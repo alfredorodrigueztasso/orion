@@ -7,7 +7,7 @@
  * @example
  * ```tsx
  * <Hero
- *   badge={<Badge>New Release</Badge>}
+ *   badge="New Release"
  *   title="Build faster with Orion"
  *   description="The AI-first design system for modern apps"
  *   primaryAction={<Button>Get Started</Button>}
@@ -32,7 +32,7 @@
 import { forwardRef, useEffect } from "react";
 import type { HeroProps } from "./Hero.types";
 import { HeroHighlight } from "./HeroHighlight";
-import { Section, Container } from "@orion-ds/react";
+import { Section, Container, Badge } from "@orion-ds/react";
 import styles from "./Hero.module.css";
 
 // SVG placeholder for default media
@@ -157,7 +157,20 @@ const HeroBase = forwardRef<HTMLElement, HeroProps>(
 
         <Container size="xl" className={styles.container}>
           <div className={styles.content}>
-            {badge && <div className={styles.badge}>{badge}</div>}
+            {badge && (
+              <div
+                className={styles.badge}
+                {...(isBackgroundVariant && { "data-on-dark": "true" })}
+              >
+                {typeof badge === "string" ? (
+                  <Badge variant="brand" size="lg">
+                    {badge}
+                  </Badge>
+                ) : (
+                  badge
+                )}
+              </div>
+            )}
 
             <h1 className={styles.headline}>{effectiveTitle}</h1>
 

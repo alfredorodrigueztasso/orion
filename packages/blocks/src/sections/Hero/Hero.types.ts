@@ -69,7 +69,11 @@ export interface HeroHighlightProps {
  */
 export interface HeroProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
   /**
-   * Optional badge/eyebrow element above title
+   * Optional badge/eyebrow element above title.
+   * - String: auto-wrapped as <Badge variant="brand" size="lg">
+   * - ReactNode: rendered as-is for full control
+   * @example badge="New Release"
+   * @example badge={<Badge variant="success">Beta</Badge>}
    */
   badge?: ReactNode;
 

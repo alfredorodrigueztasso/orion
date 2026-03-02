@@ -1,7 +1,6 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { Hero } from "./Hero";
 import { Button } from "@orion-ds/react";
-import { Badge } from "@orion-ds/react";
 
 const meta = {
   title: "Sections/Marketing/Hero",
@@ -61,7 +60,7 @@ export const Default: Story = {
 
 export const WithBadge: Story = {
   args: {
-    badge: <Badge variant="brand">New Release</Badge>,
+    badge: "New Release",
     headline: "Introducing Orion 2.0",
     description:
       "A complete redesign with 50+ new components, dark mode, and multi-brand support.",
@@ -354,7 +353,7 @@ export const AllFeatures: Story = {
       </Button>
     ),
     align: "center",
-    badge: <Badge variant="brand">New</Badge>,
+    badge: "New",
   },
 };
 

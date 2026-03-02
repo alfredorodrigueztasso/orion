@@ -17,7 +17,8 @@ export type BadgeVariant =
   | "error"
   | "warning"
   | "info"
-  | "brand";
+  | "brand"
+  | "inverse";
 
 /**
  * Badge sizes
