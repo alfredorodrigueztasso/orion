@@ -311,6 +311,113 @@
 }
 
 /* ============================================================================
+ * CONTEXT: data-on-dark="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Makes Field visible on dark backgrounds without needing variants.
+ * Label, input border, and text automatically adapt for readability.
+ * ============================================================================ */
+
+:global([data-on-dark="true"]) .label {
+  color: var(--color-neutral-0);
+}
+
+:global([data-on-dark="true"]) .optional {
+  color: var(--color-neutral-200);
+}
+
+:global([data-on-dark="true"]) .required {
+  color: var(--status-error);
+}
+
+:global([data-on-dark="true"]) .input {
+  background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+  color: var(--color-neutral-0);
+
+  &::placeholder {
+    color: var(--color-neutral-300);
+  }
+
+  &:hover:not(:disabled):not(:read-only) {
+    border-color: color-mix(in srgb, var(--color-neutral-0) 60%, transparent);
+  }
+
+  &:focus {
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px var(--soft-brand);
+  }
+
+  &:focus-visible {
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px var(--soft-brand);
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  }
+
+  &:read-only {
+    background: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-neutral-0);
+    box-shadow: 0 0 0px 1000px
+      color-mix(in srgb, var(--color-neutral-0) 15%, transparent) inset;
+  }
+}
+
+:global([data-on-dark="true"]) .error .input {
+  border-color: var(--status-error);
+
+  &:focus {
+    border-color: var(--status-error);
+    box-shadow: 0 0 0 3px var(--soft-error);
+  }
+
+  &:focus-visible {
+    border-color: var(--status-error);
+    box-shadow: 0 0 0 3px var(--soft-error);
+    outline: 2px solid var(--status-error);
+    outline-offset: 2px;
+  }
+}
+
+:global([data-on-dark="true"]) .leftIcon,
+:global([data-on-dark="true"]) .rightIcon {
+  color: var(--color-neutral-300);
+}
+
+:global([data-on-dark="true"]) .rightIconInteractive button,
+:global([data-on-dark="true"]) .rightIconInteractive [role="button"] {
+  color: var(--color-neutral-300);
+}
+
+:global([data-on-dark="true"]) .rightIconInteractive button:hover,
+:global([data-on-dark="true"]) .rightIconInteractive [role="button"]:hover {
+  color: var(--color-neutral-0);
+}
+
+:global([data-on-dark="true"]) .helperText {
+  color: var(--color-neutral-300);
+}
+
+:global([data-on-dark="true"]) .errorMessage {
+  color: var(--status-error);
+}
+
+:global([data-on-dark="true"]) .errorIconInline {
+  color: var(--status-error);
+}
+
+/* ============================================================================
  * REDUCED MOTION
  * Respects user preference for reduced motion
  * ============================================================================ */

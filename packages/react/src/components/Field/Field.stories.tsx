@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
 import { Field } from "./Field";
 import { useState } from "react";
@@ -391,6 +392,75 @@ export const AccessibilityOverview: Story = {
           disabled
           helperText="This field cannot be edited"
         />
+      </div>
+    );
+  },
+};
+
+/**
+ * On Dark Background - Field visibility on dark backgrounds (e.g., Hero sections).
+ * The data-on-dark="true" attribute automatically adapts Field styling.
+ */
+export const OnDarkBackground: Story = {
+  render: () => {
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
+
+    return (
+      <div
+        style={{
+          padding: "var(--spacing-6)",
+          borderRadius: "var(--radius-container)",
+          background:
+            "linear-gradient(135deg, rgba(0, 0, 0, 0.85), rgba(0, 0, 0, 0.7))",
+        }}
+      >
+        <h3
+          style={{
+            color: "var(--color-neutral-0)",
+            marginBottom: "var(--spacing-6)",
+          }}
+        >
+          Login Form on Dark Background
+        </h3>
+
+        <div
+          style={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "var(--spacing-4)",
+            maxWidth: "400px",
+          }}
+          data-on-dark="true"
+        >
+          <Field
+            label="Email Address"
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            leftIcon={<Mail size={18} />}
+            helperText="We'll never share your email"
+          />
+
+          <Field
+            label="Password"
+            type="password"
+            placeholder="Enter your password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            leftIcon={<Lock size={18} />}
+            helperText="Minimum 8 characters"
+            required
+          />
+
+          <Field
+            label="Full Name"
+            type="text"
+            placeholder="John Doe"
+            optional
+          />
+        </div>
       </div>
     );
   },
