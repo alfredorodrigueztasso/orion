@@ -200,6 +200,45 @@
 }
 
 /* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Makes SearchInput visible on dark backgrounds without needing variants.
+ * Container, input border, and text automatically adapt for readability.
+ * ============================================================================ */
+
+:global([data-dark-bg="true"]) .container {
+  background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+}
+
+:global([data-dark-bg="true"]) .container:hover:not(.disabled) {
+  border-color: color-mix(in srgb, var(--color-neutral-0) 60%, transparent);
+}
+
+:global([data-dark-bg="true"]) .container:focus-within {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--soft-brand);
+}
+
+:global([data-dark-bg="true"]) .container:has(.input:focus-visible) {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--soft-brand);
+}
+
+:global([data-dark-bg="true"]) .input {
+  color: var(--color-neutral-0);
+}
+
+:global([data-dark-bg="true"]) .input::placeholder {
+  color: var(--color-neutral-300);
+}
+
+:global([data-dark-bg="true"]) .searchIcon {
+  color: var(--color-neutral-300);
+}
+
+/* ============================================================================
  * HIGH CONTRAST MODE SUPPORT
  * ============================================================================ */
 
