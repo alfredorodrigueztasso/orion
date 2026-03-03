@@ -41,6 +41,7 @@ export const Tabs: React.FC<TabsProps> = ({
   activeTab: controlledActiveTab,
   onChange,
   fullWidth = false,
+  noPanelPadding = false,
   className,
 }) => {
   // Determine if controlled or uncontrolled
@@ -124,6 +125,7 @@ export const Tabs: React.FC<TabsProps> = ({
   const containerClasses = [
     styles.container,
     fullWidth && styles.fullWidth,
+    noPanelPadding && styles.noPanelPadding,
     className,
   ]
     .filter(Boolean)

@@ -18,6 +18,20 @@
   background: transparent;
 }
 
+.timeline[data-align="left"] {
+  padding: 0;
+}
+
+.timeline[data-align="left"] .container {
+  max-width: 100%;
+  margin: 0;
+}
+
+.timeline[data-align="left"] .vertical {
+  max-width: 100%;
+  margin: 0;
+}
+
 .container {
   max-width: var(--container-width, 1200px);
   margin: 0 auto;

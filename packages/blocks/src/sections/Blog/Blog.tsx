@@ -6,7 +6,7 @@
 
 import React from "react";
 import type { BlogProps, BlogArticle } from "./Blog.types";
-import { Badge } from '@orion-ds/react';
+import { Badge } from "@orion-ds/react";
 import styles from "./Blog.module.css";
 
 /**
@@ -63,7 +63,7 @@ const ArticleCard: React.FC<{
         {article.tags && article.tags.length > 0 && (
           <div className={styles.tags}>
             {article.tags.map((tag, index) => (
-              <Badge key={index} variant="neutral" size="sm">
+              <Badge key={index} variant="secondary" size="sm">
                 {tag}
               </Badge>
             ))}

@@ -51,6 +51,7 @@ export const Timeline: React.FC<TimelineProps> = ({
   showConnector = true,
   background = "base",
   compact = false,
+  align = "center",
   className,
   ...rest
 }) => {
@@ -68,6 +69,7 @@ export const Timeline: React.FC<TimelineProps> = ({
       className={`${styles.timeline} ${className || ""}`}
       data-background={background}
       data-compact={compact}
+      data-align={align}
       {...rest}
     >
       <div className={styles.container}>

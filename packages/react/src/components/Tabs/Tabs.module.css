@@ -145,3 +145,8 @@
     animation: none;
   }
 }
+
+/* No panel padding variant */
+.noPanelPadding .panel {
+  padding: 0;
+}

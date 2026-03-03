@@ -119,4 +119,11 @@ export interface TimelineProps extends Omit<
    * @default false
    */
   compact?: boolean;
+
+  /**
+   * Content alignment. Use 'left' when embedding Timeline inside a docs page
+   * or column layout instead of a full-width section.
+   * @default 'center'
+   */
+  align?: "center" | "left";
 }

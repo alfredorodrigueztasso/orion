@@ -86,4 +86,11 @@ export interface TabsProps {
    * Additional class name
    */
   className?: string;
+
+  /**
+   * Remove top and bottom padding from the tab panel.
+   * Useful when Tabs is inside a Card, Modal, or other padded container.
+   * @default false
+   */
+  noPanelPadding?: boolean;
 }
