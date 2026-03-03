@@ -27,12 +27,10 @@
   box-shadow: 0 0 0 3px var(--soft-brand);
 }
 
-/* Focus-visible - enhanced for keyboard navigation */
+/* Focus-visible - box-shadow provides sufficient focus indicator */
 .container:has(.input:focus-visible) {
   border-color: var(--interactive-primary);
   box-shadow: 0 0 0 3px var(--soft-brand);
-  outline: 2px solid var(--interactive-primary);
-  outline-offset: 2px;
 }
 
 .fullWidth {
