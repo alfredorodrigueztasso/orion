@@ -125,7 +125,7 @@ const columns = [
           ? "success"
           : status === "pending"
             ? "warning"
-            : "neutral";
+            : "secondary";
       return <Badge variant={variant}>{status}</Badge>;
     },
   },

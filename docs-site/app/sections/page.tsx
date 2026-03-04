@@ -66,7 +66,7 @@ export default async function SectionsListPage() {
                 href={`/sections/${section.name}`}
                 style={{ textDecoration: 'none' }}
               >
-                <Card variant="outlined" style={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}>
+                <Card variant="base" style={{ height: '100%', display: 'flex', flexDirection: 'column', cursor: 'pointer' }}>
                   {/* Preview */}
                   <div style={{
                     height: '240px',

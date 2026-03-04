@@ -22,9 +22,9 @@ export const previews = [
             </Card.Footer>
           </Card>
 
-          <Card variant="outlined">
-            <Card.Header>Outlined Card</Card.Header>
-            <Card.Body>This card has a border outline.</Card.Body>
+          <Card variant="glass">
+            <Card.Header>Glass Card</Card.Header>
+            <Card.Body>This card has a glassmorphism effect.</Card.Body>
           </Card>
 
           <Card variant="elevated">
@@ -48,7 +48,7 @@ export const previews = [
   {
     title: 'Interactive Card',
     render: () => (
-      <Card variant="outlined" interactive style={{ maxWidth: '300px' }}>
+      <Card variant="base" interactive style={{ maxWidth: '300px' }}>
         <Card.Header>Clickable Card</Card.Header>
         <Card.Body>
           This card has an interactive hover state. Try hovering over it.

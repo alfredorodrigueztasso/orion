@@ -47,7 +47,7 @@ export default function HomepageInstall() {
         </span>
       </div>
 
-      <Card variant="outlined">
+      <Card variant="base">
         <Card.Body style={{ padding: 'var(--spacing-4)' }}>
           {/* Package manager tabs */}
           <div

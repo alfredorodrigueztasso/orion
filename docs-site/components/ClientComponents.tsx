@@ -51,6 +51,7 @@ import {
   Contact as ContactBase,
   Newsletter as NewsletterBase,
   LogoCloud as LogoCloudBase,
+  Timeline as TimelineBase,
 } from '@orion-ds/blocks';
 
 // Re-export components
@@ -66,6 +67,9 @@ export const Table = TableBase;
 export const Alert = AlertBase;
 export const Breadcrumb = BreadcrumbBase;
 export const Card = CardBase;
+export const CardBody = CardBase.Body;
+export const CardHeader = CardBase.Header;
+export const CardFooter = CardBase.Footer;
 export const Navbar = NavbarBase;
 export const Sidebar = SidebarBase;
 export const Link = LinkBase;
@@ -94,6 +98,7 @@ export const Team = TeamBase;
 export const Contact = ContactBase;
 export const Newsletter = NewsletterBase;
 export const LogoCloud = LogoCloudBase;
+export const Timeline = TimelineBase;
 
 // Re-attach compound components (explicitly listed subcomponents that exist)
 // Card

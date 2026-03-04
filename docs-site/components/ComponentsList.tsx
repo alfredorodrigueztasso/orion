@@ -47,7 +47,7 @@ export default function ComponentsList({ components, categories }: ComponentsLis
                 style={{ textDecoration: 'none' }}
               >
                 <Card
-                  variant="outlined"
+                  variant="base"
                   interactive
                   style={{
                     height: '100%',

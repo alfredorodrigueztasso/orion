@@ -80,15 +80,14 @@ import type { HTMLAttributes, ReactNode } from 'react';
  *
  * @semanticGuide
  * - \`default\`: Standard presentation
- * - \`outlined\`: Bordered, transparent background
  *
  * @example
  * \`\`\`tsx
  * <${name} variant="default">Content</${name}>
- * <${name} variant="outlined">Content</${name}>
+ * <${name} variant="secondary">Content</${name}>
  * \`\`\`
  */
-export type ${name}Variant = 'default' | 'outlined';
+export type ${name}Variant = 'default' | 'secondary';
 
 /**
  * ${name} component props
@@ -209,8 +208,8 @@ function generateCSS(name) {
   background: var(--surface-base);
 }
 
-/* Outlined variant */
-.outlined {
+/* Secondary variant */
+.secondary {
   background: transparent;
   border: 1px solid var(--border-subtle);
 }
@@ -244,8 +243,8 @@ describe('${name}', () => {
     );
     expect(container.firstChild).toHaveClass(expect.stringContaining('default'));
 
-    rerender(<${name} variant="outlined">Content</${name}>);
-    expect(container.firstChild).toHaveClass(expect.stringContaining('outlined'));
+    rerender(<${name} variant="secondary">Content</${name}>);
+    expect(container.firstChild).toHaveClass(expect.stringContaining('secondary'));
   });
 
   it('forwards ref correctly', () => {
@@ -289,7 +288,7 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['default', 'outlined'],
+      options: ['default', 'secondary'],
       description: '${name} visual style',
     },
   },
@@ -305,10 +304,10 @@ export const Default: Story = {
   },
 };
 
-export const Outlined: Story = {
+export const Secondary: Story = {
   args: {
-    variant: 'outlined',
-    children: '${name} outlined content',
+    variant: 'secondary',
+    children: '${name} secondary content',
   },
 };
 
@@ -316,7 +315,7 @@ export const AllVariants: Story = {
   render: () => (
     <div style={{ display: 'flex', gap: 'var(--spacing-4)', flexWrap: 'wrap' }}>
       <${name} variant="default">Default</${name}>
-      <${name} variant="outlined">Outlined</${name}>
+      <${name} variant="secondary">Secondary</${name}>
     </div>
   ),
 };

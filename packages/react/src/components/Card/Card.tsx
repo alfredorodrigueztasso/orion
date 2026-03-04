@@ -63,11 +63,21 @@ export const Card: React.FC<CardProps> & {
   style,
   ...rest
 }) => {
-  const isImageVariant = variant === "image";
+  // Deprecation: outlined → base alias
+  const resolvedVariant = variant === "outlined" ? "base" : variant;
+
+  if (process.env.NODE_ENV !== "production" && variant === "outlined") {
+    console.warn(
+      "[Orion] Card variant=\"outlined\" is deprecated. Use variant=\"base\" instead. " +
+      "It will be removed in the next major version."
+    );
+  }
+
+  const isImageVariant = resolvedVariant === "image";
 
   const classNames = [
     styles.card,
-    styles[variant],
+    styles[resolvedVariant],
     interactive && styles.interactive,
     className,
   ]

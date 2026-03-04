@@ -379,10 +379,10 @@ export const ThemeController: React.FC<ThemeControllerProps> = ({
               >
                 <Badge variant="primary">Theme: {theme}</Badge>
                 <Badge variant="secondary">Brand: {brand}</Badge>
-                <Badge variant="neutral">
+                <Badge variant="secondary">
                   Accent: {BRAND_CONFIG[brand].accent}
                 </Badge>
-                <Badge variant="neutral">
+                <Badge variant="secondary">
                   Radius:{" "}
                   {BRAND_CONFIG[brand].radius === "9999px"
                     ? "9999px (pills)"

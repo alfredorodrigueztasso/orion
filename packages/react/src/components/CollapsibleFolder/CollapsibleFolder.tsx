@@ -201,7 +201,7 @@ export function CollapsibleFolder<
               className={`${styles.chevron} ${isExpanded ? styles.expanded : ""}`}
             />
             <h2 className={styles.title}>{title}</h2>
-            <Badge variant="neutral" className={styles.badge}>
+            <Badge variant="secondary" className={styles.badge}>
               {itemCount}
               <span className={styles.badgeLabel}> {itemLabelDisplay}</span>
             </Badge>

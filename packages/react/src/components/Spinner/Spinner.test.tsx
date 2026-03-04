@@ -45,7 +45,7 @@ describe("Spinner", () => {
     spinner = screen.getByRole("status");
     expect(spinner.className).toMatch(/secondary/);
 
-    rerender(<Spinner variant="neutral" />);
+    rerender(<Spinner variant="secondary" />);
     spinner = screen.getByRole("status");
     expect(spinner.className).toMatch(/neutral/);
   });
@@ -113,7 +113,7 @@ describe("Spinner", () => {
     render(
       <Spinner
         size="xl"
-        variant="neutral"
+        variant="secondary"
         label="Loading content..."
         showLabel
         className="custom"
@@ -190,7 +190,7 @@ describe("Spinner", () => {
     });
 
     it("renders neutral variant", () => {
-      render(<Spinner variant="neutral" />);
+      render(<Spinner variant="secondary" />);
       expect(screen.getByRole("status").className).toMatch(/neutral/);
     });
   });

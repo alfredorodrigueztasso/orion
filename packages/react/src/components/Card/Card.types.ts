@@ -8,6 +8,8 @@ import type { HTMLAttributes, ReactNode } from "react";
 
 /**
  * Card visual variants
+ *
+ * @deprecated 'outlined' variant is deprecated. Use 'base' instead. Will be removed in the next major version.
  */
 export type CardVariant =
   | "base"

@@ -7,8 +7,8 @@
   "properties": {
     "variant": {
       "type": "string",
-      "enum": ["elevated", "outlined", "filled"],
-      "default": "elevated",
+      "enum": ["base", "glass", "elevated", "image", "inverse"],
+      "default": "base",
       "description": "Visual style of the card"
     },
     "padding": {
@@ -54,8 +54,8 @@
       "code": "<Card\n  interactive\n  href=\"/details\"\n  media={<img src=\"/image.jpg\" alt=\"Preview\" />}\n>\n  <h3>Product Name</h3>\n  <p>Product description</p>\n</Card>"
     },
     {
-      "description": "Outlined card with no padding",
-      "code": "<Card variant=\"outlined\" padding=\"none\">\n  <CustomContent />\n</Card>"
+      "description": "Elevated card with interactive hover effect",
+      "code": "<Card variant=\"elevated\" interactive>\n  <Card.Header>Clickable Card</Card.Header>\n  <Card.Body><p>Hover to see the effect</p></Card.Body>\n</Card>"
     }
   ],
   "aiPrompts": [

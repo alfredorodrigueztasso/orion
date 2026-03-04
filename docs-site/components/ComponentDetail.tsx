@@ -30,7 +30,7 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
           Install this component using the CLI or add the package to your project.
         </p>
 
-        <Card variant="outlined" style={{ marginBottom: 'var(--spacing-4)' }}>
+        <Card variant="base" style={{ marginBottom: 'var(--spacing-4)' }}>
           <Card.Header>
             <h3 style={{ margin: 0, fontSize: '0.95rem' }}>Using CLI</h3>
           </Card.Header>
@@ -40,7 +40,7 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
         </Card>
 
         {component.import && (
-          <Card variant="outlined">
+          <Card variant="base">
             <Card.Header>
               <h3 style={{ margin: 0, fontSize: '0.95rem' }}>Using npm Package</h3>
             </Card.Header>
@@ -61,7 +61,7 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
       {component.import && (
         <section id="usage" style={{ marginBottom: 'var(--spacing-12)' }}>
           <h2>Usage</h2>
-          <Card variant="outlined">
+          <Card variant="base">
             <Card.Header>
               <h3 style={{ margin: 0, fontSize: '0.95rem' }}>Basic Example</h3>
             </Card.Header>

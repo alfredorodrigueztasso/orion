@@ -40,9 +40,9 @@
   box-shadow: var(--shadow-md);
 }
 
-/* Outlined variant (strong border) */
+/* @deprecated Outlined variant (alias for base). Use 'base' instead. */
 .outlined {
-  border: 2px solid var(--border-strong);
+  border: 1px solid var(--border-subtle);
 }
 
 /* Image variant (full background image with gradient overlay) */

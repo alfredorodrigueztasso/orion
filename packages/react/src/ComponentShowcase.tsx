@@ -59,7 +59,7 @@ const tableColumns: TableColumn<User>[] = [
     key: "status",
     header: "Status",
     cell: (user) => (
-      <Badge variant={user.status === "active" ? "success" : "neutral"}>
+      <Badge variant={user.status === "active" ? "success" : "secondary"}>
         {user.status}
       </Badge>
     ),
@@ -361,7 +361,7 @@ export const ComponentShowcase: React.FC = () => {
             <Badge variant="success">Success</Badge>
             <Badge variant="warning">Warning</Badge>
             <Badge variant="error">Error</Badge>
-            <Badge variant="neutral">Neutral</Badge>
+            <Badge variant="secondary">Neutral</Badge>
             <Badge size="sm">Small</Badge>
             <Badge size="lg">Large</Badge>
             <Badge dot>With Dot</Badge>

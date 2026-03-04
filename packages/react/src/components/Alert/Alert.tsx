@@ -38,6 +38,7 @@ const DEFAULT_ICONS: Record<AlertVariant, React.ReactNode> = {
   error: <XCircle size={20} />,
   warning: <AlertTriangle size={20} />,
   info: <Info size={20} />,
+  inverse: <Info size={20} />,
 };
 
 export const Alert: React.FC<AlertProps> = ({

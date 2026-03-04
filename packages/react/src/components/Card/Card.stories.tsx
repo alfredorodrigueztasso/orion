@@ -297,10 +297,6 @@ export const AllVariantsWithInverse: Story = {
           <Card.Header>Elevated</Card.Header>
           <Card.Body>With shadow</Card.Body>
         </Card>
-        <Card variant="outlined" style={{ width: "220px" }}>
-          <Card.Header>Outlined</Card.Header>
-          <Card.Body>With border</Card.Body>
-        </Card>
         <div
           style={{
             padding: "var(--spacing-4)",

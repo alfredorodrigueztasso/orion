@@ -287,7 +287,7 @@ export const MultipleStates: Story = {
           gap: "var(--spacing-4)",
         }}
       >
-        <Spinner size="sm" variant="neutral" />
+        <Spinner size="sm" variant="secondary" />
         <span>Uploading file...</span>
       </div>
     </div>
@@ -337,7 +337,7 @@ export const AllVariants: Story = {
         </p>
       </div>
       <div style={{ textAlign: "center" }}>
-        <Spinner variant="neutral" size="lg" />
+        <Spinner variant="secondary" size="lg" />
         <p
           style={{
             marginTop: "var(--spacing-4)",

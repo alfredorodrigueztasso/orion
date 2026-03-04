@@ -215,6 +215,19 @@
   margin-top: var(--spacing-4);
 }
 
+/* Container spacing ownership:
+   Reset browser default margins for block elements inside event cards.
+   The Timeline container owns its padding model — embedded components should not
+   compound their own margins with the 24px eventContent padding. */
+.eventExtra > *:last-child {
+  margin-bottom: 0;
+}
+
+.eventExtra pre,
+.eventExtra code {
+  margin: 0;
+}
+
 /* Horizontal Timeline */
 .horizontal {
   display: flex;

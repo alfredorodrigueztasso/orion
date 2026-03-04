@@ -42,7 +42,7 @@ const ButtonShowcase = () => (
 
 const CardShowcase = () => (
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--spacing-4)' }}>
-    {(['base', 'outlined', 'elevated'] as const).map((variant) => (
+    {(['base', 'elevated', 'glass'] as const).map((variant) => (
       <Card key={variant} variant={variant} interactive>
         <Card.Header>
           <span style={{ fontWeight: 600 }}>Card {variant}</span>

@@ -217,7 +217,7 @@ export const WithCustomCell: Story = {
         cell: (user) => {
           const variantMap = {
             active: "success",
-            inactive: "neutral",
+            inactive: "secondary",
             pending: "warning",
           } as const;
           return (
@@ -389,7 +389,7 @@ export const UserManagement: Story = {
         cell: (user) => {
           const variantMap = {
             active: "success",
-            inactive: "neutral",
+            inactive: "secondary",
             pending: "warning",
           } as const;
           const labelMap = {

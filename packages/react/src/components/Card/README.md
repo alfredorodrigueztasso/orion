@@ -46,8 +46,8 @@ Card uses dot notation for its subcomponents:
 | `base`     | Solid background, subtle border | Default - most cards                         |
 | `glass`    | Frosted glass effect            | Display mode only - marketing sections       |
 | `elevated` | Shadow elevation                | Floating content, cards that need prominence |
-| `outlined` | Border only, transparent        | Minimal style, form containers               |
 | `image`    | Background image with overlay   | Hero cards, featured content                 |
+| `inverse`  | Light content on dark bg        | Dark backgrounds and overlays                |
 
 ### Mode Restrictions
 
@@ -56,8 +56,8 @@ Card uses dot notation for its subcomponents:
 | `base`     | Yes          | Yes           | Yes      |
 | `glass`    | Yes          | No            | No       |
 | `elevated` | Yes          | Use sparingly | Yes      |
-| `outlined` | Yes          | Yes           | Yes      |
 | `image`    | Yes          | Yes           | Yes      |
+| `inverse`  | Yes          | Yes           | Yes      |
 
 **Rule:** `glass` variant only works in Display mode (marketing pages).
 
@@ -163,14 +163,14 @@ import { Card } from "@orion/react";
 </Card>;
 ```
 
-### Outlined Variant
+### Base Variant (with subtle border)
 
 ```tsx
 import { Card } from "@orion/react";
 
-<Card variant="outlined">
+<Card variant="base">
   <Card.Body>
-    <p>Minimal border-only style.</p>
+    <p>Default style with subtle border.</p>
   </Card.Body>
 </Card>;
 ```
