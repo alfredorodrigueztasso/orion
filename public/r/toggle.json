@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Toggle",
   "description": "Toggle component",
-  "category": "utilities",
+  "category": "interactive",
   "files": [
     {
       "path": "packages/react/src/components/Toggle/Toggle.tsx",

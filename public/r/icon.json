@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Icon",
   "description": "Icon component",
-  "category": "utilities",
+  "category": "data-display",
   "files": [
     {
       "path": "packages/react/src/components/Icon/Icon.tsx",

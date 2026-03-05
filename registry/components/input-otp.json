@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "InputOTP",
   "description": "InputOTP component",
-  "category": "utilities",
+  "category": "forms",
   "files": [
     {
       "path": "packages/react/src/components/InputOTP/InputOTP.tsx",

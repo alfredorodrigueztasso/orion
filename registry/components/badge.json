@@ -28,16 +28,16 @@
       "name": "variant",
       "type": "BadgeVariant",
       "description": "Badge visual variant",
-      "default": "neutral",
+      "default": "secondary",
       "values": [
         "primary",
         "secondary",
-        "neutral",
         "success",
         "error",
         "warning",
         "info",
-        "brand"
+        "brand",
+        "inverse"
       ]
     },
     {

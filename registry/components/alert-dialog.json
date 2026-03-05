@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "AlertDialog",
   "description": "AlertDialog component",
-  "category": "utilities",
+  "category": "overlays",
   "files": [
     {
       "path": "packages/react/src/components/AlertDialog/AlertDialog.tsx",

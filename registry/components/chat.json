@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Chat",
   "description": "Chat component",
-  "category": "utilities",
+  "category": "data-display",
   "files": [
     {
       "path": "packages/react/src/components/Chat/Chat.tsx",

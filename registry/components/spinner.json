@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Spinner",
   "description": "Loading indicator",
-  "category": "loading",
+  "category": "feedback",
   "files": [
     {
       "path": "packages/react/src/components/Spinner/Spinner.tsx",

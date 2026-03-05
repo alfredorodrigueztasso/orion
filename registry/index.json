@@ -16,7 +16,7 @@
       "name": "activity-feed",
       "title": "ActivityFeed",
       "description": "ActivityFeed component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
@@ -37,7 +37,7 @@
       "name": "alert-dialog",
       "title": "AlertDialog",
       "description": "AlertDialog component",
-      "category": "utilities",
+      "category": "overlays",
       "type": "registry:component"
     },
     {
@@ -58,7 +58,7 @@
       "name": "banner",
       "title": "Banner",
       "description": "Banner component",
-      "category": "utilities",
+      "category": "feedback",
       "type": "registry:component"
     },
     {
@@ -72,14 +72,14 @@
       "name": "button",
       "title": "Button",
       "description": "Primary interactive element for actions",
-      "category": "actions",
+      "category": "interactive",
       "type": "registry:component"
     },
     {
       "name": "calendar",
       "title": "Calendar",
       "description": "Calendar component",
-      "category": "utilities",
+      "category": "forms",
       "type": "registry:component"
     },
     {
@@ -100,14 +100,14 @@
       "name": "chart",
       "title": "Chart",
       "description": "Chart component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
       "name": "chat",
       "title": "Chat",
       "description": "Chat component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
@@ -121,28 +121,28 @@
       "name": "chip",
       "title": "Chip",
       "description": "Chip component",
-      "category": "tags",
+      "category": "interactive",
       "type": "registry:component"
     },
     {
       "name": "code-editor",
       "title": "CodeEditor",
       "description": "CodeEditor component",
-      "category": "utilities",
+      "category": "forms",
       "type": "registry:component"
     },
     {
       "name": "collapsible",
       "title": "Collapsible",
       "description": "Collapsible component",
-      "category": "utilities",
+      "category": "layout",
       "type": "registry:component"
     },
     {
       "name": "collapsible-folder",
       "title": "CollapsibleFolder",
       "description": "CollapsibleFolder component",
-      "category": "utilities",
+      "category": "layout",
       "type": "registry:component"
     },
     {
@@ -156,14 +156,14 @@
       "name": "command",
       "title": "Command",
       "description": "Command component",
-      "category": "utilities",
+      "category": "overlays",
       "type": "registry:component"
     },
     {
       "name": "command-bar",
       "title": "CommandBar",
       "description": "CommandBar component",
-      "category": "utilities",
+      "category": "overlays",
       "type": "registry:component"
     },
     {
@@ -177,21 +177,21 @@
       "name": "data-table",
       "title": "DataTable",
       "description": "DataTable component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
       "name": "date-picker",
       "title": "DatePicker",
       "description": "DatePicker component",
-      "category": "utilities",
+      "category": "forms",
       "type": "registry:component"
     },
     {
       "name": "detail-panel",
       "title": "DetailPanel",
       "description": "DetailPanel component",
-      "category": "utilities",
+      "category": "layout",
       "type": "registry:component"
     },
     {
@@ -226,7 +226,7 @@
       "name": "error-boundary",
       "title": "ErrorBoundary",
       "description": "ErrorBoundary component",
-      "category": "utilities",
+      "category": "feedback",
       "type": "registry:component"
     },
     {
@@ -240,49 +240,49 @@
       "name": "file-uploader",
       "title": "FileUploader",
       "description": "FileUploader component",
-      "category": "utilities",
+      "category": "forms",
       "type": "registry:component"
     },
     {
       "name": "filter-bar",
       "title": "FilterBar",
       "description": "FilterBar component",
-      "category": "utilities",
+      "category": "layout",
       "type": "registry:component"
     },
     {
       "name": "form-section",
       "title": "FormSection",
       "description": "FormSection component",
-      "category": "utilities",
+      "category": "forms",
       "type": "registry:component"
     },
     {
       "name": "icon",
       "title": "Icon",
       "description": "Icon component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
       "name": "input-otp",
       "title": "InputOTP",
       "description": "InputOTP component",
-      "category": "utilities",
+      "category": "forms",
       "type": "registry:component"
     },
     {
       "name": "kanban-board",
       "title": "KanbanBoard",
       "description": "KanbanBoard component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
       "name": "link",
       "title": "Link",
       "description": "Link component",
-      "category": "text",
+      "category": "interactive",
       "type": "registry:component"
     },
     {
@@ -296,7 +296,7 @@
       "name": "metric-cards",
       "title": "MetricCards",
       "description": "MetricCards component",
-      "category": "utilities",
+      "category": "data-display",
       "type": "registry:component"
     },
     {
@@ -310,7 +310,7 @@
       "name": "nav-tree",
       "title": "NavTree",
       "description": "NavTree Types",
-      "category": "utilities",
+      "category": "navigation",
       "type": "registry:component"
     },
     {
@@ -324,14 +324,14 @@
       "name": "notification-center",
       "title": "NotificationCenter",
       "description": "NotificationCenter component",
-      "category": "utilities",
+      "category": "feedback",
       "type": "registry:component"
     },
     {
       "name": "page-header",
       "title": "PageHeader",
       "description": "PageHeader component",
-      "category": "utilities",
+      "category": "navigation",
       "type": "registry:component"
     },
     {
@@ -359,7 +359,7 @@
       "name": "quick-actions",
       "title": "QuickActions",
       "description": "QuickActions component",
-      "category": "utilities",
+      "category": "layout",
       "type": "registry:component"
     },
     {
@@ -373,7 +373,7 @@
       "name": "search-input",
       "title": "SearchInput",
       "description": "SearchInput component",
-      "category": "search",
+      "category": "forms",
       "type": "registry:component"
     },
     {
@@ -394,14 +394,14 @@
       "name": "sidebar",
       "title": "Sidebar",
       "description": "Vertical navigation panel",
-      "category": "utilities",
+      "category": "navigation",
       "type": "registry:component"
     },
     {
       "name": "skeleton",
       "title": "Skeleton",
       "description": "Placeholder for loading content",
-      "category": "loading",
+      "category": "feedback",
       "type": "registry:component"
     },
     {
@@ -415,7 +415,7 @@
       "name": "spinner",
       "title": "Spinner",
       "description": "Loading indicator",
-      "category": "loading",
+      "category": "feedback",
       "type": "registry:component"
     },
     {
@@ -457,7 +457,7 @@
       "name": "theme-controller",
       "title": "ThemeController",
       "description": "ThemeController component",
-      "category": "utilities",
+      "category": "interactive",
       "type": "registry:component"
     },
     {
@@ -471,14 +471,14 @@
       "name": "toggle",
       "title": "Toggle",
       "description": "Toggle component",
-      "category": "utilities",
+      "category": "interactive",
       "type": "registry:component"
     },
     {
       "name": "toggle-group",
       "title": "ToggleGroup",
       "description": "ToggleGroup component",
-      "category": "utilities",
+      "category": "interactive",
       "type": "registry:component"
     },
     {
@@ -492,14 +492,14 @@
       "name": "user-menu",
       "title": "UserMenu",
       "description": "UserMenu component",
-      "category": "utilities",
+      "category": "navigation",
       "type": "registry:component"
     },
     {
       "name": "workspace-switcher",
       "title": "WorkspaceSwitcher",
       "description": "WorkspaceSwitcher component",
-      "category": "utilities",
+      "category": "navigation",
       "type": "registry:component"
     }
   ],

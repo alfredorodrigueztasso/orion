@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Link",
   "description": "Link component",
-  "category": "text",
+  "category": "interactive",
   "files": [
     {
       "path": "packages/react/src/components/Link/Link.tsx",

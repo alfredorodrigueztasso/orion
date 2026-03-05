@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "ErrorBoundary",
   "description": "ErrorBoundary component",
-  "category": "utilities",
+  "category": "feedback",
   "files": [
     {
       "path": "packages/react/src/components/ErrorBoundary/ErrorBoundary.tsx",

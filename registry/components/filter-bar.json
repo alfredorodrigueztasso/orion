@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "FilterBar",
   "description": "FilterBar component",
-  "category": "utilities",
+  "category": "layout",
   "files": [
     {
       "path": "packages/react/src/components/FilterBar/FilterBar.tsx",

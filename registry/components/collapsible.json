@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Collapsible",
   "description": "Collapsible component",
-  "category": "utilities",
+  "category": "layout",
   "files": [
     {
       "path": "packages/react/src/components/Collapsible/Collapsible.tsx",

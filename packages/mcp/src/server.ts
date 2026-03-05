@@ -50,7 +50,7 @@ server.tool(
       .string()
       .optional()
       .describe(
-        "Filter by category: actions, forms, layout, feedback, data-display, navigation, overlays, text, loading, tags, search, marketing, app, chat, utilities",
+        "Filter by category: interactive, forms, layout, feedback, data-display, navigation, overlays, internal, documentation, marketing, app",
       ),
     type: z
       .enum(["registry:component", "registry:section", "registry:template"])

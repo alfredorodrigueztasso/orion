@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "SearchInput",
   "description": "SearchInput component",
-  "category": "search",
+  "category": "forms",
   "files": [
     {
       "path": "packages/react/src/components/SearchInput/SearchInput.tsx",

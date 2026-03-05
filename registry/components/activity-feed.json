@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "ActivityFeed",
   "description": "ActivityFeed component",
-  "category": "utilities",
+  "category": "data-display",
   "files": [
     {
       "path": "packages/react/src/components/ActivityFeed/ActivityFeed.tsx",

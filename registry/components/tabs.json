@@ -55,6 +55,12 @@
       "name": "className",
       "type": "string",
       "description": "Additional class name"
+    },
+    {
+      "name": "noPanelPadding",
+      "type": "boolean",
+      "description": "Remove top and bottom padding from the tab panel.",
+      "default": false
     }
   ],
   "tokens": [

@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "ToggleGroup",
   "description": "ToggleGroup component",
-  "category": "utilities",
+  "category": "interactive",
   "files": [
     {
       "path": "packages/react/src/components/ToggleGroup/ToggleGroup.tsx",

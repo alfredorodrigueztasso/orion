@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "DataTable",
   "description": "DataTable component",
-  "category": "utilities",
+  "category": "data-display",
   "files": [
     {
       "path": "packages/react/src/components/DataTable/DataTable.tsx",

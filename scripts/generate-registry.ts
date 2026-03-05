@@ -246,7 +246,7 @@ interface ComponentMeta {
 
 const COMPONENT_META: Record<string, ComponentMeta> = {
   Button: {
-    category: 'actions',
+    category: 'interactive',
     tokens: ['--interactive-primary', '--interactive-primary-hover', '--interactive-primary-text', '--interactive-secondary', '--radius-control', '--font-secondary'],
     modeAware: true,
     dependencies: ['lucide-react'],
@@ -567,7 +567,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   Spinner: {
-    category: 'loading',
+    category: 'feedback',
     tokens: ['--interactive-primary'],
     modeAware: false,
     accessibility: {
@@ -582,7 +582,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   Skeleton: {
-    category: 'loading',
+    category: 'feedback',
     tokens: ['--surface-layer'],
     modeAware: false,
     examples: [
@@ -719,7 +719,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   Link: {
-    category: 'text',
+    category: 'interactive',
     tokens: ['--interactive-primary', '--text-primary'],
     modeAware: false,
     examples: [
@@ -734,7 +734,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   Chip: {
-    category: 'tags',
+    category: 'interactive',
     tokens: ['--surface-layer', '--text-primary', '--interactive-primary', '--radius-full'],
     modeAware: false,
     examples: [
@@ -772,7 +772,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   SearchInput: {
-    category: 'search',
+    category: 'forms',
     tokens: ['--surface-base', '--border-subtle', '--text-primary', '--radius-control'],
     modeAware: true,
     examples: [
@@ -843,7 +843,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   Icon: {
-    category: 'utilities',
+    category: 'data-display',
     tokens: [],
     modeAware: false,
     dependencies: ['lucide-react'],
@@ -855,7 +855,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   Chat: {
-    category: 'utilities',
+    category: 'data-display',
     tokens: ['--surface-base', '--surface-subtle', '--border-subtle', '--text-primary', '--text-secondary', '--interactive-primary'],
     modeAware: false,
     registryDependencies: ['button'],
@@ -867,7 +867,7 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
     ],
   },
   ThemeController: {
-    category: 'utilities',
+    category: 'interactive',
     tokens: [],
     modeAware: false,
     registryDependencies: ['card', 'switch', 'radio', 'button', 'badge', 'alert'],
@@ -933,6 +933,49 @@ const COMPONENT_META: Record<string, ComponentMeta> = {
       },
     ],
   },
+};
+
+// Category overrides for components not in COMPONENT_META (v4.x reorganization)
+// Maps component names (PascalCase) to their new categories
+const COMPONENT_CATEGORY_OVERRIDES: Record<string, string> = {
+  // Forms (7 newcomers)
+  Calendar: 'forms',
+  DatePicker: 'forms',
+  FileUploader: 'forms',
+  FormSection: 'forms',
+  InputOTP: 'forms',
+  CodeEditor: 'forms',
+  // Data-display (6 newcomers - Chat, Icon already fixed above)
+  ActivityFeed: 'data-display',
+  Chart: 'data-display',
+  DataTable: 'data-display',
+  KanbanBoard: 'data-display',
+  MetricCards: 'data-display',
+  // Navigation (5 newcomers)
+  NavTree: 'navigation',
+  PageHeader: 'navigation',
+  Sidebar: 'navigation',
+  UserMenu: 'navigation',
+  WorkspaceSwitcher: 'navigation',
+  // Feedback (5 newcomers)
+  Banner: 'feedback',
+  ErrorBoundary: 'feedback',
+  NotificationCenter: 'feedback',
+  // Overlays (3 newcomers)
+  AlertDialog: 'overlays',
+  Command: 'overlays',
+  CommandBar: 'overlays',
+  // Layout (5 newcomers)
+  Collapsible: 'layout',
+  CollapsibleFolder: 'layout',
+  DetailPanel: 'layout',
+  FilterBar: 'layout',
+  QuickActions: 'layout',
+  // Interactive (6 - Button, Chip, Link, ThemeController already fixed above)
+  Toggle: 'interactive',
+  ToggleGroup: 'interactive',
+  // Internal
+  IconGallery: 'internal',
 };
 
 // ============================================================================
@@ -1028,7 +1071,7 @@ function generateComponentRegistry(componentName: string): RegistryItem | null {
     type: 'registry:component',
     title: componentName,
     description,
-    category: meta?.category || 'utilities',
+    category: meta?.category || COMPONENT_CATEGORY_OVERRIDES[componentName] || 'utilities',
     files,
     props: props.length > 0 ? props : undefined,
     subComponents,

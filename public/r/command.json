@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Command",
   "description": "Command component",
-  "category": "utilities",
+  "category": "overlays",
   "files": [
     {
       "path": "packages/react/src/components/Command/Command.tsx",

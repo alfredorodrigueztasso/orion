@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "WorkspaceSwitcher",
   "description": "WorkspaceSwitcher component",
-  "category": "utilities",
+  "category": "navigation",
   "files": [
     {
       "path": "packages/react/src/components/WorkspaceSwitcher/WorkspaceSwitcher.tsx",

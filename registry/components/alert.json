@@ -33,7 +33,8 @@
         "success",
         "error",
         "warning",
-        "info"
+        "info",
+        "inverse"
       ]
     },
     {

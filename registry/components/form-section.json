@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "FormSection",
   "description": "FormSection component",
-  "category": "utilities",
+  "category": "forms",
   "files": [
     {
       "path": "packages/react/src/components/FormSection/FormSection.tsx",

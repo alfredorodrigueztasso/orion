@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "NavTree",
   "description": "NavTree Types",
-  "category": "utilities",
+  "category": "navigation",
   "files": [
     {
       "path": "packages/react/src/components/NavTree/NavTree.tsx",

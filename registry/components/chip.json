@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Chip",
   "description": "Chip component",
-  "category": "tags",
+  "category": "interactive",
   "files": [
     {
       "path": "packages/react/src/components/Chip/Chip.tsx",
@@ -35,7 +35,8 @@
         "success",
         "warning",
         "error",
-        "info"
+        "info",
+        "inverse"
       ]
     },
     {

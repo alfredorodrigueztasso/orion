@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Button",
   "description": "Primary interactive element for actions",
-  "category": "actions",
+  "category": "interactive",
   "files": [
     {
       "path": "packages/react/src/components/Button/Button.tsx",

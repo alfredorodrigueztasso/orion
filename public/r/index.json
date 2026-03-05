@@ -16,7 +16,7 @@
       "type": "registry:component",
       "title": "ActivityFeed",
       "description": "ActivityFeed component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/activity-feed.json"
     },
     {
@@ -40,7 +40,7 @@
       "type": "registry:component",
       "title": "AlertDialog",
       "description": "AlertDialog component",
-      "category": "utilities",
+      "category": "overlays",
       "registryUrl": "https://orion-ds.dev/r/alert-dialog.json"
     },
     {
@@ -64,7 +64,7 @@
       "type": "registry:component",
       "title": "Banner",
       "description": "Banner component",
-      "category": "utilities",
+      "category": "feedback",
       "registryUrl": "https://orion-ds.dev/r/banner.json"
     },
     {
@@ -80,7 +80,7 @@
       "type": "registry:component",
       "title": "Button",
       "description": "Primary interactive element for actions",
-      "category": "actions",
+      "category": "interactive",
       "registryUrl": "https://orion-ds.dev/r/button.json"
     },
     {
@@ -88,7 +88,7 @@
       "type": "registry:component",
       "title": "Calendar",
       "description": "Calendar component",
-      "category": "utilities",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/calendar.json"
     },
     {
@@ -112,7 +112,7 @@
       "type": "registry:component",
       "title": "Chart",
       "description": "Chart component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/chart.json"
     },
     {
@@ -120,7 +120,7 @@
       "type": "registry:component",
       "title": "Chat",
       "description": "Chat component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/chat.json"
     },
     {
@@ -136,7 +136,7 @@
       "type": "registry:component",
       "title": "Chip",
       "description": "Chip component",
-      "category": "tags",
+      "category": "interactive",
       "registryUrl": "https://orion-ds.dev/r/chip.json"
     },
     {
@@ -144,7 +144,7 @@
       "type": "registry:component",
       "title": "CodeEditor",
       "description": "CodeEditor component",
-      "category": "utilities",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/code-editor.json"
     },
     {
@@ -152,7 +152,7 @@
       "type": "registry:component",
       "title": "Collapsible",
       "description": "Collapsible component",
-      "category": "utilities",
+      "category": "layout",
       "registryUrl": "https://orion-ds.dev/r/collapsible.json"
     },
     {
@@ -160,7 +160,7 @@
       "type": "registry:component",
       "title": "CollapsibleFolder",
       "description": "CollapsibleFolder component",
-      "category": "utilities",
+      "category": "layout",
       "registryUrl": "https://orion-ds.dev/r/collapsible-folder.json"
     },
     {
@@ -176,7 +176,7 @@
       "type": "registry:component",
       "title": "Command",
       "description": "Command component",
-      "category": "utilities",
+      "category": "overlays",
       "registryUrl": "https://orion-ds.dev/r/command.json"
     },
     {
@@ -184,7 +184,7 @@
       "type": "registry:component",
       "title": "CommandBar",
       "description": "CommandBar component",
-      "category": "utilities",
+      "category": "overlays",
       "registryUrl": "https://orion-ds.dev/r/command-bar.json"
     },
     {
@@ -200,7 +200,7 @@
       "type": "registry:component",
       "title": "DataTable",
       "description": "DataTable component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/data-table.json"
     },
     {
@@ -208,7 +208,7 @@
       "type": "registry:component",
       "title": "DatePicker",
       "description": "DatePicker component",
-      "category": "utilities",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/date-picker.json"
     },
     {
@@ -216,7 +216,7 @@
       "type": "registry:component",
       "title": "DetailPanel",
       "description": "DetailPanel component",
-      "category": "utilities",
+      "category": "layout",
       "registryUrl": "https://orion-ds.dev/r/detail-panel.json"
     },
     {
@@ -256,7 +256,7 @@
       "type": "registry:component",
       "title": "ErrorBoundary",
       "description": "ErrorBoundary component",
-      "category": "utilities",
+      "category": "feedback",
       "registryUrl": "https://orion-ds.dev/r/error-boundary.json"
     },
     {
@@ -272,7 +272,7 @@
       "type": "registry:component",
       "title": "FileUploader",
       "description": "FileUploader component",
-      "category": "utilities",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/file-uploader.json"
     },
     {
@@ -280,7 +280,7 @@
       "type": "registry:component",
       "title": "FilterBar",
       "description": "FilterBar component",
-      "category": "utilities",
+      "category": "layout",
       "registryUrl": "https://orion-ds.dev/r/filter-bar.json"
     },
     {
@@ -288,7 +288,7 @@
       "type": "registry:component",
       "title": "FormSection",
       "description": "FormSection component",
-      "category": "utilities",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/form-section.json"
     },
     {
@@ -296,7 +296,7 @@
       "type": "registry:component",
       "title": "Icon",
       "description": "Icon component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/icon.json"
     },
     {
@@ -304,7 +304,7 @@
       "type": "registry:component",
       "title": "InputOTP",
       "description": "InputOTP component",
-      "category": "utilities",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/input-otp.json"
     },
     {
@@ -312,7 +312,7 @@
       "type": "registry:component",
       "title": "KanbanBoard",
       "description": "KanbanBoard component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/kanban-board.json"
     },
     {
@@ -320,7 +320,7 @@
       "type": "registry:component",
       "title": "Link",
       "description": "Link component",
-      "category": "text",
+      "category": "interactive",
       "registryUrl": "https://orion-ds.dev/r/link.json"
     },
     {
@@ -336,7 +336,7 @@
       "type": "registry:component",
       "title": "MetricCards",
       "description": "MetricCards component",
-      "category": "utilities",
+      "category": "data-display",
       "registryUrl": "https://orion-ds.dev/r/metric-cards.json"
     },
     {
@@ -352,7 +352,7 @@
       "type": "registry:component",
       "title": "NavTree",
       "description": "NavTree Types",
-      "category": "utilities",
+      "category": "navigation",
       "registryUrl": "https://orion-ds.dev/r/nav-tree.json"
     },
     {
@@ -368,7 +368,7 @@
       "type": "registry:component",
       "title": "NotificationCenter",
       "description": "NotificationCenter component",
-      "category": "utilities",
+      "category": "feedback",
       "registryUrl": "https://orion-ds.dev/r/notification-center.json"
     },
     {
@@ -376,7 +376,7 @@
       "type": "registry:component",
       "title": "PageHeader",
       "description": "PageHeader component",
-      "category": "utilities",
+      "category": "navigation",
       "registryUrl": "https://orion-ds.dev/r/page-header.json"
     },
     {
@@ -408,7 +408,7 @@
       "type": "registry:component",
       "title": "QuickActions",
       "description": "QuickActions component",
-      "category": "utilities",
+      "category": "layout",
       "registryUrl": "https://orion-ds.dev/r/quick-actions.json"
     },
     {
@@ -424,7 +424,7 @@
       "type": "registry:component",
       "title": "SearchInput",
       "description": "SearchInput component",
-      "category": "search",
+      "category": "forms",
       "registryUrl": "https://orion-ds.dev/r/search-input.json"
     },
     {
@@ -448,7 +448,7 @@
       "type": "registry:component",
       "title": "Sidebar",
       "description": "Vertical navigation panel",
-      "category": "utilities",
+      "category": "navigation",
       "registryUrl": "https://orion-ds.dev/r/sidebar.json"
     },
     {
@@ -456,7 +456,7 @@
       "type": "registry:component",
       "title": "Skeleton",
       "description": "Placeholder for loading content",
-      "category": "loading",
+      "category": "feedback",
       "registryUrl": "https://orion-ds.dev/r/skeleton.json"
     },
     {
@@ -472,7 +472,7 @@
       "type": "registry:component",
       "title": "Spinner",
       "description": "Loading indicator",
-      "category": "loading",
+      "category": "feedback",
       "registryUrl": "https://orion-ds.dev/r/spinner.json"
     },
     {
@@ -520,7 +520,7 @@
       "type": "registry:component",
       "title": "ThemeController",
       "description": "ThemeController component",
-      "category": "utilities",
+      "category": "interactive",
       "registryUrl": "https://orion-ds.dev/r/theme-controller.json"
     },
     {
@@ -536,7 +536,7 @@
       "type": "registry:component",
       "title": "Toggle",
       "description": "Toggle component",
-      "category": "utilities",
+      "category": "interactive",
       "registryUrl": "https://orion-ds.dev/r/toggle.json"
     },
     {
@@ -544,7 +544,7 @@
       "type": "registry:component",
       "title": "ToggleGroup",
       "description": "ToggleGroup component",
-      "category": "utilities",
+      "category": "interactive",
       "registryUrl": "https://orion-ds.dev/r/toggle-group.json"
     },
     {
@@ -560,7 +560,7 @@
       "type": "registry:component",
       "title": "UserMenu",
       "description": "UserMenu component",
-      "category": "utilities",
+      "category": "navigation",
       "registryUrl": "https://orion-ds.dev/r/user-menu.json"
     },
     {
@@ -568,7 +568,7 @@
       "type": "registry:component",
       "title": "WorkspaceSwitcher",
       "description": "WorkspaceSwitcher component",
-      "category": "utilities",
+      "category": "navigation",
       "registryUrl": "https://orion-ds.dev/r/workspace-switcher.json"
     }
   ]

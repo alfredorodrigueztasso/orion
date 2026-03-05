@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Chart",
   "description": "Chart component",
-  "category": "utilities",
+  "category": "data-display",
   "files": [
     {
       "path": "packages/react/src/components/Chart/Chart.tsx",

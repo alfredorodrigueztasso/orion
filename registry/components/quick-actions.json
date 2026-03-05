@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "QuickActions",
   "description": "QuickActions component",
-  "category": "utilities",
+  "category": "layout",
   "files": [
     {
       "path": "packages/react/src/components/QuickActions/QuickActions.tsx",

@@ -29,7 +29,7 @@
     },
     "category": {
       "type": "string",
-      "enum": ["actions", "forms", "layout", "feedback", "data-display", "navigation", "overlays", "text", "loading", "tags", "search", "marketing", "app", "chat", "utilities"],
+      "enum": ["interactive", "forms", "layout", "feedback", "data-display", "navigation", "overlays", "internal", "documentation", "marketing", "app"],
       "description": "Functional category for grouping"
     },
     "dependencies": {

@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "Banner",
   "description": "Banner component",
-  "category": "utilities",
+  "category": "feedback",
   "files": [
     {
       "path": "packages/react/src/components/Banner/Banner.tsx",

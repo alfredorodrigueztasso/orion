@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "DetailPanel",
   "description": "DetailPanel component",
-  "category": "utilities",
+  "category": "layout",
   "files": [
     {
       "path": "packages/react/src/components/DetailPanel/DetailPanel.tsx",

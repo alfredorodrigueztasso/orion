@@ -4,7 +4,7 @@
   "type": "registry:component",
   "title": "PageHeader",
   "description": "PageHeader component",
-  "category": "utilities",
+  "category": "navigation",
   "files": [
     {
       "path": "packages/react/src/components/PageHeader/PageHeader.tsx",
