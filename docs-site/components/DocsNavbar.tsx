@@ -115,7 +115,7 @@ function ThemeToggle() {
 const NAV_LINKS = [
   { label: 'Docs', href: '/docs/getting-started', match: '/docs' },
   { label: 'Components', href: '/components', match: '/components' },
-  { label: 'Blocks', href: '/sections', match: '/sections' },
+  { label: 'Sections', href: '/sections', match: '/sections' },
   { label: 'Templates', href: '/templates', match: '/templates' },
 ];
 

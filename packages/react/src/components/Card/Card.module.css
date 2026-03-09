@@ -232,6 +232,16 @@
   color: var(--text-primary);
 }
 
+/* Container spacing ownership — reset last-child margins so they don't compound with card padding */
+.body :last-child {
+  margin-bottom: 0;
+}
+
+.body pre,
+.body code {
+  margin: 0;
+}
+
 /* Body padding adjustment when preceded by header */
 .header + .body {
   padding-top: var(--card-padding-gap);

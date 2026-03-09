@@ -74,7 +74,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       .join(" ");
 
     // Size-specific class for input padding (CSS Modules requires flat classes)
-    const sizeClassMap = { sm: "Sm", md: "Md", lg: "Lg" } as const;
+    const sizeClassMap = { sm: "Sm", md: "Md", lg: "Lg", xl: "Xl" } as const;
     const sizeKey = sizeClassMap[size];
 
     const inputClasses = [styles.input, styles[`input${sizeKey}`]].join(" ");
@@ -84,7 +84,13 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
       styles[`searchIcon${sizeKey}`],
     ].join(" ");
 
-    const iconSize = size === "sm" ? 16 : size === "lg" ? 22 : 18;
+    const clearButtonClasses = [
+      styles.clearButton,
+      styles[`clearButton${sizeKey}`],
+    ].join(" ");
+
+    const iconSize =
+      size === "sm" ? 16 : size === "lg" ? 22 : size === "xl" ? 26 : 18;
 
     return (
       <div className={containerClasses}>
@@ -109,7 +115,7 @@ export const SearchInput = forwardRef<HTMLInputElement, SearchInputProps>(
         {showClear && hasValue && !loading && (
           <button
             type="button"
-            className={styles.clearButton}
+            className={clearButtonClasses}
             onClick={handleClear}
             aria-label={clearLabel}
           >

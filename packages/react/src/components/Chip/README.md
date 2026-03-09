@@ -119,7 +119,7 @@ function SelectableChips() {
 }
 ```
 
-### Filter Chips
+### Filter Chips (Removable)
 
 ```tsx
 function FilterChips({ filters, onRemove, onClear }) {
@@ -139,6 +139,55 @@ function FilterChips({ filters, onRemove, onClear }) {
   );
 }
 ```
+
+### Category Filter Pills (Gallery/Directory)
+
+**Use `size="lg"` for primary category filters** in gallery/directory interfaces (Components, Sections, Templates pages).
+
+```tsx
+function CategoryFilters({ categories, activeCategory, onSelect, counts }) {
+  return (
+    <div
+      style={{
+        display: "flex",
+        gap: "var(--spacing-2)",
+        flexWrap: "wrap",
+        justifyContent: "center",
+      }}
+    >
+      {/* Main filter: All items */}
+      <Chip
+        size="lg"
+        clickable
+        selected={activeCategory === "all"}
+        onClick={() => onSelect("all")}
+      >
+        All ({counts.total})
+      </Chip>
+
+      {/* Category filters */}
+      {categories.map((category) => (
+        <Chip
+          size="lg"
+          key={category}
+          clickable
+          selected={activeCategory === category}
+          onClick={() => onSelect(category)}
+        >
+          {category} ({counts[category]})
+        </Chip>
+      ))}
+    </div>
+  );
+}
+```
+
+**Why `size="lg"`**:
+
+- Creates visual hierarchy (filters prominent, cards below are smaller)
+- Improves touch target size for mobile
+- Clearer navigation affordance
+- See: [Chip size="lg" for Filter Pills pattern](../../memory/patterns.md)
 
 ### Disabled
 

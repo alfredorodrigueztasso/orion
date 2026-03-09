@@ -10,6 +10,7 @@
   position: relative;
   display: inline-flex;
   align-items: center;
+  overflow: hidden;
   background: var(--surface-base);
   border: 1px solid var(--border-subtle);
   border-radius: var(--radius-control);
@@ -24,13 +25,6 @@
 /* Focus state - visible for all focus methods */
 .container:focus-within {
   border-color: var(--interactive-primary);
-  box-shadow: 0 0 0 3px var(--soft-brand);
-}
-
-/* Focus-visible - box-shadow provides sufficient focus indicator */
-.container:has(.input:focus-visible) {
-  border-color: var(--interactive-primary);
-  box-shadow: 0 0 0 3px var(--soft-brand);
 }
 
 .fullWidth {
@@ -53,6 +47,11 @@
   font-size: var(--font-size-lg);
 }
 
+.xl {
+  height: 56px;
+  font-size: var(--font-size-xl);
+}
+
 /* Size variants - input padding (flat classes for CSS Modules) */
 .inputSm {
   padding: var(--spacing-1) var(--spacing-8) var(--spacing-1) var(--spacing-8);
@@ -64,6 +63,10 @@
 
 .inputLg {
   padding: var(--spacing-3) var(--spacing-12) var(--spacing-3) var(--spacing-12);
+}
+
+.inputXl {
+  padding: var(--spacing-4) var(--spacing-14) var(--spacing-4) var(--spacing-14);
 }
 
 /* Search icon - base */
@@ -89,6 +92,10 @@
   left: var(--spacing-4);
 }
 
+.searchIconXl {
+  left: var(--spacing-5);
+}
+
 /* Input */
 .input {
   flex: 1;
@@ -103,6 +110,13 @@
   outline: none;
 }
 
+/* High-specificity rule to prevent global :focus-visible from overriding outline: none
+   Ensures SearchInput's focus indicator (container border-color) takes precedence over native input outline */
+.input:focus,
+.input:focus-visible {
+  outline: none;
+}
+
 .input::placeholder {
   color: var(--text-tertiary);
 }
@@ -114,13 +128,13 @@
   appearance: none;
 }
 
-/* Clear button */
+/* Clear button — positioned absolutely to avoid layout shift */
 .clearButton {
+  position: absolute;
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--spacing-1);
-  margin-right: var(--spacing-1);
   background: transparent;
   border: none;
   border-radius: var(--radius-sm);
@@ -139,6 +153,23 @@
 .clearButton:focus-visible {
   outline: 2px solid var(--interactive-primary);
   outline-offset: 1px;
+}
+
+/* Clear button - size variants (flat classes for CSS Modules) */
+.clearButtonSm {
+  right: var(--spacing-1);
+}
+
+.clearButtonMd {
+  right: var(--spacing-2);
+}
+
+.clearButtonLg {
+  right: var(--spacing-2);
+}
+
+.clearButtonXl {
+  right: var(--spacing-3);
 }
 
 /* Search button */
@@ -217,11 +248,6 @@
 }
 
 :global([data-dark-bg="true"]) .container:focus-within {
-  border-color: var(--interactive-primary);
-  box-shadow: 0 0 0 3px var(--soft-brand);
-}
-
-:global([data-dark-bg="true"]) .container:has(.input:focus-visible) {
   border-color: var(--interactive-primary);
   box-shadow: 0 0 0 3px var(--soft-brand);
 }

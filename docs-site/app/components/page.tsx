@@ -1,5 +1,4 @@
 import { getAllComponents, getCategoriesByType } from '@/lib/registry';
-import DocsPageHero from '@/components/DocsPageHero';
 import ComponentsList from '@/components/ComponentsList';
 
 export const metadata = {
@@ -12,17 +11,13 @@ export default async function ComponentsListPage() {
   const categories = getCategoriesByType('registry:component');
 
   return (
-    <div className="main-content">
-      <DocsPageHero
+    <div style={{ padding: 'var(--spacing-8)' }}>
+      <ComponentsList
+        components={components}
+        categories={categories}
         title="Components"
         subtitle={`${components.length} ready-to-use React components with full TypeScript support`}
-        badges={[
-          { label: `${components.length} Components`, variant: 'info' },
-          { label: 'TypeScript', variant: 'success' },
-          { label: 'Accessible', variant: 'success' },
-        ]}
       />
-      <ComponentsList components={components} categories={categories} />
     </div>
   );
 }

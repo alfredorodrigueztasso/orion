@@ -1,28 +1,87 @@
 {
-  "$schema": "https://orion-ds.dev/schema/registry-item.json",
   "name": "activity-feed",
+  "title": "Activity Feed",
+  "description": "Timeline of events and user activities with filtering, pagination, and multiple display modes for SaaS dashboards and app interfaces",
+  "category": "app",
   "type": "registry:section",
-  "title": "ActivityFeed",
-  "description": "ActivityFeed section component",
-  "category": "marketing",
-  "files": [
+  "import": "import { ActivityFeed } from '@orion-ds/blocks'",
+  "cssImport": "import '@orion-ds/blocks/styles.css'",
+  "props": [
     {
-      "path": "packages/react/src/sections/ActivityFeed/ActivityFeed.tsx",
-      "type": "registry:component"
+      "name": "activities",
+      "type": "Activity[]",
+      "description": "Array of activity items to display",
+      "required": true
     },
     {
-      "path": "packages/react/src/sections/ActivityFeed/ActivityFeed.types.ts",
-      "type": "registry:types"
+      "name": "showFilters",
+      "type": "boolean",
+      "description": "Show filter chips above the activity list",
+      "default": "false"
     },
     {
-      "path": "packages/react/src/sections/ActivityFeed/index.ts",
-      "type": "registry:index"
+      "name": "filters",
+      "type": "ActivityFilter[]",
+      "description": "Array of filter options for the activity feed"
+    },
+    {
+      "name": "activeFilter",
+      "type": "string",
+      "description": "Currently selected filter value"
+    },
+    {
+      "name": "onFilterChange",
+      "type": "(value: string) => void",
+      "description": "Callback fired when a filter is selected"
+    },
+    {
+      "name": "compact",
+      "type": "boolean",
+      "description": "Use compact layout with reduced spacing",
+      "default": "false"
+    },
+    {
+      "name": "hasMore",
+      "type": "boolean",
+      "description": "Show 'Load more' button when there are more items to load",
+      "default": "false"
+    },
+    {
+      "name": "onLoadMore",
+      "type": "() => void",
+      "description": "Callback fired when 'Load more' button is clicked"
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "description": "Show loading spinner and disable interactions",
+      "default": "false"
+    },
+    {
+      "name": "emptyMessage",
+      "type": "string",
+      "description": "Message to display when there are no activities",
+      "default": "No activities yet"
     }
   ],
+  "files": [
+    {
+      "path": "src/sections/ActivityFeed/ActivityFeed.tsx",
+      "type": "component"
+    },
+    {
+      "path": "src/sections/ActivityFeed/ActivityFeed.types.ts",
+      "type": "types"
+    },
+    {
+      "path": "src/sections/ActivityFeed/ActivityFeed.module.css",
+      "type": "styles"
+    }
+  ],
+  "dependencies": [],
+  "registryDependencies": [],
+  "modeAware": false,
   "preview": {
-    "url": "https://orion-ds.dev/library.html#activity-feed",
-    "local": "/library.html#activity-feed"
-  },
-  "import": "import { ActivityFeed } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+    "url": "http://localhost:6006/?path=/story/sections-activityfeed--basic"
+  }
 }

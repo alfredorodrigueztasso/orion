@@ -60,6 +60,7 @@
   display: flex;
   gap: var(--spacing-2);
   flex-wrap: wrap;
+  justify-content: center;
   margin-bottom: var(--spacing-8);
 }
 

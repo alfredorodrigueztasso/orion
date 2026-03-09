@@ -8,8 +8,12 @@ import type { InputHTMLAttributes, ReactNode } from "react";
 
 /**
  * SearchInput size variants
+ * - sm: 32px height
+ * - md: 40px height (default)
+ * - lg: 48px height
+ * - xl: 56px height — for prominent search bars (hero sections, lists)
  */
-export type SearchInputSize = "sm" | "md" | "lg";
+export type SearchInputSize = "sm" | "md" | "lg" | "xl";
 
 /**
  * SearchInput component props

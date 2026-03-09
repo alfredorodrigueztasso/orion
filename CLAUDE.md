@@ -545,6 +545,18 @@ Button sizes scale contextually per mode using a proportional system. Each mode 
 }
 ```
 
+**Semantic Font Sizes (NOW EXIST - Mar 6 2026):**
+- ✅ `var(--font-size-xs)` → EXISTS (12px) — Use for captions, small labels
+- ✅ `var(--font-size-sm)` → EXISTS (13px) — Use for small UI text
+- ✅ `var(--font-size-base)` → EXISTS (14px) — Use for standard body text
+- ✅ `var(--font-size-md)` → EXISTS (16px) — Use for comfortable reading
+- ✅ `var(--font-size-lg)` → EXISTS (18px) — Use for large UI text
+- ✅ `var(--font-size-xl)` → EXISTS (20px) — Use for emphasis
+- ✅ `var(--font-size-2xl)` → EXISTS (24px) — Use for headings
+- ✅ `var(--font-size-3xl)` → EXISTS (32px) — Use for display text
+
+These semantic aliases map to numeric primitives (`--font-size-12`, `--font-size-14`, etc.) for semantic clarity in component CSS. Use them in `.module.css` files instead of hardcoding pixel values or using numeric tokens directly.
+
 ### Font Loading (Automatic in React)
 
 **For @orion/react users:** Fonts are loaded **automatically** by `ThemeProvider`. No manual setup required.
@@ -1045,6 +1057,17 @@ turbo run build              # Direct Turbo invocation
 - `--radius-control` (12px) - The master knob (brand override possible)
 - `--radius-container` (16px) - Larger containers
 - `--radius-full` (9999px) - Pills/circles
+
+### Typography Scale (Semantic Size Aliases)
+- `--font-size-xs` (12px) — captions, small labels
+- `--font-size-sm` (13px) — small UI text
+- `--font-size-base` (14px) — standard body text
+- `--font-size-md` (16px) — comfortable reading
+- `--font-size-lg` (18px) — large UI text
+- `--font-size-xl` (20px) — emphasis text
+- `--font-size-2xl` (24px) — headings
+- `--font-size-3xl` (32px) — display text
+- `--spacing-14` (56px) — fills gap between spacing-12 (48px) and spacing-16 (64px)
 
 ## Tri-Modal Operating System
 

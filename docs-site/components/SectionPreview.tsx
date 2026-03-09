@@ -100,7 +100,7 @@ export default function SectionPreview({ sectionName, title }: SectionPreviewPro
   );
 
   return (
-    <Card variant="elevated" style={{ marginTop: 'var(--spacing-4)' }}>
+    <Card variant="base" style={{ marginTop: 'var(--spacing-4)' }}>
       <Card.Header>
         <h3 style={{ margin: 0 }}>{title || 'Live Preview'}</h3>
       </Card.Header>

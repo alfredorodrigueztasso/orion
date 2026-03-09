@@ -3,66 +3,60 @@
 import { useState, useMemo } from 'react';
 import Link from 'next/link';
 import { Card, Badge, SearchInput, Chip } from '@/components/ClientComponents';
-import styles from './ComponentsList.module.css';
 
-interface Component {
+interface Template {
   name: string;
   title: string;
   description: string;
   category: string;
-  modeAware?: boolean;
-  props?: Array<unknown>;
-  accessibility?: object;
 }
 
-interface ComponentsListProps {
-  components: Component[];
+interface TemplateCardGridProps {
+  templates: Template[];
   categories: string[];
-  title: string;
-  subtitle: string;
 }
 
-export default function ComponentsList({ components, categories, title, subtitle }: ComponentsListProps) {
+export default function TemplateCardGrid({ templates, categories }: TemplateCardGridProps) {
   const [query, setQuery] = useState('');
   const [activeCategory, setActiveCategory] = useState('all');
 
-  // Compute filtered components
+  // Compute filtered templates
   const filtered = useMemo(() => {
-    let result = components;
+    let result = templates;
 
     if (activeCategory !== 'all') {
-      result = result.filter(c => c.category === activeCategory);
+      result = result.filter(t => t.category === activeCategory);
     }
 
     if (query.trim()) {
       const q = query.toLowerCase();
-      result = result.filter(c =>
-        c.title.toLowerCase().includes(q) ||
-        c.description.toLowerCase().includes(q) ||
-        c.name.toLowerCase().includes(q)
+      result = result.filter(t =>
+        t.title.toLowerCase().includes(q) ||
+        t.description.toLowerCase().includes(q) ||
+        t.name.toLowerCase().includes(q)
       );
     }
 
     return result;
-  }, [components, activeCategory, query]);
+  }, [templates, activeCategory, query]);
 
-  // Group filtered components by category (only when viewing all + no search)
+  // Group filtered templates by category (only when viewing all + no search)
   const shouldGroup = activeCategory === 'all' && !query.trim();
   const filteredByCategory = useMemo(() => {
     if (!shouldGroup) return {};
     return categories.reduce((acc, category) => {
-      acc[category] = filtered.filter(c => c.category === category);
+      acc[category] = filtered.filter(t => t.category === category);
       return acc;
-    }, {} as Record<string, Component[]>);
+    }, {} as Record<string, Template[]>);
   }, [filtered, shouldGroup, categories]);
 
-  // Count components per category for filter pills
+  // Count templates per category for filter pills
   const categoryCounts = useMemo(() => {
     return categories.reduce((acc, cat) => {
-      acc[cat] = components.filter(c => c.category === cat).length;
+      acc[cat] = templates.filter(t => t.category === cat).length;
       return acc;
     }, {} as Record<string, number>);
-  }, [components, categories]);
+  }, [templates, categories]);
 
   return (
     <>
@@ -79,7 +73,7 @@ export default function ComponentsList({ components, categories, title, subtitle
           fontWeight: 800,
           marginBottom: 'var(--spacing-3)',
         }}>
-          {title}
+          Templates
         </h1>
         <p style={{
           fontSize: '1.125rem',
@@ -89,7 +83,7 @@ export default function ComponentsList({ components, categories, title, subtitle
           lineHeight: 1.6,
           marginBottom: 'var(--spacing-8)',
         }}>
-          {subtitle}
+          {templates.length} complete page templates ready to use
         </p>
 
         {/* Search Bar */}
@@ -97,7 +91,7 @@ export default function ComponentsList({ components, categories, title, subtitle
           <SearchInput
             size="xl"
             fullWidth
-            placeholder="Search components by name or description..."
+            placeholder="Search templates by name or description..."
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             onClear={() => setQuery('')}
@@ -107,7 +101,13 @@ export default function ComponentsList({ components, categories, title, subtitle
       </div>
 
       {/* Category Filter Pills */}
-      <div className={styles.filterRow}>
+      <div style={{
+        display: 'flex',
+        gap: 'var(--spacing-2)',
+        flexWrap: 'wrap',
+        justifyContent: 'center',
+        marginBottom: 'var(--spacing-8)',
+      }}>
         <Chip
           size="lg"
           clickable
@@ -132,19 +132,44 @@ export default function ComponentsList({ components, categories, title, subtitle
 
       {/* Results Count */}
       {(query.trim() || activeCategory !== 'all') && (
-        <div className={styles.resultsCount}>
-          Showing {filtered.length} of {components.length} components
+        <div style={{
+          fontSize: '0.875rem',
+          color: 'var(--text-tertiary)',
+          marginBottom: 'var(--spacing-6)',
+        }}>
+          Showing {filtered.length} of {templates.length} templates
         </div>
       )}
 
       {/* Empty State */}
       {filtered.length === 0 ? (
-        <div className={styles.emptyState}>
-          <div className={styles.emptyTitle}>No components found</div>
-          <div className={styles.emptyDescription}>
+        <div style={{
+          display: 'flex',
+          flexDirection: 'column',
+          alignItems: 'center',
+          justifyContent: 'center',
+          padding: 'var(--spacing-12)',
+          textAlign: 'center',
+          border: '1px solid var(--border-subtle)',
+          borderRadius: 'var(--radius-control)',
+          background: 'var(--surface-subtle)',
+        }}>
+          <div style={{
+            fontSize: '1.125rem',
+            fontWeight: 600,
+            color: 'var(--text-primary)',
+            marginBottom: 'var(--spacing-2)',
+          }}>
+            No templates found
+          </div>
+          <div style={{
+            color: 'var(--text-secondary)',
+            fontSize: '0.875rem',
+            marginBottom: 'var(--spacing-4)',
+          }}>
             {query.trim()
-              ? `No components match "${query}". Try a different search.`
-              : `No components in the "${activeCategory}" category.`}
+              ? `No templates match "${query}". Try a different search.`
+              : `No templates in the "${activeCategory}" category.`}
           </div>
           {(query.trim() || activeCategory !== 'all') && (
             <button
@@ -168,18 +193,30 @@ export default function ComponentsList({ components, categories, title, subtitle
           )}
         </div>
       ) : shouldGroup ? (
-        // Grouped View
+        // Grouped View (by category)
         <>
           {categories.map((category) => {
-            const categoryComponents = filteredByCategory[category] || [];
-            if (categoryComponents.length === 0) return null;
+            const categoryTemplates = filteredByCategory[category] || [];
+            if (categoryTemplates.length === 0) return null;
 
             return (
-              <section key={category} className={styles.categorySection}>
-                <h2 className={styles.categoryTitle}>{category}</h2>
-                <div className={styles.componentGrid}>
-                  {categoryComponents.map((component) => (
-                    <ComponentCard key={component.name} component={component} />
+              <section key={category} style={{ marginBottom: 'var(--spacing-16)' }}>
+                <h2 style={{
+                  textTransform: 'capitalize',
+                  marginBottom: 'var(--spacing-6)',
+                  fontSize: '1.5rem',
+                  fontWeight: 600,
+                }}>
+                  {category}
+                </h2>
+
+                <div style={{
+                  display: 'grid',
+                  gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+                  gap: 'var(--spacing-4)',
+                }}>
+                  {categoryTemplates.map((template) => (
+                    <TemplateCard key={template.name} template={template} />
                   ))}
                 </div>
               </section>
@@ -188,9 +225,13 @@ export default function ComponentsList({ components, categories, title, subtitle
         </>
       ) : (
         // Flat Grid View (when filtering or searching)
-        <div className={styles.componentGrid}>
-          {filtered.map((component) => (
-            <ComponentCard key={component.name} component={component} />
+        <div style={{
+          display: 'grid',
+          gridTemplateColumns: 'repeat(auto-fill, minmax(350px, 1fr))',
+          gap: 'var(--spacing-4)',
+        }}>
+          {filtered.map((template) => (
+            <TemplateCard key={template.name} template={template} />
           ))}
         </div>
       )}
@@ -198,11 +239,11 @@ export default function ComponentsList({ components, categories, title, subtitle
   );
 }
 
-// Extracted component card for reusability
-function ComponentCard({ component }: { component: Component }) {
+// Template Card Component
+function TemplateCard({ template }: { template: Template }) {
   return (
     <Link
-      href={`/components/${component.name}`}
+      href={`/templates/${template.name}`}
       style={{ textDecoration: 'none' }}
     >
       <Card
@@ -232,18 +273,16 @@ function ComponentCard({ component }: { component: Component }) {
               flex: 1,
             }}
           >
-            {component.title}
+            {template.title}
           </h3>
-          {component.modeAware && (
-            <Badge variant="info" size="sm" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
-              Mode Aware
-            </Badge>
-          )}
+          <Badge variant="secondary" size="sm" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
+            {template.category}
+          </Badge>
         </Card.Header>
 
         {/* Description */}
         <Card.Body style={{ flex: 1 }}>
-          <p className={styles.description}
+          <p
             style={{
               margin: 0,
               color: 'var(--text-secondary)',
@@ -251,20 +290,12 @@ function ComponentCard({ component }: { component: Component }) {
               lineHeight: 1.5,
             }}
           >
-            {component.description}
+            {template.description}
           </p>
         </Card.Body>
 
-        {/* Footer: Component Name + Props + Accessibility */}
-        <Card.Footer
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            gap: 'var(--spacing-2)',
-            fontSize: '0.75rem',
-          }}
-        >
+        {/* Footer: Template Name */}
+        <Card.Footer>
           <code
             style={{
               background: 'var(--surface-layer)',
@@ -272,23 +303,11 @@ function ComponentCard({ component }: { component: Component }) {
               borderRadius: 'var(--radius-sm)',
               color: 'var(--text-tertiary)',
               fontFamily: 'var(--font-mono)',
+              fontSize: '0.75rem',
             }}
           >
-            {component.name}
+            {template.name}
           </code>
-
-          <div style={{ display: 'flex', gap: 'var(--spacing-2)' }}>
-            {component.props && component.props.length > 0 && (
-              <Badge variant="secondary" size="sm">
-                {component.props.length} props
-              </Badge>
-            )}
-            {component.accessibility && (
-              <Badge variant="success" size="sm">
-                A11y
-              </Badge>
-            )}
-          </div>
         </Card.Footer>
       </Card>
     </Link>

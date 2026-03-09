@@ -284,7 +284,15 @@
                 "--font-size-80",
                 "--font-size-96",
                 "--font-size-display-lg",
-                "--font-size-display-xl"
+                "--font-size-display-xl",
+                "--font-size-xs",
+                "--font-size-sm",
+                "--font-size-base",
+                "--font-size-md",
+                "--font-size-lg",
+                "--font-size-xl",
+                "--font-size-2xl",
+                "--font-size-3xl"
             ],
             "weight": [
                 "--font-weight-regular",
@@ -308,6 +316,7 @@
             "--spacing-6",
             "--spacing-8",
             "--spacing-12",
+            "--spacing-14",
             "--spacing-16",
             "--spacing-24",
             "--spacing-32"

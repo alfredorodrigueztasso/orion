@@ -4,8 +4,7 @@
  */
 
 import React, { useState } from 'react';
-import { ActivityFeed } from '@orion-ds/react';
-import { MessageSquare, Edit, Plus, CheckCircle, Upload } from 'lucide-react';
+import { ActivityFeed } from '@orion-ds/blocks';
 
 const sampleActivities = [
   {
