@@ -7,6 +7,7 @@ import PreviewBrandModeBar from '@/components/PreviewBrandModeBar';
 import PackageManagerTabs from '@/components/PackageManagerTabs';
 import ExpandableExamples from '@/components/ExpandableExamples';
 import Link from 'next/link';
+import styles from './ComponentDetail.module.css';
 
 interface ComponentDetailProps {
   component: any;
@@ -24,63 +25,50 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
       )}
 
       {/* Section 1: Installation */}
-      <section id="installation" style={{ marginBottom: 'var(--spacing-12)' }}>
-        <h2>Installation</h2>
+      <section id="installation" className={styles.section}>
+        <h2 className={styles.sectionTitle}>Installation</h2>
         <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-4)' }}>
           Install this component using the CLI or add the package to your project.
         </p>
 
-        <Card variant="base" style={{ marginBottom: 'var(--spacing-4)' }}>
-          <Card.Header>
-            <h3 style={{ margin: 0, fontSize: '0.95rem' }}>Using CLI</h3>
-          </Card.Header>
-          <Card.Body style={{ padding: 0 }}>
+        <div className={styles.installSection}>
+          <div>
+            <h4 className={styles.installLabel}>Using CLI</h4>
             <CodeBlockSimple code={`npx @orion-ds/cli add ${component.name}`} language="bash" />
-          </Card.Body>
-        </Card>
+          </div>
 
-        {component.import && (
-          <Card variant="base">
-            <Card.Header>
-              <h3 style={{ margin: 0, fontSize: '0.95rem' }}>Using npm Package</h3>
-            </Card.Header>
-            <Card.Body style={{ paddingBottom: 0 }}>
+          {component.import && (
+            <div>
+              <h4 className={styles.installLabel}>Using npm Package</h4>
               <PackageManagerTabs packageName="@orion-ds/react" />
-            </Card.Body>
-          </Card>
-        )}
+            </div>
+          )}
+        </div>
       </section>
 
       {/* Section 2: Preview */}
-      <section id="preview" style={{ marginBottom: 'var(--spacing-12)' }}>
-        <h2>Preview</h2>
+      <section id="preview" className={styles.section}>
+        <h2 className={styles.sectionTitle}>Preview</h2>
         <PreviewBrandModeBar componentName={component.name} />
       </section>
 
       {/* Section 3: Usage */}
       {component.import && (
-        <section id="usage" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Usage</h2>
-          <Card variant="base">
-            <Card.Header>
-              <h3 style={{ margin: 0, fontSize: '0.95rem' }}>Basic Example</h3>
-            </Card.Header>
-            <Card.Body style={{ padding: 0 }}>
-              <CodeBlockSimple
-                code={`${component.import}${
-                  component.cssImport ? `\n${component.cssImport}` : ''
-                }\n\nexport default function Example() {\n  return <${component.title} />;\n}`}
-                language="tsx"
-              />
-            </Card.Body>
-          </Card>
+        <section id="usage" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Usage</h2>
+          <CodeBlockSimple
+            code={`${component.import}${
+              component.cssImport ? `\n${component.cssImport}` : ''
+            }\n\nexport default function Example() {\n  return <${component.title} />;\n}`}
+            language="tsx"
+          />
         </section>
       )}
 
       {/* Section 4: Examples */}
       {component.examples && component.examples.length > 1 && (
-        <section id="examples" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Examples</h2>
+        <section id="examples" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Examples</h2>
           <ExpandableExamples
             examples={component.examples.map((example: any) => ({
               title: example.title,
@@ -92,16 +80,16 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
 
       {/* Section 5: Props */}
       {component.props && component.props.length > 0 && (
-        <section id="props" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Props</h2>
+        <section id="props" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Props</h2>
           <PropsTable props={component.props} />
         </section>
       )}
 
       {/* Section 6: Design Tokens */}
       {component.tokens && component.tokens.length > 0 && (
-        <section id="tokens" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Design Tokens</h2>
+        <section id="tokens" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Design Tokens</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-4)', fontSize: '0.9rem' }}>
             This component uses the following CSS tokens:
           </p>
@@ -117,8 +105,8 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
 
       {/* Section 7: Accessibility */}
       {component.accessibility && (
-        <section id="accessibility" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Accessibility</h2>
+        <section id="accessibility" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Accessibility</h2>
 
           {component.accessibility.role && (
             <div style={{ marginBottom: 'var(--spacing-6)' }}>
@@ -199,8 +187,8 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
 
       {/* Section 8: Dependencies */}
       {(component.dependencies || component.registryDependencies) && (
-        <section id="dependencies" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Dependencies</h2>
+        <section id="dependencies" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Dependencies</h2>
 
           {component.dependencies && component.dependencies.length > 0 && (
             <div style={{ marginBottom: 'var(--spacing-6)' }}>
@@ -234,8 +222,8 @@ export default function ComponentDetail({ component }: ComponentDetailProps) {
 
       {/* Section 9: Files */}
       {component.files && component.files.length > 0 && (
-        <section id="files" style={{ marginBottom: 'var(--spacing-12)' }}>
-          <h2>Files</h2>
+        <section id="files" className={styles.section}>
+          <h2 className={styles.sectionTitle}>Files</h2>
           <p style={{ color: 'var(--text-secondary)', marginBottom: 'var(--spacing-4)', fontSize: '0.9rem' }}>
             Files copied to your project when using the CLI.
           </p>

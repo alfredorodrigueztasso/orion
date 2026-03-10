@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useEffect, useState } from 'react';
-import { Card, Alert } from '@/components/ClientComponents';
+import { Alert } from '@/components/ClientComponents';
 
 interface ComponentPreviewProps {
   componentName: string;
@@ -82,11 +82,22 @@ export default function ComponentPreview({ componentName, title }: ComponentPrev
   );
 
   return (
-    <Card variant="elevated" style={{ marginTop: 'var(--spacing-4)' }}>
-      <Card.Header>
-        <h3 style={{ margin: 0 }}>{title || 'Live Preview'}</h3>
-      </Card.Header>
-      <Card.Body>{content}</Card.Body>
-    </Card>
+    <div style={{
+      marginTop: 'var(--spacing-4)',
+      border: '1px solid var(--border-subtle)',
+      borderRadius: 'var(--radius-container)',
+      overflow: 'hidden',
+      background: 'var(--surface-base)',
+    }}>
+      <div style={{
+        padding: 'var(--spacing-4)',
+        borderBottom: '1px solid var(--border-subtle)',
+      }}>
+        <h3 style={{ margin: 0, fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>{title || 'Live Preview'}</h3>
+      </div>
+      <div style={{ padding: 'var(--spacing-4)' }}>
+        {content}
+      </div>
+    </div>
   );
 }
