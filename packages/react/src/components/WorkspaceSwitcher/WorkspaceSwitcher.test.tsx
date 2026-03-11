@@ -2,33 +2,28 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
-import type { Workspace } from "./WorkspaceSwitcher.types";
 
 describe("WorkspaceSwitcher", () => {
-  const mockWorkspaces: Workspace[] = [
+  const mockCurrentOrg = {
+    name: "Personal",
+    role: "Owner",
+    memberCount: 1,
+  };
+
+  const mockOrganizations = [
     {
-      id: "ws-1",
-      name: "Personal",
-      icon: "👤",
-      isActive: true,
-    },
-    {
-      id: "ws-2",
       name: "Team",
-      icon: "👥",
-      isActive: false,
+      role: "Member",
     },
     {
-      id: "ws-3",
       name: "Enterprise",
-      icon: "🏢",
-      isActive: false,
+      role: "Admin",
     },
   ];
 
-  it("renders active workspace", () => {
+  it("renders current org", () => {
     render(
-      <WorkspaceSwitcher workspaces={mockWorkspaces} />,
+      <WorkspaceSwitcher currentOrg={mockCurrentOrg} organizations={mockOrganizations} />,
     );
 
     expect(screen.getByText("Personal")).toBeInTheDocument();
@@ -38,7 +33,7 @@ describe("WorkspaceSwitcher", () => {
     const user = userEvent.setup();
 
     render(
-      <WorkspaceSwitcher workspaces={mockWorkspaces} />,
+      <WorkspaceSwitcher currentOrg={mockCurrentOrg} organizations={mockOrganizations} />,
     );
 
     const trigger = screen.getByText("Personal");
@@ -47,38 +42,42 @@ describe("WorkspaceSwitcher", () => {
     expect(screen.getByText("Personal")).toBeInTheDocument();
   });
 
-  it("switches workspace", async () => {
-    const handleSwitch = vi.fn();
+  it("switches organization", async () => {
+    const handleOrgChange = vi.fn();
     const user = userEvent.setup();
 
     render(
       <WorkspaceSwitcher
-        workspaces={mockWorkspaces}
-        onSwitch={handleSwitch}
+        currentOrg={mockCurrentOrg}
+        organizations={mockOrganizations}
+        onOrgChange={handleOrgChange}
       />,
     );
 
     expect(screen.getByText("Personal")).toBeInTheDocument();
   });
 
-  it("shows all workspaces in menu", async () => {
+  it("shows all organizations in menu", async () => {
     const user = userEvent.setup();
 
     render(
-      <WorkspaceSwitcher workspaces={mockWorkspaces} />,
+      <WorkspaceSwitcher currentOrg={mockCurrentOrg} organizations={mockOrganizations} />,
     );
 
     const trigger = screen.getByText("Personal");
     await user.click(trigger);
 
-    // Menu should show all workspaces
     expect(screen.getByText("Personal")).toBeInTheDocument();
   });
 
   it("forwards ref correctly", () => {
     const ref = vi.fn();
     render(
-      <WorkspaceSwitcher ref={ref} workspaces={mockWorkspaces} />,
+      <WorkspaceSwitcher
+        ref={ref}
+        currentOrg={mockCurrentOrg}
+        organizations={mockOrganizations}
+      />,
     );
 
     expect(ref).toHaveBeenCalled();

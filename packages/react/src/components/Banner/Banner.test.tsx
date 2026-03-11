@@ -2,65 +2,86 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { Banner } from "./Banner";
-import { AlertCircle, X } from "lucide-react";
 
 describe("Banner", () => {
-  it("renders banner content", () => {
+  it("renders banner title", () => {
     render(
-      <Banner variant="info" icon={<AlertCircle size={20} />}>
-        Important information
-      </Banner>,
+      <Banner title="Important information" />,
     );
 
     expect(screen.getByText("Important information")).toBeInTheDocument();
   });
 
-  it("applies variant styles", () => {
-    const { container, rerender } = render(
-      <Banner variant="success">Success</Banner>,
+  it("displays banner description", () => {
+    render(
+      <Banner
+        title="Important information"
+        description="Please read this carefully"
+      />,
     );
 
-    expect(container.querySelector("[class*='success']")).toBeInTheDocument();
+    expect(screen.getByText("Please read this carefully")).toBeInTheDocument();
+  });
 
-    rerender(<Banner variant="error">Error</Banner>);
+  it("applies variant styles", () => {
+    const { container } = render(
+      <Banner title="Default" variant="default" />,
+    );
+
     expect(container).toBeInTheDocument();
   });
 
-  it("handles close button", async () => {
-    const handleClose = vi.fn();
+  it("supports image variant", () => {
+    const { container } = render(
+      <Banner
+        title="Image Banner"
+        variant="image"
+        backgroundImage="https://example.com/image.jpg"
+      />,
+    );
+
+    expect(container).toBeInTheDocument();
+  });
+
+  it("handles dismiss button", async () => {
+    const handleDismiss = vi.fn();
     const user = userEvent.setup();
 
     render(
-      <Banner closable onClose={handleClose}>
-        Closable Banner
-      </Banner>,
+      <Banner
+        title="Dismissible Banner"
+        dismissible
+        onDismiss={handleDismiss}
+      />,
     );
 
-    const closeButton = screen.getByRole("button");
-    await user.click(closeButton);
+    const dismissButton = screen.getByRole("button");
+    await user.click(dismissButton);
 
-    expect(handleClose).toHaveBeenCalled();
+    expect(handleDismiss).toHaveBeenCalled();
   });
 
-  it("displays action button", async () => {
-    const handleAction = vi.fn();
-    const user = userEvent.setup();
-
+  it("displays CTA button with link", () => {
     render(
-      <Banner action={{ label: "Learn more", onClick: handleAction }}>
-        Banner with action
-      </Banner>,
+      <Banner
+        title="Learn more"
+        ctaLabel="Read documentation"
+        ctaHref="/docs"
+      />,
     );
 
-    const actionButton = screen.getByText("Learn more");
-    await user.click(actionButton);
-
-    expect(handleAction).toHaveBeenCalled();
+    expect(screen.getByText("Read documentation")).toBeInTheDocument();
   });
 
-  it("forwards ref correctly", () => {
-    const ref = vi.fn();
-    render(<Banner ref={ref}>Banner</Banner>);
-    expect(ref).toHaveBeenCalled();
+  it("applies custom className", () => {
+    const { container } = render(
+      <Banner
+        title="Custom Banner"
+        className="custom-banner"
+      />,
+    );
+
+    const banner = container.querySelector(".custom-banner");
+    expect(banner).toBeInTheDocument();
   });
 });

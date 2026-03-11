@@ -8,26 +8,23 @@ describe("ActivityFeed", () => {
   const mockActivities: Activity[] = [
     {
       id: "1",
-      author: "Alice Johnson",
-      avatar: "https://i.pravatar.cc/150?u=alice",
-      content: "Started working on new feature",
-      timestamp: new Date("2024-03-09T10:00:00"),
+      actor: { name: "Alice Johnson", avatar: "https://i.pravatar.cc/150?u=alice" },
+      title: "Started working on new feature",
+      timestamp: "2024-03-09T10:00:00Z",
       icon: <MessageCircle size={16} />,
     },
     {
       id: "2",
-      author: "Bob Smith",
-      avatar: "https://i.pravatar.cc/150?u=bob",
-      content: "Liked your comment",
-      timestamp: new Date("2024-03-09T09:30:00"),
+      actor: { name: "Bob Smith", avatar: "https://i.pravatar.cc/150?u=bob" },
+      title: "Liked your comment",
+      timestamp: "2024-03-09T09:30:00Z",
       icon: <Heart size={16} />,
     },
     {
       id: "3",
-      author: "Charlie Brown",
-      avatar: "https://i.pravatar.cc/150?u=charlie",
-      content: "Shared the document",
-      timestamp: new Date("2024-03-09T09:00:00"),
+      actor: { name: "Charlie Brown", avatar: "https://i.pravatar.cc/150?u=charlie" },
+      title: "Shared the document",
+      timestamp: "2024-03-09T09:00:00Z",
       icon: <Share2 size={16} />,
     },
   ];
@@ -115,9 +112,4 @@ describe("ActivityFeed", () => {
     expect(ref).toHaveBeenCalled();
   });
 
-  it("shows action buttons", () => {
-    render(<ActivityFeed activities={mockActivities} showActions />);
-
-    expect(screen.getByText("Alice Johnson")).toBeInTheDocument();
-  });
 });

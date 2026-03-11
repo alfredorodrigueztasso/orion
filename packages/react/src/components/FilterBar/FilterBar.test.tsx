@@ -2,12 +2,12 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { FilterBar } from "./FilterBar";
-import type { Filter } from "./FilterBar.types";
+import type { FilterDefinition, ActiveFilter } from "./FilterBar.types";
 
 describe("FilterBar", () => {
-  const mockFilters: Filter[] = [
+  const mockFilters: FilterDefinition[] = [
     {
-      id: "status",
+      key: "status",
       label: "Status",
       type: "select",
       options: [
@@ -16,15 +16,22 @@ describe("FilterBar", () => {
       ],
     },
     {
-      id: "date",
+      key: "date",
       label: "Date Range",
-      type: "daterange",
+      type: "date-range",
     },
   ];
 
+  const mockActiveFilters: ActiveFilter[] = [];
+
   it("renders all filters", () => {
     render(
-      <FilterBar filters={mockFilters} onApply={() => {}} />,
+      <FilterBar
+        filters={mockFilters}
+        activeFilters={mockActiveFilters}
+        onFilterChange={() => {}}
+        onFilterRemove={() => {}}
+      />,
     );
 
     expect(screen.getByText("Status")).toBeInTheDocument();
@@ -32,30 +39,45 @@ describe("FilterBar", () => {
   });
 
   it("handles filter changes", async () => {
-    const handleApply = vi.fn();
+    const handleFilterChange = vi.fn();
     const user = userEvent.setup();
 
     render(
-      <FilterBar filters={mockFilters} onApply={handleApply} />,
+      <FilterBar
+        filters={mockFilters}
+        activeFilters={mockActiveFilters}
+        onFilterChange={handleFilterChange}
+        onFilterRemove={() => {}}
+      />,
     );
 
     const selectElement = screen.getByText("Status");
     expect(selectElement).toBeInTheDocument();
   });
 
-  it("shows clear filters button", () => {
+  it("shows filters", () => {
     render(
-      <FilterBar filters={mockFilters} onApply={() => {}} />,
+      <FilterBar
+        filters={mockFilters}
+        activeFilters={mockActiveFilters}
+        onFilterChange={() => {}}
+        onFilterRemove={() => {}}
+      />,
     );
 
-    expect(screen.getByText(/filter/i)).toBeInTheDocument();
+    expect(screen.getByText(/Status|Date/i)).toBeInTheDocument();
   });
 
-  it("applies filters on submit", () => {
-    const handleApply = vi.fn();
+  it("handles filter removal", () => {
+    const handleFilterRemove = vi.fn();
 
     render(
-      <FilterBar filters={mockFilters} onApply={handleApply} />,
+      <FilterBar
+        filters={mockFilters}
+        activeFilters={mockActiveFilters}
+        onFilterChange={() => {}}
+        onFilterRemove={handleFilterRemove}
+      />,
     );
 
     expect(screen.getByText(/Status|Date/i)).toBeInTheDocument();
@@ -67,7 +89,9 @@ describe("FilterBar", () => {
       <FilterBar
         ref={ref}
         filters={mockFilters}
-        onApply={() => {}}
+        activeFilters={mockActiveFilters}
+        onFilterChange={() => {}}
+        onFilterRemove={() => {}}
       />,
     );
 

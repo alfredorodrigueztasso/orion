@@ -11,9 +11,20 @@ describe("UserMenu", () => {
     avatar: "https://i.pravatar.cc/150?u=john",
   };
 
+  const mockSections = [
+    {
+      id: "account",
+      items: [
+        { id: "profile", label: "Profile", onClick: vi.fn() },
+        { id: "settings", label: "Settings", onClick: vi.fn() },
+        { id: "logout", label: "Sign out", onClick: vi.fn(), danger: true },
+      ],
+    },
+  ];
+
   it("displays user name", () => {
     render(
-      <UserMenu user={mockUser} />,
+      <UserMenu user={mockUser} sections={mockSections} />,
     );
 
     expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -21,7 +32,7 @@ describe("UserMenu", () => {
 
   it("shows user avatar", () => {
     const { container } = render(
-      <UserMenu user={mockUser} />,
+      <UserMenu user={mockUser} sections={mockSections} />,
     );
 
     const img = container.querySelector("img");
@@ -32,7 +43,7 @@ describe("UserMenu", () => {
     const user = userEvent.setup();
 
     render(
-      <UserMenu user={mockUser} />,
+      <UserMenu user={mockUser} sections={mockSections} />,
     );
 
     const trigger = screen.getByText("John Doe").closest("button") || screen.getByText("John Doe");
@@ -41,15 +52,9 @@ describe("UserMenu", () => {
     expect(screen.getByText("John Doe")).toBeInTheDocument();
   });
 
-  it("handles logout", async () => {
-    const handleLogout = vi.fn();
-    const user = userEvent.setup();
-
+  it("shows menu items", () => {
     render(
-      <UserMenu
-        user={mockUser}
-        onLogout={handleLogout}
-      />,
+      <UserMenu user={mockUser} sections={mockSections} />,
     );
 
     expect(screen.getByText("John Doe")).toBeInTheDocument();
@@ -58,7 +63,7 @@ describe("UserMenu", () => {
   it("forwards ref correctly", () => {
     const ref = vi.fn();
     render(
-      <UserMenu ref={ref} user={mockUser} />,
+      <UserMenu ref={ref} user={mockUser} sections={mockSections} />,
     );
 
     expect(ref).toHaveBeenCalled();

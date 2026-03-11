@@ -7,7 +7,7 @@ import { Upload } from "lucide-react";
 describe("FileUploader", () => {
   it("renders upload area", () => {
     render(
-      <FileUploader onUpload={() => {}} />,
+      <FileUploader onFilesAdded={() => {}} />,
     );
 
     const uploadArea = screen.getByText(/upload|drop|select/i);
@@ -15,11 +15,11 @@ describe("FileUploader", () => {
   });
 
   it("handles file selection", async () => {
-    const handleUpload = vi.fn();
+    const handleFilesAdded = vi.fn();
     const user = userEvent.setup();
 
     render(
-      <FileUploader onUpload={handleUpload} />,
+      <FileUploader onFilesAdded={handleFilesAdded} />,
     );
 
     const input = screen.getByRole("button") || screen.getByText(/upload/i);
@@ -29,9 +29,9 @@ describe("FileUploader", () => {
   it("shows file list after upload", () => {
     const { rerender } = render(
       <FileUploader
-        onUpload={() => {}}
+        onFilesAdded={() => {}}
         files={[
-          { name: "document.pdf", size: 1024, type: "application/pdf" },
+          { id: "1", name: "document.pdf", size: 1024, type: "application/pdf", status: "completed" },
         ]}
       />,
     );
@@ -42,7 +42,7 @@ describe("FileUploader", () => {
   it("supports multiple file upload", () => {
     render(
       <FileUploader
-        onUpload={() => {}}
+        onFilesAdded={() => {}}
         multiple
       />,
     );
@@ -55,7 +55,7 @@ describe("FileUploader", () => {
     render(
       <FileUploader
         ref={ref}
-        onUpload={() => {}}
+        onFilesAdded={() => {}}
       />,
     );
 

@@ -50,7 +50,7 @@ describe("CodeEditor", () => {
       <CodeEditor
         value={mockCode}
         onChange={() => {}}
-        theme="dark"
+        language="javascript"
       />,
     );
 

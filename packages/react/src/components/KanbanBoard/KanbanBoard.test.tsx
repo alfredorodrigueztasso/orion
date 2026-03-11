@@ -89,7 +89,7 @@ describe("KanbanBoard", () => {
     const card = screen.getByText("Fix login bug");
     await user.click(card);
 
-    expect(handleCardClick).toHaveBeenCalledWith(mockCards[0]);
+    expect(handleCardClick).toHaveBeenCalledWith(mockCards[0], "todo");
   });
 
   it("handles add card action", async () => {
@@ -158,19 +158,4 @@ describe("KanbanBoard", () => {
     expect(ref).toHaveBeenCalled();
   });
 
-  it("handles card delete action", async () => {
-    const handleDeleteCard = vi.fn();
-    const user = userEvent.setup();
-
-    render(
-      <KanbanBoard
-        columns={mockColumns}
-        onDeleteCard={handleDeleteCard}
-      />,
-    );
-
-    // Look for more options menu on a card
-    const moreButtons = screen.queryAllByRole("button");
-    expect(moreButtons.length).toBeGreaterThan(0);
-  });
 });

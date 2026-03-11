@@ -2,25 +2,23 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { MetricCards } from "./MetricCards";
 import { TrendingUp, Users, DollarSign } from "lucide-react";
-import type { MetricCard } from "./MetricCards.types";
+import type { MetricItem } from "./MetricCards.types";
 
 describe("MetricCards", () => {
-  const mockMetrics: MetricCard[] = [
+  const mockMetrics: MetricItem[] = [
     {
       id: "revenue",
-      title: "Revenue",
+      label: "Revenue",
       value: "$12,500",
-      change: "+12%",
+      change: { value: "+12%", positive: true },
       icon: <DollarSign size={20} />,
-      trend: "up",
     },
     {
       id: "users",
-      title: "Active Users",
+      label: "Active Users",
       value: "2,450",
-      change: "+5%",
+      change: { value: "+5%", positive: true },
       icon: <Users size={20} />,
-      trend: "up",
     },
   ];
 
@@ -49,7 +47,7 @@ describe("MetricCards", () => {
     const handleSelect = vi.fn();
 
     render(
-      <MetricCards metrics={mockMetrics} onClick={handleSelect} />,
+      <MetricCards metrics={mockMetrics} />,
     );
 
     expect(screen.getByText("Revenue")).toBeInTheDocument();

@@ -1,6 +1,7 @@
-import { describe, it, expect } from "vitest";
+import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import { PageHeader } from "./PageHeader";
+import { Button } from "../Button";
 
 describe("PageHeader", () => {
   it("renders title", () => {
@@ -23,7 +24,7 @@ describe("PageHeader", () => {
     render(
       <PageHeader
         title="Settings"
-        actions={[{ label: "Save", onClick: () => {} }]}
+        actions={<Button onClick={() => {}}>Save</Button>}
       />,
     );
 
@@ -50,5 +51,3 @@ describe("PageHeader", () => {
     expect(ref).toHaveBeenCalled();
   });
 });
-
-import { vi } from "vitest";

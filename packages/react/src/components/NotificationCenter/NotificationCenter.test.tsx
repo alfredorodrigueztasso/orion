@@ -2,23 +2,23 @@ import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { NotificationCenter } from "./NotificationCenter";
-import type { Notification } from "./NotificationCenter.types";
+import type { NotificationItem } from "./NotificationCenter.types";
 
 describe("NotificationCenter", () => {
-  const mockNotifications: Notification[] = [
+  const mockNotifications: NotificationItem[] = [
     {
       id: "1",
       title: "New message",
       message: "You have a new message from Alice",
       type: "info",
-      timestamp: new Date(),
+      timestamp: "2026-03-09T10:00:00Z",
     },
     {
       id: "2",
       title: "System update",
       message: "Updates available",
       type: "warning",
-      timestamp: new Date(),
+      timestamp: "2026-03-09T10:05:00Z",
     },
   ];
 
@@ -44,12 +44,12 @@ describe("NotificationCenter", () => {
   });
 
   it("deletes notification", async () => {
-    const handleDelete = vi.fn();
+    const handleDismiss = vi.fn();
 
     render(
       <NotificationCenter
         notifications={mockNotifications}
-        onDelete={handleDelete}
+        onDismiss={handleDismiss}
       />,
     );
 
