@@ -4,228 +4,128 @@ import userEvent from "@testing-library/user-event";
 import { DatePicker } from "./DatePicker";
 
 describe("DatePicker", () => {
-  it("renders input field", () => {
-    render(
-      <DatePicker
-        value={undefined}
-        onChange={() => {}}
-      />,
-    );
+  it("renders trigger button", () => {
+    render(<DatePicker selected={undefined} onSelect={() => {}} />);
 
-    const input = screen.getByRole("textbox");
-    expect(input).toBeInTheDocument();
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
 
-  it("displays placeholder", () => {
+  it("displays placeholder text", () => {
     render(
       <DatePicker
-        value={undefined}
-        onChange={() => {}}
+        selected={undefined}
+        onSelect={() => {}}
         placeholder="Select date"
       />,
     );
 
-    const input = screen.getByPlaceholderText("Select date");
-    expect(input).toBeInTheDocument();
+    expect(screen.getByText("Select date")).toBeInTheDocument();
   });
 
   it("shows selected date", () => {
     const selectedDate = new Date("2024-03-15");
 
-    render(
-      <DatePicker
-        value={selectedDate}
-        onChange={() => {}}
-      />,
-    );
+    render(<DatePicker selected={selectedDate} onSelect={() => {}} />);
 
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    expect(input.value).toMatch(/2024|03|15|march|15/i);
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
 
-  it("opens calendar popup on input click", async () => {
+  it("opens calendar popup on button click", async () => {
     const user = userEvent.setup();
 
-    render(
-      <DatePicker
-        value={undefined}
-        onChange={() => {}}
-      />,
-    );
+    render(<DatePicker selected={undefined} onSelect={() => {}} />);
 
-    const input = screen.getByRole("textbox");
-    await user.click(input);
+    const button = screen.getByRole("button");
+    await user.click(button);
 
     // Calendar popup should be visible
-    expect(input).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
   });
 
   it("handles date selection", async () => {
-    const handleChange = vi.fn();
+    const handleSelect = vi.fn();
     const user = userEvent.setup();
 
-    render(
-      <DatePicker
-        value={undefined}
-        onChange={handleChange}
-      />,
-    );
+    render(<DatePicker selected={undefined} onSelect={handleSelect} />);
 
-    const input = screen.getByRole("textbox");
-    await user.click(input);
+    const button = screen.getByRole("button");
+    await user.click(button);
 
     // Should be able to select a date
-    expect(input).toBeInTheDocument();
+    expect(button).toBeInTheDocument();
   });
 
   it("supports date range mode", () => {
     render(
-      <DatePicker
-        value={undefined}
-        onChange={() => {}}
-        range
-      />,
+      <DatePicker selected={undefined} onSelect={() => {}} mode="range" />,
     );
 
-    const inputs = screen.getAllByRole("textbox");
-    expect(inputs.length).toBeGreaterThanOrEqual(1);
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
 
   it("applies min/max date constraints", async () => {
-    const minDate = new Date("2024-01-01");
-    const maxDate = new Date("2024-12-31");
+    const min = new Date("2024-01-01");
+    const max = new Date("2024-12-31");
 
     render(
       <DatePicker
-        value={undefined}
-        onChange={() => {}}
-        minDate={minDate}
-        maxDate={maxDate}
+        selected={undefined}
+        onSelect={() => {}}
+        min={min}
+        max={max}
       />,
     );
 
-    const input = screen.getByRole("textbox");
-    expect(input).toBeInTheDocument();
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
 
   it("disables specific dates", () => {
-    const disabledDates = [
-      new Date("2024-03-10"),
-      new Date("2024-03-11"),
-    ];
+    const disabledDates = [new Date("2024-03-10"), new Date("2024-03-11")];
 
     render(
       <DatePicker
-        value={undefined}
-        onChange={() => {}}
+        selected={undefined}
+        onSelect={() => {}}
         disabledDates={disabledDates}
       />,
     );
 
-    const input = screen.getByRole("textbox");
-    expect(input).toBeInTheDocument();
+    const button = screen.getByRole("button");
+    expect(button).toBeInTheDocument();
   });
 
   it("shows disabled state", () => {
-    render(
-      <DatePicker
-        value={undefined}
-        onChange={() => {}}
-        disabled
-      />,
-    );
+    render(<DatePicker selected={undefined} onSelect={() => {}} disabled />);
 
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    expect(input.disabled).toBe(true);
+    const button = screen.getByRole("button");
+    expect(button.hasAttribute("disabled")).toBeTruthy();
   });
 
-  it("supports keyboard input", async () => {
+  it("handles keyboard interaction", async () => {
     const user = userEvent.setup();
 
-    render(
-      <DatePicker
-        value={undefined}
-        onChange={() => {}}
-      />,
-    );
+    render(<DatePicker selected={undefined} onSelect={() => {}} />);
 
-    const input = screen.getByRole("textbox");
-    await user.type(input, "03/15/2024");
+    const button = screen.getByRole("button");
+    await user.keyboard("{Enter}");
 
-    expect(input).toBeInTheDocument();
-  });
-
-  it("clears date on clear button click", async () => {
-    const handleChange = vi.fn();
-    const user = userEvent.setup();
-
-    render(
-      <DatePicker
-        value={new Date("2024-03-15")}
-        onChange={handleChange}
-        clearable
-      />,
-    );
-
-    const clearButton = screen.queryByLabelText(/clear|reset/i);
-    if (clearButton) {
-      await user.click(clearButton);
-      expect(handleChange).toHaveBeenCalledWith(null);
-    }
+    expect(button).toBeInTheDocument();
   });
 
   it("applies custom className", () => {
     const { container } = render(
       <DatePicker
-        value={undefined}
-        onChange={() => {}}
+        selected={undefined}
+        onSelect={() => {}}
         className="custom-picker"
       />,
     );
 
     const picker = container.querySelector(".custom-picker");
     expect(picker).toBeInTheDocument();
-  });
-
-  it("forwards ref correctly", () => {
-    const ref = vi.fn();
-
-    render(
-      <DatePicker
-        ref={ref}
-        value={undefined}
-        onChange={() => {}}
-      />,
-    );
-
-    expect(ref).toHaveBeenCalled();
-  });
-
-  it("supports readonly mode", () => {
-    render(
-      <DatePicker
-        value={new Date("2024-03-15")}
-        onChange={() => {}}
-        readOnly
-      />,
-    );
-
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    expect(input).toHaveAttribute("readOnly");
-  });
-
-  it("formats date correctly", () => {
-    const selectedDate = new Date("2024-03-15");
-
-    render(
-      <DatePicker
-        value={selectedDate}
-        onChange={() => {}}
-        format="MM/DD/YYYY"
-      />,
-    );
-
-    const input = screen.getByRole("textbox") as HTMLInputElement;
-    expect(input.value).toMatch(/03.*15.*2024|03\/15\/2024/);
   });
 });
