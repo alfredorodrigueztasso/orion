@@ -29,6 +29,19 @@ if (!HTMLElement.prototype.scrollIntoView) {
   HTMLElement.prototype.scrollIntoView = vi.fn();
 }
 
+// Mock ResizeObserver for components using responsive sizing
+if (!global.ResizeObserver) {
+  global.ResizeObserver = class ResizeObserver {
+    constructor(callback: any) {
+      this.callback = callback;
+    }
+    callback: any;
+    observe = vi.fn();
+    unobserve = vi.fn();
+    disconnect = vi.fn();
+  } as any;
+}
+
 // Mock lucide-react icons for testing
 // This prevents SVG rendering issues in jsdom and speeds up tests
 vi.mock("lucide-react", () => {
@@ -155,7 +168,6 @@ vi.mock("lucide-react", () => {
     // Additional icons used by components
     Inbox: createMockIcon("Inbox"),
     Building2: createMockIcon("Building2"),
-    LogOut: createMockIcon("LogOut"),
 
     __esModule: true,
   };
