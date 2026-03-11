@@ -43,6 +43,7 @@ export default async function SectionPage({ params }: PageProps) {
   return (
     <div className="main-content">
       <PageHeader
+        size="lg"
         title={section.title}
         description={section.description}
         badge={

@@ -51,6 +51,7 @@ export default async function ComponentPage({ params }: PageProps) {
     <div className="main-content">
       {/* Header */}
       <PageHeader
+        size="lg"
         title={component.title}
         description={component.description}
         badge={

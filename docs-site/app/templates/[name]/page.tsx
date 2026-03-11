@@ -43,6 +43,7 @@ export default async function TemplatePage({ params }: PageProps) {
   return (
     <div className="main-content">
       <PageHeader
+        size="lg"
         title={template.title}
         description={template.description}
         badge={
