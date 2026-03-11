@@ -27,8 +27,8 @@
 
 import { forwardRef, useCallback, useState } from "react";
 import type { ContactProps, ContactFormField } from "./Contact.types";
-import { Section, Container } from '@orion-ds/react';
-import { Button, Field, Textarea } from '@orion-ds/react';
+import { Section, Container } from "@orion-ds/react";
+import { Button, Field, Textarea } from "@orion-ds/react";
 import styles from "./Contact.module.css";
 
 const defaultFields: ContactFormField[] = [

@@ -7,7 +7,7 @@
   "category": "marketing",
   "files": [
     {
-      "path": "packages/react/src/templates/marketing/PricingPageTemplate/PricingPageTemplate.tsx",
+      "path": "packages/blocks/src/templates/marketing/PricingPageTemplate/PricingPageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#pricing-page-template",
     "local": "/library.html#pricing-page-template"
   },
-  "import": "import { PricingPageTemplate } from '@orion-ds/react'",
+  "import": "import { PricingPageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

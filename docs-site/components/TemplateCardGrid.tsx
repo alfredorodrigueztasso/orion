@@ -69,14 +69,14 @@ export default function TemplateCardGrid({ templates, categories }: TemplateCard
         }}
       >
         <h1 style={{
-          fontSize: 'clamp(2rem, 4vw, 3rem)',
+          fontSize: 'clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl))',
           fontWeight: 800,
           marginBottom: 'var(--spacing-3)',
         }}>
           Templates
         </h1>
         <p style={{
-          fontSize: '1.125rem',
+          fontSize: 'var(--font-size-lg)',
           color: 'var(--text-secondary)',
           maxWidth: '600px',
           margin: '0 auto',
@@ -133,7 +133,7 @@ export default function TemplateCardGrid({ templates, categories }: TemplateCard
       {/* Results Count */}
       {(query.trim() || activeCategory !== 'all') && (
         <div style={{
-          fontSize: '0.875rem',
+          fontSize: 'var(--font-size-sm)',
           color: 'var(--text-tertiary)',
           marginBottom: 'var(--spacing-6)',
         }}>
@@ -155,7 +155,7 @@ export default function TemplateCardGrid({ templates, categories }: TemplateCard
           background: 'var(--surface-subtle)',
         }}>
           <div style={{
-            fontSize: '1.125rem',
+            fontSize: 'var(--font-size-lg)',
             fontWeight: 600,
             color: 'var(--text-primary)',
             marginBottom: 'var(--spacing-2)',
@@ -164,7 +164,7 @@ export default function TemplateCardGrid({ templates, categories }: TemplateCard
           </div>
           <div style={{
             color: 'var(--text-secondary)',
-            fontSize: '0.875rem',
+            fontSize: 'var(--font-size-sm)',
             marginBottom: 'var(--spacing-4)',
           }}>
             {query.trim()
@@ -183,7 +183,7 @@ export default function TemplateCardGrid({ templates, categories }: TemplateCard
                 border: 'none',
                 color: 'var(--text-brand)',
                 textDecoration: 'underline',
-                fontSize: '0.875rem',
+                fontSize: 'var(--font-size-sm)',
                 fontWeight: 500,
                 padding: 0,
               }}
@@ -204,7 +204,7 @@ export default function TemplateCardGrid({ templates, categories }: TemplateCard
                 <h2 style={{
                   textTransform: 'capitalize',
                   marginBottom: 'var(--spacing-6)',
-                  fontSize: '1.5rem',
+                  fontSize: 'var(--font-size-2xl)',
                   fontWeight: 600,
                 }}>
                   {category}
@@ -267,7 +267,7 @@ function TemplateCard({ template }: { template: Template }) {
           <h3
             style={{
               margin: 0,
-              fontSize: '1rem',
+              fontSize: 'var(--font-size-md)',
               fontWeight: 600,
               color: 'var(--text-primary)',
               flex: 1,
@@ -286,7 +286,7 @@ function TemplateCard({ template }: { template: Template }) {
             style={{
               margin: 0,
               color: 'var(--text-secondary)',
-              fontSize: '0.875rem',
+              fontSize: 'var(--font-size-sm)',
               lineHeight: 1.5,
             }}
           >
@@ -303,7 +303,7 @@ function TemplateCard({ template }: { template: Template }) {
               borderRadius: 'var(--radius-sm)',
               color: 'var(--text-tertiary)',
               fontFamily: 'var(--font-mono)',
-              fontSize: '0.75rem',
+              fontSize: 'var(--font-size-xs)',
             }}
           >
             {template.name}

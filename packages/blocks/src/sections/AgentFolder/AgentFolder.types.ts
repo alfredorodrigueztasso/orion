@@ -5,7 +5,7 @@
  */
 
 import type { HTMLAttributes } from "react";
-import type { AgentCardProps, SortOption } from '@orion-ds/react';
+import type { AgentCardProps, SortOption } from "@orion-ds/react";
 
 export type { SortOption };
 

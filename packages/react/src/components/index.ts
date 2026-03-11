@@ -346,10 +346,7 @@ export { Banner } from "./Banner";
 export type { BannerProps, BannerVariant } from "./Banner";
 
 export { CollapsibleFolder } from "./CollapsibleFolder";
-export type {
-  CollapsibleFolderProps,
-  SortOption,
-} from "./CollapsibleFolder";
+export type { CollapsibleFolderProps, SortOption } from "./CollapsibleFolder";
 
 export { CommandBar } from "./CommandBar";
 export type { CommandBarProps, CommandItem, CommandGroup } from "./CommandBar";

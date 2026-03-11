@@ -597,10 +597,11 @@ This single import includes:
 - ✅ Theme switching (light/dark)
 - ✅ Brand support (orion, red, deepblue, orange, lemon)
 
-**Alternative: If you need theme.css separately**
+**Advanced: If you need tokens only (for tree-shaking)**
 ```typescript
-import '@orion-ds/react/theme.css';    // Design tokens only
-import '@orion-ds/react/dist/react.css'; // Component styles
+import '@orion-ds/react/theme.css';    // Design tokens only (228 KB)
+// Then import components individually for maximum tree-shaking
+import { Button } from '@orion-ds/react/components/Button';
 ```
 
 Missing CSS imports will result in unstyled components.
@@ -785,8 +786,7 @@ import { Button, ThemeProvider, useThemeContext } from '@orion-ds/react';
 
 // Styles (CSS)
 import '@orion-ds/react/styles.css';     // Recommended - Full bundle (tokens + components)
-import '@orion-ds/react/theme.css';      // Tokens only
-import '@orion-ds/react/dist/react.css'; // Components only
+import '@orion-ds/react/theme.css';      // Tokens only (for advanced tree-shaking)
 
 // Tokens (TypeScript)
 import { primitives, getToken, getSemanticToken } from '@orion-ds/react/tokens';

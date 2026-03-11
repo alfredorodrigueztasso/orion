@@ -8,247 +8,248 @@
 
 /* ─── Primitives (from primary.json) ─── */
 :root {
-  /* Colors */
-  /* Brand: Orion (default) */
-  --color-brand-50: #e8f0ff;
-  --color-brand-100: #c7daff;
-  --color-brand-200: #a3c2ff;
-  --color-brand-300: #7ea9ff;
-  --color-brand-400: #5990ff;
-  --color-brand-500: #1b5bff;
-  --color-brand-600: #1850e6;
-  --color-brand-700: #1544cc;
-  --color-brand-800: #1139b3;
-  --color-brand-900: #0d2d99;
-  --color-brand-950: #071a5c;
+    /* Colors */
+    /* Brand: Orion (default) */
+    --color-brand-50: #e8f0ff;
+    --color-brand-100: #c7daff;
+    --color-brand-200: #a3c2ff;
+    --color-brand-300: #7ea9ff;
+    --color-brand-400: #5990ff;
+    --color-brand-500: #1B5BFF;
+    --color-brand-600: #1850e6;
+    --color-brand-700: #1544cc;
+    --color-brand-800: #1139b3;
+    --color-brand-900: #0d2d99;
+    --color-brand-950: #071a5c;
 
-  /* Neutral */
-  --color-neutral-0: #ffffff;
-  --color-neutral-50: #f8fafc;
-  --color-neutral-100: #f1f5f9;
-  --color-neutral-200: #e2e8f0;
-  --color-neutral-300: #cbd5e1;
-  --color-neutral-400: #94a3b8;
-  --color-neutral-500: #64748b;
-  --color-neutral-600: #475569;
-  --color-neutral-700: #334155;
-  --color-neutral-800: #1e293b;
-  --color-neutral-900: #0f172a;
-  --color-neutral-950: #020617;
-  --color-neutral-1000: #000000;
+    /* Neutral */
+    --color-neutral-0: #ffffff;
+    --color-neutral-50: #f8fafc;
+    --color-neutral-100: #f1f5f9;
+    --color-neutral-200: #e2e8f0;
+    --color-neutral-300: #cbd5e1;
+    --color-neutral-400: #94a3b8;
+    --color-neutral-500: #64748b;
+    --color-neutral-600: #475569;
+    --color-neutral-700: #334155;
+    --color-neutral-800: #1e293b;
+    --color-neutral-900: #0f172a;
+    --color-neutral-950: #020617;
+    --color-neutral-1000: #000000;
 
-  /* Status */
-  --color-error-500: #ef4444;
-  --color-success-500: #22c55e;
-  --color-warning-500: #eab308;
+    /* Status */
+    --color-error-500: #ef4444;
+    --color-success-500: #22c55e;
+    --color-warning-500: #eab308;
 
-  /* Typography */
-  --font-primary: Libre Baskerville, system-ui, sans-serif;
-  --font-secondary: Inter, system-ui, sans-serif;
-  --font-mono: JetBrains Mono, monospace;
+    /* Typography */
+    --font-primary: Libre Baskerville, system-ui, sans-serif;
+    --font-secondary: Inter, system-ui, sans-serif;
+    --font-mono: JetBrains Mono, monospace;
 
-  /* Font Sizes */
-  --font-size-10: 10px;
-  --font-size-11: 11px;
-  --font-size-12: 12px;
-  --font-size-13: 13px;
-  --font-size-14: 14px;
-  --font-size-16: 16px;
-  --font-size-18: 18px;
-  --font-size-20: 20px;
-  --font-size-24: 24px;
-  --font-size-32: 32px;
-  --font-size-48: 48px;
-  --font-size-64: 64px;
-  --font-size-80: 80px;
-  --font-size-96: 96px;
+    /* Font Sizes */
+    --font-size-10: 10px;
+    --font-size-11: 11px;
+    --font-size-12: 12px;
+    --font-size-13: 13px;
+    --font-size-14: 14px;
+    --font-size-16: 16px;
+    --font-size-18: 18px;
+    --font-size-20: 20px;
+    --font-size-24: 24px;
+    --font-size-32: 32px;
+    --font-size-48: 48px;
+    --font-size-64: 64px;
+    --font-size-80: 80px;
+    --font-size-96: 96px;
 
-  /* Font Weights */
-  --font-weight-regular: 400;
-  --font-weight-medium: 500;
-  --font-weight-bold: 700;
+    /* Font Weights */
+    --font-weight-regular: 400;
+    --font-weight-medium: 500;
+    --font-weight-bold: 700;
 
-  /* Spacing (base: 4px) */
-  --spacing-0: 0px;
-  --spacing-1: 4px;
-  --spacing-2: 8px;
-  --spacing-3: 12px;
-  --spacing-4: 16px;
-  --spacing-5: 20px;
-  --spacing-6: 24px;
-  --spacing-7: 28px;
-  --spacing-8: 32px;
-  --spacing-9: 36px;
-  --spacing-10: 40px;
-  --spacing-11: 44px;
-  --spacing-12: 48px;
-  --spacing-14: 56px;
-  --spacing-16: 64px;
-  --spacing-20: 80px;
-  --spacing-24: 96px;
-  --spacing-32: 128px;
-  --spacing-px: 1px;
-  --spacing-05: 2px;
+    /* Spacing (base: 4px) */
+    --spacing-0: 0px;
+    --spacing-1: 4px;
+    --spacing-2: 8px;
+    --spacing-3: 12px;
+    --spacing-4: 16px;
+    --spacing-5: 20px;
+    --spacing-6: 24px;
+    --spacing-7: 28px;
+    --spacing-8: 32px;
+    --spacing-9: 36px;
+    --spacing-10: 40px;
+    --spacing-11: 44px;
+    --spacing-12: 48px;
+    --spacing-14: 56px;
+    --spacing-16: 64px;
+    --spacing-20: 80px;
+    --spacing-24: 96px;
+    --spacing-32: 128px;
+    --spacing-px: 1px;
+    --spacing-05: 2px;
 
-  /* Border Radius */
-  --radius-0: 0px;
-  --radius-xs: 4px;
-  --radius-sm: 8px;
-  --radius-md: 12px;
-  --radius-lg: 16px;
-  --radius-lg-2: 20px;
-  --radius-xl: 24px;
-  --radius-2xl: 32px;
-  --radius-3xl: 36px;
-  --radius-full: 9999px;
+    /* Border Radius */
+    --radius-0: 0px;
+    --radius-xs: 4px;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-lg-2: 20px;
+    --radius-xl: 24px;
+    --radius-2xl: 32px;
+    --radius-3xl: 36px;
+    --radius-full: 9999px;
 
-  /* Blur */
-  --blur-sm: 4px;
-  --blur-md: 8px;
-  --blur-lg: 12px;
-  --blur-xl: 24px;
+    /* Blur */
+    --blur-sm: 4px;
+    --blur-md: 8px;
+    --blur-lg: 12px;
+    --blur-xl: 24px;
 }
 
 /* ─── Light Theme Semantics ─── */
 [data-theme="light"] {
-  /* Surfaces */
-  --surface-base: var(--color-neutral-0);
-  --surface-subtle: var(--color-neutral-50);
-  --surface-layer: var(--color-neutral-100);
-  --surface-primary: var(--color-neutral-100);
-  --surface-secondary: var(--color-neutral-50);
-  --surface-glass: color-mix(in srgb, {color.neutral.0} 70%, transparent);
-  --surface-sunken: color-mix(in srgb, {color.neutral.0} 40%, transparent);
-  --surface-overlay: color-mix(in srgb, {color.neutral.1000} 50%, transparent);
+    /* Surfaces */
+    --surface-base: var(--color-neutral-0);
+    --surface-subtle: var(--color-neutral-50);
+    --surface-layer: var(--color-neutral-100);
+    --surface-primary: var(--color-neutral-100);
+    --surface-secondary: var(--color-neutral-50);
+    --surface-glass: color-mix(in srgb, {color.neutral.0} 70%, transparent);
+    --surface-sunken: color-mix(in srgb, {color.neutral.0} 40%, transparent);
+    --surface-overlay: color-mix(in srgb, {color.neutral.1000} 50%, transparent);
 
-  /* Text */
-  --text-primary: var(--color-neutral-900);
-  --text-secondary: var(--color-neutral-500);
-  --text-tertiary: var(--color-neutral-400);
-  --text-inverse: var(--color-neutral-0);
-  --text-brand: var(--color-brand-500);
-  --text-on-brand: [object Object];
+    /* Text */
+    --text-primary: var(--color-neutral-900);
+    --text-secondary: var(--color-neutral-500);
+    --text-tertiary: var(--color-neutral-400);
+    --text-inverse: var(--color-neutral-0);
+    --text-brand: var(--color-brand-500);
+    --text-on-brand: [object Object];
 
-  /* Borders */
-  --border-subtle: var(--color-neutral-200);
-  --border-strong: var(--color-neutral-300);
-  --border-interactive: var(--color-brand-500);
+    /* Borders */
+    --border-subtle: var(--color-neutral-200);
+    --border-strong: var(--color-neutral-300);
+    --border-interactive: var(--color-brand-500);
 
-  /* Interactive */
-  --interactive-primary: var(--color-brand-500);
-  --interactive-primary-hover: var(--color-brand-700);
-  --interactive-primary-text: var(--color-neutral-0);
-  --interactive-secondary: var(--color-neutral-100);
-  --interactive-secondary-hover: var(--color-neutral-200);
-  --interactive-secondary-text: var(--color-neutral-900);
+    /* Interactive */
+    --interactive-primary: var(--color-brand-500);
+    --interactive-primary-hover: var(--color-brand-700);
+    --interactive-primary-text: var(--color-neutral-0);
+    --interactive-secondary: var(--color-neutral-100);
+    --interactive-secondary-hover: var(--color-neutral-200);
+    --interactive-secondary-text: var(--color-neutral-900);
 
-  /* Status */
-  --status-error: var(--color-error-500);
-  --status-success: var(--color-success-500);
-  --status-warning: var(--color-warning-500);
-  --status-info: var(--color-info-500);
+    /* Status */
+    --status-error: var(--color-error-500);
+    --status-success: var(--color-success-500);
+    --status-warning: var(--color-warning-500);
+    --status-info: var(--color-info-500);
 
-  /* Gradient */
-  --gradient-start: var(--color-brand-400);
-  --gradient-end: var(--color-brand-600);
+    /* Gradient */
+    --gradient-start: var(--color-brand-400);
+    --gradient-end: var(--color-brand-600);
 
-  /* Chart Palette */
-  --chart-1: var(--color-brand-500);
-  --chart-2: var(--color-brand-300);
-  --chart-3: var(--color-brand-700);
-  --chart-4: var(--color-success-500);
-  --chart-5: var(--color-warning-500);
+    /* Chart Palette */
+    --chart-1: var(--color-brand-500);
+    --chart-2: var(--color-brand-300);
+    --chart-3: var(--color-brand-700);
+    --chart-4: var(--color-success-500);
+    --chart-5: var(--color-warning-500);
 }
 
 /* ─── Dark Theme Semantics ─── */
 [data-theme="dark"] {
-  /* Surfaces */
-  --surface-base: var(--color-neutral-900);
-  --surface-subtle: var(--color-neutral-950);
-  --surface-layer: var(--color-neutral-900);
-  --surface-primary: var(--color-neutral-900);
-  --surface-secondary: var(--color-neutral-900);
-  --surface-glass: color-mix(in srgb, {color.neutral.950} 60%, transparent);
-  --surface-sunken: color-mix(in srgb, {color.neutral.950} 40%, transparent);
-  --surface-overlay: color-mix(in srgb, {color.neutral.1000} 70%, transparent);
+    /* Surfaces */
+    --surface-base: var(--color-neutral-900);
+    --surface-subtle: var(--color-neutral-950);
+    --surface-layer: var(--color-neutral-900);
+    --surface-primary: var(--color-neutral-900);
+    --surface-secondary: var(--color-neutral-900);
+    --surface-glass: color-mix(in srgb, {color.neutral.950} 60%, transparent);
+    --surface-sunken: color-mix(in srgb, {color.neutral.950} 40%, transparent);
+    --surface-overlay: color-mix(in srgb, {color.neutral.1000} 70%, transparent);
 
-  /* Text */
-  --text-primary: var(--color-neutral-50);
-  --text-secondary: var(--color-neutral-400);
-  --text-tertiary: var(--color-neutral-600);
-  --text-inverse: var(--color-neutral-950);
-  --text-brand: var(--color-brand-400);
-  --text-on-brand: [object Object];
+    /* Text */
+    --text-primary: var(--color-neutral-50);
+    --text-secondary: var(--color-neutral-400);
+    --text-tertiary: var(--color-neutral-600);
+    --text-inverse: var(--color-neutral-950);
+    --text-brand: var(--color-brand-400);
+    --text-on-brand: [object Object];
 
-  /* Borders */
-  --border-subtle: var(--color-neutral-800);
-  --border-strong: var(--color-neutral-700);
-  --border-interactive: var(--color-brand-500);
+    /* Borders */
+    --border-subtle: var(--color-neutral-800);
+    --border-strong: var(--color-neutral-700);
+    --border-interactive: var(--color-brand-500);
 
-  /* Interactive */
-  --interactive-primary: var(--color-brand-500);
-  --interactive-primary-hover: var(--color-brand-400);
-  --interactive-primary-text: var(--color-neutral-0);
-  --interactive-secondary: var(--color-neutral-800);
-  --interactive-secondary-hover: var(--color-neutral-700);
-  --interactive-secondary-text: var(--color-neutral-50);
+    /* Interactive */
+    --interactive-primary: var(--color-brand-500);
+    --interactive-primary-hover: var(--color-brand-400);
+    --interactive-primary-text: var(--color-neutral-0);
+    --interactive-secondary: var(--color-neutral-800);
+    --interactive-secondary-hover: var(--color-neutral-700);
+    --interactive-secondary-text: var(--color-neutral-50);
 
-  /* Status */
-  --status-error: var(--color-error-500);
-  --status-success: var(--color-success-500);
-  --status-warning: var(--color-warning-500);
-  --status-info: var(--color-info-500);
+    /* Status */
+    --status-error: var(--color-error-500);
+    --status-success: var(--color-success-500);
+    --status-warning: var(--color-warning-500);
+    --status-info: var(--color-info-500);
 
-  /* Gradient */
-  --gradient-start: var(--color-brand-400);
-  --gradient-end: var(--color-brand-600);
+    /* Gradient */
+    --gradient-start: var(--color-brand-400);
+    --gradient-end: var(--color-brand-600);
 
-  /* Chart Palette */
-  --chart-1: var(--color-brand-400);
-  --chart-2: var(--color-brand-200);
-  --chart-3: var(--color-brand-600);
-  --chart-4: var(--color-success-500);
-  --chart-5: var(--color-warning-500);
+    /* Chart Palette */
+    --chart-1: var(--color-brand-400);
+    --chart-2: var(--color-brand-200);
+    --chart-3: var(--color-brand-600);
+    --chart-4: var(--color-success-500);
+    --chart-5: var(--color-warning-500);
 }
 
 /* ─── Radius Scale (Button → Container Derivation) ─── */
 :root {
-  /* Derived: button="full" (9999px) → container="3xl" (36px) */
-  --radius-button: var(--radius-full);
-  --radius-container: var(--radius-3xl);
+    /* Derived: button="full" (9999px) → container="3xl" (36px) */
+    --radius-button: var(--radius-full);
+    --radius-container: var(--radius-3xl);
 }
 
 /* ─── Deepblue Radius ─── */
 [data-brand="deepblue"] {
-  /* Derived: button="md" (12px) → container="xl" (24px) */
-  --radius-button: var(--radius-md);
-  --radius-container: var(--radius-xl);
+    /* Derived: button="md" (12px) → container="xl" (24px) */
+    --radius-button: var(--radius-md);
+    --radius-container: var(--radius-xl);
 }
 
 /* ─── Red Radius ─── */
 [data-brand="red"] {
-  /* Derived: button="full" (9999px) → container="3xl" (36px) */
-  --radius-button: var(--radius-full);
-  --radius-container: var(--radius-3xl);
+    /* Derived: button="full" (9999px) → container="3xl" (36px) */
+    --radius-button: var(--radius-full);
+    --radius-container: var(--radius-3xl);
 }
 
 /* ─── Orange Radius ─── */
 [data-brand="orange"] {
-  /* Derived: button="full" (9999px) → container="3xl" (36px) */
-  --radius-button: var(--radius-full);
-  --radius-container: var(--radius-3xl);
+    /* Derived: button="full" (9999px) → container="3xl" (36px) */
+    --radius-button: var(--radius-full);
+    --radius-container: var(--radius-3xl);
 }
 
 /* ─── Ember Radius ─── */
 [data-brand="ember"] {
-  /* Derived: button="md" (12px) → container="xl" (24px) */
-  --radius-button: var(--radius-md);
-  --radius-container: var(--radius-xl);
+    /* Derived: button="md" (12px) → container="xl" (24px) */
+    --radius-button: var(--radius-md);
+    --radius-container: var(--radius-xl);
 }
 
 /* ─── Lemon Radius ─── */
 [data-brand="lemon"] {
-  /* Derived: button="full" (9999px) → container="3xl" (36px) */
-  --radius-button: var(--radius-full);
-  --radius-container: var(--radius-3xl);
+    /* Derived: button="full" (9999px) → container="3xl" (36px) */
+    --radius-button: var(--radius-full);
+    --radius-container: var(--radius-3xl);
 }
+

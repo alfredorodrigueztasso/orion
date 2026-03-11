@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * @orion-ds/blocks/client
@@ -19,4 +19,4 @@
  * ```
  */
 
-export * from './index';
+export * from "./index";

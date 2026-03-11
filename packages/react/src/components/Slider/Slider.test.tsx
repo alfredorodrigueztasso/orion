@@ -112,8 +112,12 @@ describe("Slider", () => {
         tickValues={[0, 25, 50, 75, 100]}
       />,
     );
-    const ticks = Array.from(container.querySelectorAll('[class*="tick"]')).filter(el =>
-      (el as HTMLElement).className.includes('tick') && !(el as HTMLElement).className.includes('ticks')
+    const ticks = Array.from(
+      container.querySelectorAll('[class*="tick"]'),
+    ).filter(
+      (el) =>
+        (el as HTMLElement).className.includes("tick") &&
+        !(el as HTMLElement).className.includes("ticks"),
     );
     expect(ticks).toHaveLength(5);
   });

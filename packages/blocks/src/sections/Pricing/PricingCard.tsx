@@ -5,7 +5,7 @@
  */
 
 import type { PricingCardProps, PricingFeature } from "./Pricing.types";
-import { Card, Badge } from '@orion-ds/react';
+import { Card, Badge } from "@orion-ds/react";
 import { Check, X } from "lucide-react";
 import styles from "./Pricing.module.css";
 

@@ -7,7 +7,7 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/LoginTemplate/LoginTemplate.tsx",
+      "path": "packages/blocks/src/templates/app/LoginTemplate/LoginTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#login-template",
     "local": "/library.html#login-template"
   },
-  "import": "import { LoginTemplate } from '@orion-ds/react'",
+  "import": "import { LoginTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

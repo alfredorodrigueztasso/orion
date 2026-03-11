@@ -557,9 +557,7 @@ export type {
 // ============================================================================
 
 export { CodeEditor } from "./components/CodeEditor";
-export type {
-  CodeEditorProps,
-} from "./components/CodeEditor";
+export type { CodeEditorProps } from "./components/CodeEditor";
 
 // ============================================================================
 // WIDGETS (Composite UI patterns)

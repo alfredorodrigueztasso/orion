@@ -7,6 +7,14 @@
   "category": "marketing",
   "files": [
     {
+      "path": "packages/react/src/sections/Chat/Chat.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Chat/Chat.types.ts",
+      "type": "registry:types"
+    },
+    {
       "path": "packages/react/src/sections/Chat/index.ts",
       "type": "registry:index"
     }

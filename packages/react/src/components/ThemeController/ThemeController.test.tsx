@@ -161,7 +161,9 @@ describe("ThemeController", () => {
       render(<ThemeController compact showBrandSelector />, { wrapper });
       // Should have brand buttons
       expect(screen.getByRole("button", { name: /Orion/ })).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: /Deepblue/ })).toBeInTheDocument();
+      expect(
+        screen.getByRole("button", { name: /Deepblue/ }),
+      ).toBeInTheDocument();
     });
 
     it("renders both controls in compact mode", () => {
@@ -176,12 +178,8 @@ describe("ThemeController", () => {
   describe("Brand descriptions", () => {
     it("shows brand descriptions in full mode", () => {
       render(<ThemeController />, { wrapper });
-      expect(
-        screen.getByText("Blue accent • 12px radius"),
-      ).toBeInTheDocument(); // Orion
-      expect(
-        screen.getByText("Red accent • Pill buttons"),
-      ).toBeInTheDocument(); // Red
+      expect(screen.getByText("Blue accent • 12px radius")).toBeInTheDocument(); // Orion
+      expect(screen.getByText("Red accent • Pill buttons")).toBeInTheDocument(); // Red
     });
   });
 

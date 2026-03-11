@@ -133,13 +133,13 @@
       "optional": false
     },
     "react-markdown": {
-      "optional": false
+      "optional": true
     },
     "react-syntax-highlighter": {
-      "optional": false
+      "optional": true
     },
     "remark-gfm": {
-      "optional": false
+      "optional": true
     },
     "recharts": {
       "optional": true

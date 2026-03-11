@@ -3,13 +3,7 @@ import { useState } from "react";
 import { AgentEditor } from "./AgentEditor";
 import type { AgentEditorTab } from "./AgentEditor.types";
 import { MultiAgentPanel } from "./MultiAgentPanel";
-import {
-  Building2,
-  Star,
-  Sparkles,
-  Zap,
-  Bot,
-} from "lucide-react";
+import { Building2, Star, Sparkles, Zap, Bot } from "lucide-react";
 import type { AgentFolderProps } from "../../../sections/AgentFolder";
 
 const meta: Meta<typeof AgentEditor> = {
@@ -41,10 +35,15 @@ const sampleFolders: AgentFolderProps[] = [
       {
         id: "agent-2",
         avatar: (
-          <Star size={32} fill="var(--status-warning)" color="var(--status-warning)" />
+          <Star
+            size={32}
+            fill="var(--status-warning)"
+            color="var(--status-warning)"
+          />
         ),
         title: "Premium Support",
-        description: "Coordinates intake, resolution and follow-up across multiple specialized support agents",
+        description:
+          "Coordinates intake, resolution and follow-up across multiple specialized support agents",
         timestamp: "Hace 5 horas",
         isMultiAgent: true,
       },
@@ -60,7 +59,8 @@ const sampleFolders: AgentFolderProps[] = [
         id: "agent-3",
         avatar: "https://api.dicebear.com/7.x/bottts/svg?seed=campus1",
         title: "Campus Assistant",
-        description: "Orchestrates enrollment, schedule and campus services agents to guide students end to end",
+        description:
+          "Orchestrates enrollment, schedule and campus services agents to guide students end to end",
         timestamp: "Hace 1 día",
         isMultiAgent: true,
       },
@@ -75,7 +75,8 @@ const sampleFolders: AgentFolderProps[] = [
         id: "agent-5",
         avatar: <Sparkles size={32} />,
         title: "Research Helper",
-        description: "Delegates tasks to search, synthesis and citation agents for comprehensive academic research",
+        description:
+          "Delegates tasks to search, synthesis and citation agents for comprehensive academic research",
         timestamp: "Hace 1 semana",
         isMultiAgent: true,
       },
@@ -120,7 +121,8 @@ function DefaultWrapper() {
     {
       id: "2",
       role: "assistant" as const,
-      content: "¡Hola! Estoy bien, gracias por preguntar. ¿Cómo puedo ayudarte hoy?",
+      content:
+        "¡Hola! Estoy bien, gracias por preguntar. ¿Cómo puedo ayudarte hoy?",
       status: "sent" as const,
     },
   ]);
@@ -140,13 +142,15 @@ function DefaultWrapper() {
       placeholder:
         "# Introduction & Scope\nYou are a virtual assistant designed to support users in this project.",
       value: tabValues.comportamiento,
-      onChange: (val) => setTabValues((prev) => ({ ...prev, comportamiento: val })),
+      onChange: (val) =>
+        setTabValues((prev) => ({ ...prev, comportamiento: val })),
     },
     {
       id: "memoria",
       label: "Memoria",
       language: "markdown",
-      placeholder: "# Memory\nStore and reference important user information...",
+      placeholder:
+        "# Memory\nStore and reference important user information...",
       value: tabValues.memoria,
       onChange: (val) => setTabValues((prev) => ({ ...prev, memoria: val })),
     },
@@ -253,17 +257,63 @@ function DefaultWrapper() {
         workspaceRole: "Propietario",
         workspaceParticipantCount: 32,
         workspaces: [
-          { id: "uvm", name: "Universidad Virtual de México", initials: "UVM", role: "Propietario" },
-          { id: "campus", name: "Campus Online", initials: "CO", role: "Propietario" },
-          { id: "postgrado", name: "Postgrado", initials: "PG", role: "Editor" },
-          { id: "research", name: "Research Team", initials: "RT", role: "Viewer" },
-          { id: "innovation", name: "Innovation Lab", initials: "IL", role: "Propietario" },
-          { id: "development", name: "Development Hub", initials: "DH", role: "Editor" },
-          { id: "quality", name: "Quality Assurance", initials: "QA", role: "Viewer" },
-          { id: "support", name: "Customer Support", initials: "CS", role: "Propietario" },
-          { id: "analytics", name: "Analytics Platform", initials: "AP", role: "Editor" },
+          {
+            id: "uvm",
+            name: "Universidad Virtual de México",
+            initials: "UVM",
+            role: "Propietario",
+          },
+          {
+            id: "campus",
+            name: "Campus Online",
+            initials: "CO",
+            role: "Propietario",
+          },
+          {
+            id: "postgrado",
+            name: "Postgrado",
+            initials: "PG",
+            role: "Editor",
+          },
+          {
+            id: "research",
+            name: "Research Team",
+            initials: "RT",
+            role: "Viewer",
+          },
+          {
+            id: "innovation",
+            name: "Innovation Lab",
+            initials: "IL",
+            role: "Propietario",
+          },
+          {
+            id: "development",
+            name: "Development Hub",
+            initials: "DH",
+            role: "Editor",
+          },
+          {
+            id: "quality",
+            name: "Quality Assurance",
+            initials: "QA",
+            role: "Viewer",
+          },
+          {
+            id: "support",
+            name: "Customer Support",
+            initials: "CS",
+            role: "Propietario",
+          },
+          {
+            id: "analytics",
+            name: "Analytics Platform",
+            initials: "AP",
+            role: "Editor",
+          },
         ],
-        onWorkspaceChange: (id: string) => console.log("Workspace changed:", id),
+        onWorkspaceChange: (id: string) =>
+          console.log("Workspace changed:", id),
         onWorkspaceSettings: () => console.log("Workspace settings"),
         onWorkspaceInvite: () => console.log("Invite participants"),
         onCreateWorkspace: () => console.log("Create workspace"),
@@ -360,7 +410,14 @@ export const WithTypingIndicator: Story = {
       looseAgents={sampleLooseAgents}
       activeNavNodeId="agent-1-edit"
       title="Editor"
-      messages={[{ id: "1", role: "user" as const, content: "Hola", status: "sent" as const }]}
+      messages={[
+        {
+          id: "1",
+          role: "user" as const,
+          content: "Hola",
+          status: "sent" as const,
+        },
+      ]}
       isTyping={true}
       tabs={[]}
     />

@@ -24,7 +24,7 @@
 
 import { forwardRef } from "react";
 import type { LogoCloudProps } from "./LogoCloud.types";
-import { Section, Container } from '@orion-ds/react';
+import { Section, Container } from "@orion-ds/react";
 import styles from "./LogoCloud.module.css";
 
 export const LogoCloud = forwardRef<HTMLElement, LogoCloudProps>(

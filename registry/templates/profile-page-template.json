@@ -7,7 +7,7 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/ProfilePageTemplate/ProfilePageTemplate.tsx",
+      "path": "packages/blocks/src/templates/app/ProfilePageTemplate/ProfilePageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#profile-page-template",
     "local": "/library.html#profile-page-template"
   },
-  "import": "import { ProfilePageTemplate } from '@orion-ds/react'",
+  "import": "import { ProfilePageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

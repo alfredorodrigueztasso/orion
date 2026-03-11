@@ -233,7 +233,9 @@ export const UserMenu = forwardRef<HTMLDivElement, UserMenuProps>(
                         <span className={styles.itemBadge}>{item.badge}</span>
                       )}
                       {item.shortcut && (
-                        <span className={styles.itemShortcut}>{item.shortcut}</span>
+                        <span className={styles.itemShortcut}>
+                          {item.shortcut}
+                        </span>
                       )}
                     </a>
                   );
@@ -256,7 +258,9 @@ export const UserMenu = forwardRef<HTMLDivElement, UserMenuProps>(
                       <span className={styles.itemBadge}>{item.badge}</span>
                     )}
                     {item.shortcut && (
-                      <span className={styles.itemShortcut}>{item.shortcut}</span>
+                      <span className={styles.itemShortcut}>
+                        {item.shortcut}
+                      </span>
                     )}
                   </button>
                 );

@@ -7,26 +7,14 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/AgentWorkspace/AgentWorkspace.tsx",
+      "path": "packages/blocks/src/templates/app/AgentWorkspace/AgentWorkspace.tsx",
       "type": "registry:component"
-    },
-    {
-      "path": "packages/react/src/templates/app/AgentWorkspace/AgentWorkspace.types.ts",
-      "type": "registry:types"
-    },
-    {
-      "path": "packages/react/src/templates/app/AgentWorkspace/AgentWorkspace.module.css",
-      "type": "registry:styles"
-    },
-    {
-      "path": "packages/react/src/templates/app/AgentWorkspace/index.ts",
-      "type": "registry:index"
     }
   ],
   "preview": {
     "url": "https://orion-ds.dev/library.html#agent-workspace",
     "local": "/library.html#agent-workspace"
   },
-  "import": "import { AgentWorkspace } from '@orion-ds/react'",
+  "import": "import { AgentWorkspace } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

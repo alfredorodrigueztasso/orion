@@ -19,8 +19,7 @@ export interface InputConfig {
   maxLength?: number;
 }
 
-export interface ChatPageTemplateProps
-  extends HTMLAttributes<HTMLDivElement> {
+export interface ChatPageTemplateProps extends HTMLAttributes<HTMLDivElement> {
   /**
    * List of conversations in the sidebar
    */

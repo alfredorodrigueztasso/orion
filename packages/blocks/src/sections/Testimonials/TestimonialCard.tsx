@@ -5,7 +5,7 @@
  */
 
 import type { TestimonialCardProps } from "./Testimonials.types";
-import { Card } from '@orion-ds/react';
+import { Card } from "@orion-ds/react";
 import { Star } from "lucide-react";
 import styles from "./Testimonials.module.css";
 

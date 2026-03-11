@@ -34,7 +34,9 @@ const isValidTheme = (value: string): value is Theme => {
 };
 
 const isValidBrand = (value: string): value is Brand => {
-  return ["orion", "red", "deepblue", "orange", "ember", "lemon"].includes(value);
+  return ["orion", "red", "deepblue", "orange", "ember", "lemon"].includes(
+    value,
+  );
 };
 
 export interface UseThemeOptions {

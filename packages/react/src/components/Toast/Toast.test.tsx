@@ -232,7 +232,7 @@ describe("Toast", () => {
     await user.click(screen.getByText("Show Warning"));
 
     // Use a short timeout to allow React to process state updates
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     // First toast should be removed
     expect(screen.queryByText("Success message")).not.toBeInTheDocument();
@@ -264,7 +264,7 @@ describe("Toast", () => {
     await user.click(screen.getByText("Show Toast"));
 
     // Allow React to process the click and render the toast
-    await new Promise(resolve => setTimeout(resolve, 50));
+    await new Promise((resolve) => setTimeout(resolve, 50));
 
     const toast = screen.getByRole("alert");
     expect(toast).toHaveAttribute("aria-live", "polite");

@@ -11,7 +11,7 @@ import type {
   CarouselVariant,
   CarouselAspectRatio,
   CarouselGap,
-} from '@orion-ds/react';
+} from "@orion-ds/react";
 
 // Re-export types from atomic component for convenience
 export type {
@@ -20,7 +20,7 @@ export type {
   CarouselAspectRatio,
   CarouselGap,
   CarouselOverlay,
-} from '@orion-ds/react';
+} from "@orion-ds/react";
 
 /**
  * CarouselSection props

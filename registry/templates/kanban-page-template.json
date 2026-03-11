@@ -7,7 +7,7 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/KanbanPageTemplate/KanbanPageTemplate.tsx",
+      "path": "packages/blocks/src/templates/app/KanbanPageTemplate/KanbanPageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#kanban-page-template",
     "local": "/library.html#kanban-page-template"
   },
-  "import": "import { KanbanPageTemplate } from '@orion-ds/react'",
+  "import": "import { KanbanPageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

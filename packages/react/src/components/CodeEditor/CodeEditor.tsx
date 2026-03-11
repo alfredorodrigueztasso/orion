@@ -74,7 +74,8 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     const nextCursor = useRef<{ start: number; end: number } | null>(null);
 
     // Use provided ref or internal ref
-    const textareaRef = (ref as React.MutableRefObject<HTMLTextAreaElement | null>) ||
+    const textareaRef =
+      (ref as React.MutableRefObject<HTMLTextAreaElement | null>) ||
       internalTextareaRef;
 
     // Current line tracking for line highlight
@@ -92,10 +93,7 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     const highlightStyle = currentTheme === "light" ? oneLight : oneDark;
 
     // Calculate number of lines
-    const lineCount = Math.max(
-      value.split("\n").length,
-      minRows,
-    );
+    const lineCount = Math.max(value.split("\n").length, minRows);
 
     // Restore cursor position after React re-render
     useEffect(() => {
@@ -175,15 +173,21 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
 
         if (start === end) {
           // No selection: insert 2 spaces at cursor
-          const newValue = value.substring(0, start) + TAB + value.substring(end);
-          nextCursor.current = { start: start + TAB.length, end: start + TAB.length };
+          const newValue =
+            value.substring(0, start) + TAB + value.substring(end);
+          nextCursor.current = {
+            start: start + TAB.length,
+            end: start + TAB.length,
+          };
           onChange?.(newValue);
         } else if (e.shiftKey) {
           // Shift+Tab: remove up to 2 leading spaces from current line
           const lineStart = value.lastIndexOf("\n", start - 1) + 1;
           const spaces = value.substring(lineStart).match(/^ {1,2}/)?.[0] ?? "";
           if (spaces.length > 0) {
-            const newValue = value.substring(0, lineStart) + value.substring(lineStart + spaces.length);
+            const newValue =
+              value.substring(0, lineStart) +
+              value.substring(lineStart + spaces.length);
             nextCursor.current = {
               start: Math.max(lineStart, start - spaces.length),
               end: Math.max(lineStart, end - spaces.length),
@@ -192,8 +196,12 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
           }
         } else {
           // Selection: insert TAB at start, keep cursor
-          const newValue = value.substring(0, start) + TAB + value.substring(end);
-          nextCursor.current = { start: start + TAB.length, end: start + TAB.length };
+          const newValue =
+            value.substring(0, start) + TAB + value.substring(end);
+          nextCursor.current = {
+            start: start + TAB.length,
+            end: start + TAB.length,
+          };
           onChange?.(newValue);
         }
       }
@@ -208,10 +216,16 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
       return (
         <div
           className={wrapperClasses}
-          style={{ minHeight: `calc(${minRows} * 1.6em + 2 * var(--spacing-4))` }}
+          style={{
+            minHeight: `calc(${minRows} * 1.6em + 2 * var(--spacing-4))`,
+          }}
         >
           {/* Hidden mirror div for measuring visual line heights */}
-          <div ref={mirrorRef} className={styles.lineMirror} aria-hidden="true" />
+          <div
+            ref={mirrorRef}
+            className={styles.lineMirror}
+            aria-hidden="true"
+          />
 
           {/* Line numbers column */}
           {showLineNumbers && (
@@ -224,7 +238,11 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
                 <div
                   key={i}
                   className={styles.lineNumber}
-                  style={lineHeights[i] !== undefined ? { height: `${lineHeights[i]}px` } : undefined}
+                  style={
+                    lineHeights[i] !== undefined
+                      ? { height: `${lineHeights[i]}px` }
+                      : undefined
+                  }
                 >
                   {i + 1}
                 </div>
@@ -242,13 +260,19 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
                   lineHeights.length > 0
                     ? `calc(var(--spacing-4) + ${lineHeights.slice(0, currentLine).reduce((a, b) => a + b, 0)}px)`
                     : `calc(var(--spacing-4) + ${(currentLine * 1.6).toFixed(2)}em)`,
-                ...(lineHeights[currentLine] !== undefined ? { height: `${lineHeights[currentLine]}px` } : {}),
+                ...(lineHeights[currentLine] !== undefined
+                  ? { height: `${lineHeights[currentLine]}px` }
+                  : {}),
               }}
               aria-hidden="true"
             />
 
             {/* Highlight layer — detrás, no interactivo */}
-            <div ref={highlightRef} className={styles.highlightLayer} aria-hidden="true">
+            <div
+              ref={highlightRef}
+              className={styles.highlightLayer}
+              aria-hidden="true"
+            >
               <SyntaxHighlighter
                 language={language}
                 style={highlightStyle}
@@ -318,7 +342,11 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
               <div
                 key={i}
                 className={styles.lineNumber}
-                style={lineHeights[i] !== undefined ? { height: `${lineHeights[i]}px` } : undefined}
+                style={
+                  lineHeights[i] !== undefined
+                    ? { height: `${lineHeights[i]}px` }
+                    : undefined
+                }
               >
                 {i + 1}
               </div>

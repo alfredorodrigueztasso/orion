@@ -29,7 +29,7 @@
 
 import { forwardRef } from "react";
 import type { TestimonialsProps } from "./Testimonials.types";
-import { Section, Container } from '@orion-ds/react';
+import { Section, Container } from "@orion-ds/react";
 import { TestimonialCard } from "./TestimonialCard";
 import styles from "./Testimonials.module.css";
 

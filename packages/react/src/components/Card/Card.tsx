@@ -68,8 +68,8 @@ export const Card: React.FC<CardProps> & {
 
   if (process.env.NODE_ENV !== "production" && variant === "outlined") {
     console.warn(
-      "[Orion] Card variant=\"outlined\" is deprecated. Use variant=\"base\" instead. " +
-      "It will be removed in the next major version."
+      '[Orion] Card variant="outlined" is deprecated. Use variant="base" instead. ' +
+        "It will be removed in the next major version.",
     );
   }
 

@@ -1,6 +1,7 @@
 'use client';
 
 import Link from 'next/link';
+import type { RegistryItem } from '@/lib/registry';
 import { Card, Badge } from '@/components/ClientComponents';
 import CodeBlock from '@/components/CodeBlock';
 import PropsTable from '@/components/PropsTable';
@@ -8,7 +9,7 @@ import SectionPreview from '@/components/SectionPreview';
 import PackageManagerTabs from '@/components/PackageManagerTabs';
 
 interface SectionDetailProps {
-  section: any;
+  section: RegistryItem;
 }
 
 export default function SectionDetail({ section }: SectionDetailProps) {

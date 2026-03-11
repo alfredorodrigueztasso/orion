@@ -4,8 +4,8 @@
  * Storybook stories for the Notion-style navigation tree.
  */
 
-import type { Meta, StoryObj } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import type { Meta, StoryObj } from "@storybook/react";
+import { action } from "@storybook/addon-actions";
 import {
   Home,
   BookOpen,
@@ -26,23 +26,23 @@ import {
   Database,
   Plug,
   Megaphone,
-} from 'lucide-react';
-import { Avatar } from '../../components/Avatar';
-import { NavTree } from './NavTree';
+} from "lucide-react";
+import { Avatar } from "../../components/Avatar";
+import { NavTree } from "./NavTree";
 
 const meta: Meta<typeof NavTree> = {
-  title: 'Sections/App/NavTree',
+  title: "Sections/App/NavTree",
   component: NavTree,
   parameters: {
-    layout: 'fullscreen' as const,
+    layout: "fullscreen" as const,
     docs: {
       description: {
         component:
-          'A Notion-style hierarchical navigation sidebar with collapsible sections, folders, pages, and context menu actions. Features include localStorage persistence of expanded/collapsed states and hover actions for adding and managing tree nodes.',
+          "A Notion-style hierarchical navigation sidebar with collapsible sections, folders, pages, and context menu actions. Features include localStorage persistence of expanded/collapsed states and hover actions for adding and managing tree nodes.",
       },
     },
   },
-  tags: ['autodocs'],
+  tags: ["autodocs"],
 };
 
 export default meta;
@@ -54,197 +54,197 @@ export const Default: StoryObj<typeof NavTree> = {
   render: () => {
     const sections = [
       {
-        id: 'essentials',
-        title: 'Lo esencial',
+        id: "essentials",
+        title: "Lo esencial",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'dashboard',
-            type: 'page' as const,
-            label: 'Dashboard',
+            id: "dashboard",
+            type: "page" as const,
+            label: "Dashboard",
             icon: <Home size={16} />,
-            href: '/dashboard',
+            href: "/dashboard",
           },
           {
-            id: 'quick-start',
-            type: 'page' as const,
-            label: 'Inicio rápido',
+            id: "quick-start",
+            type: "page" as const,
+            label: "Inicio rápido",
             icon: <Zap size={16} />,
-            href: '/quick-start',
+            href: "/quick-start",
           },
           {
-            id: 'settings',
-            type: 'page' as const,
-            label: 'Configuración',
+            id: "settings",
+            type: "page" as const,
+            label: "Configuración",
             icon: <Settings size={16} />,
-            href: '/settings',
+            href: "/settings",
           },
         ],
       },
       {
-        id: 'my-pages',
-        title: 'Mis páginas',
+        id: "my-pages",
+        title: "Mis páginas",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'projects',
-            type: 'folder' as const,
-            label: 'Proyectos',
+            id: "projects",
+            type: "folder" as const,
+            label: "Proyectos",
             icon: <FolderOpen size={16} />,
             children: [
               {
-                id: 'web-redesign',
-                type: 'page' as const,
-                label: 'Rediseño web',
+                id: "web-redesign",
+                type: "page" as const,
+                label: "Rediseño web",
                 icon: <FileText size={16} />,
-                href: '/projects/web-redesign',
+                href: "/projects/web-redesign",
               },
               {
-                id: 'mobile-app',
-                type: 'page' as const,
-                label: 'Aplicación móvil',
+                id: "mobile-app",
+                type: "page" as const,
+                label: "Aplicación móvil",
                 icon: <FileText size={16} />,
-                href: '/projects/mobile-app',
+                href: "/projects/mobile-app",
               },
               {
-                id: 'design-system',
-                type: 'folder' as const,
-                label: 'Sistema de diseño',
+                id: "design-system",
+                type: "folder" as const,
+                label: "Sistema de diseño",
                 icon: <FolderOpen size={16} />,
                 children: [
                   {
-                    id: 'components',
-                    type: 'page' as const,
-                    label: 'Componentes',
+                    id: "components",
+                    type: "page" as const,
+                    label: "Componentes",
                     icon: <FileText size={16} />,
-                    href: '/design-system/components',
+                    href: "/design-system/components",
                   },
                   {
-                    id: 'tokens',
-                    type: 'page' as const,
-                    label: 'Tokens',
+                    id: "tokens",
+                    type: "page" as const,
+                    label: "Tokens",
                     icon: <FileText size={16} />,
-                    href: '/design-system/tokens',
+                    href: "/design-system/tokens",
                   },
                   {
-                    id: 'guidelines',
-                    type: 'page' as const,
-                    label: 'Guías',
+                    id: "guidelines",
+                    type: "page" as const,
+                    label: "Guías",
                     icon: <FileText size={16} />,
-                    href: '/design-system/guidelines',
+                    href: "/design-system/guidelines",
                   },
                 ],
               },
             ],
           },
           {
-            id: 'documentation',
-            type: 'folder' as const,
-            label: 'Documentación',
+            id: "documentation",
+            type: "folder" as const,
+            label: "Documentación",
             icon: <BookOpen size={16} />,
             children: [
               {
-                id: 'getting-started',
-                type: 'page' as const,
-                label: 'Empezando',
+                id: "getting-started",
+                type: "page" as const,
+                label: "Empezando",
                 icon: <FileText size={16} />,
-                href: '/docs/getting-started',
+                href: "/docs/getting-started",
               },
               {
-                id: 'api-reference',
-                type: 'page' as const,
-                label: 'Referencia API',
+                id: "api-reference",
+                type: "page" as const,
+                label: "Referencia API",
                 icon: <FileText size={16} />,
-                href: '/docs/api-reference',
+                href: "/docs/api-reference",
               },
               {
-                id: 'examples',
-                type: 'page' as const,
-                label: 'Ejemplos',
+                id: "examples",
+                type: "page" as const,
+                label: "Ejemplos",
                 icon: <FileText size={16} />,
-                href: '/docs/examples',
+                href: "/docs/examples",
               },
             ],
           },
         ],
       },
       {
-        id: 'shared',
-        title: 'Compartido',
+        id: "shared",
+        title: "Compartido",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'team-workspace',
-            type: 'folder' as const,
-            label: 'Espacio del equipo',
+            id: "team-workspace",
+            type: "folder" as const,
+            label: "Espacio del equipo",
             icon: <Users size={16} />,
             children: [
               {
-                id: 'team-goals',
-                type: 'page' as const,
-                label: 'Objetivos',
+                id: "team-goals",
+                type: "page" as const,
+                label: "Objetivos",
                 icon: <FileText size={16} />,
-                href: '/team/goals',
+                href: "/team/goals",
               },
               {
-                id: 'team-updates',
-                type: 'page' as const,
-                label: 'Actualizaciones',
+                id: "team-updates",
+                type: "page" as const,
+                label: "Actualizaciones",
                 icon: <FileText size={16} />,
-                href: '/team/updates',
+                href: "/team/updates",
               },
             ],
           },
           {
-            id: 'roadmap',
-            type: 'page' as const,
-            label: 'Mapa de ruta',
+            id: "roadmap",
+            type: "page" as const,
+            label: "Mapa de ruta",
             icon: <Rocket size={16} />,
-            href: '/roadmap',
+            href: "/roadmap",
           },
         ],
       },
     ];
 
     return (
-      <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
+      <div style={{ display: "flex", height: "100vh", background: "#f5f5f5" }}>
         <NavTree
           sections={sections}
           persistKey="orion-nav-tree-demo"
           activeNodeId="components"
           onNodeClick={(node) => {
-            action('onNodeClick')(node);
+            action("onNodeClick")(node);
           }}
           actions={{
             onAdd: (parentId, sectionId) => {
-              action('onAdd')({ parentId, sectionId });
+              action("onAdd")({ parentId, sectionId });
             },
             onRename: (nodeId) => {
-              action('onRename')({ nodeId });
+              action("onRename")({ nodeId });
             },
             onDuplicate: (nodeId) => {
-              action('onDuplicate')({ nodeId });
+              action("onDuplicate")({ nodeId });
             },
             onMove: (nodeId) => {
-              action('onMove')({ nodeId });
+              action("onMove")({ nodeId });
             },
             onDelete: (nodeId) => {
-              action('onDelete')({ nodeId });
+              action("onDelete")({ nodeId });
             },
           }}
         />
-        <div style={{ flex: 1, padding: '40px', background: 'white' }}>
+        <div style={{ flex: 1, padding: "40px", background: "white" }}>
           <h1>NavTree Demo</h1>
           <p>
             Haz clic en los elementos de la barra lateral para navegar. Pasa el
-            ratón sobre los elementos para ver las acciones de agregar (+) y menú
-            (…).
+            ratón sobre los elementos para ver las acciones de agregar (+) y
+            menú (…).
           </p>
           <p>
-            Las secciones y el estado de expansión de los elementos se guardan en
-            localStorage, así que persisten después de recargar.
+            Las secciones y el estado de expansión de los elementos se guardan
+            en localStorage, así que persisten después de recargar.
           </p>
-          <ul style={{ marginTop: '20px', color: '#666' }}>
+          <ul style={{ marginTop: "20px", color: "#666" }}>
             <li>✓ Secciones colapsables</li>
             <li>✓ Carpetas anidadas con desplazamiento automático</li>
             <li>✓ Acciones por fila: agregar (+) y menú (...)</li>
@@ -265,26 +265,26 @@ export const Compact: StoryObj<typeof NavTree> = {
   render: () => {
     const sections = [
       {
-        id: 'main',
-        title: 'Navegación',
+        id: "main",
+        title: "Navegación",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'home',
-            type: 'page' as const,
-            label: 'Inicio',
+            id: "home",
+            type: "page" as const,
+            label: "Inicio",
             icon: <Home size={16} />,
           },
           {
-            id: 'docs',
-            type: 'folder' as const,
-            label: 'Documentación',
+            id: "docs",
+            type: "folder" as const,
+            label: "Documentación",
             icon: <BookOpen size={16} />,
             children: [
               {
-                id: 'intro',
-                type: 'page' as const,
-                label: 'Introducción',
+                id: "intro",
+                type: "page" as const,
+                label: "Introducción",
                 icon: <FileText size={16} />,
               },
             ],
@@ -294,18 +294,24 @@ export const Compact: StoryObj<typeof NavTree> = {
     ];
 
     return (
-      <div style={{ display: 'flex', height: '600px', border: '1px solid #e0e0e0' }}>
+      <div
+        style={{
+          display: "flex",
+          height: "600px",
+          border: "1px solid #e0e0e0",
+        }}
+      >
         <NavTree
           width={240}
           sections={sections}
           persistKey="orion-nav-tree-compact"
           activeNodeId="home"
-          onNodeClick={action('onNodeClick')}
+          onNodeClick={action("onNodeClick")}
           actions={{
-            onDelete: action('onDelete'),
+            onDelete: action("onDelete"),
           }}
         />
-        <div style={{ flex: 1, padding: '20px', background: '#fafafa' }}>
+        <div style={{ flex: 1, padding: "20px", background: "#fafafa" }}>
           <h2>Compact view</h2>
           <p>Versión simplificada con pocas secciones.</p>
         </div>
@@ -321,20 +327,20 @@ export const WithHeaderAndFooter: StoryObj<typeof NavTree> = {
   render: () => {
     const sections = [
       {
-        id: 'main',
-        title: 'Principal',
+        id: "main",
+        title: "Principal",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'page1',
-            type: 'page' as const,
-            label: 'Página 1',
+            id: "page1",
+            type: "page" as const,
+            label: "Página 1",
             icon: <FileText size={16} />,
           },
           {
-            id: 'page2',
-            type: 'page' as const,
-            label: 'Página 2',
+            id: "page2",
+            type: "page" as const,
+            label: "Página 2",
             icon: <FileText size={16} />,
           },
         ],
@@ -342,31 +348,37 @@ export const WithHeaderAndFooter: StoryObj<typeof NavTree> = {
     ];
 
     return (
-      <div style={{ display: 'flex', height: '600px', border: '1px solid #e0e0e0' }}>
+      <div
+        style={{
+          display: "flex",
+          height: "600px",
+          border: "1px solid #e0e0e0",
+        }}
+      >
         <NavTree
           width={260}
           sections={sections}
           persistKey="orion-nav-tree-with-slots"
           header={
-            <div style={{ textAlign: 'center', fontWeight: 'bold' }}>
+            <div style={{ textAlign: "center", fontWeight: "bold" }}>
               📚 Mi Workspace
             </div>
           }
           footer={
             <div
               style={{
-                textAlign: 'center',
-                fontSize: '12px',
-                color: '#666',
+                textAlign: "center",
+                fontSize: "12px",
+                color: "#666",
               }}
             >
               👤 Usuario
             </div>
           }
           activeNodeId="page1"
-          onNodeClick={action('onNodeClick')}
+          onNodeClick={action("onNodeClick")}
         />
-        <div style={{ flex: 1, padding: '20px', background: '#fafafa' }}>
+        <div style={{ flex: 1, padding: "20px", background: "#fafafa" }}>
           <h2>Con encabezado y pie</h2>
           <p>
             El NavTree puede incluir un encabezado (ej. logo) y pie (ej. menú de
@@ -385,72 +397,72 @@ export const Headless: StoryObj<typeof NavTree> = {
   render: () => {
     const sections = [
       {
-        id: 'navigation',
-        title: 'Navigation',
+        id: "navigation",
+        title: "Navigation",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'home',
-            type: 'page' as const,
-            label: 'Inicio',
+            id: "home",
+            type: "page" as const,
+            label: "Inicio",
             icon: <Home size={16} />,
-            href: '/home',
+            href: "/home",
           },
           {
-            id: 'docs',
-            type: 'folder' as const,
-            label: 'Documentación',
+            id: "docs",
+            type: "folder" as const,
+            label: "Documentación",
             icon: <BookOpen size={16} />,
             children: [
               {
-                id: 'intro',
-                type: 'page' as const,
-                label: 'Introducción',
+                id: "intro",
+                type: "page" as const,
+                label: "Introducción",
                 icon: <FileText size={16} />,
-                href: '/docs/intro',
+                href: "/docs/intro",
               },
               {
-                id: 'guide',
-                type: 'page' as const,
-                label: 'Guía',
+                id: "guide",
+                type: "page" as const,
+                label: "Guía",
                 icon: <FileText size={16} />,
-                href: '/docs/guide',
+                href: "/docs/guide",
               },
             ],
           },
         ],
       },
       {
-        id: 'tools',
-        title: 'Tools',
+        id: "tools",
+        title: "Tools",
         defaultExpanded: true,
         nodes: [
           {
-            id: 'settings',
-            type: 'page' as const,
-            label: 'Configuración',
+            id: "settings",
+            type: "page" as const,
+            label: "Configuración",
             icon: <Settings size={16} />,
-            href: '/settings',
+            href: "/settings",
           },
           {
-            id: 'team',
-            type: 'folder' as const,
-            label: 'Equipo',
+            id: "team",
+            type: "folder" as const,
+            label: "Equipo",
             icon: <Users size={16} />,
             children: [
               {
-                id: 'members',
-                type: 'page' as const,
-                label: 'Miembros',
+                id: "members",
+                type: "page" as const,
+                label: "Miembros",
                 icon: <FileText size={16} />,
-                href: '/team/members',
+                href: "/team/members",
               },
               {
-                id: 'roles',
-                type: 'page' as const,
-                label: 'Roles',
+                id: "roles",
+                type: "page" as const,
+                label: "Roles",
                 icon: <FileText size={16} />,
-                href: '/team/roles',
+                href: "/team/roles",
               },
             ],
           },
@@ -459,7 +471,13 @@ export const Headless: StoryObj<typeof NavTree> = {
     ];
 
     return (
-      <div style={{ display: 'flex', height: '600px', border: '1px solid #e0e0e0' }}>
+      <div
+        style={{
+          display: "flex",
+          height: "600px",
+          border: "1px solid #e0e0e0",
+        }}
+      >
         <NavTree
           width={240}
           sections={sections}
@@ -467,22 +485,22 @@ export const Headless: StoryObj<typeof NavTree> = {
           activeNodeId="home"
           headless={true}
           onNodeClick={(node) => {
-            action('onNodeClick')(node);
+            action("onNodeClick")(node);
           }}
           actions={{
             onDelete: (nodeId) => {
-              action('onDelete')({ nodeId });
+              action("onDelete")({ nodeId });
             },
           }}
         />
-        <div style={{ flex: 1, padding: '20px', background: '#fafafa' }}>
+        <div style={{ flex: 1, padding: "20px", background: "#fafafa" }}>
           <h2>Headless Variant</h2>
           <p>
             Variante sin encabezados de sección. Los nodos se renderizan
             directamente, manteniendo toda la funcionalidad de jerarquía,
             acciones hover, y persistencia en localStorage.
           </p>
-          <ul style={{ marginTop: '20px', color: '#666' }}>
+          <ul style={{ marginTop: "20px", color: "#666" }}>
             <li>✓ Sin encabezados de sección colapsables</li>
             <li>✓ Nodos raíz renderizados directamente</li>
             <li>✓ Carpetas anidadas funcionan normalmente</li>
@@ -502,98 +520,133 @@ export const Headless: StoryObj<typeof NavTree> = {
 export const WithAgents: StoryObj<typeof NavTree> = {
   render: () => {
     const agentSubPages = (agentId: string) => [
-      { id: `${agentId}-edit`, type: 'page' as const, label: 'Editar', icon: <Edit2 size={14} /> },
-      { id: `${agentId}-metrics`, type: 'page' as const, label: 'Métricas', icon: <BarChart3 size={14} /> },
-      { id: `${agentId}-conversations`, type: 'page' as const, label: 'Conversaciones', icon: <MessageSquare size={14} /> },
-      { id: `${agentId}-datasources`, type: 'page' as const, label: 'Fuentes de datos', icon: <Database size={14} /> },
-      { id: `${agentId}-integrations`, type: 'page' as const, label: 'Integraciones', icon: <Plug size={14} /> },
-      { id: `${agentId}-campaigns`, type: 'page' as const, label: 'Campañas', icon: <Megaphone size={14} /> },
-      { id: `${agentId}-settings`, type: 'page' as const, label: 'Configuración', icon: <Settings size={14} /> },
+      {
+        id: `${agentId}-edit`,
+        type: "page" as const,
+        label: "Editar",
+        icon: <Edit2 size={14} />,
+      },
+      {
+        id: `${agentId}-metrics`,
+        type: "page" as const,
+        label: "Métricas",
+        icon: <BarChart3 size={14} />,
+      },
+      {
+        id: `${agentId}-conversations`,
+        type: "page" as const,
+        label: "Conversaciones",
+        icon: <MessageSquare size={14} />,
+      },
+      {
+        id: `${agentId}-datasources`,
+        type: "page" as const,
+        label: "Fuentes de datos",
+        icon: <Database size={14} />,
+      },
+      {
+        id: `${agentId}-integrations`,
+        type: "page" as const,
+        label: "Integraciones",
+        icon: <Plug size={14} />,
+      },
+      {
+        id: `${agentId}-campaigns`,
+        type: "page" as const,
+        label: "Campañas",
+        icon: <Megaphone size={14} />,
+      },
+      {
+        id: `${agentId}-settings`,
+        type: "page" as const,
+        label: "Configuración",
+        icon: <Settings size={14} />,
+      },
     ];
 
     const sections = [
       {
-        id: 'agents',
-        title: 'Agentes IA',
+        id: "agents",
+        title: "Agentes IA",
         icon: <Sparkles size={16} />,
         badge: 5,
         defaultExpanded: true,
         nodes: [
           {
-            id: 'folder-postgrado',
-            type: 'folder' as const,
-            label: 'Agentes postgrado',
+            id: "folder-postgrado",
+            type: "folder" as const,
+            label: "Agentes postgrado",
             icon: <FolderOpen size={16} />,
             children: [
               {
-                id: 'agent-uvm',
-                type: 'folder' as const,
-                label: 'UVM Agent',
+                id: "agent-uvm",
+                type: "folder" as const,
+                label: "UVM Agent",
                 icon: <Avatar size="xs" initials="UV" />,
-                children: agentSubPages('agent-uvm'),
+                children: agentSubPages("agent-uvm"),
               },
               {
-                id: 'agent-premium',
-                type: 'folder' as const,
-                label: 'Premium Support',
+                id: "agent-premium",
+                type: "folder" as const,
+                label: "Premium Support",
                 icon: <Avatar size="xs" icon={<Star size={12} />} />,
-                children: agentSubPages('agent-premium'),
+                children: agentSubPages("agent-premium"),
               },
             ],
           },
           {
-            id: 'agent-gp-bot',
-            type: 'folder' as const,
-            label: 'General Purpose Bot',
+            id: "agent-gp-bot",
+            type: "folder" as const,
+            label: "General Purpose Bot",
             icon: <Avatar size="xs" initials="GP" />,
-            children: agentSubPages('agent-gp-bot'),
+            children: agentSubPages("agent-gp-bot"),
           },
         ],
       },
       {
-        id: 'help-centers',
-        title: 'Centro de Ayuda',
+        id: "help-centers",
+        title: "Centro de Ayuda",
         icon: <BookOpen size={16} />,
         badge: 2,
         defaultExpanded: true,
         nodes: [
           {
-            id: 'help-uvm',
-            type: 'page' as const,
-            label: 'Universidad Virtual',
+            id: "help-uvm",
+            type: "page" as const,
+            label: "Universidad Virtual",
             icon: <BookOpen size={14} />,
           },
           {
-            id: 'help-campus',
-            type: 'page' as const,
-            label: 'Campus Online',
+            id: "help-campus",
+            type: "page" as const,
+            label: "Campus Online",
             icon: <BookOpen size={14} />,
           },
         ],
       },
       {
-        id: 'community',
-        title: 'Comunidad',
+        id: "community",
+        title: "Comunidad",
         icon: <Users2 size={16} />,
         badge: 3,
         defaultExpanded: true,
         nodes: [
           {
-            id: 'community-contacts',
-            type: 'page' as const,
-            label: 'Contactos',
+            id: "community-contacts",
+            type: "page" as const,
+            label: "Contactos",
             icon: <Users2 size={14} />,
           },
           {
-            id: 'community-conversations',
-            type: 'page' as const,
-            label: 'Conversaciones',
+            id: "community-conversations",
+            type: "page" as const,
+            label: "Conversaciones",
             icon: <MessageCircle size={14} />,
           },
           {
-            id: 'community-segments',
-            type: 'page' as const,
-            label: 'Segmentos',
+            id: "community-segments",
+            type: "page" as const,
+            label: "Segmentos",
             icon: <Target size={14} />,
           },
         ],
@@ -601,36 +654,40 @@ export const WithAgents: StoryObj<typeof NavTree> = {
     ];
 
     return (
-      <div style={{ display: 'flex', height: '100vh', background: '#f5f5f5' }}>
+      <div style={{ display: "flex", height: "100vh", background: "#f5f5f5" }}>
         <NavTree
           width={260}
           sections={sections}
           persistKey="orion-nav-tree-agents"
           activeNodeId="agent-uvm"
           onNodeClick={(node) => {
-            action('onNodeClick')(node);
+            action("onNodeClick")(node);
           }}
           actions={{
             onAdd: (parentId, sectionId) => {
-              action('onAdd')({ parentId, sectionId });
+              action("onAdd")({ parentId, sectionId });
             },
             onDelete: (nodeId) => {
-              action('onDelete')({ nodeId });
+              action("onDelete")({ nodeId });
             },
           }}
         />
-        <div style={{ flex: 1, padding: '40px', background: 'white' }}>
+        <div style={{ flex: 1, padding: "40px", background: "white" }}>
           <h1>Agentes IA</h1>
           <p>
-            Este es el patrón de AgentWorkspace: sidebar con secciones de agentes,
-            centros de ayuda y comunidad. Cada agente tiene 7 sub-páginas y usa Avatar con iconos o iniciales.
+            Este es el patrón de AgentWorkspace: sidebar con secciones de
+            agentes, centros de ayuda y comunidad. Cada agente tiene 7
+            sub-páginas y usa Avatar con iconos o iniciales.
           </p>
-          <p style={{ marginTop: '20px', color: '#666', fontSize: '14px' }}>
-            ✓ Tres secciones colapsables con iconos<br/>
-            ✓ Agentes anidados en carpetas con Avatar<br/>
-            ✓ Sub-páginas para cada agente<br/>
-            ✓ Icon-to-chevron swap en hover<br/>
-            ✓ Badges de contador en secciones
+          <p style={{ marginTop: "20px", color: "#666", fontSize: "14px" }}>
+            ✓ Tres secciones colapsables con iconos
+            <br />
+            ✓ Agentes anidados en carpetas con Avatar
+            <br />
+            ✓ Sub-páginas para cada agente
+            <br />
+            ✓ Icon-to-chevron swap en hover
+            <br />✓ Badges de contador en secciones
           </p>
         </div>
       </div>

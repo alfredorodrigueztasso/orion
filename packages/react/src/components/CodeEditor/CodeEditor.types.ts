@@ -4,8 +4,10 @@ import type { TextareaHTMLAttributes } from "react";
  * CodeEditor Props
  * A simple textarea-based code editor with synchronized line numbers.
  */
-export interface CodeEditorProps
-  extends Omit<TextareaHTMLAttributes<HTMLTextAreaElement>, "size" | "onChange"> {
+export interface CodeEditorProps extends Omit<
+  TextareaHTMLAttributes<HTMLTextAreaElement>,
+  "size" | "onChange"
+> {
   /**
    * Current editor content
    */

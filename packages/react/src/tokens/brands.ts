@@ -154,7 +154,8 @@ export const brands: Record<Brand, BrandConfig> = {
   },
   ember: {
     name: "Ember",
-    description: "Ember brand — Orange accent with dark neutral buttons and rectangular geometry",
+    description:
+      "Ember brand — Orange accent with dark neutral buttons and rectangular geometry",
     accent: {
       primary: "{color.brand.orange.500}",
       light: "{color.brand.orange.100}",

@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 /**
  * @orion-ds/react/client
@@ -20,4 +20,4 @@
  * tree is understood by your framework as a client-side boundary.
  */
 
-export * from './index';
+export * from "./index";

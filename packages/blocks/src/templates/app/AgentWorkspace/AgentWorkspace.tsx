@@ -98,8 +98,8 @@ import {
   LogOut,
   HelpCircle,
 } from "lucide-react";
-import type { NavTreeSection, NavTreeNode } from '@orion-ds/react';
-import type { NavTreeActionConfig } from '@orion-ds/react';
+import type { NavTreeSection, NavTreeNode } from "@orion-ds/react";
+import type { NavTreeActionConfig } from "@orion-ds/react";
 import styles from "./AgentWorkspace.module.css";
 
 export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
@@ -130,7 +130,7 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
 }) => {
   // State for sidebar navigation
   const [activeNavNodeId, setActiveNavNodeId] = useState<string | undefined>(
-    controlledActiveNavNodeId
+    controlledActiveNavNodeId,
   );
 
   // Drag & drop state
@@ -142,13 +142,48 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
 
   // Helper function to get agent sub-pages (7 pages)
   const agentSubPages = (agentId: string) => [
-    { id: `${agentId}-edit`, type: "page" as const, label: "Editar", icon: <Edit2 size={14} /> },
-    { id: `${agentId}-metrics`, type: "page" as const, label: "Métricas", icon: <BarChart3 size={14} /> },
-    { id: `${agentId}-conversations`, type: "page" as const, label: "Conversaciones", icon: <MessageSquare size={14} /> },
-    { id: `${agentId}-datasources`, type: "page" as const, label: "Fuentes de datos", icon: <Database size={14} /> },
-    { id: `${agentId}-integrations`, type: "page" as const, label: "Integraciones", icon: <Plug size={14} /> },
-    { id: `${agentId}-campaigns`, type: "page" as const, label: "Campañas", icon: <Megaphone size={14} /> },
-    { id: `${agentId}-settings`, type: "page" as const, label: "Configuración", icon: <Settings size={14} /> },
+    {
+      id: `${agentId}-edit`,
+      type: "page" as const,
+      label: "Editar",
+      icon: <Edit2 size={14} />,
+    },
+    {
+      id: `${agentId}-metrics`,
+      type: "page" as const,
+      label: "Métricas",
+      icon: <BarChart3 size={14} />,
+    },
+    {
+      id: `${agentId}-conversations`,
+      type: "page" as const,
+      label: "Conversaciones",
+      icon: <MessageSquare size={14} />,
+    },
+    {
+      id: `${agentId}-datasources`,
+      type: "page" as const,
+      label: "Fuentes de datos",
+      icon: <Database size={14} />,
+    },
+    {
+      id: `${agentId}-integrations`,
+      type: "page" as const,
+      label: "Integraciones",
+      icon: <Plug size={14} />,
+    },
+    {
+      id: `${agentId}-campaigns`,
+      type: "page" as const,
+      label: "Campañas",
+      icon: <Megaphone size={14} />,
+    },
+    {
+      id: `${agentId}-settings`,
+      type: "page" as const,
+      label: "Configuración",
+      icon: <Settings size={14} />,
+    },
   ];
 
   // Build NavTree sections (Agentes IA, Centro de Ayuda, Comunidad)
@@ -157,33 +192,57 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
 
     // Section: "Agentes IA" — folders + loose agents
     const agentNodes = [
-      ...folders.map(folder => ({
+      ...folders.map((folder) => ({
         id: folder.id,
         type: "folder" as const,
         label: folder.title,
         icon: <FolderOpen size={16} />,
-        children: folder.agents.map(agent => ({
+        children: folder.agents.map((agent) => ({
           id: agent.id,
           type: "folder" as const,
           label: agent.title || "Agente sin nombre",
-          icon: typeof agent.avatar === "string"
-            ? <Avatar size="xs" src={agent.avatar} initials={agent.title?.slice(0, 2).toUpperCase()} />
-            : <Avatar size="xs" icon={agent.avatar} initials={agent.title?.slice(0, 2).toUpperCase()} />,
+          icon:
+            typeof agent.avatar === "string" ? (
+              <Avatar
+                size="xs"
+                src={agent.avatar}
+                initials={agent.title?.slice(0, 2).toUpperCase()}
+              />
+            ) : (
+              <Avatar
+                size="xs"
+                icon={agent.avatar}
+                initials={agent.title?.slice(0, 2).toUpperCase()}
+              />
+            ),
           children: agentSubPages(agent.id),
         })),
       })),
-      ...(looseAgents ?? []).map(agent => ({
+      ...(looseAgents ?? []).map((agent) => ({
         id: agent.id,
         type: "folder" as const,
         label: agent.title || "Agente sin nombre",
-        icon: typeof agent.avatar === "string"
-          ? <Avatar size="xs" src={agent.avatar} initials={agent.title?.slice(0, 2).toUpperCase()} />
-          : <Avatar size="xs" icon={agent.avatar} initials={agent.title?.slice(0, 2).toUpperCase()} />,
+        icon:
+          typeof agent.avatar === "string" ? (
+            <Avatar
+              size="xs"
+              src={agent.avatar}
+              initials={agent.title?.slice(0, 2).toUpperCase()}
+            />
+          ) : (
+            <Avatar
+              size="xs"
+              icon={agent.avatar}
+              initials={agent.title?.slice(0, 2).toUpperCase()}
+            />
+          ),
         children: agentSubPages(agent.id),
       })),
     ];
     // Calculate badge for agents section
-    const agentsBadge = folders.reduce((acc, f) => acc + f.agents.length, 0) + (looseAgents?.length ?? 0);
+    const agentsBadge =
+      folders.reduce((acc, f) => acc + f.agents.length, 0) +
+      (looseAgents?.length ?? 0);
 
     sections.push({
       id: "agents",
@@ -201,7 +260,7 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
         title: "Centro de Ayuda",
         icon: <BookOpen size={16} />,
         badge: helpCenters.length,
-        nodes: helpCenters.map(hc => ({
+        nodes: helpCenters.map((hc) => ({
           id: hc.id,
           type: "page" as const,
           label: hc.name,
@@ -217,9 +276,24 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
       icon: <Users2 size={16} />,
       badge: 3,
       nodes: [
-        { id: "community-contacts", type: "page" as const, label: "Contactos", icon: <Users2 size={14} /> },
-        { id: "community-conversations", type: "page" as const, label: "Conversaciones", icon: <MessageCircle size={14} /> },
-        { id: "community-segments", type: "page" as const, label: "Segmentos", icon: <Target size={14} /> },
+        {
+          id: "community-contacts",
+          type: "page" as const,
+          label: "Contactos",
+          icon: <Users2 size={14} />,
+        },
+        {
+          id: "community-conversations",
+          type: "page" as const,
+          label: "Conversaciones",
+          icon: <MessageCircle size={14} />,
+        },
+        {
+          id: "community-segments",
+          type: "page" as const,
+          label: "Segmentos",
+          icon: <Target size={14} />,
+        },
       ],
     });
 
@@ -229,63 +303,93 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
   // Filter sections by visibleSections
   const sectionsToShow = useMemo(() => {
     if (!visibleSections) return navTreeSections;
-    return navTreeSections.filter(s => visibleSections.includes(s.id));
+    return navTreeSections.filter((s) => visibleSections.includes(s.id));
   }, [navTreeSections, visibleSections]);
 
   // Build NavTree actions
-  const navTreeActions: NavTreeActionConfig = useMemo(() => ({
-    onAdd: (parentId: string | null, sectionId: string) => {
-      if (sectionId === "agents" && parentId === null) {
-        onCreateFolder?.();
-      } else if (sectionId === "agents" && parentId !== null) {
-        onCreateAgent?.(parentId);
-      } else if (sectionId === "help-centers") {
-        onCreateHelpCenter?.();
-      }
-    },
-    getCustomActions: (node: NavTreeNode) => {
-      // Detect node type
-      const isFolder = folders.some(f => f.id === node.id);
-      const isAgent = !isFolder && (
-        folders.some(f => f.agents.some(a => a.id === node.id)) ||
-        looseAgents?.some(a => a.id === node.id)
-      );
-      const isHelpCenter = helpCenters?.some(hc => hc.id === node.id);
+  const navTreeActions: NavTreeActionConfig = useMemo(
+    () => ({
+      onAdd: (parentId: string | null, sectionId: string) => {
+        if (sectionId === "agents" && parentId === null) {
+          onCreateFolder?.();
+        } else if (sectionId === "agents" && parentId !== null) {
+          onCreateAgent?.(parentId);
+        } else if (sectionId === "help-centers") {
+          onCreateHelpCenter?.();
+        }
+      },
+      getCustomActions: (node: NavTreeNode) => {
+        // Detect node type
+        const isFolder = folders.some((f) => f.id === node.id);
+        const isAgent =
+          !isFolder &&
+          (folders.some((f) => f.agents.some((a) => a.id === node.id)) ||
+            looseAgents?.some((a) => a.id === node.id));
+        const isHelpCenter = helpCenters?.some((hc) => hc.id === node.id);
 
-      if (isFolder) {
-        return [
-          { id: "edit", label: "Editar", onClick: () => onEditFolder?.(node.id) },
-          { id: "delete", label: "Eliminar", variant: "danger" as const, onClick: () => onDeleteFolder?.(node.id) },
-        ];
-      }
-      if (isAgent) {
-        return [
-          { id: "move", label: "Mover a carpeta", onClick: () => onMoveAgent?.(node.id) },
-          { id: "delete", label: "Eliminar", variant: "danger" as const, onClick: () => onDeleteAgent?.(node.id) },
-        ];
-      }
-      if (isHelpCenter) {
-        return [
-          { id: "edit", label: "Editar", onClick: () => onEditHelpCenter?.(node.id) },
-          { id: "delete", label: "Eliminar", variant: "danger" as const, onClick: () => onDeleteHelpCenter?.(node.id) },
-        ];
-      }
-      return [];
-    },
-  }), [
-    folders,
-    looseAgents,
-    helpCenters,
-    onCreateFolder,
-    onCreateAgent,
-    onCreateHelpCenter,
-    onEditFolder,
-    onDeleteFolder,
-    onMoveAgent,
-    onDeleteAgent,
-    onEditHelpCenter,
-    onDeleteHelpCenter,
-  ]);
+        if (isFolder) {
+          return [
+            {
+              id: "edit",
+              label: "Editar",
+              onClick: () => onEditFolder?.(node.id),
+            },
+            {
+              id: "delete",
+              label: "Eliminar",
+              variant: "danger" as const,
+              onClick: () => onDeleteFolder?.(node.id),
+            },
+          ];
+        }
+        if (isAgent) {
+          return [
+            {
+              id: "move",
+              label: "Mover a carpeta",
+              onClick: () => onMoveAgent?.(node.id),
+            },
+            {
+              id: "delete",
+              label: "Eliminar",
+              variant: "danger" as const,
+              onClick: () => onDeleteAgent?.(node.id),
+            },
+          ];
+        }
+        if (isHelpCenter) {
+          return [
+            {
+              id: "edit",
+              label: "Editar",
+              onClick: () => onEditHelpCenter?.(node.id),
+            },
+            {
+              id: "delete",
+              label: "Eliminar",
+              variant: "danger" as const,
+              onClick: () => onDeleteHelpCenter?.(node.id),
+            },
+          ];
+        }
+        return [];
+      },
+    }),
+    [
+      folders,
+      looseAgents,
+      helpCenters,
+      onCreateFolder,
+      onCreateAgent,
+      onCreateHelpCenter,
+      onEditFolder,
+      onDeleteFolder,
+      onMoveAgent,
+      onDeleteAgent,
+      onEditHelpCenter,
+      onDeleteHelpCenter,
+    ],
+  );
 
   // Drag & drop sensors
   const sensors = useSensors(
@@ -532,7 +636,6 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
                 }
                 placement="bottom-start"
                 showArrow={false}
-
               />
             </div>
           ) : null
@@ -552,38 +655,71 @@ export const AgentWorkspace: React.FC<AgentWorkspaceProps> = ({
                   id: "account",
                   label: "Mi Cuenta",
                   items: [
-                    { id: "profile", label: "Mi Perfil", icon: <Users2 size={16} /> },
-                    { id: "preferences", label: "Preferencias", icon: <Settings size={16} /> },
+                    {
+                      id: "profile",
+                      label: "Mi Perfil",
+                      icon: <Users2 size={16} />,
+                    },
+                    {
+                      id: "preferences",
+                      label: "Preferencias",
+                      icon: <Settings size={16} />,
+                    },
                   ],
                 },
                 {
                   id: "workspace",
                   label: "Espacio de Trabajo",
                   items: [
-                    { id: "workspace-settings", label: "Configuración", icon: <Settings size={16} /> },
-                    { id: "invite", label: "Invitar miembros", icon: <Users2 size={16} /> },
+                    {
+                      id: "workspace-settings",
+                      label: "Configuración",
+                      icon: <Settings size={16} />,
+                    },
+                    {
+                      id: "invite",
+                      label: "Invitar miembros",
+                      icon: <Users2 size={16} />,
+                    },
                   ],
                 },
                 {
                   id: "billing",
                   label: "Suscripción",
                   items: [
-                    { id: "subscription", label: "Plan actual", icon: <CreditCard size={16} /> },
-                    { id: "billing-history", label: "Historial de pagos", icon: <CreditCard size={16} /> },
+                    {
+                      id: "subscription",
+                      label: "Plan actual",
+                      icon: <CreditCard size={16} />,
+                    },
+                    {
+                      id: "billing-history",
+                      label: "Historial de pagos",
+                      icon: <CreditCard size={16} />,
+                    },
                   ],
                 },
                 {
                   id: "support",
                   items: [
-                    { id: "help", label: "Ayuda y soporte", icon: <HelpCircle size={16} /> },
-                    { id: "logout", label: "Cerrar sesión", icon: <LogOut size={16} />, danger: true, onClick: navbar?.onUserMenuClick },
+                    {
+                      id: "help",
+                      label: "Ayuda y soporte",
+                      icon: <HelpCircle size={16} />,
+                    },
+                    {
+                      id: "logout",
+                      label: "Cerrar sesión",
+                      icon: <LogOut size={16} />,
+                      danger: true,
+                      onClick: navbar?.onUserMenuClick,
+                    },
                   ],
                 },
               ]}
               align="start"
               placement="top"
               showHeader={true}
-
             />
           </div>
         }

@@ -86,7 +86,8 @@
   cursor: pointer;
   border-radius: var(--radius-sm);
   user-select: none;
-  transition: background-color var(--transition-fast),
+  transition:
+    background-color var(--transition-fast),
     color var(--transition-fast);
   position: relative;
 }
@@ -301,7 +302,11 @@
 
 /* Active node: gradient fades with brand background */
 .nodeRowActive .nodeActions {
-  background: linear-gradient(to right, transparent, var(--color-brand-soft) 40%);
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-brand-soft) 40%
+  );
 }
 
 /* ============================================================================
@@ -356,7 +361,9 @@
   align-items: center;
   justify-content: center;
   color: var(--text-tertiary);
-  transition: opacity var(--transition-fast), transform var(--transition-fast);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
   opacity: 0;
 }
 

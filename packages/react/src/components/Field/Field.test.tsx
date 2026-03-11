@@ -102,7 +102,9 @@ describe("Field", () => {
   it("shows error icon when error present and no right icon", () => {
     const { container } = render(<Field label="Email" error="Invalid" />);
     // Error icon should be present (AlertCircle mocked as data-icon span)
-    expect(container.querySelector('[data-icon="AlertCircle"]')).toBeInTheDocument();
+    expect(
+      container.querySelector('[data-icon="AlertCircle"]'),
+    ).toBeInTheDocument();
   });
 
   it("does not show error icon when right icon is provided", () => {

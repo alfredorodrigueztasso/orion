@@ -23,7 +23,7 @@
  * ```
  */
 
-export { NavTree } from './NavTree';
+export { NavTree } from "./NavTree";
 export type {
   NavTreeProps,
   NavTreeNode,
@@ -32,4 +32,4 @@ export type {
   NavTreeSectionVariant,
   NavTreeActionConfig,
   NavTreeContextValue,
-} from './NavTree.types';
+} from "./NavTree.types";

@@ -7,7 +7,7 @@
   "category": "marketing",
   "files": [
     {
-      "path": "packages/react/src/templates/marketing/LandingPageTemplate/LandingPageTemplate.tsx",
+      "path": "packages/blocks/src/templates/marketing/LandingPageTemplate/LandingPageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#landing-page-template",
     "local": "/library.html#landing-page-template"
   },
-  "import": "import { LandingPageTemplate } from '@orion-ds/react'",
+  "import": "import { LandingPageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

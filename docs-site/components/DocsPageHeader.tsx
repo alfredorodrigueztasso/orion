@@ -26,7 +26,7 @@ export default function DocsPageHeader({ title, description, badge }: DocsPageHe
       <h1
         style={{
           fontFamily: 'var(--font-secondary)',
-          fontSize: 'var(--font-size-3xl)',
+          fontSize: '48px',
           fontWeight: 700,
           letterSpacing: '-0.02em',
           lineHeight: 'var(--line-height-tight)',

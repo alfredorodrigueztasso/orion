@@ -33,7 +33,7 @@
 
 import { forwardRef } from "react";
 import type { PricingProps } from "./Pricing.types";
-import { Section, Container } from '@orion-ds/react';
+import { Section, Container } from "@orion-ds/react";
 import { PricingCard } from "./PricingCard";
 import styles from "./Pricing.module.css";
 

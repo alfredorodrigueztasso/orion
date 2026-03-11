@@ -8,7 +8,10 @@ import { Divider } from "../../components/Divider";
 import styles from "./WorkspaceSwitcher.module.css";
 import type { WorkspaceSwitcherProps } from "./WorkspaceSwitcher.types";
 
-export const WorkspaceSwitcher = forwardRef<HTMLDivElement, WorkspaceSwitcherProps>(
+export const WorkspaceSwitcher = forwardRef<
+  HTMLDivElement,
+  WorkspaceSwitcherProps
+>(
   (
     {
       currentOrg,
@@ -41,19 +44,33 @@ export const WorkspaceSwitcher = forwardRef<HTMLDivElement, WorkspaceSwitcherPro
         {/* Active workspace */}
         <div className={styles.activeWorkspace}>
           <Avatar size="lg" icon={<Building2 size={20} />} />
-          <Badge variant="secondary" size="sm">{currentOrg.role}</Badge>
+          <Badge variant="secondary" size="sm">
+            {currentOrg.role}
+          </Badge>
           <div>
             <div className={styles.orgName}>{currentOrg.name}</div>
-            <div className={styles.orgMeta}>{currentOrg.memberCount} participantes</div>
+            <div className={styles.orgMeta}>
+              {currentOrg.memberCount} participantes
+            </div>
           </div>
         </div>
 
         {/* Action buttons */}
         <div className={styles.actionButtons}>
-          <Button variant="secondary" size="sm" icon={<Settings size={16} />} onClick={onSettings}>
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={<Settings size={16} />}
+            onClick={onSettings}
+          >
             Configuración
           </Button>
-          <Button variant="secondary" size="sm" icon={<Users size={16} />} onClick={onParticipants}>
+          <Button
+            variant="secondary"
+            size="sm"
+            icon={<Users size={16} />}
+            onClick={onParticipants}
+          >
             Participantes
           </Button>
         </div>

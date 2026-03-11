@@ -56,7 +56,7 @@
  */
 
 import React from "react";
-import { CollapsibleFolder, AgentCard } from '@orion-ds/react';
+import { CollapsibleFolder, AgentCard } from "@orion-ds/react";
 import type { AgentFolderProps } from "./AgentFolder.types";
 
 export const AgentFolder: React.FC<AgentFolderProps> = ({

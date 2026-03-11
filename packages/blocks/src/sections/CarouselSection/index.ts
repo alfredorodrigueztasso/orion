@@ -8,7 +8,7 @@
 export { CarouselSection } from "./CarouselSection";
 
 // Re-export CarouselCard from the atomic component for convenience
-export { CarouselCard } from '@orion-ds/react';
+export { CarouselCard } from "@orion-ds/react";
 
 export type {
   CarouselSectionProps,
@@ -20,4 +20,4 @@ export type {
 } from "./CarouselSection.types";
 
 // Re-export CarouselCardProps from the atomic component
-export type { CarouselCardProps } from '@orion-ds/react';
+export type { CarouselCardProps } from "@orion-ds/react";

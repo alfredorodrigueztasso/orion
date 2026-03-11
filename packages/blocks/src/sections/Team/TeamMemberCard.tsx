@@ -5,7 +5,7 @@
  */
 
 import type { TeamMemberCardProps } from "./Team.types";
-import { Card, Avatar } from '@orion-ds/react';
+import { Card, Avatar } from "@orion-ds/react";
 import styles from "./Team.module.css";
 
 export const TeamMemberCard = ({

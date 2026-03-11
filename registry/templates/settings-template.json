@@ -7,7 +7,7 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/SettingsTemplate/SettingsTemplate.tsx",
+      "path": "packages/blocks/src/templates/app/SettingsTemplate/SettingsTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#settings-template",
     "local": "/library.html#settings-template"
   },
-  "import": "import { SettingsTemplate } from '@orion-ds/react'",
+  "import": "import { SettingsTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

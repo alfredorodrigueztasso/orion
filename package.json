@@ -16,6 +16,7 @@
     "build:tokens": "ts-node scripts/generate-types.ts && node scripts/build-tokens.js",
     "build:packages": "turbo run build",
     "build:release": "npm run build:tokens && turbo run build --filter=!orion-docs",
+    "clean:dist": "find packages -name dist -type d -exec rm -rf {} + 2>/dev/null; echo '✓ Cleaned dist/ directories'",
     "build:core": "turbo run build --filter=!orion-docs",
     "build:react": "turbo run build --filter=@orion/core --filter=@orion/react",
     "build:registry": "npx ts-node --transpile-only scripts/generate-registry.ts",

@@ -128,7 +128,9 @@ describe("Stepper", () => {
 
   it("renders horizontal orientation by default", () => {
     const { container } = render(<Stepper steps={mockSteps} />);
-    expect(container.querySelector('[class*="horizontal"]')).toBeInTheDocument();
+    expect(
+      container.querySelector('[class*="horizontal"]'),
+    ).toBeInTheDocument();
   });
 
   it("renders vertical orientation", () => {

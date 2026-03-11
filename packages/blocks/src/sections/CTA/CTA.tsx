@@ -22,8 +22,8 @@
 
 import { forwardRef, useEffect } from "react";
 import type { CTAProps } from "./CTA.types";
-import { Section, Container } from '@orion-ds/react';
-import { Card } from '@orion-ds/react';
+import { Section, Container } from "@orion-ds/react";
+import { Card } from "@orion-ds/react";
 import styles from "./CTA.module.css";
 
 export const CTA = forwardRef<HTMLElement, CTAProps>(

@@ -105,7 +105,9 @@ describe("SearchInput", () => {
 
   it("renders full width", () => {
     render(<SearchInput fullWidth data-testid="input" />);
-    expect(screen.getByTestId("input").parentElement!.className).toMatch(/fullWidth/);
+    expect(screen.getByTestId("input").parentElement!.className).toMatch(
+      /fullWidth/,
+    );
   });
 
   it("renders loading state", () => {

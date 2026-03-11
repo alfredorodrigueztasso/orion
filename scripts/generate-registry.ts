@@ -99,9 +99,10 @@ interface RegistryIndex {
 
 const ROOT = path.resolve(__dirname, '..');
 const REACT_SRC = path.join(ROOT, 'packages/react/src');
+const BLOCKS_SRC = path.join(ROOT, 'packages/blocks/src');
 const COMPONENTS_DIR = path.join(REACT_SRC, 'components');
-const SECTIONS_DIR = path.join(REACT_SRC, 'sections');
-const TEMPLATES_DIR = path.join(REACT_SRC, 'templates');
+const SECTIONS_DIR = path.join(BLOCKS_SRC, 'sections');
+const TEMPLATES_DIR = path.join(BLOCKS_SRC, 'templates');
 const REGISTRY_DIR = path.join(ROOT, 'registry');
 const SCHEMA_URL = 'https://orion-ds.dev/schema/registry-item.json';
 const CSS_IMPORT = "import '@orion-ds/react/styles.css'";
@@ -1231,13 +1232,13 @@ function main() {
         description: `${dir.replace(/Template$/, '')} page template`,
         category: cat,
         files: [
-          { path: `packages/react/src/templates/${cat}/${dir}/${dir}.tsx`, type: 'registry:component' },
+          { path: `packages/blocks/src/templates/${cat}/${dir}/${dir}.tsx`, type: 'registry:component' },
         ],
         preview: {
           url: `https://orion-ds.dev/library.html#${kebabName}`,
           local: `/library.html#${kebabName}`,
         },
-        import: `import { ${dir} } from '@orion-ds/react'`,
+        import: `import { ${dir} } from '@orion-ds/blocks'`,
         cssImport: CSS_IMPORT,
       };
 

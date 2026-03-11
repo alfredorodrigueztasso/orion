@@ -14,7 +14,7 @@ npm install @orion-ds/react lucide-react
 
 ```tsx
 // app/layout.tsx
-import '@orion-ds/react/styles.css';
+import "@orion-ds/react/styles.css";
 
 export default function RootLayout({
   children,
@@ -35,17 +35,13 @@ Create a new client component for your providers:
 
 ```tsx
 // app/providers.tsx
-'use client';
+"use client";
 
-import { ThemeProvider } from '@orion-ds/react/client';
-import { ReactNode } from 'react';
+import { ThemeProvider } from "@orion-ds/react/client";
+import { ReactNode } from "react";
 
 export function Providers({ children }: { children: ReactNode }) {
-  return (
-    <ThemeProvider>
-      {children}
-    </ThemeProvider>
-  );
+  return <ThemeProvider>{children}</ThemeProvider>;
 }
 ```
 
@@ -53,8 +49,8 @@ Then wrap your app in the root layout:
 
 ```tsx
 // app/layout.tsx
-import '@orion-ds/react/styles.css';
-import { Providers } from './providers';
+import "@orion-ds/react/styles.css";
+import { Providers } from "./providers";
 
 export default function RootLayout({
   children,
@@ -64,9 +60,7 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body>
-        <Providers>
-          {children}
-        </Providers>
+        <Providers>{children}</Providers>
       </body>
     </html>
   );
@@ -81,7 +75,7 @@ In Server Components (the default in App Router), you can import display-only co
 
 ```tsx
 // app/page.tsx — Server Component
-import { Button, Card, Hero } from '@orion-ds/react/client';
+import { Button, Card, Hero } from "@orion-ds/react/client";
 
 export default function Page() {
   return (
@@ -99,19 +93,15 @@ In Client Components (for interactive features), use the `'use client'` directiv
 
 ```tsx
 // app/components/counter.tsx
-'use client';
+"use client";
 
-import { Button } from '@orion-ds/react/client';
-import { useState } from 'react';
+import { Button } from "@orion-ds/react/client";
+import { useState } from "react";
 
 export function Counter() {
   const [count, setCount] = useState(0);
 
-  return (
-    <Button onClick={() => setCount(count + 1)}>
-      Count: {count}
-    </Button>
-  );
+  return <Button onClick={() => setCount(count + 1)}>Count: {count}</Button>;
 }
 ```
 
@@ -150,9 +140,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body>
-        {children}
-      </body>
+      <body>{children}</body>
     </html>
   );
 }
@@ -166,8 +154,8 @@ The main entry point (`@orion-ds/react`) contains all components, hooks, and uti
 
 ```tsx
 // Both import the same components, but /client is explicitly marked for RSC
-import { Button } from '@orion-ds/react';       // Works everywhere
-import { Button } from '@orion-ds/react/client'; // Explicitly marks RSC boundary
+import { Button } from "@orion-ds/react"; // Works everywhere
+import { Button } from "@orion-ds/react/client"; // Explicitly marks RSC boundary
 ```
 
 **Recommendation**: Use `/client` in your provider files and client components for clarity. The `'use client'` directive propagates to all re-exports, making your intent explicit to the framework.
@@ -182,9 +170,9 @@ Create a custom `_app.tsx`:
 
 ```tsx
 // pages/_app.tsx
-import '@orion-ds/react/styles.css';
-import type { AppProps } from 'next/app';
-import { ThemeProvider } from '@orion-ds/react';
+import "@orion-ds/react/styles.css";
+import type { AppProps } from "next/app";
+import { ThemeProvider } from "@orion-ds/react";
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -199,7 +187,7 @@ export default function App({ Component, pageProps }: AppProps) {
 
 ```tsx
 // pages/index.tsx
-import { Button, Hero } from '@orion-ds/react';
+import { Button, Hero } from "@orion-ds/react";
 
 export default function Home() {
   return (
@@ -226,13 +214,13 @@ npm install @orion-ds/react lucide-react
 
 ```tsx
 // main.tsx or index.tsx
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import '@orion-ds/react/styles.css';
-import { ThemeProvider } from '@orion-ds/react';
-import App from './App';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "@orion-ds/react/styles.css";
+import { ThemeProvider } from "@orion-ds/react";
+import App from "./App";
 
-ReactDOM.createRoot(document.getElementById('root')!).render(
+ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <ThemeProvider>
       <App />
@@ -244,7 +232,7 @@ ReactDOM.createRoot(document.getElementById('root')!).render(
 ### 3. Use components
 
 ```tsx
-import { Button, Card } from '@orion-ds/react';
+import { Button, Card } from "@orion-ds/react";
 
 export default function App() {
   return (
@@ -262,12 +250,12 @@ No SSR concerns, so use the main entry point directly.
 All Orion components are fully typed. Your IDE will provide autocomplete and type checking automatically:
 
 ```tsx
-import { Button, type ButtonProps } from '@orion-ds/react/client';
+import { Button, type ButtonProps } from "@orion-ds/react/client";
 
 // You can use props with type safety
 const config: ButtonProps = {
-  variant: 'primary',
-  size: 'lg',
+  variant: "primary",
+  size: "lg",
   disabled: false,
 };
 
@@ -281,6 +269,7 @@ export function MyButton() {
 ### "Hydration mismatch" errors in console
 
 These are expected if you're using theme/brand persistence without the blocking script. Either:
+
 1. Add the blocking script (recommended), or
 2. Remove localStorage persistence: `<ThemeProvider disableAutoFontLoading>...</ThemeProvider>`
 
@@ -291,7 +280,7 @@ These are expected if you're using theme/brand persistence without the blocking 
 Check that you've imported the CSS:
 
 ```tsx
-import '@orion-ds/react/styles.css'; // Required!
+import "@orion-ds/react/styles.css"; // Required!
 ```
 
 This single import includes all design tokens, component styles, and theme support.
@@ -318,16 +307,16 @@ Ensure `ThemeProvider` wraps your app. The theme state is managed via React Cont
 Also check that you're using `useTheme()` or `useThemeContext()` correctly:
 
 ```tsx
-'use client';
+"use client";
 
-import { useThemeContext } from '@orion-ds/react/client';
+import { useThemeContext } from "@orion-ds/react/client";
 
 export function ThemeSwitcher() {
   const { theme, setTheme } = useThemeContext();
 
   return (
-    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      Switch to {theme === 'light' ? 'dark' : 'light'} mode
+    <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+      Switch to {theme === "light" ? "dark" : "light"} mode
     </button>
   );
 }
@@ -348,16 +337,16 @@ A: Yes, as long as they don't use hooks or event handlers. Display-only componen
 A: Use the `useThemeContext()` hook inside a Client Component:
 
 ```tsx
-'use client';
+"use client";
 
-import { useThemeContext } from '@orion-ds/react/client';
+import { useThemeContext } from "@orion-ds/react/client";
 
 export function ThemeToggle() {
   const { theme, setTheme } = useThemeContext();
 
   return (
-    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
-      {theme === 'light' ? '🌙' : '☀️'}
+    <button onClick={() => setTheme(theme === "light" ? "dark" : "light")}>
+      {theme === "light" ? "🌙" : "☀️"}
     </button>
   );
 }
@@ -374,9 +363,7 @@ A: Yes, but note that Orion uses **CSS custom properties (variables)** exclusive
 ```tsx
 <div className="flex gap-4">
   {/* Tailwind classes */}
-  <Card>
-    {/* Orion components use CSS vars, not Tailwind */}
-  </Card>
+  <Card>{/* Orion components use CSS vars, not Tailwind */}</Card>
 </div>
 ```
 

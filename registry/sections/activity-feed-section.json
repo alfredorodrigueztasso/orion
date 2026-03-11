@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "activity-feed-section",
+  "type": "registry:section",
+  "title": "ActivityFeed",
+  "description": "ActivityFeed section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/ActivityFeed/ActivityFeed.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/ActivityFeed/ActivityFeed.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/ActivityFeed/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#activity-feed-section",
+    "local": "/library.html#activity-feed-section"
+  },
+  "import": "import { ActivityFeed } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

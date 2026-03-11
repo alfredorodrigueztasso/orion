@@ -52,9 +52,19 @@ import { Section, Container } from "../sections";
 export function LandingPageExample() {
   return (
     <ThemeProvider>
-      <div style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}>
+      <div
+        style={{ minHeight: "100vh", display: "flex", flexDirection: "column" }}
+      >
         <Navbar>
-          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", width: "100%", padding: "0 24px" }}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: "center",
+              width: "100%",
+              padding: "0 24px",
+            }}
+          >
             <strong>Orion</strong>
             <div style={{ display: "flex", gap: "24px" }}>
               <Button variant="ghost">Features</Button>
@@ -67,12 +77,31 @@ export function LandingPageExample() {
 
         <Section>
           <Container>
-            <div style={{ textAlign: "center", paddingTop: "60px", paddingBottom: "60px" }}>
-              <h1 style={{ fontSize: "48px", marginBottom: "16px", fontWeight: "bold" }}>
+            <div
+              style={{
+                textAlign: "center",
+                paddingTop: "60px",
+                paddingBottom: "60px",
+              }}
+            >
+              <h1
+                style={{
+                  fontSize: "48px",
+                  marginBottom: "16px",
+                  fontWeight: "bold",
+                }}
+              >
                 Welcome to Orion Design System
               </h1>
-              <p style={{ fontSize: "18px", marginBottom: "32px", color: "var(--text-secondary)" }}>
-                The AI-first design system for building beautiful, accessible interfaces
+              <p
+                style={{
+                  fontSize: "18px",
+                  marginBottom: "32px",
+                  color: "var(--text-secondary)",
+                }}
+              >
+                The AI-first design system for building beautiful, accessible
+                interfaces
               </p>
               <Button variant="primary" size="lg">
                 Start Building
@@ -84,16 +113,26 @@ export function LandingPageExample() {
         <Section>
           <Container>
             <div style={{ textAlign: "center" }}>
-              <h2 style={{ fontSize: "32px", marginBottom: "16px", fontWeight: "bold" }}>
+              <h2
+                style={{
+                  fontSize: "32px",
+                  marginBottom: "16px",
+                  fontWeight: "bold",
+                }}
+              >
                 Premium Sections Available
               </h2>
-              <p style={{ marginBottom: "24px", color: "var(--text-secondary)" }}>
-                For pre-built marketing and app sections, templates, and advanced components,
-                install <strong>@orion-ds/blocks</strong>
+              <p
+                style={{ marginBottom: "24px", color: "var(--text-secondary)" }}
+              >
+                For pre-built marketing and app sections, templates, and
+                advanced components, install <strong>@orion-ds/blocks</strong>
               </p>
               <Button
                 variant="secondary"
-                onClick={() => window.open("https://github.com/anthropics/orion", "_blank")}
+                onClick={() =>
+                  window.open("https://github.com/anthropics/orion", "_blank")
+                }
               >
                 Learn More
               </Button>

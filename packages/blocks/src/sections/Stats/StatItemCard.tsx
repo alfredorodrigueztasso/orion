@@ -5,7 +5,7 @@
  */
 
 import type { StatItemCardProps } from "./Stats.types";
-import { Card } from '@orion-ds/react';
+import { Card } from "@orion-ds/react";
 import { TrendingUp, TrendingDown } from "lucide-react";
 import styles from "./Stats.module.css";
 

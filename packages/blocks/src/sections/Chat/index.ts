@@ -3,7 +3,7 @@
  *
  * @example
  * ```tsx
- * import { ChatSection } from '@orion-ds/react';
+ * import { ChatSection } from '@orion-ds/blocks';
  *
  * <ChatSection
  *   conversations={conversations}
@@ -15,5 +15,10 @@
  * ```
  */
 
-export { ChatSection } from "./ChatSection";
-export type { ChatSectionProps } from '@orion-ds/react';
+export { ChatSection } from "./Chat";
+export type {
+  ChatSectionProps,
+  ChatMessage,
+  ChatConversation,
+  ChatInputProps,
+} from "./Chat.types";

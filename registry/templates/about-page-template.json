@@ -7,7 +7,7 @@
   "category": "marketing",
   "files": [
     {
-      "path": "packages/react/src/templates/marketing/AboutPageTemplate/AboutPageTemplate.tsx",
+      "path": "packages/blocks/src/templates/marketing/AboutPageTemplate/AboutPageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#about-page-template",
     "local": "/library.html#about-page-template"
   },
-  "import": "import { AboutPageTemplate } from '@orion-ds/react'",
+  "import": "import { AboutPageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

@@ -1,5 +1,5 @@
 import { useState, useMemo } from "react";
-import { CodeEditor } from '@orion-ds/react';
+import { CodeEditor } from "@orion-ds/react";
 import styles from "./MultiAgentPanel.module.css";
 
 interface AgentFlowNode {
@@ -93,8 +93,7 @@ function generateFlowchart(flow: AgentFlow): string {
     visited.add(nodeId);
 
     const hasNext = !!node.next;
-    const hasOutputs =
-      !!node.outputs && Object.keys(node.outputs).length > 0;
+    const hasOutputs = !!node.outputs && Object.keys(node.outputs).length > 0;
 
     // Render box
     renderNodeBox(node, hasNext || hasOutputs).forEach((l) => lines.push(l));
@@ -119,7 +118,9 @@ function generateFlowchart(flow: AgentFlow): string {
       // Render each branch's subtree
       entries.forEach(([label, targetId], i) => {
         if (i > 0) lines.push("");
-        lines.push(`${"─".repeat(Math.floor(INNER / 2))} Rama: ${label} ${"─".repeat(Math.floor(INNER / 2))}`);
+        lines.push(
+          `${"─".repeat(Math.floor(INNER / 2))} Rama: ${label} ${"─".repeat(Math.floor(INNER / 2))}`,
+        );
         lines.push("");
         traverse(targetId);
       });

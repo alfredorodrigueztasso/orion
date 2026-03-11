@@ -22,7 +22,7 @@
 
 import { forwardRef } from "react";
 import type { FooterProps, FooterLink } from "./Footer.types";
-import { Section, Container } from '@orion-ds/react';
+import { Section, Container } from "@orion-ds/react";
 import styles from "./Footer.module.css";
 
 const FooterLinkItem = ({ link }: { link: FooterLink }) => (

@@ -291,7 +291,9 @@ function DefaultWrapper() {
         { id: "hc-2", name: "Centro Campus Online" },
       ]}
       onCreateFolder={() => console.log("Create folder")}
-      onCreateAgent={(folderId?: string) => console.log("Create agent in:", folderId ?? "root")}
+      onCreateAgent={(folderId?: string) =>
+        console.log("Create agent in:", folderId ?? "root")
+      }
       onCreateHelpCenter={() => console.log("Create help center")}
       onEditFolder={(id) => console.log("Edit folder:", id)}
       onDeleteFolder={(id) => console.log("Delete folder:", id)}
@@ -339,7 +341,8 @@ export const NoAgents: Story = {
       { id: "hc-2", name: "Centro Campus Online" },
     ],
     onCreateFolder: () => console.log("Create folder"),
-    onCreateAgent: (folderId?: string) => console.log("Create agent in:", folderId ?? "root"),
+    onCreateAgent: (folderId?: string) =>
+      console.log("Create agent in:", folderId ?? "root"),
     onCreateHelpCenter: () => console.log("Create help center"),
     onEditFolder: (id: string) => console.log("Edit folder:", id),
     onDeleteFolder: (id: string) => console.log("Delete folder:", id),
@@ -552,7 +555,9 @@ function FullFeaturedWrapper() {
         { id: "hc-2", name: "Centro Campus Online" },
       ]}
       onCreateFolder={() => console.log("Create folder")}
-      onCreateAgent={(folderId?: string) => console.log("Create agent in:", folderId ?? "root")}
+      onCreateAgent={(folderId?: string) =>
+        console.log("Create agent in:", folderId ?? "root")
+      }
       onCreateHelpCenter={() => console.log("Create help center")}
       onEditFolder={(id) => console.log("Edit folder:", id)}
       onDeleteFolder={(id) => console.log("Delete folder:", id)}
@@ -606,7 +611,9 @@ function MobileWrapper() {
         { id: "hc-2", name: "Centro Campus Online" },
       ]}
       onCreateFolder={() => console.log("Create folder")}
-      onCreateAgent={(folderId?: string) => console.log("Create agent in:", folderId ?? "root")}
+      onCreateAgent={(folderId?: string) =>
+        console.log("Create agent in:", folderId ?? "root")
+      }
       onCreateHelpCenter={() => console.log("Create help center")}
       onEditFolder={(id) => console.log("Edit folder:", id)}
       onDeleteFolder={(id) => console.log("Delete folder:", id)}

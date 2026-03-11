@@ -7,7 +7,7 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/DashboardTemplate/DashboardTemplate.tsx",
+      "path": "packages/blocks/src/templates/app/DashboardTemplate/DashboardTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#dashboard-template",
     "local": "/library.html#dashboard-template"
   },
-  "import": "import { DashboardTemplate } from '@orion-ds/react'",
+  "import": "import { DashboardTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

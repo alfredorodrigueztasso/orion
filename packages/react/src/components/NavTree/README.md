@@ -5,32 +5,32 @@ A Notion-style hierarchical navigation sidebar with collapsible sections, folder
 ## Quick Start
 
 ```tsx
-import { NavTree } from '@orion-ds/react/sections';
-import { Home, BookOpen, FolderOpen } from 'lucide-react';
+import { NavTree } from "@orion-ds/react/sections";
+import { Home, BookOpen, FolderOpen } from "lucide-react";
 
 const sections = [
   {
-    id: 'essentials',
-    title: 'Lo esencial',
+    id: "essentials",
+    title: "Lo esencial",
     icon: <Home size={16} />,
     nodes: [
       {
-        id: 'dashboard',
-        type: 'page',
-        label: 'Dashboard',
-        href: '/dashboard'
+        id: "dashboard",
+        type: "page",
+        label: "Dashboard",
+        href: "/dashboard",
       },
       {
-        id: 'docs',
-        type: 'folder',
-        label: 'Documentación',
+        id: "docs",
+        type: "folder",
+        label: "Documentación",
         icon: <BookOpen size={16} />,
         children: [
           {
-            id: 'getting-started',
-            type: 'page',
-            label: 'Getting Started',
-            href: '/docs/getting-started'
+            id: "getting-started",
+            type: "page",
+            label: "Getting Started",
+            href: "/docs/getting-started",
           },
         ],
       },
@@ -39,7 +39,7 @@ const sections = [
 ];
 
 export default function App() {
-  const [activeNodeId, setActiveNodeId] = useState('dashboard');
+  const [activeNodeId, setActiveNodeId] = useState("dashboard");
 
   return (
     <NavTree
@@ -50,7 +50,7 @@ export default function App() {
         // Navigate to node.href
       }}
       actions={{
-        onDelete: (nodeId) => console.log('Delete', nodeId),
+        onDelete: (nodeId) => console.log("Delete", nodeId),
       }}
     />
   );
@@ -61,53 +61,53 @@ export default function App() {
 
 ### NavTreeProps
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| `sections` | `NavTreeSection[]` | - | Array of collapsible sections |
-| `activeNodeId` | `string?` | - | ID of the currently active/highlighted node |
-| `onNodeClick` | `(node: NavTreeNode) => void?` | - | Callback when a node row is clicked |
-| `actions` | `NavTreeActionConfig?` | - | Object containing action callbacks (onAdd, onRename, onDelete, etc.) |
-| `persistKey` | `string` | `'orion-nav-tree'` | localStorage key prefix for persisting expanded/collapsed states |
-| `header` | `ReactNode?` | - | Optional header slot (e.g. workspace logo, switcher) |
-| `footer` | `ReactNode?` | - | Optional footer slot (e.g. UserMenu) |
-| `width` | `number \| string` | `240` | Sidebar width in pixels or CSS value (e.g. `"clamp(200px, 25vw, 320px)"`) |
-| `className` | `string?` | - | Additional CSS class for the root container |
-| `headless` | `boolean` | `false` | Render root nodes directly without section headers |
+| Prop           | Type                           | Default            | Description                                                               |
+| -------------- | ------------------------------ | ------------------ | ------------------------------------------------------------------------- |
+| `sections`     | `NavTreeSection[]`             | -                  | Array of collapsible sections                                             |
+| `activeNodeId` | `string?`                      | -                  | ID of the currently active/highlighted node                               |
+| `onNodeClick`  | `(node: NavTreeNode) => void?` | -                  | Callback when a node row is clicked                                       |
+| `actions`      | `NavTreeActionConfig?`         | -                  | Object containing action callbacks (onAdd, onRename, onDelete, etc.)      |
+| `persistKey`   | `string`                       | `'orion-nav-tree'` | localStorage key prefix for persisting expanded/collapsed states          |
+| `header`       | `ReactNode?`                   | -                  | Optional header slot (e.g. workspace logo, switcher)                      |
+| `footer`       | `ReactNode?`                   | -                  | Optional footer slot (e.g. UserMenu)                                      |
+| `width`        | `number \| string`             | `240`              | Sidebar width in pixels or CSS value (e.g. `"clamp(200px, 25vw, 320px)"`) |
+| `className`    | `string?`                      | -                  | Additional CSS class for the root container                               |
+| `headless`     | `boolean`                      | `false`            | Render root nodes directly without section headers                        |
 
 ### NavTreeSection
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `id` | `string` | - | Unique section identifier |
-| `title` | `string` | - | Section title (displayed in collapsible header) |
-| `icon` | `ReactNode?` | - | Optional icon next to section title (16px recommended) |
-| `badge` | `number \| string?` | - | Optional badge/counter displayed on section header |
-| `variant` | `'node' \| 'label'` | `'node'` | Section header visual style: `'node'` = dark 14px bold (matches folder style), `'label'` = light 10px uppercase |
-| `nodes` | `NavTreeNode[]` | - | Root-level nodes in this section |
-| `defaultExpanded` | `boolean` | `true` | Whether section is expanded by default |
+| Field             | Type                | Default  | Description                                                                                                     |
+| ----------------- | ------------------- | -------- | --------------------------------------------------------------------------------------------------------------- |
+| `id`              | `string`            | -        | Unique section identifier                                                                                       |
+| `title`           | `string`            | -        | Section title (displayed in collapsible header)                                                                 |
+| `icon`            | `ReactNode?`        | -        | Optional icon next to section title (16px recommended)                                                          |
+| `badge`           | `number \| string?` | -        | Optional badge/counter displayed on section header                                                              |
+| `variant`         | `'node' \| 'label'` | `'node'` | Section header visual style: `'node'` = dark 14px bold (matches folder style), `'label'` = light 10px uppercase |
+| `nodes`           | `NavTreeNode[]`     | -        | Root-level nodes in this section                                                                                |
+| `defaultExpanded` | `boolean`           | `true`   | Whether section is expanded by default                                                                          |
 
 ### NavTreeNode
 
-| Field | Type | Default | Description |
-|-------|------|---------|-------------|
-| `id` | `string` | - | Unique identifier within the section |
-| `type` | `'page' \| 'folder'` | - | Node type: `'page'` (leaf, not expandable) or `'folder'` (container, expandable if children exist) |
-| `label` | `string` | - | Display label |
-| `icon` | `ReactNode?` | - | Optional icon (16px for root level, 14px for nested pages recommended) |
-| `href` | `string?` | - | Optional navigation href (typically used for page nodes) |
-| `badge` | `number \| string?` | - | Optional badge (e.g. unread count, item count) |
-| `children` | `NavTreeNode[]?` | - | Child nodes (folders only, but not enforced) |
+| Field      | Type                 | Default | Description                                                                                        |
+| ---------- | -------------------- | ------- | -------------------------------------------------------------------------------------------------- |
+| `id`       | `string`             | -       | Unique identifier within the section                                                               |
+| `type`     | `'page' \| 'folder'` | -       | Node type: `'page'` (leaf, not expandable) or `'folder'` (container, expandable if children exist) |
+| `label`    | `string`             | -       | Display label                                                                                      |
+| `icon`     | `ReactNode?`         | -       | Optional icon (16px for root level, 14px for nested pages recommended)                             |
+| `href`     | `string?`            | -       | Optional navigation href (typically used for page nodes)                                           |
+| `badge`    | `number \| string?`  | -       | Optional badge (e.g. unread count, item count)                                                     |
+| `children` | `NavTreeNode[]?`     | -       | Child nodes (folders only, but not enforced)                                                       |
 
 ### NavTreeActionConfig
 
-| Callback | Type | Description |
-|----------|------|-------------|
-| `onAdd` | `(parentId: string \| null, sectionId: string) => void?` | Add new node: `parentId` is null for root, `sectionId` identifies the section |
-| `onRename` | `(nodeId: string) => void?` | Rename a node |
-| `onDuplicate` | `(nodeId: string) => void?` | Duplicate a node |
-| `onMove` | `(nodeId: string) => void?` | Move a node to a different location |
-| `onDelete` | `(nodeId: string) => void?` | Delete a node |
-| `getCustomActions` | `(node: NavTreeNode) => DropdownItem[]?` | Get custom dropdown actions (merged with standard ones) |
+| Callback           | Type                                                     | Description                                                                   |
+| ------------------ | -------------------------------------------------------- | ----------------------------------------------------------------------------- |
+| `onAdd`            | `(parentId: string \| null, sectionId: string) => void?` | Add new node: `parentId` is null for root, `sectionId` identifies the section |
+| `onRename`         | `(nodeId: string) => void?`                              | Rename a node                                                                 |
+| `onDuplicate`      | `(nodeId: string) => void?`                              | Duplicate a node                                                              |
+| `onMove`           | `(nodeId: string) => void?`                              | Move a node to a different location                                           |
+| `onDelete`         | `(nodeId: string) => void?`                              | Delete a node                                                                 |
+| `getCustomActions` | `(node: NavTreeNode) => DropdownItem[]?`                 | Get custom dropdown actions (merged with standard ones)                       |
 
 ## Features
 
@@ -129,13 +129,11 @@ All expanded/collapsed states are automatically persisted to localStorage under 
 ```tsx
 <NavTree
   header={
-    <div style={{ padding: '16px', textAlign: 'center' }}>
+    <div style={{ padding: "16px", textAlign: "center" }}>
       <img src="logo.png" alt="Logo" />
     </div>
   }
-  footer={
-    <UserMenu userName="John Doe" userEmail="john@example.com" />
-  }
+  footer={<UserMenu userName="John Doe" userEmail="john@example.com" />}
   sections={sections}
 />
 ```
@@ -170,23 +168,33 @@ CSS is scoped via CSS Modules in `NavTree.module.css`.
 ### With Avatar Icons (Agent Pattern)
 
 ```tsx
-import { Avatar } from '@orion-ds/react/components';
-import { Sparkles } from 'lucide-react';
+import { Avatar } from "@orion-ds/react/components";
+import { Sparkles } from "lucide-react";
 
 const sections = [
   {
-    id: 'agents',
-    title: 'Agentes IA',
+    id: "agents",
+    title: "Agentes IA",
     icon: <Sparkles size={16} />,
     nodes: [
       {
-        id: 'agent-1',
-        type: 'folder',
-        label: 'Marketing Bot',
+        id: "agent-1",
+        type: "folder",
+        label: "Marketing Bot",
         icon: <Avatar size="xs" initials="MB" />,
         children: [
-          { id: 'agent-1-edit', type: 'page', label: 'Edit', icon: <Edit2 size={14} /> },
-          { id: 'agent-1-metrics', type: 'page', label: 'Metrics', icon: <BarChart3 size={14} /> },
+          {
+            id: "agent-1-edit",
+            type: "page",
+            label: "Edit",
+            icon: <Edit2 size={14} />,
+          },
+          {
+            id: "agent-1-metrics",
+            type: "page",
+            label: "Metrics",
+            icon: <BarChart3 size={14} />,
+          },
         ],
       },
     ],
@@ -199,15 +207,15 @@ const sections = [
 ```tsx
 const sections = [
   {
-    id: 'essentials',
-    title: 'Essentials',
-    badge: 5,  // Section-level badge
+    id: "essentials",
+    title: "Essentials",
+    badge: 5, // Section-level badge
     nodes: [
       {
-        id: 'inbox',
-        type: 'page',
-        label: 'Inbox',
-        badge: 3,  // Node-level badge
+        id: "inbox",
+        type: "page",
+        label: "Inbox",
+        badge: 3, // Node-level badge
       },
     ],
   },
@@ -221,17 +229,19 @@ const sections = [
   sections={sections}
   actions={{
     onAdd: (parentId, sectionId) => {
-      console.log(`Add new node in section "${sectionId}" under parent "${parentId || 'root'}"`);
+      console.log(
+        `Add new node in section "${sectionId}" under parent "${parentId || "root"}"`,
+      );
     },
     onDelete: (nodeId) => {
       console.log(`Delete node "${nodeId}"`);
     },
     getCustomActions: (node) => [
       {
-        id: 'export',
-        label: 'Export',
+        id: "export",
+        label: "Export",
         icon: <Download size={14} />,
-        onClick: () => console.log('Export', node.id),
+        onClick: () => console.log("Export", node.id),
       },
     ],
   }}

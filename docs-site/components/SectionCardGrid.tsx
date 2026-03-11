@@ -86,14 +86,14 @@ export default function SectionCardGrid({ sections, categories }: SectionCardGri
         }}
       >
         <h1 style={{
-          fontSize: 'clamp(2rem, 4vw, 3rem)',
+          fontSize: 'clamp(var(--font-size-2xl), 4vw, var(--font-size-3xl))',
           fontWeight: 800,
           marginBottom: 'var(--spacing-3)',
         }}>
           Building Blocks for the Web
         </h1>
         <p style={{
-          fontSize: '1.125rem',
+          fontSize: 'var(--font-size-lg)',
           color: 'var(--text-secondary)',
           maxWidth: '600px',
           margin: '0 auto',
@@ -150,7 +150,7 @@ export default function SectionCardGrid({ sections, categories }: SectionCardGri
       {/* Results Count */}
       {(query.trim() || activeCategory !== 'all') && (
         <div style={{
-          fontSize: '0.875rem',
+          fontSize: 'var(--font-size-sm)',
           color: 'var(--text-tertiary)',
           marginBottom: 'var(--spacing-6)',
         }}>
@@ -172,7 +172,7 @@ export default function SectionCardGrid({ sections, categories }: SectionCardGri
           background: 'var(--surface-subtle)',
         }}>
           <div style={{
-            fontSize: '1.125rem',
+            fontSize: 'var(--font-size-lg)',
             fontWeight: 600,
             color: 'var(--text-primary)',
             marginBottom: 'var(--spacing-2)',
@@ -181,7 +181,7 @@ export default function SectionCardGrid({ sections, categories }: SectionCardGri
           </div>
           <div style={{
             color: 'var(--text-secondary)',
-            fontSize: '0.875rem',
+            fontSize: 'var(--font-size-sm)',
             marginBottom: 'var(--spacing-4)',
           }}>
             {query.trim()
@@ -221,7 +221,7 @@ export default function SectionCardGrid({ sections, categories }: SectionCardGri
                 <h2 style={{
                   textTransform: 'capitalize',
                   marginBottom: 'var(--spacing-6)',
-                  fontSize: '1.5rem',
+                  fontSize: 'var(--font-size-2xl)',
                   fontWeight: 600,
                 }}>
                   {category}
@@ -274,7 +274,7 @@ function SectionCard({ section, category, router }: { section: Section; category
           display: 'flex',
           alignItems: 'center',
           justifyContent: 'center',
-          fontSize: '0.875rem',
+          fontSize: 'var(--font-size-sm)',
           color: 'var(--text-tertiary)',
         }}>
           <div
@@ -295,7 +295,7 @@ function SectionCard({ section, category, router }: { section: Section; category
         {/* Info */}
         <div style={{ padding: 'var(--spacing-4)', flex: 1, display: 'flex', flexDirection: 'column', gap: 'var(--spacing-2)' }}>
           <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'start', gap: 'var(--spacing-2)' }}>
-            <h3 style={{ margin: 0, fontSize: '1.125rem', fontWeight: 600 }}>
+            <h3 style={{ margin: 0, fontSize: 'var(--font-size-lg)', fontWeight: 600 }}>
               {section.title}
             </h3>
             <Badge variant="secondary" size="sm" style={{ whiteSpace: 'nowrap', flexShrink: 0 }}>
@@ -305,7 +305,7 @@ function SectionCard({ section, category, router }: { section: Section; category
           <p style={{
             margin: 0,
             color: 'var(--text-secondary)',
-            fontSize: '0.875rem',
+            fontSize: 'var(--font-size-sm)',
             flex: 1,
           }}>
             {section.description}
@@ -314,7 +314,7 @@ function SectionCard({ section, category, router }: { section: Section; category
             background: 'var(--surface-layer)',
             padding: 'var(--spacing-2) var(--spacing-3)',
             borderRadius: 'var(--radius-sm)',
-            fontSize: '0.75rem',
+            fontSize: 'var(--font-size-xs)',
             color: 'var(--text-secondary)',
             marginTop: 'var(--spacing-2)',
             overflow: 'auto',

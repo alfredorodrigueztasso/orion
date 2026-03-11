@@ -7,17 +7,16 @@
  *
  * @example
  * ```tsx
- * import { Hero, Features, CTA, Footer } from '@orion-ds/blocks/sections';
- * import { LandingPageTemplate } from '@orion-ds/blocks/templates';
+ * import { Hero, Features, CTA, Footer, DashboardTemplate } from '@orion-ds/blocks';
  *
  * export default function LandingPage() {
  *   return (
- *     <LandingPageTemplate>
+ *     <DashboardTemplate>
  *       <Hero />
  *       <Features />
  *       <CTA />
  *       <Footer />
- *     </LandingPageTemplate>
+ *     </DashboardTemplate>
  *   );
  * }
  * ```
@@ -26,7 +25,7 @@
  */
 
 // Import and re-export sections
-export * from './sections';
+export * from "./sections";
 
 // Import and re-export templates
-export * from './templates';
+export * from "./templates";

@@ -7,7 +7,7 @@
   "category": "app",
   "files": [
     {
-      "path": "packages/react/src/templates/app/ChatPageTemplate/ChatPageTemplate.tsx",
+      "path": "packages/blocks/src/templates/app/ChatPageTemplate/ChatPageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#chat-page-template",
     "local": "/library.html#chat-page-template"
   },
-  "import": "import { ChatPageTemplate } from '@orion-ds/react'",
+  "import": "import { ChatPageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

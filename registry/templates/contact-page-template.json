@@ -7,7 +7,7 @@
   "category": "marketing",
   "files": [
     {
-      "path": "packages/react/src/templates/marketing/ContactPageTemplate/ContactPageTemplate.tsx",
+      "path": "packages/blocks/src/templates/marketing/ContactPageTemplate/ContactPageTemplate.tsx",
       "type": "registry:component"
     }
   ],
@@ -15,6 +15,6 @@
     "url": "https://orion-ds.dev/library.html#contact-page-template",
     "local": "/library.html#contact-page-template"
   },
-  "import": "import { ContactPageTemplate } from '@orion-ds/react'",
+  "import": "import { ContactPageTemplate } from '@orion-ds/blocks'",
   "cssImport": "import '@orion-ds/react/styles.css'"
 }

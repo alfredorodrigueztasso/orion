@@ -20,8 +20,11 @@
 import { forwardRef, useState, useCallback } from "react";
 import { Menu, LogOut, Settings, User } from "lucide-react";
 import { Chat, useStreamingText } from "@orion-ds/react";
-import type { ChatPageTemplateProps, ChatMessage as ChatMessageType } from "./ChatPageTemplate.types";
-import styles from './Chat.module.css';
+import type {
+  ChatPageTemplateProps,
+  ChatMessage as ChatMessageType,
+} from "./ChatPageTemplate.types";
+import styles from "./Chat.module.css";
 
 /**
  * Internal wrapper that progressively reveals message content word-by-word.

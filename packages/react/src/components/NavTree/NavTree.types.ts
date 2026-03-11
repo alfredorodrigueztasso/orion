@@ -6,18 +6,18 @@
  * and localStorage persistence of expanded/collapsed states.
  */
 
-import type { ReactNode } from 'react';
-import type { DropdownItem } from '../../components/Dropdown';
+import type { ReactNode } from "react";
+import type { DropdownItem } from "../../components/Dropdown";
 
 /**
  * Node type discriminator
  */
-export type NavTreeNodeType = 'page' | 'folder';
+export type NavTreeNodeType = "page" | "folder";
 
 /**
  * Section header visual variant
  */
-export type NavTreeSectionVariant = 'node' | 'label';
+export type NavTreeSectionVariant = "node" | "label";
 
 /**
  * A node in the navigation tree (page or folder)

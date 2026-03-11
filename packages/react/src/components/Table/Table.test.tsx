@@ -138,7 +138,9 @@ describe("Table", () => {
     const { container } = render(
       <Table columns={mockColumns} data={mockData} />,
     );
-    expect((container.firstChild as HTMLElement)?.className).toMatch(/hoverable/);
+    expect((container.firstChild as HTMLElement)?.className).toMatch(
+      /hoverable/,
+    );
   });
 
   it("does not apply hoverable class when hoverable is false", () => {
@@ -152,14 +154,18 @@ describe("Table", () => {
     const { container } = render(
       <Table columns={mockColumns} data={mockData} bordered />,
     );
-    expect((container.firstChild as HTMLElement)?.className).toMatch(/bordered/);
+    expect((container.firstChild as HTMLElement)?.className).toMatch(
+      /bordered/,
+    );
   });
 
   it("applies clickable class when onRowClick is provided", () => {
     const { container } = render(
       <Table columns={mockColumns} data={mockData} onRowClick={() => {}} />,
     );
-    expect((container.firstChild as HTMLElement)?.className).toMatch(/clickable/);
+    expect((container.firstChild as HTMLElement)?.className).toMatch(
+      /clickable/,
+    );
   });
 
   it("applies custom className", () => {

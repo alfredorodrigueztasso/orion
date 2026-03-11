@@ -5,7 +5,7 @@
  */
 
 import type { FeatureCardProps } from "./Features.types";
-import { Card, Badge } from '@orion-ds/react';
+import { Card, Badge } from "@orion-ds/react";
 import styles from "./Features.module.css";
 
 export const FeatureCard = ({

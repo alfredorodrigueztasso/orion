@@ -48,31 +48,41 @@ import {
   forwardRef,
   CSSProperties,
   useMemo,
-} from 'react';
-import { ChevronRight, Plus, MoreHorizontal, Copy, FolderSymlink, Pencil, Trash2 } from 'lucide-react';
-import { useLocalStorage } from '../../hooks/useLocalStorage';
-import { Collapsible } from '../../components/Collapsible';
-import { Dropdown } from '../../components/Dropdown';
-import { Button } from '../../components/Button';
+} from "react";
+import {
+  ChevronRight,
+  Plus,
+  MoreHorizontal,
+  Copy,
+  FolderSymlink,
+  Pencil,
+  Trash2,
+} from "lucide-react";
+import { useLocalStorage } from "../../hooks/useLocalStorage";
+import { Collapsible } from "../../components/Collapsible";
+import { Dropdown } from "../../components/Dropdown";
+import { Button } from "../../components/Button";
 import type {
   NavTreeProps,
   NavTreeNode,
   NavTreeSection,
   NavTreeContextValue,
-} from './NavTree.types';
-import type { DropdownItem } from '../../components/Dropdown';
-import styles from './NavTree.module.css';
+} from "./NavTree.types";
+import type { DropdownItem } from "../../components/Dropdown";
+import styles from "./NavTree.module.css";
 
 /* ============================================================================
    NavTreeContext
    ============================================================================ */
 
-const NavTreeContext = createContext<NavTreeContextValue | undefined>(undefined);
+const NavTreeContext = createContext<NavTreeContextValue | undefined>(
+  undefined,
+);
 
 function useNavTreeContext() {
   const context = useContext(NavTreeContext);
   if (!context) {
-    throw new Error('useNavTreeContext must be used within NavTree');
+    throw new Error("useNavTreeContext must be used within NavTree");
   }
   return context;
 }
@@ -91,7 +101,7 @@ export const NavTree = forwardRef<HTMLDivElement, NavTreeProps>(
       activeNodeId,
       onNodeClick,
       actions,
-      persistKey = 'orion-nav-tree',
+      persistKey = "orion-nav-tree",
       header,
       footer,
       width = 240,
@@ -103,9 +113,7 @@ export const NavTree = forwardRef<HTMLDivElement, NavTreeProps>(
     // Initialize localStorage for open sections and nodes
     const defaultOpenSections = useMemo(
       () =>
-        sections
-          .filter((s) => s.defaultExpanded !== false)
-          .map((s) => s.id),
+        sections.filter((s) => s.defaultExpanded !== false).map((s) => s.id),
       [sections],
     );
 
@@ -132,8 +140,8 @@ export const NavTree = forwardRef<HTMLDivElement, NavTreeProps>(
     };
 
     const isOpen = (id: string) => {
-      if (id.startsWith('section-')) {
-        return openSectionIds.includes(id.replace('section-', ''));
+      if (id.startsWith("section-")) {
+        return openSectionIds.includes(id.replace("section-", ""));
       }
       return openNodeIds.includes(id);
     };
@@ -150,7 +158,7 @@ export const NavTree = forwardRef<HTMLDivElement, NavTreeProps>(
     };
 
     const navTreeStyle: CSSProperties = {
-      width: typeof width === 'number' ? `${width}px` : width,
+      width: typeof width === "number" ? `${width}px` : width,
     };
 
     // Collect all root nodes when in headless mode
@@ -158,13 +166,15 @@ export const NavTree = forwardRef<HTMLDivElement, NavTreeProps>(
       ? sections.flatMap((section) => section.nodes)
       : [];
 
-    const isEmpty = headless ? allRootNodes.length === 0 : sections.length === 0;
-    const emptyMessage = headless ? 'No nodes' : 'No sections';
+    const isEmpty = headless
+      ? allRootNodes.length === 0
+      : sections.length === 0;
+    const emptyMessage = headless ? "No nodes" : "No sections";
 
     return (
       <div
         ref={ref}
-        className={`${styles.navTree} ${className || ''}`}
+        className={`${styles.navTree} ${className || ""}`}
         style={navTreeStyle}
         role="tree"
       >
@@ -199,7 +209,7 @@ export const NavTree = forwardRef<HTMLDivElement, NavTreeProps>(
   },
 );
 
-NavTree.displayName = 'NavTree';
+NavTree.displayName = "NavTree";
 
 /* ============================================================================
    NavTreeSectionBlock (Section with Collapsible Header)
@@ -213,7 +223,7 @@ function NavTreeSectionBlock({ section }: NavTreeSectionBlockProps) {
   const { isOpen, toggleSection, actionConfig } = useNavTreeContext();
   const sectionId = `section-${section.id}`;
   const open = isOpen(sectionId);
-  const variant = section.variant ?? 'node'; // Default to 'node'
+  const variant = section.variant ?? "node"; // Default to 'node'
 
   const handleSectionAdd = (e: React.MouseEvent) => {
     e.stopPropagation();
@@ -221,8 +231,9 @@ function NavTreeSectionBlock({ section }: NavTreeSectionBlockProps) {
   };
 
   const titleClass =
-    variant === 'node' ? styles.sectionTitleNode : styles.sectionTitle;
-  const headerClass = `${styles.sectionHeader} ${variant === 'node' ? styles.sectionHeaderNode : ''}`.trim();
+    variant === "node" ? styles.sectionTitleNode : styles.sectionTitle;
+  const headerClass =
+    `${styles.sectionHeader} ${variant === "node" ? styles.sectionHeaderNode : ""}`.trim();
 
   return (
     <div className={styles.section} role="group">
@@ -238,7 +249,7 @@ function NavTreeSectionBlock({ section }: NavTreeSectionBlockProps) {
                 <span className={styles.slotIcon}>{section.icon}</span>
                 {section.nodes.length > 0 && (
                   <div
-                    className={`${styles.slotChevron} ${open ? styles.slotChevronOpen : ''}`}
+                    className={`${styles.slotChevron} ${open ? styles.slotChevronOpen : ""}`}
                   >
                     <ChevronRight size={16} />
                   </div>
@@ -248,7 +259,7 @@ function NavTreeSectionBlock({ section }: NavTreeSectionBlockProps) {
               section.nodes.length > 0 && (
                 <ChevronRight
                   size={12}
-                  className={`${styles.sectionChevron} ${open ? styles.sectionChevronOpen : ''}`}
+                  className={`${styles.sectionChevron} ${open ? styles.sectionChevronOpen : ""}`}
                 />
               )
             )}
@@ -298,15 +309,10 @@ interface NavTreeNodeRowProps {
 }
 
 function NavTreeNodeRow({ node, depth, sectionId }: NavTreeNodeRowProps) {
-  const {
-    activeNodeId,
-    isOpen,
-    toggleNode,
-    onNodeClick,
-    actionConfig,
-  } = useNavTreeContext();
+  const { activeNodeId, isOpen, toggleNode, onNodeClick, actionConfig } =
+    useNavTreeContext();
 
-  const isFolder = node.type === 'folder';
+  const isFolder = node.type === "folder";
   const hasChildren = isFolder && node.children && node.children.length > 0;
   const open = isOpen(node.id);
   const isActive = activeNodeId === node.id;
@@ -327,26 +333,26 @@ function NavTreeNodeRow({ node, depth, sectionId }: NavTreeNodeRowProps) {
   // Build dropdown menu items
   const dropdownItems: DropdownItem[] = [
     {
-      id: 'rename',
-      label: 'Renombrar',
+      id: "rename",
+      label: "Renombrar",
       icon: <Pencil size={14} />,
       onClick: () => actionConfig?.onRename?.(node.id),
     },
     {
-      id: 'duplicate',
-      label: 'Duplicar',
+      id: "duplicate",
+      label: "Duplicar",
       icon: <Copy size={14} />,
       onClick: () => actionConfig?.onDuplicate?.(node.id),
     },
     {
-      id: 'move',
-      label: 'Mover a…',
+      id: "move",
+      label: "Mover a…",
       icon: <FolderSymlink size={14} />,
       onClick: () => actionConfig?.onMove?.(node.id),
     },
     {
-      id: 'delete',
-      label: 'Eliminar',
+      id: "delete",
+      label: "Eliminar",
       icon: <Trash2 size={14} />,
       danger: true,
       onClick: () => actionConfig?.onDelete?.(node.id),
@@ -364,14 +370,18 @@ function NavTreeNodeRow({ node, depth, sectionId }: NavTreeNodeRowProps) {
   };
 
   return (
-    <div className={styles.node} role="treeitem" aria-expanded={isFolder && open}>
+    <div
+      className={styles.node}
+      role="treeitem"
+      aria-expanded={isFolder && open}
+    >
       <div
-        className={`${styles.nodeRow} ${isActive ? styles.nodeRowActive : ''} ${depth > 0 ? styles.nodeNested : ''}`}
+        className={`${styles.nodeRow} ${isActive ? styles.nodeRowActive : ""} ${depth > 0 ? styles.nodeNested : ""}`}
         onClick={handleRowClick}
         style={nodePaddingStyle}
         tabIndex={0}
         onKeyDown={(e) => {
-          if (e.key === 'Enter' || e.key === ' ') {
+          if (e.key === "Enter" || e.key === " ") {
             e.preventDefault();
             handleRowClick();
           }
@@ -383,7 +393,7 @@ function NavTreeNodeRow({ node, depth, sectionId }: NavTreeNodeRowProps) {
               <span className={styles.slotIcon}>{node.icon}</span>
               {hasChildren && (
                 <div
-                  className={`${styles.slotChevron} ${open ? styles.slotChevronOpen : ''}`}
+                  className={`${styles.slotChevron} ${open ? styles.slotChevronOpen : ""}`}
                 >
                   <ChevronRight size={16} />
                 </div>
@@ -397,7 +407,7 @@ function NavTreeNodeRow({ node, depth, sectionId }: NavTreeNodeRowProps) {
         ) : isFolder ? (
           <ChevronRight
             size={12}
-            className={`${styles.nodeChevron} ${open ? styles.nodeChevronOpen : ''}`}
+            className={`${styles.nodeChevron} ${open ? styles.nodeChevronOpen : ""}`}
           />
         ) : (
           <div className={styles.nodeChevronHidden} />

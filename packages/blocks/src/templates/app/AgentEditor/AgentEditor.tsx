@@ -3,7 +3,7 @@ import type { AgentEditorProps, AgentEditorTab } from "./AgentEditor.types";
 import { NavTree } from "@orion-ds/react";
 import { UserMenu } from "@orion-ds/react";
 import { PageHeader } from "@orion-ds/react";
-import { CodeEditor } from '@orion-ds/react';
+import { CodeEditor } from "@orion-ds/react";
 import { Card } from "@orion-ds/react";
 import { ToggleGroup } from "@orion-ds/react";
 import { Chat } from "@orion-ds/react";
@@ -98,7 +98,8 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
       id: "memoria",
       label: "Memoria",
       language: "markdown",
-      placeholder: "# Memory\nStore and reference important user information...",
+      placeholder:
+        "# Memory\nStore and reference important user information...",
       value: "",
     },
     {
@@ -120,13 +121,15 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
   const activeTab = controlledActiveTab || localActiveTab;
 
   // Dirty tracking: edited values per tab
-  const [editedValues, setEditedValues] = useState<Record<string, string>>(() => {
-    const map: Record<string, string> = {};
-    tabs.forEach((t) => {
-      map[t.id] = t.value ?? "";
-    });
-    return map;
-  });
+  const [editedValues, setEditedValues] = useState<Record<string, string>>(
+    () => {
+      const map: Record<string, string> = {};
+      tabs.forEach((t) => {
+        map[t.id] = t.value ?? "";
+      });
+      return map;
+    },
+  );
 
   // Track which tabs have unsaved changes
   const [dirtyTabs, setDirtyTabs] = useState<Set<string>>(new Set());
@@ -204,7 +207,7 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
   };
 
   // Build workspace switcher header (same pattern as AgentWorkspace)
-  const sidebarHeader = (
+  const sidebarHeader =
     navbar?.workspaces && navbar.workspaces.length > 0 ? (
       <div className={styles.sidebarHeader}>
         <Popover
@@ -340,11 +343,9 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
           }
           placement="bottom-start"
           showArrow={false}
-
         />
       </div>
-    ) : null
-  );
+    ) : null;
 
   // Build sidebar footer (UserMenu)
   const sidebarFooter = (
@@ -423,7 +424,6 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
         align="start"
         placement="top"
         showHeader={true}
-
       />
     </div>
   );
@@ -469,7 +469,9 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
                       iconRight={<ChevronDown size={16} />}
                     >
                       {selectedModel
-                        ? modelOptions.find((opt) => opt.value === selectedModel)?.label || "Select model..."
+                        ? modelOptions.find(
+                            (opt) => opt.value === selectedModel,
+                          )?.label || "Select model..."
                         : "Select model..."}
                     </Button>
                   }
@@ -485,7 +487,9 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
                           role="option"
                           aria-selected={selectedModel === option.value}
                         >
-                          <span className={styles.modelItemLabel}>{option.label}</span>
+                          <span className={styles.modelItemLabel}>
+                            {option.label}
+                          </span>
                           {selectedModel === option.value && (
                             <span className={styles.modelItemCheck}>✓</span>
                           )}
@@ -597,32 +601,30 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
                 />
 
                 <Chat.Messages autoScroll>
-                  {messages.length === 0 && !isTyping ? (
-                    emptyPreviewState || (
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          justifyContent: "center",
-                          height: "100%",
-                          color: "var(--text-tertiary)",
-                        }}
-                      >
-                        No messages yet
-                      </div>
-                    )
-                  ) : (
-                    messages.map((message) => (
-                      <Chat.Message
-                        key={message.id}
-                        role={message.role}
-                        content={message.content}
-                        status={message.status}
-                        attachments={message.attachments}
-                        isStreaming={message.isStreaming}
-                      />
-                    ))
-                  )}
+                  {messages.length === 0 && !isTyping
+                    ? emptyPreviewState || (
+                        <div
+                          style={{
+                            display: "flex",
+                            alignItems: "center",
+                            justifyContent: "center",
+                            height: "100%",
+                            color: "var(--text-tertiary)",
+                          }}
+                        >
+                          No messages yet
+                        </div>
+                      )
+                    : messages.map((message) => (
+                        <Chat.Message
+                          key={message.id}
+                          role={message.role}
+                          content={message.content}
+                          status={message.status}
+                          attachments={message.attachments}
+                          isStreaming={message.isStreaming}
+                        />
+                      ))}
                   {isTyping && <Chat.TypingIndicator />}
                 </Chat.Messages>
 
@@ -630,8 +632,7 @@ export const AgentEditor: React.FC<AgentEditorProps> = ({
                   onSend={onSendMessage}
                   isLoading={isLoading}
                   placeholder={
-                    chatInputConfig?.placeholder ||
-                    "Type your message here..."
+                    chatInputConfig?.placeholder || "Type your message here..."
                   }
                   allowAttachments={chatInputConfig?.allowAttachments ?? true}
                   allowVoiceRecording={

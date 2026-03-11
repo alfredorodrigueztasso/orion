@@ -12,8 +12,10 @@ export interface CurrentWorkspaceOrg extends WorkspaceOrg {
   memberCount: number;
 }
 
-export interface WorkspaceSwitcherProps
-  extends Omit<HTMLAttributes<HTMLDivElement>, "children"> {
+export interface WorkspaceSwitcherProps extends Omit<
+  HTMLAttributes<HTMLDivElement>,
+  "children"
+> {
   /** The currently active organization */
   currentOrg: CurrentWorkspaceOrg;
   /** List of other organizations to switch to */
