@@ -12,12 +12,12 @@ describe("Badge", () => {
     const variants = [
       "primary",
       "secondary",
-      "neutral",
       "success",
       "error",
       "warning",
       "info",
       "brand",
+      "inverse",
     ] as const;
 
     variants.forEach((variant) => {
@@ -41,7 +41,9 @@ describe("Badge", () => {
 
   it("uses default variant when not specified", () => {
     const { container } = render(<Badge>Default</Badge>);
-    expect((container.firstChild as HTMLElement).className).toMatch(/neutral/);
+    expect((container.firstChild as HTMLElement).className).toMatch(
+      /secondary/,
+    );
   });
 
   it("uses default size when not specified", () => {

@@ -36,11 +36,12 @@ vi.mock("lucide-react", () => {
   const createMockIcon = (iconName: string) => {
     const MockIcon = React.forwardRef<
       HTMLSpanElement,
-      React.SVGProps<SVGSVGElement> & { "data-testid"?: string }
+      React.SVGProps<SVGSVGElement> & { "data-testid"?: string; size?: number }
     >((props, ref) => {
       const {
         "aria-label": ariaLabel,
         "aria-hidden": ariaHidden,
+        size,
         ...rest
       } = props;
 
@@ -55,6 +56,7 @@ vi.mock("lucide-react", () => {
         role,
         "aria-label": ariaLabel,
         "aria-hidden": ariaHidden,
+        size,
         ...rest,
       });
     });
@@ -63,7 +65,7 @@ vi.mock("lucide-react", () => {
     return MockIcon;
   };
 
-  // Export commonly used icons as mocks
+  // Export all commonly used and requested icons as mocks
   return {
     // Navigation & UI
     Menu: createMockIcon("Menu"),
@@ -75,6 +77,7 @@ vi.mock("lucide-react", () => {
     Home: createMockIcon("Home"),
     Settings: createMockIcon("Settings"),
     User: createMockIcon("User"),
+    Users: createMockIcon("Users"),
     Search: createMockIcon("Search"),
     Bell: createMockIcon("Bell"),
     Mail: createMockIcon("Mail"),
@@ -149,7 +152,11 @@ vi.mock("lucide-react", () => {
     ZoomIn: createMockIcon("ZoomIn"),
     ZoomOut: createMockIcon("ZoomOut"),
 
-    // Fallback for any other icons
+    // Additional icons used by components
+    Inbox: createMockIcon("Inbox"),
+    Building2: createMockIcon("Building2"),
+    LogOut: createMockIcon("LogOut"),
+
     __esModule: true,
   };
 });

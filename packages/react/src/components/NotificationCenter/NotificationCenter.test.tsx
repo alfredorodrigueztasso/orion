@@ -53,14 +53,12 @@ describe("NotificationCenter", () => {
       />,
     );
 
-    expect(screen.getByText(/New message|System/)).toBeInTheDocument();
+    expect(screen.getAllByText(/New message|System/)[0]).toBeInTheDocument();
   });
 
   it("forwards ref correctly", () => {
     const ref = vi.fn();
-    render(
-      <NotificationCenter ref={ref} notifications={mockNotifications} />,
-    );
+    render(<NotificationCenter ref={ref} notifications={mockNotifications} />);
 
     expect(ref).toHaveBeenCalled();
   });

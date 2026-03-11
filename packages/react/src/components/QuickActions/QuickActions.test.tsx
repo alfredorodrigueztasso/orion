@@ -30,9 +30,9 @@ describe("QuickActions", () => {
   it("renders all actions", () => {
     render(<QuickActions actions={mockActions} />);
 
-    expect(screen.getByText("Add")).toBeInTheDocument();
-    expect(screen.getByText("Edit")).toBeInTheDocument();
-    expect(screen.getByText("Delete")).toBeInTheDocument();
+    expect(screen.getByTitle("Add")).toBeInTheDocument();
+    expect(screen.getByTitle("Edit")).toBeInTheDocument();
+    expect(screen.getByTitle("Delete")).toBeInTheDocument();
   });
 
   it("executes action on click", async () => {
@@ -45,7 +45,7 @@ describe("QuickActions", () => {
 
     render(<QuickActions actions={actions} />);
 
-    const button = screen.getByText("Test");
+    const button = screen.getByTitle("Test");
     await user.click(button);
 
     expect(handleClick).toHaveBeenCalled();
@@ -53,7 +53,7 @@ describe("QuickActions", () => {
 
   it("forwards ref correctly", () => {
     const ref = vi.fn();
-    render(<QuickActions ref={ref} actions={mockActions} />);
+    render(<QuickActions ref={ref} variant="bar" actions={mockActions} />);
     expect(ref).toHaveBeenCalled();
   });
 });

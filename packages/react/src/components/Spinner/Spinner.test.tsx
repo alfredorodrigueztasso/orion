@@ -47,7 +47,7 @@ describe("Spinner", () => {
 
     rerender(<Spinner variant="secondary" />);
     spinner = screen.getByRole("status");
-    expect(spinner.className).toMatch(/neutral/);
+    expect(spinner.className).toMatch(/secondary/);
   });
 
   it("uses default variant when not specified", () => {
@@ -126,7 +126,7 @@ describe("Spinner", () => {
 
     expect(container).toHaveClass("custom");
     expect(spinner.className).toMatch(/xl/);
-    expect(spinner.className).toMatch(/neutral/);
+    expect(spinner.className).toMatch(/secondary/);
     expect(spinner).toHaveAttribute("aria-label", "Loading content...");
     expect(screen.getByText("Loading content...")).toBeInTheDocument();
   });
@@ -191,7 +191,7 @@ describe("Spinner", () => {
 
     it("renders neutral variant", () => {
       render(<Spinner variant="secondary" />);
-      expect(screen.getByRole("status").className).toMatch(/neutral/);
+      expect(screen.getByRole("status").className).toMatch(/secondary/);
     });
   });
 });

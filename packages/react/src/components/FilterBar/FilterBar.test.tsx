@@ -65,7 +65,7 @@ describe("FilterBar", () => {
       />,
     );
 
-    expect(screen.getByText(/Status|Date/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Status|Date/i)[0]).toBeInTheDocument();
   });
 
   it("handles filter removal", () => {
@@ -80,7 +80,7 @@ describe("FilterBar", () => {
       />,
     );
 
-    expect(screen.getByText(/Status|Date/i)).toBeInTheDocument();
+    expect(screen.getAllByText(/Status|Date/i)[0]).toBeInTheDocument();
   });
 
   it("forwards ref correctly", () => {

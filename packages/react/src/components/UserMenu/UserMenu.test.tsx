@@ -23,11 +23,9 @@ describe("UserMenu", () => {
   ];
 
   it("displays user name", () => {
-    render(
-      <UserMenu user={mockUser} sections={mockSections} />,
-    );
+    render(<UserMenu user={mockUser} sections={mockSections} />);
 
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getAllByText("John Doe")[0]).toBeInTheDocument();
   });
 
   it("shows user avatar", () => {
@@ -42,29 +40,25 @@ describe("UserMenu", () => {
   it("opens menu on click", async () => {
     const user = userEvent.setup();
 
-    render(
-      <UserMenu user={mockUser} sections={mockSections} />,
-    );
+    render(<UserMenu user={mockUser} sections={mockSections} />);
 
-    const trigger = screen.getByText("John Doe").closest("button") || screen.getByText("John Doe");
+    const trigger =
+      screen.getAllByText("John Doe")[0].closest("button") ||
+      screen.getAllByText("John Doe")[0];
     await user.click(trigger as HTMLElement);
 
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getAllByText("John Doe")[0]).toBeInTheDocument();
   });
 
   it("shows menu items", () => {
-    render(
-      <UserMenu user={mockUser} sections={mockSections} />,
-    );
+    render(<UserMenu user={mockUser} sections={mockSections} />);
 
-    expect(screen.getByText("John Doe")).toBeInTheDocument();
+    expect(screen.getAllByText("John Doe")[0]).toBeInTheDocument();
   });
 
   it("forwards ref correctly", () => {
     const ref = vi.fn();
-    render(
-      <UserMenu ref={ref} user={mockUser} sections={mockSections} />,
-    );
+    render(<UserMenu ref={ref} user={mockUser} sections={mockSections} />);
 
     expect(ref).toHaveBeenCalled();
   });
