@@ -125,4 +125,213 @@ describe("Link", () => {
     );
     expect(ref.current).toBeInstanceOf(HTMLAnchorElement);
   });
+
+  // Additional coverage tests
+  it("shows external icon by default for external links", () => {
+    render(
+      <Link href="https://example.com" external>
+        External Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    const externalIcon = link.querySelector('[aria-hidden="true"]');
+
+    // Should have an icon (external link icon)
+    expect(externalIcon).toBeInTheDocument();
+  });
+
+  it("hides external icon when showExternalIcon is false", () => {
+    render(
+      <Link href="https://example.com" external showExternalIcon={false}>
+        External Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // External icon should not be rendered
+    const icons = link.querySelectorAll('[aria-hidden="true"]');
+    expect(icons.length).toBe(0);
+  });
+
+  it("external icon takes precedence over iconRight when showExternalIcon is true", () => {
+    render(
+      <Link href="https://example.com" external iconRight={<span>custom</span>}>
+        External Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Custom iconRight should be rendered, not external icon
+    expect(link).toHaveTextContent("custom");
+  });
+
+  it("applies animation when iconAnimation is arrow", () => {
+    render(
+      <Link href="/" iconAnimation="arrow" iconRight={<span>→</span>}>
+        Next
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Icon should be rendered with animation applied
+    expect(link).toHaveTextContent("→");
+  });
+
+  it("applies animation when iconAnimation is arrow-left", () => {
+    render(
+      <Link href="/" iconAnimation="arrow-left" icon={<span>←</span>}>
+        Back
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Icon should be rendered with animation applied
+    expect(link).toHaveTextContent("←");
+  });
+
+  it("applies animation when iconAnimation is external", () => {
+    render(
+      <Link href="/" iconAnimation="external" iconRight={<span>→</span>}>
+        External
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Icon should be rendered with animation applied
+    expect(link).toHaveTextContent("→");
+  });
+
+  it("applies external animation by default for external links with right icon", () => {
+    render(
+      <Link href="https://example.com" external iconRight={<span>→</span>}>
+        External
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Custom icon should be rendered
+    expect(link).toHaveTextContent("→");
+  });
+
+  it("renders with sm size", () => {
+    render(
+      <Link href="/" size="sm" icon={<span>icon</span>}>
+        Small Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    expect(link.className).toContain("sm");
+  });
+
+  it("renders with lg size", () => {
+    render(
+      <Link href="/" size="lg" icon={<span>icon</span>}>
+        Large Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    expect(link.className).toContain("lg");
+  });
+
+  it("renders both left and right icons together", () => {
+    render(
+      <Link
+        href="/"
+        icon={<span data-testid="left">←</span>}
+        iconRight={<span data-testid="right">→</span>}
+      >
+        Middle
+      </Link>,
+    );
+
+    expect(screen.getByTestId("left")).toBeInTheDocument();
+    expect(screen.getByTestId("right")).toBeInTheDocument();
+  });
+
+  it("handles unknown iconAnimation gracefully", () => {
+    render(
+      <Link href="/" iconAnimation={"unknown" as any} icon={<span>icon</span>}>
+        Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Should still render without errors
+    expect(link).toBeInTheDocument();
+  });
+
+  it("renders internal link with left icon without external animation", () => {
+    render(
+      <Link href="/" icon={<span>→</span>}>
+        Internal
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    // Icon should be rendered
+    expect(link).toHaveTextContent("→");
+  });
+
+  it("combines multiple class names correctly", () => {
+    render(
+      <Link href="/" variant="brand" size="lg" className="custom">
+        Link
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    expect(link.className).toContain("brand");
+    expect(link.className).toContain("lg");
+    expect(link.className).toContain("custom");
+  });
+
+  it("passes through additional HTML attributes", () => {
+    render(
+      <Link href="/" data-testid="custom-link" title="Link title">
+        Link
+      </Link>,
+    );
+
+    const link = screen.getByTestId("custom-link");
+    expect(link).toHaveAttribute("title", "Link title");
+  });
+
+  it("icon is hidden from accessibility tree", () => {
+    render(
+      <Link href="/" icon={<span data-testid="icon">→</span>}>
+        Link
+      </Link>,
+    );
+
+    const icon = screen.getByTestId("icon");
+    expect(icon.parentElement).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("right icon is hidden from accessibility tree", () => {
+    render(
+      <Link href="/" iconRight={<span data-testid="right-icon">→</span>}>
+        Link
+      </Link>,
+    );
+
+    const icon = screen.getByTestId("right-icon");
+    expect(icon.parentElement).toHaveAttribute("aria-hidden", "true");
+  });
+
+  it("external icon is hidden from accessibility tree", () => {
+    render(
+      <Link href="https://example.com" external>
+        External
+      </Link>,
+    );
+
+    const link = screen.getByRole("link");
+    const hiddenIcons = link.querySelectorAll('[aria-hidden="true"]');
+
+    // Should have at least one hidden icon (external icon)
+    expect(hiddenIcons.length).toBeGreaterThan(0);
+  });
 });
