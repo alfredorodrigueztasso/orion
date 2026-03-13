@@ -275,4 +275,99 @@ describe("Toast", () => {
     const toast = screen.getByRole("alert");
     expect(toast).toHaveAttribute("aria-live", "polite");
   });
+
+  it("calls action.onClick when action button clicked", async () => {
+    const user = userEvent.setup();
+    const actionClick = vi.fn();
+
+    const ActionToastTest = () => {
+      const { toast } = useToast();
+      return (
+        <button
+          onClick={() =>
+            toast({
+              message: "Action test",
+              action: { label: "Do it", onClick: actionClick },
+            })
+          }
+        >
+          Show Action Toast
+        </button>
+      );
+    };
+
+    render(
+      <ToastProvider>
+        <ActionToastTest />
+      </ToastProvider>,
+    );
+
+    await user.click(screen.getByText("Show Action Toast"));
+
+    await waitFor(() => {
+      expect(screen.getByText("Action test")).toBeInTheDocument();
+    });
+
+    const actionButton = screen.getByText("Do it");
+    await user.click(actionButton);
+
+    expect(actionClick).toHaveBeenCalled();
+  });
+
+  it("renders toast without dismissible button", async () => {
+    const user = userEvent.setup();
+
+    const NonDismissibleToast = () => {
+      const { toast } = useToast();
+      return (
+        <button
+          onClick={() => toast({ message: "No dismiss", dismissible: false })}
+        >
+          Show
+        </button>
+      );
+    };
+
+    render(
+      <ToastProvider>
+        <NonDismissibleToast />
+      </ToastProvider>,
+    );
+
+    await user.click(screen.getByText("Show"));
+
+    await waitFor(() => {
+      expect(screen.getByText("No dismiss")).toBeInTheDocument();
+    });
+
+    // Should not have dismiss button
+    const dismissButtons = screen.queryAllByLabelText("Dismiss");
+    expect(dismissButtons.length).toBe(0);
+  });
+
+  it("renders different toast variants correctly", async () => {
+    const user = userEvent.setup();
+
+    render(
+      <ToastProvider>
+        <ToastTester />
+      </ToastProvider>,
+    );
+
+    // Show info variant
+    await user.click(screen.getByText("Show Info"));
+    await waitFor(() => {
+      expect(screen.getByText("Info message")).toBeInTheDocument();
+    });
+
+    // Show warning variant
+    await user.click(screen.getByText("Show Warning"));
+    await waitFor(() => {
+      expect(screen.getByText("Warning message")).toBeInTheDocument();
+    });
+
+    // Both should exist
+    expect(screen.getByText("Info message")).toBeInTheDocument();
+    expect(screen.getByText("Warning message")).toBeInTheDocument();
+  });
 });

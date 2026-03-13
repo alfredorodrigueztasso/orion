@@ -275,4 +275,88 @@ describe("QuickActions", () => {
     const trigger = screen.getByLabelText("Open actions");
     expect(trigger).toBeInTheDocument();
   });
+
+  it("executes primary action immediately on FAB click", async () => {
+    const user = userEvent.setup();
+    const primaryActionClick = vi.fn();
+
+    const primaryAction = {
+      id: "primary",
+      label: "Primary",
+      icon: <Plus size={24} />,
+      onClick: primaryActionClick,
+    };
+
+    render(
+      <QuickActions actions={mockActions} primaryAction={primaryAction} />,
+    );
+
+    const trigger = screen.getByLabelText("Open actions");
+    await user.click(trigger);
+
+    expect(primaryActionClick).toHaveBeenCalled();
+  });
+
+  it("renders menu variant", async () => {
+    const user = userEvent.setup();
+    const handleClick = vi.fn();
+
+    const actions = [
+      {
+        id: "action1",
+        label: "Action 1",
+        icon: <Plus size={20} />,
+        onClick: handleClick,
+      },
+    ];
+
+    render(<QuickActions variant="menu" actions={actions} />);
+
+    // Click trigger to open menu
+    const trigger = screen.getByLabelText("Open menu");
+    await user.click(trigger);
+
+    // Menu items should be visible
+    expect(screen.getByText("Action 1")).toBeInTheDocument();
+
+    // Click action
+    const actionButton = screen.getByText("Action 1");
+    await user.click(actionButton);
+
+    expect(handleClick).toHaveBeenCalled();
+  });
+
+  it("closes menu variant when trigger clicked again", async () => {
+    const user = userEvent.setup();
+
+    const actions = [
+      {
+        id: "test",
+        label: "Test",
+        icon: <Plus size={20} />,
+        onClick: vi.fn(),
+      },
+    ];
+
+    render(<QuickActions variant="menu" actions={actions} />);
+
+    const trigger = screen.getByLabelText("Open menu");
+
+    // Open menu
+    await user.click(trigger);
+    expect(screen.getByText("Test")).toBeInTheDocument();
+
+    // Close menu
+    await user.click(trigger);
+    expect(screen.queryByText("Test")).not.toBeInTheDocument();
+  });
+
+  it("renders bar variant with all actions visible", () => {
+    render(<QuickActions variant="bar" actions={mockActions} />);
+
+    // All actions should be visible in bar variant
+    expect(screen.getByTitle("Add")).toBeInTheDocument();
+    expect(screen.getByTitle("Edit")).toBeInTheDocument();
+    expect(screen.getByTitle("Delete")).toBeInTheDocument();
+  });
 });
