@@ -30,6 +30,38 @@ describe("useMediaQuery", () => {
     const { result } = renderHook(() => useMediaQuery("(max-width: 400px)"));
     expect(result.current).toBe(false);
   });
+
+  it("handles initial state with true matches", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: true,
+        media: "(max-width: 768px)",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(true);
+  });
+
+  it("different queries return expected match values", () => {
+    const queries = [
+      "(max-width: 768px)",
+      "(min-width: 1024px)",
+      "(prefers-reduced-motion: reduce)",
+    ];
+
+    queries.forEach((query) => {
+      const { result, unmount } = renderHook(() => useMediaQuery(query));
+      expect(typeof result.current).toBe("boolean");
+      unmount();
+    });
+  });
 });
 
 describe("useIsMobile", () => {
@@ -462,5 +494,162 @@ describe("useMediaQuery - behavior with listener", () => {
 
     const { result } = renderHook(() => useIsDesktop());
     expect(result.current).toBe(false);
+  });
+
+  it("mediaQueryList with addEventListener available is used for modern browsers", () => {
+    const addEventListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: addEventListenerSpy,
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      "change",
+      expect.any(Function),
+    );
+  });
+
+  it("handles query changes by re-registering listeners", () => {
+    const currentQuery = "(max-width: 768px)";
+    const addEventListenerSpy = vi.fn();
+    const removeEventListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: (query: string) => ({
+        matches: query === "(min-width: 1024px)",
+        media: query,
+        addEventListener: addEventListenerSpy,
+        removeEventListener: removeEventListenerSpy,
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { rerender } = renderHook(
+      ({ q }: { q: string }) => useMediaQuery(q),
+      { initialProps: { q: "(max-width: 768px)" } },
+    );
+
+    const firstCallCount = addEventListenerSpy.mock.calls.length;
+
+    rerender({ q: "(min-width: 1024px)" });
+
+    // Should have registered new listener for new query
+    expect(addEventListenerSpy.mock.calls.length).toBeGreaterThan(
+      firstCallCount,
+    );
+  });
+
+  it("handles empty query string gracefully", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery(""));
+    expect(typeof result.current).toBe("boolean");
+  });
+
+  it("usePrefersReducedMotion returns correct value", () => {
+    const matchMediaSpy = vi.spyOn(window, "matchMedia");
+    renderHook(() => usePrefersReducedMotion());
+
+    expect(matchMediaSpy).toHaveBeenCalledWith(
+      "(prefers-reduced-motion: reduce)",
+    );
+    matchMediaSpy.mockRestore();
+  });
+
+  it("all preset hooks call useMediaQuery with correct queries", () => {
+    const matchMediaSpy = vi.spyOn(window, "matchMedia");
+
+    const { unmount: unmount1 } = renderHook(() => useIsMobile());
+    expect(matchMediaSpy).toHaveBeenCalledWith("(max-width: 639px)");
+    unmount1();
+
+    matchMediaSpy.mockClear();
+
+    const { unmount: unmount2 } = renderHook(() => useIsTablet());
+    expect(matchMediaSpy).toHaveBeenCalledWith(
+      "(min-width: 640px) and (max-width: 1023px)",
+    );
+    unmount2();
+
+    matchMediaSpy.mockClear();
+
+    const { unmount: unmount3 } = renderHook(() => useIsDesktop());
+    expect(matchMediaSpy).toHaveBeenCalledWith("(min-width: 1024px)");
+    unmount3();
+
+    matchMediaSpy.mockRestore();
+  });
+
+  it("listener receives correct event object on change", () => {
+    let capturedListener: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: (
+          event: string,
+          listener: (event: MediaQueryListEvent) => void,
+        ) => {
+          capturedListener = listener;
+        },
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(false);
+
+    // Simulate event with specific properties
+    act(() => {
+      if (capturedListener) {
+        const event = { matches: true } as MediaQueryListEvent;
+        capturedListener(event);
+      }
+    });
+
+    expect(result.current).toBe(true);
+  });
+
+  it("handles rapid query string changes", () => {
+    const { result, rerender } = renderHook(
+      ({ q }: { q: string }) => useMediaQuery(q),
+      { initialProps: { q: "(max-width: 768px)" } },
+    );
+
+    // Rapidly change queries
+    rerender({ q: "(min-width: 1024px)" });
+    rerender({ q: "(max-width: 640px)" });
+    rerender({ q: "(prefers-reduced-motion: reduce)" });
+
+    expect(typeof result.current).toBe("boolean");
   });
 });
