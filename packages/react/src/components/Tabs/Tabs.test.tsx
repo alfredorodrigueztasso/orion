@@ -380,4 +380,252 @@ describe("Tabs", () => {
       expect(screen.getByText("Content B1")).toBeInTheDocument();
     });
   });
+
+  describe("Keyboard Navigation", () => {
+    it("navigates right with ArrowRight key", async () => {
+      const user = userEvent.setup();
+      render(<Tabs tabs={mockTabs} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const settingsTab = screen.getByRole("tab", { name: "Settings" });
+
+      // Focus profile tab
+      profileTab.focus();
+      expect(document.activeElement).toBe(profileTab);
+
+      // Press ArrowRight
+      await user.keyboard("{ArrowRight}");
+
+      // Settings tab should be focused
+      expect(document.activeElement).toBe(settingsTab);
+    });
+
+    it("navigates left with ArrowLeft key", async () => {
+      const user = userEvent.setup();
+      render(<Tabs tabs={mockTabs} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const settingsTab = screen.getByRole("tab", { name: "Settings" });
+      const billingTab = screen.getByRole("tab", { name: "Billing" });
+
+      // Focus billing tab
+      billingTab.focus();
+      expect(document.activeElement).toBe(billingTab);
+
+      // Press ArrowLeft
+      await user.keyboard("{ArrowLeft}");
+
+      // Settings tab should be focused
+      expect(document.activeElement).toBe(settingsTab);
+
+      // Press ArrowLeft again
+      await user.keyboard("{ArrowLeft}");
+
+      // Profile tab should be focused
+      expect(document.activeElement).toBe(profileTab);
+    });
+
+    it("wraps around with ArrowRight on last tab", async () => {
+      const user = userEvent.setup();
+      render(<Tabs tabs={mockTabs} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const billingTab = screen.getByRole("tab", { name: "Billing" });
+
+      // Focus billing tab (last)
+      billingTab.focus();
+
+      // Press ArrowRight
+      await user.keyboard("{ArrowRight}");
+
+      // Should wrap to profile tab
+      expect(document.activeElement).toBe(profileTab);
+    });
+
+    it("wraps around with ArrowLeft on first tab", async () => {
+      const user = userEvent.setup();
+      render(<Tabs tabs={mockTabs} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const billingTab = screen.getByRole("tab", { name: "Billing" });
+
+      // Focus profile tab (first)
+      profileTab.focus();
+
+      // Press ArrowLeft
+      await user.keyboard("{ArrowLeft}");
+
+      // Should wrap to billing tab
+      expect(document.activeElement).toBe(billingTab);
+    });
+
+    it("jumps to first tab with Home key", async () => {
+      const user = userEvent.setup();
+      render(<Tabs tabs={mockTabs} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const billingTab = screen.getByRole("tab", { name: "Billing" });
+
+      // Focus billing tab
+      billingTab.focus();
+
+      // Press Home
+      await user.keyboard("{Home}");
+
+      // Should focus first tab
+      expect(document.activeElement).toBe(profileTab);
+    });
+
+    it("jumps to last tab with End key", async () => {
+      const user = userEvent.setup();
+      render(<Tabs tabs={mockTabs} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const billingTab = screen.getByRole("tab", { name: "Billing" });
+
+      // Focus profile tab
+      profileTab.focus();
+
+      // Press End
+      await user.keyboard("{End}");
+
+      // Should focus last tab
+      expect(document.activeElement).toBe(billingTab);
+    });
+
+    it("skips disabled tabs during navigation", async () => {
+      const user = userEvent.setup();
+      const tabsWithDisabled: TabItem[] = [
+        { id: "tab1", label: "Tab 1", content: <div>Content 1</div> },
+        {
+          id: "tab2",
+          label: "Tab 2",
+          content: <div>Content 2</div>,
+          disabled: true,
+        },
+        { id: "tab3", label: "Tab 3", content: <div>Content 3</div> },
+      ];
+
+      render(<Tabs tabs={tabsWithDisabled} />);
+
+      const tab1 = screen.getByRole("tab", { name: "Tab 1" });
+      const tab3 = screen.getByRole("tab", { name: "Tab 3" });
+
+      // Focus tab 1
+      tab1.focus();
+
+      // Press ArrowRight - should skip disabled tab 2 and focus tab 3
+      await user.keyboard("{ArrowRight}");
+      expect(document.activeElement).toBe(tab3);
+    });
+
+    it("does not change active tab on keyboard navigation (only focus)", async () => {
+      const user = userEvent.setup();
+      const handleChange = vi.fn();
+      render(<Tabs tabs={mockTabs} onChange={handleChange} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+
+      // Focus profile tab
+      profileTab.focus();
+
+      // Press ArrowRight
+      await user.keyboard("{ArrowRight}");
+
+      // onChange should NOT be called for navigation
+      expect(handleChange).not.toHaveBeenCalled();
+
+      // Content should still show profile (first tab)
+      expect(screen.getByText("Profile Content")).toBeInTheDocument();
+    });
+
+    it("selects tab when using arrow keys and then Enter", async () => {
+      const user = userEvent.setup();
+      const handleChange = vi.fn();
+      render(<Tabs tabs={mockTabs} onChange={handleChange} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const settingsTab = screen.getByRole("tab", { name: "Settings" });
+
+      // Focus profile tab
+      profileTab.focus();
+
+      // Press ArrowRight to move focus
+      await user.keyboard("{ArrowRight}");
+      expect(document.activeElement).toBe(settingsTab);
+
+      // Click focused tab to select it
+      await user.click(settingsTab);
+
+      // Now onChange should be called
+      expect(handleChange).toHaveBeenCalledWith("settings");
+      expect(screen.getByText("Settings Content")).toBeInTheDocument();
+    });
+  });
+
+  describe("noPanelPadding prop", () => {
+    it("applies noPanelPadding class when prop is true", () => {
+      const { container } = render(<Tabs tabs={mockTabs} noPanelPadding />);
+      const classes = (container.firstChild as HTMLElement).className;
+      expect(classes).toMatch(/noPanelPadding/);
+    });
+
+    it("does not apply noPanelPadding class when prop is false", () => {
+      const { container } = render(
+        <Tabs tabs={mockTabs} noPanelPadding={false} />,
+      );
+      const classes = (container.firstChild as HTMLElement).className;
+      expect(classes).not.toMatch(/noPanelPadding/);
+    });
+  });
+
+  describe("Edge cases", () => {
+    it("handles tab with null/undefined content gracefully", () => {
+      const tabsWithNull: TabItem[] = [
+        {
+          id: "empty",
+          label: "Empty",
+          content: <></>,
+        },
+      ];
+
+      render(<Tabs tabs={tabsWithNull} />);
+      expect(screen.getByRole("tab", { name: "Empty" })).toBeInTheDocument();
+    });
+
+    it("handles very long tab labels", () => {
+      const longLabelTabs: TabItem[] = [
+        {
+          id: "long",
+          label:
+            "This is a very long tab label that might wrap to multiple lines",
+          content: <div>Content</div>,
+        },
+      ];
+
+      render(<Tabs tabs={longLabelTabs} />);
+      const tab = screen.getByRole("tab", {
+        name: /This is a very long tab label/,
+      });
+      expect(tab).toBeInTheDocument();
+    });
+
+    it("handles rapid tab switches", async () => {
+      const user = userEvent.setup();
+      const handleChange = vi.fn();
+      render(<Tabs tabs={mockTabs} onChange={handleChange} />);
+
+      const profileTab = screen.getByRole("tab", { name: "Profile" });
+      const settingsTab = screen.getByRole("tab", { name: "Settings" });
+      const billingTab = screen.getByRole("tab", { name: "Billing" });
+
+      // Rapidly switch tabs
+      await user.click(settingsTab);
+      await user.click(billingTab);
+      await user.click(profileTab);
+
+      expect(handleChange).toHaveBeenCalledTimes(3);
+      expect(screen.getByText("Profile Content")).toBeInTheDocument();
+    });
+  });
 });

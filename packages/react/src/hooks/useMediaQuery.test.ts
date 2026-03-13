@@ -65,6 +65,24 @@ describe("usePrefersReducedMotion", () => {
     const { result } = renderHook(() => usePrefersReducedMotion());
     expect(typeof result.current).toBe("boolean");
   });
+
+  it("returns true when user prefers reduced motion", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: (query: string) => ({
+        matches: query === "(prefers-reduced-motion: reduce)",
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => usePrefersReducedMotion());
+    expect(result.current).toBe(true);
+  });
 });
 
 describe("useMediaQuery - behavior with listener", () => {
@@ -192,5 +210,257 @@ describe("useMediaQuery - behavior with listener", () => {
     unmount();
 
     expect(removeListenerSpy).toHaveBeenCalled();
+  });
+
+  it("uses addListener fallback when addEventListener is not available", () => {
+    const addListenerSpy = vi.fn();
+    const removeListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        // No addEventListener - simulate older browsers
+        addListener: addListenerSpy,
+        removeListener: removeListenerSpy,
+      }),
+    });
+
+    const { unmount } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(addListenerSpy).toHaveBeenCalled();
+
+    unmount();
+    expect(removeListenerSpy).toHaveBeenCalled();
+  });
+
+  it("handles query change with addListener fallback", () => {
+    let changeHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addListener: (handler: (event: MediaQueryListEvent) => void) => {
+          changeHandler = handler;
+        },
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(false);
+
+    // Trigger change via addListener callback
+    act(() => {
+      if (changeHandler) {
+        changeHandler({ matches: true } as MediaQueryListEvent);
+      }
+    });
+
+    expect(result.current).toBe(true);
+  });
+
+  it("updates state when query changes", () => {
+    let changeHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: (
+          event: string,
+          handler: (event: MediaQueryListEvent) => void,
+        ) => {
+          if (event === "change") {
+            changeHandler = handler;
+          }
+        },
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(false);
+
+    act(() => {
+      if (changeHandler) {
+        changeHandler({ matches: true } as MediaQueryListEvent);
+      }
+    });
+
+    expect(result.current).toBe(true);
+  });
+
+  it("sets initial value from matchMedia on mount", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: true,
+        media: "(max-width: 768px)",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(true);
+  });
+
+  it("usePrefersDarkMode uses correct query", () => {
+    const matchMediaSpy = vi.spyOn(window, "matchMedia");
+    renderHook(() => usePrefersDarkMode());
+
+    expect(matchMediaSpy).toHaveBeenCalledWith("(prefers-color-scheme: dark)");
+    matchMediaSpy.mockRestore();
+  });
+
+  it("returns true for dark mode preference", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: (query: string) => ({
+        matches: query === "(prefers-color-scheme: dark)",
+        media: query,
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => usePrefersDarkMode());
+    expect(result.current).toBe(true);
+  });
+
+  it("updates when query dependency changes", () => {
+    let changeHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: (
+          event: string,
+          handler: (event: MediaQueryListEvent) => void,
+        ) => {
+          if (event === "change") {
+            changeHandler = handler;
+          }
+        },
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result, rerender } = renderHook(
+      ({ query }: { query: string }) => useMediaQuery(query),
+      { initialProps: { query: "(max-width: 768px)" } },
+    );
+
+    expect(result.current).toBe(false);
+
+    // Change the query
+    rerender({ query: "(min-width: 1024px)" });
+
+    // The hook should now use the new query
+    expect(result.current).toBe(false);
+  });
+
+  it("handles multiple consecutive media query changes", () => {
+    let changeHandler: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: (
+          event: string,
+          handler: (event: MediaQueryListEvent) => void,
+        ) => {
+          if (event === "change") {
+            changeHandler = handler;
+          }
+        },
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(false);
+
+    act(() => {
+      if (changeHandler) {
+        changeHandler({ matches: true } as MediaQueryListEvent);
+      }
+    });
+    expect(result.current).toBe(true);
+
+    act(() => {
+      if (changeHandler) {
+        changeHandler({ matches: false } as MediaQueryListEvent);
+      }
+    });
+    expect(result.current).toBe(false);
+
+    act(() => {
+      if (changeHandler) {
+        changeHandler({ matches: true } as MediaQueryListEvent);
+      }
+    });
+    expect(result.current).toBe(true);
+  });
+
+  it("useIsTablet returns false for non-tablet sizes", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(min-width: 640px) and (max-width: 1023px)",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useIsTablet());
+    expect(result.current).toBe(false);
+  });
+
+  it("useIsDesktop returns false for non-desktop sizes", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(min-width: 1024px)",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+        addListener: vi.fn(),
+        removeListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useIsDesktop());
+    expect(result.current).toBe(false);
   });
 });

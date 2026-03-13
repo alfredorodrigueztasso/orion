@@ -26,7 +26,7 @@ describe("useClickOutside", () => {
   it("respects enabled option", () => {
     const handler = vi.fn();
     const { result, rerender } = renderHook(
-      ({ enabled }) => useClickOutside(ref, handler, { enabled }),
+      ({ enabled }) => useClickOutside(ref, handler, enabled),
       { initialProps: { enabled: false } },
     );
 
@@ -123,6 +123,105 @@ describe("useClickOutside", () => {
 
     document.body.removeChild(div);
   });
+
+  it("handler receives the event object", () => {
+    const handler = vi.fn();
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+    const testRef = { current: div };
+
+    renderHook(() => useClickOutside(testRef, handler));
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalled();
+    expect(handler.mock.calls[0][0]).toBeDefined();
+    expect(handler.mock.calls[0][0].type).toBe("mousedown");
+
+    document.body.removeChild(div);
+  });
+
+  it("handles nested elements correctly", () => {
+    const handler = vi.fn();
+    const parent = document.createElement("div");
+    const child = document.createElement("div");
+    parent.appendChild(child);
+    document.body.appendChild(parent);
+    const testRef = { current: parent };
+
+    renderHook(() => useClickOutside(testRef, handler));
+
+    fireEvent.mouseDown(child);
+    expect(handler).not.toHaveBeenCalled();
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(parent);
+  });
+
+  it("re-registers listeners when handler changes", () => {
+    const handler1 = vi.fn();
+    const handler2 = vi.fn();
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+    const testRef = { current: div };
+
+    const { rerender } = renderHook(
+      ({ handler }) => useClickOutside(testRef, handler),
+      { initialProps: { handler: handler1 } },
+    );
+
+    fireEvent.mouseDown(document.body);
+    expect(handler1).toHaveBeenCalledTimes(1);
+
+    rerender({ handler: handler2 });
+    fireEvent.mouseDown(document.body);
+    expect(handler2).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(div);
+  });
+
+  it("disables listener when enabled changes from true to false", () => {
+    const handler = vi.fn();
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+    const testRef = { current: div };
+
+    const { rerender } = renderHook(
+      ({ enabled }) => useClickOutside(testRef, handler, enabled),
+      { initialProps: { enabled: true } },
+    );
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    rerender({ enabled: false });
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(div);
+  });
+
+  it("re-enables listener when enabled changes from false to true", () => {
+    const handler = vi.fn();
+    const div = document.createElement("div");
+    document.body.appendChild(div);
+    const testRef = { current: div };
+
+    const { rerender } = renderHook(
+      ({ enabled }) => useClickOutside(testRef, handler, enabled),
+      { initialProps: { enabled: false } },
+    );
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).not.toHaveBeenCalled();
+
+    rerender({ enabled: true });
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(div);
+  });
 });
 
 describe("useClickOutsideMultiple", () => {
@@ -197,6 +296,131 @@ describe("useClickOutsideMultiple", () => {
     fireEvent.mouseDown(div2);
     expect(handler).not.toHaveBeenCalled();
 
+    document.body.removeChild(div1);
+    document.body.removeChild(div2);
+  });
+
+  it("calls handler on touchstart event outside refs", () => {
+    const handler = vi.fn();
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    document.body.appendChild(div1);
+    document.body.appendChild(div2);
+    const testRefs = [{ current: div1 }, { current: div2 }];
+
+    renderHook(() => useClickOutsideMultiple(testRefs, handler));
+
+    fireEvent.touchStart(document.body);
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(div1);
+    document.body.removeChild(div2);
+  });
+
+  it("does not call handler when enabled is false", () => {
+    const handler = vi.fn();
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    document.body.appendChild(div1);
+    document.body.appendChild(div2);
+    const testRefs = [{ current: div1 }, { current: div2 }];
+
+    renderHook(() => useClickOutsideMultiple(testRefs, handler, false));
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).not.toHaveBeenCalled();
+
+    document.body.removeChild(div1);
+    document.body.removeChild(div2);
+  });
+
+  it("handler receives the event object", () => {
+    const handler = vi.fn();
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    document.body.appendChild(div1);
+    document.body.appendChild(div2);
+    const testRefs = [{ current: div1 }, { current: div2 }];
+
+    renderHook(() => useClickOutsideMultiple(testRefs, handler));
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalled();
+    expect(handler.mock.calls[0][0]).toBeDefined();
+    expect(handler.mock.calls[0][0].type).toBe("mousedown");
+
+    document.body.removeChild(div1);
+    document.body.removeChild(div2);
+  });
+
+  it("handles nested elements inside refs correctly", () => {
+    const handler = vi.fn();
+    const parent1 = document.createElement("div");
+    const child1 = document.createElement("div");
+    const parent2 = document.createElement("div");
+    const child2 = document.createElement("div");
+    parent1.appendChild(child1);
+    parent2.appendChild(child2);
+    document.body.appendChild(parent1);
+    document.body.appendChild(parent2);
+    const testRefs = [{ current: parent1 }, { current: parent2 }];
+
+    renderHook(() => useClickOutsideMultiple(testRefs, handler));
+
+    fireEvent.mouseDown(child1);
+    expect(handler).not.toHaveBeenCalled();
+
+    fireEvent.mouseDown(child2);
+    expect(handler).not.toHaveBeenCalled();
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(parent1);
+    document.body.removeChild(parent2);
+  });
+
+  it("respects enabled option", () => {
+    const handler = vi.fn();
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    document.body.appendChild(div1);
+    document.body.appendChild(div2);
+    const testRefs = [{ current: div1 }, { current: div2 }];
+
+    const { rerender } = renderHook(
+      ({ enabled }) => useClickOutsideMultiple(testRefs, handler, enabled),
+      { initialProps: { enabled: true } },
+    );
+
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    rerender({ enabled: false });
+    fireEvent.mouseDown(document.body);
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    document.body.removeChild(div1);
+    document.body.removeChild(div2);
+  });
+
+  it("cleans up listeners on unmount", () => {
+    const handler = vi.fn();
+    const div1 = document.createElement("div");
+    const div2 = document.createElement("div");
+    document.body.appendChild(div1);
+    document.body.appendChild(div2);
+    const testRefs = [{ current: div1 }, { current: div2 }];
+
+    const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
+    const { unmount } = renderHook(() =>
+      useClickOutsideMultiple(testRefs, handler),
+    );
+
+    unmount();
+    expect(removeEventListenerSpy).toHaveBeenCalled();
+
+    removeEventListenerSpy.mockRestore();
     document.body.removeChild(div1);
     document.body.removeChild(div2);
   });
