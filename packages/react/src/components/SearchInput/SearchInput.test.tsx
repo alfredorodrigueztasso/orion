@@ -101,6 +101,9 @@ describe("SearchInput", () => {
 
     rerender(<SearchInput size="lg" data-testid="input" />);
     expect(screen.getByTestId("input").parentElement!.className).toMatch(/lg/);
+
+    rerender(<SearchInput size="xl" data-testid="input" />);
+    expect(screen.getByTestId("input").parentElement!.className).toMatch(/xl/);
   });
 
   it("renders full width", () => {
