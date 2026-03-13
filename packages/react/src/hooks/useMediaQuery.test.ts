@@ -652,4 +652,323 @@ describe("useMediaQuery - behavior with listener", () => {
 
     expect(typeof result.current).toBe("boolean");
   });
+
+  // ============================================================================
+  // TARGETED BRANCH COVERAGE TESTS (To reach 75% branches threshold)
+  // ============================================================================
+
+  it("tests addEventListener branch when listener is properly registered", () => {
+    const removeEventListenerSpy = vi.fn();
+    const addEventListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: addEventListenerSpy,
+        removeEventListener: removeEventListenerSpy,
+        // No addListener - force addEventListener path
+      }),
+    });
+
+    const { unmount } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // addEventListener should be called with "change" event
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      "change",
+      expect.any(Function),
+    );
+
+    unmount();
+
+    // removeEventListener should be called on cleanup
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      "change",
+      expect.any(Function),
+    );
+  });
+
+  it("forces addListener fallback when addEventListener does not exist", () => {
+    const addListenerSpy = vi.fn();
+    const removeListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addListener: addListenerSpy,
+        removeListener: removeListenerSpy,
+        // Explicitly no addEventListener to trigger fallback
+        addEventListener: undefined,
+      }),
+    });
+
+    const { unmount } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // Since addEventListener is undefined, addListener should be called
+    expect(addListenerSpy).toHaveBeenCalled();
+
+    unmount();
+
+    // removeListener should be called on cleanup
+    expect(removeListenerSpy).toHaveBeenCalled();
+  });
+
+  it("uses addEventListener when available even if addListener exists", () => {
+    const addEventListenerSpy = vi.fn();
+    const addListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: addEventListenerSpy,
+        removeEventListener: vi.fn(),
+        addListener: addListenerSpy,
+        removeListener: vi.fn(),
+      }),
+    });
+
+    renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // addEventListener should be preferred over addListener
+    expect(addEventListenerSpy).toHaveBeenCalled();
+    expect(addListenerSpy).not.toHaveBeenCalled();
+  });
+
+  it("initializes state from matchMedia matches property", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: true,
+        media: "(max-width: 768px)",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // Should initialize with matches: true from matchMedia
+    expect(result.current).toBe(true);
+  });
+
+  it("initializes state as false when matchMedia returns false", () => {
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: vi.fn(),
+        removeEventListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // Should initialize with matches: false from matchMedia
+    expect(result.current).toBe(false);
+  });
+
+  it("properly handles listener changes when query dependency updates", () => {
+    const addEventListenerSpy = vi.fn();
+    const removeEventListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: addEventListenerSpy,
+        removeEventListener: removeEventListenerSpy,
+      }),
+    });
+
+    const { rerender } = renderHook(
+      ({ q }: { q: string }) => useMediaQuery(q),
+      { initialProps: { q: "(max-width: 768px)" } },
+    );
+
+    const firstCallCount = removeEventListenerSpy.mock.calls.length;
+
+    // Rerender with different query
+    rerender({ q: "(min-width: 1024px)" });
+
+    // Old listener should be removed
+    expect(removeEventListenerSpy.mock.calls.length).toBeGreaterThan(
+      firstCallCount,
+    );
+  });
+
+  it("calls setMatches with event.matches when change event is triggered", () => {
+    let capturedListener: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: (
+          _: string,
+          listener: (event: MediaQueryListEvent) => void,
+        ) => {
+          capturedListener = listener;
+        },
+        removeEventListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+    expect(result.current).toBe(false);
+
+    // Trigger change event with matches: true
+    act(() => {
+      if (capturedListener) {
+        const event = { matches: true } as MediaQueryListEvent;
+        capturedListener(event);
+      }
+    });
+
+    expect(result.current).toBe(true);
+  });
+
+  it("returns cleanup function that removes listener", () => {
+    const removeEventListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: vi.fn(),
+        removeEventListener: removeEventListenerSpy,
+      }),
+    });
+
+    const { unmount } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // Remove the hook
+    unmount();
+
+    // Cleanup should have called removeEventListener
+    expect(removeEventListenerSpy).toHaveBeenCalled();
+  });
+
+  it("handles conditional branch where addEventListener is falsy for addListener fallback", () => {
+    const removeListenerSpy = vi.fn();
+    const addListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        // addEventListener is null/falsy, should use addListener
+        addEventListener: null as any,
+        addListener: addListenerSpy,
+        removeListener: removeListenerSpy,
+      }),
+    });
+
+    const { unmount } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // addListener should be used when addEventListener is falsy
+    expect(addListenerSpy).toHaveBeenCalled();
+
+    unmount();
+    expect(removeListenerSpy).toHaveBeenCalled();
+  });
+
+  it("correctly identifies when addEventListener exists on mediaQueryList", () => {
+    const addEventListenerSpy = vi.spyOn(
+      EventTarget.prototype,
+      "addEventListener",
+    );
+
+    const { unmount } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    // addEventListener should be called (testing the if branch)
+    expect(addEventListenerSpy).toHaveBeenCalled();
+
+    unmount();
+    addEventListenerSpy.mockRestore();
+  });
+
+  it("executes addListener path when addEventListener is not available", () => {
+    const addListenerSpy = vi.fn();
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: undefined,
+        addListener: addListenerSpy,
+        removeListener: vi.fn(),
+      }),
+    });
+
+    renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    expect(addListenerSpy).toHaveBeenCalled();
+  });
+
+  it("handles setState updates correctly when listener captures event", () => {
+    let listenerCallback: ((event: MediaQueryListEvent) => void) | null = null;
+
+    Object.defineProperty(window, "matchMedia", {
+      writable: true,
+      configurable: true,
+      value: () => ({
+        matches: false,
+        media: "(max-width: 768px)",
+        addEventListener: (
+          _: string,
+          callback: (event: MediaQueryListEvent) => void,
+        ) => {
+          listenerCallback = callback;
+        },
+        removeEventListener: vi.fn(),
+      }),
+    });
+
+    const { result } = renderHook(() => useMediaQuery("(max-width: 768px)"));
+
+    expect(result.current).toBe(false);
+
+    // Fire multiple events in sequence to test setState
+    act(() => {
+      if (listenerCallback) {
+        listenerCallback({ matches: true } as MediaQueryListEvent);
+      }
+    });
+    expect(result.current).toBe(true);
+
+    act(() => {
+      if (listenerCallback) {
+        listenerCallback({ matches: false } as MediaQueryListEvent);
+      }
+    });
+    expect(result.current).toBe(false);
+
+    act(() => {
+      if (listenerCallback) {
+        listenerCallback({ matches: true } as MediaQueryListEvent);
+      }
+    });
+    expect(result.current).toBe(true);
+  });
 });
