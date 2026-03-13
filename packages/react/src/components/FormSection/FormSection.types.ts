@@ -28,9 +28,10 @@ export type FormSectionVariant = "default" | "card" | "inline";
  */
 export interface FormSectionProps extends HTMLAttributes<HTMLDivElement> {
   /**
-   * Section title
+   * Section title (optional)
+   * If not provided, header is omitted unless collapsible is true
    */
-  title: string;
+  title?: string;
 
   /**
    * Description text below title

@@ -154,6 +154,19 @@ export interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
   isLoading?: boolean;
 
   /**
+   * Text to display during loading state instead of children.
+   * Screen-reader accessible alternative for custom loading messaging.
+   *
+   * @example
+   * ```tsx
+   * <Button isLoading loadingText="Saving...">Save Changes</Button>
+   * ```
+   *
+   * @default undefined (uses children)
+   */
+  loadingText?: string;
+
+  /**
    * Full width button - expands to fill container.
    * Useful for form submissions and card footers.
    *

@@ -113,25 +113,32 @@ const FormSectionBase = forwardRef<HTMLDivElement, FormSectionProps>(
         }
       : {};
 
+    // Only render header if there's content to show
+    const hasHeader = title || icon || collapsible;
+
     return (
       <div ref={ref} className={classNames} {...rest}>
-        <HeaderTag className={styles.header} {...headerProps}>
-          <div className={styles.headerContent}>
-            {icon && <span className={styles.icon}>{icon}</span>}
-            <div className={styles.headerText}>
-              <h3 className={styles.title}>{title}</h3>
-              {description && (
-                <p className={styles.description}>{description}</p>
+        {hasHeader && (
+          <HeaderTag className={styles.header} {...headerProps}>
+            <div className={styles.headerContent}>
+              {icon && <span className={styles.icon}>{icon}</span>}
+              {(title || description) && (
+                <div className={styles.headerText}>
+                  {title && <h3 className={styles.title}>{title}</h3>}
+                  {description && (
+                    <p className={styles.description}>{description}</p>
+                  )}
+                </div>
               )}
             </div>
-          </div>
-          {collapsible && (
-            <ChevronDown
-              size={20}
-              className={`${styles.collapseIcon} ${collapsed ? styles.iconCollapsed : ""}`}
-            />
-          )}
-        </HeaderTag>
+            {collapsible && (
+              <ChevronDown
+                size={20}
+                className={`${styles.collapseIcon} ${collapsed ? styles.iconCollapsed : ""}`}
+              />
+            )}
+          </HeaderTag>
+        )}
 
         {(!collapsible || !collapsed) && (
           <div className={styles.content}>

@@ -643,4 +643,91 @@ describe("Button", () => {
       expect(contentSpan?.textContent).toContain("Loading");
     });
   });
+
+  describe("loadingText prop", () => {
+    it("displays loadingText instead of children when isLoading=true", () => {
+      render(
+        <Button isLoading loadingText="Saving...">
+          Save Changes
+        </Button>,
+      );
+
+      expect(screen.getByText("Saving...")).toBeInTheDocument();
+      expect(screen.queryByText("Save Changes")).not.toBeInTheDocument();
+    });
+
+    it("displays children (not loadingText) when isLoading=false", () => {
+      render(
+        <Button isLoading={false} loadingText="Saving...">
+          Save Changes
+        </Button>,
+      );
+
+      expect(screen.getByText("Save Changes")).toBeInTheDocument();
+      expect(screen.queryByText("Saving...")).not.toBeInTheDocument();
+    });
+
+    it("displays children when isLoading=true but no loadingText provided", () => {
+      render(<Button isLoading>Save Changes</Button>);
+
+      expect(screen.getByText("Save Changes")).toBeInTheDocument();
+    });
+
+    it("loadingText works with different variants", () => {
+      const { rerender } = render(
+        <Button isLoading loadingText="Processing..." variant="primary">
+          Submit
+        </Button>,
+      );
+
+      expect(screen.getByText("Processing...")).toBeInTheDocument();
+
+      rerender(
+        <Button isLoading loadingText="Processing..." variant="danger">
+          Delete
+        </Button>,
+      );
+
+      expect(screen.getByText("Processing...")).toBeInTheDocument();
+    });
+
+    it("loadingText works with icon", () => {
+      render(
+        <Button
+          isLoading
+          loadingText="Uploading..."
+          icon={<span data-testid="icon">📤</span>}
+        >
+          Upload File
+        </Button>,
+      );
+
+      expect(screen.getByTestId("icon")).toBeInTheDocument();
+      expect(screen.getByText("Uploading...")).toBeInTheDocument();
+      expect(screen.queryByText("Upload File")).not.toBeInTheDocument();
+    });
+
+    it("loadingText applies loadingContent class", () => {
+      const { container } = render(
+        <Button isLoading loadingText="Saving...">
+          Save
+        </Button>,
+      );
+
+      const contentSpan = container.querySelector("[class*='loadingContent']");
+      expect(contentSpan).toBeInTheDocument();
+      expect(contentSpan?.textContent).toContain("Saving...");
+    });
+
+    it("button remains disabled during loading with loadingText", () => {
+      render(
+        <Button isLoading loadingText="Saving...">
+          Save
+        </Button>,
+      );
+
+      const button = screen.getByRole("button");
+      expect(button).toBeDisabled();
+    });
+  });
 });

@@ -31,6 +31,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       variant = "primary",
       size = "md",
       isLoading = false,
+      loadingText,
       fullWidth = false,
       icon,
       iconRight,
@@ -93,7 +94,9 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             {icon}
           </span>
         ) : (
-          <span className={contentClass}>{children}</span>
+          <span className={contentClass}>
+            {isLoading && loadingText ? loadingText : children}
+          </span>
         )}
 
         {iconRight && !iconOnly && (

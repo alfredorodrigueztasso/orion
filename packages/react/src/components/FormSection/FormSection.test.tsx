@@ -447,4 +447,78 @@ describe("FormSection", () => {
       expect(screen.getByText("Info")).toBeInTheDocument();
     });
   });
+
+  describe("optional title", () => {
+    it("renders without title", () => {
+      render(
+        <FormSection>
+          <input data-testid="form-input" />
+        </FormSection>,
+      );
+
+      expect(screen.getByTestId("form-input")).toBeInTheDocument();
+      // Verify no h3 header is rendered when title is omitted
+      expect(
+        screen.queryByRole("heading", { level: 3 }),
+      ).not.toBeInTheDocument();
+    });
+
+    it("renders without header when description exists but title and icon are missing", () => {
+      const { container } = render(
+        <FormSection description="Update your settings">
+          <div data-testid="content">Form content</div>
+        </FormSection>,
+      );
+
+      // Description alone doesn't render a header without title
+      expect(screen.getByTestId("content")).toBeInTheDocument();
+      expect(
+        screen.queryByText("Update your settings"),
+      ).not.toBeInTheDocument();
+    });
+
+    it("renders collapsible header even without title", async () => {
+      const user = userEvent.setup();
+      const { container } = render(
+        <FormSection collapsible defaultCollapsed={false}>
+          <div data-testid="content">Collapsible content</div>
+        </FormSection>,
+      );
+
+      // Collapsible button should exist even without title
+      const button = container.querySelector("button");
+      expect(button).toBeInTheDocument();
+      expect(screen.getByTestId("content")).toBeInTheDocument();
+
+      // Toggle should work
+      await user.click(button!);
+      expect(screen.queryByTestId("content")).not.toBeInTheDocument();
+    });
+
+    it("renders with icon and title together", () => {
+      render(
+        <FormSection title="Settings" icon={<Settings size={20} />}>
+          <input data-testid="form-input" />
+        </FormSection>,
+      );
+
+      expect(screen.getByTestId("form-input")).toBeInTheDocument();
+      expect(screen.getByText("Settings")).toBeInTheDocument();
+      // Icon prop is accepted and renders (no exception thrown)
+    });
+
+    it("omits header when no title, icon, or collapsible", () => {
+      const { container } = render(
+        <FormSection>
+          <input data-testid="form-input" />
+        </FormSection>,
+      );
+
+      const input = screen.getByTestId("form-input");
+      expect(input).toBeInTheDocument();
+      // No header element should exist
+      const header = container.querySelector("[class*='header']");
+      expect(header).not.toBeInTheDocument();
+    });
+  });
 });
