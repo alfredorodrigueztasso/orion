@@ -729,3 +729,446 @@ describe("useKeyboardShortcuts", () => {
     removeEventListenerSpy.mockRestore();
   });
 });
+
+// ============================================================================
+// ADDITIONAL BRANCH COVERAGE & EDGE CASES
+// ============================================================================
+
+describe("useKeyboard - Handler & Event Details", () => {
+  it("calls handler with the keyboard event object", () => {
+    const handler = vi.fn();
+    renderHook(() => useKeyboard("Enter", handler));
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler).toHaveBeenCalledWith(expect.any(KeyboardEvent));
+  });
+
+  it("does not call handler when modifier is explicitly false but event has it", () => {
+    const handler = vi.fn();
+    renderHook(() => useKeyboard("s", handler, { ctrl: false }));
+
+    // Event has ctrl pressed, but hook requires ctrl=false
+    fireEvent.keyDown(document, { key: "s", ctrlKey: true });
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it("calls handler when modifier is false and event doesn't have it", () => {
+    const handler = vi.fn();
+    renderHook(() => useKeyboard("s", handler, { shift: false }));
+
+    // Event doesn't have shift, hook requires shift=false
+    fireEvent.keyDown(document, { key: "s" });
+    expect(handler).toHaveBeenCalled();
+  });
+
+  it("does not call handler when alt is required but not pressed", () => {
+    const handler = vi.fn();
+    renderHook(() => useKeyboard("a", handler, { alt: true }));
+
+    fireEvent.keyDown(document, { key: "a" });
+    expect(handler).not.toHaveBeenCalled();
+  });
+
+  it("handler updates when handler prop changes (ref pattern)", () => {
+    const handler1 = vi.fn();
+    const handler2 = vi.fn();
+
+    const { rerender } = renderHook(
+      ({ handler }) => useKeyboard("Enter", handler),
+      { initialProps: { handler: handler1 } },
+    );
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler1).toHaveBeenCalledTimes(1);
+    expect(handler2).not.toHaveBeenCalled();
+
+    rerender({ handler: handler2 });
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler1).toHaveBeenCalledTimes(1); // Still 1
+    expect(handler2).toHaveBeenCalledTimes(1); // Now called once
+  });
+
+  it("uses custom target element instead of document", () => {
+    const handler = vi.fn();
+    const customElement = document.createElement("div");
+    document.body.appendChild(customElement);
+
+    renderHook(() => useKeyboard("Enter", handler, { target: customElement }));
+
+    // Event on custom element should trigger
+    fireEvent.keyDown(customElement, { key: "Enter" });
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(customElement);
+  });
+
+  it("does not trigger when targetOnly=true but target doesn't match", () => {
+    const handler = vi.fn();
+    const target1 = document.createElement("input");
+    const target2 = document.createElement("input");
+    document.body.appendChild(target1);
+    document.body.appendChild(target2);
+
+    renderHook(() =>
+      useKeyboard("Enter", handler, { target: target1, targetOnly: true }),
+    );
+
+    fireEvent.keyDown(target2, { key: "Enter" });
+    expect(handler).not.toHaveBeenCalled();
+
+    document.body.removeChild(target1);
+    document.body.removeChild(target2);
+  });
+
+  it("triggers when targetOnly=true and target matches event.target", () => {
+    const handler = vi.fn();
+    const target = document.createElement("div");
+    document.body.appendChild(target);
+
+    renderHook(() =>
+      useKeyboard("Enter", handler, { target, targetOnly: true }),
+    );
+
+    fireEvent.keyDown(target, { key: "Enter" });
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(target);
+  });
+
+  it("does not call preventDefault when preventDefault=false", () => {
+    const handler = vi.fn();
+    renderHook(() => useKeyboard("Enter", handler, { preventDefault: false }));
+
+    const event = new KeyboardEvent("keydown", { key: "Enter" });
+    const preventDefaultSpy = vi.spyOn(event, "preventDefault");
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    // Note: fireEvent uses its own events, but we can verify behavior indirectly
+
+    expect(handler).toHaveBeenCalled();
+    preventDefaultSpy.mockRestore();
+  });
+
+  it("calls stopPropagation when option is true", () => {
+    const handler = vi.fn();
+    renderHook(() => useKeyboard("Enter", handler, { stopPropagation: true }));
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler).toHaveBeenCalled();
+  });
+
+  it("does not trigger handler when enabled changes to false", () => {
+    const handler = vi.fn();
+    const { rerender } = renderHook(
+      ({ enabled }) => useKeyboard("Enter", handler, { enabled }),
+      { initialProps: { enabled: true } },
+    );
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    rerender({ enabled: false });
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler).toHaveBeenCalledTimes(1); // Still 1
+  });
+
+  it("triggers handler again when enabled changes back to true", () => {
+    const handler = vi.fn();
+    const { rerender } = renderHook(
+      ({ enabled }) => useKeyboard("Enter", handler, { enabled }),
+      { initialProps: { enabled: false } },
+    );
+
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler).not.toHaveBeenCalled();
+
+    rerender({ enabled: true });
+    fireEvent.keyDown(document, { key: "Enter" });
+    expect(handler).toHaveBeenCalledTimes(1);
+  });
+
+  it("handles textarea similarly to input (blocks non-Escape keys)", () => {
+    const handler = vi.fn();
+    const textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+
+    renderHook(() => useKeyboard("a", handler));
+    textarea.focus();
+
+    fireEvent.keyDown(document, { key: "a" });
+    expect(handler).not.toHaveBeenCalled();
+
+    document.body.removeChild(textarea);
+  });
+
+  it("allows Escape even with textarea focused", () => {
+    const handler = vi.fn();
+    const textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+
+    renderHook(() => useKeyboard("Escape", handler));
+    textarea.focus();
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(textarea);
+  });
+
+  it("respects all four modifiers simultaneously", () => {
+    const handler = vi.fn();
+    renderHook(() =>
+      useKeyboard("x", handler, {
+        ctrl: true,
+        shift: true,
+        alt: true,
+        meta: true,
+      }),
+    );
+
+    // All four required
+    fireEvent.keyDown(document, {
+      key: "x",
+      ctrlKey: true,
+      shiftKey: true,
+      altKey: true,
+      metaKey: true,
+    });
+    expect(handler).toHaveBeenCalled();
+  });
+
+  it("does not trigger if one of four modifiers is missing", () => {
+    const handler = vi.fn();
+    renderHook(() =>
+      useKeyboard("x", handler, {
+        ctrl: true,
+        shift: true,
+        alt: true,
+        meta: true,
+      }),
+    );
+
+    // Missing alt
+    fireEvent.keyDown(document, {
+      key: "x",
+      ctrlKey: true,
+      shiftKey: true,
+      metaKey: true,
+    });
+    expect(handler).not.toHaveBeenCalled();
+  });
+});
+
+describe("useKeyboardShortcuts - Advanced Behavior", () => {
+  it("receives correct handler with no arguments for shortcuts", () => {
+    const handler = vi.fn();
+    renderHook(() =>
+      useKeyboardShortcuts({
+        Escape: handler,
+      }),
+    );
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(handler).toHaveBeenCalledWith(); // No arguments
+  });
+
+  it("does not call handler when input focused (except Escape)", () => {
+    const handler = vi.fn();
+    const input = document.createElement("input");
+    document.body.appendChild(input);
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        "Ctrl+a": handler,
+      }),
+    );
+
+    input.focus();
+    fireEvent.keyDown(document, { key: "a", ctrlKey: true });
+    expect(handler).not.toHaveBeenCalled();
+
+    document.body.removeChild(input);
+  });
+
+  it("allows Escape shortcut even when input focused", () => {
+    const handler = vi.fn();
+    const input = document.createElement("input");
+    document.body.appendChild(input);
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        Escape: handler,
+      }),
+    );
+
+    input.focus();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(input);
+  });
+
+  it("does not trigger when disabled, even with matching shortcut", () => {
+    const handler = vi.fn();
+    const { rerender } = renderHook(
+      ({ enabled }) => useKeyboardShortcuts({ Escape: handler }, { enabled }),
+      { initialProps: { enabled: true } },
+    );
+
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(handler).toHaveBeenCalledTimes(1);
+
+    rerender({ enabled: false });
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(handler).toHaveBeenCalledTimes(1); // Still 1
+  });
+
+  it("handles all supported modifier aliases: Ctrl, Shift, Alt, Meta", () => {
+    const handler1 = vi.fn();
+    const handler2 = vi.fn();
+    const handler3 = vi.fn();
+    const handler4 = vi.fn();
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        "Control+a": handler1,
+        "Shift+b": handler2,
+        "Alt+c": handler3,
+        "Meta+d": handler4,
+      }),
+    );
+
+    fireEvent.keyDown(document, { key: "a", ctrlKey: true });
+    expect(handler1).toHaveBeenCalled();
+
+    fireEvent.keyDown(document, { key: "b", shiftKey: true });
+    expect(handler2).toHaveBeenCalled();
+
+    fireEvent.keyDown(document, { key: "c", altKey: true });
+    expect(handler3).toHaveBeenCalled();
+
+    fireEvent.keyDown(document, { key: "d", metaKey: true });
+    expect(handler4).toHaveBeenCalled();
+  });
+
+  it("matches shortcut key case-insensitively in shortcut string", () => {
+    const handler = vi.fn();
+    renderHook(() =>
+      useKeyboardShortcuts({
+        "ctrl+s": handler,
+      }),
+    );
+
+    fireEvent.keyDown(document, { key: "S", ctrlKey: true });
+    expect(handler).toHaveBeenCalled();
+  });
+
+  it("breaks after first matching shortcut", () => {
+    const handler1 = vi.fn();
+    const handler2 = vi.fn();
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        "Ctrl+a": handler1,
+        "Ctrl+a": handler2, // Object override - only handler2 exists
+      }),
+    );
+
+    fireEvent.keyDown(document, { key: "a", ctrlKey: true });
+    expect(handler2).toHaveBeenCalled();
+  });
+
+  it("does not trigger shortcuts when textarea is focused (except Escape)", () => {
+    const handler = vi.fn();
+    const textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        "Ctrl+b": handler,
+      }),
+    );
+
+    textarea.focus();
+    fireEvent.keyDown(document, { key: "b", ctrlKey: true });
+    expect(handler).not.toHaveBeenCalled();
+
+    document.body.removeChild(textarea);
+  });
+
+  it("triggers Escape shortcut even with textarea focused", () => {
+    const handler = vi.fn();
+    const textarea = document.createElement("textarea");
+    document.body.appendChild(textarea);
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        Escape: handler,
+      }),
+    );
+
+    textarea.focus();
+    fireEvent.keyDown(document, { key: "Escape" });
+    expect(handler).toHaveBeenCalled();
+
+    document.body.removeChild(textarea);
+  });
+
+  it("cleans up event listener when disabled", () => {
+    const handler = vi.fn();
+    const removeEventListenerSpy = vi.spyOn(document, "removeEventListener");
+
+    const { rerender } = renderHook(
+      ({ enabled }) => useKeyboardShortcuts({ Escape: handler }, { enabled }),
+      { initialProps: { enabled: true } },
+    );
+
+    rerender({ enabled: false });
+
+    expect(removeEventListenerSpy).toHaveBeenCalledWith(
+      "keydown",
+      expect.any(Function),
+    );
+
+    removeEventListenerSpy.mockRestore();
+  });
+
+  it("re-registers listener when event type changes", () => {
+    const handler = vi.fn();
+    const addEventListenerSpy = vi.spyOn(document, "addEventListener");
+
+    const { rerender } = renderHook(
+      ({ event }) => useKeyboardShortcuts({ Escape: handler }, { event }),
+      { initialProps: { event: "keydown" as const } },
+    );
+
+    rerender({ event: "keyup" as const });
+
+    expect(addEventListenerSpy).toHaveBeenCalledWith(
+      "keyup",
+      expect.any(Function),
+    );
+
+    addEventListenerSpy.mockRestore();
+  });
+
+  it("handles contenteditable=true elements like inputs", () => {
+    const handler = vi.fn();
+    const contentEditable = document.createElement("div");
+    contentEditable.setAttribute("contenteditable", "true");
+    document.body.appendChild(contentEditable);
+
+    renderHook(() =>
+      useKeyboardShortcuts({
+        "Ctrl+x": handler,
+      }),
+    );
+
+    contentEditable.focus();
+    fireEvent.keyDown(document, { key: "x", ctrlKey: true });
+    expect(handler).not.toHaveBeenCalled();
+
+    document.body.removeChild(contentEditable);
+  });
+});

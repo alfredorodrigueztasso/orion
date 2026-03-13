@@ -437,4 +437,259 @@ describe("fonts utils", () => {
       expect(result).toEqual([]);
     });
   });
+
+  describe("Edge cases and SSR handling", () => {
+    it("waitForFonts returns true in SSR context (document undefined)", async () => {
+      const originalDocument = global.document;
+      delete (global as any).document;
+
+      const result = await waitForFonts(["Inter", "DM Sans"]);
+      expect(result).toBe(true);
+
+      (global as any).document = originalDocument;
+    });
+
+    it("isFontLoaded handles SSR correctly", () => {
+      const originalDocument = global.document;
+      delete (global as any).document;
+
+      const result = isFontLoaded("Inter");
+      expect(result).toBe(true);
+
+      (global as any).document = originalDocument;
+    });
+
+    it("areBrandFontsLoaded returns true when all fonts in brand are loaded", () => {
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockReturnValue(true),
+        },
+      });
+
+      const result = areBrandFontsLoaded("red");
+      expect(result).toBe(true);
+    });
+
+    it("getMissingFonts returns all fonts when none are loaded", () => {
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockReturnValue(false),
+        },
+      });
+
+      const result = getMissingFonts("orion");
+      expect(result.length).toBe(BRAND_FONTS.orion.length);
+      expect(result).toEqual(BRAND_FONTS.orion);
+    });
+
+    it("isFontLoaded checks font with correct format string", () => {
+      const checkSpy = vi.fn().mockReturnValue(true);
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: checkSpy,
+        },
+      });
+
+      isFontLoaded("Poppins");
+      expect(checkSpy).toHaveBeenCalledWith('16px "Poppins"');
+    });
+
+    it("waitForFonts loads fonts with correct format", async () => {
+      const loadSpy = vi.fn().mockResolvedValue([]);
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          load: loadSpy,
+        },
+      });
+
+      await waitForFonts(["Poppins", "Work Sans"]);
+      expect(loadSpy).toHaveBeenNthCalledWith(1, '16px "Poppins"');
+      expect(loadSpy).toHaveBeenNthCalledWith(2, '16px "Work Sans"');
+    });
+
+    it("isFontLoaded handles document.fonts throwing error gracefully", () => {
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockImplementation(() => {
+            throw new Error("Font API error");
+          }),
+        },
+      });
+
+      const result = isFontLoaded("Inter");
+      expect(result).toBe(true); // Should default to true
+    });
+
+    it("waitForFonts handles Promise.all rejection", async () => {
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          load: vi.fn().mockRejectedValue(new Error("Network error")),
+        },
+      });
+
+      const result = await waitForFonts(["Inter"]);
+      expect(result).toBe(false);
+    });
+
+    it("areBrandFontsLoaded with orange brand", () => {
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockReturnValue(true),
+        },
+      });
+
+      const result = areBrandFontsLoaded("orange");
+      expect(result).toBe(true);
+    });
+
+    it("getFontLinkTags generates proper HTML structure", () => {
+      const html = getFontLinkTags();
+
+      // Check for preconnect links
+      expect(html).toContain('rel="preconnect"');
+      expect(html).toContain("fonts.googleapis.com");
+      expect(html).toContain("fonts.gstatic.com");
+
+      // Check for stylesheet link
+      expect(html).toContain('rel="stylesheet"');
+
+      // Check structure
+      expect(html).toContain("<link");
+      expect(html).toContain(">");
+    });
+
+    it("GOOGLE_FONTS_URL includes all required fonts", () => {
+      ALL_FONTS.forEach((font) => {
+        const fontName = font.replace(/\s+/g, "+");
+        expect(GOOGLE_FONTS_URL).toContain(fontName);
+      });
+    });
+
+    it("BRAND_FONTS has correct fonts for each brand", () => {
+      expect(BRAND_FONTS.orion).toContain("Libre Baskerville");
+      expect(BRAND_FONTS.orion).toContain("Inter");
+      expect(BRAND_FONTS.deepblue).toContain("Work Sans");
+      expect(BRAND_FONTS.red).toContain("Poppins");
+      expect(BRAND_FONTS.orange).toContain("DM Sans");
+      expect(BRAND_FONTS.ember).toContain("DM Sans");
+      expect(BRAND_FONTS.lemon).toContain("Anton");
+    });
+
+    it("getMissingFonts works with orange brand when fonts are missing", () => {
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockReturnValue(false),
+        },
+      });
+
+      const result = getMissingFonts("orange");
+      expect(result).toEqual(BRAND_FONTS.orange);
+    });
+
+    it("areBrandFontsLoaded returns false when fonts are partially loaded", () => {
+      let callCount = 0;
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockImplementation(() => {
+            callCount++;
+            // Only first font loads
+            return callCount === 1;
+          }),
+        },
+      });
+
+      const result = areBrandFontsLoaded("orange");
+      expect(result).toBe(false);
+    });
+
+    it("waitForFonts with single font", async () => {
+      const loadSpy = vi.fn().mockResolvedValue([]);
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          load: loadSpy,
+        },
+      });
+
+      const result = await waitForFonts(["Inter"]);
+      expect(result).toBe(true);
+      expect(loadSpy).toHaveBeenCalledTimes(1);
+    });
+
+    it("isFontLoaded called multiple times returns consistent results", () => {
+      const checkSpy = vi.fn().mockReturnValue(true);
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: checkSpy,
+        },
+      });
+
+      isFontLoaded("Inter");
+      isFontLoaded("DM Sans");
+      isFontLoaded("Inter"); // Same font again
+
+      expect(checkSpy).toHaveBeenCalledTimes(3);
+    });
+
+    it("waitForFonts resolves when all fonts load successfully", async () => {
+      const loadSpy = vi.fn().mockResolvedValue([]);
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          load: loadSpy,
+        },
+      });
+
+      const result = await waitForFonts(["Inter", "DM Sans", "Work Sans"]);
+      expect(result).toBe(true);
+      expect(loadSpy).toHaveBeenCalledTimes(3);
+    });
+
+    it("FONT_PRECONNECT_URLS array structure is correct", () => {
+      expect(FONT_PRECONNECT_URLS).toHaveLength(2);
+      expect(FONT_PRECONNECT_URLS[0]).toBe("https://fonts.googleapis.com");
+      expect(FONT_PRECONNECT_URLS[1]).toBe("https://fonts.gstatic.com");
+    });
+
+    it("getMissingFonts filters correctly with mixed loading states", () => {
+      const loadedFonts = new Set(["Inter", "DM Sans"]);
+      Object.defineProperty(document, "fonts", {
+        writable: true,
+        configurable: true,
+        value: {
+          check: vi.fn().mockImplementation((fontStr: string) => {
+            // Check if any of the loaded fonts is in the string
+            return Array.from(loadedFonts).some((font) =>
+              fontStr.includes(font),
+            );
+          }),
+        },
+      });
+
+      const result = getMissingFonts("orion");
+      expect(result).toContain("Libre Baskerville"); // Not in loaded set
+    });
+  });
 });
