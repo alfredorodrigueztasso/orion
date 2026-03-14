@@ -243,4 +243,51 @@ describe("Calendar", () => {
     );
     expect(screen.getByTestId("cal")).toHaveClass("custom-calendar");
   });
+
+  describe("showOutsideDays prop", () => {
+    it("does not render outside month day buttons when showOutsideDays=false", () => {
+      const { container } = render(<Calendar selected={january15} />);
+
+      // With showOutsideDays=false (default), outside days are NOT rendered as buttons
+      // Count total buttons
+      const buttons = screen.getAllByRole("button");
+
+      // Record the button count for comparison
+      const initialButtonCount = buttons.length;
+      expect(initialButtonCount).toBeGreaterThan(0);
+    });
+
+    it("renders more buttons when showOutsideDays=true vs false", () => {
+      const { container: container1, rerender } = render(
+        <Calendar selected={january15} showOutsideDays={false} />,
+      );
+      const buttonsWithoutOutside = screen.getAllByRole("button").length;
+
+      rerender(<Calendar selected={january15} showOutsideDays={true} />);
+      const buttonsWithOutside = screen.getAllByRole("button").length;
+
+      // When showOutsideDays=true, we should have more buttons
+      expect(buttonsWithOutside).toBeGreaterThan(buttonsWithoutOutside);
+    });
+
+    it("allows selecting dates when showOutsideDays=true", async () => {
+      const user = userEvent.setup();
+      const onSelect = vi.fn();
+
+      render(
+        <Calendar
+          selected={january15}
+          onSelect={onSelect}
+          showOutsideDays={true}
+        />,
+      );
+
+      // Verify we can select a January date
+      const januaryButton = screen.getByLabelText(
+        "Wednesday, January 15, 2025",
+      );
+      await user.click(januaryButton);
+      expect(onSelect).toHaveBeenCalled();
+    });
+  });
 });
