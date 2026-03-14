@@ -1,5 +1,7 @@
-import { describe, it, expect } from "vitest";
-import { render, screen } from "@testing-library/react";
+import { describe, it, expect, vi } from "vitest";
+import { render, screen, waitFor } from "@testing-library/react";
+import userEvent from "@testing-library/user-event";
+import { useState } from "react";
 import { Navbar } from "./Navbar";
 
 describe("Navbar", () => {
@@ -430,6 +432,148 @@ describe("Navbar", () => {
       expect(navbar.className).toMatch(/lg/);
       expect(navbar.className).toMatch(/sticky/);
       expect(navbar.className).toMatch(/bordered/);
+    });
+  });
+
+  // ============================================================================
+  // MISSING BRANCHES & TOGGLE/COLLAPSE COMPONENTS COVERAGE
+  // ============================================================================
+
+  describe("Navbar.Toggle", () => {
+    it("renders with correct aria-label when isOpen is false", () => {
+      const { container } = render(
+        <Navbar>
+          <Navbar.Toggle isOpen={false} onToggle={() => {}} />
+        </Navbar>,
+      );
+
+      const toggle = container.querySelector("button[aria-label]");
+      expect(toggle).toHaveAttribute("aria-label", "Open menu");
+      expect(toggle).toHaveAttribute("aria-expanded", "false");
+    });
+
+    it("renders with correct aria-label when isOpen is true", () => {
+      const { container } = render(
+        <Navbar>
+          <Navbar.Toggle isOpen={true} onToggle={() => {}} />
+        </Navbar>,
+      );
+
+      const toggle = container.querySelector("button[aria-label]");
+      expect(toggle).toHaveAttribute("aria-label", "Close menu");
+      expect(toggle).toHaveAttribute("aria-expanded", "true");
+      expect(toggle?.className).toMatch(/toggleOpen/);
+    });
+
+    it("calls onToggle callback when clicked", async () => {
+      const user = userEvent.setup();
+      const handleToggle = vi.fn();
+
+      const { container } = render(
+        <Navbar>
+          <Navbar.Toggle isOpen={false} onToggle={handleToggle} />
+        </Navbar>,
+      );
+
+      const toggle = container.querySelector("button[aria-label]");
+      if (toggle) {
+        await user.click(toggle);
+      }
+
+      expect(handleToggle).toHaveBeenCalled();
+    });
+  });
+
+  describe("Navbar.Collapse", () => {
+    it("does not render collapseOpen class when isOpen is false", () => {
+      const { container } = render(
+        <Navbar>
+          <Navbar.Collapse isOpen={false}>
+            <Navbar.Link href="/">Home</Navbar.Link>
+          </Navbar.Collapse>
+        </Navbar>,
+      );
+
+      const collapse = container.querySelector("[class*='collapse']");
+      expect(collapse?.className).not.toMatch(/collapseOpen/);
+    });
+
+    it("renders collapseOpen class when isOpen is true", () => {
+      const { container } = render(
+        <Navbar>
+          <Navbar.Collapse isOpen={true}>
+            <Navbar.Link href="/">Home</Navbar.Link>
+          </Navbar.Collapse>
+        </Navbar>,
+      );
+
+      const collapse = container.querySelector("[class*='collapse']");
+      expect(collapse?.className).toMatch(/collapseOpen/);
+    });
+  });
+
+  describe("Navbar.CollapseActions", () => {
+    it("renders children in CollapseActions", () => {
+      render(
+        <Navbar>
+          <Navbar.CollapseActions>
+            <button>Sign In</button>
+          </Navbar.CollapseActions>
+        </Navbar>,
+      );
+
+      expect(screen.getByText("Sign In")).toBeInTheDocument();
+    });
+
+    it("applies custom className to CollapseActions", () => {
+      render(
+        <Navbar>
+          <Navbar.CollapseActions className="custom-actions">
+            <button>Sign In</button>
+          </Navbar.CollapseActions>
+        </Navbar>,
+      );
+
+      const button = screen.getByText("Sign In");
+      expect(button.parentElement).toHaveClass("custom-actions");
+    });
+  });
+
+  describe("Navbar colorScheme", () => {
+    it("applies light scheme class when colorScheme='light'", () => {
+      const { container } = render(
+        <Navbar colorScheme="light">
+          <Navbar.Brand>Brand</Navbar.Brand>
+        </Navbar>,
+      );
+
+      const navbar = container.firstChild as HTMLElement;
+      expect(navbar.className).toMatch(/schemeLight/);
+    });
+  });
+
+  describe("Navbar responsive with Toggle and Collapse", () => {
+    it("toggle and collapse work together for responsive navbar", () => {
+      const { container } = render(
+        <Navbar>
+          <Navbar.Brand>MyApp</Navbar.Brand>
+          <Navbar.Toggle isOpen={false} onToggle={() => {}} />
+          <Navbar.Collapse isOpen={false}>
+            <Navbar.Link href="/">Home</Navbar.Link>
+            <Navbar.Link href="/about">About</Navbar.Link>
+          </Navbar.Collapse>
+        </Navbar>,
+      );
+
+      // Verify toggle button exists with correct aria attributes
+      const toggleButton = container.querySelector("button[aria-expanded]");
+      expect(toggleButton).toBeInTheDocument();
+      expect(toggleButton).toHaveAttribute("aria-expanded", "false");
+
+      // Verify collapse exists with correct class
+      const collapse = container.querySelector("[class*='collapse']");
+      expect(collapse).toBeInTheDocument();
+      expect(collapse?.className).not.toMatch(/collapseOpen/);
     });
   });
 });
