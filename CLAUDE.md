@@ -776,13 +776,17 @@ function MyButton() {
 </Button>
 ```
 
-### Package Exports & Import Paths
+### Package Exports & Import Paths (v4.5.0+ - Next.js App Router Compatible)
 
-`@orion-ds/react@^3.0.0` supports multiple entry points:
+`@orion-ds/react@^4.5.0` supports multiple entry points optimized for different use cases:
 
+#### Core Imports (No Optional Dependencies)
 ```typescript
-// Main export - All components + hooks + contexts
+// Main export - ALL components + hooks + contexts
 import { Button, ThemeProvider, useThemeContext } from '@orion-ds/react';
+
+// Client-safe import (Next.js App Router) - Light bundle without heavy deps
+import { Button, Card, Field } from '@orion-ds/react/client';
 
 // Styles (CSS)
 import '@orion-ds/react/styles.css';     // Recommended - Full bundle (tokens + components)
@@ -790,12 +794,74 @@ import '@orion-ds/react/theme.css';      // Tokens only (for advanced tree-shaki
 
 // Tokens (TypeScript)
 import { primitives, getToken, getSemanticToken } from '@orion-ds/react/tokens';
-
-// Individual components (tree-shaking - advanced)
-import { Button } from '@orion-ds/react/components/Button';
 ```
 
-**⚠️ CRITICAL**: Always import from `@orion-ds/react`.
+#### Heavy Components (Require Optional Peer Dependencies)
+
+**`@orion-ds/react/chart`** — Requires `recharts`
+```bash
+npm install recharts
+```
+```typescript
+import { ChartContainer, ChartTooltipContent, ChartLegend } from '@orion-ds/react/chart';
+```
+
+**`@orion-ds/react/calendar`** — Requires `date-fns`
+```bash
+npm install date-fns
+```
+```typescript
+import { Calendar, DatePicker } from '@orion-ds/react/calendar';
+```
+
+**`@orion-ds/react/editor`** — Requires `react-syntax-highlighter`
+```bash
+npm install react-syntax-highlighter
+```
+```typescript
+import { CodeEditor } from '@orion-ds/react/editor';
+```
+
+**`@orion-ds/react/dnd`** — Requires `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities`
+```bash
+npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
+```
+```typescript
+import { CollapsibleFolder } from '@orion-ds/react/dnd';
+```
+
+**`@orion-ds/react/rich`** — Requires `react-markdown`, `react-syntax-highlighter`, `remark-gfm`
+```bash
+npm install react-markdown react-syntax-highlighter remark-gfm
+```
+```typescript
+import { Chat } from '@orion-ds/react/rich';
+```
+
+#### Migration from v4.4.0 to v4.5.0
+
+**Problem (v4.4.0)**:
+```typescript
+// ❌ FAILS if recharts/date-fns not installed
+import { Button, Chart, Calendar } from '@orion-ds/react/client';
+```
+
+**Solution (v4.5.0)**:
+```typescript
+// ✅ ALWAYS WORKS - no optional deps required
+import { Button, Card, Field } from '@orion-ds/react/client';
+
+// ✅ OPTIONAL - only import if you use these components
+import { Chart } from '@orion-ds/react/chart';      // requires recharts
+import { Calendar } from '@orion-ds/react/calendar'; // requires date-fns
+```
+
+#### Why Separate Entry Points?
+
+- **Smaller bundle**: Apps using only Button/Card don't need recharts, date-fns, etc.
+- **Faster builds**: Webpack/Turbopack don't try to resolve optional deps
+- **Next.js compatible**: `@orion-ds/react/client` works without all peer deps installed
+- **Tree-shaking**: Each entry point is independently tree-shakeable with `preserveModules: true`
 
 **Exports configuration**: See `packages/react/package.json` → `exports` field
 
