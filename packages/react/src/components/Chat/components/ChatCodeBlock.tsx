@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * ChatCodeBlock Component
  *

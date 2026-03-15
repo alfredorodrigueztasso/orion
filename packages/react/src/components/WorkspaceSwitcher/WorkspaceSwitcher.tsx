@@ -1,3 +1,5 @@
+"use client";
+
 import { useState, forwardRef } from "react";
 import { Building2, ChevronDown, Settings, Users, Plus } from "lucide-react";
 import { Popover } from "../../components/Popover";

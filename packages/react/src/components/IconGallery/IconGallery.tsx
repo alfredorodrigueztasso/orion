@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Icon Browser - Documentation Utility
  *

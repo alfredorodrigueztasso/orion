@@ -1,3 +1,5 @@
+"use client";
+
 import { forwardRef, useState, useCallback } from "react";
 import type { ToggleProps } from "./Toggle.types";
 import styles from "./Toggle.module.css";

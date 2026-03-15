@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Comparison Section Component
  *

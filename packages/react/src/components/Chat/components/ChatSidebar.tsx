@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * ChatSidebar Component
  *

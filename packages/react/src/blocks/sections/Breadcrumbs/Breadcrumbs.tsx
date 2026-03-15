@@ -1,3 +1,5 @@
+"use client";
+
 /**
  * Breadcrumbs Component
  *
