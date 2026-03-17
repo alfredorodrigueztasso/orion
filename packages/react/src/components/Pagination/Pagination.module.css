@@ -1,0 +1,142 @@
+/**
+ * Pagination Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+.pagination {
+  display: inline-flex;
+  align-items: center;
+}
+
+.list {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ============================================================================
+ * BUTTONS
+ * ============================================================================ */
+
+.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: 1px solid transparent;
+  border-radius: var(--radius-button);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast),
+    border-color var(--transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--surface-subtle);
+    color: var(--text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+  }
+}
+
+.pageButton {
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.active {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border-color: var(--interactive-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--interactive-primary-hover);
+    color: var(--interactive-primary-text);
+  }
+}
+
+/* ============================================================================
+ * ELLIPSIS
+ * ============================================================================ */
+
+.ellipsis {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-family: var(--font-secondary);
+  user-select: none;
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm {
+  .button {
+    min-width: 28px;
+    height: 28px;
+    font-size: var(--font-size-12);
+  }
+
+  .ellipsis {
+    min-width: 28px;
+    height: 28px;
+    font-size: var(--font-size-12);
+  }
+}
+
+.md {
+  .button {
+    min-width: 36px;
+    height: 36px;
+    font-size: var(--font-size-14);
+  }
+
+  .ellipsis {
+    min-width: 36px;
+    height: 36px;
+    font-size: var(--font-size-14);
+  }
+}
+
+.lg {
+  .button {
+    min-width: 44px;
+    height: 44px;
+    font-size: var(--font-size-16);
+  }
+
+  .ellipsis {
+    min-width: 44px;
+    height: 44px;
+    font-size: var(--font-size-16);
+  }
+
+  .list {
+    gap: var(--spacing-2);
+  }
+}
+
+/* ============================================================================
+ * DISABLED STATE
+ * ============================================================================ */
+
+.disabled {
+  pointer-events: none;
+  opacity: 0.5;
+}

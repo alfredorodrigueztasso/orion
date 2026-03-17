@@ -1,0 +1,113 @@
+.section {
+  padding: var(--spacing-8) var(--spacing-6);
+  background: var(--surface-base);
+}
+
+.title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-8) 0;
+  text-align: center;
+}
+
+.eventsHorizontal {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+  overflow-x: auto;
+  padding-bottom: var(--spacing-4);
+}
+
+.eventsVertical {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  position: relative;
+  padding-left: var(--spacing-8);
+}
+
+.eventsVertical::before {
+  content: "";
+  position: absolute;
+  left: 15px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--border-subtle);
+}
+
+.event {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1;
+  min-width: 160px;
+}
+
+.eventVertical {
+  flex: none;
+  position: relative;
+  padding: var(--spacing-3) 0;
+}
+
+.eventDot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+  background: var(--interactive-primary);
+  flex-shrink: 0;
+  border: 2px solid var(--surface-base);
+  box-shadow: 0 0 0 2px var(--interactive-primary);
+}
+
+.eventDotVertical {
+  position: absolute;
+  left: calc(var(--spacing-8) * -1 + 10px);
+  top: var(--spacing-4);
+}
+
+.eventContent {
+  display: flex;
+  flex-direction: column;
+}
+
+.eventDate {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  color: var(--interactive-primary);
+  margin: 0;
+}
+
+.eventTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-base);
+  font-weight: 500;
+  color: var(--text-primary);
+  margin: var(--spacing-1) 0 0;
+}
+
+.eventDescription {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 2px 0 0;
+}
+
+.connector {
+  flex: 1;
+  height: 2px;
+  background: var(--border-subtle);
+  min-width: var(--spacing-4);
+  align-self: center;
+}
+
+.compact .eventContent {
+  gap: 0;
+}
+
+.compact .eventDescription {
+  display: none;
+}

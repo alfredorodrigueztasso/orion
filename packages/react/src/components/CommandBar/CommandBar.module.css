@@ -1,0 +1,255 @@
+/**
+ * CommandBar Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Keyboard-first interaction with minimal visual noise.
+ */
+
+.overlay {
+  position: fixed;
+  inset: 0;
+  background: var(--surface-overlay);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20vh;
+  z-index: var(--z-modal);
+  animation: fadeIn 150ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.commandBar {
+  width: 100%;
+  max-width: 560px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-xl);
+  overflow: hidden;
+  animation: slideIn 150ms ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: scale(0.96) translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* ============================================================================
+ * INPUT
+ * ============================================================================ */
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.searchIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-16);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+.shortcutHint {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+  background: var(--surface-subtle);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+ * RESULTS
+ * ============================================================================ */
+
+.results {
+  max-height: 400px;
+  overflow-y: auto;
+  padding: var(--spacing-2);
+}
+
+.empty {
+  padding: var(--spacing-8);
+  text-align: center;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * GROUP
+ * ============================================================================ */
+
+.group {
+  margin-bottom: var(--spacing-2);
+}
+
+.group:last-child {
+  margin-bottom: 0;
+}
+
+.groupTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: var(--spacing-2) var(--spacing-2);
+}
+
+/* ============================================================================
+ * ITEM
+ * ============================================================================ */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  padding: var(--spacing-2-5) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--mode-hover-duration);
+}
+
+.item:hover,
+.itemSelected {
+  background: var(--surface-subtle);
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.itemSelected .itemIcon {
+  color: var(--interactive-primary);
+}
+
+.itemContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.itemLabel {
+  font-weight: var(--font-weight-medium);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemDescription {
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemShortcut {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+  background: var(--surface-subtle);
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+ * FOOTER
+ * ============================================================================ */
+
+.footer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-2-5) var(--spacing-4);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+}
+
+.footerHint {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+}
+
+.footerHint span {
+  font-family: var(--font-mono);
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 640px) {
+  .overlay {
+    padding-top: var(--spacing-4);
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+
+  .commandBar {
+    max-width: 100%;
+  }
+
+  .results {
+    max-height: 60vh;
+  }
+}

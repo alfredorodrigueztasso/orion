@@ -1,0 +1,425 @@
+/**
+ * Button Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Base button styles */
+.button {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+
+  /* Interaction */
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+
+  /* Borders */
+  border: 1px solid transparent;
+  outline: none;
+
+  /* Focus state */
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+
+  /* Disabled state */
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+/* Primary variant */
+.primary {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+
+  &:hover:not(:disabled) {
+    background: var(--interactive-primary-hover);
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+/* Secondary variant - light mode uses semantic tokens, dark mode uses glassmorphism */
+.secondary {
+  /* Light mode: fondo claro con tokens semánticos */
+  background: var(--interactive-secondary);
+  color: var(--interactive-secondary-text);
+  border: 1px solid var(--border-subtle);
+
+  &:hover:not(:disabled) {
+    background: var(--interactive-secondary-hover);
+    border-color: var(--border-subtle);
+  }
+
+  &:active:not(:disabled) {
+    background: var(--surface-layer);
+    transform: translateY(1px);
+  }
+
+  /* Dark mode: mantener glassmorphism existente */
+  :global([data-theme="dark"]) & {
+    background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+    color: var(--text-primary);
+    backdrop-filter: blur(var(--mode-blur-amount, var(--blur-md)));
+    -webkit-backdrop-filter: blur(var(--mode-blur-amount, var(--blur-md)));
+
+    &:hover:not(:disabled) {
+      background: color-mix(in srgb, var(--color-neutral-0) 22%, transparent);
+      border-color: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+    }
+
+    &:active:not(:disabled) {
+      background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+    }
+  }
+}
+
+/* Secondary Inverse variant - for DARK/COLORED backgrounds */
+/* Always the same in light and dark mode (theme-invariant) */
+.secondaryInverse {
+  /* Fixed 20% white overlay — uses color-neutral-0 (primitive, never changes) */
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0); /* Always white regardless of theme */
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+  }
+
+  &:active:not(:disabled) {
+    background: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+    transform: translateY(1px);
+  }
+}
+
+/* Ghost variant */
+.ghost {
+  background: transparent;
+  color: var(--text-primary);
+
+  &:hover:not(:disabled) {
+    background: var(--interactive-ghost-hover);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* Ghost Inverse variant - for dark/colored backgrounds */
+/* Always the same in light and dark mode (theme-invariant) */
+.ghostInverse {
+  background: transparent;
+  color: var(--color-neutral-0); /* Always white regardless of theme */
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* Danger variant */
+.danger {
+  background: var(--status-error);
+  color: var(--color-neutral-0);
+
+  &:hover:not(:disabled) {
+    background: color-mix(
+      in srgb,
+      var(--status-error) 85%,
+      var(--color-neutral-1000)
+    );
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+/* Inverse variant - for use on colored backgrounds */
+/* Always white background (doesn't change in dark mode) */
+.inverse {
+  background: var(--color-neutral-0);
+  color: var(--interactive-primary);
+  border-color: transparent;
+
+  &:hover:not(:disabled) {
+    background: color-mix(
+      in srgb,
+      var(--color-neutral-0) 92%,
+      var(--color-neutral-900)
+    );
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+/* Lemon brand uses black text for better contrast on white */
+:global([data-brand="lemon"]) .inverse {
+  color: var(--color-neutral-1000);
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm {
+  height: 32px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-12);
+  border-radius: var(--radius-button);
+}
+
+.md {
+  height: 40px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-16);
+  border-radius: var(--radius-button);
+}
+
+.lg {
+  height: 48px;
+  padding: 0 var(--spacing-6);
+  font-size: var(--font-size-18);
+  border-radius: var(--radius-button);
+}
+
+/* ============================================================================
+ * MODIFIERS
+ * ============================================================================ */
+
+/* Full width */
+.fullWidth {
+  width: 100%;
+}
+
+/* Icon only */
+.iconOnly {
+  &.sm {
+    width: 32px;
+    padding: 0;
+  }
+
+  &.md {
+    width: 40px;
+    padding: 0;
+  }
+
+  &.lg {
+    width: 48px;
+    padding: 0;
+  }
+}
+
+/* Loading state */
+.loading {
+  position: relative;
+  pointer-events: none;
+}
+
+.spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  animation: spin 600ms linear infinite;
+}
+
+/* Spinner colors per variant */
+.primary .spinner {
+  border: 2px solid var(--interactive-primary-text);
+  border-top-color: transparent;
+}
+
+.secondary .spinner {
+  border: 2px solid var(--text-primary);
+  border-top-color: transparent;
+}
+
+.secondaryInverse .spinner {
+  border: 2px solid var(--color-neutral-0); /* Always white - theme-invariant */
+  border-top-color: transparent;
+}
+
+.ghost .spinner {
+  border: 2px solid var(--text-primary);
+  border-top-color: transparent;
+}
+
+.ghostInverse .spinner {
+  border: 2px solid var(--color-neutral-0); /* Always white - theme-invariant */
+  border-top-color: transparent;
+}
+
+.danger .spinner {
+  border: 2px solid var(--color-neutral-0);
+  border-top-color: transparent;
+}
+
+.inverse .spinner {
+  border: 2px solid var(--interactive-primary);
+  border-top-color: transparent;
+}
+
+/* Lemon brand spinner uses black for visibility */
+:global([data-brand="lemon"]) .inverse .spinner {
+  border: 2px solid var(--color-neutral-1000);
+  border-top-color: transparent;
+}
+
+/* ============================================================================
+ * EMBER BRAND — Black primary buttons (light) / Light grey primary (dark)
+ * ============================================================================ */
+
+/* Ember: Dark primary buttons in light mode */
+:global([data-theme="light"][data-brand="ember"]) .primary {
+  background: var(--color-neutral-900);
+  color: var(--color-neutral-0);
+
+  &:hover:not(:disabled) {
+    background: var(--color-neutral-700);
+  }
+}
+
+/* Ember: Light grey primary buttons in dark mode */
+:global([data-theme="dark"][data-brand="ember"]) .primary {
+  background: var(--color-neutral-100);
+  color: var(--color-neutral-900);
+
+  &:hover:not(:disabled) {
+    background: var(--color-neutral-0);
+  }
+}
+
+/* Hide content when loading */
+.loadingContent {
+  visibility: hidden;
+}
+
+/* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background", CTA variant="brand")
+ *
+ * Maps light-context button variants to their inverse counterparts automatically.
+ * This allows buttons to inherit correct styling when inside dark backgrounds
+ * without requiring developers to manually switch to inverse variants.
+ * ============================================================================ */
+
+/* primary → inverse behavior (white bg, brand text) */
+:global([data-dark-bg="true"]) .primary {
+  background: var(--color-neutral-0);
+  color: var(--interactive-primary);
+  border-color: transparent;
+
+  &:hover:not(:disabled) {
+    background: color-mix(
+      in srgb,
+      var(--color-neutral-0) 92%,
+      var(--color-neutral-900)
+    );
+  }
+
+  &:active:not(:disabled) {
+    transform: translateY(1px);
+  }
+}
+
+/* secondary → secondaryInverse behavior (20% white frosted, white text) */
+:global([data-dark-bg="true"]) .secondary {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+  }
+
+  &:active:not(:disabled) {
+    background: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+    transform: translateY(1px);
+  }
+}
+
+/* ghost → ghostInverse behavior (transparent, white text) */
+:global([data-dark-bg="true"]) .ghost {
+  background: transparent;
+  color: var(--color-neutral-0);
+
+  &:hover:not(:disabled) {
+    background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+  }
+
+  &:active:not(:disabled) {
+    transform: scale(0.98);
+  }
+}
+
+/* Spinners in dark context */
+:global([data-dark-bg="true"]) .primary .spinner {
+  border: 2px solid var(--interactive-primary);
+  border-top-color: transparent;
+}
+
+:global([data-dark-bg="true"]) .secondary .spinner,
+:global([data-dark-bg="true"]) .ghost .spinner {
+  border: 2px solid var(--color-neutral-0);
+  border-top-color: transparent;
+}
+
+/* Lemon brand in dark context: primary uses black text for contrast */
+:global([data-brand="lemon"][data-dark-bg="true"]) .primary {
+  color: var(--color-neutral-1000);
+}
+
+@keyframes spin {
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+/* Icon styles */
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.iconRight {
+  order: 1;
+}

@@ -1,0 +1,344 @@
+/**
+ * QuickActions Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Floating action button and bar variants.
+ */
+
+.quickActions {
+  z-index: var(--z-sticky);
+}
+
+.fixed {
+  position: fixed;
+}
+
+/* Position variants */
+.position-bottom-right {
+  bottom: var(--offset);
+  right: var(--offset);
+}
+
+.position-bottom-left {
+  bottom: var(--offset);
+  left: var(--offset);
+}
+
+.position-bottom-center {
+  bottom: var(--offset);
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.position-top-right {
+  top: var(--offset);
+  right: var(--offset);
+}
+
+.position-top-left {
+  top: var(--offset);
+  left: var(--offset);
+}
+
+/* ============================================================================
+ * FAB VARIANT
+ * ============================================================================ */
+
+.variant-fab {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.fabTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 56px;
+  height: 56px;
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition:
+    background-color var(--mode-hover-duration),
+    transform var(--mode-hover-duration),
+    box-shadow var(--mode-hover-duration);
+}
+
+.fabTrigger:hover {
+  background: var(--interactive-primary-hover);
+  transform: scale(1.05);
+}
+
+.fabTrigger:active {
+  transform: scale(0.98);
+}
+
+.fabTriggerIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-normal);
+}
+
+.fabTriggerIconRotate {
+  transform: rotate(45deg);
+}
+
+.fabActions {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  gap: var(--spacing-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(8px);
+  transition: all var(--transition-normal);
+}
+
+.open .fabActions {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.fabAction {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2-5) var(--spacing-4);
+  background: var(--surface-base);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-md);
+  white-space: nowrap;
+  transition: all var(--mode-hover-duration);
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+.open .fabAction {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.fabAction:hover {
+  background: var(--surface-subtle);
+  border-color: var(--border-moderate);
+}
+
+.fabActionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+.fabActionLabel {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================================
+ * BAR VARIANT
+ * ============================================================================ */
+
+.variant-bar .bar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-2);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-lg);
+}
+
+.barAction {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: none;
+  color: var(--text-secondary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+}
+
+.barAction:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+.barActionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+}
+
+.barActionLabel {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================================
+ * MENU VARIANT
+ * ============================================================================ */
+
+.variant-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: var(--spacing-2);
+}
+
+.menuTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  box-shadow: var(--shadow-lg);
+  transition: background-color var(--mode-hover-duration);
+}
+
+.menuTrigger:hover {
+  background: var(--interactive-primary-hover);
+}
+
+.menu {
+  display: flex;
+  flex-direction: column;
+  min-width: 180px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-1);
+  animation: menuSlide 150ms ease-out;
+}
+
+@keyframes menuSlide {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.menuAction {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  padding: var(--spacing-2-5) var(--spacing-3);
+  background: none;
+  color: var(--text-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--mode-hover-duration);
+}
+
+.menuAction:hover {
+  background: var(--surface-subtle);
+}
+
+.menuActionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  color: var(--text-secondary);
+}
+
+.menuActionLabel {
+  flex: 1;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================================================
+ * ACTION VARIANTS
+ * ============================================================================ */
+
+.action-primary {
+  color: var(--interactive-primary);
+}
+
+.action-danger {
+  color: var(--text-error);
+}
+
+.action-danger:hover {
+  background: var(--status-error-bg);
+}
+
+.actionDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * SHORTCUT
+ * ============================================================================ */
+
+.shortcut {
+  font-family: var(--font-mono);
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+  background: var(--surface-subtle);
+  padding: var(--spacing-0-5) var(--spacing-1);
+  border-radius: var(--radius-sm);
+  margin-left: auto;
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 640px) {
+  .fabTrigger {
+    width: 48px;
+    height: 48px;
+  }
+
+  .menuTrigger {
+    width: 40px;
+    height: 40px;
+  }
+
+  .fabActionLabel {
+    display: none;
+  }
+
+  .fabAction {
+    padding: var(--spacing-2-5);
+    border-radius: var(--radius-full);
+  }
+}

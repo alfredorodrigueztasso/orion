@@ -1,0 +1,81 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Testimonials.schema.json",
+  "title": "Testimonials",
+  "description": "A social proof section displaying customer testimonials with quotes and author information.",
+  "type": "object",
+  "properties": {
+    "eyebrow": {
+      "type": "string",
+      "description": "Small text above title"
+    },
+    "title": {
+      "type": "string",
+      "description": "Section title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Section description"
+    },
+    "testimonials": {
+      "type": "array",
+      "description": "Array of testimonials",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "quote": { "type": "string", "description": "Testimonial text" },
+          "author": {
+            "type": "object",
+            "properties": {
+              "name": { "type": "string" },
+              "title": { "type": "string", "description": "Job title" },
+              "company": { "type": "string" },
+              "avatar": { "type": "string", "description": "Avatar image URL" }
+            },
+            "required": ["name"]
+          },
+          "rating": {
+            "type": "number",
+            "minimum": 1,
+            "maximum": 5,
+            "description": "Star rating"
+          }
+        },
+        "required": ["id", "quote", "author"]
+      }
+    },
+    "columns": {
+      "type": "number",
+      "enum": [1, 2, 3],
+      "default": 3,
+      "description": "Number of columns"
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["cards", "simple", "featured"],
+      "default": "cards",
+      "description": "Display variant"
+    },
+    "background": {
+      "type": "string",
+      "enum": ["base", "subtle"],
+      "default": "base",
+      "description": "Background color"
+    }
+  },
+  "required": ["testimonials"],
+  "examples": [
+    {
+      "description": "Testimonials grid with avatars",
+      "code": "<Testimonials\n  title=\"What Our Customers Say\"\n  testimonials={[\n    {\n      id: '1',\n      quote: 'This product transformed our workflow completely.',\n      author: {\n        name: 'Sarah Johnson',\n        title: 'CEO',\n        company: 'TechCorp',\n        avatar: '/avatars/sarah.jpg'\n      },\n      rating: 5\n    },\n    {\n      id: '2',\n      quote: 'Best investment we made this year.',\n      author: {\n        name: 'Mike Chen',\n        title: 'CTO',\n        company: 'StartupXYZ',\n        avatar: '/avatars/mike.jpg'\n      },\n      rating: 5\n    }\n  ]}\n/>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a testimonials section with customer reviews",
+    "Make a single featured testimonial with large quote",
+    "Build a testimonials carousel",
+    "Create testimonials with star ratings",
+    "Add a testimonials grid with company logos"
+  ]
+}

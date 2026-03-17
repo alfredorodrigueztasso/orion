@@ -1,0 +1,158 @@
+import { Meta } from '@storybook/blocks';
+import { Callout, FeatureCard, CardGrid, BrandSwatch, TokenTable } from './DocComponents';
+
+<Meta title="Getting Started/Brands & Themes" />
+
+# Brands & Themes
+
+Orion supports multiple brands and themes through CSS variables. Switch between brands and themes at runtime — all components update automatically.
+
+## Available Brands
+
+<CardGrid columns={3}>
+  <FeatureCard icon={<BrandSwatch color="#1B5BFF" name="Orion Blue" />} title="Orion (default)">
+    Libre Baskerville + Inter. Pill buttons. The flagship brand with a bold blue accent.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#006FBA" name="Deep Blue" />} title="Deepblue">
+    Work Sans. Rounded buttons (12px radius). A corporate, professional feel.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#D7282F" name="Red" />} title="Red">
+    Poppins + Inter. Pill buttons. Bold, energetic, and attention-grabbing.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#F15D22" name="Orange" />} title="Orange">
+    DM Sans + Inter. Pill buttons. Warm, approachable, and modern.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#0f172a" name="Ember Black" />} title="Ember">
+    DM Sans + Inter. Rounded buttons (12px radius). Orange accents with dark neutral buttons.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#84CC16" name="Lemon" />} title="Lemon">
+    Anton + Work Sans. Pill buttons. Fresh, vibrant, and eye-catching.
+  </FeatureCard>
+</CardGrid>
+
+<Callout variant="info" title="How brands work">
+  Each brand overrides accent colors, typography, and border radius through CSS variables. Components use semantic tokens like <code>var(--interactive-primary)</code> — they don't need to know which brand is active.
+</Callout>
+
+## Setting Up ThemeProvider
+
+Wrap your app with `ThemeProvider` and optionally set a default brand:
+
+```tsx
+import '@orion-ds/react/styles.css';
+import { ThemeProvider } from '@orion-ds/react';
+
+function App() {
+  return (
+    <ThemeProvider defaultBrand="deepblue" defaultTheme="light">
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+<Callout variant="tip" title="Fonts load automatically">
+  <code>ThemeProvider</code> detects the active brand and loads the correct Google Fonts. No manual <code>&lt;link&gt;</code> tags required.
+</Callout>
+
+## Switching Brand and Theme
+
+Use the `useTheme` hook to control brand and theme programmatically:
+
+```tsx
+import { useTheme } from '@orion-ds/react';
+
+function BrandSwitcher() {
+  const { theme, brand, setTheme, setBrand, toggleTheme } = useTheme();
+
+  return (
+    <div>
+      <p>Current: {brand} / {theme}</p>
+
+      {/* Toggle light/dark */}
+      <button onClick={toggleTheme}>
+        Switch to {theme === 'light' ? 'dark' : 'light'}
+      </button>
+
+      {/* Switch brand */}
+      <button onClick={() => setBrand('red')}>Red Brand</button>
+      <button onClick={() => setBrand('deepblue')}>Deepblue Brand</button>
+      <button onClick={() => setBrand('orange')}>Orange Brand</button>
+      <button onClick={() => setBrand('lemon')}>Lemon Brand</button>
+    </div>
+  );
+}
+```
+
+## How It Works
+
+1. `ThemeProvider` sets `data-theme` and `data-brand` attributes on `<html>`
+2. CSS uses selectors like `[data-brand="deepblue"]` to override token values
+3. Components use semantic tokens (`var(--interactive-primary)`) that resolve per-brand
+4. Changing the brand attribute instantly updates every component
+
+```html
+<!-- Light theme, Orion brand (default) -->
+<html data-theme="light">
+
+<!-- Dark theme, Deepblue brand -->
+<html data-theme="dark" data-brand="deepblue">
+```
+
+## Key Semantic Tokens
+
+These tokens change value per brand and theme:
+
+<TokenTable rows={[
+  { token: '--interactive-primary', description: 'Primary button/link color' },
+  { token: '--interactive-primary-hover', description: 'Hover state' },
+  { token: '--interactive-primary-text', description: 'Text on primary buttons' },
+  { token: '--text-brand', description: 'Brand-colored text' },
+  { token: '--color-brand-400 to 600', description: 'Brand color range (for gradients)' },
+  { token: '--radius-control', description: 'Button/input border radius' },
+  { token: '--font-primary', description: 'Heading font family' },
+  { token: '--font-secondary', description: 'Body font family' },
+]} />
+
+<Callout variant="warning" title="Brand is global, not per-component">
+  Never pass <code>brand</code> as a prop. Components inherit the brand from the nearest <code>ThemeProvider</code>.
+</Callout>
+
+## Tri-Modal System
+
+In addition to brands and themes, Orion has a **mode** system that controls visual behavior:
+
+<CardGrid columns={3}>
+  <FeatureCard icon="🍎" title="Display Mode">
+    Atmospheric (Apple-style). Generous shadows, -4px hover lift, glassmorphism enabled. For marketing pages.
+  </FeatureCard>
+  <FeatureCard icon="📐" title="Product Mode">
+    Flat (Linear-style). Minimal shadows, color-change-only hover, no glassmorphism. For dashboards.
+  </FeatureCard>
+  <FeatureCard icon="📱" title="App Mode">
+    Tactile (Material 3-style). Native shadows, -2px hover lift, no glassmorphism. For touch interfaces.
+  </FeatureCard>
+</CardGrid>
+
+Set the mode via data attribute or ThemeProvider:
+
+```html
+<html data-theme="light" data-brand="orion" data-mode="product">
+```
+
+Components use mode-aware tokens automatically:
+
+```css
+/* These tokens change per mode */
+var(--mode-shadow-hover)     /* Shadow on hover */
+var(--mode-hover-lift)       /* Transform on hover */
+var(--mode-hover-duration)   /* Animation speed */
+```
+
+## Storybook Toolbar
+
+Use the Storybook toolbar at the top of this page to switch themes, brands, and modes in real-time. All component stories will update instantly.
+
+- **Theme** (sun/moon icon): Switch between light and dark
+- **Brand** (paintbrush icon): Switch between orion, deepblue, red, orange, ember, lemon
+- **Mode** (browser icon): Switch between display, product, app

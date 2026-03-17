@@ -1,0 +1,152 @@
+/**
+ * Tabs Component Styles
+ *
+ * Navigation tabs for switching between content sections.
+ */
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* Tab list */
+.tabList {
+  display: flex;
+  gap: var(--spacing-1);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  overflow-y: hidden;
+
+  /* Hide scrollbar but keep functionality */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.fullWidth .tabList {
+  width: 100%;
+}
+
+/* Tab button */
+.tab {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  white-space: nowrap;
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  line-height: var(--line-height-tight);
+
+  /* Styling */
+  background: transparent;
+  border: none;
+  border-bottom: 2px solid transparent;
+  cursor: pointer;
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+  outline: none;
+
+  /* Hover state */
+  &:hover:not(:disabled) {
+    color: var(--text-primary);
+    background: var(--interactive-ghost-hover);
+  }
+
+  /* Focus state */
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: -2px;
+    border-radius: var(--radius-sm);
+  }
+
+  /* Disabled state */
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* Full width tabs */
+.fullWidth .tab {
+  flex: 1;
+  justify-content: center;
+}
+
+/* Active tab */
+.active {
+  color: var(--text-brand);
+  border-bottom-color: var(--interactive-primary);
+
+  &:hover {
+    color: var(--text-brand);
+  }
+}
+
+/* Tab icon */
+.icon {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+/* Tab badge */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 var(--spacing-1);
+  font-size: var(--text-xs);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-inverse);
+  background: var(--text-tertiary);
+  border-radius: var(--radius-full);
+  line-height: 1;
+}
+
+.active .badge {
+  background: var(--interactive-primary);
+}
+
+/* Tab panel (content) */
+.panel {
+  padding: var(--spacing-4) 0;
+  animation: fadeIn 200ms ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(4px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .panel {
+    animation: none;
+  }
+}
+
+/* No panel padding variant */
+.noPanelPadding .panel {
+  padding: 0;
+}

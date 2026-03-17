@@ -1,0 +1,58 @@
+/* Collapsible Component Styles */
+
+.collapsible {
+  width: 100%;
+}
+
+/* Trigger - unstyled button that inherits parent styling */
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+/* Content - CSS grid trick for smooth height animation */
+.content {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows var(--transition-normal);
+}
+
+.contentOpen {
+  grid-template-rows: 1fr;
+}
+
+.contentInner {
+  overflow: hidden;
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .content {
+    transition: none;
+  }
+}
+
+/* Forced colors (high contrast mode) */
+@media (forced-colors: active) {
+  .trigger:focus-visible {
+    outline: 2px solid ButtonText;
+  }
+}

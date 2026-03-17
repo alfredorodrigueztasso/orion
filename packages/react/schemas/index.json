@@ -1,0 +1,82 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "Orion React Component Schemas",
+  "description": "JSON Schema definitions for @orion/react components. Use these schemas to enable AI code generation and validation.",
+  "version": "1.0.0",
+  "schemas": {
+    "components": {
+      "Button": "./Button.schema.json",
+      "Card": "./Card.schema.json",
+      "Field": "./Field.schema.json",
+      "Modal": "./Modal.schema.json"
+    },
+    "sections": {
+      "Hero": "./Hero.schema.json",
+      "Features": "./Features.schema.json",
+      "Pricing": "./Pricing.schema.json",
+      "Testimonials": "./Testimonials.schema.json",
+      "CTA": "./CTA.schema.json",
+      "Footer": "./Footer.schema.json"
+    }
+  },
+  "aiInstructions": {
+    "codeGeneration": {
+      "imports": [
+        "import { ComponentName } from '@orion/react';",
+        "import { SectionName } from '@orion/react/sections';",
+        "import { IconName } from 'lucide-react';"
+      ],
+      "cssImports": [
+        "import '@orion/core/theme.css';",
+        "import '@orion/react/dist/react.css';"
+      ],
+      "themeSetup": "<ThemeProvider> must wrap the app root",
+      "brandNote": "Brand and theme are GLOBAL - never pass as component props"
+    },
+    "bestPractices": [
+      "Always use semantic color tokens (--surface-base, --text-primary)",
+      "Never hardcode colors, fonts, or pixel values",
+      "Use CSS variables from @orion/core for all styling",
+      "Wrap app with ThemeProvider for theme/brand management",
+      "Use Lucide icons from 'lucide-react' package",
+      "Include aria-label on icon-only buttons"
+    ],
+    "antiPatterns": [
+      "Passing 'brand' prop to components",
+      "Setting data-brand on component elements",
+      "Hardcoding #FFFFFF, #000000, or any hex colors",
+      "Using px values instead of --spacing-* tokens",
+      "Creating custom icon SVGs instead of using Lucide"
+    ]
+  },
+  "categories": {
+    "layout": ["Container", "Section"],
+    "forms": ["Field", "Select", "Checkbox", "Radio", "Textarea", "Switch"],
+    "feedback": ["Alert", "Modal", "Toast", "Tooltip", "Skeleton"],
+    "navigation": ["Navbar", "Tabs", "Drawer", "Dropdown"],
+    "data": ["Table", "Avatar", "Badge", "Card"],
+    "actions": ["Button", "Link"],
+    "sections": [
+      "Hero",
+      "Features",
+      "CTA",
+      "Pricing",
+      "Testimonials",
+      "Footer",
+      "FAQ",
+      "Stats",
+      "Team",
+      "Contact",
+      "Newsletter",
+      "LogoCloud",
+      "Blog",
+      "Gallery",
+      "Timeline",
+      "Comparison",
+      "Banner",
+      "SocialProof",
+      "AppDownload",
+      "Carousel"
+    ]
+  }
+}

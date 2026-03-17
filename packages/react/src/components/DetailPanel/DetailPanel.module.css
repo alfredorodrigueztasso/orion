@@ -1,0 +1,233 @@
+/**
+ * DetailPanel Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Slide-over panel for focused detail views.
+ */
+
+.container {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal);
+  display: flex;
+}
+
+/* ============================================================================
+ * OVERLAY
+ * ============================================================================ */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--surface-overlay);
+  animation: fadeIn 200ms ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+ * PANEL
+ * ============================================================================ */
+
+.panel {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-base);
+  box-shadow: var(--shadow-xl);
+  outline: none;
+}
+
+.position-right {
+  right: 0;
+  border-left: 1px solid var(--border-subtle);
+  animation: slideInRight 200ms ease-out;
+}
+
+.position-left {
+  left: 0;
+  border-right: 1px solid var(--border-subtle);
+  animation: slideInLeft 200ms ease-out;
+}
+
+@keyframes slideInRight {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideInLeft {
+  from {
+    transform: translateX(-100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+/* Sizes */
+.size-sm {
+  width: 320px;
+}
+
+.size-md {
+  width: 480px;
+}
+
+.size-lg {
+  width: 640px;
+}
+
+.size-xl {
+  width: 800px;
+}
+
+/* ============================================================================
+ * HEADER
+ * ============================================================================ */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-shrink: 0;
+}
+
+.headerContent {
+  flex: 1;
+  min-width: 0;
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.subtitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  margin: var(--spacing-1) 0 0 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.headerActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.closeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition:
+    background-color var(--mode-hover-duration),
+    color var(--mode-hover-duration);
+}
+
+.closeButton:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+.closeButton:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+ * BODY
+ * ============================================================================ */
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-6);
+}
+
+/* ============================================================================
+ * FOOTER
+ * ============================================================================ */
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) var(--spacing-6);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-subtle);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+ * LOADING
+ * ============================================================================ */
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 200px;
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--surface-subtle);
+  border-top-color: var(--interactive-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 640px) {
+  .panel {
+    width: 100% !important;
+    max-width: 100%;
+  }
+
+  .header,
+  .body,
+  .footer {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+}

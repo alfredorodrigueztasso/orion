@@ -1,0 +1,30 @@
+{
+  "totalJs": 4798740,
+  "totalJsKB": 4686.27,
+  "totalCss": 901960,
+  "totalCssKB": 880.82,
+  "files": [
+    {
+      "file": "index.mjs",
+      "size": 2762603,
+      "sizeKB": 2697.85
+    },
+    {
+      "file": "index.cjs",
+      "size": 2036137,
+      "sizeKB": 1988.42
+    },
+    {
+      "file": "styles.css",
+      "size": 564787,
+      "sizeKB": 551.55
+    },
+    {
+      "file": "react.css",
+      "size": 337173,
+      "sizeKB": 329.27
+    }
+  ],
+  "timestamp": "2026-02-13T19:42:12.584Z",
+  "withinBudget": true
+}

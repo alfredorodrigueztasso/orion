@@ -1,0 +1,69 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Features.schema.json",
+  "title": "Features",
+  "description": "A features grid section for showcasing product capabilities with icons and descriptions.",
+  "type": "object",
+  "properties": {
+    "eyebrow": {
+      "type": "string",
+      "description": "Small text above title"
+    },
+    "title": {
+      "type": "string",
+      "description": "Section title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Section description"
+    },
+    "items": {
+      "type": "array",
+      "description": "Array of feature items",
+      "items": {
+        "type": "object",
+        "properties": {
+          "icon": { "description": "Feature icon (ReactNode)" },
+          "title": { "type": "string", "description": "Feature title" },
+          "description": {
+            "type": "string",
+            "description": "Feature description"
+          },
+          "href": { "type": "string", "description": "Optional link URL" }
+        },
+        "required": ["title", "description"]
+      }
+    },
+    "columns": {
+      "type": "number",
+      "enum": [2, 3, 4],
+      "default": 3,
+      "description": "Number of columns in grid"
+    },
+    "centered": {
+      "type": "boolean",
+      "default": false,
+      "description": "Center-align feature cards"
+    },
+    "background": {
+      "type": "string",
+      "enum": ["base", "subtle"],
+      "default": "base",
+      "description": "Background color"
+    }
+  },
+  "required": ["items"],
+  "examples": [
+    {
+      "description": "Three-column features grid",
+      "code": "<Features\n  title=\"Why Choose Us\"\n  description=\"Everything you need to build modern apps\"\n  columns={3}\n  items={[\n    {\n      icon: <Zap size={24} />,\n      title: 'Lightning Fast',\n      description: 'Optimized for speed and performance'\n    },\n    {\n      icon: <Shield size={24} />,\n      title: 'Secure by Default',\n      description: 'Built-in security best practices'\n    },\n    {\n      icon: <Code size={24} />,\n      title: 'Developer Friendly',\n      description: 'Clean APIs and great documentation'\n    }\n  ]}\n/>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a features section with 3 columns",
+    "Make a features grid with icons for a SaaS landing page",
+    "Build a centered features section with 4 items",
+    "Create a features list with links to detail pages",
+    "Add a features section with subtle background"
+  ]
+}

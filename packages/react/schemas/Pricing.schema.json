@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Pricing.schema.json",
+  "title": "Pricing",
+  "description": "A pricing table section for displaying subscription plans. Supports highlighting featured plans.",
+  "type": "object",
+  "properties": {
+    "eyebrow": {
+      "type": "string",
+      "description": "Small text above title"
+    },
+    "title": {
+      "type": "string",
+      "description": "Section title"
+    },
+    "description": {
+      "type": "string",
+      "description": "Section description"
+    },
+    "plans": {
+      "type": "array",
+      "description": "Array of pricing plans",
+      "items": {
+        "type": "object",
+        "properties": {
+          "id": { "type": "string" },
+          "name": {
+            "type": "string",
+            "description": "Plan name (e.g., 'Basic', 'Pro')"
+          },
+          "price": {
+            "type": "string",
+            "description": "Price display (e.g., '$9', '$29/mo')"
+          },
+          "period": {
+            "type": "string",
+            "description": "Billing period (e.g., 'per month')"
+          },
+          "description": {
+            "type": "string",
+            "description": "Plan description"
+          },
+          "features": {
+            "type": "array",
+            "items": { "type": "object" },
+            "description": "List of features"
+          },
+          "highlighted": {
+            "type": "boolean",
+            "description": "Highlight as recommended"
+          },
+          "badge": {
+            "type": "string",
+            "description": "Badge text (e.g., 'Most Popular')"
+          },
+          "buttonText": { "type": "string" },
+          "buttonHref": { "type": "string" }
+        },
+        "required": ["id", "name", "price", "features"]
+      }
+    },
+    "columns": {
+      "type": "number",
+      "enum": [2, 3, 4],
+      "default": 3,
+      "description": "Number of columns"
+    },
+    "background": {
+      "type": "string",
+      "enum": ["base", "subtle"],
+      "default": "base",
+      "description": "Background color"
+    }
+  },
+  "required": ["plans"],
+  "examples": [
+    {
+      "description": "Three-tier pricing table",
+      "code": "<Pricing\n  title=\"Simple Pricing\"\n  description=\"Choose the plan that fits your needs\"\n  plans={[\n    {\n      id: 'basic',\n      name: 'Basic',\n      price: '$9',\n      period: 'per month',\n      features: [\n        { text: '5 projects', included: true },\n        { text: '10GB storage', included: true },\n        { text: 'Priority support', included: false }\n      ],\n      buttonText: 'Get Started'\n    },\n    {\n      id: 'pro',\n      name: 'Pro',\n      price: '$29',\n      period: 'per month',\n      highlighted: true,\n      badge: 'Most Popular',\n      features: [\n        { text: 'Unlimited projects', included: true },\n        { text: '100GB storage', included: true },\n        { text: 'Priority support', included: true }\n      ],\n      buttonText: 'Get Started'\n    },\n    {\n      id: 'enterprise',\n      name: 'Enterprise',\n      price: 'Custom',\n      features: [\n        { text: 'Unlimited everything', included: true },\n        { text: 'Dedicated support', included: true },\n        { text: 'Custom integrations', included: true }\n      ],\n      buttonText: 'Contact Sales'\n    }\n  ]}\n/>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a pricing table with three plans",
+    "Make a pricing section with monthly/yearly toggle",
+    "Build a pricing comparison with highlighted Pro plan",
+    "Create an enterprise pricing page with contact form",
+    "Add a freemium pricing table"
+  ]
+}

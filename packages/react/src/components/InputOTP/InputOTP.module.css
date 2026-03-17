@@ -1,0 +1,144 @@
+/* InputOTP Component Styles */
+
+.root {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  position: relative;
+}
+
+/* Hidden input that captures keyboard events */
+.hiddenInput {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Group container */
+.group {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+/* Individual slot */
+.slot {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  font-family: var(--font-mono);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  background: var(--surface-base);
+  transition: all var(--transition-fast);
+  cursor: text;
+  user-select: none;
+  position: relative;
+}
+
+.slot:hover:not(.slotDisabled) {
+  border-color: var(--border-strong);
+}
+
+/* Active slot — matches Field focus pattern (border + soft-brand shadow) */
+.slotActive {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--soft-brand);
+}
+
+/* Filled slot */
+.slotFilled {
+  color: var(--text-primary);
+}
+
+/* Disabled */
+.slotDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--surface-subtle);
+}
+
+/* Caret animation */
+.caret {
+  width: 1px;
+  height: 50%;
+  background: var(--text-primary);
+  animation: blink 1s step-end infinite;
+}
+
+/* ============================================================================
+ * SIZES — Slot dimensions scale proportionally (sm 36, md 44, lg 52)
+ * Font sizes aligned with Field input tokens
+ * ============================================================================ */
+
+.sm .slot,
+.sm.slot {
+  width: 36px;
+  height: 36px;
+  font-size: var(--font-size-14);
+}
+
+.md .slot,
+.md.slot {
+  width: 44px;
+  height: 44px;
+  font-size: var(--font-size-18);
+}
+
+.lg .slot,
+.lg.slot {
+  width: 52px;
+  height: 52px;
+  font-size: var(--font-size-24);
+}
+
+/* Separator */
+.separator {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-18);
+}
+
+@keyframes blink {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0;
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .slot {
+    transition: none;
+  }
+
+  .caret {
+    animation: none;
+    opacity: 1;
+  }
+}
+
+/* Forced colors (high contrast mode) */
+@media (forced-colors: active) {
+  .slot {
+    border: 1px solid ButtonText;
+  }
+
+  .slotActive {
+    border-color: Highlight;
+    outline: 1px solid Highlight;
+    box-shadow: none;
+  }
+
+  .caret {
+    background: ButtonText;
+  }
+}

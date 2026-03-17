@@ -1,0 +1,85 @@
+/**
+ * DatePicker Component Styles
+ *
+ * Trigger button and popover layout for date selection.
+ */
+
+.wrapper {
+  display: inline-block;
+  position: relative;
+}
+
+/* Trigger button — layout overrides on top of Button secondary */
+.trigger {
+  min-width: 200px;
+  justify-content: flex-start;
+  white-space: nowrap;
+}
+
+.triggerIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Popover override — wider than default to fit presets + calendar */
+.popover {
+  max-width: none;
+}
+
+.popover > div {
+  padding: 0;
+}
+
+/* Popover content wrapper */
+.popoverContent {
+  display: flex;
+}
+
+/* Presets sidebar */
+.presets {
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid var(--border-subtle);
+  padding: var(--spacing-2);
+  min-width: 140px;
+}
+
+.presetButton {
+  display: block;
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.presetButton:hover {
+  background: var(--interactive-ghost-hover);
+  color: var(--text-primary);
+}
+
+.presetButton:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .presetButton {
+    transition: none;
+  }
+}

@@ -1,0 +1,129 @@
+/**
+ * Badge Component Styles
+ *
+ * Status indicators and labels.
+ */
+
+/* Base badge */
+.badge {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-none);
+  white-space: nowrap;
+
+  /* Styling */
+  border-radius: var(--radius-full);
+
+  /* Interaction */
+  user-select: none;
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+/* Primary variant */
+.primary {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+}
+
+/* Secondary variant */
+.secondary {
+  background: var(--interactive-secondary);
+  color: var(--text-primary);
+}
+
+/* Success variant */
+.success {
+  background: var(--soft-success);
+  color: var(--status-success);
+}
+
+/* Error variant */
+.error {
+  background: var(--soft-error);
+  color: var(--status-error);
+}
+
+/* Warning variant */
+.warning {
+  background: var(--soft-warning);
+  color: var(--status-warning);
+}
+
+/* Info variant */
+.info {
+  background: var(--soft-info);
+  color: var(--status-info);
+}
+
+/* Brand variant */
+.brand {
+  background: var(--soft-brand);
+  color: var(--text-brand);
+}
+
+/* Inverse variant — for dark/colored backgrounds (theme-invariant) */
+/* White text on semi-transparent white background */
+.inverse {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm {
+  height: 20px;
+  padding: 0 var(--spacing-2);
+  font-size: var(--font-size-10);
+}
+
+.md {
+  height: 24px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-12);
+}
+
+.lg {
+  height: 28px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-14);
+}
+
+/* ============================================================================
+ * DOT INDICATOR
+ * ============================================================================ */
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  background: currentColor;
+}
+
+/* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Maps brand/secondary variants to inverse appearance automatically.
+ * This allows badges to inherit correct styling when inside dark backgrounds
+ * without requiring developers to manually switch to inverse variant.
+ * ============================================================================ */
+
+:global([data-dark-bg="true"]) .brand,
+:global([data-dark-bg="true"]) .secondary {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+}

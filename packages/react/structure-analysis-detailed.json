@@ -1,0 +1,730 @@
+{
+  "summary": {
+    "total": 20,
+    "withTests": 11,
+    "withStories": 11,
+    "withTypes": 20,
+    "withStyles": 19,
+    "fullyComplete": 11,
+    "needingTests": 9,
+    "needingStories": 9
+  },
+  "components": [
+    {
+      "name": "Button",
+      "priority": 10,
+      "files": {
+        "component": "Button.tsx",
+        "types": "Button.types.ts",
+        "styles": "Button.module.css",
+        "stories": "Button.stories.tsx",
+        "test": "Button.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 95,
+        "types": 82,
+        "styles": 194,
+        "stories": 136,
+        "test": 85
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Card",
+      "priority": 10,
+      "files": {
+        "component": "Card.tsx",
+        "types": "Card.types.ts",
+        "styles": "Card.module.css",
+        "stories": "Card.stories.tsx",
+        "test": "Card.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 91,
+        "types": 74,
+        "styles": 109,
+        "stories": 110,
+        "test": 148
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Field",
+      "priority": 10,
+      "files": {
+        "component": "Field.tsx",
+        "types": "Field.types.ts",
+        "styles": "Field.module.css",
+        "stories": "Field.stories.tsx",
+        "test": "Field.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 146,
+        "types": 66,
+        "styles": 181,
+        "stories": 168,
+        "test": 178
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Alert",
+      "priority": 9,
+      "files": {
+        "component": "Alert.tsx",
+        "types": "Alert.types.ts",
+        "styles": "Alert.module.css",
+        "stories": "Alert.stories.tsx",
+        "test": "Alert.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 95,
+        "types": 61,
+        "styles": 124,
+        "stories": 86,
+        "test": 87
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Modal",
+      "priority": 9,
+      "files": {
+        "component": "Modal.tsx",
+        "types": "Modal.types.ts",
+        "styles": "Modal.module.css",
+        "stories": "Modal.stories.tsx",
+        "test": "Modal.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 150,
+        "types": 97,
+        "styles": 162,
+        "stories": 263,
+        "test": 326
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Select",
+      "priority": 9,
+      "files": {
+        "component": "Select.tsx",
+        "types": "Select.types.ts",
+        "styles": "Select.module.css",
+        "stories": "Select.stories.tsx",
+        "test": "Select.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 139,
+        "types": 82,
+        "styles": 146,
+        "stories": 156,
+        "test": 229
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Badge",
+      "priority": 8,
+      "files": {
+        "component": "Badge.tsx",
+        "types": "Badge.types.ts",
+        "styles": "Badge.module.css",
+        "stories": "Badge.stories.tsx",
+        "test": "Badge.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 40,
+        "types": 53,
+        "styles": 136,
+        "stories": 138,
+        "test": 63
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Checkbox",
+      "priority": 8,
+      "files": {
+        "component": "Checkbox.tsx",
+        "types": "Checkbox.types.ts",
+        "styles": "Checkbox.module.css",
+        "stories": "Checkbox.stories.tsx",
+        "test": "Checkbox.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 121,
+        "types": 51,
+        "styles": 209,
+        "stories": 223,
+        "test": 204
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Navbar",
+      "priority": 8,
+      "files": {
+        "component": "Navbar.tsx",
+        "types": "Navbar.types.ts",
+        "styles": "Navbar.module.css",
+        "stories": "Navbar.stories.tsx",
+        "test": "Navbar.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 173,
+        "types": 105,
+        "styles": 177,
+        "stories": 331,
+        "test": 430
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Spinner",
+      "priority": 8,
+      "files": {
+        "component": "Spinner.tsx",
+        "types": "Spinner.types.ts",
+        "styles": "Spinner.module.css",
+        "stories": "Spinner.stories.tsx",
+        "test": "Spinner.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 46,
+        "types": 54,
+        "styles": 96,
+        "stories": 243,
+        "test": 192
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "Switch",
+      "priority": 8,
+      "files": {
+        "component": "Switch.tsx",
+        "types": "Switch.types.ts",
+        "styles": "Switch.module.css",
+        "stories": "Switch.stories.tsx",
+        "test": "Switch.test.tsx",
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 67,
+        "types": 40,
+        "styles": 179,
+        "stories": 270,
+        "test": 240
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": true,
+        "hasTest": true
+      },
+      "score": 100,
+      "recommendations": []
+    },
+    {
+      "name": "ProgressBar",
+      "priority": 7,
+      "files": {
+        "component": "ProgressBar.tsx",
+        "types": "ProgressBar.types.ts",
+        "styles": "ProgressBar.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 77,
+        "types": 71,
+        "styles": 118,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "ProgressBar.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "ProgressBar.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Radio",
+      "priority": 7,
+      "files": {
+        "component": "Radio.tsx",
+        "types": "Radio.types.ts",
+        "styles": "Radio.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 100,
+        "types": 45,
+        "styles": 182,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Radio.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Radio.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Table",
+      "priority": 7,
+      "files": {
+        "component": "Table.tsx",
+        "types": "Table.types.ts",
+        "styles": "Table.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 245,
+        "types": 165,
+        "styles": 191,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Table.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Table.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Tabs",
+      "priority": 7,
+      "files": {
+        "component": "Tabs.tsx",
+        "types": "Tabs.types.ts",
+        "styles": "Tabs.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 131,
+        "types": 90,
+        "styles": 148,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Tabs.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Tabs.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Textarea",
+      "priority": 7,
+      "files": {
+        "component": "Textarea.tsx",
+        "types": "Textarea.types.ts",
+        "styles": "Textarea.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 165,
+        "types": 73,
+        "styles": 184,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Textarea.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Textarea.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Tooltip",
+      "priority": 7,
+      "files": {
+        "component": "Tooltip.tsx",
+        "types": "Tooltip.types.ts",
+        "styles": "Tooltip.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 86,
+        "types": 58,
+        "styles": 121,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Tooltip.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Tooltip.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "ThemeController",
+      "priority": 6,
+      "files": {
+        "component": "ThemeController.tsx",
+        "types": "ThemeController.types.ts",
+        "styles": null,
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 320,
+        "types": 66,
+        "styles": 0,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": false,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 50,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "ThemeController.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "ThemeController.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Avatar",
+      "priority": 6,
+      "files": {
+        "component": "Avatar.tsx",
+        "types": "Avatar.types.ts",
+        "styles": "Avatar.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 81,
+        "types": 63,
+        "styles": 171,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Avatar.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Avatar.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    },
+    {
+      "name": "Breadcrumb",
+      "priority": 6,
+      "files": {
+        "component": "Breadcrumb.tsx",
+        "types": "Breadcrumb.types.ts",
+        "styles": "Breadcrumb.module.css",
+        "stories": null,
+        "test": null,
+        "index": "index.ts"
+      },
+      "lines": {
+        "component": 155,
+        "types": 106,
+        "styles": 124,
+        "stories": 0,
+        "test": 0
+      },
+      "completeness": {
+        "hasComponent": true,
+        "hasTypes": true,
+        "hasStyles": true,
+        "hasStories": false,
+        "hasTest": false
+      },
+      "score": 65,
+      "recommendations": [
+        {
+          "type": "CRITICAL",
+          "priority": "HIGH",
+          "action": "Create test file",
+          "file": "Breadcrumb.test.tsx",
+          "impact": "Enable automated validation and provide usage examples for AI"
+        },
+        {
+          "type": "IMPORTANT",
+          "priority": "HIGH",
+          "action": "Create Storybook story",
+          "file": "Breadcrumb.stories.tsx",
+          "impact": "Visual documentation and interactive examples"
+        }
+      ]
+    }
+  ],
+  "phases": {
+    "phase1": [],
+    "phase2": ["ProgressBar", "Radio", "Table", "Tabs", "Textarea", "Tooltip"],
+    "phase3": [
+      "ProgressBar",
+      "Radio",
+      "Table",
+      "Tabs",
+      "Textarea",
+      "Tooltip",
+      "ThemeController",
+      "Avatar",
+      "Breadcrumb"
+    ]
+  },
+  "quickWins": [],
+  "timeEstimates": {
+    "phase1Hours": 0,
+    "phase2Hours": 3,
+    "totalHours": 9
+  }
+}

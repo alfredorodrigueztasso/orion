@@ -1,0 +1,423 @@
+/**
+ * KanbanBoard Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Clean task board with efficient visual scanning.
+ */
+
+.kanbanBoard {
+  width: 100%;
+  overflow-x: auto;
+  padding: var(--spacing-4);
+}
+
+.columns {
+  display: flex;
+  gap: var(--spacing-4);
+  min-height: 400px;
+}
+
+/* ============================================================================
+ * COLUMN
+ * ============================================================================ */
+
+.column {
+  flex-shrink: 0;
+  width: 280px;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-control);
+  max-height: 100%;
+}
+
+.columnHeader {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-3) var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.columnTitleWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.columnDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.dot-blue {
+  background: var(--color-blue-500);
+}
+.dot-green {
+  background: var(--color-green-500);
+}
+.dot-yellow {
+  background: var(--color-yellow-500);
+}
+.dot-red {
+  background: var(--color-red-500);
+}
+.dot-purple {
+  background: var(--color-purple-500);
+}
+
+.columnTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.columnCount {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  background: var(--surface-base);
+  padding: var(--spacing-0-5) var(--spacing-2);
+  border-radius: var(--radius-full);
+}
+
+.columnCountOver {
+  background: var(--status-error-bg);
+  color: var(--text-error);
+}
+
+.columnActions {
+  display: flex;
+  gap: var(--spacing-1);
+}
+
+.columnAction {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition: all var(--mode-hover-duration);
+}
+
+.columnAction:hover {
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+/* ============================================================================
+ * CARDS CONTAINER
+ * ============================================================================ */
+
+.columnCards {
+  flex: 1;
+  overflow-y: auto;
+  padding: 0 var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.emptyColumn {
+  padding: var(--spacing-6);
+  text-align: center;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * CARD
+ * ============================================================================ */
+
+.card {
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+  overflow: hidden;
+}
+
+.card:hover {
+  border-color: var(--border-moderate);
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.card:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+.card[draggable="true"] {
+  cursor: grab;
+}
+
+.card[draggable="true"]:active {
+  cursor: grabbing;
+}
+
+.cardCompact .cardContent {
+  padding: var(--spacing-2);
+}
+
+.cardCover {
+  width: 100%;
+  height: 120px;
+  overflow: hidden;
+}
+
+.cardCover img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.cardContent {
+  padding: var(--spacing-3);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+/* Labels */
+.labels {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-1);
+}
+
+.label {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-0-5) var(--spacing-1-5);
+  border-radius: var(--radius-sm);
+  text-transform: uppercase;
+  letter-spacing: 0.02em;
+}
+
+.label-red {
+  background: var(--color-red-100);
+  color: var(--color-red-700);
+}
+.label-orange {
+  background: var(--color-orange-100);
+  color: var(--color-orange-700);
+}
+.label-yellow {
+  background: var(--color-yellow-100);
+  color: var(--color-yellow-700);
+}
+.label-green {
+  background: var(--color-green-100);
+  color: var(--color-green-700);
+}
+.label-blue {
+  background: var(--color-blue-100);
+  color: var(--color-blue-700);
+}
+.label-purple {
+  background: var(--color-purple-100);
+  color: var(--color-purple-700);
+}
+.label-pink {
+  background: var(--color-pink-100);
+  color: var(--color-pink-700);
+}
+.label-gray {
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+}
+
+/* Title */
+.cardTitle {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  line-height: var(--line-height-relaxed);
+}
+
+.priority {
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.priority-medium {
+  color: var(--color-yellow-500);
+}
+.priority-high {
+  color: var(--color-orange-500);
+}
+.priority-urgent {
+  color: var(--color-red-500);
+}
+
+/* Description */
+.cardDescription {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* Footer */
+.cardFooter {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-1);
+}
+
+.dueDate {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+}
+
+/* Assignees */
+.assignees {
+  display: flex;
+  align-items: center;
+  margin-left: auto;
+}
+
+.assignee {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--surface-subtle);
+  border: 2px solid var(--surface-base);
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+.assignee:first-child {
+  margin-left: 0;
+}
+
+.assignee img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.assigneeMore {
+  width: 24px;
+  height: 24px;
+  border-radius: var(--radius-full);
+  background: var(--surface-layer);
+  border: 2px solid var(--surface-base);
+  margin-left: -8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * ADD BUTTONS
+ * ============================================================================ */
+
+.addCardButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-1);
+  width: calc(100% - var(--spacing-6));
+  margin: var(--spacing-2) var(--spacing-3) var(--spacing-3);
+  padding: var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  background: none;
+  border: 1px dashed var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+}
+
+.addCardButton:hover {
+  color: var(--text-primary);
+  border-color: var(--border-moderate);
+  background: var(--surface-base);
+}
+
+.addColumnButton {
+  flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  width: 280px;
+  min-height: 120px;
+  padding: var(--spacing-4);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  background: var(--surface-subtle);
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+}
+
+.addColumnButton:hover {
+  color: var(--text-primary);
+  border-color: var(--border-moderate);
+  background: var(--surface-layer);
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .column {
+    width: 260px;
+  }
+
+  .kanbanBoard {
+    padding: var(--spacing-2);
+  }
+
+  .columns {
+    gap: var(--spacing-3);
+  }
+}

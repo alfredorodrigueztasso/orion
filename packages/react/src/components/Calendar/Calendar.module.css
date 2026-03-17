@@ -1,0 +1,204 @@
+/**
+ * Calendar Component Styles
+ *
+ * Grid-based date picker with token-driven styling.
+ */
+
+.calendar {
+  display: inline-flex;
+  flex-direction: column;
+  padding: var(--spacing-3);
+  font-family: var(--font-secondary);
+  user-select: none;
+}
+
+/* ============================================================================
+ * HEADER (Month navigation)
+ * ============================================================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 var(--spacing-1);
+  margin-bottom: var(--spacing-2);
+}
+
+.monthLabel {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+}
+
+/* ============================================================================
+ * GRID
+ * ============================================================================ */
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: var(--spacing-1);
+}
+
+/* Day-of-week headers */
+.weekday {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * DAY CELLS
+ * ============================================================================ */
+
+.day {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  font-size: var(--font-size-14);
+  font-family: var(--font-secondary);
+  color: var(--text-primary);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+}
+
+.day:hover:not(.disabled):not(.selected):not(.rangeStart):not(.rangeMiddle):not(
+    .rangeEnd
+  ) {
+  background: var(--interactive-ghost-hover);
+}
+
+.day:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  z-index: var(--z-dropdown);
+}
+
+.day:active:not(.disabled) {
+  transform: scale(0.95);
+}
+
+/* Today */
+.today:not(.selected):not(.rangeStart):not(.rangeEnd) {
+  font-weight: var(--font-weight-bold);
+  color: var(--interactive-primary);
+}
+
+/* Selected (single / multiple) */
+.selected {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  font-weight: var(--font-weight-semibold);
+}
+
+.selected:hover {
+  background: var(--interactive-primary-hover);
+}
+
+/* ============================================================================
+ * RANGE SELECTION
+ *
+ * Uses ::before pseudo-element for the connecting soft band.
+ * Start/end endpoints are fully-rounded (matching brand radius)
+ * with the primary color. The band runs behind them.
+ * ============================================================================ */
+
+/* Soft band behind all range cells */
+.rangeStart::before,
+.rangeMiddle::before,
+.rangeEnd::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  background: var(--soft-brand);
+  z-index: -1;
+}
+
+/* Start: band extends to the right into the gap */
+.rangeStart::before {
+  left: 50%;
+  right: calc(var(--spacing-1) * -0.5);
+}
+
+/* Middle: band extends full width + into gaps on both sides */
+.rangeMiddle::before {
+  left: calc(var(--spacing-1) * -0.5);
+  right: calc(var(--spacing-1) * -0.5);
+}
+
+/* End: band extends to the left into the gap */
+.rangeEnd::before {
+  left: calc(var(--spacing-1) * -0.5);
+  right: 50%;
+}
+
+/* Range start/end hover */
+.rangeStart:hover,
+.rangeEnd:hover {
+  background: var(--interactive-primary-hover);
+}
+
+/* Range start */
+.rangeStart {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border-radius: var(--radius-button);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Range middle — transparent bg, band is in ::before */
+.rangeMiddle {
+  background: transparent;
+  color: var(--text-primary);
+  border-radius: 0;
+}
+
+/* Range end */
+.rangeEnd {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border-radius: var(--radius-button);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* Range start + end same day — no band needed */
+.rangeStart.rangeEnd::before {
+  display: none;
+}
+
+/* Outside month */
+.outside {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+/* Disabled */
+.disabled {
+  color: var(--text-tertiary);
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .day {
+    transition: none;
+  }
+}

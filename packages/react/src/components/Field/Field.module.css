@@ -1,0 +1,428 @@
+/**
+ * Field Component Styles
+ *
+ * Input field with label, error states, and icons.
+ * Implements WCAG 2.1 AA accessibility guidelines.
+ */
+
+/* Container */
+.fieldContainer {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+.disabled {
+  opacity: 0.6;
+}
+
+/* Label */
+.label {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  line-height: var(--line-height-tight);
+  cursor: pointer;
+}
+
+.disabled .label {
+  cursor: not-allowed;
+}
+
+.labelText {
+  /* Allows label text to be styled separately if needed */
+}
+
+.optional {
+  font-size: var(--font-size-11);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-tertiary);
+}
+
+.required {
+  color: var(--status-error);
+  font-weight: var(--font-weight-medium);
+  margin-left: 2px;
+}
+
+/* Input wrapper (for icons) */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+/* Input */
+.input {
+  /* Layout */
+  width: 100%;
+  display: block;
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-normal);
+  color: var(--text-primary);
+
+  /* Styling */
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+  outline: none;
+
+  /* Placeholder */
+  &::placeholder {
+    color: var(--text-tertiary);
+  }
+
+  /* Hover state */
+  &:hover:not(:disabled):not(:read-only) {
+    border-color: var(--border-strong);
+  }
+
+  /* Focus state - visible for all focus methods */
+  &:focus {
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px var(--soft-brand);
+  }
+
+  /* Focus-visible - box-shadow provides sufficient focus indicator */
+  &:focus-visible {
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px var(--soft-brand);
+  }
+
+  /* Disabled state */
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    background: var(--surface-subtle);
+  }
+
+  /* Read-only state */
+  &:read-only {
+    background: var(--surface-subtle);
+    border-color: var(--border-subtle);
+    cursor: default;
+  }
+
+  /* Autofill styling - maintains accessible contrast */
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--text-primary);
+    box-shadow: 0 0 0px 1000px var(--surface-subtle) inset;
+    transition: background-color 5000s ease-in-out 0s;
+  }
+}
+
+/* Error state */
+.error .input {
+  border-color: var(--status-error);
+
+  &:focus {
+    border-color: var(--status-error);
+    box-shadow: 0 0 0 3px var(--soft-error);
+  }
+
+  &:focus-visible {
+    border-color: var(--status-error);
+    box-shadow: 0 0 0 3px var(--soft-error);
+  }
+}
+
+/* Icons */
+.leftIcon,
+.rightIcon {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.leftIcon {
+  left: var(--spacing-3);
+}
+
+.rightIcon {
+  right: var(--spacing-3);
+}
+
+/* Interactive right icon (e.g., password toggle button) */
+.rightIconInteractive {
+  pointer-events: auto;
+}
+
+/* Ensure buttons inside rightIcon are accessible */
+.rightIconInteractive button,
+.rightIconInteractive [role="button"] {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-1);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition: color var(--transition-fast);
+}
+
+.rightIconInteractive button:hover,
+.rightIconInteractive [role="button"]:hover {
+  color: var(--text-primary);
+}
+
+.rightIconInteractive button:focus-visible,
+.rightIconInteractive [role="button"]:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* Error icon inline (in input) */
+.errorIconInline {
+  color: var(--status-error);
+  pointer-events: none;
+}
+
+/* Error icon in message */
+.errorIconMessage {
+  flex-shrink: 0;
+}
+
+/* Sizes - use explicit padding to allow icon padding overrides */
+.sm {
+  height: 32px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: var(--spacing-3);
+  padding-right: var(--spacing-3);
+  font-size: var(--font-size-12);
+}
+
+.md {
+  height: 40px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+  font-size: var(--font-size-16);
+}
+
+.lg {
+  height: 48px;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: var(--spacing-4);
+  padding-right: var(--spacing-4);
+  font-size: var(--font-size-18);
+}
+
+/* Input with icons - MUST come after size rules to override padding */
+.input.hasLeftIcon {
+  padding-left: var(--spacing-10);
+}
+
+.input.hasRightIcon {
+  padding-right: var(--spacing-10);
+}
+
+/* Helper text */
+.helperText {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  line-height: var(--line-height-snug);
+}
+
+/* Error message */
+.errorMessage {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-1);
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--status-error);
+  line-height: var(--line-height-snug);
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE SUPPORT
+ * Ensures visibility in Windows High Contrast Mode and forced-colors
+ * ============================================================================ */
+
+@media (forced-colors: active) {
+  .input {
+    border: 2px solid CanvasText;
+    background: Canvas;
+    color: CanvasText;
+  }
+
+  .input:focus,
+  .input:focus-visible {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .input:disabled {
+    border-color: GrayText;
+    color: GrayText;
+  }
+
+  .error .input {
+    border-color: LinkText;
+  }
+
+  .errorMessage,
+  .errorIconInline,
+  .errorIconMessage {
+    color: LinkText;
+  }
+
+  .required {
+    color: LinkText;
+  }
+
+  .leftIcon,
+  .rightIcon {
+    color: CanvasText;
+  }
+}
+
+/* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Makes Field visible on dark backgrounds without needing variants.
+ * Label, input border, and text automatically adapt for readability.
+ * ============================================================================ */
+
+:global([data-dark-bg="true"]) .label {
+  color: var(--color-neutral-0);
+}
+
+:global([data-dark-bg="true"]) .optional {
+  color: var(--color-neutral-200);
+}
+
+:global([data-dark-bg="true"]) .required {
+  color: var(--status-error);
+}
+
+:global([data-dark-bg="true"]) .input {
+  background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+  color: var(--color-neutral-0);
+
+  &::placeholder {
+    color: var(--color-neutral-300);
+  }
+
+  &:hover:not(:disabled):not(:read-only) {
+    border-color: color-mix(in srgb, var(--color-neutral-0) 60%, transparent);
+  }
+
+  &:focus {
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px var(--soft-brand);
+  }
+
+  &:focus-visible {
+    border-color: var(--interactive-primary);
+    box-shadow: 0 0 0 3px var(--soft-brand);
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+
+  &:disabled {
+    background: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  }
+
+  &:read-only {
+    background: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
+    border-color: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  }
+
+  &:-webkit-autofill,
+  &:-webkit-autofill:hover,
+  &:-webkit-autofill:focus {
+    -webkit-text-fill-color: var(--color-neutral-0);
+    box-shadow: 0 0 0px 1000px
+      color-mix(in srgb, var(--color-neutral-0) 15%, transparent) inset;
+  }
+}
+
+:global([data-dark-bg="true"]) .error .input {
+  border-color: var(--status-error);
+
+  &:focus {
+    border-color: var(--status-error);
+    box-shadow: 0 0 0 3px var(--soft-error);
+  }
+
+  &:focus-visible {
+    border-color: var(--status-error);
+    box-shadow: 0 0 0 3px var(--soft-error);
+  }
+}
+
+:global([data-dark-bg="true"]) .leftIcon,
+:global([data-dark-bg="true"]) .rightIcon {
+  color: var(--color-neutral-300);
+}
+
+:global([data-dark-bg="true"]) .rightIconInteractive button,
+:global([data-dark-bg="true"]) .rightIconInteractive [role="button"] {
+  color: var(--color-neutral-300);
+}
+
+:global([data-dark-bg="true"]) .rightIconInteractive button:hover,
+:global([data-dark-bg="true"]) .rightIconInteractive [role="button"]:hover {
+  color: var(--color-neutral-0);
+}
+
+:global([data-dark-bg="true"]) .helperText {
+  color: var(--color-neutral-300);
+}
+
+:global([data-dark-bg="true"]) .errorMessage {
+  color: var(--status-error);
+}
+
+:global([data-dark-bg="true"]) .errorIconInline {
+  color: var(--status-error);
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * Respects user preference for reduced motion
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .input {
+    transition: none;
+  }
+
+  .rightIconInteractive button,
+  .rightIconInteractive [role="button"] {
+    transition: none;
+  }
+}

@@ -1,0 +1,121 @@
+import { Meta } from '@storybook/blocks';
+import { Callout, FeatureCard, CardGrid, LinkCard, LinkCardGrid, BrandSwatch } from './DocComponents';
+
+<Meta title="Getting Started/Introduction" />
+
+# Orion Design System
+
+Orion is an **AI-first design system** built on the "Chain of Truth" principle. It's a token-governed framework that eliminates UI hallucination by enforcing strict separation between primitives, semantics, and components.
+
+## The Chain of Truth
+
+Orion's architecture is a 3-layer system where each layer has a single responsibility:
+
+<CardGrid columns={3}>
+  <FeatureCard icon="🧱" title="Primitives (Layer 1)">
+    Raw values (colors, sizes, fonts) defined in <code>tokens/primary.json</code>. The immutable source of truth. E.g. <code>#1B5BFF</code>, <code>16px</code>.
+  </FeatureCard>
+  <FeatureCard icon="🎯" title="Semantics (Layer 2)">
+    Intent-based aliases like <code>--surface-base</code>, <code>--text-primary</code>. Defined per theme (light/dark). Describe <em>what values do</em>, not what they look like.
+  </FeatureCard>
+  <FeatureCard icon="🧩" title="Components (Layer 3)">
+    Blind consumers that reference semantic tokens via CSS variables. Components never hardcode values — they just work across any brand or theme.
+  </FeatureCard>
+</CardGrid>
+
+This architecture guarantees that switching brands or themes updates the entire UI consistently — zero visual drift.
+
+## Packages
+
+<CardGrid columns={3}>
+  <FeatureCard icon="⚛" title="@orion-ds/react">
+    40+ React components, 30+ sections, 9 templates
+  </FeatureCard>
+  <FeatureCard icon="📋" title="@orion-ds/cli">
+    Copy components into your project (shadcn-style)
+  </FeatureCard>
+  <FeatureCard icon="🚀" title="@orion-ds/create">
+    Scaffold a new Orion project with <code>npx @orion-ds/create</code>
+  </FeatureCard>
+  <FeatureCard icon="✅" title="@orion-ds/validate">
+    Validate your code against Orion rules
+  </FeatureCard>
+  <FeatureCard icon="🤖" title="@orion-ds/mcp">
+    MCP Server for AI-assisted development
+  </FeatureCard>
+</CardGrid>
+
+## Multi-Brand Support
+
+Orion supports 5 brands out of the box. Each brand changes accent colors, typography, and border radius — all through CSS variables. Components don't need to know which brand is active.
+
+<CardGrid columns={3}>
+  <FeatureCard icon={<BrandSwatch color="#1B5BFF" name="Blue" />} title="Orion">
+    Libre Baskerville headings, pill buttons. The default brand.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#006FBA" name="Deep Blue" />} title="Deepblue">
+    Work Sans typography, rounded buttons. Corporate feel.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#D7282F" name="Red" />} title="Red">
+    Poppins headings, pill buttons. Bold and energetic.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#F15D22" name="Orange" />} title="Orange">
+    DM Sans typography, pill buttons. Warm and approachable.
+  </FeatureCard>
+  <FeatureCard icon={<BrandSwatch color="#84CC16" name="Lime" />} title="Lemon">
+    Anton headings, pill buttons. Fresh and modern.
+  </FeatureCard>
+</CardGrid>
+
+## Tri-Modal System
+
+Components adapt their visual behavior based on the active mode:
+
+<CardGrid columns={3}>
+  <FeatureCard icon="🍎" title="Display Mode">
+    Atmospheric & Narrative (Apple-style). Generous shadows, -4px hover lifts, glassmorphism enabled. For marketing and landing pages.
+  </FeatureCard>
+  <FeatureCard icon="📐" title="Product Mode">
+    Geometric Precision (Linear-style). Minimal shadows, color-change-only hover, no glassmorphism. For dashboards and admin panels.
+  </FeatureCard>
+  <FeatureCard icon="📱" title="App Mode">
+    Tactile Elevation (Material 3-style). Native shadows, -2px hover lifts, touch-friendly. For mobile apps and touch interfaces.
+  </FeatureCard>
+</CardGrid>
+
+Each mode controls shadows, hover lifts, glassmorphism, and spacing — automatically.
+
+## Next Steps
+
+<LinkCardGrid>
+  <LinkCard
+    icon="📦"
+    title="Installation"
+    description="Set up Orion in your project"
+    href="?path=/docs/getting-started-installation--docs"
+  />
+  <LinkCard
+    icon="🧩"
+    title="Using Components"
+    description="Import and use components"
+    href="?path=/docs/getting-started-using-components--docs"
+  />
+  <LinkCard
+    icon="📋"
+    title="CLI (orion add)"
+    description="Copy components into your project"
+    href="?path=/docs/getting-started-cli-orion-add--docs"
+  />
+  <LinkCard
+    icon="🤖"
+    title="MCP Server"
+    description="AI-assisted development"
+    href="?path=/docs/getting-started-mcp-server--docs"
+  />
+  <LinkCard
+    icon="🎨"
+    title="Brands & Themes"
+    description="Multi-brand and theming"
+    href="?path=/docs/getting-started-brands-themes--docs"
+  />
+</LinkCardGrid>

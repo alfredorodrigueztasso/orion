@@ -1,0 +1,202 @@
+/**
+ * Accordion Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Container */
+.accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+/* Default variant - minimal styling */
+.accordion.default {
+  gap: 0;
+}
+
+.accordion.default .item {
+  border-bottom: 1px solid var(--border-subtle);
+
+  &:last-child {
+    border-bottom: none;
+  }
+}
+
+/* Bordered variant - with outer border */
+.accordion.bordered {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  gap: 0;
+  overflow: hidden; /* Ensures child backgrounds respect container radius */
+}
+
+.accordion.bordered .item {
+  border-bottom: 1px solid var(--border-subtle);
+
+  &:first-child .header {
+    border-top-left-radius: calc(var(--radius-control) - 1px);
+    border-top-right-radius: calc(var(--radius-control) - 1px);
+  }
+
+  &:last-child {
+    border-bottom: none;
+  }
+
+  &:last-child .header {
+    border-bottom-left-radius: calc(var(--radius-control) - 1px);
+    border-bottom-right-radius: calc(var(--radius-control) - 1px);
+  }
+
+  &:last-child.expanded .header {
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+
+  &:last-child .contentInner {
+    border-bottom-left-radius: calc(var(--radius-control) - 1px);
+    border-bottom-right-radius: calc(var(--radius-control) - 1px);
+  }
+}
+
+/* Separated variant - items with gaps */
+.accordion.separated {
+  gap: var(--spacing-2);
+}
+
+.accordion.separated .item {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  overflow: hidden; /* Ensures child backgrounds respect item radius */
+}
+
+/* ============================================================================
+ * ITEM
+ * ============================================================================ */
+
+.item {
+  background: var(--surface-base);
+}
+
+.item.expanded {
+  background: var(--surface-subtle);
+}
+
+.item.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * HEADER
+ * ============================================================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--spacing-4);
+  gap: var(--spacing-3);
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  transition: background-color var(--transition-fast);
+
+  &:hover:not(:disabled) {
+    background: var(--surface-subtle);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: -2px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+.icon {
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.title {
+  flex: 1;
+}
+
+.chevron {
+  width: var(--spacing-5);
+  height: var(--spacing-5);
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast);
+}
+
+.chevronExpanded {
+  transform: rotate(180deg);
+}
+
+/* ============================================================================
+ * CONTENT
+ * ============================================================================ */
+
+.content {
+  overflow: hidden;
+}
+
+.content.animated {
+  transition:
+    max-height var(--transition-normal),
+    opacity var(--transition-normal);
+}
+
+.content[hidden] {
+  display: none;
+}
+
+.contentExpanded {
+  display: block;
+}
+
+.contentInner {
+  padding: 0 var(--spacing-4) var(--spacing-4) var(--spacing-4);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* Container spacing ownership */
+.contentInner :last-child {
+  margin-bottom: 0;
+}
+
+.contentInner pre,
+.contentInner code {
+  margin: 0;
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .chevron,
+  .content.animated {
+    transition: none;
+  }
+}

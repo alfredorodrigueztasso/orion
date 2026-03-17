@@ -1,0 +1,117 @@
+/**
+ * ProgressBar Component Styles
+ *
+ * Progress indicator with variants and sizes.
+ */
+
+/* Container */
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  width: 100%;
+}
+
+/* Label */
+.labelWrapper {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}
+
+.percentage {
+  font-variant-numeric: tabular-nums;
+  color: var(--text-primary);
+}
+
+/* Track (background) */
+.track {
+  position: relative;
+  width: 100%;
+  background: var(--surface-layer);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+/* Bar (foreground) */
+.bar {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm .track {
+  height: 4px;
+}
+
+.md .track {
+  height: 8px;
+}
+
+.lg .track {
+  height: 12px;
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+.primary .bar {
+  background: var(--interactive-primary);
+}
+
+.success .bar {
+  background: var(--status-success);
+}
+
+.warning .bar {
+  background: var(--status-warning);
+}
+
+.error .bar {
+  background: var(--status-error);
+}
+
+.info .bar {
+  background: var(--status-info);
+}
+
+/* ============================================================================
+ * INDETERMINATE (LOADING) STATE
+ * ============================================================================ */
+
+.indeterminate .bar {
+  width: 30% !important;
+  animation: indeterminate 1.5s ease-in-out infinite;
+}
+
+@keyframes indeterminate {
+  0% {
+    transform: translateX(-100%);
+  }
+  50% {
+    transform: translateX(350%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .bar {
+    transition: none;
+  }
+
+  .indeterminate .bar {
+    animation: none;
+    width: 100% !important;
+  }
+}

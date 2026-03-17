@@ -1,0 +1,226 @@
+/**
+ * Avatar Component Styles
+ *
+ * User profile picture or initials display.
+ */
+
+/* Base avatar */
+.avatar {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* Styling */
+  background: var(--surface-layer);
+  border-radius: 50%;
+  user-select: none;
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+}
+
+/* Avatar image */
+.image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+/* Initials */
+.initials {
+  text-transform: uppercase;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+/* Icon */
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+}
+
+.icon svg {
+  width: 100%;
+  height: 100%;
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.xs {
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-10);
+}
+
+.xs .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.sm {
+  width: 32px;
+  height: 32px;
+  font-size: var(--font-size-12);
+}
+
+.sm .icon {
+  width: 16px;
+  height: 16px;
+}
+
+.md {
+  width: 40px;
+  height: 40px;
+  font-size: var(--font-size-14);
+}
+
+.md .icon {
+  width: 20px;
+  height: 20px;
+}
+
+.lg {
+  width: 48px;
+  height: 48px;
+  font-size: var(--font-size-16);
+}
+
+.lg .icon {
+  width: 24px;
+  height: 24px;
+}
+
+.xl {
+  width: 64px;
+  height: 64px;
+  font-size: var(--font-size-20);
+}
+
+.xl .icon {
+  width: 32px;
+  height: 32px;
+}
+
+.xxl {
+  width: 96px;
+  height: 96px;
+  font-size: var(--font-size-32);
+}
+
+.xxl .icon {
+  width: 48px;
+  height: 48px;
+}
+
+.profile {
+  width: 120px;
+  height: 120px;
+  font-size: var(--font-size-48);
+}
+
+.profile .icon {
+  width: 56px;
+  height: 56px;
+}
+
+.xxxl {
+  width: 120px;
+  height: 120px;
+  font-size: var(--font-size-48);
+}
+
+.xxxl .icon {
+  width: 56px;
+  height: 56px;
+}
+
+.xxxxl {
+  width: 160px;
+  height: 160px;
+  font-size: var(--font-size-64);
+}
+
+.xxxxl .icon {
+  width: 72px;
+  height: 72px;
+}
+
+.xxxxxl {
+  width: 200px;
+  height: 200px;
+  font-size: var(--font-size-80);
+}
+
+.xxxxxl .icon {
+  width: 96px;
+  height: 96px;
+}
+
+/* ============================================================================
+ * INTERACTIVE
+ * ============================================================================ */
+
+.interactive {
+  cursor: pointer;
+
+  &:hover {
+    transform: scale(1.05);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: scale(0.98);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================================
+ * STATUS INDICATOR
+ * ============================================================================ */
+
+.statusIndicator {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 25%;
+  height: 25%;
+  min-width: 8px;
+  min-height: 8px;
+  border-radius: 50%;
+  border: 2px solid var(--surface-base);
+}
+
+.online {
+  background: var(--status-success);
+}
+
+.offline {
+  background: var(--text-tertiary);
+}
+
+.away {
+  background: var(--status-warning);
+}
+
+.busy {
+  background: var(--status-error);
+}

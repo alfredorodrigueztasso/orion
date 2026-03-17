@@ -1,0 +1,337 @@
+/**
+ * FilterBar Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Horizontal filter controls with clear visual hierarchy.
+ */
+
+.filterBar {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  flex-wrap: wrap;
+}
+
+.compact {
+  padding: var(--spacing-2) var(--spacing-3);
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+ * SEARCH
+ * ============================================================================ */
+
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--spacing-2-5);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.searchInput {
+  padding: var(--spacing-2) var(--spacing-3) var(--spacing-2) var(--spacing-8);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  width: 200px;
+  transition:
+    border-color var(--mode-hover-duration),
+    background-color var(--mode-hover-duration);
+}
+
+.searchInput:focus {
+  outline: none;
+  background: var(--surface-base);
+  border-color: var(--interactive-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * FILTERS
+ * ============================================================================ */
+
+.filters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.filterWrapper {
+  position: relative;
+}
+
+.filterTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1-5);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background: var(--surface-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+}
+
+.filterTrigger:hover {
+  color: var(--text-primary);
+  background: var(--surface-layer);
+}
+
+.filterActive {
+  color: var(--interactive-primary);
+  background: var(--status-info-bg);
+  border-color: var(--interactive-primary);
+}
+
+.chevron {
+  transition: transform var(--mode-hover-duration);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* ============================================================================
+ * DROPDOWN
+ * ============================================================================ */
+
+.dropdown {
+  position: absolute;
+  top: calc(100% + var(--spacing-1));
+  left: 0;
+  min-width: 200px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  padding: var(--spacing-1);
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--mode-hover-duration);
+}
+
+.dropdownItem:hover {
+  background: var(--surface-subtle);
+}
+
+.dropdownItemSelected {
+  background: var(--status-info-bg);
+  color: var(--interactive-primary);
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid var(--border-moderate);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-10);
+  flex-shrink: 0;
+}
+
+.dropdownItemSelected .checkbox {
+  background: var(--interactive-primary);
+  border-color: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+}
+
+.optionCount {
+  margin-left: auto;
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+}
+
+.dropdownFooter {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  border-top: 1px solid var(--border-subtle);
+  margin-top: var(--spacing-1);
+}
+
+.dropdownCancel,
+.dropdownApply {
+  padding: var(--spacing-1-5) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+}
+
+.dropdownCancel {
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+}
+
+.dropdownCancel:hover {
+  color: var(--text-primary);
+}
+
+.dropdownApply {
+  color: var(--interactive-primary-text);
+  background: var(--interactive-primary);
+  border: none;
+}
+
+.dropdownApply:hover {
+  background: var(--interactive-primary-hover);
+}
+
+/* ============================================================================
+ * ACTIVE FILTERS (CHIPS)
+ * ============================================================================ */
+
+.activeFilters {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  padding-left: var(--spacing-2);
+  border-left: 1px solid var(--border-subtle);
+  margin-left: var(--spacing-1);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1) var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-full);
+}
+
+.chipLabel {
+  max-width: 150px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.chipRemove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition: all var(--mode-hover-duration);
+}
+
+.chipRemove:hover {
+  background: var(--surface-layer);
+  color: var(--text-primary);
+}
+
+.clearAll {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-decoration: underline;
+  transition: color var(--mode-hover-duration);
+}
+
+.clearAll:hover {
+  color: var(--text-error);
+}
+
+/* ============================================================================
+ * COUNT
+ * ============================================================================ */
+
+.count {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  margin-left: auto;
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .filterBar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .searchWrapper {
+    width: 100%;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .filters {
+    flex-wrap: wrap;
+  }
+
+  .activeFilters {
+    border-left: none;
+    padding-left: 0;
+    margin-left: 0;
+    padding-top: var(--spacing-2);
+    border-top: 1px solid var(--border-subtle);
+  }
+
+  .count {
+    margin-left: 0;
+    margin-top: var(--spacing-2);
+  }
+}

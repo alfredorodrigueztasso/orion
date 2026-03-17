@@ -1,0 +1,114 @@
+/* Toggle Component Styles */
+
+.toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-tight);
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-fast);
+  border: 1px solid transparent;
+  outline: none;
+  background: transparent;
+  color: var(--text-secondary);
+
+  &:hover:not(:disabled) {
+    background: var(--interactive-ghost-hover);
+    color: var(--text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+    box-shadow: 0 0 0 4px var(--soft-brand);
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+}
+
+/* Pressed state */
+.pressed {
+  background: var(--soft-brand);
+  color: var(--text-brand);
+
+  &:hover:not(:disabled) {
+    background: var(--soft-brand-hover);
+    color: var(--text-brand);
+  }
+}
+
+/* Outline variant */
+.outline {
+  border-color: var(--border-subtle);
+
+  &:hover:not(:disabled) {
+    border-color: var(--border-strong);
+  }
+
+  &.pressed {
+    border-color: var(--border-interactive);
+    background: var(--soft-brand);
+    color: var(--text-brand);
+  }
+}
+
+/* ============================================================================
+ * SIZES — Aligned with Button (32/40/48px, same font-size & padding scale)
+ * ============================================================================ */
+
+.sm {
+  height: 32px;
+  min-width: 32px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-12);
+  border-radius: var(--radius-button);
+}
+
+.md {
+  height: 40px;
+  min-width: 40px;
+  padding: 0 var(--spacing-4);
+  font-size: var(--font-size-16);
+  border-radius: var(--radius-button);
+}
+
+.lg {
+  height: 48px;
+  min-width: 48px;
+  padding: 0 var(--spacing-6);
+  font-size: var(--font-size-18);
+  border-radius: var(--radius-button);
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .toggle {
+    transition: none;
+  }
+}
+
+/* Forced colors (high contrast mode) */
+@media (forced-colors: active) {
+  .toggle {
+    border: 1px solid ButtonText;
+  }
+
+  .toggle:focus-visible {
+    box-shadow: none;
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .pressed {
+    background: Highlight;
+    color: HighlightText;
+  }
+}

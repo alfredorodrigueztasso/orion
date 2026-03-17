@@ -1,0 +1,217 @@
+/**
+ * Table Component Styles
+ *
+ * Data display table with sorting, selection, and various styling options.
+ */
+
+/* Container */
+.container {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+/* Borderless variant - for integration inside Cards */
+.borderless {
+  border: none;
+  border-radius: 0;
+}
+
+/* Table */
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-16);
+  color: var(--text-primary);
+  background: var(--surface-base);
+}
+
+/* Caption */
+.caption {
+  padding: var(--spacing-3);
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  text-align: left;
+  caption-side: top;
+}
+
+/* ============================================================================
+ * HEADER
+ * ============================================================================ */
+
+.thead {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.th {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  text-align: left;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}
+
+.th.alignCenter {
+  text-align: center;
+}
+
+.th.alignRight {
+  text-align: right;
+}
+
+/* Sortable column header */
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: background var(--transition-fast);
+}
+
+.sortable:hover {
+  color: var(--text-primary);
+}
+
+.sortable:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: -2px;
+}
+
+/* Sort indicator */
+.sortIndicator {
+  display: inline-flex;
+  margin-left: var(--spacing-1);
+  color: var(--text-tertiary);
+  font-size: 0.75em;
+}
+
+.sortIndicator.active {
+  color: var(--interactive-primary);
+}
+
+/* ============================================================================
+ * BODY
+ * ============================================================================ */
+
+.tbody {
+  /* Base tbody styles */
+}
+
+.tr {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background var(--transition-fast);
+}
+
+/* Remove border from last row for cleaner look */
+.tbody .tr:last-child {
+  border-bottom: none;
+}
+
+.td {
+  padding: var(--spacing-3) var(--spacing-4);
+  text-align: left;
+}
+
+.td.alignCenter {
+  text-align: center;
+}
+
+.td.alignRight {
+  text-align: right;
+}
+
+/* ============================================================================
+ * INTERACTIVE STATES
+ * ============================================================================ */
+
+/* Hoverable rows */
+.hoverable .tr:hover {
+  background: var(--surface-subtle);
+}
+
+/* Clickable rows */
+.clickable .tr {
+  cursor: pointer;
+}
+
+.clickable .tr:active {
+  background: var(--surface-layer);
+}
+
+/* ============================================================================
+ * STRIPED ROWS
+ * ============================================================================ */
+
+.striped .tr:nth-child(even) {
+  background: var(--surface-subtle);
+}
+
+.striped.hoverable .tr:nth-child(even):hover {
+  background: var(--surface-layer);
+}
+
+/* ============================================================================
+ * BORDERED
+ * ============================================================================ */
+
+.bordered {
+  border: 1px solid var(--border-subtle);
+}
+
+.bordered .th,
+.bordered .td {
+  border-right: 1px solid var(--border-subtle);
+}
+
+.bordered .th:last-child,
+.bordered .td:last-child {
+  border-right: none;
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm .th {
+  padding: var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-10);
+}
+
+.sm .td {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-12);
+}
+
+.md .th {
+  padding: var(--spacing-2) var(--spacing-4);
+  font-size: var(--font-size-12);
+}
+
+.md .td {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-16);
+}
+
+.lg .th {
+  padding: var(--spacing-3) var(--spacing-6);
+  font-size: var(--font-size-12);
+}
+
+.lg .td {
+  padding: var(--spacing-4) var(--spacing-6);
+  font-size: var(--font-size-16);
+}
+
+/* ============================================================================
+ * EMPTY STATE
+ * ============================================================================ */
+
+.empty {
+  padding: var(--spacing-8) var(--spacing-4);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-16);
+}

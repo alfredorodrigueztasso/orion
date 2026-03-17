@@ -1,0 +1,265 @@
+/**
+ * MetricCards Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Minimal shadows, no hover lift, compact typography.
+ */
+
+.metricCards {
+  display: grid;
+  gap: var(--mode-spacing-element);
+}
+
+.cols-2 {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.cols-3 {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.cols-4 {
+  grid-template-columns: repeat(4, 1fr);
+}
+
+.cols-5 {
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ============================================================================
+ * CARD STYLES
+ * ============================================================================ */
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding: var(--mode-spacing-element);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  text-decoration: none;
+  color: inherit;
+  box-shadow: var(--mode-shadow-default);
+  transition:
+    box-shadow var(--mode-hover-duration),
+    border-color var(--mode-hover-duration);
+}
+
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover {
+  border-color: var(--border-moderate);
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.interactive:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+.loading {
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * CARD HEADER
+ * ============================================================================ */
+
+.cardHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.cardIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+  color: var(--text-secondary);
+}
+
+.label {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  line-height: var(--line-height-tight);
+}
+
+/* ============================================================================
+ * CARD BODY
+ * ============================================================================ */
+
+.cardBody {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-4);
+  min-height: 36px;
+}
+
+.value {
+  font-family: var(--font-secondary);
+  font-size: clamp(1.5rem, 2vw, 1.75rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.skeleton {
+  width: 100px;
+  height: 32px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.sparkline {
+  flex-shrink: 0;
+  opacity: 0.8;
+}
+
+/* ============================================================================
+ * CARD FOOTER
+ * ============================================================================ */
+
+.cardFooter {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  margin-top: var(--spacing-1);
+}
+
+.change {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+}
+
+.positive {
+  color: var(--text-success);
+}
+
+.negative {
+  color: var(--text-error);
+}
+
+.changeLabel {
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-normal);
+  margin-left: var(--spacing-1);
+}
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================================
+ * VARIANT: COMPACT
+ * ============================================================================ */
+
+.variant-compact {
+  padding: var(--spacing-3);
+  gap: var(--spacing-1);
+}
+
+.variant-compact .cardIcon {
+  width: 24px;
+  height: 24px;
+}
+
+.variant-compact .label {
+  font-size: var(--font-size-12);
+}
+
+.variant-compact .cardBody {
+  min-height: 28px;
+}
+
+.variant-compact .value {
+  font-size: var(--font-size-20);
+}
+
+.variant-compact .change {
+  font-size: var(--font-size-11);
+}
+
+/* ============================================================================
+ * VARIANT: DETAILED
+ * ============================================================================ */
+
+.variant-detailed {
+  padding: var(--spacing-5);
+  gap: var(--spacing-3);
+}
+
+.variant-detailed .cardIcon {
+  width: 40px;
+  height: 40px;
+}
+
+.variant-detailed .cardBody {
+  justify-content: space-between;
+}
+
+.variant-detailed .value {
+  font-size: var(--font-size-32);
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 1200px) {
+  .cols-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .cols-4 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .cols-5,
+  .cols-4,
+  .cols-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 480px) {
+  .cols-5,
+  .cols-4,
+  .cols-3,
+  .cols-2 {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: var(--spacing-4);
+  }
+}

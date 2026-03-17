@@ -1,0 +1,178 @@
+import { Meta } from '@storybook/blocks';
+import { Callout, FeatureCard, CardGrid, Steps, Step, InfoTable, TokenTable } from './DocComponents';
+
+<Meta title="Getting Started/CLI (orion add)" />
+
+# CLI — `@orion-ds/cli`
+
+Copy Orion components directly into your project, shadcn-style. You own the code and can modify it freely.
+
+<Callout variant="tip" title="Zero dependencies">
+  The CLI uses only Node.js built-ins — no additional packages are installed for the CLI itself.
+</Callout>
+
+## Quick Start
+
+<Steps>
+  <Step number={1} title="Configure your project">
+    Run <code>npx @orion-ds/cli init</code> to create an <code>orion.json</code> config file.
+  </Step>
+  <Step number={2} title="Add components">
+    Run <code>npx @orion-ds/cli add button card modal</code> to copy component source files into your project.
+  </Step>
+</Steps>
+
+## Commands
+
+### `orion init`
+
+Creates an `orion.json` config file in your project root.
+
+```bash
+npx @orion-ds/cli init          # Interactive setup
+npx @orion-ds/cli init --yes    # Use defaults
+```
+
+After init, import the CSS once in your entry file:
+
+```tsx
+import '@orion-ds/react/styles.css';
+```
+
+### `orion add <name...>`
+
+Copy components from the Orion registry into your project.
+
+```bash
+npx @orion-ds/cli add button                    # Single component
+npx @orion-ds/cli add button card modal          # Multiple at once
+npx @orion-ds/cli add theme-controller --yes     # Skip prompts (resolves 6 deps)
+npx @orion-ds/cli add hero --type=section        # Add a section
+npx @orion-ds/cli add button --overwrite         # Replace existing files
+```
+
+**What happens when you run `add`:**
+
+1. Fetches component JSON from the registry
+2. Resolves `registryDependencies` recursively (BFS)
+3. Asks for confirmation if extra dependencies are needed
+4. Transforms imports (hooks/contexts to `@orion-ds/react`, cross-component to relative paths)
+5. Writes files to your configured directory
+6. Installs npm dependencies (e.g., `lucide-react`)
+
+**Example output:**
+
+```
++ button
++ card
+
+Files:
+  src/components/orion/button/Button.tsx
+  src/components/orion/button/Button.types.ts
+  src/components/orion/button/Button.module.css
+  src/components/orion/button/index.ts
+  src/components/orion/card/Card.tsx
+  src/components/orion/card/Card.types.ts
+  src/components/orion/card/Card.module.css
+  src/components/orion/card/index.ts
+
+Dependencies installed: lucide-react
+
+Done!
+```
+
+### `orion list`
+
+Browse all 90+ available items grouped by type and category.
+
+```bash
+npx @orion-ds/cli list                       # All items
+npx @orion-ds/cli list --type=component      # Components only (39)
+npx @orion-ds/cli list --type=section        # Sections only (41)
+npx @orion-ds/cli list --type=template       # Templates only (10)
+```
+
+Installed components are marked with a checkmark.
+
+## Configuration: `orion.json`
+
+Created by `orion init` in your project root:
+
+```json
+{
+  "$schema": "https://orion-ds.dev/schema/cli-config.json",
+  "registryUrl": "https://orion-ds.dev/r",
+  "componentDir": "src/components/orion",
+  "sectionDir": "src/sections/orion",
+  "templateDir": "src/templates/orion",
+  "typescript": true,
+  "brand": "orion",
+  "mode": "product"
+}
+```
+
+<TokenTable rows={[
+  { token: 'registryUrl', description: 'Base URL for the component registry' },
+  { token: 'componentDir', description: 'Where components are copied to' },
+  { token: 'sectionDir', description: 'Where sections are copied to' },
+  { token: 'templateDir', description: 'Where templates are copied to' },
+  { token: 'typescript', description: 'Generate TypeScript files' },
+  { token: 'brand', description: 'Default brand for the project' },
+  { token: 'mode', description: 'Default visual mode (display, product, app)' },
+]} />
+
+## Import Transforms
+
+When components are copied, imports are automatically rewritten:
+
+<InfoTable
+  headers={['Original import', 'Transformed to', 'Why']}
+  rows={[
+    ["from './Button.types'", 'Unchanged', 'Internal file'],
+    ["from './Button.module.css'", 'Unchanged', 'CSS Module'],
+    ["from '../Button'", "from '../button'", 'Cross-component reference'],
+    ["from '../../hooks'", "from '@orion-ds/react'", 'Shared hook'],
+    ["from '../../contexts/ThemeContext'", "from '@orion-ds/react'", 'Shared context'],
+  ]}
+/>
+
+## Dependency Resolution
+
+Some components depend on others. The CLI resolves this automatically:
+
+<InfoTable
+  headers={['Component', 'Dependencies']}
+  rows={[
+    ['chat', 'button'],
+    ['theme-controller', 'card, switch, radio, button, badge, alert'],
+  ]}
+/>
+
+When you `add theme-controller`, all 6 dependencies are fetched and copied too.
+
+## npm vs CLI: When to Use Each
+
+<CardGrid columns={2}>
+  <FeatureCard icon="📦" title="npm install @orion-ds/react">
+    Stable versioned components with auto-updates. Zero maintenance — just upgrade the package version. Best for teams that want consistency.
+  </FeatureCard>
+  <FeatureCard icon="📋" title="npx @orion-ds/cli add">
+    Own the source code, customize freely. Full control over component internals. Best for projects that need deep customization.
+  </FeatureCard>
+</CardGrid>
+
+<Callout variant="info">
+  You can mix both approaches. Use npm for most components and copy specific ones you need to customize.
+</Callout>
+
+## Flags Reference
+
+<InfoTable
+  headers={['Flag', 'Description']}
+  rows={[
+    ['--yes', 'Skip all confirmation prompts'],
+    ['--overwrite', 'Replace existing component files'],
+    ['--local', 'Use local public/r/ registry instead of HTTP'],
+    ['--type=component|section|template', 'Filter by item type'],
+  ]}
+/>

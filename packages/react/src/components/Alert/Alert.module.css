@@ -1,0 +1,150 @@
+/**
+ * Alert Component Styles
+ *
+ * Notification and message alerts.
+ */
+
+/* Base alert */
+.alert {
+  /* Layout */
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+
+  /* Styling */
+  border-radius: var(--radius-control);
+
+  /* Typography */
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-normal);
+}
+
+/* Icon */
+.icon {
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+}
+
+/* Content wrapper */
+.content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+/* Title */
+.title {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-16);
+  line-height: var(--line-height-tight);
+}
+
+/* Message */
+.message {
+  color: inherit;
+  opacity: 0.9;
+}
+
+/* Close button */
+.closeButton {
+  /* Layout */
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+
+  /* Styling */
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+
+  /* Typography */
+  color: inherit;
+  opacity: 0.6;
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+
+  &:hover {
+    opacity: 1;
+    background: var(--interactive-ghost-hover);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
+    opacity: 1;
+  }
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+/* Success variant */
+.success {
+  background: var(--soft-success);
+  border: 1px solid var(--status-success);
+  color: var(--status-success);
+}
+
+/* Error variant */
+.error {
+  background: var(--soft-error);
+  border: 1px solid var(--status-error);
+  color: var(--status-error);
+}
+
+/* Warning variant */
+.warning {
+  background: var(--soft-warning);
+  border: 1px solid var(--status-warning);
+  color: var(--status-warning);
+}
+
+/* Info variant */
+.info {
+  background: var(--soft-info);
+  border: 1px solid var(--status-info);
+  color: var(--status-info);
+}
+
+/* Inverse variant — for dark/colored backgrounds (theme-invariant) */
+/* White text on semi-transparent white background */
+.inverse {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+}
+
+/* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Maps success/error/warning/info variants to inverse appearance automatically.
+ * This allows alerts to inherit correct styling when inside dark backgrounds
+ * without requiring developers to manually switch to inverse variant.
+ * ============================================================================ */
+
+:global([data-dark-bg="true"]) .success,
+:global([data-dark-bg="true"]) .error,
+:global([data-dark-bg="true"]) .warning,
+:global([data-dark-bg="true"]) .info {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+}

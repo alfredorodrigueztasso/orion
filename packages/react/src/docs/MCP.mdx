@@ -1,0 +1,174 @@
+import { Meta } from '@storybook/blocks';
+import { Callout, FeatureCard, CardGrid, Steps, Step } from './DocComponents';
+
+<Meta title="Getting Started/MCP Server" />
+
+# MCP Server — `@orion-ds/mcp`
+
+The Orion MCP (Model Context Protocol) Server connects AI assistants directly to the design system. It provides 9 tools that let Claude, Cursor, and other AI tools query components, tokens, and validate code — without reading documentation manually.
+
+## What is MCP?
+
+<Callout variant="info" title="Model Context Protocol">
+  MCP is a protocol that allows AI assistants to use external tools. Instead of copy-pasting documentation into your prompt, the AI can call tools like <code>get-component</code> or <code>validate-code</code> directly.
+</Callout>
+
+## Setup
+
+### Claude Desktop
+
+<Steps>
+  <Step number={1} title="Open your Claude Desktop config">
+    Located at <code>~/Library/Application Support/Claude/claude_desktop_config.json</code>
+  </Step>
+  <Step number={2} title="Add the Orion MCP server">
+    Add the following to your config file:
+  </Step>
+</Steps>
+
+```json
+{
+  "mcpServers": {
+    "orion-ds": {
+      "command": "npx",
+      "args": ["@orion-ds/mcp"]
+    }
+  }
+}
+```
+
+### Cursor
+
+<Steps>
+  <Step number={1} title="Open your Cursor MCP settings">
+    Located at <code>.cursor/mcp.json</code> in your project root.
+  </Step>
+  <Step number={2} title="Add the Orion MCP server">
+    Add the following to your config file:
+  </Step>
+</Steps>
+
+```json
+{
+  "mcpServers": {
+    "orion-ds": {
+      "command": "npx",
+      "args": ["@orion-ds/mcp"]
+    }
+  }
+}
+```
+
+<Callout variant="tip">
+  After configuration, restart the application. The Orion tools will be available to the AI assistant.
+</Callout>
+
+## Available Tools
+
+### Component Tools
+
+<CardGrid columns={3}>
+  <FeatureCard icon="📋" title="list-components">
+    List all available components, sections, and templates. Filter by category or type.
+  </FeatureCard>
+  <FeatureCard icon="🔍" title="get-component">
+    Get complete details: props, types, code examples, tokens, accessibility info.
+  </FeatureCard>
+  <FeatureCard icon="🔎" title="search-components">
+    Semantic search by keyword or use case (e.g., "form input" finds Field, Select, Checkbox).
+  </FeatureCard>
+</CardGrid>
+
+### Token Tools
+
+<CardGrid columns={2}>
+  <FeatureCard icon="🎨" title="list-tokens">
+    List design tokens by category (surface, text, interactive, spacing, etc.).
+  </FeatureCard>
+  <FeatureCard icon="🏷" title="get-token">
+    Get a specific token's values per theme and brand.
+  </FeatureCard>
+</CardGrid>
+
+### Validation & Setup
+
+<CardGrid columns={3}>
+  <FeatureCard icon="✅" title="validate-code">
+    Validate TSX/CSS against Orion rules. Catches hardcoded colors, wrong props, missing imports.
+  </FeatureCard>
+  <FeatureCard icon="📖" title="get-setup-guide">
+    Get a complete setup guide for Vite, Next.js, or React projects.
+  </FeatureCard>
+  <FeatureCard icon="🧩" title="list-sections">
+    List all pre-built sections (Hero, Pricing, Sidebar, etc.).
+  </FeatureCard>
+  <FeatureCard icon="📄" title="get-section">
+    Get details and code for a specific section or template.
+  </FeatureCard>
+</CardGrid>
+
+## Example Workflows
+
+<Callout variant="tip" title="Just describe what you need">
+  The AI assistant will call the right tools automatically. You don't need to specify tool names.
+</Callout>
+
+### Building a new page
+
+```
+You: "Build a pricing page for the deepblue brand"
+
+AI calls: list-sections → finds Pricing, Hero, Footer sections
+AI calls: get-section("pricing") → gets full code with props
+AI calls: get-section("hero") → gets hero section code
+AI calls: get-setup-guide("vite", brand="deepblue") → gets project setup
+AI calls: validate-code(generatedCode) → checks for violations
+```
+
+### Finding the right component
+
+```
+You: "I need a form with email, password, and a submit button"
+
+AI calls: search-components("form input") → finds Field, Select, Checkbox
+AI calls: get-component("field") → gets Field props, examples
+AI calls: get-component("button") → gets Button variants
+```
+
+### Checking token values
+
+```
+You: "What's the primary color for the red brand?"
+
+AI calls: get-token("--interactive-primary") → values per brand/theme
+AI calls: list-tokens("interactive") → all interactive tokens
+```
+
+### Validating generated code
+
+```
+You: "Check if this component follows Orion rules"
+
+AI calls: validate-code(`<Button brand="red">...`)
+→ Error: Components should not have a "brand" prop. Brand is global via ThemeProvider.
+```
+
+## Tool Parameters
+
+### `list-components`
+- `category` (optional): actions, forms, layout, feedback, data-display, navigation, overlays, etc.
+- `type` (optional): `registry:component`, `registry:section`, `registry:template`
+
+### `get-component`
+- `name` (required): Component name in kebab-case (e.g., `"button"`, `"data-table"`)
+
+### `search-components`
+- `query` (required): Keyword or use case (e.g., `"dialog popup"`, `"navigation"`)
+
+### `get-setup-guide`
+- `framework` (required): `"vite"`, `"nextjs"`, or `"react"`
+- `brand` (optional): Brand to configure (default: `"orion"`)
+- `theme` (optional): `"light"` or `"dark"` (default: `"light"`)
+
+### `validate-code`
+- `code` (required): The TSX or CSS code to validate

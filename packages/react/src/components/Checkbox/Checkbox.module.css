@@ -1,0 +1,327 @@
+/**
+ * Checkbox Component Styles
+ *
+ * Multi-select checkbox input.
+ * Implements WCAG 2.1 AA accessibility guidelines.
+ */
+
+/* ============================================================================
+ * CONTAINER
+ * ============================================================================ */
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+/* ============================================================================
+ * LABEL WRAPPER (clickable area)
+ * ============================================================================ */
+
+.labelWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  cursor: pointer;
+  user-select: none;
+}
+
+.disabled .labelWrapper {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * HIDDEN INPUT
+ * ============================================================================ */
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * CUSTOM CHECKBOX INDICATOR
+ * ============================================================================ */
+
+.checkbox {
+  position: relative;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  /* Default size (md) */
+  width: 20px;
+  height: 20px;
+
+  /* Styling */
+  background: var(--surface-base);
+  border: 2px solid var(--border-strong);
+  border-radius: var(--radius-sm);
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+}
+
+/* Checkmark icon */
+.checkmark {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 12px;
+  height: 12px;
+  color: var(--interactive-primary-text);
+  opacity: 0;
+  transform: scale(0.5);
+  transition: all var(--transition-fast);
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm .checkbox {
+  width: 16px;
+  height: 16px;
+}
+
+.sm .checkmark {
+  width: 10px;
+  height: 10px;
+}
+
+.md .checkbox {
+  width: 20px;
+  height: 20px;
+}
+
+.md .checkmark {
+  width: 12px;
+  height: 12px;
+}
+
+.lg .checkbox {
+  width: 24px;
+  height: 24px;
+}
+
+.lg .checkmark {
+  width: 14px;
+  height: 14px;
+}
+
+/* ============================================================================
+ * CHECKED STATE
+ * ============================================================================ */
+
+.input:checked + .labelWrapper .checkbox {
+  background: var(--interactive-primary);
+  border-color: var(--interactive-primary);
+}
+
+.input:checked + .labelWrapper .checkmark {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================================================
+ * INDETERMINATE STATE
+ * ============================================================================ */
+
+.input:indeterminate + .labelWrapper .checkbox {
+  background: var(--interactive-primary);
+  border-color: var(--interactive-primary);
+}
+
+.input:indeterminate + .labelWrapper .checkmark {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* ============================================================================
+ * HOVER STATE
+ * ============================================================================ */
+
+.labelWrapper:hover .checkbox {
+  border-color: var(--interactive-primary);
+}
+
+.input:checked + .labelWrapper:hover .checkbox,
+.input:indeterminate + .labelWrapper:hover .checkbox {
+  background: var(--interactive-primary-hover);
+  border-color: var(--interactive-primary-hover);
+}
+
+/* ============================================================================
+ * FOCUS STATE
+ * ============================================================================ */
+
+.input:focus-visible + .labelWrapper .checkbox {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--soft-brand);
+}
+
+/* ============================================================================
+ * DISABLED STATE
+ * ============================================================================ */
+
+.input:disabled + .labelWrapper {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.input:disabled + .labelWrapper .checkbox {
+  background: var(--surface-subtle);
+  border-color: var(--border-subtle);
+}
+
+.input:disabled:checked + .labelWrapper .checkbox,
+.input:disabled:indeterminate + .labelWrapper .checkbox {
+  background: var(--text-tertiary);
+  border-color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * ERROR STATE
+ * ============================================================================ */
+
+.error .checkbox {
+  border-color: var(--status-error);
+}
+
+.error .labelWrapper:hover .checkbox {
+  border-color: var(--status-error);
+}
+
+.error .input:focus-visible + .labelWrapper .checkbox {
+  outline-color: var(--status-error);
+  box-shadow: 0 0 0 4px var(--soft-error);
+}
+
+/* ============================================================================
+ * LABEL & TEXT
+ * ============================================================================ */
+
+.label {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.sm .label {
+  font-size: var(--font-size-13);
+}
+
+.lg .label {
+  font-size: var(--font-size-16);
+}
+
+.required {
+  color: var(--status-error);
+  margin-left: 2px;
+}
+
+/* Helper text - aligned with label */
+.helperText {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  line-height: var(--line-height-snug);
+  padding-left: calc(20px + var(--spacing-3)); /* checkbox width + gap */
+}
+
+.sm .helperText {
+  padding-left: calc(16px + var(--spacing-3));
+}
+
+.lg .helperText {
+  padding-left: calc(24px + var(--spacing-3));
+}
+
+/* Error message */
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--status-error);
+  line-height: var(--line-height-snug);
+  padding-left: calc(20px + var(--spacing-3));
+}
+
+.sm .errorMessage {
+  padding-left: calc(16px + var(--spacing-3));
+}
+
+.lg .errorMessage {
+  padding-left: calc(24px + var(--spacing-3));
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE SUPPORT
+ * ============================================================================ */
+
+@media (forced-colors: active) {
+  .checkbox {
+    border: 2px solid CanvasText;
+    background: Canvas;
+  }
+
+  .input:checked + .labelWrapper .checkbox,
+  .input:indeterminate + .labelWrapper .checkbox {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  .checkmark {
+    color: Canvas;
+  }
+
+  .input:focus-visible + .labelWrapper .checkbox {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .input:disabled + .labelWrapper .checkbox {
+    border-color: GrayText;
+  }
+
+  .error .checkbox {
+    border-color: LinkText;
+  }
+
+  .errorMessage {
+    color: LinkText;
+  }
+
+  .label {
+    color: CanvasText;
+  }
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .checkbox,
+  .checkmark {
+    transition: none;
+  }
+}

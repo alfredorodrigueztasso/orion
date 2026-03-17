@@ -1,0 +1,199 @@
+import { Meta } from '@storybook/blocks';
+import { Callout, FeatureCard, CardGrid } from './DocComponents';
+
+<Meta title="Getting Started/Using Components" />
+
+# Using Components
+
+All Orion components are fully typed, accessible, and theme-aware. Import them from `@orion-ds/react`.
+
+## Basic Import
+
+```tsx
+import { Button, Card, Field, Alert, Badge, Modal } from '@orion-ds/react';
+```
+
+<Callout variant="tip">
+  All components are tree-shakeable. Only the components you import are included in your bundle.
+</Callout>
+
+## Variants and Sizes
+
+Most components support `variant` and `size` props.
+
+```tsx
+// Button variants
+<Button variant="primary">Primary</Button>
+<Button variant="secondary">Secondary</Button>
+<Button variant="ghost">Ghost</Button>
+
+// Button sizes
+<Button size="sm">Small</Button>
+<Button size="md">Medium</Button>
+<Button size="lg">Large</Button>
+
+// Alert variants
+<Alert variant="info">Information message</Alert>
+<Alert variant="success">Success message</Alert>
+<Alert variant="warning">Warning message</Alert>
+<Alert variant="error">Error message</Alert>
+```
+
+## Compound Components
+
+Several components use the compound pattern for flexible composition:
+
+```tsx
+// Card with sub-components
+<Card>
+  <Card.Header>Title</Card.Header>
+  <Card.Body>Content goes here</Card.Body>
+  <Card.Footer>
+    <Button variant="primary">Save</Button>
+  </Card.Footer>
+</Card>
+
+// Tabs
+<Tabs defaultValue="tab1">
+  <Tabs.List>
+    <Tabs.Tab value="tab1">First</Tabs.Tab>
+    <Tabs.Tab value="tab2">Second</Tabs.Tab>
+  </Tabs.List>
+  <Tabs.Panel value="tab1">First panel content</Tabs.Panel>
+  <Tabs.Panel value="tab2">Second panel content</Tabs.Panel>
+</Tabs>
+```
+
+## Icons with Lucide
+
+Orion uses [Lucide](https://lucide.dev) for icons — 5000+ consistent, open-source icons.
+
+```tsx
+import { Button, Field } from '@orion-ds/react';
+import { Search, Download, ChevronDown, Settings } from 'lucide-react';
+
+// Icon on the left
+<Button icon={<Search size={20} />}>Search</Button>
+
+// Icon on the right
+<Button iconRight={<ChevronDown size={20} />}>Menu</Button>
+
+// Icon only (aria-label required!)
+<Button iconOnly icon={<Settings size={20} />} aria-label="Settings" />
+
+// Icon in a form field
+<Field placeholder="Search..." icon={<Search size={18} />} />
+```
+
+**Icon sizing by component size:**
+
+<CardGrid columns={3}>
+  <FeatureCard title="Small (sm)" icon="S">16–18px icons</FeatureCard>
+  <FeatureCard title="Medium (md)" icon="M">20px icons (default)</FeatureCard>
+  <FeatureCard title="Large (lg)" icon="L">24px icons</FeatureCard>
+</CardGrid>
+
+## Forms
+
+Orion provides form components with built-in label, helper text, and error states.
+
+```tsx
+import { Field, Select, Checkbox, Radio, Switch, Textarea } from '@orion-ds/react';
+
+<Field
+  label="Email"
+  type="email"
+  placeholder="your@email.com"
+  helperText="We'll never share your email"
+/>
+
+<Field
+  label="Password"
+  type="password"
+  error="Password must be at least 8 characters"
+/>
+
+<Select label="Country" options={[
+  { value: 'us', label: 'United States' },
+  { value: 'mx', label: 'Mexico' },
+]} />
+
+<Checkbox label="Accept terms" />
+<Switch label="Enable notifications" />
+<Textarea label="Message" rows={4} />
+```
+
+## Theme and Brand Switching
+
+Components adapt automatically to the current theme and brand. Use `useTheme` to control them programmatically.
+
+```tsx
+import { useTheme } from '@orion-ds/react';
+
+function ThemeSwitcher() {
+  const { theme, brand, setTheme, setBrand, toggleTheme } = useTheme();
+
+  return (
+    <div>
+      <p>Theme: {theme} | Brand: {brand}</p>
+      <Button onClick={toggleTheme}>Toggle Theme</Button>
+      <Button onClick={() => setBrand('deepblue')}>Switch to Deepblue</Button>
+    </div>
+  );
+}
+```
+
+<Callout variant="warning" title="Brand is global, not per-component">
+  Never pass <code>brand</code> as a prop to components. Brand is set once at the app root via <code>&lt;ThemeProvider&gt;</code> and all components inherit it automatically.
+</Callout>
+
+## Sections and Templates
+
+Orion includes 30+ pre-built sections and 9 page templates for rapid development.
+
+```tsx
+import { Hero, Features, Pricing } from '@orion-ds/react';
+
+// Pre-built marketing section
+<Hero
+  title="Build faster with Orion"
+  description="AI-first design system with zero visual drift"
+/>
+
+// Features grid
+<Features items={[
+  { title: 'Type-safe', description: 'Full TypeScript support' },
+  { title: 'Multi-brand', description: '5 brands out of the box' },
+]} columns={2} />
+```
+
+**Full page template:**
+
+```tsx
+import { LandingPageTemplate } from '@orion-ds/react';
+
+<LandingPageTemplate
+  hero={{ title: 'Welcome', description: 'Get started today' }}
+  features={{ items: [...] }}
+  pricing={{ plans: [...] }}
+/>
+```
+
+## Accessibility
+
+<Callout variant="info">
+  All components follow <strong>WCAG AA</strong> guidelines. Color contrast, keyboard navigation, and screen reader support are built in.
+</Callout>
+
+- Visible `:focus-visible` states on interactive elements
+- Proper ARIA attributes (`aria-label`, `role`, `aria-live`)
+- Keyboard navigation support
+- `prefers-reduced-motion` respected for animations
+- Icon-only buttons require `aria-label`
+
+## Component Reference
+
+Browse all components in the **Components** section of this Storybook sidebar. Each component page includes:
+- Live preview with controls
+- Prop documentation with types
+- Usage examples

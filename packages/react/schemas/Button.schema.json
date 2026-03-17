@@ -1,0 +1,89 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Button.schema.json",
+  "title": "Button",
+  "description": "A versatile button component for user interactions. Supports multiple variants, sizes, and states.",
+  "type": "object",
+  "properties": {
+    "variant": {
+      "type": "string",
+      "enum": ["primary", "secondary", "ghost", "danger"],
+      "default": "primary",
+      "description": "Visual style of the button"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg"],
+      "default": "md",
+      "description": "Button size"
+    },
+    "fullWidth": {
+      "type": "boolean",
+      "default": false,
+      "description": "Whether button takes full container width"
+    },
+    "loading": {
+      "type": "boolean",
+      "default": false,
+      "description": "Shows loading spinner and disables interaction"
+    },
+    "iconOnly": {
+      "type": "boolean",
+      "default": false,
+      "description": "Button contains only an icon (requires aria-label)"
+    },
+    "disabled": {
+      "type": "boolean",
+      "default": false,
+      "description": "Disables the button"
+    },
+    "type": {
+      "type": "string",
+      "enum": ["button", "submit", "reset"],
+      "default": "button",
+      "description": "HTML button type"
+    },
+    "children": {
+      "description": "Button content (text, icons, or both)"
+    },
+    "icon": {
+      "description": "Icon element to display on the left side"
+    },
+    "iconRight": {
+      "description": "Icon element to display on the right side"
+    },
+    "onClick": {
+      "description": "Click handler function"
+    }
+  },
+  "required": [],
+  "examples": [
+    {
+      "description": "Primary button with text",
+      "code": "<Button variant=\"primary\">Get Started</Button>"
+    },
+    {
+      "description": "Secondary button with icon",
+      "code": "<Button variant=\"secondary\" icon={<Download size={20} />}>Download</Button>"
+    },
+    {
+      "description": "Loading state",
+      "code": "<Button loading>Processing...</Button>"
+    },
+    {
+      "description": "Icon-only button (requires aria-label)",
+      "code": "<Button iconOnly icon={<Settings size={20} />} aria-label=\"Settings\" />"
+    },
+    {
+      "description": "Full width danger button",
+      "code": "<Button variant=\"danger\" fullWidth>Delete Account</Button>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a primary button that says 'Submit'",
+    "Make a button with a download icon on the left",
+    "Create a loading button for form submission",
+    "Add a settings icon button in the header",
+    "Create a red delete button"
+  ]
+}

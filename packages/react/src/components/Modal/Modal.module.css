@@ -1,0 +1,160 @@
+/**
+ * Modal Component Styles
+ *
+ * Dialog/overlay component with backdrop.
+ */
+
+/* Backdrop overlay */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-overlay);
+  backdrop-filter: blur(var(--blur-sm));
+  animation: fadeIn 200ms ease;
+  padding: var(--spacing-4);
+  overflow-y: auto;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Modal container */
+.modal {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100vh - var(--spacing-8));
+  background: var(--surface-base);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-xl);
+  animation: slideUp 200ms ease;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .modal {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm {
+  max-width: 400px;
+}
+
+.md {
+  max-width: 560px;
+}
+
+.lg {
+  max-width: 720px;
+}
+
+.xl {
+  max-width: 960px;
+}
+
+.full {
+  max-width: 100%;
+  margin: var(--spacing-4);
+}
+
+/* ============================================================================
+ * MODAL SECTIONS
+ * ============================================================================ */
+
+/* Modal Header */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-6);
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+/* Close button */
+.closeButton {
+  /* Layout */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  margin-left: var(--spacing-4);
+  flex-shrink: 0;
+
+  /* Styling */
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+
+  /* Typography */
+  font-size: var(--font-size-20);
+  line-height: 1;
+
+  /* Interaction */
+  transition: all var(--transition-fast);
+
+  &:hover {
+    background: var(--interactive-ghost-hover);
+    color: var(--text-primary);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* Modal Body */
+.body {
+  padding: var(--spacing-6);
+  overflow-y: auto;
+  flex: 1;
+  color: var(--text-primary);
+}
+
+/* Modal Footer */
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--spacing-3);
+  padding: var(--spacing-6);
+  border-top: 1px solid var(--border-subtle);
+}

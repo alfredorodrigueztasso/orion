@@ -1,0 +1,100 @@
+/**
+ * Spinner Component Styles
+ *
+ * Loading indicator with animation.
+ */
+
+/* Container */
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Spinner */
+.spinner {
+  border-radius: 50%;
+  border-style: solid;
+  animation: spin 600ms linear infinite;
+
+  /* Reduce motion for accessibility */
+  @media (prefers-reduced-motion: reduce) {
+    animation: spin 1200ms linear infinite;
+  }
+}
+
+/* Spin animation */
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.xs {
+  width: 12px;
+  height: 12px;
+  border-width: 2px;
+}
+
+.sm {
+  width: 16px;
+  height: 16px;
+  border-width: 2px;
+}
+
+.md {
+  width: 24px;
+  height: 24px;
+  border-width: 3px;
+}
+
+.lg {
+  width: 32px;
+  height: 32px;
+  border-width: 3px;
+}
+
+.xl {
+  width: 48px;
+  height: 48px;
+  border-width: 4px;
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+.primary {
+  border-color: var(--interactive-primary);
+  border-top-color: transparent;
+}
+
+.secondary {
+  border-color: var(--text-tertiary);
+  border-top-color: transparent;
+}
+
+.neutral {
+  border-color: var(--border-strong);
+  border-top-color: transparent;
+}
+
+.inverse {
+  border-color: var(--text-inverse);
+  border-top-color: transparent;
+}
+
+/* ============================================================================
+ * LABEL
+ * ============================================================================ */
+
+.label {
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  font-weight: var(--font-weight-medium);
+}

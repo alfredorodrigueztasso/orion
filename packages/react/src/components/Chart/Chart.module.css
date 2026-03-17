@@ -1,0 +1,104 @@
+/**
+ * Chart Component Styles
+ *
+ * Themed wrapper, tooltip, and legend for Recharts.
+ */
+
+/* Container */
+.container {
+  width: 100%;
+  font-family: var(--font-secondary);
+}
+
+/* ============================================================================
+ * TOOLTIP
+ * ============================================================================ */
+
+.tooltip {
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-3) var(--spacing-4);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+}
+
+.tooltipLabel {
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin-bottom: var(--spacing-2);
+  padding-bottom: var(--spacing-2);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.tooltipItems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.tooltipItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.tooltipDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.tooltipLine {
+  width: 12px;
+  height: 2px;
+  flex-shrink: 0;
+}
+
+.tooltipDashed {
+  width: 12px;
+  height: 2px;
+  flex-shrink: 0;
+  border-top: 2px dashed;
+}
+
+.tooltipName {
+  color: var(--text-secondary);
+}
+
+.tooltipValue {
+  color: var(--text-primary);
+  font-weight: var(--font-weight-medium);
+  margin-left: auto;
+  padding-left: var(--spacing-3);
+}
+
+/* ============================================================================
+ * LEGEND
+ * ============================================================================ */
+
+.legend {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-4);
+  padding-top: var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+}
+
+.legendItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  color: var(--text-secondary);
+}
+
+.legendDot {
+  width: 8px;
+  height: 8px;
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}

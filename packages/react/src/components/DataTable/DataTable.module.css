@@ -1,0 +1,540 @@
+/**
+ * DataTable Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Dense data display with minimal visual noise.
+ */
+
+.dataTable {
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  overflow: hidden;
+}
+
+/* ============================================================================
+ * TOOLBAR
+ * ============================================================================ */
+
+.toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+  flex-wrap: wrap;
+}
+
+.toolbarLeft {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.toolbarRight {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  margin-left: auto;
+}
+
+/* Search */
+.searchWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--spacing-3);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.searchInput {
+  padding: var(--spacing-2) var(--spacing-3) var(--spacing-2) var(--spacing-9);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+  border: 1px solid transparent;
+  border-radius: var(--radius-sm);
+  width: 240px;
+  transition:
+    border-color var(--mode-hover-duration),
+    background-color var(--mode-hover-duration);
+}
+
+.searchInput:focus {
+  outline: none;
+  background: var(--surface-base);
+  border-color: var(--interactive-primary);
+}
+
+.searchInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Bulk actions */
+.bulkActions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.selectedCount {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  padding-right: var(--spacing-2);
+  border-right: 1px solid var(--border-subtle);
+  margin-right: var(--spacing-1);
+}
+
+.bulkAction {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-1-5) var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--mode-hover-duration),
+    color var(--mode-hover-duration);
+}
+
+.bulkAction:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+.bulkActionDanger:hover {
+  background: var(--status-error-bg);
+  color: var(--text-error);
+}
+
+/* ============================================================================
+ * TABLE CONTAINER
+ * ============================================================================ */
+
+.tableContainer {
+  overflow: auto;
+  position: relative;
+}
+
+/* ============================================================================
+ * TABLE
+ * ============================================================================ */
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+}
+
+/* Header */
+.thead {
+  /* No background - minimalist style */
+}
+
+.stickyHeader .thead {
+  position: sticky;
+  top: 0;
+  z-index: var(--z-sticky);
+  background: var(--surface-base);
+}
+
+.th {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.thContent {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  transition: color var(--mode-hover-duration);
+}
+
+.sortable:hover {
+  color: var(--text-primary);
+}
+
+.sortIcon {
+  display: inline-flex;
+}
+
+.sortIconInactive {
+  opacity: 0.3;
+}
+
+/* Body */
+.tbody {
+  background: var(--surface-base);
+}
+
+.tr {
+  border-bottom: 1px solid var(--border-subtle);
+  transition: background-color var(--mode-hover-duration);
+}
+
+.tr:last-child {
+  border-bottom: none;
+}
+
+.hoverable .tr:hover {
+  background: var(--surface-subtle);
+}
+
+.trSelected {
+  background: var(--status-info-bg);
+}
+
+.trSelected:hover {
+  background: var(--status-info-bg);
+}
+
+.striped .tr:nth-child(even) {
+  background: var(--surface-subtle);
+}
+
+.td {
+  padding: var(--spacing-3);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+/* Checkbox cell */
+.checkboxCell {
+  width: 40px;
+  text-align: center;
+  padding-left: var(--spacing-3);
+  padding-right: 0;
+}
+
+.checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--interactive-primary);
+}
+
+/* Actions cell */
+.actionsCell {
+  width: 48px;
+  text-align: center;
+  padding: var(--spacing-1);
+}
+
+/* Sticky columns */
+.sticky-left {
+  position: sticky;
+  left: 0;
+  background: inherit;
+  z-index: var(--z-sticky);
+}
+
+.sticky-right {
+  position: sticky;
+  right: 0;
+  background: inherit;
+  z-index: var(--z-sticky);
+}
+
+/* ============================================================================
+ * ACTION MENU
+ * ============================================================================ */
+
+.actionMenu {
+  position: relative;
+}
+
+.actionMenuTrigger {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-tertiary);
+  transition:
+    background-color var(--mode-hover-duration),
+    color var(--mode-hover-duration);
+}
+
+.actionMenuTrigger:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+.actionMenuDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  min-width: 160px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  box-shadow: var(--shadow-lg);
+  z-index: var(--z-dropdown);
+  padding: var(--spacing-1);
+}
+
+.actionMenuItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-primary);
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color var(--mode-hover-duration);
+}
+
+.actionMenuItem:hover {
+  background: var(--surface-subtle);
+}
+
+.actionMenuItemDanger {
+  color: var(--text-error);
+}
+
+.actionMenuItemDanger:hover {
+  background: var(--status-error-bg);
+}
+
+/* ============================================================================
+ * PAGINATION
+ * ============================================================================ */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--spacing-3) var(--spacing-4);
+  border-top: 1px solid var(--border-subtle);
+  gap: var(--spacing-4);
+  flex-wrap: wrap;
+}
+
+.paginationInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.paginationText {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+}
+
+.pageSizeSelect {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+}
+
+.paginationControls {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.paginationButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  color: var(--text-secondary);
+  transition:
+    background-color var(--mode-hover-duration),
+    color var(--mode-hover-duration);
+}
+
+.paginationButton:hover:not(:disabled) {
+  background: var(--surface-layer);
+  color: var(--text-primary);
+}
+
+.paginationButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.paginationPages {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  min-width: 60px;
+  text-align: center;
+}
+
+/* ============================================================================
+ * EMPTY STATE
+ * ============================================================================ */
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+  text-align: center;
+}
+
+.emptyIcon {
+  color: var(--text-tertiary);
+  margin-bottom: var(--spacing-4);
+}
+
+.emptyTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.emptyDescription {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-4) 0;
+  max-width: 320px;
+}
+
+.emptyAction {
+  margin-top: var(--spacing-2);
+}
+
+/* ============================================================================
+ * LOADING
+ * ============================================================================ */
+
+.loadingOverlay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-16);
+}
+
+.spinner {
+  width: 32px;
+  height: 32px;
+  border: 3px solid var(--surface-subtle);
+  border-top-color: var(--interactive-primary);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+ * COMPACT MODE
+ * ============================================================================ */
+
+.compact .th,
+.compact .td {
+  padding: var(--spacing-2);
+  font-size: var(--font-size-12);
+}
+
+.compact .toolbar {
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+.compact .pagination {
+  padding: var(--spacing-2) var(--spacing-3);
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+.hideOnMobile {
+  /* Will be hidden via media query */
+}
+
+@media (max-width: 768px) {
+  .hideOnMobile {
+    display: none;
+  }
+
+  .toolbar {
+    flex-direction: column;
+    align-items: stretch;
+    gap: var(--spacing-3);
+  }
+
+  .toolbarRight {
+    margin-left: 0;
+  }
+
+  .searchInput {
+    width: 100%;
+  }
+
+  .pagination {
+    flex-direction: column;
+    gap: var(--spacing-3);
+  }
+
+  .paginationInfo {
+    width: 100%;
+    justify-content: space-between;
+  }
+
+  .paginationControls {
+    width: 100%;
+    justify-content: center;
+  }
+}

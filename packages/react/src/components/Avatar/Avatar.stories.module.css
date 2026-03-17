@@ -1,0 +1,336 @@
+/**
+ * Avatar Stories CSS Module
+ *
+ * Styles for Avatar component Storybook stories.
+ * All values use design tokens - NO hardcoded colors, fonts, or pixels.
+ *
+ * @module Avatar.stories
+ */
+
+/* ============================================
+   Story Layout Variables
+   ============================================ */
+
+:root {
+  --story-width-sm: calc(var(--spacing-32) * 2 + var(--spacing-16));
+  --story-width-md: calc(var(--spacing-32) * 3 + var(--spacing-16));
+  --story-width-lg: calc(var(--spacing-32) * 4);
+  --story-width-xl: calc(var(--spacing-32) * 4 + var(--spacing-16) * 2);
+  --story-banner-height: calc(var(--spacing-32) + var(--spacing-16));
+}
+
+/* ============================================
+   Shared Layout Containers
+   ============================================ */
+
+.storyContainer {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-6);
+}
+
+.storyContainerWide {
+  display: flex;
+  gap: var(--spacing-8);
+}
+
+.storyContainerColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ============================================
+   AllSizes Story
+   ============================================ */
+
+.sizeItem {
+  text-align: center;
+}
+
+.sizeLabel {
+  margin-top: var(--spacing-2);
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   AllStatuses Story
+   ============================================ */
+
+.statusItem {
+  text-align: center;
+}
+
+.statusLabel {
+  margin-top: var(--spacing-3);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+/* ============================================
+   AvatarGroup Story
+   ============================================ */
+
+.avatarGroup {
+  display: flex;
+  margin-left: calc(var(--spacing-2) * -1);
+}
+
+.avatarGroupItem {
+  margin-left: calc(var(--spacing-2) * -1);
+}
+
+/* ============================================
+   UserProfile Story
+   ============================================ */
+
+.userProfileCard {
+  width: var(--story-width-sm);
+  padding: var(--spacing-8);
+  border-radius: var(--radius-container);
+  border: 1px solid var(--border-subtle);
+  text-align: center;
+  background: var(--surface-base);
+}
+
+.profileAvatar {
+  margin: 0 auto;
+}
+
+.profileName {
+  margin: var(--spacing-4) 0 var(--spacing-1) 0;
+  font-size: var(--font-size-20);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.profileRole {
+  margin: 0;
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+}
+
+.profileEmail {
+  margin: var(--spacing-2) 0 0 0;
+  font-size: var(--font-size-14);
+  color: var(--text-tertiary);
+}
+
+.profileActions {
+  margin-top: var(--spacing-6);
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: center;
+}
+
+/* ============================================
+   UserList Story
+   ============================================ */
+
+.userListCard {
+  width: var(--story-width-md);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-container);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-base);
+}
+
+.userListTitle {
+  margin: 0 0 var(--spacing-6) 0;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.userListItems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.userListItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-3);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  transition: background-color var(--mode-hover-duration, 150ms) ease;
+}
+
+.userListItem:hover {
+  background: var(--surface-subtle);
+}
+
+.userListItemInfo {
+  flex: 1;
+}
+
+.userListItemName {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+}
+
+.userListItemRole {
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+}
+
+/* ============================================
+   CommentThread Story
+   ============================================ */
+
+.commentThreadContainer {
+  width: var(--story-width-lg);
+}
+
+.commentItem {
+  display: flex;
+  gap: var(--spacing-4);
+}
+
+.commentItemWithMargin {
+  composes: commentItem;
+  margin-bottom: var(--spacing-6);
+}
+
+.commentContent {
+  flex: 1;
+}
+
+.commentHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-2);
+}
+
+.commentAuthor {
+  font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+}
+
+.commentTime {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+}
+
+.commentText {
+  margin: 0;
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+  line-height: var(--line-height-normal);
+}
+
+/* ============================================
+   Mentions Story
+   ============================================ */
+
+.mentionsCard {
+  width: var(--story-width-md);
+  padding: var(--spacing-6);
+  border-radius: var(--radius-container);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-base);
+}
+
+.mentionsTitle {
+  margin: 0 0 var(--spacing-4) 0;
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+.mentionsItems {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.mentionItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  padding: var(--spacing-3);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border-subtle);
+  background: var(--surface-base);
+}
+
+.mentionContent {
+  flex: 1;
+}
+
+.mentionText {
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+}
+
+.mentionAuthor {
+  font-weight: var(--font-weight-medium);
+}
+
+/* ============================================
+   ProfileHeader Story
+   ============================================ */
+
+.profileHeaderCard {
+  width: var(--story-width-xl);
+  border-radius: var(--radius-container);
+  border: 1px solid var(--border-subtle);
+  overflow: hidden;
+  background: var(--surface-base);
+}
+
+.profileHeaderBanner {
+  height: var(--story-banner-height);
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-400),
+    var(--color-brand-600)
+  );
+}
+
+.profileHeaderContent {
+  padding: var(--spacing-6);
+  margin-top: calc(var(--story-banner-height) / -2);
+  position: relative;
+}
+
+.profileHeaderAvatar {
+  border: var(--spacing-1) solid var(--surface-base);
+  border-radius: var(--radius-full);
+}
+
+.profileHeaderInfo {
+  margin-top: var(--spacing-4);
+}
+
+.profileHeaderName {
+  margin: 0 0 var(--spacing-2) 0;
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+}
+
+.profileHeaderBio {
+  margin: 0 0 var(--spacing-4) 0;
+  font-size: var(--font-size-16);
+  color: var(--text-secondary);
+}
+
+.profileHeaderStats {
+  display: flex;
+  gap: var(--spacing-8);
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+}
+
+.profileHeaderStatValue {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}

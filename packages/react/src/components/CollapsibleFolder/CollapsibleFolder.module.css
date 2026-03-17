@@ -1,0 +1,199 @@
+/**
+ * CollapsibleFolder Section Styles
+ *
+ * Styles for the collapsible folder section.
+ * Uses semantic tokens for AI-first compliance.
+ */
+
+.folder {
+  background-color: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-6);
+  margin-bottom: 0;
+  transition:
+    border-color var(--transition-fast),
+    background-color var(--transition-fast),
+    box-shadow var(--transition-fast);
+}
+
+/* Drop target visual */
+.folder.dropTarget,
+.folder[data-drop-active="true"] {
+  border: 2px dashed var(--border-interactive);
+  background-color: var(--soft-brand);
+  filter: drop-shadow(0 0 0 2px var(--border-interactive));
+  transition: all var(--transition-fast);
+}
+
+/* Micro-feedback: successful drop */
+.folder.dropCompleted {
+  border-color: var(--status-success);
+  background-color: var(--surface-subtle);
+}
+
+/* Header section */
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+}
+
+/* Collapsible trigger button */
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex: 1;
+  padding: 0;
+  border: none;
+  background: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--text-primary);
+  transition: color var(--transition-fast);
+}
+
+.trigger:hover {
+  color: var(--interactive-primary);
+}
+
+.trigger:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-control);
+}
+
+/* Chevron icon */
+.chevron {
+  flex-shrink: 0;
+  transition: transform var(--transition-normal);
+  color: var(--text-secondary);
+}
+
+.chevron.expanded {
+  transform: rotate(0deg);
+}
+
+.chevron:not(.expanded) {
+  transform: rotate(-90deg);
+}
+
+/* Folder title */
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.4;
+}
+
+/* Item count badge */
+.badge {
+  flex-shrink: 0;
+}
+
+/* Actions section (sort + menu) */
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+/* Content area (collapsible) */
+.content {
+  padding-top: var(--spacing-4);
+  padding-bottom: var(--spacing-3);
+}
+
+/* Items grid */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--spacing-4);
+}
+
+/* Responsive grid */
+@media (max-width: 1200px) {
+  .grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Badge: hide label text, show only the count */
+  .badgeLabel {
+    display: none;
+  }
+
+  /* Sort button: icon-only on mobile */
+  .sortDropdown button > span:not([aria-hidden="true"]) {
+    display: none;
+  }
+
+  .sortDropdown button {
+    width: 32px;
+    padding: 0;
+  }
+}
+
+/* Empty state */
+.emptyState {
+  padding: var(--spacing-16) var(--spacing-8);
+  text-align: center;
+}
+
+.emptyText {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+/* Insertion indicator: shows where the dragged item will be placed */
+.insertionLine {
+  height: 2px;
+  background-color: var(--interactive-primary);
+  border-radius: 1px;
+  margin: var(--spacing-1) 0;
+  position: relative;
+  opacity: 1;
+
+  /* Circular dot on the left edge */
+  &::before {
+    content: "";
+    position: absolute;
+    left: -6px;
+    top: -3px;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background-color: var(--interactive-primary);
+  }
+}
+
+/* Empty drop zone for empty folders */
+.emptyDropZone {
+  padding: var(--spacing-4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 80px;
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  .folder {
+    transition: none;
+  }
+
+  .chevron {
+    transition: none;
+  }
+}

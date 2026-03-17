@@ -1,0 +1,347 @@
+/**
+ * Switch Component Styles
+ *
+ * Toggle switch for boolean settings.
+ * Implements WCAG 2.1 AA accessibility guidelines.
+ */
+
+/* ============================================================================
+ * CONTAINER
+ * ============================================================================ */
+
+.container {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.disabled {
+  opacity: 0.5;
+}
+
+/* ============================================================================
+ * LABEL WRAPPER (clickable area)
+ * ============================================================================ */
+
+.labelWrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  cursor: pointer;
+  user-select: none;
+}
+
+.disabled .labelWrapper {
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * HIDDEN INPUT
+ * ============================================================================ */
+
+.input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * SWITCH TRACK (iOS style)
+ * ============================================================================ */
+
+.track {
+  position: relative;
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+
+  /* Default size (sm) */
+  width: 42px;
+  height: 26px;
+
+  /* iOS-style off state: light gray */
+  background: var(--surface-subtle);
+  border: none;
+  border-radius: var(--radius-full);
+
+  /* Interaction */
+  transition: background-color 0.2s ease-in-out;
+}
+
+/* ============================================================================
+ * SWITCH THUMB (iOS style)
+ * Always white with subtle shadow
+ * ============================================================================ */
+
+.thumb {
+  position: absolute;
+  left: 2px;
+  width: 22px;
+  height: 22px;
+  background: var(--color-neutral-0);
+  border-radius: 50%;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.2s ease-in-out;
+}
+
+/* ============================================================================
+ * SIZES (iOS proportions)
+ * ============================================================================ */
+
+/* Small size */
+.sm .track {
+  width: 42px;
+  height: 26px;
+}
+
+.sm .thumb {
+  width: 22px;
+  height: 22px;
+  left: 2px;
+}
+
+/* Medium size (default - matches iOS) */
+.md .track {
+  width: 51px;
+  height: 31px;
+}
+
+.md .thumb {
+  width: 27px;
+  height: 27px;
+  left: 2px;
+}
+
+/* Large size */
+.lg .track {
+  width: 60px;
+  height: 36px;
+}
+
+.lg .thumb {
+  width: 32px;
+  height: 32px;
+  left: 2px;
+}
+
+/* ============================================================================
+ * CHECKED STATE
+ * ============================================================================ */
+
+.input:checked + .labelWrapper .track {
+  background: var(--interactive-primary);
+}
+
+.input:checked + .labelWrapper .thumb {
+  background: var(--color-neutral-0);
+}
+
+/* Thumb position when checked - by size */
+.sm .input:checked + .labelWrapper .thumb {
+  transform: translateX(16px);
+}
+
+.md .input:checked + .labelWrapper .thumb {
+  transform: translateX(20px);
+}
+
+.lg .input:checked + .labelWrapper .thumb {
+  transform: translateX(24px);
+}
+
+/* ============================================================================
+ * HOVER STATE
+ * ============================================================================ */
+
+.labelWrapper:hover .track {
+  background: var(--surface-layer);
+}
+
+.input:checked + .labelWrapper:hover .track {
+  background: var(--interactive-primary-hover);
+}
+
+/* ============================================================================
+ * FOCUS STATE
+ * ============================================================================ */
+
+.input:focus-visible + .labelWrapper .track {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px var(--soft-brand);
+}
+
+/* ============================================================================
+ * DISABLED STATE
+ * ============================================================================ */
+
+.input:disabled + .labelWrapper {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.input:disabled + .labelWrapper .track {
+  background: var(--border-subtle);
+}
+
+.input:disabled + .labelWrapper .thumb {
+  background: var(--color-neutral-0);
+  box-shadow: var(--shadow-flat);
+}
+
+.input:disabled:checked + .labelWrapper .track {
+  background: var(--interactive-primary);
+  opacity: 0.5;
+}
+
+.input:disabled:checked + .labelWrapper .thumb {
+  background: var(--color-neutral-0);
+}
+
+/* ============================================================================
+ * ERROR STATE
+ * ============================================================================ */
+
+.error .track {
+  box-shadow: inset 0 0 0 2px var(--status-error);
+}
+
+.error .labelWrapper:hover .track {
+  box-shadow: inset 0 0 0 2px var(--status-error);
+}
+
+.error .input:focus-visible + .labelWrapper .track {
+  outline-color: var(--status-error);
+  box-shadow:
+    inset 0 0 0 2px var(--status-error),
+    0 0 0 4px var(--soft-error);
+}
+
+/* ============================================================================
+ * LABEL & TEXT
+ * ============================================================================ */
+
+.label {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-primary);
+  line-height: 1.4;
+}
+
+.sm .label {
+  font-size: var(--font-size-13);
+}
+
+.lg .label {
+  font-size: var(--font-size-16);
+}
+
+.required {
+  color: var(--status-error);
+  margin-left: 2px;
+}
+
+/* Helper text - aligned with label */
+.helperText {
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-secondary);
+  line-height: var(--line-height-snug);
+  padding-left: calc(42px + var(--spacing-3)); /* track width + gap */
+}
+
+.md .helperText {
+  padding-left: calc(51px + var(--spacing-3));
+}
+
+.lg .helperText {
+  padding-left: calc(60px + var(--spacing-3));
+}
+
+/* Error message */
+.errorMessage {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  margin: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--status-error);
+  line-height: var(--line-height-snug);
+  padding-left: calc(42px + var(--spacing-3));
+}
+
+.md .errorMessage {
+  padding-left: calc(51px + var(--spacing-3));
+}
+
+.lg .errorMessage {
+  padding-left: calc(60px + var(--spacing-3));
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE SUPPORT
+ * ============================================================================ */
+
+@media (forced-colors: active) {
+  .track {
+    background: Canvas;
+    border: 2px solid CanvasText;
+  }
+
+  .thumb {
+    background: CanvasText;
+  }
+
+  .input:checked + .labelWrapper .track {
+    background: Highlight;
+    border-color: Highlight;
+  }
+
+  .input:checked + .labelWrapper .thumb {
+    background: Canvas;
+  }
+
+  .input:focus-visible + .labelWrapper .track {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .input:disabled + .labelWrapper .track {
+    border-color: GrayText;
+    background: Canvas;
+  }
+
+  .input:disabled + .labelWrapper .thumb {
+    background: GrayText;
+  }
+
+  .error .track {
+    border-color: LinkText;
+  }
+
+  .errorMessage {
+    color: LinkText;
+  }
+
+  .label {
+    color: CanvasText;
+  }
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .track,
+  .thumb {
+    transition: none;
+  }
+}

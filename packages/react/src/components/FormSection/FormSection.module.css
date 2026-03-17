@@ -1,0 +1,260 @@
+/**
+ * FormSection Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Clean, efficient layout for settings and form pages.
+ */
+
+.formSection {
+  display: flex;
+  flex-direction: column;
+}
+
+.divider {
+  border-bottom: 1px solid var(--border-subtle);
+  padding-bottom: var(--mode-spacing-block);
+  margin-bottom: var(--mode-spacing-block);
+}
+
+.disabled {
+  opacity: 0.6;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * HEADER
+ * ============================================================================ */
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  width: 100%;
+  text-align: left;
+  background: none;
+  border: none;
+  padding: 0;
+  margin-bottom: var(--mode-spacing-element);
+}
+
+.collapsible .header {
+  cursor: pointer;
+  padding: var(--spacing-3);
+  margin: calc(var(--spacing-3) * -1);
+  margin-bottom: var(--spacing-3);
+  border-radius: var(--radius-sm);
+  transition: background-color var(--mode-hover-duration);
+}
+
+.collapsible .header:hover {
+  background: var(--surface-subtle);
+}
+
+.collapsed .header {
+  margin-bottom: 0;
+}
+
+.headerContent {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+}
+
+.headerText {
+  flex: 1;
+  min-width: 0;
+}
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: var(--surface-subtle);
+  border-radius: var(--radius-control);
+  color: var(--interactive-primary);
+  flex-shrink: 0;
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-16);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0;
+  line-height: var(--line-height-tight);
+}
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  margin: var(--spacing-1) 0 0 0;
+  line-height: var(--line-height-relaxed);
+}
+
+.collapseIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  transition: transform var(--mode-hover-duration);
+}
+
+.iconCollapsed {
+  transform: rotate(-90deg);
+}
+
+/* ============================================================================
+ * CONTENT
+ * ============================================================================ */
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mode-spacing-element);
+}
+
+.fields {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.actionsWrapper {
+  margin-top: var(--spacing-4);
+  padding-top: var(--spacing-4);
+  border-top: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+ * GROUP SUB-COMPONENT
+ * ============================================================================ */
+
+.group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.groupLabel {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+}
+
+.groupFields {
+  display: grid;
+  gap: var(--spacing-4);
+}
+
+.columns-1 .groupFields {
+  grid-template-columns: 1fr;
+}
+
+.columns-2 .groupFields {
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.columns-3 .groupFields {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.groupHelp {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================================
+ * ACTIONS SUB-COMPONENT
+ * ============================================================================ */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-wrap: wrap;
+}
+
+.align-start {
+  justify-content: flex-start;
+}
+
+.align-center {
+  justify-content: center;
+}
+
+.align-end {
+  justify-content: flex-end;
+}
+
+.align-between {
+  justify-content: space-between;
+}
+
+/* ============================================================================
+ * VARIANT: CARD
+ * ============================================================================ */
+
+.variant-card {
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  padding: var(--mode-spacing-element);
+}
+
+.variant-card .header {
+  margin-bottom: var(--spacing-4);
+}
+
+.variant-card .actionsWrapper {
+  margin-top: var(--spacing-6);
+}
+
+/* ============================================================================
+ * VARIANT: INLINE
+ * ============================================================================ */
+
+.variant-inline {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: var(--spacing-8);
+}
+
+.variant-inline .header {
+  margin-bottom: 0;
+  position: sticky;
+  top: var(--spacing-4);
+  align-self: start;
+}
+
+.variant-inline .content {
+  flex: 1;
+}
+
+.variant-inline .collapseIcon {
+  display: none;
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .variant-inline {
+    grid-template-columns: 1fr;
+    gap: var(--spacing-4);
+  }
+
+  .variant-inline .header {
+    position: static;
+  }
+
+  .columns-2 .groupFields,
+  .columns-3 .groupFields {
+    grid-template-columns: 1fr;
+  }
+}

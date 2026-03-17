@@ -1,0 +1,93 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Footer.schema.json",
+  "title": "Footer",
+  "description": "A page footer section with brand, navigation links, and social media.",
+  "type": "object",
+  "properties": {
+    "brand": {
+      "type": "object",
+      "description": "Brand information",
+      "properties": {
+        "logo": { "description": "Logo element or image" },
+        "name": { "type": "string", "description": "Brand name" },
+        "description": { "type": "string", "description": "Brand tagline" }
+      }
+    },
+    "linkGroups": {
+      "type": "array",
+      "description": "Groups of navigation links",
+      "items": {
+        "type": "object",
+        "properties": {
+          "title": { "type": "string", "description": "Group title" },
+          "links": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "label": { "type": "string" },
+                "href": { "type": "string" }
+              },
+              "required": ["label", "href"]
+            }
+          }
+        },
+        "required": ["title", "links"]
+      }
+    },
+    "socialLinks": {
+      "type": "array",
+      "description": "Social media links",
+      "items": {
+        "type": "object",
+        "properties": {
+          "platform": {
+            "type": "string",
+            "enum": [
+              "twitter",
+              "facebook",
+              "instagram",
+              "linkedin",
+              "github",
+              "youtube"
+            ]
+          },
+          "href": { "type": "string" },
+          "label": { "type": "string" }
+        },
+        "required": ["platform", "href"]
+      }
+    },
+    "copyright": {
+      "type": "string",
+      "description": "Copyright text"
+    },
+    "variant": {
+      "type": "string",
+      "enum": ["simple", "columns", "centered"],
+      "default": "columns",
+      "description": "Footer layout variant"
+    },
+    "background": {
+      "type": "string",
+      "enum": ["base", "subtle", "dark"],
+      "default": "dark",
+      "description": "Background style"
+    }
+  },
+  "required": [],
+  "examples": [
+    {
+      "description": "Multi-column footer with links",
+      "code": "<Footer\n  brand={{\n    name: 'Orion',\n    description: 'The AI-first design system'\n  }}\n  linkGroups={[\n    {\n      title: 'Product',\n      links: [\n        { label: 'Features', href: '/features' },\n        { label: 'Pricing', href: '/pricing' }\n      ]\n    },\n    {\n      title: 'Company',\n      links: [\n        { label: 'About', href: '/about' },\n        { label: 'Contact', href: '/contact' }\n      ]\n    }\n  ]}\n  socialLinks={[\n    { platform: 'twitter', href: 'https://twitter.com/orion' },\n    { platform: 'github', href: 'https://github.com/orion' }\n  ]}\n  copyright=\"© 2025 Orion. All rights reserved.\"\n/>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a footer with navigation columns",
+    "Make a simple centered footer with copyright",
+    "Build a footer with social media icons",
+    "Create a dark footer with newsletter signup",
+    "Add a footer with logo and multiple link groups"
+  ]
+}

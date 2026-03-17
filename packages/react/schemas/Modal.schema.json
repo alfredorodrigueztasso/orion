@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Modal.schema.json",
+  "title": "Modal",
+  "description": "A dialog overlay component for focused interactions. Supports various sizes and customizable content areas.",
+  "type": "object",
+  "properties": {
+    "open": {
+      "type": "boolean",
+      "description": "Controls modal visibility"
+    },
+    "onClose": {
+      "description": "Handler called when modal should close"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg", "xl", "full"],
+      "default": "md",
+      "description": "Modal width size"
+    },
+    "closeOnOverlay": {
+      "type": "boolean",
+      "default": true,
+      "description": "Close when clicking overlay background"
+    },
+    "closeOnEscape": {
+      "type": "boolean",
+      "default": true,
+      "description": "Close when pressing Escape key"
+    },
+    "showCloseButton": {
+      "type": "boolean",
+      "default": true,
+      "description": "Show close button in header"
+    },
+    "header": {
+      "description": "Modal header content (title, description)"
+    },
+    "footer": {
+      "description": "Modal footer content (action buttons)"
+    },
+    "children": {
+      "description": "Main modal body content"
+    }
+  },
+  "required": ["open", "onClose"],
+  "examples": [
+    {
+      "description": "Basic confirmation modal",
+      "code": "<Modal\n  open={isOpen}\n  onClose={() => setIsOpen(false)}\n  header={<ModalHeader title=\"Confirm Action\" />}\n  footer={\n    <ModalFooter>\n      <Button variant=\"secondary\" onClick={() => setIsOpen(false)}>Cancel</Button>\n      <Button onClick={handleConfirm}>Confirm</Button>\n    </ModalFooter>\n  }\n>\n  <p>Are you sure you want to proceed?</p>\n</Modal>"
+    },
+    {
+      "description": "Large form modal",
+      "code": "<Modal\n  open={isOpen}\n  onClose={handleClose}\n  size=\"lg\"\n  closeOnOverlay={false}\n>\n  <form onSubmit={handleSubmit}>\n    <Field label=\"Name\" />\n    <Field label=\"Email\" type=\"email\" />\n  </form>\n</Modal>"
+    },
+    {
+      "description": "Full-screen modal",
+      "code": "<Modal open={isOpen} onClose={handleClose} size=\"full\">\n  <FullScreenContent />\n</Modal>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a confirmation dialog with yes/no buttons",
+    "Make a form modal for user registration",
+    "Build a full-screen image preview modal",
+    "Create a settings modal with tabs",
+    "Add a delete confirmation modal"
+  ]
+}

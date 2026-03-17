@@ -1,0 +1,301 @@
+/**
+ * ActivityFeed Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Timeline layout with efficient information scanning.
+ */
+
+.activityFeed {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+/* ============================================================================
+ * FILTERS
+ * ============================================================================ */
+
+.filters {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+  padding-bottom: var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+ * LIST
+ * ============================================================================ */
+
+.list {
+  display: flex;
+  flex-direction: column;
+}
+
+.empty {
+  padding: var(--spacing-8);
+  text-align: center;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * ITEM
+ * ============================================================================ */
+
+.item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4) 0;
+}
+
+.item:first-child {
+  padding-top: 0;
+}
+
+.itemCompact {
+  padding: var(--spacing-2-5) 0;
+}
+
+.itemCompact:first-child {
+  padding-top: 0;
+}
+
+/* Icon column */
+.iconColumn {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.iconWrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
+  border-radius: var(--radius-full);
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+}
+
+.iconVariant-success {
+  background: var(--status-success-bg);
+  color: var(--text-success);
+}
+
+.iconVariant-warning {
+  background: var(--status-warning-bg);
+  color: var(--text-warning);
+}
+
+.iconVariant-error {
+  background: var(--status-error-bg);
+  color: var(--text-error);
+}
+
+.iconVariant-info {
+  background: var(--status-info-bg);
+  color: var(--text-info);
+}
+
+.iconVariant-brand {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+}
+
+.connector {
+  width: var(--border-width-bold);
+  flex: 1;
+  min-height: var(--size-icon-sm);
+  background: var(--border-subtle);
+  margin-top: var(--spacing-2);
+}
+
+/* Content */
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-tight);
+  min-height: var(--size-icon-xl);
+}
+
+.actor {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.avatar {
+  width: var(--size-avatar-xs);
+  height: var(--size-avatar-xs);
+  border-radius: var(--radius-full);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.actorName {
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-decoration: none;
+  white-space: nowrap;
+}
+
+a.actorName:hover {
+  text-decoration: underline;
+}
+
+.title {
+  color: var(--text-primary);
+  flex: 1;
+  min-width: 0;
+}
+
+.time {
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: var(--spacing-2);
+}
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  line-height: var(--line-height-relaxed);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.metadata {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+}
+
+.metadataItem {
+  display: inline-flex;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+}
+
+.metadataKey {
+  color: var(--text-tertiary);
+}
+
+.metadataValue {
+  color: var(--text-secondary);
+}
+
+.actions {
+  display: flex;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-2);
+}
+
+/* ============================================================================
+ * COMPACT MODE
+ * ============================================================================ */
+
+.compact .item {
+  gap: var(--spacing-2);
+}
+
+.compact .iconWrapper {
+  width: var(--size-icon-lg);
+  height: var(--size-icon-lg);
+}
+
+.compact .content {
+  gap: var(--spacing-1-5);
+}
+
+.compact .header {
+  font-size: var(--font-size-13);
+  min-height: var(--size-icon-lg);
+  gap: var(--spacing-2);
+}
+
+.compact .actor {
+  gap: var(--spacing-2);
+}
+
+.compact .description {
+  font-size: var(--font-size-12);
+  padding: var(--spacing-1-5) var(--spacing-2);
+}
+
+/* ============================================================================
+ * LOADING SKELETON
+ * ============================================================================ */
+
+.skeleton {
+  display: flex;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) 0;
+}
+
+.skeletonIcon {
+  width: var(--size-icon-xl);
+  height: var(--size-icon-xl);
+  border-radius: var(--radius-full);
+  background: var(--surface-subtle);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.skeletonTitle {
+  width: 60%;
+  height: var(--size-icon-sm);
+  border-radius: var(--radius-sm);
+  background: var(--surface-subtle);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+.skeletonDesc {
+  width: 80%;
+  height: var(--font-size-12);
+  border-radius: var(--radius-sm);
+  background: var(--surface-subtle);
+  animation: pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+/* ============================================================================
+ * LOAD MORE
+ * ============================================================================ */
+/* Removed - Now uses Orion Button component */

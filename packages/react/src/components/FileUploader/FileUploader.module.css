@@ -1,0 +1,326 @@
+/**
+ * FileUploader Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Clean drag & drop zone with efficient file management.
+ */
+
+.fileUploader {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+}
+
+/* ============================================================================
+ * DROPZONE
+ * ============================================================================ */
+
+.dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  border: 2px dashed var(--border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+}
+
+.dropzone:hover {
+  border-color: var(--border-default);
+  background: var(--surface-layer);
+}
+
+.dropzone:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+.dropzoneDragging {
+  border-color: var(--interactive-primary);
+  background: var(--surface-layer);
+}
+
+.dropzoneDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.dropzoneDisabled:hover {
+  border-color: var(--border-subtle);
+  background: var(--surface-subtle);
+}
+
+.dropzoneError {
+  border-color: var(--text-error);
+}
+
+.input {
+  display: none;
+}
+
+.dropzoneContent {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-3);
+  text-align: center;
+}
+
+.dropzoneIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--surface-base);
+  color: var(--text-tertiary);
+}
+
+.dropzonePlaceholder {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.dropzoneHints {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--spacing-2) var(--spacing-4);
+}
+
+.dropzoneHint {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * HELPER TEXT
+ * ============================================================================ */
+
+.helperText {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+}
+
+.helperTextError {
+  color: var(--text-error);
+}
+
+/* ============================================================================
+ * FILE LIST
+ * ============================================================================ */
+
+.fileList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.fileItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-sm);
+}
+
+.fileIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--surface-base);
+  color: var(--text-secondary);
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.filePreview {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.fileInfo {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-0-5);
+}
+
+.fileName {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-13);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.fileSize {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-11);
+  color: var(--text-tertiary);
+}
+
+.fileStatus {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.progressBar {
+  width: 60px;
+  height: 4px;
+  background: var(--surface-layer);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.progressFill {
+  height: 100%;
+  background: var(--interactive-primary);
+  transition: width var(--mode-hover-duration);
+}
+
+.fileStatusIcon {
+  color: var(--text-tertiary);
+  animation: spin 1s linear infinite;
+}
+
+.fileStatusSuccess {
+  color: var(--text-success);
+}
+
+.fileStatusError {
+  color: var(--text-error);
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.fileRemove {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition: all var(--mode-hover-duration);
+  flex-shrink: 0;
+}
+
+.fileRemove:hover {
+  background: var(--surface-layer);
+  color: var(--text-error);
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+/* Minimal variant */
+.minimal .dropzone {
+  padding: var(--spacing-4);
+  border-style: solid;
+  border-width: 1px;
+}
+
+.minimal .dropzoneIcon {
+  width: 32px;
+  height: 32px;
+}
+
+/* Card variant */
+.card .dropzone {
+  padding: var(--spacing-6);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--mode-shadow-default);
+}
+
+.card .dropzone:hover {
+  box-shadow: var(--mode-shadow-hover);
+}
+
+/* ============================================================================
+ * COMPACT MODE
+ * ============================================================================ */
+
+.compact .dropzone {
+  padding: var(--spacing-4);
+}
+
+.compact .dropzoneIcon {
+  width: 32px;
+  height: 32px;
+}
+
+.compact .dropzonePlaceholder {
+  font-size: var(--font-size-13);
+}
+
+.compact .dropzoneHints {
+  display: none;
+}
+
+.compact .fileItem {
+  padding: var(--spacing-1-5) var(--spacing-2);
+}
+
+.compact .fileIcon {
+  width: 28px;
+  height: 28px;
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 480px) {
+  .dropzone {
+    padding: var(--spacing-6);
+  }
+
+  .dropzoneHints {
+    flex-direction: column;
+    gap: var(--spacing-1);
+  }
+
+  .fileItem {
+    flex-wrap: wrap;
+  }
+
+  .fileStatus {
+    order: 3;
+    width: 100%;
+    margin-top: var(--spacing-2);
+  }
+
+  .progressBar {
+    flex: 1;
+  }
+}

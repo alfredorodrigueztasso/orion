@@ -1,0 +1,134 @@
+import { Meta } from '@storybook/blocks';
+import { Callout, FeatureCard, CardGrid, Steps, Step } from './DocComponents';
+
+<Meta title="Getting Started/Installation" />
+
+# Installation
+
+There are two ways to use Orion components in your project.
+
+<CardGrid columns={2}>
+  <FeatureCard icon="📦" title="Option A: npm install">
+    Install the full library as a versioned dependency. Auto-updates, zero maintenance. Best for most projects.
+  </FeatureCard>
+  <FeatureCard icon="📋" title="Option B: CLI copy">
+    Copy individual components into your project (shadcn-style). Own the source, customize freely.
+  </FeatureCard>
+</CardGrid>
+
+---
+
+## Option A: npm install (full library)
+
+Install the package to get all components as a versioned dependency.
+
+```bash
+npm install @orion-ds/react
+```
+
+### CSS Setup
+
+Import styles in your app entry file (`main.tsx` or `App.tsx`).
+
+**Single import (recommended):**
+
+```tsx
+import '@orion-ds/react/styles.css';
+```
+
+This bundles both design tokens and component styles.
+
+
+<Callout variant="warning" title="Missing CSS = unstyled components">
+  You must import the CSS file — without it, components will render without any Orion styling.
+</Callout>
+
+### ThemeProvider Setup
+
+Wrap your app root with `ThemeProvider`. This is **required** — it manages global theme/brand state and loads fonts automatically.
+
+```tsx
+import '@orion-ds/react/styles.css';
+import { ThemeProvider } from '@orion-ds/react';
+
+function App() {
+  return (
+    <ThemeProvider>
+      <YourApp />
+    </ThemeProvider>
+  );
+}
+```
+
+<Callout variant="tip" title="Fonts load automatically">
+  <code>ThemeProvider</code> loads Google Fonts for the active brand automatically. No manual <code>&lt;link&gt;</code> tags needed.
+</Callout>
+
+**ThemeProvider props:**
+
+| Prop | Default | Description |
+|------|---------|-------------|
+| `defaultTheme` | `'light'` | Initial theme |
+| `defaultBrand` | `'orion'` | Initial brand |
+| `disableAutoFontLoading` | `false` | Disable automatic Google Fonts loading |
+| `disableFontWarnings` | `false` | Disable console warnings for missing fonts |
+
+**That's it.** Fonts load automatically, theme/brand are managed globally, and all components inherit the correct styling.
+
+---
+
+## Option B: CLI copy (own the code)
+
+Copy individual components into your project, shadcn-style. You own the source and can modify freely.
+
+<Steps>
+  <Step number={1} title="Initialize your project">
+    Run <code>npx @orion-ds/cli init</code> — creates an <code>orion.json</code> config file.
+  </Step>
+  <Step number={2} title="Add the components you need">
+    Run <code>npx @orion-ds/cli add button card modal</code> — copies component source files, resolves dependencies, transforms imports.
+  </Step>
+</Steps>
+
+After init, import the CSS once:
+
+```tsx
+import '@orion-ds/react/styles.css';
+```
+
+See the [CLI documentation](?path=/docs/getting-started-cli-orion-add--docs) for full details.
+
+---
+
+## Verify Your Setup
+
+A minimal working example:
+
+```tsx
+import '@orion-ds/react/styles.css';
+import { ThemeProvider, Button } from '@orion-ds/react';
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Button variant="primary">It works!</Button>
+    </ThemeProvider>
+  );
+}
+```
+
+If the button renders with the correct Orion blue color and rounded corners, you're all set.
+
+## Troubleshooting
+
+<Callout variant="error" title="Components render unstyled?">
+  Ensure you've imported <code>@orion-ds/react/styles.css</code> (or both separate CSS files). This is the most common setup issue.
+</Callout>
+
+<Callout variant="warning" title="Fonts look wrong (Times New Roman)?">
+  Make sure <code>ThemeProvider</code> wraps your app. It loads Google Fonts automatically. If you disabled auto-loading, add the font <code>&lt;link&gt;</code> manually.
+</Callout>
+
+<Callout variant="info" title="TypeScript errors?">
+  Make sure <code>@orion-ds/react</code> is installed and imported correctly.
+</Callout>

@@ -1,0 +1,223 @@
+{
+  "name": "@orion-ds/react",
+  "version": "4.6.0",
+  "type": "module",
+  "description": "Orion Design System - React component library with 40+ AI-ready components and 9 templates",
+  "author": "Orion Design System Team",
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "sideEffects": [
+    "**/*.css"
+  ],
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.cjs"
+    },
+    "./client": {
+      "types": "./dist/client.d.ts",
+      "import": "./dist/client.mjs",
+      "require": "./dist/client.cjs"
+    },
+    "./styles.css": "./dist/styles.css",
+    "./theme.css": "./dist/theme.css",
+    "./tokens": {
+      "types": "./dist/tokens/index.d.ts",
+      "import": "./dist/tokens/index.mjs",
+      "require": "./dist/tokens/index.cjs"
+    },
+    "./sections": {
+      "types": "./dist/sections/index.d.ts",
+      "import": "./dist/sections/index.mjs",
+      "require": "./dist/sections/index.cjs"
+    },
+    "./blocks": {
+      "types": "./dist/blocks/index.d.ts",
+      "import": "./dist/blocks/index.mjs",
+      "require": "./dist/blocks/index.cjs"
+    },
+    "./templates": {
+      "types": "./dist/templates/index.d.ts",
+      "import": "./dist/templates/index.mjs",
+      "require": "./dist/templates/index.cjs"
+    },
+    "./chart": {
+      "types": "./dist/chart.d.ts",
+      "import": "./dist/chart.mjs",
+      "require": "./dist/chart.cjs"
+    },
+    "./calendar": {
+      "types": "./dist/calendar.d.ts",
+      "import": "./dist/calendar.mjs",
+      "require": "./dist/calendar.cjs"
+    },
+    "./editor": {
+      "types": "./dist/editor.d.ts",
+      "import": "./dist/editor.mjs",
+      "require": "./dist/editor.cjs"
+    },
+    "./dnd": {
+      "types": "./dist/dnd.d.ts",
+      "import": "./dist/dnd.mjs",
+      "require": "./dist/dnd.cjs"
+    },
+    "./rich": {
+      "types": "./dist/rich.d.ts",
+      "import": "./dist/rich.mjs",
+      "require": "./dist/rich.cjs"
+    },
+    "./blocks.css": "./dist/blocks.css"
+  },
+  "files": [
+    "dist",
+    "README.md",
+    "LICENSE",
+    "AI_GUIDE.md",
+    "AI_QUICKREF.md",
+    "AI_COMPONENTS.md",
+    "BUNDLE_OPTIMIZATION.md"
+  ],
+  "scripts": {
+    "copy:assets": "mkdir -p assets/tokens && cp ../../theme.css assets/theme.css && cp ../../tokens/generated.css assets/tokens/generated.css",
+    "build": "npm run copy:assets && tsc -p tsconfig.build.json && vite build && npm run build:styles",
+    "build:styles": "node scripts/bundle-styles.js",
+    "type-check": "tsc --noEmit",
+    "dev": "vite",
+    "test": "vitest",
+    "test:ui": "vitest --ui",
+    "test:coverage": "vitest --coverage",
+    "test:e2e": "playwright test",
+    "test:e2e:headed": "playwright test --headed",
+    "test:e2e:debug": "playwright test --debug",
+    "test:e2e:report": "playwright show-report",
+    "test:visual": "npm run build-storybook && npm run percy",
+    "percy": "percy storybook storybook-static",
+    "bench": "vitest bench --run",
+    "measure:bundle-size": "node scripts/measure-bundle-size.js",
+    "storybook": "storybook dev -p 6006 --host 127.0.0.1",
+    "storybook:restart": "node -e \"require('child_process').execSync('lsof -ti :6006 | xargs kill -9 2>/dev/null; true', {shell:true,stdio:'inherit'})\" && storybook dev -p 6006 --host 127.0.0.1",
+    "storybook:reset": "node -e \"require('child_process').execSync('lsof -ti :6006 | xargs kill -9 2>/dev/null; true', {shell:true,stdio:'inherit'})\" && node -e \"require('fs').rmSync('node_modules/.cache/storybook',{recursive:true,force:true})\" && storybook dev -p 6006 --host 127.0.0.1",
+    "build-storybook": "storybook build"
+  },
+  "keywords": [
+    "react",
+    "components",
+    "orion",
+    "design-system",
+    "typescript",
+    "ui",
+    "component-library",
+    "css-variables",
+    "theme",
+    "dark-mode",
+    "accessible",
+    "wcag"
+  ],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/orion-ds/orion",
+    "directory": "packages/react"
+  },
+  "homepage": "https://github.com/orion-ds/orion#readme",
+  "bugs": {
+    "url": "https://github.com/orion-ds/orion/issues"
+  },
+  "aiMetadata": {
+    "setupRequired": [
+      "@orion-ds/react/styles.css"
+    ],
+    "entryPoints": [
+      "AI_GUIDE.md",
+      "AI_QUICKREF.md",
+      "AI_COMPONENTS.md"
+    ],
+    "wrapperRequired": "ThemeProvider",
+    "iconLibrary": "lucide-react",
+    "breakingChangesV2": [
+      "Hero: headline -> title",
+      "CTA: headline -> title",
+      "DetailPanel: subtitle -> description",
+      "ThemeProvider: options -> flat props (defaultTheme, defaultBrand)"
+    ]
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  },
+  "peerDependencies": {
+    "@dnd-kit/core": "^6.0.0",
+    "@dnd-kit/sortable": "^8.0.0",
+    "date-fns": "^4.0.0",
+    "lucide-react": ">=0.400.0",
+    "react": "^18.0.0 || ^19.0.0",
+    "react-dom": "^18.0.0 || ^19.0.0",
+    "react-markdown": ">=8.0.0",
+    "react-syntax-highlighter": ">=15.0.0",
+    "recharts": "^3.0.0",
+    "remark-gfm": ">=3.0.0"
+  },
+  "peerDependenciesMeta": {
+    "lucide-react": {
+      "optional": false
+    },
+    "react-markdown": {
+      "optional": true
+    },
+    "react-syntax-highlighter": {
+      "optional": true
+    },
+    "remark-gfm": {
+      "optional": true
+    },
+    "recharts": {
+      "optional": true
+    },
+    "date-fns": {
+      "optional": true
+    },
+    "@dnd-kit/core": {
+      "optional": true
+    },
+    "@dnd-kit/sortable": {
+      "optional": true
+    },
+    "@dnd-kit/utilities": {
+      "optional": true
+    }
+  },
+  "devDependencies": {
+    "@percy/cli": "^1.31.8",
+    "@percy/storybook": "^10.0.0",
+    "@playwright/test": "^1.58.2",
+    "@storybook/addon-a11y": "^8.6.17",
+    "@storybook/addon-essentials": "^8.6.17",
+    "@storybook/addon-interactions": "^8.6.17",
+    "@storybook/addon-links": "^8.6.17",
+    "@storybook/blocks": "^8.6.17",
+    "@storybook/react": "^8.6.17",
+    "@storybook/react-vite": "^8.6.17",
+    "@testing-library/jest-dom": "^6.9.1",
+    "@testing-library/react": "^16.3.2",
+    "@testing-library/user-event": "^14.6.1",
+    "@types/node": "^25.2.1",
+    "@types/react": "^19.2.9",
+    "@types/react-dom": "^19.2.3",
+    "@types/react-syntax-highlighter": "^15.5.13",
+    "@vitejs/plugin-react": "^5.1.2",
+    "@vitest/coverage-v8": "^4.0.18",
+    "@vitest/ui": "^4.0.18",
+    "jsdom": "^27.4.0",
+    "react": "^19.2.4",
+    "react-dom": "^19.2.4",
+    "rollup-plugin-preserve-directives": "^0.4.0",
+    "storybook": "^8.6.17",
+    "typescript": "^5.9.3",
+    "vite": "^7.3.1",
+    "vite-plugin-dts": "^3.7.0",
+    "vitest": "^4.0.18",
+    "vitest-axe": "^0.1.0"
+  }
+}

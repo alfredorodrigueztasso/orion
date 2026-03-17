@@ -1,0 +1,73 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Hero.schema.json",
+  "title": "Hero",
+  "description": "A prominent page section for headlines and calls-to-action. Perfect for landing page headers.",
+  "type": "object",
+  "properties": {
+    "headline": {
+      "type": "string",
+      "description": "Main headline text"
+    },
+    "subheadline": {
+      "type": "string",
+      "description": "Supporting description text"
+    },
+    "eyebrow": {
+      "description": "Small text above headline (badge, category)"
+    },
+    "primaryAction": {
+      "description": "Primary CTA button/element"
+    },
+    "secondaryAction": {
+      "description": "Secondary CTA button/element"
+    },
+    "media": {
+      "description": "Media content (image, video, illustration)"
+    },
+    "align": {
+      "type": "string",
+      "enum": ["left", "center", "right"],
+      "default": "center",
+      "description": "Content alignment"
+    },
+    "size": {
+      "type": "string",
+      "enum": ["sm", "md", "lg", "xl"],
+      "default": "lg",
+      "description": "Hero height/prominence"
+    },
+    "background": {
+      "type": "string",
+      "enum": ["base", "subtle", "gradient", "image"],
+      "default": "base",
+      "description": "Background style"
+    },
+    "backgroundImage": {
+      "type": "string",
+      "description": "Background image URL (when background='image')"
+    }
+  },
+  "required": ["headline"],
+  "examples": [
+    {
+      "description": "Centered hero with CTAs",
+      "code": "<Hero\n  headline=\"Build faster with Orion\"\n  subheadline=\"The AI-first design system for modern applications\"\n  primaryAction={<Button>Get Started</Button>}\n  secondaryAction={<Button variant=\"secondary\">Learn More</Button>}\n/>"
+    },
+    {
+      "description": "Left-aligned hero with image",
+      "code": "<Hero\n  align=\"left\"\n  eyebrow=\"New Release\"\n  headline=\"Introducing v2.0\"\n  subheadline=\"Completely redesigned with new features\"\n  media={<img src=\"/hero-image.png\" alt=\"Product\" />}\n  primaryAction={<Button>Try Now</Button>}\n/>"
+    },
+    {
+      "description": "Gradient background hero",
+      "code": "<Hero\n  background=\"gradient\"\n  headline=\"Transform Your Workflow\"\n  subheadline=\"Join thousands of teams already using our platform\"\n  primaryAction={<Button>Start Free Trial</Button>}\n/>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a landing page hero with headline and CTA",
+    "Make a hero section with a product image on the right",
+    "Build a gradient hero for a SaaS product",
+    "Create a full-height hero with background image",
+    "Add a hero with eyebrow badge and two buttons"
+  ]
+}

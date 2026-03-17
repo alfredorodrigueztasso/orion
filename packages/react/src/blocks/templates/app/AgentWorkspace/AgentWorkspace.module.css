@@ -1,0 +1,194 @@
+/* AgentWorkspace Template Styles */
+
+.root {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+  padding: var(--spacing-6);
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-4);
+}
+
+.headerContent {
+  flex: 1;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: var(--spacing-2) 0 0 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.error {
+  padding: var(--spacing-3);
+  border-radius: var(--radius-control);
+  background: var(--surface-danger-subtle);
+  color: var(--text-danger);
+  font-size: var(--font-size-sm);
+  border-left: 4px solid var(--border-danger);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: var(--spacing-4);
+  flex: 1;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .header {
+    flex-direction: column;
+  }
+
+  .root {
+    padding: var(--spacing-4);
+    gap: var(--spacing-4);
+  }
+}
+
+.emptyState {
+  grid-column: 1 / -1;
+}
+
+.emptyStateBody {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  text-align: center;
+  gap: var(--spacing-4);
+}
+
+.emptyStateIcon {
+  font-size: 48px;
+}
+
+.emptyStateTitle {
+  margin: 0;
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.emptyStateText {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.agentCard {
+  cursor: pointer;
+  transition: box-shadow 150ms ease, border-color 150ms ease;
+  border: 2px solid transparent;
+}
+
+.agentCard:hover {
+  box-shadow: var(--shadow-md);
+}
+
+.agentCardSelected {
+  border-color: var(--border-primary);
+  box-shadow: var(--shadow-lg);
+}
+
+.agentCardBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  padding: var(--spacing-4);
+}
+
+.agentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: var(--spacing-2);
+}
+
+.agentInfo {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex: 1;
+}
+
+.agentName {
+  margin: 0;
+  font-size: var(--font-size-md);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.agentActions {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+}
+
+.actionButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2);
+  border: none;
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: background-color 150ms ease, color 150ms ease;
+}
+
+.actionButton:hover {
+  background: var(--surface-layer);
+  color: var(--text-primary);
+}
+
+.actionButtonDanger:hover {
+  background: var(--surface-danger-subtle);
+  color: var(--text-danger);
+}
+
+.agentDescription {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.agentMeta {
+  display: flex;
+  gap: var(--spacing-3);
+  padding-top: var(--spacing-2);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.metaItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+}
+
+.metaLabel {
+  white-space: nowrap;
+}

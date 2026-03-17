@@ -1,0 +1,221 @@
+/**
+ * Chip Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Base chip styles */
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+  transition:
+    background-color var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm {
+  height: 24px;
+  padding: 0 var(--spacing-2);
+  font-size: var(--font-size-12);
+}
+
+.md {
+  height: 28px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-12);
+}
+
+.lg {
+  height: 32px;
+  padding: 0 var(--spacing-3);
+  font-size: var(--font-size-14);
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+.default {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+  border: 1px solid var(--border-subtle);
+}
+
+.primary {
+  background: color-mix(in srgb, var(--interactive-primary) 15%, transparent);
+  color: var(--text-brand);
+  border: 1px solid
+    color-mix(in srgb, var(--interactive-primary) 30%, transparent);
+}
+
+.success {
+  background: color-mix(in srgb, var(--status-success) 15%, transparent);
+  color: var(--status-success);
+  border: 1px solid color-mix(in srgb, var(--status-success) 30%, transparent);
+}
+
+.warning {
+  background: color-mix(in srgb, var(--status-warning) 15%, transparent);
+  color: var(--status-warning);
+  border: 1px solid color-mix(in srgb, var(--status-warning) 30%, transparent);
+}
+
+.error {
+  background: color-mix(in srgb, var(--status-error) 15%, transparent);
+  color: var(--status-error);
+  border: 1px solid color-mix(in srgb, var(--status-error) 30%, transparent);
+}
+
+.info {
+  background: color-mix(in srgb, var(--status-info) 15%, transparent);
+  color: var(--status-info);
+  border: 1px solid color-mix(in srgb, var(--status-info) 30%, transparent);
+}
+
+.inverse {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+}
+
+/* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Maps default/primary/success/warning/error/info variants to inverse appearance automatically.
+ * This allows chips to inherit correct styling when inside dark backgrounds
+ * without requiring developers to manually switch to inverse variant.
+ * ============================================================================ */
+
+:global([data-dark-bg="true"]) .default,
+:global([data-dark-bg="true"]) .primary,
+:global([data-dark-bg="true"]) .success,
+:global([data-dark-bg="true"]) .warning,
+:global([data-dark-bg="true"]) .error,
+:global([data-dark-bg="true"]) .info {
+  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+  color: var(--color-neutral-0);
+  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);
+}
+
+/* ============================================================================
+ * STATES
+ * ============================================================================ */
+
+.clickable {
+  cursor: pointer;
+
+  &:hover:not(.disabled) {
+    filter: brightness(0.95);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+
+  &:active:not(.disabled) {
+    transform: scale(0.98);
+  }
+}
+
+.selected {
+  &.default {
+    background: var(--interactive-primary);
+    color: var(--interactive-primary-text);
+    border-color: var(--interactive-primary);
+  }
+
+  &.primary {
+    background: var(--interactive-primary);
+    color: var(--interactive-primary-text);
+    border-color: var(--interactive-primary);
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * ELEMENTS
+ * ============================================================================ */
+
+.icon {
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .sm & {
+    width: 12px;
+    height: 12px;
+  }
+
+  .lg & {
+    width: 16px;
+    height: 16px;
+  }
+}
+
+.label {
+  line-height: 1;
+}
+
+.removeButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  margin-left: var(--spacing-1);
+  margin-right: calc(var(--spacing-1) * -1);
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: 50%;
+  color: currentColor;
+  opacity: 0.6;
+  cursor: pointer;
+  transition:
+    opacity var(--transition-fast),
+    background-color var(--transition-fast);
+
+  &:hover:not(:disabled) {
+    opacity: 1;
+    background: var(--interactive-ghost-hover);
+  }
+
+  &:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 1px;
+  }
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+
+  .sm & {
+    width: 14px;
+    height: 14px;
+  }
+
+  .lg & {
+    width: 18px;
+    height: 18px;
+  }
+}

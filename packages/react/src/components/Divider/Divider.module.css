@@ -1,0 +1,126 @@
+/**
+ * Divider Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Base divider styles */
+.divider {
+  border: none;
+  background: var(--border-subtle);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+ * ORIENTATIONS
+ * ============================================================================ */
+
+.horizontal {
+  width: 100%;
+  height: 1px;
+}
+
+.vertical {
+  width: 1px;
+  height: 100%;
+  min-height: 24px;
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+.solid {
+  background: var(--border-subtle);
+}
+
+.dashed {
+  background: transparent;
+
+  &.horizontal {
+    border-top: 1px dashed var(--border-subtle);
+  }
+
+  &.vertical {
+    border-left: 1px dashed var(--border-subtle);
+  }
+}
+
+.dotted {
+  background: transparent;
+
+  &.horizontal {
+    border-top: 1px dotted var(--border-subtle);
+  }
+
+  &.vertical {
+    border-left: 1px dotted var(--border-subtle);
+  }
+}
+
+/* ============================================================================
+ * SPACING
+ * ============================================================================ */
+
+.spacing-none {
+  margin: 0;
+}
+
+.spacing-sm {
+  &.horizontal {
+    margin: var(--spacing-2) 0;
+  }
+
+  &.vertical {
+    margin: 0 var(--spacing-2);
+  }
+}
+
+.spacing-md {
+  &.horizontal {
+    margin: var(--spacing-4) 0;
+  }
+
+  &.vertical {
+    margin: 0 var(--spacing-4);
+  }
+}
+
+.spacing-lg {
+  &.horizontal {
+    margin: var(--spacing-6) 0;
+  }
+
+  &.vertical {
+    margin: 0 var(--spacing-6);
+  }
+}
+
+/* ============================================================================
+ * WITH LABEL
+ * ============================================================================ */
+
+.withLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-4);
+  background: transparent;
+  height: auto;
+}
+
+.line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.label {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  white-space: nowrap;
+}

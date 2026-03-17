@@ -1,0 +1,123 @@
+/* Trigger button */
+.trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  border: none;
+  border-radius: var(--radius-control);
+  background: transparent;
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+  width: 100%;
+  box-sizing: border-box;
+  text-align: left;
+  transition: background-color var(--mode-hover-duration);
+}
+
+.trigger:hover {
+  background: var(--surface-subtle);
+}
+
+.triggerName {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Chevron animation */
+.chevron {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: transform var(--mode-hover-duration);
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+/* Popover content */
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  min-width: 260px;
+}
+
+/* Active workspace header */
+.activeWorkspace {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-3);
+  padding-bottom: var(--spacing-3);
+  text-align: center;
+}
+
+.orgName {
+  font-weight: var(--font-weight-semibold);
+  font-size: var(--font-size-16);
+}
+
+.orgMeta {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+}
+
+/* Action buttons */
+.actionButtons {
+  display: flex;
+  gap: var(--spacing-2);
+}
+
+/* Divider with reduced spacing */
+.dividerWrapper {
+  margin: calc(-1 * var(--spacing-1)) calc(-1 * var(--spacing-4));
+}
+
+/* Section label */
+.sectionLabel {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* Org list */
+.orgList {
+  max-height: 300px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.orgItem {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.orgItem:hover {
+  background-color: var(--surface-layer);
+}
+
+.orgItemName {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+}
+
+.orgItemRole {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+}

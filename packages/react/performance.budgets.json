@@ -1,0 +1,36 @@
+{
+  "$schema": "./schemas/performance-budgets.schema.json",
+  "budgets": {
+    "bundle": {
+      "maxJsSize": 5242880,
+      "maxCssSize": 1048576,
+      "description": "Bundle size limits (JS: 5MB, CSS: 1MB) - full design system library (users tree-shake)"
+    },
+    "render": {
+      "maxInitialRender": 16,
+      "maxReRender": 8,
+      "description": "Render time budgets in milliseconds (1 frame = 16ms)"
+    },
+    "lighthouse": {
+      "performance": 90,
+      "accessibility": 95,
+      "bestPractices": 90,
+      "seo": 90,
+      "description": "Lighthouse score thresholds (0-100)"
+    }
+  },
+  "criticalComponents": [
+    "Button",
+    "Field",
+    "Card",
+    "Modal",
+    "Dropdown",
+    "Tabs"
+  ],
+  "monitoring": {
+    "trackBundleSize": true,
+    "trackRenderPerformance": true,
+    "alertOnBudgetExceeded": true,
+    "reportFormat": "json"
+  }
+}

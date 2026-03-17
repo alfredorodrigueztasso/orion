@@ -1,0 +1,105 @@
+/**
+ * Icon Component Styles
+ *
+ * Normalized icon styling with design token integration.
+ * All sizes and colors use CSS variables for theming.
+ */
+
+/* Base icon wrapper */
+.icon {
+  /* Layout */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  /* Default to inherit color */
+  color: currentColor;
+
+  /* Smooth transitions for state changes */
+  transition:
+    color var(--transition-fast),
+    opacity var(--transition-fast);
+}
+
+/* ============================================================================
+ * SIZES (mapped to --icon-size-* tokens)
+ * ============================================================================ */
+
+.xs {
+  width: var(--icon-size-sm); /* 16px - xs uses sm token as minimum */
+  height: var(--icon-size-sm);
+}
+
+.sm {
+  width: var(--icon-size-sm); /* 16px */
+  height: var(--icon-size-sm);
+}
+
+.md {
+  width: var(--icon-size-md); /* 20px */
+  height: var(--icon-size-md);
+}
+
+.lg {
+  width: var(--icon-size-lg); /* 24px */
+  height: var(--icon-size-lg);
+}
+
+.xl {
+  width: var(--icon-size-xl); /* 32px */
+  height: var(--icon-size-xl);
+}
+
+/* ============================================================================
+ * COLORS (mapped to semantic tokens)
+ * ============================================================================ */
+
+.current {
+  color: currentColor;
+}
+
+.primary {
+  color: var(--text-primary);
+}
+
+.secondary {
+  color: var(--text-secondary);
+}
+
+.tertiary {
+  color: var(--text-tertiary);
+}
+
+.brand {
+  color: var(--text-brand);
+}
+
+.success {
+  color: var(--status-success);
+}
+
+.warning {
+  color: var(--status-warning);
+}
+
+.error {
+  color: var(--status-error);
+}
+
+.info {
+  color: var(--status-info);
+}
+
+.inverse {
+  color: var(--text-inverse);
+}
+
+/* ============================================================================
+ * STATES
+ * ============================================================================ */
+
+.disabled {
+  opacity: 0.5;
+  pointer-events: none;
+}

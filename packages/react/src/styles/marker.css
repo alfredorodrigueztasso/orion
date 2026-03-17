@@ -1,0 +1,12 @@
+/**
+ * Orion React Component Styles Marker
+ *
+ * This file provides a CSS custom property that ThemeProvider uses
+ * to detect if component styles have been loaded correctly.
+ *
+ * DO NOT REMOVE this file - it's used for development-time validation.
+ */
+
+:root {
+  --orion-react-styles-loaded: 1;
+}

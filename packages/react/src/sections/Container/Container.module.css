@@ -1,0 +1,57 @@
+/**
+ * Container Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+.container {
+  width: 100%;
+}
+
+/* Centered modifier */
+.centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Padded modifier */
+.padded {
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+}
+
+/* ============================================================================
+ * SIZE VARIANTS
+ * ============================================================================ */
+
+.sm {
+  max-width: 640px;
+}
+
+.md {
+  max-width: 768px;
+}
+
+.lg {
+  max-width: 1024px;
+}
+
+.xl {
+  max-width: 1280px;
+}
+
+.full {
+  max-width: 100%;
+}
+
+/* ============================================================================
+ * RESPONSIVE ADJUSTMENTS
+ * ============================================================================ */
+
+@media (max-width: 640px) {
+  .padded {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+}

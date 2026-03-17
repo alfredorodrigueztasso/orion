@@ -1,0 +1,368 @@
+/**
+ * Navbar Component Styles
+ *
+ * Application navigation header with responsive mobile menu.
+ */
+
+/* Container */
+.navbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--spacing-4);
+  width: 100%;
+  padding: 0 var(--spacing-6);
+  z-index: var(--z-sticky);
+  position: relative;
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+.solid {
+  background: var(--surface-base);
+}
+
+.transparent {
+  background: transparent;
+}
+
+.glass {
+  background: color-mix(in srgb, var(--surface-base) 70%, transparent);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid
+    color-mix(in srgb, var(--border-subtle) 50%, transparent);
+}
+
+/* Glass with light scheme - for dark/colored backgrounds */
+.glass.schemeLight {
+  background: var(--overlay-light-subtle);
+  border-bottom-color: var(--overlay-light-subtle);
+}
+
+/* Glass with dark scheme - for light backgrounds */
+.glass.schemeDark {
+  background: var(--overlay-light);
+  border-bottom-color: var(--overlay-dark-subtle);
+}
+
+/* ============================================================================
+ * COLOR SCHEMES (for transparent/glass on colored backgrounds)
+ * ============================================================================ */
+
+/* Light color scheme - white/light text for dark backgrounds */
+.schemeLight .brand {
+  color: var(--color-neutral-0);
+}
+
+.schemeLight .link {
+  color: var(--color-neutral-100);
+}
+
+.schemeLight .link:hover {
+  color: var(--color-neutral-0);
+  background: var(--overlay-light-subtle);
+}
+
+.schemeLight .link.active {
+  color: var(--color-neutral-0);
+  background: var(--overlay-light);
+}
+
+.schemeLight .toggleLine {
+  background: var(--color-neutral-0);
+}
+
+/* Dark color scheme - dark text for light backgrounds */
+.schemeDark .brand {
+  color: var(--text-primary);
+}
+
+.schemeDark .link {
+  color: var(--text-secondary);
+}
+
+.schemeDark .link:hover {
+  color: var(--text-primary);
+  background: var(--overlay-dark-subtle);
+}
+
+.schemeDark .link.active {
+  color: var(--text-brand);
+  background: var(--soft-brand);
+}
+
+/* ============================================================================
+ * BORDERS
+ * ============================================================================ */
+
+.bordered {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+ * STICKY
+ * ============================================================================ */
+
+.sticky {
+  position: sticky;
+  top: 0;
+}
+
+/* ============================================================================
+ * HEIGHTS
+ * ============================================================================ */
+
+.sm {
+  height: 56px;
+}
+
+.md {
+  height: 64px;
+}
+
+.lg {
+  height: 72px;
+}
+
+/* ============================================================================
+ * BRAND
+ * ============================================================================ */
+
+.brand {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  flex-shrink: 0;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-bold);
+  color: var(--text-primary);
+  text-decoration: none;
+  transition: opacity var(--transition-fast);
+}
+
+.brand:hover {
+  opacity: 0.8;
+}
+
+.brand:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ============================================================================
+ * NAV (Links Container) - Desktop
+ * ============================================================================ */
+
+.nav {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+  flex: 1;
+  justify-content: center;
+}
+
+/* ============================================================================
+ * LINK
+ * ============================================================================ */
+
+.link {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-decoration: none;
+  white-space: nowrap;
+  border-radius: var(--radius-button);
+  transition: all var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+.link.active {
+  color: var(--text-brand);
+  background: var(--soft-brand);
+}
+
+/* ============================================================================
+ * ACTIONS
+ * ============================================================================ */
+
+.actions {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  flex-shrink: 0;
+}
+
+/* ============================================================================
+ * TOGGLE (Hamburger Button) - Mobile Only
+ * ============================================================================ */
+
+.toggle {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-button);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.toggle:hover {
+  background: var(--surface-subtle);
+}
+
+.toggle:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+.toggleIcon {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 5px;
+  width: 20px;
+  height: 20px;
+}
+
+.toggleLine {
+  width: 20px;
+  height: 2px;
+  background: var(--text-primary);
+  border-radius: 1px;
+  transition: all var(--transition-fast);
+}
+
+/* Hamburger to X animation */
+.toggleOpen .toggleLine:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.toggleOpen .toggleLine:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.toggleOpen .toggleLine:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ============================================================================
+ * COLLAPSE (Mobile Menu Container)
+ * ============================================================================ */
+
+.collapse {
+  display: none;
+}
+
+.collapseOpen {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: var(--surface-base);
+  border-bottom: 1px solid var(--border-subtle);
+  padding: var(--spacing-4);
+  gap: var(--spacing-2);
+  animation: slideDown var(--transition-normal) ease-out;
+  box-shadow: var(--shadow-lg);
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile nav links in collapse */
+.collapse .link,
+.collapseOpen .link {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-16);
+  border-radius: var(--radius-control);
+}
+
+/* Mobile actions in collapse */
+.collapseActions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  padding-top: var(--spacing-3);
+  margin-top: var(--spacing-2);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.collapseActions > * {
+  width: 100%;
+}
+
+/* ============================================================================
+ * RESPONSIVE - Tablet and below
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .navbar {
+    padding: 0 var(--spacing-4);
+  }
+
+  /* Hide desktop nav and actions */
+  .nav {
+    display: none;
+  }
+
+  .actions {
+    display: none;
+  }
+
+  /* Show toggle button */
+  .toggle {
+    display: flex;
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVE - Large screens
+ * ============================================================================ */
+
+@media (min-width: 769px) {
+  /* Hide mobile elements on desktop */
+  .toggle {
+    display: none !important;
+  }
+
+  .collapse,
+  .collapseOpen {
+    display: none !important;
+  }
+}

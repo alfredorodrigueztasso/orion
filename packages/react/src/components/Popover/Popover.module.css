@@ -1,0 +1,118 @@
+/**
+ * Popover Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Component-level tokens */
+:root {
+  --popover-arrow-size: 10px;
+  --popover-arrow-offset: 6px;
+  --popover-arrow-margin: 5px;
+}
+
+/* Trigger wrapper */
+.trigger {
+  display: inline-block;
+}
+
+/* Trigger full-width modifier */
+.triggerFullWidth {
+  display: block;
+  width: 100%;
+  min-width: 0;
+}
+
+/* Popover container */
+.popover {
+  position: absolute;
+  z-index: var(--z-popover);
+  min-width: 200px;
+  max-width: 320px;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-lg);
+  opacity: 0;
+  visibility: hidden;
+  transform: scale(0.95);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    visibility 0s linear var(--transition-fast);
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: scale(1);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    visibility 0s linear 0s;
+}
+
+/* Content */
+.content {
+  padding: var(--spacing-4);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+}
+
+/* ============================================================================
+ * ARROW
+ * ============================================================================ */
+
+.arrow {
+  position: absolute;
+  width: var(--popover-arrow-size);
+  height: var(--popover-arrow-size);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  transform: rotate(45deg);
+}
+
+/* Arrow positions */
+.arrow-top {
+  top: calc(var(--popover-arrow-offset) * -1);
+  left: 50%;
+  margin-left: calc(var(--popover-arrow-margin) * -1);
+  border-right: none;
+  border-bottom: none;
+}
+
+.arrow-bottom {
+  bottom: calc(var(--popover-arrow-offset) * -1);
+  left: 50%;
+  margin-left: calc(var(--popover-arrow-margin) * -1);
+  border-left: none;
+  border-top: none;
+}
+
+.arrow-left {
+  left: calc(var(--popover-arrow-offset) * -1);
+  top: 50%;
+  margin-top: calc(var(--popover-arrow-margin) * -1);
+  border-right: none;
+  border-top: none;
+}
+
+.arrow-right {
+  right: calc(var(--popover-arrow-offset) * -1);
+  top: 50%;
+  margin-top: calc(var(--popover-arrow-margin) * -1);
+  border-left: none;
+  border-bottom: none;
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .popover {
+    transition: none;
+  }
+}

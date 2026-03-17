@@ -1,0 +1,140 @@
+/**
+ * Dropdown Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Trigger wrapper */
+.trigger {
+  display: inline-block;
+}
+
+/* Menu container */
+.menu {
+  position: absolute;
+  z-index: var(--z-dropdown);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-lg);
+  padding: var(--spacing-2);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    visibility 0s linear var(--transition-fast);
+}
+
+.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast),
+    visibility 0s linear 0s;
+}
+
+/* ============================================================================
+ * GROUPS
+ * ============================================================================ */
+
+.group {
+  /* No specific styles needed */
+}
+
+.groupLabel {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.separator {
+  height: 1px;
+  margin: var(--spacing-2) 0;
+  background: var(--border-subtle);
+}
+
+/* ============================================================================
+ * MENU ITEM
+ * ============================================================================ */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-radius: var(--radius-sm);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+  outline: none;
+
+  &:hover:not(.disabled),
+  &:focus-visible:not(.disabled) {
+    background: var(--surface-subtle);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: -2px;
+  }
+}
+
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.danger {
+  color: var(--status-error);
+
+  &:hover:not(.disabled),
+  &:focus-visible:not(.disabled) {
+    background: color-mix(in srgb, var(--status-error) 10%, transparent);
+  }
+}
+
+/* ============================================================================
+ * ITEM PARTS
+ * ============================================================================ */
+
+.icon {
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+
+  .danger & {
+    color: var(--status-error);
+  }
+}
+
+.label {
+  flex: 1;
+}
+
+.shortcut {
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  font-family: var(--font-mono);
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .menu {
+    transition: none;
+  }
+}

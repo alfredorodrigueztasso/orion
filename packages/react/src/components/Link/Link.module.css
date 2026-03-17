@@ -1,0 +1,141 @@
+/**
+ * Link Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Base link styles */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  text-decoration: none;
+  cursor: pointer;
+  transition: color var(--transition-fast);
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+    border-radius: var(--radius-sm);
+  }
+}
+
+/* ============================================================================
+ * VARIANTS
+ * ============================================================================ */
+
+.default {
+  color: var(--text-primary);
+
+  &:hover {
+    color: var(--text-brand);
+  }
+}
+
+.subtle {
+  color: var(--text-secondary);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+.brand {
+  color: var(--text-brand);
+
+  &:hover {
+    color: var(--interactive-primary-hover);
+  }
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm {
+  font-size: var(--font-size-12);
+  gap: var(--spacing-1);
+}
+
+.md {
+  font-size: var(--font-size-14);
+  gap: var(--spacing-2);
+}
+
+.lg {
+  font-size: var(--font-size-16);
+  gap: var(--spacing-2);
+}
+
+/* ============================================================================
+ * MODIFIERS
+ * ============================================================================ */
+
+.underline {
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);
+  text-underline-offset: 3px;
+  text-decoration-thickness: 1px;
+
+  &:hover {
+    text-decoration-color: currentColor;
+  }
+}
+
+/* ============================================================================
+ * ICONS
+ * ============================================================================ */
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  opacity: 0.7;
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.link:hover .icon {
+  opacity: 1;
+}
+
+/* Icon sizes based on link size */
+.sm .icon {
+  width: 12px;
+  height: 12px;
+}
+
+.md .icon {
+  width: 14px;
+  height: 14px;
+}
+
+.lg .icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* Right icon (external, arrow, etc.) */
+.iconRight {
+  /* Animation on hover - subtle movement */
+}
+
+/* External link icon animation */
+.link:hover .iconExternal {
+  transform: translate(1px, -1px);
+}
+
+/* Arrow right animation */
+.link:hover .iconArrow {
+  transform: translateX(2px);
+}
+
+/* Arrow left animation */
+.link:hover .iconArrowLeft {
+  transform: translateX(-2px);
+}

@@ -1,0 +1,199 @@
+/* LoginTemplate Styles */
+
+.root {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  padding: var(--spacing-4);
+  background: var(--surface-base);
+}
+
+.card {
+  width: 100%;
+  max-width: 420px;
+}
+
+.body {
+  padding: var(--spacing-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
+}
+
+.logo {
+  display: flex;
+  justify-content: center;
+  font-size: 48px;
+  margin-bottom: var(--spacing-2);
+}
+
+.header {
+  text-align: center;
+}
+
+.title {
+  margin: 0;
+  font-size: var(--font-size-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.subtitle {
+  margin: var(--spacing-2) 0 0 0;
+  font-size: var(--font-size-base);
+  color: var(--text-secondary);
+}
+
+.error {
+  padding: var(--spacing-3);
+  border-radius: var(--radius-control);
+  background: var(--surface-danger-subtle);
+  color: var(--text-danger);
+  font-size: var(--font-size-sm);
+  border-left: 4px solid var(--border-danger);
+}
+
+.success {
+  padding: var(--spacing-3);
+  border-radius: var(--radius-control);
+  background: var(--surface-success-subtle);
+  color: var(--text-success);
+  font-size: var(--font-size-sm);
+  border-left: 4px solid var(--border-success);
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  color: var(--text-primary);
+}
+
+.passwordLabel {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.showPasswordButton {
+  background: none;
+  border: none;
+  color: var(--text-secondary);
+  cursor: pointer;
+  padding: var(--spacing-1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: color 150ms ease;
+}
+
+.showPasswordButton:hover:not(:disabled) {
+  color: var(--text-primary);
+}
+
+.showPasswordButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.input {
+  padding: var(--spacing-2) var(--spacing-3);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--surface-base);
+  color: var(--text-primary);
+  font-size: var(--font-size-base);
+  font-family: var(--font-secondary);
+  transition: border-color 150ms ease;
+}
+
+.input:hover {
+  border-color: var(--border-base);
+}
+
+.input:focus {
+  outline: none;
+  border-color: var(--border-primary);
+  box-shadow: 0 0 0 2px var(--surface-primary-subtle);
+}
+
+.input:disabled {
+  background: var(--surface-subtle);
+  color: var(--text-tertiary);
+}
+
+.optionsRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  cursor: pointer;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  user-select: none;
+}
+
+.checkbox input {
+  width: 18px;
+  height: 18px;
+  cursor: pointer;
+  accent-color: var(--interactive-primary);
+}
+
+.checkbox input:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.link {
+  background: none;
+  border: none;
+  color: var(--text-brand);
+  cursor: pointer;
+  padding: 0;
+  font-size: var(--font-size-sm);
+  font-weight: 500;
+  transition: opacity 150ms ease;
+  text-decoration: none;
+}
+
+.link:hover:not(:disabled) {
+  text-decoration: underline;
+}
+
+.link:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.signupText {
+  text-align: center;
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+@media (max-width: 640px) {
+  .body {
+    padding: var(--spacing-6);
+  }
+}

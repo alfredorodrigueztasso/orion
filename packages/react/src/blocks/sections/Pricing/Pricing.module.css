@@ -1,0 +1,140 @@
+.section {
+  padding: var(--spacing-16) var(--spacing-6);
+  background: var(--surface-base);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-12);
+}
+
+.title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-3) 0;
+}
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-6);
+  align-items: stretch;
+}
+
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  padding: var(--spacing-8);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-container);
+  border: 1px solid var(--border-subtle);
+  transition: box-shadow 150ms ease;
+}
+
+.card:hover {
+  box-shadow: var(--mode-shadow-hover);
+}
+
+.cardPopular {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 1px var(--interactive-primary);
+}
+
+.popularBadge {
+  position: absolute;
+  top: calc(var(--spacing-4) * -1);
+  left: 50%;
+  transform: translateX(-50%);
+  padding: var(--spacing-1) var(--spacing-3);
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xs);
+  font-weight: 600;
+  border-radius: var(--radius-full);
+  white-space: nowrap;
+}
+
+.cardName {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.cardPrice {
+  display: flex;
+  align-items: baseline;
+  gap: var(--spacing-1);
+  margin-bottom: var(--spacing-2);
+}
+
+.priceValue {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.pricePeriod {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.cardDescription {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-6) 0;
+}
+
+.featureList {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 var(--spacing-6) 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+  flex: 1;
+}
+
+.featureItem {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+}
+
+.featureCheck {
+  color: var(--interactive-primary);
+  flex-shrink: 0;
+}
+
+.cardAction {
+  margin-top: auto;
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}

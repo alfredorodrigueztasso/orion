@@ -1,0 +1,215 @@
+/**
+ * Command Component Styles
+ *
+ * Command palette with search, groups, and keyboard navigation.
+ */
+
+/* Root container */
+.command {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  font-family: var(--font-secondary);
+}
+
+/* ============================================================================
+ * INPUT
+ * ============================================================================ */
+
+.inputWrapper {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-3) var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.searchIcon {
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+}
+
+.input {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+  padding: 0;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * LIST
+ * ============================================================================ */
+
+.list {
+  max-height: 300px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-2);
+}
+
+/* ============================================================================
+ * EMPTY STATE
+ * ============================================================================ */
+
+.empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-6);
+  font-size: var(--font-size-14);
+  color: var(--text-tertiary);
+}
+
+/* ============================================================================
+ * GROUP
+ * ============================================================================ */
+
+.group {
+  padding: var(--spacing-1) 0;
+}
+
+.groupHeading {
+  padding: var(--spacing-1) var(--spacing-2);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+/* ============================================================================
+ * ITEM
+ * ============================================================================ */
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-14);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: background var(--transition-fast);
+  position: relative;
+  user-select: none;
+}
+
+.item:hover:not(.itemDisabled) {
+  background: var(--interactive-ghost-hover);
+}
+
+.item[data-active="true"] {
+  background: var(--interactive-ghost-hover);
+}
+
+.item:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: -2px;
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.itemHidden {
+  display: none;
+}
+
+/* ============================================================================
+ * SEPARATOR
+ * ============================================================================ */
+
+/* Override Divider margins within Command context */
+.separator {
+  margin: var(--spacing-1) calc(var(--spacing-2) * -1);
+}
+
+/* ============================================================================
+ * SHORTCUT BADGE
+ * ============================================================================ */
+
+.shortcut {
+  margin-left: auto;
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  font-family: var(--font-secondary);
+  letter-spacing: 0.02em;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * DIALOG OVERLAY
+ * ============================================================================ */
+
+.dialogBackdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 20vh;
+  background: var(--surface-overlay);
+  backdrop-filter: blur(var(--blur-sm));
+  animation: fadeIn 150ms ease;
+}
+
+.dialogContent {
+  width: 100%;
+  max-width: 520px;
+  animation: slideDown 150ms ease;
+}
+
+.dialogContent .command {
+  box-shadow: var(--shadow-xl);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-8px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .item {
+    transition: none;
+  }
+
+  .dialogBackdrop,
+  .dialogContent {
+    animation: none;
+  }
+}

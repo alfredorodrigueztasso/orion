@@ -1,0 +1,387 @@
+/**
+ * Combobox Component Styles
+ *
+ * Autocomplete input with dropdown suggestions.
+ * Implements WCAG 2.1 AA accessibility guidelines.
+ * Aligned with Field component styles.
+ */
+
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Label */
+.label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+}
+
+/* Input wrapper */
+.inputWrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  cursor: text;
+  transition: all var(--transition-fast);
+}
+
+/* Hover state */
+.inputWrapper:hover:not(.disabled .inputWrapper) {
+  border-color: var(--border-strong);
+}
+
+/* Focus state - visible for all focus methods */
+.inputWrapper:focus-within {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--soft-brand);
+}
+
+/* Focus-visible - enhanced for keyboard navigation */
+.inputWrapper:has(.input:focus-visible) {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--soft-brand);
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* Size variants */
+.sm .inputWrapper {
+  height: 32px;
+}
+
+.sm .input {
+  padding: var(--spacing-1) var(--spacing-8) var(--spacing-1) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.md .inputWrapper {
+  height: 40px;
+}
+
+.md .input {
+  padding: var(--spacing-2) var(--spacing-10) var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-base);
+}
+
+.lg .inputWrapper {
+  height: 48px;
+}
+
+.lg .input {
+  padding: var(--spacing-3) var(--spacing-12) var(--spacing-3) var(--spacing-4);
+  font-size: var(--font-size-lg);
+}
+
+/* Input */
+.input {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-radius: inherit;
+  font-family: var(--font-secondary);
+  color: var(--text-primary);
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Actions (clear, chevron) */
+.actions {
+  position: absolute;
+  right: var(--spacing-2);
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.clearButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-1);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.clearButton:hover {
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+}
+
+.chevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: transform var(--duration-fast) var(--ease-out);
+}
+
+.chevron.open {
+  transform: rotate(180deg);
+}
+
+/* Error state */
+.error .inputWrapper {
+  border-color: var(--status-error);
+}
+
+.error .inputWrapper:focus-within {
+  border-color: var(--status-error);
+  box-shadow: 0 0 0 3px var(--soft-error);
+}
+
+.error .inputWrapper:has(.input:focus-visible) {
+  border-color: var(--status-error);
+  box-shadow: 0 0 0 3px var(--soft-error);
+  outline: 2px solid var(--status-error);
+  outline-offset: 2px;
+}
+
+.errorText {
+  font-size: var(--font-size-sm);
+  color: var(--status-error);
+}
+
+/* Helper text */
+.helperText {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+/* Disabled state */
+.disabled .inputWrapper {
+  background: var(--surface-subtle);
+  cursor: not-allowed;
+}
+
+.disabled .input {
+  cursor: not-allowed;
+  color: var(--text-tertiary);
+}
+
+/* Dropdown */
+.dropdown {
+  position: fixed;
+  z-index: var(--z-popover);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  box-shadow: var(--shadow-lg);
+  overflow-y: auto;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-4px);
+  transition:
+    opacity var(--duration-fast) var(--ease-out),
+    transform var(--duration-fast) var(--ease-out),
+    visibility var(--duration-fast) var(--ease-out);
+}
+
+.dropdown.visible {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+/* Option */
+.option {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-2) var(--spacing-3);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.option:first-child {
+  border-top-left-radius: calc(var(--radius-control) - 1px);
+  border-top-right-radius: calc(var(--radius-control) - 1px);
+}
+
+.option:last-child {
+  border-bottom-left-radius: calc(var(--radius-control) - 1px);
+  border-bottom-right-radius: calc(var(--radius-control) - 1px);
+}
+
+.option.highlighted {
+  background: var(--surface-subtle);
+}
+
+.option.selected {
+  background: var(--interactive-primary-subtle);
+}
+
+.option.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Option content */
+.optionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.optionContent {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.optionLabel {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.optionDescription {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.checkIcon {
+  flex-shrink: 0;
+  color: var(--interactive-primary);
+}
+
+/* Loading state */
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-4);
+  color: var(--text-secondary);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Empty state */
+.empty {
+  padding: var(--spacing-4);
+  text-align: center;
+  color: var(--text-secondary);
+  font-size: var(--font-size-sm);
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE SUPPORT
+ * ============================================================================ */
+
+@media (forced-colors: active) {
+  .inputWrapper {
+    border: 2px solid CanvasText;
+    background: Canvas;
+  }
+
+  .inputWrapper:focus-within,
+  .inputWrapper:has(.input:focus-visible) {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .disabled .inputWrapper {
+    border-color: GrayText;
+  }
+
+  .input {
+    color: CanvasText;
+  }
+
+  .error .inputWrapper {
+    border-color: LinkText;
+  }
+
+  .errorText {
+    color: LinkText;
+  }
+
+  .dropdown {
+    border: 2px solid CanvasText;
+    background: Canvas;
+  }
+
+  .option.highlighted {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .option.selected {
+    background: Highlight;
+    color: HighlightText;
+  }
+
+  .clearButton,
+  .chevron {
+    color: CanvasText;
+  }
+
+  .checkIcon {
+    color: Highlight;
+  }
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .inputWrapper {
+    transition: none;
+  }
+
+  .dropdown {
+    transition: none;
+  }
+
+  .clearButton,
+  .chevron,
+  .option {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+  }
+}

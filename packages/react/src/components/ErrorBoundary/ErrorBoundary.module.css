@@ -1,0 +1,54 @@
+.errorBoundary {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-8);
+  text-align: center;
+  min-height: 200px;
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  background: var(--surface-subtle);
+}
+
+.icon {
+  color: var(--status-error);
+  margin-bottom: var(--spacing-4);
+}
+
+.title {
+  font-family: var(--font-secondary);
+  font-weight: 600;
+  font-size: 1.125rem;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.message {
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-4) 0;
+  max-width: 400px;
+}
+
+.resetButton {
+  padding: var(--spacing-2) var(--spacing-4);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border-default);
+  background: var(--surface-base);
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background var(--transition-fast);
+}
+
+.resetButton:hover {
+  background: var(--surface-layer);
+}
+
+.resetButton:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}

@@ -1,0 +1,239 @@
+/**
+ * Drawer Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+/* Overlay container */
+.overlay {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  visibility: hidden;
+  opacity: 0;
+  transition:
+    visibility 0s linear var(--transition-normal),
+    opacity var(--transition-normal);
+}
+
+.overlayVisible {
+  visibility: visible;
+  opacity: 1;
+  transition:
+    visibility 0s linear 0s,
+    opacity var(--transition-normal);
+}
+
+/* Backdrop */
+.backdrop {
+  position: absolute;
+  inset: 0;
+  background: var(--overlay-dark);
+}
+
+/* Drawer panel */
+.drawer {
+  position: fixed;
+  display: flex;
+  flex-direction: column;
+  background: var(--surface-base);
+  box-shadow: var(--shadow-xl);
+  z-index: var(--z-modal);
+  transition: transform var(--transition-normal);
+}
+
+/* ============================================================================
+ * PLACEMENTS
+ * ============================================================================ */
+
+.left {
+  top: 0;
+  left: 0;
+  bottom: 0;
+  transform: translateX(-100%);
+}
+
+.left.drawerVisible {
+  transform: translateX(0);
+}
+
+.right {
+  top: 0;
+  right: 0;
+  bottom: 0;
+  transform: translateX(100%);
+}
+
+.right.drawerVisible {
+  transform: translateX(0);
+}
+
+.top {
+  top: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(-100%);
+}
+
+.top.drawerVisible {
+  transform: translateY(0);
+}
+
+.bottom {
+  bottom: 0;
+  left: 0;
+  right: 0;
+  transform: translateY(100%);
+}
+
+.bottom.drawerVisible {
+  transform: translateY(0);
+}
+
+/* ============================================================================
+ * SIZES (for left/right placements)
+ * ============================================================================ */
+
+.left.size-sm,
+.right.size-sm {
+  width: 280px;
+}
+
+.left.size-md,
+.right.size-md {
+  width: 360px;
+}
+
+.left.size-lg,
+.right.size-lg {
+  width: 480px;
+}
+
+.left.size-xl,
+.right.size-xl {
+  width: 640px;
+}
+
+.left.size-full,
+.right.size-full {
+  width: 100%;
+}
+
+/* SIZES (for top/bottom placements) */
+.top.size-sm,
+.bottom.size-sm {
+  height: 200px;
+}
+
+.top.size-md,
+.bottom.size-md {
+  height: 300px;
+}
+
+.top.size-lg,
+.bottom.size-lg {
+  height: 400px;
+}
+
+.top.size-xl,
+.bottom.size-xl {
+  height: 500px;
+}
+
+.top.size-full,
+.bottom.size-full {
+  height: 100%;
+}
+
+/* ============================================================================
+ * CLOSE BUTTON
+ * ============================================================================ */
+
+.closeButton {
+  position: absolute;
+  top: var(--spacing-4);
+  right: var(--spacing-4);
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  z-index: var(--z-base);
+
+  &:hover {
+    background: var(--surface-subtle);
+    color: var(--text-primary);
+  }
+
+  &:focus-visible {
+    outline: 2px solid var(--interactive-primary);
+    outline-offset: 2px;
+  }
+}
+
+/* ============================================================================
+ * SECTIONS
+ * ============================================================================ */
+
+.header {
+  flex-shrink: 0;
+  padding: var(--spacing-6) var(--spacing-6) var(--spacing-4);
+  padding-right: var(--spacing-12); /* Space for close button */
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--spacing-4) var(--spacing-6);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+}
+
+.footer {
+  flex-shrink: 0;
+  padding: var(--spacing-4) var(--spacing-6);
+  border-top: 1px solid var(--border-subtle);
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: flex-end;
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .overlay,
+  .drawer {
+    transition: none;
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 640px) {
+  .left.size-lg,
+  .right.size-lg,
+  .left.size-xl,
+  .right.size-xl {
+    width: 100%;
+  }
+}

@@ -1,0 +1,196 @@
+/**
+ * Breadcrumb Component Styles
+ *
+ * Navigation breadcrumbs showing current page location.
+ */
+
+/* Container */
+.breadcrumb {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  font-family: var(--font-secondary);
+}
+
+/* Item */
+.item {
+  display: flex;
+  align-items: center;
+}
+
+/* Link */
+.link {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-regular);
+  color: var(--text-secondary);
+  text-decoration: none;
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  transition: all var(--transition-fast);
+}
+
+.link:hover {
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+}
+
+.link:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* Current page (non-clickable) */
+.current {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  padding: var(--spacing-1) var(--spacing-2);
+}
+
+/* Separator */
+.separator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* Chevron separator - using SVG for crisp rendering */
+.chevron {
+  width: 16px;
+  height: 16px;
+}
+
+.chevron::after {
+  content: "";
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: rotate(-45deg);
+  margin-left: 2px;
+}
+
+/* Slash separator */
+.slash::after {
+  content: "/";
+  font-weight: var(--font-weight-regular);
+  font-size: 0.875em;
+  opacity: 0.5;
+}
+
+/* Icon wrapper */
+.icon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  opacity: 0.7;
+}
+
+.link:hover .icon {
+  opacity: 1;
+}
+
+.current .icon {
+  opacity: 1;
+}
+
+/* Home icon */
+.homeIcon {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Ellipsis (collapsed items indicator) */
+.ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  font-weight: var(--font-weight-medium);
+  user-select: none;
+  padding: var(--spacing-1) var(--spacing-2);
+  letter-spacing: 2px;
+}
+
+/* ============================================================================
+ * SIZES
+ * ============================================================================ */
+
+.sm .link,
+.sm .current,
+.sm .ellipsis {
+  font-size: var(--font-size-12);
+  padding: 2px var(--spacing-1);
+}
+
+.sm .icon,
+.sm .homeIcon {
+  width: 14px;
+  height: 14px;
+}
+
+.sm .separator {
+  width: 14px;
+  height: 14px;
+}
+
+.sm .chevron::after {
+  width: 5px;
+  height: 5px;
+}
+
+.md .link,
+.md .current,
+.md .ellipsis {
+  font-size: var(--font-size-14);
+}
+
+.md .icon,
+.md .homeIcon {
+  width: 16px;
+  height: 16px;
+}
+
+.md .separator {
+  width: 16px;
+  height: 16px;
+}
+
+.lg .link,
+.lg .current,
+.lg .ellipsis {
+  font-size: var(--font-size-16);
+  padding: var(--spacing-1) var(--spacing-2);
+}
+
+.lg .icon,
+.lg .homeIcon {
+  width: 18px;
+  height: 18px;
+}
+
+.lg .separator {
+  width: 18px;
+  height: 18px;
+}
+
+.lg .chevron::after {
+  width: 7px;
+  height: 7px;
+}

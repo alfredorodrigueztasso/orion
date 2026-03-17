@@ -1,0 +1,461 @@
+/**
+ * NavTree Styles
+ *
+ * Notion-style navigation tree with collapsible sections, folders, and pages.
+ * Uses Orion semantic tokens for theme-aware styling (light/dark mode).
+ */
+
+/* ============================================================================
+   Root Container
+   ============================================================================ */
+
+.navTree {
+  width: 100%;
+  height: 100%;
+  background: var(--surface-base);
+  border-right: 1px solid var(--border-subtle);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+}
+
+/* ============================================================================
+   Header and Footer Slots
+   ============================================================================ */
+
+.header {
+  flex-shrink: 0;
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+  background: var(--surface-base);
+}
+
+.footer {
+  flex-shrink: 0;
+  padding: var(--spacing-4);
+  border-top: 1px solid var(--border-subtle);
+  background: var(--surface-base);
+}
+
+/* ============================================================================
+   Scrollable Content Area
+   ============================================================================ */
+
+.treeContent {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-2);
+}
+
+/* Scrollbar styling (webkit browsers) */
+.treeContent::-webkit-scrollbar {
+  width: 4px;
+}
+
+.treeContent::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.treeContent::-webkit-scrollbar-thumb {
+  background: var(--border-strong);
+  border-radius: 4px;
+}
+
+.treeContent::-webkit-scrollbar-thumb:hover {
+  background: var(--border-interactive);
+}
+
+/* ============================================================================
+   Section Styles
+   ============================================================================ */
+
+.section {
+  margin-bottom: var(--spacing-1);
+}
+
+/* Collapsible trigger wrapper */
+.sectionHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  padding: var(--spacing-1) var(--spacing-3);
+  cursor: pointer;
+  border-radius: var(--radius-sm);
+  user-select: none;
+  transition:
+    background-color var(--transition-fast),
+    color var(--transition-fast);
+  position: relative;
+}
+
+.sectionHeader:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+/* Section header — variant: node (matches nodeRow padding) */
+.sectionHeaderNode {
+  padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) var(--spacing-2);
+}
+
+/* Chevron icon in section header */
+.sectionChevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* Chevron rotates 90deg when open */
+.sectionChevronOpen {
+  transform: rotate(90deg);
+}
+
+/* Section title styling */
+.sectionTitle {
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+/* Section title — variant: node (looks like folder node) */
+.sectionTitleNode {
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  flex: 1;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  user-select: none;
+}
+
+/* Section body (collapsible content) */
+.sectionBody {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Section actions (+ button on hover) */
+.sectionActions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-05);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  padding-left: var(--spacing-8);
+  /* Gradient fade: blends with section header background */
+  background: linear-gradient(to right, transparent, var(--surface-base) 40%);
+}
+
+.sectionHeader:hover .sectionActions,
+.sectionHeader:focus-within .sectionActions {
+  opacity: 1;
+  pointer-events: auto;
+  /* On hover, section header background is --surface-subtle */
+  background: linear-gradient(to right, transparent, var(--surface-subtle) 40%);
+}
+
+/* ============================================================================
+   Node Styles (Page and Folder)
+   ============================================================================ */
+
+.node {
+  position: relative;
+}
+
+/* Node row (the interactive line) */
+.nodeRow {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-2);
+  min-height: var(--spacing-8);
+  padding: var(--spacing-1) var(--spacing-2) var(--spacing-1) 0;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--mode-hover-duration),
+    color var(--mode-hover-duration);
+  user-select: none;
+  position: relative;
+}
+
+.nodeRow:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+/* Active node (current page) — soft brand background */
+.nodeRowActive {
+  background: var(--color-brand-soft);
+}
+
+.nodeRowActive:hover {
+  background: var(--color-brand-soft-hover);
+}
+
+.nodeRowActive .nodeLabel {
+  color: var(--text-brand);
+  font-weight: var(--font-weight-medium);
+}
+
+.nodeRowActive .nodeIcon,
+.nodeRowActive .nodeChevron {
+  color: var(--text-brand);
+}
+
+/* Chevron toggle (for folders) */
+.nodeChevron {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition: transform var(--transition-fast);
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.nodeChevronOpen {
+  transform: rotate(90deg);
+}
+
+/* Hidden chevron space (for pages that don't have a chevron) */
+.nodeChevronHidden {
+  width: 20px;
+  flex-shrink: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* Node icon (folder or page icon) */
+.nodeIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  width: 20px;
+  height: 20px;
+}
+
+/* Node label text */
+.nodeLabel {
+  flex: 1;
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  min-width: 0;
+  user-select: none;
+}
+
+/* ============================================================================
+   Hover Actions (+ and ...)
+   ============================================================================ */
+
+.nodeActions {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-05);
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+  pointer-events: none;
+  padding-left: var(--spacing-8);
+  /* Default: gradient fades with base background */
+  background: linear-gradient(to right, transparent, var(--surface-base) 40%);
+}
+
+/* Show actions on hover or focus-within */
+.nodeRow:hover .nodeActions,
+.nodeRow:focus-within .nodeActions {
+  opacity: 1;
+  pointer-events: auto;
+  /* On hover: gradient fades with subtle background */
+  background: linear-gradient(to right, transparent, var(--surface-subtle) 40%);
+}
+
+/* Active node: gradient fades with brand background */
+.nodeRowActive .nodeActions {
+  background: linear-gradient(
+    to right,
+    transparent,
+    var(--color-brand-soft) 40%
+  );
+}
+
+/* ============================================================================
+   Node Children (Nested Nodes)
+   ============================================================================ */
+
+.nodeChildren {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border-left: 1px solid var(--border-subtle);
+  margin-left: var(--spacing-3);
+  /* paddingLeft applied inline via style prop based on depth */
+}
+
+/* Nested node styling — smaller font */
+.nodeNested .nodeLabel {
+  font-size: var(--font-size-13);
+}
+
+/* ============================================================================
+   Badges and Icons
+   ============================================================================ */
+
+/* Icon slot: shared container for icon and chevron (one appears on hover) */
+.iconSlot {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Icon inside slot: visible by default, hidden on hover */
+.slotIcon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition-fast);
+  opacity: 1;
+}
+
+/* Chevron inside slot: hidden by default, visible on hover */
+.slotChevron {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  transition:
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+  opacity: 0;
+}
+
+/* Chevron rotated when open */
+.slotChevronOpen {
+  transform: rotate(90deg);
+}
+
+/* Swap on hover: icon fades out, chevron fades in */
+/* Only apply swap when chevron is present (colapsable elements) */
+.sectionHeader:has(.slotChevron):hover .slotIcon,
+.nodeRow:has(.slotChevron):hover .slotIcon {
+  opacity: 0;
+}
+
+.sectionHeader:has(.slotChevron):hover .slotChevron,
+.nodeRow:has(.slotChevron):hover .slotChevron {
+  opacity: 1;
+}
+
+/* Section icon */
+.sectionIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+}
+
+/* Section icon — variant: node (matches nodeIcon size: 20px) */
+.sectionIconNode {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-primary);
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+/* Section badge (item count) */
+.sectionBadge {
+  font-size: var(--font-size-11);
+  font-family: var(--font-secondary);
+  color: var(--text-tertiary);
+  background: var(--surface-layer);
+  border-radius: var(--radius-full);
+  padding: 0 var(--spacing-1);
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-right: auto;
+  margin-left: var(--spacing-2);
+}
+
+/* Node badge */
+.nodeBadge {
+  font-size: var(--font-size-11);
+  font-family: var(--font-secondary);
+  color: var(--text-tertiary);
+  background: var(--surface-layer);
+  border-radius: var(--radius-full);
+  padding: 0 var(--spacing-1);
+  min-width: 18px;
+  text-align: center;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+
+/* ============================================================================
+   Empty State
+   ============================================================================ */
+
+.empty {
+  padding: var(--spacing-4) var(--spacing-3);
+  text-align: center;
+  color: var(--text-tertiary);
+  font-size: var(--font-size-12);
+}
+
+/* ============================================================================
+   Accessibility: Focus Visible
+   ============================================================================ */
+
+.nodeRow:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: -2px;
+}
+
+.sectionHeader:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: -2px;
+}

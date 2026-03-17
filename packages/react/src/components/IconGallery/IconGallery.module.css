@@ -1,0 +1,311 @@
+/**
+ * Icon Gallery Styles
+ *
+ * Responsive gallery for displaying and browsing Lucide icons
+ */
+
+.gallery {
+  padding: var(--spacing-8);
+  background: var(--surface-base);
+  min-height: 100vh;
+}
+
+/* Header */
+.header {
+  margin-bottom: var(--spacing-6);
+  text-align: center;
+}
+
+.header h1 {
+  font-size: var(--font-size-32);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.header p {
+  font-size: var(--font-size-16);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* Search */
+.searchContainer {
+  position: relative;
+  max-width: 400px;
+  margin: 0 auto var(--spacing-6);
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--spacing-3) var(--spacing-4) var(--spacing-3) var(--spacing-10);
+  font-size: var(--font-size-16);
+  border: 2px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  background: var(--surface-layer);
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.searchInput:focus {
+  outline: none;
+  border-color: var(--interactive-primary);
+  background: var(--surface-base);
+}
+
+.searchInput::placeholder {
+  color: var(--text-tertiary);
+}
+
+.resultCount {
+  position: absolute;
+  right: var(--spacing-3);
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: var(--font-size-13);
+  color: var(--text-secondary);
+  pointer-events: none;
+}
+
+/* Categories */
+.categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-2);
+  margin-bottom: var(--spacing-6);
+  justify-content: center;
+}
+
+.categoryBtn {
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-14);
+  font-weight: 500;
+  background: var(--surface-subtle);
+  color: var(--text-secondary);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.categoryBtn:hover {
+  background: var(--surface-layer);
+  color: var(--text-primary);
+  border-color: var(--border-strong);
+}
+
+.categoryBtn.active {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border-color: var(--interactive-primary);
+}
+
+/* Icon Grid - Responsive auto-fit */
+.iconGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  gap: var(--spacing-3);
+  max-width: 1400px;
+  margin: 0 auto var(--spacing-8);
+}
+
+.iconItem {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--spacing-1);
+  padding: var(--spacing-3);
+  background: var(--surface-layer);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  min-height: 80px;
+}
+
+.iconItem:hover {
+  background: var(--surface-base);
+  border-color: var(--interactive-primary);
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg);
+}
+
+.iconItem:focus {
+  outline: none;
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--interactive-primary-subtle);
+}
+
+.iconDisplay {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  color: var(--text-primary);
+}
+
+.iconName {
+  font-size: var(--font-size-11);
+  color: var(--text-secondary);
+  text-align: center;
+  word-break: break-word;
+  line-height: 1.3;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.copiedBadge {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  padding: var(--spacing-1) var(--spacing-2);
+  border-radius: var(--radius-sm);
+  font-size: var(--font-size-11);
+  font-weight: 600;
+  animation: fadeInOut 1.5s ease;
+  z-index: var(--z-dropdown);
+  pointer-events: none;
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+  15% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  85% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  100% {
+    opacity: 0;
+    transform: translate(-50%, -50%) scale(0.8);
+  }
+}
+
+/* No Results */
+.noResults {
+  text-align: center;
+  padding: var(--spacing-8);
+  color: var(--text-secondary);
+}
+
+.noResults p {
+  margin: 0;
+  font-size: var(--font-size-16);
+}
+
+/* Usage Info */
+.usageInfo {
+  max-width: 600px;
+  margin: var(--spacing-8) auto 0;
+  padding: var(--spacing-4);
+  background: var(--surface-layer);
+  border-radius: var(--radius-control);
+  border: 1px solid var(--border-subtle);
+}
+
+.usageInfo h3 {
+  margin: 0 0 var(--spacing-3) 0;
+  font-size: var(--font-size-16);
+  color: var(--text-primary);
+}
+
+.codeBlock {
+  margin: 0;
+  padding: var(--spacing-3);
+  background: var(--surface-base);
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border-subtle);
+  overflow-x: auto;
+  font-family: var(--font-mono);
+  font-size: var(--font-size-13);
+  color: var(--text-primary);
+  line-height: 1.5;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .gallery {
+    padding: var(--spacing-4);
+  }
+
+  .header h1 {
+    font-size: var(--font-size-24);
+  }
+
+  .searchContainer {
+    max-width: 100%;
+  }
+
+  .categories {
+    justify-content: flex-start;
+    overflow-x: auto;
+    flex-wrap: nowrap;
+    padding-bottom: var(--spacing-2);
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .categoryBtn {
+    flex-shrink: 0;
+  }
+
+  .iconGrid {
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: var(--spacing-2);
+  }
+
+  .iconItem {
+    min-height: 70px;
+    padding: var(--spacing-2);
+  }
+
+  .iconDisplay {
+    width: 32px;
+    height: 32px;
+  }
+
+  .iconName {
+    font-size: var(--font-size-10);
+  }
+}
+
+@media (max-width: 480px) {
+  .header h1 {
+    font-size: var(--font-size-20);
+  }
+
+  .iconGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  .usageInfo {
+    padding: var(--spacing-3);
+  }
+
+  .codeBlock {
+    font-size: var(--font-size-12);
+    padding: var(--spacing-2);
+  }
+}

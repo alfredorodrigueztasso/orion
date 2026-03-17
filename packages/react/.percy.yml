@@ -1,0 +1,109 @@
+version: 2
+
+# Percy Visual Regression Testing Configuration
+# Captures screenshots of Storybook stories across browsers and viewports
+
+storybook:
+  # Storybook build directory
+  staticDir: storybook-static
+
+  # Wait for these selectors before capturing
+  waitForSelector: '[data-percy-ready], .sb-show-main'
+
+  # Maximum wait time for page load
+  waitForTimeout: 30000
+
+# Browser configurations
+browsers:
+  - name: chromium
+    widths:
+      - 375   # Mobile
+      - 768   # Tablet
+      - 1280  # Desktop
+  - name: firefox
+    widths:
+      - 1280  # Desktop only for Firefox
+  - name: webkit
+    widths:
+      - 375   # Mobile (iOS)
+      - 1280  # Desktop (Safari)
+
+# Snapshot configuration
+snapshot:
+  # Enable JavaScript
+  enableJavaScript: true
+
+  # Minimum height for snapshots
+  minHeight: 1024
+
+  # Percy CSS for consistent snapshots
+  percyCSS: |
+    /* Hide dynamic content that changes between snapshots */
+    [data-percy-hide] { display: none !important; }
+
+    /* Stabilize animations */
+    *, *::before, *::after {
+      animation-duration: 0s !important;
+      animation-delay: 0s !important;
+      transition-duration: 0s !important;
+      transition-delay: 0s !important;
+    }
+
+# Discovery configuration
+discovery:
+  # Disable resource discovery to speed up snapshots
+  disableCache: false
+
+  # Network idle timeout
+  networkIdleTimeout: 250
+
+# Component-specific overrides
+stories:
+  # Capture all stories by default
+  include: ['**/*.stories.*']
+
+  # Exclude specific stories
+  exclude:
+    - '**/docs.stories.*'
+    - '**/internal/**'
+
+# Theme and brand coverage
+# Percy will capture each story in:
+# - Light theme (default)
+# - Dark theme (via global parameter)
+# - Multiple brands (via global parameter)
+
+# Comparison settings
+threshold:
+  # Pixel difference threshold (0-1)
+  # 0 = exact match, 1 = completely different
+  threshold: 0.1
+
+  # Anti-aliasing tolerance
+  antialiasing: true
+
+  # Ignore regions
+  ignoreRegions:
+    # Ignore regions with data-percy-ignore attribute
+    - '[data-percy-ignore]'
+
+# CI/CD settings
+agent:
+  # Enable asset discovery
+  assetDiscovery:
+    enabled: true
+
+    # Allowed hostnames for asset loading
+    allowedHostnames:
+      - localhost
+      - 127.0.0.1
+      - fonts.googleapis.com
+      - fonts.gstatic.com
+
+# Build configuration
+builds:
+  # Parallel builds for faster processing
+  parallel: true
+
+  # Number of parallel workers
+  parallelTotal: 4

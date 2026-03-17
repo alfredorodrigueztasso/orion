@@ -1,0 +1,68 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "$id": "https://orion-ds.com/schemas/Card.schema.json",
+  "title": "Card",
+  "description": "A container component for grouping related content. Supports headers, media, actions, and various visual styles.",
+  "type": "object",
+  "properties": {
+    "variant": {
+      "type": "string",
+      "enum": ["base", "glass", "elevated", "image", "inverse"],
+      "default": "base",
+      "description": "Visual style of the card"
+    },
+    "padding": {
+      "type": "string",
+      "enum": ["none", "sm", "md", "lg"],
+      "default": "md",
+      "description": "Internal padding size"
+    },
+    "interactive": {
+      "type": "boolean",
+      "default": false,
+      "description": "Makes card clickable with hover effects"
+    },
+    "href": {
+      "type": "string",
+      "description": "Makes card a link to this URL"
+    },
+    "header": {
+      "description": "Card header content (title, subtitle, actions)"
+    },
+    "media": {
+      "description": "Media content (image, video) at top of card"
+    },
+    "footer": {
+      "description": "Card footer content (actions, metadata)"
+    },
+    "children": {
+      "description": "Main card body content"
+    }
+  },
+  "required": [],
+  "examples": [
+    {
+      "description": "Basic card with content",
+      "code": "<Card>\n  <p>Card content goes here</p>\n</Card>"
+    },
+    {
+      "description": "Card with header and footer",
+      "code": "<Card\n  header={<CardHeader title=\"Title\" subtitle=\"Description\" />}\n  footer={<CardFooter><Button>Action</Button></CardFooter>}\n>\n  <p>Content</p>\n</Card>"
+    },
+    {
+      "description": "Interactive card with media",
+      "code": "<Card\n  interactive\n  href=\"/details\"\n  media={<img src=\"/image.jpg\" alt=\"Preview\" />}\n>\n  <h3>Product Name</h3>\n  <p>Product description</p>\n</Card>"
+    },
+    {
+      "description": "Elevated card with interactive hover effect",
+      "code": "<Card variant=\"elevated\" interactive>\n  <Card.Header>Clickable Card</Card.Header>\n  <Card.Body><p>Hover to see the effect</p></Card.Body>\n</Card>"
+    }
+  ],
+  "aiPrompts": [
+    "Create a card with a title and description",
+    "Make a product card with an image and price",
+    "Create a clickable card that links to a detail page",
+    "Build a team member card with avatar and bio",
+    "Create a pricing card with features list"
+  ]
+}

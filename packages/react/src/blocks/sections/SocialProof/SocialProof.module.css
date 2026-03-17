@@ -1,0 +1,124 @@
+.section {
+  padding: var(--spacing-16) var(--spacing-8);
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.title {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-8) 0;
+  text-align: center;
+}
+
+.logos {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-8);
+  margin-bottom: var(--spacing-12);
+}
+
+.logoImage {
+  height: 32px;
+  object-fit: contain;
+  opacity: 0.5;
+  transition: opacity 200ms ease;
+}
+
+.logoImage:hover {
+  opacity: 0.8;
+}
+
+.stats {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-12);
+  margin-bottom: var(--spacing-12);
+}
+
+.statItem {
+  text-align: center;
+}
+
+.statValue {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  color: var(--text-brand);
+  margin: 0;
+}
+
+.statLabel {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  margin: var(--spacing-1) 0 0 0;
+}
+
+.testimonials {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: var(--spacing-6);
+}
+
+.testimonialCard {
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-container);
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+}
+
+.quote {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-md);
+  color: var(--text-primary);
+  line-height: 1.6;
+  margin: 0;
+  font-style: italic;
+}
+
+.quote::before {
+  content: "\201C";
+}
+
+.quote::after {
+  content: "\201D";
+}
+
+.testimonialAuthor {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+  margin-top: auto;
+}
+
+.authorName {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-sm);
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.authorTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-xs);
+  color: var(--text-tertiary);
+  margin: 0;
+}
+
+.compact .stats {
+  margin-bottom: 0;
+}

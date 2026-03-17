@@ -1,0 +1,127 @@
+/**
+ * AlertDialog Component Styles
+ *
+ * Compact dialog that forces user response.
+ * All values reference semantic tokens.
+ */
+
+/* Backdrop overlay */
+.backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: var(--z-modal-backdrop);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-overlay);
+  backdrop-filter: blur(var(--blur-sm));
+  animation: fadeIn 200ms ease;
+  padding: var(--spacing-4);
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+/* Dialog container */
+.dialog {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  max-width: 400px;
+  background: var(--surface-base);
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-xl);
+  padding: var(--spacing-8) var(--spacing-6) var(--spacing-6);
+  animation: scaleIn 200ms ease;
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .backdrop,
+  .dialog {
+    animation: none;
+  }
+}
+
+/* ============================================================================
+ * ICON
+ * ============================================================================ */
+
+.icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  margin-bottom: var(--spacing-4);
+  flex-shrink: 0;
+}
+
+.iconInfo {
+  background: var(--soft-info);
+  color: var(--status-info);
+}
+
+.iconWarning {
+  background: var(--soft-warning);
+  color: var(--status-warning);
+}
+
+.iconDanger {
+  background: var(--soft-error);
+  color: var(--status-error);
+}
+
+/* ============================================================================
+ * CONTENT
+ * ============================================================================ */
+
+.title {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+  color: var(--text-primary);
+  margin: 0 0 var(--spacing-2) 0;
+  line-height: var(--line-height-tight);
+}
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-6) 0;
+  line-height: var(--line-height-normal);
+}
+
+/* ============================================================================
+ * ACTIONS
+ * ============================================================================ */
+
+.actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-3);
+  width: 100%;
+}

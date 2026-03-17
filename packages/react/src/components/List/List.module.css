@@ -1,0 +1,183 @@
+/**
+ * List Component Styles
+ */
+
+.list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* Variants */
+.bordered {
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  overflow: hidden;
+}
+
+.divided .item:not(:last-child) {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+.bordered .item:not(:last-child) {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* List Item */
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--surface-base);
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+/* Size variants */
+.sm {
+  gap: var(--spacing-2);
+  padding: var(--spacing-2) var(--spacing-3);
+  font-size: var(--font-size-sm);
+}
+
+.md {
+  font-size: var(--font-size-base);
+}
+
+.lg {
+  gap: var(--spacing-4);
+  padding: var(--spacing-4) var(--spacing-5);
+  font-size: var(--font-size-lg);
+}
+
+/* Interactive items */
+.interactive {
+  cursor: pointer;
+}
+
+.interactive:hover:not(.disabled) {
+  background: var(--surface-subtle);
+}
+
+.interactive:active:not(.disabled) {
+  background: var(--surface-layer);
+}
+
+.interactive:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: -2px;
+}
+
+/* Selectable items */
+.selectable {
+  cursor: pointer;
+  padding-right: var(--spacing-10);
+}
+
+.selectable:hover:not(.disabled) {
+  background: var(--surface-subtle);
+}
+
+.selected {
+  background: var(--interactive-primary-subtle);
+}
+
+.selected:hover:not(.disabled) {
+  background: var(--interactive-primary-subtle);
+}
+
+/* Disabled state */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* Leading content (icon/avatar) */
+.leading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  color: var(--text-secondary);
+}
+
+.sm .leading {
+  width: 20px;
+  height: 20px;
+}
+
+.md .leading {
+  width: 24px;
+  height: 24px;
+}
+
+.lg .leading {
+  width: 32px;
+  height: 32px;
+}
+
+/* Content */
+.content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.primary {
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.secondary {
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.sm .secondary {
+  font-size: var(--font-size-xs);
+}
+
+.lg .secondary {
+  font-size: var(--font-size-base);
+}
+
+/* Trailing content */
+.trailing {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+}
+
+/* Checkmark for selectable */
+.checkmark {
+  position: absolute;
+  right: var(--spacing-3);
+  display: flex;
+  align-items: center;
+  color: var(--interactive-primary);
+}
+
+.selectable {
+  position: relative;
+}
+
+/* Custom item wrapper */
+.customItem {
+  list-style: none;
+}
+
+/* Empty state */
+.empty {
+  padding: var(--spacing-8);
+  text-align: center;
+  color: var(--text-secondary);
+}

@@ -1,0 +1,329 @@
+/**
+ * Sidebar Component Styles
+ *
+ * Optimized for Product Mode (SaaS dashboards).
+ * Efficient navigation with clear visual hierarchy.
+ */
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: var(--sidebar-width);
+  height: 100%;
+  background: var(--surface-base);
+  border-right: 1px solid var(--border-subtle);
+  transition: width var(--mode-hover-duration);
+  position: relative;
+  overflow: hidden;
+}
+
+.collapsed {
+  width: var(--sidebar-width);
+}
+
+/* ============================================================================
+ * HEADER
+ * ============================================================================ */
+
+.header {
+  display: flex;
+  align-items: center;
+  padding: var(--spacing-4);
+  border-bottom: 1px solid var(--border-subtle);
+  min-height: calc(var(--spacing-12) + var(--spacing-2));
+}
+
+.collapsed .header {
+  justify-content: center;
+  padding: var(--spacing-3);
+}
+
+/* ============================================================================
+ * CONTENT
+ * ============================================================================ */
+
+.content {
+  flex: 1;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: var(--spacing-2);
+}
+
+/* ============================================================================
+ * SECTION
+ * ============================================================================ */
+
+.section {
+  margin-bottom: var(--spacing-4);
+}
+
+.section:last-child {
+  margin-bottom: 0;
+}
+
+.sectionTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-tertiary);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding: var(--spacing-2) var(--spacing-3);
+  margin-bottom: var(--spacing-1);
+}
+
+.sectionItems {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ============================================================================
+ * ITEM
+ * ============================================================================ */
+
+.itemWrapper {
+  margin-bottom: var(--spacing-05);
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+  width: 100%;
+  padding: var(--spacing-2) var(--spacing-3);
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-secondary);
+  text-decoration: none;
+  background: none;
+  border: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  transition:
+    background-color var(--mode-hover-duration),
+    color var(--mode-hover-duration);
+  text-align: left;
+}
+
+.item:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+.itemActive {
+  background: var(--color-brand-soft);
+  color: var(--text-brand);
+  font-weight: var(--font-weight-semibold);
+}
+
+.itemActive:hover {
+  background: var(--color-brand-soft-hover);
+  color: var(--text-brand);
+}
+
+.itemDisabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+.itemNested {
+  font-size: var(--font-size-13);
+}
+
+.itemIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-md);
+  height: var(--icon-size-md);
+  flex-shrink: 0;
+  color: currentColor;
+}
+
+.itemLabel {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.itemBadge {
+  flex-shrink: 0;
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-medium);
+  padding: var(--spacing-0-5) var(--spacing-2);
+  background: var(--surface-subtle);
+  border-radius: var(--radius-full);
+  color: var(--text-secondary);
+}
+
+.itemActive .itemBadge {
+  background: var(--color-brand-soft-hover);
+  color: var(--text-brand);
+}
+
+.itemChevron {
+  flex-shrink: 0;
+  color: var(--text-tertiary);
+  transition: transform var(--mode-hover-duration);
+}
+
+.chevronExpanded {
+  transform: rotate(180deg);
+}
+
+/* ============================================================================
+ * SUB-ITEMS
+ * ============================================================================ */
+
+.subItems {
+  list-style: none;
+  margin: var(--spacing-1) 0 0 0;
+  padding: 0;
+}
+
+/* ============================================================================
+ * COLLAPSED STATE
+ * ============================================================================ */
+
+.collapsed .item {
+  justify-content: center;
+  padding: var(--spacing-2);
+}
+
+.collapsed .itemLabel,
+.collapsed .itemBadge,
+.collapsed .itemChevron,
+.collapsed .sectionTitle {
+  display: none;
+}
+
+.collapsed .itemIcon {
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+}
+
+/* ============================================================================
+ * FOOTER
+ * ============================================================================ */
+
+.footer {
+  padding: var(--spacing-3);
+  border-top: 1px solid var(--border-subtle);
+}
+
+.collapsed .footer {
+  padding: var(--spacing-2);
+}
+
+/* ============================================================================
+ * DIVIDER
+ * ============================================================================ */
+
+.divider {
+  border: none;
+  border-top: 1px solid var(--border-subtle);
+  margin: var(--spacing-2) 0;
+}
+
+/* ============================================================================
+ * COLLAPSE TOGGLE
+ * ============================================================================ */
+
+.collapseToggle {
+  position: absolute;
+  bottom: var(--spacing-4);
+  right: calc(var(--spacing-2) * -1);
+  transform: translateX(50%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--icon-size-lg);
+  height: var(--icon-size-lg);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-full);
+  cursor: pointer;
+  color: var(--text-secondary);
+  z-index: var(--z-sticky);
+  transition:
+    color var(--mode-hover-duration),
+    background-color var(--mode-hover-duration);
+}
+
+.collapseToggle:hover {
+  background: var(--surface-subtle);
+  color: var(--text-primary);
+}
+
+/* ============================================================================
+ * VARIANT: FLOATING
+ * ============================================================================ */
+
+.variant-floating {
+  border-right: none;
+  border-radius: var(--radius-container);
+  box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-subtle);
+  /* margin removed - template handles spacing */
+  height: 100%;
+}
+
+/* Subtle internal dividers instead of full borders */
+.variant-floating .header {
+  border-bottom: none;
+  position: relative;
+}
+
+.variant-floating .header::after {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  left: var(--spacing-4);
+  right: var(--spacing-4);
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+.variant-floating .footer {
+  border-top: none;
+  position: relative;
+}
+
+.variant-floating .footer::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: var(--spacing-4);
+  right: var(--spacing-4);
+  height: 1px;
+  background: var(--border-subtle);
+}
+
+/* ============================================================================
+ * RESPONSIVE
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .sidebar {
+    position: fixed;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    z-index: var(--z-overlay);
+    transform: translateX(-100%);
+    transition: transform var(--mode-hover-duration);
+  }
+
+  .sidebar:not(.collapsed) {
+    transform: translateX(0);
+  }
+
+  .collapseToggle {
+    display: none;
+  }
+}

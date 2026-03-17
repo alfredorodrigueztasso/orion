@@ -1,0 +1,401 @@
+/**
+ * Carousel Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ * This is the atomic carousel - no section/container wrappers.
+ */
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  width: 100%;
+}
+
+/* ============================================================================
+ * CAROUSEL TRACK
+ * ============================================================================ */
+
+.track {
+  display: flex;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+}
+
+.track::-webkit-scrollbar {
+  display: none;
+}
+
+/* Alignment: Cards start from edge (default, Apple style) */
+.trackEdge {
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+}
+
+/* Alignment: Cards aligned with Container (matches section title)
+ * First card gets extra margin-left via inline style.
+ * scroll-padding ensures snap works correctly.
+ */
+.trackContainer {
+  padding-left: var(--spacing-6);
+  padding-right: var(--spacing-6);
+}
+
+/* Peek effect - cards cut at edge */
+.peek .trackEdge,
+.peek .trackContainer {
+  padding-right: var(--spacing-16);
+}
+
+/* Gap variants */
+.gapSm .track {
+  gap: var(--spacing-4);
+}
+
+.gapMd .track {
+  gap: var(--spacing-6);
+}
+
+.gapLg .track {
+  gap: var(--spacing-8);
+}
+
+/* ============================================================================
+ * NAVIGATION BUTTONS (Inline)
+ * ============================================================================ */
+
+.navigation {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: center;
+  margin-top: var(--spacing-4);
+}
+
+.navButton {
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--surface-subtle);
+  border: 1px solid var(--border-subtle);
+  border-radius: 50%;
+  color: var(--text-primary);
+  cursor: pointer;
+  transition:
+    background var(--transition-fast),
+    border-color var(--transition-fast);
+}
+
+.navButton:hover:not(:disabled) {
+  background: var(--surface-layer);
+  border-color: var(--border-default);
+}
+
+.navButton:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ============================================================================
+ * CAROUSEL CARD
+ * ============================================================================ */
+
+.card {
+  flex-shrink: 0;
+  scroll-snap-align: start;
+  position: relative;
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  width: calc(100% - var(--spacing-12));
+  max-width: 600px;
+}
+
+/* Aspect ratios */
+.aspect-16-9 {
+  aspect-ratio: 16/9;
+}
+
+.aspect-4-3 {
+  aspect-ratio: 4/3;
+}
+
+.aspect-1-1 {
+  aspect-ratio: 1/1;
+}
+
+.aspect-3-4 {
+  aspect-ratio: 3/4;
+}
+
+/* ============================================================================
+ * CARD IMAGE
+ * ============================================================================ */
+
+.imageWrapper {
+  position: absolute;
+  inset: 0;
+}
+
+.imageWrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* ============================================================================
+ * CARD OVERLAY
+ * ============================================================================ */
+
+.overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.overlay-gradient {
+  background: linear-gradient(
+    to top,
+    var(--overlay-dark-heavy) 0%,
+    var(--overlay-dark-light) 30%,
+    transparent 60%
+  );
+}
+
+.overlay-dark {
+  background: var(--overlay-dark);
+}
+
+/* ============================================================================
+ * CARD CONTENT
+ * ============================================================================ */
+
+.content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: var(--spacing-6);
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.card .eyebrow {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--text-on-dark-secondary);
+}
+
+.card .cardTitle {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-24);
+  font-weight: var(--font-weight-bold);
+  line-height: var(--line-height-tight);
+  color: var(--text-on-dark);
+  margin: 0;
+}
+
+.card .cardDescription {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-14);
+  color: var(--text-on-dark-secondary);
+  line-height: var(--line-height-relaxed);
+  margin: 0;
+}
+
+.card .action {
+  margin-top: var(--spacing-2);
+}
+
+/* ============================================================================
+ * VARIANT: EDITORIAL (Apple-style)
+ * ============================================================================ */
+
+.variant-editorial {
+  max-width: 700px;
+}
+
+.variant-editorial .cardTitle {
+  font-size: clamp(1.25rem, 2.5vw, 2rem);
+}
+
+/* ============================================================================
+ * VARIANT: PRODUCT
+ * ============================================================================ */
+
+.variant-product {
+  max-width: 320px;
+  background: var(--surface-layer);
+  display: flex;
+  flex-direction: column;
+  aspect-ratio: auto; /* Override card aspect-ratio */
+}
+
+.variant-product .imageWrapper {
+  position: relative;
+  flex-shrink: 0;
+  height: 140px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.variant-product .content {
+  position: relative;
+  padding: var(--spacing-4);
+  background: var(--surface-layer);
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-2);
+}
+
+.variant-product .eyebrow {
+  color: var(--text-tertiary);
+}
+
+.variant-product .cardTitle {
+  color: var(--text-primary);
+  font-size: var(--font-size-18);
+  font-weight: var(--font-weight-semibold);
+}
+
+.variant-product .cardDescription {
+  color: var(--text-secondary);
+  font-size: var(--font-size-14);
+  line-height: var(--line-height-relaxed);
+}
+
+/* ============================================================================
+ * VARIANT: GALLERY
+ * ============================================================================ */
+
+.variant-gallery {
+  max-width: 500px;
+}
+
+.variant-gallery .content {
+  opacity: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.variant-gallery:hover .content {
+  opacity: 1;
+}
+
+/* ============================================================================
+ * PAGINATION
+ * ============================================================================ */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: var(--spacing-2);
+  margin-top: var(--spacing-4);
+}
+
+.dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--border-subtle);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition:
+    background var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.dot:hover {
+  background: var(--border-default);
+}
+
+.dotActive {
+  background: var(--interactive-primary);
+  transform: scale(1.25);
+}
+
+/* ============================================================================
+ * HIGHLIGHTED ACTIVE CARD (Spotlight Effect)
+ * ============================================================================ */
+
+/* Add vertical padding to track to accommodate scaled card overflow */
+.highlightActive .track {
+  padding-block: var(--spacing-6);
+}
+
+.cardHighlighted {
+  transform: scale(1.1);
+  transform-origin: center center;
+  z-index: var(--z-dropdown);
+  transition: transform var(--transition-normal);
+}
+
+/* Non-highlighted cards get a subtle scale down for contrast */
+.highlightActive .card:not(.cardHighlighted) {
+  transform: scale(0.95);
+  opacity: 0.7;
+  transition:
+    transform var(--transition-normal),
+    opacity var(--transition-normal);
+}
+
+/* ============================================================================
+ * RESPONSIVE ADJUSTMENTS
+ * ============================================================================ */
+
+@media (max-width: 1024px) {
+  .card {
+    width: calc(100% - var(--spacing-8));
+    max-width: 500px;
+  }
+
+  .variant-editorial {
+    max-width: 500px;
+  }
+}
+
+@media (max-width: 640px) {
+  .trackEdge,
+  .trackContainer {
+    padding-left: var(--spacing-4);
+    padding-right: var(--spacing-4);
+  }
+
+  .peek .trackEdge,
+  .peek .trackContainer {
+    padding-right: var(--spacing-8);
+  }
+
+  .card {
+    width: calc(100% - var(--spacing-4));
+    max-width: none;
+  }
+
+  .variant-editorial,
+  .variant-product,
+  .variant-gallery {
+    max-width: none;
+  }
+
+  .navButton {
+    width: 40px;
+    height: 40px;
+  }
+
+  .content {
+    padding: var(--spacing-4);
+  }
+
+  .card .cardTitle {
+    font-size: var(--font-size-18);
+  }
+}

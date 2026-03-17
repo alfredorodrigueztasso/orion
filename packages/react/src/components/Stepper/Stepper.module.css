@@ -1,0 +1,486 @@
+/**
+ * Stepper Component Styles
+ *
+ * Minimalist Linear-style stepper with elegant, refined design.
+ * - Thin borders and subtle colors
+ * - No heavy backgrounds on indicators
+ * - Clean typography with generous spacing
+ */
+
+.stepper {
+  width: 100%;
+}
+
+.list {
+  display: flex;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+/* ============================================================================
+ * MOBILE-FIRST: HORIZONTAL (Default)
+ * Compact dots with labels hidden, current step info shown separately
+ * ============================================================================ */
+
+.horizontal .list {
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+}
+
+.horizontal .item {
+  display: flex;
+  align-items: center;
+  flex: 1;
+  max-width: 120px;
+}
+
+.horizontal .item:last-child {
+  flex: 0;
+  max-width: none;
+}
+
+/* ============================================================================
+ * STEP
+ * ============================================================================ */
+
+.step {
+  display: flex;
+  align-items: center;
+  gap: var(--spacing-3);
+}
+
+.horizontal .step {
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.horizontal .label-right .step {
+  flex-direction: row;
+  text-align: left;
+}
+
+/* ============================================================================
+ * INDICATOR - Minimalist Style
+ * ============================================================================ */
+
+.indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  border-radius: 50%;
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  transition: all var(--transition-fast);
+  position: relative;
+  z-index: var(--z-base);
+}
+
+/* Mobile sizes - smaller and more elegant */
+.sm .indicator {
+  width: 20px;
+  height: 20px;
+  font-size: var(--font-size-11);
+}
+
+.md .indicator {
+  width: 24px;
+  height: 24px;
+  font-size: var(--font-size-12);
+}
+
+.lg .indicator {
+  width: 28px;
+  height: 28px;
+  font-size: var(--font-size-13);
+}
+
+/* ============================================================================
+ * STATUS STYLES - Minimalist (Linear-inspired)
+ * ============================================================================ */
+
+/* Upcoming - thin border, transparent background */
+.upcoming .indicator {
+  background: transparent;
+  border: 1px solid var(--border-subtle);
+  color: var(--text-tertiary);
+}
+
+/* Current - brand border only, no fill */
+.current .indicator {
+  background: transparent;
+  border: 1.5px solid var(--interactive-primary);
+  color: var(--interactive-primary);
+  /* No shadow, no glow - clean and minimal */
+}
+
+/* Complete - no border, just the checkmark */
+.complete .indicator {
+  background: transparent;
+  border: none;
+  color: var(--status-success);
+}
+
+/* Error - no border, just the icon */
+.error .indicator {
+  background: transparent;
+  border: none;
+  color: var(--status-error);
+}
+
+/* ============================================================================
+ * NUMBER
+ * ============================================================================ */
+
+.number {
+  font-variant-numeric: tabular-nums;
+}
+
+/* ============================================================================
+ * CONTENT (Labels)
+ * ============================================================================ */
+
+.content {
+  display: none; /* Hidden on mobile by default */
+  flex-direction: column;
+  gap: var(--spacing-1);
+  min-width: 0;
+}
+
+/* ============================================================================
+ * TITLE - Clean typography
+ * ============================================================================ */
+
+.title {
+  font-family: var(--font-secondary);
+  font-weight: var(--font-weight-medium);
+  color: var(--text-primary);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.sm .title {
+  font-size: var(--font-size-12);
+}
+.md .title {
+  font-size: var(--font-size-13);
+}
+.lg .title {
+  font-size: var(--font-size-14);
+}
+
+.upcoming .title {
+  color: var(--text-tertiary);
+}
+.complete .title {
+  color: var(--text-secondary);
+}
+
+/* ============================================================================
+ * OPTIONAL
+ * ============================================================================ */
+
+.optional {
+  font-size: var(--font-size-10);
+  font-weight: var(--font-weight-normal);
+  color: var(--text-tertiary);
+  margin-left: var(--spacing-1);
+}
+
+/* ============================================================================
+ * DESCRIPTION - Subtle secondary text
+ * ============================================================================ */
+
+.description {
+  font-family: var(--font-secondary);
+  font-size: var(--font-size-12);
+  color: var(--text-tertiary);
+  line-height: 1.4;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.upcoming .description {
+  color: var(--text-tertiary);
+  opacity: 0.7;
+}
+
+/* ============================================================================
+ * ERROR MESSAGE
+ * ============================================================================ */
+
+.errorMessage {
+  color: var(--status-error);
+  font-size: var(--font-size-11);
+}
+
+/* ============================================================================
+ * CONNECTOR - Thin and elegant (1px)
+ * ============================================================================ */
+
+.connector {
+  flex: 1;
+  height: 1px;
+  background: var(--border-subtle);
+  transition: background var(--transition-fast);
+  min-width: 24px;
+}
+
+.connector.complete {
+  background: color-mix(in srgb, var(--status-success) 50%, transparent);
+}
+
+/* Horizontal connector */
+.horizontal .connector {
+  margin: 0;
+}
+
+.horizontal.sm .connector {
+  height: 1px;
+}
+.horizontal.md .connector {
+  height: 1px;
+}
+.horizontal.lg .connector {
+  height: 1px;
+}
+
+/* When labels are shown, position connector properly */
+.horizontal .label-bottom .connector {
+  position: absolute;
+  top: 50%;
+  left: 100%;
+  right: 0;
+  transform: translateY(-50%);
+  margin: 0;
+}
+
+/* Vertical connector */
+.vertical .connector {
+  width: 1px;
+  height: 20px;
+  margin: var(--spacing-2) 0;
+  margin-left: 9px;
+  flex: none;
+}
+
+.vertical.sm .connector {
+  margin-left: 9px;
+  height: 16px;
+}
+.vertical.md .connector {
+  margin-left: 11px;
+  height: 20px;
+}
+.vertical.lg .connector {
+  margin-left: 13px;
+  height: 24px;
+}
+
+/* ============================================================================
+ * VERTICAL ORIENTATION
+ * ============================================================================ */
+
+.vertical .list {
+  flex-direction: column;
+  gap: 0;
+}
+
+.vertical .item {
+  display: flex;
+  flex-direction: column;
+}
+
+.vertical .step {
+  flex-direction: row;
+  align-items: flex-start;
+  text-align: left;
+  gap: var(--spacing-3);
+}
+
+.vertical .content {
+  display: flex;
+  padding-top: 2px;
+}
+
+/* ============================================================================
+ * CLICKABLE - Subtle interaction
+ * ============================================================================ */
+
+.clickable {
+  cursor: pointer;
+}
+
+.clickable:hover .indicator {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
+.clickable:active .indicator {
+  transform: scale(0.98);
+}
+
+.clickable:focus-visible {
+  outline: none;
+}
+
+.clickable:focus-visible .indicator {
+  outline: 1.5px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* ============================================================================
+ * DISABLED
+ * ============================================================================ */
+
+.disabled {
+  opacity: 0.35;
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ============================================================================
+ * RESPONSIVE: TABLET AND UP (min-width: 640px)
+ * Show labels on larger screens
+ * ============================================================================ */
+
+@media (min-width: 640px) {
+  .horizontal .item {
+    max-width: 200px;
+  }
+
+  .horizontal .content {
+    display: flex;
+    margin-top: var(--spacing-3);
+  }
+
+  .horizontal .label-right .content {
+    margin-top: 0;
+    margin-left: var(--spacing-3);
+  }
+
+  /* Slightly larger indicators on desktop - still minimal */
+  .sm .indicator {
+    width: 22px;
+    height: 22px;
+    font-size: var(--font-size-11);
+  }
+
+  .md .indicator {
+    width: 26px;
+    height: 26px;
+    font-size: var(--font-size-12);
+  }
+
+  .lg .indicator {
+    width: 30px;
+    height: 30px;
+    font-size: var(--font-size-13);
+  }
+
+  /* Vertical spacing on desktop */
+  .vertical.sm .connector {
+    height: 20px;
+    margin-left: 10px;
+  }
+  .vertical.md .connector {
+    height: 24px;
+    margin-left: 12px;
+  }
+  .vertical.lg .connector {
+    height: 28px;
+    margin-left: 14px;
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVE: DESKTOP (min-width: 768px)
+ * ============================================================================ */
+
+@media (min-width: 768px) {
+  .horizontal .item {
+    max-width: none;
+  }
+
+  .title {
+    white-space: normal;
+    overflow: visible;
+  }
+
+  .description {
+    white-space: normal;
+    overflow: visible;
+  }
+}
+
+/* ============================================================================
+ * SCROLLABLE MODE
+ * Enables horizontal scrolling on mobile for better UX with many steps
+ * ============================================================================ */
+
+.scrollable .list {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none; /* Firefox */
+  scroll-behavior: smooth;
+  scroll-snap-type: x mandatory;
+  padding: var(--spacing-2) 0;
+  /* Override horizontal defaults for proper scrolling */
+  justify-content: flex-start;
+  flex-wrap: nowrap;
+}
+
+.scrollable .list::-webkit-scrollbar {
+  display: none; /* Chrome/Safari */
+}
+
+.scrollable .item {
+  flex: 0 0 auto;
+  min-width: 120px;
+  max-width: none;
+  scroll-snap-align: center;
+}
+
+.scrollable .item:last-child {
+  flex: 0 0 auto;
+  min-width: 120px;
+}
+
+/* In scrollable mode, always show labels */
+.scrollable .content {
+  display: flex;
+  margin-top: var(--spacing-2);
+}
+
+/* Scrollable connectors need proper sizing */
+.scrollable .connector {
+  min-width: 40px;
+  flex: 0 0 40px;
+}
+
+/* On tablet and up, scrollable items can be slightly larger */
+@media (min-width: 640px) {
+  .scrollable .item {
+    min-width: 140px;
+  }
+
+  .scrollable .item:last-child {
+    min-width: 140px;
+  }
+
+  .scrollable .content {
+    margin-top: var(--spacing-3);
+  }
+
+  .scrollable .connector {
+    min-width: 48px;
+    flex: 0 0 48px;
+  }
+}

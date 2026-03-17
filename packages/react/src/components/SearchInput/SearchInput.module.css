@@ -1,0 +1,319 @@
+/**
+ * SearchInput Component Styles
+ *
+ * Search input with icon, clear button, and optional search button.
+ * Implements WCAG 2.1 AA accessibility guidelines.
+ * Aligned with Field component styles.
+ */
+
+.container {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  transition: all var(--transition-fast);
+}
+
+/* Hover state */
+.container:hover:not(.disabled) {
+  border-color: var(--border-strong);
+}
+
+/* Focus state - visible for all focus methods */
+.container:focus-within {
+  border-color: var(--interactive-primary);
+}
+
+.fullWidth {
+  width: 100%;
+}
+
+/* Size variants - container */
+.sm {
+  height: 32px;
+  font-size: var(--font-size-sm);
+}
+
+.md {
+  height: 40px;
+  font-size: var(--font-size-base);
+}
+
+.lg {
+  height: 48px;
+  font-size: var(--font-size-lg);
+}
+
+.xl {
+  height: 56px;
+  font-size: var(--font-size-xl);
+}
+
+/* Size variants - input padding (flat classes for CSS Modules) */
+.inputSm {
+  padding: var(--spacing-1) var(--spacing-8) var(--spacing-1) var(--spacing-8);
+}
+
+.inputMd {
+  padding: var(--spacing-2) var(--spacing-10) var(--spacing-2) var(--spacing-10);
+}
+
+.inputLg {
+  padding: var(--spacing-3) var(--spacing-12) var(--spacing-3) var(--spacing-12);
+}
+
+.inputXl {
+  padding: var(--spacing-4) var(--spacing-14) var(--spacing-4) var(--spacing-14);
+}
+
+/* Search icon - base */
+.searchIcon {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-tertiary);
+  pointer-events: none;
+}
+
+/* Search icon - size variants (flat classes for CSS Modules) */
+.searchIconSm {
+  left: var(--spacing-2);
+}
+
+.searchIconMd {
+  left: var(--spacing-3);
+}
+
+.searchIconLg {
+  left: var(--spacing-4);
+}
+
+.searchIconXl {
+  left: var(--spacing-5);
+}
+
+/* Input */
+.input {
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  background: transparent;
+  border: none;
+  border-radius: inherit;
+  font-family: var(--font-secondary);
+  font-size: inherit;
+  color: var(--text-primary);
+  outline: none;
+}
+
+/* High-specificity rule to prevent global :focus-visible from overriding outline: none
+   Ensures SearchInput's focus indicator (container border-color) takes precedence over native input outline */
+.input:focus,
+.input:focus-visible {
+  outline: none;
+}
+
+.input::placeholder {
+  color: var(--text-tertiary);
+}
+
+/* Hide browser clear button */
+.input::-webkit-search-cancel-button,
+.input::-webkit-search-decoration {
+  display: none;
+  appearance: none;
+}
+
+/* Clear button — positioned absolutely to avoid layout shift */
+.clearButton {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-1);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--text-tertiary);
+  cursor: pointer;
+  transition:
+    color var(--duration-fast) var(--ease-out),
+    background-color var(--duration-fast) var(--ease-out);
+}
+
+.clearButton:hover {
+  color: var(--text-primary);
+  background: var(--surface-subtle);
+}
+
+.clearButton:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 1px;
+}
+
+/* Clear button - size variants (flat classes for CSS Modules) */
+.clearButtonSm {
+  right: var(--spacing-1);
+}
+
+.clearButtonMd {
+  right: var(--spacing-2);
+}
+
+.clearButtonLg {
+  right: var(--spacing-2);
+}
+
+.clearButtonXl {
+  right: var(--spacing-3);
+}
+
+/* Search button */
+.searchButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-2);
+  margin-right: var(--spacing-1);
+  background: var(--interactive-primary);
+  border: none;
+  border-radius: var(--radius-sm);
+  color: var(--interactive-primary-text);
+  cursor: pointer;
+  transition: background-color var(--duration-fast) var(--ease-out);
+}
+
+.searchButton:hover:not(:disabled) {
+  background: var(--interactive-primary-hover);
+}
+
+.searchButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.searchButton:focus-visible {
+  outline: 2px solid var(--interactive-primary);
+  outline-offset: 2px;
+}
+
+/* Disabled state */
+.disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  background: var(--surface-subtle);
+}
+
+.disabled .input {
+  cursor: not-allowed;
+}
+
+/* Loading state */
+.loading .searchIcon {
+  color: var(--interactive-primary);
+}
+
+.spinner {
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* ============================================================================
+ * CONTEXT: data-dark-bg="true" — Dark background contexts
+ * (e.g. Hero variant="background")
+ *
+ * Makes SearchInput visible on dark backgrounds without needing variants.
+ * Container, input border, and text automatically adapt for readability.
+ * ============================================================================ */
+
+:global([data-dark-bg="true"]) .container {
+  background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+  border-color: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+}
+
+:global([data-dark-bg="true"]) .container:hover:not(.disabled) {
+  border-color: color-mix(in srgb, var(--color-neutral-0) 60%, transparent);
+}
+
+:global([data-dark-bg="true"]) .container:focus-within {
+  border-color: var(--interactive-primary);
+  box-shadow: 0 0 0 3px var(--soft-brand);
+}
+
+:global([data-dark-bg="true"]) .input {
+  color: var(--color-neutral-0);
+}
+
+:global([data-dark-bg="true"]) .input::placeholder {
+  color: var(--color-neutral-300);
+}
+
+:global([data-dark-bg="true"]) .searchIcon {
+  color: var(--color-neutral-300);
+}
+
+/* ============================================================================
+ * HIGH CONTRAST MODE SUPPORT
+ * ============================================================================ */
+
+@media (forced-colors: active) {
+  .container {
+    border: 2px solid CanvasText;
+    background: Canvas;
+  }
+
+  .container:focus-within,
+  .container:has(.input:focus-visible) {
+    outline: 3px solid Highlight;
+    outline-offset: 2px;
+  }
+
+  .disabled {
+    border-color: GrayText;
+  }
+
+  .input {
+    color: CanvasText;
+  }
+
+  .searchIcon,
+  .clearButton {
+    color: CanvasText;
+  }
+
+  .searchButton {
+    background: Highlight;
+    color: HighlightText;
+  }
+}
+
+/* ============================================================================
+ * REDUCED MOTION
+ * ============================================================================ */
+
+@media (prefers-reduced-motion: reduce) {
+  .container {
+    transition: none;
+  }
+
+  .clearButton,
+  .searchButton {
+    transition: none;
+  }
+
+  .spinner {
+    animation: none;
+  }
+}

@@ -1,0 +1,93 @@
+/**
+ * Section Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+.section {
+  width: 100%;
+  position: relative;
+}
+
+/* ============================================================================
+ * SPACING VARIANTS
+ * ============================================================================ */
+
+.spacing-none {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+.spacing-sm {
+  padding-top: var(--spacing-8);
+  padding-bottom: var(--spacing-8);
+}
+
+.spacing-md {
+  padding-top: var(--spacing-16);
+  padding-bottom: var(--spacing-16);
+}
+
+.spacing-lg {
+  padding-top: var(--spacing-24);
+  padding-bottom: var(--spacing-24);
+}
+
+.spacing-xl {
+  padding-top: var(--spacing-32);
+  padding-bottom: var(--spacing-32);
+}
+
+/* ============================================================================
+ * BACKGROUND VARIANTS
+ * ============================================================================ */
+
+.bg-none {
+  background: transparent;
+}
+
+.bg-base {
+  background: var(--surface-base);
+}
+
+.bg-subtle {
+  background: var(--surface-subtle);
+}
+
+.bg-sunken {
+  background: var(--surface-sunken);
+}
+
+.bg-brand {
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+}
+
+/* ============================================================================
+ * BORDER MODIFIERS
+ * ============================================================================ */
+
+.borderTop {
+  border-top: 1px solid var(--border-subtle);
+}
+
+.borderBottom {
+  border-bottom: 1px solid var(--border-subtle);
+}
+
+/* ============================================================================
+ * RESPONSIVE ADJUSTMENTS
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .spacing-lg {
+    padding-top: var(--spacing-16);
+    padding-bottom: var(--spacing-16);
+  }
+
+  .spacing-xl {
+    padding-top: var(--spacing-24);
+    padding-bottom: var(--spacing-24);
+  }
+}
