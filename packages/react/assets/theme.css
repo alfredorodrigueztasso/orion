@@ -79,6 +79,24 @@
     --color-warning-500: #eab308;
     --color-info-500: #3b82f6;
 
+    /* ─── Status Color Scale (50, 100, 300, 700 stops) ─── */
+    --color-success-50: #f0fdf4;
+    --color-success-100: #dcfce7;
+    --color-success-300: #86efac;
+    --color-success-700: #15803d;
+    --color-error-50: #fef2f2;
+    --color-error-100: #fee2e2;
+    --color-error-300: #fca5a5;
+    --color-error-700: #b91c1c;
+    --color-warning-50: #fefce8;
+    --color-warning-100: #fef9c3;
+    --color-warning-300: #fde047;
+    --color-warning-700: #a16207;
+    --color-info-50: #eff6ff;
+    --color-info-100: #dbeafe;
+    --color-info-300: #93c5fd;
+    --color-info-700: #1d4ed8;
+
     /* ─── Typography ─── */
     --font-primary: 'Libre Baskerville', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     --font-secondary: 'dm sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
@@ -383,6 +401,20 @@
     /* ─── Feature Gradients ─── */
     --surface-brand-gradient: linear-gradient(135deg, var(--color-brand-soft) 0%, transparent 100%);
     --status-warning-bg: rgba(234, 179, 8, 0.1);
+
+    /* ─── Alert Tokens (high-contrast backgrounds + text) ─── */
+    --alert-success-bg:     var(--color-success-50);
+    --alert-success-text:   var(--color-success-700);
+    --alert-success-border: var(--color-success-300);
+    --alert-error-bg:       var(--color-error-50);
+    --alert-error-text:     var(--color-error-700);
+    --alert-error-border:   var(--color-error-300);
+    --alert-warning-bg:     var(--color-warning-50);
+    --alert-warning-text:   var(--color-warning-700);
+    --alert-warning-border: var(--color-warning-300);
+    --alert-info-bg:        var(--color-info-50);
+    --alert-info-text:      var(--color-info-700);
+    --alert-info-border:    var(--color-info-300);
 }
 
 
@@ -500,6 +532,20 @@
     /* ─── Feature Gradients ─── */
     --surface-brand-gradient: linear-gradient(135deg, var(--color-brand-soft) 0%, transparent 100%);
     --status-warning-bg: rgba(234, 179, 8, 0.15);
+
+    /* ─── Alert Tokens (dark mode) ─── */
+    --alert-success-bg:     color-mix(in srgb, var(--color-success-500) 20%, transparent);
+    --alert-success-text:   var(--color-success-300);
+    --alert-success-border: color-mix(in srgb, var(--color-success-500) 40%, transparent);
+    --alert-error-bg:       color-mix(in srgb, var(--color-error-500) 20%, transparent);
+    --alert-error-text:     var(--color-error-300);
+    --alert-error-border:   color-mix(in srgb, var(--color-error-500) 40%, transparent);
+    --alert-warning-bg:     color-mix(in srgb, var(--color-warning-500) 20%, transparent);
+    --alert-warning-text:   var(--color-warning-300);
+    --alert-warning-border: color-mix(in srgb, var(--color-warning-500) 40%, transparent);
+    --alert-info-bg:        color-mix(in srgb, var(--color-info-500) 20%, transparent);
+    --alert-info-text:      var(--color-info-300);
+    --alert-info-border:    color-mix(in srgb, var(--color-info-500) 40%, transparent);
 }
 
 

@@ -97,30 +97,30 @@
 
 /* Success variant */
 .success {
-  background: var(--soft-success);
-  border: 1px solid var(--status-success);
-  color: var(--status-success);
+  background: var(--alert-success-bg);
+  border: 1px solid var(--alert-success-border);
+  color: var(--alert-success-text);
 }
 
 /* Error variant */
 .error {
-  background: var(--soft-error);
-  border: 1px solid var(--status-error);
-  color: var(--status-error);
+  background: var(--alert-error-bg);
+  border: 1px solid var(--alert-error-border);
+  color: var(--alert-error-text);
 }
 
 /* Warning variant */
 .warning {
-  background: var(--soft-warning);
-  border: 1px solid var(--status-warning);
-  color: var(--status-warning);
+  background: var(--alert-warning-bg);
+  border: 1px solid var(--alert-warning-border);
+  color: var(--alert-warning-text);
 }
 
 /* Info variant */
 .info {
-  background: var(--soft-info);
-  border: 1px solid var(--status-info);
-  color: var(--status-info);
+  background: var(--alert-info-bg);
+  border: 1px solid var(--alert-info-border);
+  color: var(--alert-info-text);
 }
 
 /* Inverse variant — for dark/colored backgrounds (theme-invariant) */
