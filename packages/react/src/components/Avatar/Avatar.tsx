@@ -14,9 +14,9 @@
  * ```
  */
 
-import React, { useState } from "react";
+import React, { useState, useMemo } from "react";
 import { User } from "lucide-react";
-import type { AvatarProps } from "./Avatar.types";
+import type { AvatarProps, AvatarColor } from "./Avatar.types";
 import styles from "./Avatar.module.css";
 
 // Map size prop to CSS class names
@@ -33,6 +33,37 @@ const sizeClassMap: Record<string, string> = {
   profile: "profile",
 };
 
+// Available colors for auto-derivation
+const AVATAR_COLORS: AvatarColor[] = [
+  "blue",
+  "green",
+  "purple",
+  "orange",
+  "red",
+  "teal",
+  "pink",
+];
+
+/**
+ * Derive a deterministic color from a string using a simple hash
+ * Same input always produces the same color
+ */
+const getColorFromString = (str: string): AvatarColor => {
+  if (!str) return "blue"; // default fallback
+
+  // Simple hash function
+  let hash = 0;
+  for (let i = 0; i < str.length; i++) {
+    const char = str.charCodeAt(i);
+    hash = (hash << 5) - hash + char;
+    hash = hash & hash; // Convert to 32-bit integer
+  }
+
+  // Use absolute value to index into colors array
+  const index = Math.abs(hash) % AVATAR_COLORS.length;
+  return AVATAR_COLORS[index]!;
+};
+
 export const Avatar: React.FC<AvatarProps> = ({
   src,
   alt = "",
@@ -41,6 +72,7 @@ export const Avatar: React.FC<AvatarProps> = ({
   size = "md",
   status,
   interactive = false,
+  color,
   className,
   ...rest
 }) => {
@@ -48,9 +80,17 @@ export const Avatar: React.FC<AvatarProps> = ({
 
   const sizeClass = sizeClassMap[size] || size;
 
+  // Derive color from initials if not provided
+  const resolvedColor = useMemo((): AvatarColor => {
+    if (color) return color;
+    if (initials) return getColorFromString(initials);
+    return "blue"; // default fallback
+  }, [color, initials]);
+
   const classNames = [
     styles.avatar,
     styles[sizeClass],
+    styles[resolvedColor],
     interactive && styles.interactive,
     className,
   ]

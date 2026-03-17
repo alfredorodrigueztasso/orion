@@ -22,12 +22,32 @@ export type AvatarSize =
   | "profile";
 
 /**
+ * Avatar colors
+ */
+export type AvatarColor =
+  | "blue"
+  | "green"
+  | "purple"
+  | "orange"
+  | "red"
+  | "teal"
+  | "pink";
+
+/**
  * Avatar component props
  *
  * @example
  * ```tsx
+ * // With image
  * <Avatar src="/user.jpg" alt="John Doe" />
+ *
+ * // With initials and explicit color
+ * <Avatar initials="JD" color="blue" />
+ *
+ * // With initials and auto-derived color (deterministic from initials)
  * <Avatar initials="JD" />
+ *
+ * // With icon
  * <Avatar icon={<UserIcon />} />
  * ```
  */
@@ -57,6 +77,13 @@ export interface AvatarProps extends HTMLAttributes<HTMLDivElement> {
    * @default 'md'
    */
   size?: AvatarSize;
+
+  /**
+   * Avatar background color
+   * When not provided, auto-derived from initials using a deterministic hash
+   * (same initials always get the same color)
+   */
+  color?: AvatarColor;
 
   /**
    * Show online status indicator

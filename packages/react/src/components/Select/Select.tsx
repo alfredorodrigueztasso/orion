@@ -1,5 +1,3 @@
-"use client";
-
 /**
  * Select Component
  *
@@ -7,6 +5,7 @@
  *
  * @example
  * ```tsx
+ * // Using options prop
  * <Select
  *   label="Country"
  *   options={[
@@ -17,6 +16,13 @@
  *   placeholder="Select a country"
  * />
  *
+ * // Using compound component (Select.Option)
+ * <Select label="Who paid?">
+ *   <Select.Option value="me">Me</Select.Option>
+ *   <Select.Option value="partner">Partner</Select.Option>
+ * </Select>
+ *
+ * // Using native <option> children
  * <Select label="Status" error="Please select a status">
  *   <option value="">Choose status</option>
  *   <option value="active">Active</option>
@@ -26,10 +32,31 @@
  */
 
 import { forwardRef } from "react";
-import type { SelectProps } from "./Select.types";
+import type { SelectProps, SelectOptionProps } from "./Select.types";
 import styles from "./Select.module.css";
 
-export const Select = forwardRef<HTMLSelectElement, SelectProps>(
+/**
+ * SelectOption component - used as Select.Option for compound component pattern
+ *
+ * @example
+ * ```tsx
+ * <Select>
+ *   <Select.Option value="us">United States</Select.Option>
+ *   <Select.Option value="uk">United Kingdom</Select.Option>
+ * </Select>
+ * ```
+ */
+const SelectOption = forwardRef<HTMLOptionElement, SelectOptionProps>(
+  ({ value, disabled, children, ...rest }, ref) => (
+    <option ref={ref} value={value} disabled={disabled} {...rest}>
+      {children}
+    </option>
+  ),
+);
+
+SelectOption.displayName = "Select.Option";
+
+const SelectComponent = forwardRef<HTMLSelectElement, SelectProps>(
   (
     {
       label,
@@ -113,7 +140,7 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
               </option>
             ))}
 
-            {/* Custom children */}
+            {/* Custom children (including Select.Option components) */}
             {children}
           </select>
         </div>
@@ -143,4 +170,10 @@ export const Select = forwardRef<HTMLSelectElement, SelectProps>(
   },
 );
 
-Select.displayName = "Select";
+SelectComponent.displayName = "Select";
+
+// Attach SelectOption as static property
+export const Select = SelectComponent as typeof SelectComponent & {
+  Option: typeof SelectOption;
+};
+Select.Option = SelectOption;

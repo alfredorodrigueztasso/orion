@@ -48,6 +48,12 @@ export interface Toast {
   variant?: ToastVariant;
 
   /**
+   * Alias for `variant` - familiar for devs from other libraries (MUI, Chakra, etc.)
+   * @deprecated Use `variant` instead
+   */
+  type?: ToastVariant;
+
+  /**
    * Duration in milliseconds before auto-dismiss (0 = no auto-dismiss)
    * @default 5000
    */

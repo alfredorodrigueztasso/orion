@@ -243,12 +243,19 @@ export const ToastProvider = ({
   const addToast = useCallback(
     (options: ToastOptions): string => {
       const id = generateId();
+
+      // Handle both 'variant' and 'type' (alias for backward compatibility)
+      const { type, ...optionsWithoutType } = options as ToastOptions & {
+        type?: string;
+      };
+      const variant = optionsWithoutType.variant || type || "info";
+
       const newToast: Toast = {
         id,
         duration: defaultDuration,
         dismissible: true,
-        variant: "info",
-        ...options,
+        variant: variant as any,
+        ...optionsWithoutType,
       };
 
       setToasts((prev) => {

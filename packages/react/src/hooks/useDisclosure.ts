@@ -5,7 +5,11 @@
  *
  * @example
  * ```tsx
+ * // Orion convention (preferred)
  * const { isOpen, open, close, toggle } = useDisclosure();
+ *
+ * // MUI/Chakra/Radix convention (also works)
+ * const { isOpen, onOpen, onClose, toggle } = useDisclosure();
  *
  * return (
  *   <>
@@ -64,6 +68,16 @@ export interface UseDisclosureReturn {
    * Close the disclosure
    */
   close: () => void;
+
+  /**
+   * Alias for `open` - familiar for devs from MUI/Chakra/Radix
+   */
+  onOpen: () => void;
+
+  /**
+   * Alias for `close` - familiar for devs from MUI/Chakra/Radix
+   */
+  onClose: () => void;
 
   /**
    * Toggle the disclosure
@@ -131,6 +145,8 @@ export function useDisclosure(
     isOpen,
     open,
     close,
+    onOpen: open, // alias for MUI/Chakra/Radix convention
+    onClose: close, // alias for MUI/Chakra/Radix convention
     toggle,
     setIsOpen: handleSetIsOpen,
   };

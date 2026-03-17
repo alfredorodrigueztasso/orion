@@ -155,6 +155,16 @@ export type {
   StepperSize,
 } from "./components/Stepper";
 
+export { Stack } from "./components/Stack";
+export type {
+  StackProps,
+  StackGap,
+  StackDirection,
+  StackAlign,
+  StackJustify,
+  StackWrap,
+} from "./components/Stack";
+
 // Data Display
 export { Card } from "./components/Card";
 export type {

@@ -7,11 +7,31 @@
 import type { SelectHTMLAttributes, ReactNode } from "react";
 
 /**
- * Select option type
+ * Select option type (for options prop)
  */
 export interface SelectOption {
   value: string;
   label: string;
+  disabled?: boolean;
+}
+
+/**
+ * Select.Option component props (for compound component usage)
+ */
+export interface SelectOptionProps extends React.OptionHTMLAttributes<HTMLOptionElement> {
+  /**
+   * Option value
+   */
+  value: string;
+
+  /**
+   * Option label (displayed text)
+   */
+  children?: React.ReactNode;
+
+  /**
+   * Disabled state
+   */
   disabled?: boolean;
 }
 
