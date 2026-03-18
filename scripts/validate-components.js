@@ -563,6 +563,7 @@ function main() {
   testCSSVariables();
   testNoHardcodedFonts();
   testNoAnyType();
+  testNoFakeVars();
   testNoHardcodedRgba();
   testNoHardcodedZIndex();
   testNoHardcodedTransitions();
@@ -575,3 +576,64 @@ function main() {
 }
 
 main();
+
+// ============================================================================
+// FAKE_VARS Test — Detect non-existent CSS variables that LLMs commonly invent
+// ============================================================================
+
+function testNoFakeVars() {
+  const FAKE_VARS = require('../shared/fake-vars.json');
+  const fakeVarPattern = new RegExp(`var\\((${Object.keys(FAKE_VARS).map(v => v.replace(/--/g, '\\-\\-')).join('|')})\\)`, 'g');
+  
+  let testsPassed = 0;
+  let testsFailed = 0;
+  const failedVars = [];
+
+  // Check all component CSS files
+  const componentDirs = getComponentDirs().filter(d => {
+    const fullPath = path.join(COMPONENTS_PATH, d);
+    return fs.statSync(fullPath).isDirectory();
+  });
+
+  for (const componentDir of componentDirs) {
+    const cssFile = path.join(COMPONENTS_PATH, componentDir, `${componentDir}.module.css`);
+    if (!fs.existsSync(cssFile)) continue;
+
+    const cssContent = fs.readFileSync(cssFile, 'utf-8');
+    const matches = cssContent.match(fakeVarPattern);
+    
+    if (matches) {
+      matches.forEach(match => {
+        const varName = match.match(/var\((.*?)\)/)[1];
+        const varInfo = FAKE_VARS[varName];
+        testsFailed++;
+        failedVars.push({
+          component: componentDir,
+          variable: varName,
+          alternative: varInfo.alternative,
+          reason: varInfo.reason
+        });
+      });
+    } else {
+      testsPassed++;
+    }
+  }
+
+  if (failedVars.length > 0) {
+    console.log('\n❌ FAKE_VARS DETECTED:');
+    console.log('───────────────────────────────────────────────────');
+    failedVars.forEach(item => {
+      console.log(`  ${item.component}: ${item.variable}`);
+      console.log(`    → Use: ${item.alternative}`);
+      console.log(`    ℹ  ${item.reason}\n`);
+    });
+  }
+
+  return {
+    name: 'testNoFakeVars',
+    passed: testsPassed,
+    failed: testsFailed,
+    status: testsFailed === 0 ? '✅' : '❌'
+  };
+}
+

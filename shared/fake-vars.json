@@ -1,0 +1,142 @@
+{
+  "--font-sans": {
+    "description": "Non-existent: body text font",
+    "alternative": "var(--font-secondary)",
+    "reason": "Orion uses semantic font families, not generic names"
+  },
+  "--font-body": {
+    "description": "Non-existent: body text font",
+    "alternative": "var(--font-secondary)",
+    "reason": "Use semantic name instead"
+  },
+  "--color-primary": {
+    "description": "Non-existent: primary color",
+    "alternative": "var(--interactive-primary)",
+    "reason": "Use semantic token for interactive elements"
+  },
+  "--color-accent": {
+    "description": "Non-existent: accent color",
+    "alternative": "var(--text-brand)",
+    "reason": "Use semantic token matching your context"
+  },
+  "--bg-primary": {
+    "description": "Non-existent: primary background",
+    "alternative": "var(--surface-base)",
+    "reason": "Use surface token for backgrounds"
+  },
+  "--bg-secondary": {
+    "description": "Non-existent: secondary background",
+    "alternative": "var(--surface-subtle)",
+    "reason": "Use surface token for backgrounds"
+  },
+  "--text-muted": {
+    "description": "Non-existent: muted text color",
+    "alternative": "var(--text-tertiary)",
+    "reason": "Use semantic text color token"
+  },
+  "--border-radius": {
+    "description": "Non-existent: border radius",
+    "alternative": "var(--radius-control)",
+    "reason": "Use semantic radius token"
+  },
+  "--shadow-default": {
+    "description": "Non-existent: default shadow",
+    "alternative": "var(--shadow-md)",
+    "reason": "Use semantic shadow token"
+  },
+  "--transition-default": {
+    "description": "Non-existent: default transition",
+    "alternative": "transition: 150ms ease-in-out",
+    "reason": "Use inline transition property with standard timing"
+  },
+  "--padding-base": {
+    "description": "Non-existent: base padding",
+    "alternative": "var(--spacing-4)",
+    "reason": "Use spacing token"
+  },
+  "--blue-500": {
+    "description": "Non-existent: specific blue shade",
+    "alternative": "var(--color-brand-orion)",
+    "reason": "Use brand-aware color token"
+  },
+  "--gray-100": {
+    "description": "Non-existent: gray color",
+    "alternative": "var(--surface-subtle)",
+    "reason": "Use semantic surface token"
+  },
+  "--accent": {
+    "description": "Non-existent: accent color",
+    "alternative": "var(--interactive-primary)",
+    "reason": "Use semantic interactive token"
+  },
+  "--font-weight-bold": {
+    "description": "Non-existent: bold font weight variable",
+    "alternative": "font-weight: 600",
+    "reason": "Use numeric font-weight, not CSS variable"
+  },
+  "--hover-bg": {
+    "description": "Non-existent: hover background",
+    "alternative": "var(--surface-layer)",
+    "reason": "Use surface token, apply in :hover pseudo-class"
+  },
+  "--primary": {
+    "description": "Non-existent: primary token (ambiguous)",
+    "alternative": "var(--interactive-primary) or var(--text-brand)",
+    "reason": "Be specific: interactive or text context?"
+  },
+  "--secondary": {
+    "description": "Non-existent: secondary token (ambiguous)",
+    "alternative": "var(--interactive-secondary) or var(--text-secondary)",
+    "reason": "Be specific: interactive or text context?"
+  },
+  "--gradient-primary": {
+    "description": "Non-existent: primary gradient",
+    "alternative": "linear-gradient(135deg, var(--color-brand-400), var(--color-brand-600))",
+    "reason": "Use color tokens in gradient, not a gradient variable"
+  },
+  "--brand-accent-vivid": {
+    "description": "Non-existent: vivid brand accent",
+    "alternative": "var(--color-brand-500)",
+    "reason": "Use primitive color token"
+  },
+  "--error-bg": {
+    "description": "Non-existent: error background",
+    "alternative": "var(--color-error-50)",
+    "reason": "Use primitive error color token"
+  },
+  "--success-bg": {
+    "description": "Non-existent: success background",
+    "alternative": "var(--color-success-50)",
+    "reason": "Use primitive success color token"
+  },
+  "--warning-bg": {
+    "description": "Non-existent: warning background",
+    "alternative": "var(--color-warning-50)",
+    "reason": "Use primitive warning color token"
+  },
+  "--info-bg": {
+    "description": "Non-existent: info background",
+    "alternative": "var(--color-info-50)",
+    "reason": "Use primitive info color token"
+  },
+  "--danger-color": {
+    "description": "Non-existent: danger color",
+    "alternative": "var(--color-error-500)",
+    "reason": "Use semantic error color token"
+  },
+  "--spacing-lg": {
+    "description": "Non-existent: large spacing (ambiguous size)",
+    "alternative": "var(--spacing-8) or var(--spacing-12) or var(--spacing-16)",
+    "reason": "Be specific: which size do you need?"
+  },
+  "--radius-lg": {
+    "description": "Non-existent: large radius",
+    "alternative": "var(--radius-container)",
+    "reason": "Use semantic radius token"
+  },
+  "--focus-outline": {
+    "description": "Non-existent: focus outline",
+    "alternative": "outline: 2px solid var(--interactive-primary)",
+    "reason": "Define outline directly with semantic color"
+  }
+}
