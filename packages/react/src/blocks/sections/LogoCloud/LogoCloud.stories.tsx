@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { LogoCloud } from "./LogoCloud";
 
 const meta = {
-  title: "Blocks/Sections/LogoCloud",
+  title: "Sections/Marketing/LogoCloud",
   component: LogoCloud,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

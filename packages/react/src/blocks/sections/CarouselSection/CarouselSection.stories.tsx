@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CarouselSection } from "./CarouselSection";
 
 const meta = {
-  title: "Blocks/Sections/CarouselSection",
+  title: "Sections/Marketing/CarouselSection",
   component: CarouselSection,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

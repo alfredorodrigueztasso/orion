@@ -3,7 +3,7 @@ import { Button } from "@/components/Button";
 import { Pricing } from "./Pricing";
 
 const meta = {
-  title: "Blocks/Sections/Pricing",
+  title: "Sections/Marketing/Pricing",
   component: Pricing,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

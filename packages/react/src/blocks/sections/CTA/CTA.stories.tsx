@@ -3,7 +3,7 @@ import { Button } from "@/components/Button";
 import { CTA } from "./CTA";
 
 const meta = {
-  title: "Blocks/Sections/CTA",
+  title: "Sections/Marketing/CTA",
   component: CTA,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

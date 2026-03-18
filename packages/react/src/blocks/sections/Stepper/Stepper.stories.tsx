@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Stepper } from "./Stepper";
 
 const meta = {
-  title: "Blocks/Sections/Stepper",
+  title: "Sections/Marketing/Stepper",
   component: Stepper,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Gallery } from "./Gallery";
 
 const meta = {
-  title: "Blocks/Sections/Gallery",
+  title: "Sections/Marketing/Gallery",
   component: Gallery,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { CollapsibleFolder } from "./CollapsibleFolder";
 
 const meta = {
-  title: "Components/CollapsibleFolder",
+  title: "Components/Layout/CollapsibleFolder",
   component: CollapsibleFolder,
   parameters: {
     layout: "centered",

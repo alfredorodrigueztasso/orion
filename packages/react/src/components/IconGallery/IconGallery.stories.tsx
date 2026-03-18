@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { IconGallery } from "./IconGallery";
 
 const meta: Meta<typeof IconGallery> = {
-  title: "Documentation/Icon Browser",
+  title: "Icons/Icon Browser",
   component: IconGallery,
   parameters: {
     layout: "fullscreen",

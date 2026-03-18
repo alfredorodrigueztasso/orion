@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SettingsLayout } from "./SettingsLayout";
 
 const meta = {
-  title: "Blocks/Sections/SettingsLayout",
+  title: "Sections/Marketing/SettingsLayout",
   component: SettingsLayout,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

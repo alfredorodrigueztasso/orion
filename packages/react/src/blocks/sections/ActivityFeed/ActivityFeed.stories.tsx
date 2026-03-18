@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ActivityFeed } from "./ActivityFeed";
 
 const meta = {
-  title: "Blocks/Sections/ActivityFeed",
+  title: "Sections/Marketing/ActivityFeed",
   component: ActivityFeed,
   parameters: {
     layout: "fullscreen",

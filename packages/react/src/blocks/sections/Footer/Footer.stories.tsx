@@ -3,7 +3,7 @@ import { Github, Twitter } from "lucide-react";
 import { Footer } from "./Footer";
 
 const meta = {
-  title: "Blocks/Sections/Footer",
+  title: "Sections/Marketing/Footer",
   component: Footer,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

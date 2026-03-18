@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Timeline } from "./Timeline";
 
 const meta = {
-  title: "Blocks/Sections/Timeline",
+  title: "Sections/Marketing/Timeline",
   component: Timeline,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

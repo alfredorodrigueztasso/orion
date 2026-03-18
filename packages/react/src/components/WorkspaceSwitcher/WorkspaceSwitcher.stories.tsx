@@ -3,7 +3,7 @@ import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
 import type { CurrentWorkspaceOrg, WorkspaceOrg } from "./WorkspaceSwitcher.types";
 
 const meta = {
-  title: "Components/WorkspaceSwitcher",
+  title: "Components/Navigation/WorkspaceSwitcher",
   component: WorkspaceSwitcher,
   parameters: {
     layout: "centered",

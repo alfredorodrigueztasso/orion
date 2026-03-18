@@ -3,7 +3,7 @@ import { Button } from "@/components/Button";
 import { Hero } from "./Hero";
 
 const meta = {
-  title: "Blocks/Sections/Hero",
+  title: "Sections/Marketing/Hero",
   component: Hero,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

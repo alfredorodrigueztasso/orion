@@ -3,7 +3,7 @@ import { Zap, Users, Target } from "lucide-react";
 import { Stats } from "./Stats";
 
 const meta = {
-  title: "Blocks/Sections/Stats",
+  title: "Sections/Marketing/Stats",
   component: Stats,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

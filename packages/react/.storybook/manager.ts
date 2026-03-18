@@ -4,10 +4,10 @@ addons.setConfig({
   sidebar: {
     order: [
       "Getting Started",
+      "Icons",
       "Components",
       "Sections",
       "Templates",
-      "Documentation",
     ],
   },
 });

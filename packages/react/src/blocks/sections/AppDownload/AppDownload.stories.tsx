@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { AppDownload } from "./AppDownload";
 
 const meta = {
-  title: "Blocks/Sections/AppDownload",
+  title: "Sections/Marketing/AppDownload",
   component: AppDownload,
   parameters: {
     layout: "fullscreen",

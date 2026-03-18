@@ -3,7 +3,7 @@ import { Zap, Package, Layers, Palette } from "lucide-react";
 import { Features } from "./Features";
 
 const meta = {
-  title: "Blocks/Sections/Features",
+  title: "Sections/Marketing/Features",
   component: Features,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

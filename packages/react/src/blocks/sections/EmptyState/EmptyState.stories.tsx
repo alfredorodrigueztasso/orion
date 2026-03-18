@@ -4,7 +4,7 @@ import { Button } from "@/components/Button";
 import { EmptyState } from "./EmptyState";
 
 const meta = {
-  title: "Blocks/Sections/EmptyState",
+  title: "Sections/Marketing/EmptyState",
   component: EmptyState,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

@@ -11,7 +11,7 @@ Orion supports multiple brands and themes through CSS variables. Switch between 
 
 <CardGrid columns={3}>
   <FeatureCard icon={<BrandSwatch color="#1B5BFF" name="Orion Blue" />} title="Orion (default)">
-    Libre Baskerville + Inter. Pill buttons. The flagship brand with a bold blue accent.
+    Libre Baskerville + DM Sans. Pill buttons. The flagship brand with a bold blue accent.
   </FeatureCard>
   <FeatureCard icon={<BrandSwatch color="#006FBA" name="Deep Blue" />} title="Deepblue">
     Work Sans. Rounded buttons (12px radius). A corporate, professional feel.
@@ -78,6 +78,7 @@ function BrandSwitcher() {
       <button onClick={() => setBrand('red')}>Red Brand</button>
       <button onClick={() => setBrand('deepblue')}>Deepblue Brand</button>
       <button onClick={() => setBrand('orange')}>Orange Brand</button>
+      <button onClick={() => setBrand('ember')}>Ember Brand</button>
       <button onClick={() => setBrand('lemon')}>Lemon Brand</button>
     </div>
   );

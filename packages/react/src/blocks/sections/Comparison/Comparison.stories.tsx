@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { Comparison } from "./Comparison";
 
 const meta = {
-  title: "Blocks/Sections/Comparison",
+  title: "Sections/Marketing/Comparison",
   component: Comparison,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

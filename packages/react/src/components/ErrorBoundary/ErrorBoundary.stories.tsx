@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ErrorBoundary } from "./ErrorBoundary";
 
 const meta = {
-  title: "Components/ErrorBoundary",
+  title: "Components/Utilities/ErrorBoundary",
   component: ErrorBoundary,
   parameters: {
     layout: "centered",

@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { ChatSection as Chat } from "./Chat";
 
 const meta = {
-  title: "Blocks/Sections/Chat",
+  title: "Sections/Marketing/Chat",
   component: Chat,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],

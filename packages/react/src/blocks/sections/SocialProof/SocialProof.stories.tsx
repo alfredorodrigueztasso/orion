@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from "@storybook/react";
 import { SocialProof } from "./SocialProof";
 
 const meta = {
-  title: "Blocks/Sections/SocialProof",
+  title: "Sections/Marketing/SocialProof",
   component: SocialProof,
   parameters: { layout: "fullscreen" },
   tags: ["autodocs"],
