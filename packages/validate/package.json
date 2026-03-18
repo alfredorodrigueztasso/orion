@@ -1,0 +1,43 @@
+{
+  "name": "@orion-ds/validate",
+  "version": "1.0.0",
+  "description": "Validate code against Orion Design System rules — catches hardcoded values, wrong props, and anti-patterns",
+  "type": "module",
+  "bin": {
+    "orion-validate": "./dist/cli.js"
+  },
+  "main": "dist/validator.js",
+  "types": "dist/validator.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/validator.d.ts",
+      "import": "./dist/validator.js"
+    }
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "orion",
+    "design-system",
+    "validator",
+    "lint",
+    "ai-first",
+    "css-variables"
+  ],
+  "license": "MIT",
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

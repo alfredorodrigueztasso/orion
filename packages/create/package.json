@@ -1,0 +1,38 @@
+{
+  "name": "@orion-ds/create",
+  "version": "1.0.0",
+  "description": "Create a new project with Orion Design System — zero configuration",
+  "type": "module",
+  "bin": {
+    "create-orion": "./dist/index.js",
+    "@orion-ds/create": "./dist/index.js"
+  },
+  "files": [
+    "dist",
+    "templates",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "create",
+    "scaffolding",
+    "orion",
+    "design-system",
+    "react",
+    "vite"
+  ],
+  "license": "MIT",
+  "dependencies": {},
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

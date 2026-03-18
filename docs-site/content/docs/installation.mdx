@@ -1,0 +1,179 @@
+# Installation
+
+Complete setup guide for Orion Design System across different frameworks and environments.
+
+## Prerequisites
+
+- Node.js 18+ or higher
+- npm, pnpm, yarn, or bun package manager
+- React 19+ (for `@orion-ds/react`)
+
+## Step 1: Install the Package
+
+Choose your preferred package manager:
+
+<PackageManagerTabs packageName="@orion-ds/react" />
+
+## Step 2: Import Styles
+
+Add the CSS import to your root layout or app component. This single import includes all tokens, component styles, and theme support:
+
+```tsx
+import '@orion-ds/react/styles.css';
+```
+
+**Note:** This replaces any separate imports of `theme.css` or component styles. Use this one import for everything.
+
+## Step 3: Wrap with ThemeProvider
+
+The `ThemeProvider` enables theme switching, brand management, and global style control. Wrap your entire app at the root level:
+
+### React (Vite, Create React App)
+
+```tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+import App from './App';
+
+export default function Root() {
+  return (
+    <ThemeProvider>
+      <App />
+    </ThemeProvider>
+  );
+}
+```
+
+### Next.js (App Router)
+
+```tsx
+// app/layout.tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+
+export default function RootLayout({
+  children,
+}: {
+  children: React.ReactNode;
+}) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+Key points:
+- Use `@orion-ds/react/client` entry point (SSR-safe)
+- Add `suppressHydrationWarning` to `<html>` for Next.js
+- Fonts load automatically — no Google Fonts setup needed
+
+### Next.js (Pages Router)
+
+```tsx
+// pages/_app.tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+import type { AppProps } from 'next/app';
+
+export default function App({ Component, pageProps }: AppProps) {
+  return (
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
+```
+
+### Remix
+
+```tsx
+// root.tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Outlet />
+    </ThemeProvider>
+  );
+}
+```
+
+## Step 4: Use Components
+
+Start using Orion components:
+
+```tsx
+import { Button, Card, Badge } from '@orion-ds/react';
+
+export default function MyPage() {
+  return (
+    <Card>
+      <Card.Header>
+        <h1>Welcome</h1>
+      </Card.Header>
+      <Card.Body>
+        <p>You're ready to build with Orion!</p>
+        <Button variant="primary">Get Started</Button>
+      </Card.Body>
+    </Card>
+  );
+}
+```
+
+## Using the CLI (Alternative)
+
+For faster component installation, use the Orion CLI:
+
+```bash
+# Initialize your project
+npx @orion-ds/cli init
+
+# Add specific components
+npx @orion-ds/cli add button card modal
+
+# Add multiple at once
+npx @orion-ds/cli add button card badge alert button-group
+```
+
+Components are copied directly into your project with zero dependencies. Learn more in [CLI Documentation](/docs/cli).
+
+## Troubleshooting
+
+### Styles not applying
+
+- Verify `import '@orion-ds/react/styles.css'` is in your root layout
+- Check that `<ThemeProvider>` wraps your entire app
+- Ensure `suppressHydrationWarning` is on `<html>` in Next.js
+
+### TypeScript errors
+
+- Update `@orion-ds/react` to the latest version
+- Run `npm install` to ensure all type definitions are installed
+- Check `tsconfig.json` has `"moduleResolution": "bundler"`
+
+### Fonts not loading
+
+- Fonts load automatically via `ThemeProvider`
+- If fonts don't appear, check network tab in DevTools
+- Fallback system fonts will display if Google Fonts CDN is unavailable
+
+### Build errors in Next.js
+
+- For App Router, use `@orion-ds/react/client` entry point (not main)
+- For Pages Router, use the main entry point
+- Ensure `suppressHydrationWarning` is set on `<html>` tag
+
+## Next Steps
+
+- [Getting Started](/docs/getting-started) — Overview and core concepts
+- [Theming](/docs/theming) — Brands, colors, and dark mode
+- [Components](/components) — Browse all 69+ components
+- [CLI](/docs/cli) — Copy components into your project

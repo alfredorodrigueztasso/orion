@@ -107,7 +107,7 @@
 .value {
   font-family: var(--font-secondary);
   font-size: clamp(1.5rem, 2vw, 1.75rem);
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   color: var(--text-primary);
   line-height: 1;
   letter-spacing: -0.02em;

@@ -1,0 +1,361 @@
+{
+    "name": "Orion Component Manifest",
+    "version": "1.0.0",
+    "description": "Machine-readable component definitions for AI agents",
+    "components": {
+        "button": {
+            "description": "Primary interactive element for actions",
+            "variants": [
+                "primary",
+                "secondary",
+                "ghost"
+            ],
+            "sizes": [
+                "sm",
+                "md",
+                "lg"
+            ],
+            "tokens": [
+                "interactive-primary",
+                "interactive-primary-hover",
+                "interactive-primary-text",
+                "interactive-secondary",
+                "radius-control"
+            ],
+            "html": "<button class=\"btn btn-{variant} btn-{size}\">{content}</button>",
+            "modifiers": {
+                "disabled": "disabled",
+                "icon-only": "btn-icon"
+            }
+        },
+        "badge": {
+            "description": "Status indicator or label",
+            "variants": [
+                "default",
+                "primary",
+                "success",
+                "warning",
+                "error",
+                "outline",
+                "subtle"
+            ],
+            "tokens": [
+                "surface-brand-soft",
+                "text-brand",
+                "status-success",
+                "status-warning",
+                "status-error"
+            ],
+            "html": "<span class=\"badge badge-{variant}\">{content}</span>"
+        },
+        "field": {
+            "description": "Text input wrapper with label and error state",
+            "variants": [
+                "default",
+                "error",
+                "success"
+            ],
+            "tokens": [
+                "surface-base",
+                "border-subtle",
+                "border-interactive",
+                "text-primary",
+                "text-secondary",
+                "radius-control"
+            ],
+            "html": "<div class=\"field\"><label class=\"field-label\">{label}</label><input class=\"field-input\" type=\"{type}\" placeholder=\"{placeholder}\"></div>",
+            "modifiers": {
+                "error": "is-error",
+                "success": "is-success"
+            }
+        },
+        "select": {
+            "description": "Dropdown selection input",
+            "tokens": [
+                "surface-base",
+                "border-subtle",
+                "text-primary",
+                "radius-control"
+            ],
+            "html": "<div class=\"select-wrapper\"><select class=\"select\">{options}</select><i data-lucide=\"chevron-down\" class=\"icon select-icon\"></i></div>"
+        },
+        "switch": {
+            "description": "Toggle switch for boolean settings",
+            "tokens": [
+                "interactive-primary",
+                "surface-layer",
+                "radius-full"
+            ],
+            "html": "<label class=\"switch\"><input type=\"checkbox\" class=\"switch-input\"><span class=\"switch-track\"><span class=\"switch-thumb\"></span></span><span class=\"switch-label\">{label}</span></label>"
+        },
+        "checkbox": {
+            "description": "Checkbox input for multiple selections",
+            "tokens": [
+                "interactive-primary",
+                "border-subtle",
+                "radius-sm"
+            ],
+            "html": "<label class=\"checkbox\"><input type=\"checkbox\" class=\"checkbox-input\"><span class=\"checkbox-label\">{label}</span></label>"
+        },
+        "radio": {
+            "description": "Radio button for single selection",
+            "tokens": [
+                "interactive-primary",
+                "border-subtle"
+            ],
+            "html": "<label class=\"radio\"><input type=\"radio\" name=\"{group}\" class=\"radio-input\"><span class=\"radio-label\">{label}</span></label>"
+        },
+        "avatar": {
+            "description": "User profile image or initials",
+            "sizes": [
+                "sm",
+                "md",
+                "lg",
+                "xl"
+            ],
+            "tokens": [
+                "surface-layer",
+                "text-secondary",
+                "radius-full"
+            ],
+            "html": "<span class=\"avatar avatar-{size}\">{initials}</span>"
+        },
+        "card": {
+            "description": "Container for grouped content",
+            "variants": [
+                "default",
+                "visual",
+                "interactive"
+            ],
+            "tokens": [
+                "surface-base",
+                "surface-subtle",
+                "border-subtle",
+                "radius-container",
+                "shadow-md"
+            ],
+            "html": "<div class=\"card\">{content}</div>"
+        },
+        "stat-card": {
+            "description": "Metric display with value and trend",
+            "tokens": [
+                "surface-base",
+                "border-subtle",
+                "text-primary",
+                "text-secondary",
+                "status-success",
+                "status-error"
+            ],
+            "html": "<div class=\"stat-card\"><div class=\"stat-label\">{label}</div><div class=\"stat-value\">{value}</div><div class=\"stat-trend stat-trend-{direction}\">{trend}</div></div>"
+        },
+        "alert": {
+            "description": "Feedback message with icon",
+            "variants": [
+                "info",
+                "success",
+                "warning",
+                "error"
+            ],
+            "tokens": [
+                "status-info",
+                "status-success",
+                "status-warning",
+                "status-error",
+                "radius-control"
+            ],
+            "html": "<div class=\"alert alert-{variant}\"><i data-lucide=\"{icon}\" class=\"icon alert-icon\"></i><div class=\"alert-content\"><div class=\"alert-title\">{title}</div><div class=\"alert-description\">{description}</div></div></div>"
+        },
+        "modal": {
+            "description": "Dialog overlay for focused interactions",
+            "tokens": [
+                "surface-base",
+                "surface-overlay",
+                "border-subtle",
+                "radius-container",
+                "shadow-xl"
+            ],
+            "html": "<div class=\"modal-backdrop\"><div class=\"modal\"><div class=\"modal-header\">{header}</div><div class=\"modal-body\">{body}</div><div class=\"modal-footer\">{footer}</div></div></div>"
+        },
+        "tabs": {
+            "description": "Pill-style navigation tabs with segmented control appearance",
+            "variants": [
+                "pill",
+                "pill-secondary",
+                "pill-ghost"
+            ],
+            "tokens": [
+                "text-secondary",
+                "text-primary",
+                "interactive-primary",
+                "interactive-primary-text",
+                "surface-layer",
+                "surface-base",
+                "border-subtle",
+                "interactive-ghost-hover"
+            ],
+            "html": {
+                "pill": "<div class=\"tabs-pill\"><button class=\"tab is-active\">Home</button><button class=\"tab\">Products</button><button class=\"tab\">About</button></div>",
+                "pill-secondary": "<div class=\"tabs-pill tabs-pill-secondary\"><button class=\"tab is-active\">Overview</button><button class=\"tab\">Details</button><button class=\"tab\">History</button></div>",
+                "pill-ghost": "<div class=\"tabs-pill tabs-pill-ghost\"><button class=\"tab is-active\">Home</button><button class=\"tab\">Products</button><button class=\"tab\">About</button></div>"
+            },
+            "use_cases": {
+                "pill": "Primary navigation with background container - modern segmented control appearance",
+                "pill-secondary": "Subtle secondary navigation - lighter active state with border",
+                "pill-ghost": "Clean minimal navigation - no container background or border"
+            }
+        },
+        "table": {
+            "description": "Data grid with headers and rows",
+            "tokens": [
+                "surface-base",
+                "border-subtle",
+                "text-primary",
+                "text-secondary"
+            ],
+            "html": "<div class=\"table-wrapper\"><table class=\"table\"><thead>{headers}</thead><tbody>{rows}</tbody></table></div>"
+        },
+        "navbar": {
+            "description": "Top navigation bar with brand and links",
+            "tokens": [
+                "surface-base",
+                "border-subtle",
+                "text-primary",
+                "text-secondary",
+                "interactive-primary"
+            ],
+            "html": "<nav class=\"navbar\"><a class=\"navbar-brand\">{brand}</a><div class=\"navbar-nav\">{links}</div><div class=\"navbar-actions\">{actions}</div></nav>"
+        },
+        "sidebar": {
+            "description": "Vertical navigation panel",
+            "tokens": [
+                "surface-sunken",
+                "border-subtle",
+                "text-primary",
+                "text-secondary",
+                "interactive-primary"
+            ],
+            "html": "<aside class=\"sidebar\">{content}</aside>"
+        },
+        "progress-bar": {
+            "description": "Visual progress indicator",
+            "variants": [
+                "default",
+                "success",
+                "warning",
+                "error"
+            ],
+            "tokens": [
+                "surface-layer",
+                "interactive-primary",
+                "status-success",
+                "status-warning",
+                "status-error"
+            ],
+            "html": "<div class=\"progress-bar\"><div class=\"progress-bar-fill progress-bar-{variant}\" style=\"width: {value}%\"></div></div>"
+        },
+        "tooltip": {
+            "description": "Contextual help on hover",
+            "positions": [
+                "top",
+                "bottom",
+                "left",
+                "right"
+            ],
+            "tokens": [
+                "surface-layer",
+                "text-primary",
+                "radius-sm",
+                "shadow-md"
+            ],
+            "html": "<div class=\"tooltip tooltip-{position}\"><span class=\"tooltip-content\">{content}</span>{trigger}</div>"
+        },
+        "dropdown": {
+            "description": "Contextual menu on click",
+            "tokens": [
+                "surface-base",
+                "border-subtle",
+                "text-primary",
+                "radius-control",
+                "shadow-lg"
+            ],
+            "html": "<div class=\"dropdown\"><button class=\"dropdown-trigger\">{trigger}</button><div class=\"dropdown-menu\">{items}</div></div>"
+        },
+        "spinner": {
+            "description": "Loading indicator",
+            "sizes": [
+                "sm",
+                "md",
+                "lg"
+            ],
+            "tokens": [
+                "interactive-primary"
+            ],
+            "html": "<div class=\"spinner spinner-{size}\"></div>"
+        },
+        "skeleton": {
+            "description": "Placeholder for loading content",
+            "tokens": [
+                "surface-layer"
+            ],
+            "html": "<div class=\"skeleton\" style=\"width: {width}; height: {height}\"></div>"
+        },
+        "divider": {
+            "description": "Visual separator between content",
+            "tokens": [
+                "border-subtle"
+            ],
+            "html": "<hr class=\"divider\">"
+        },
+        "breadcrumb": {
+            "description": "Navigation path indicator",
+            "tokens": [
+                "text-secondary",
+                "text-primary"
+            ],
+            "html": "<nav class=\"breadcrumb\">{items}</nav>"
+        },
+        "pagination": {
+            "description": "Page navigation controls",
+            "tokens": [
+                "interactive-primary",
+                "surface-base",
+                "border-subtle"
+            ],
+            "html": "<nav class=\"pagination\">{pages}</nav>"
+        }
+    },
+    "utilities": {
+        "typography": [
+            "text-display-xl",
+            "text-display-lg",
+            "text-display-sm",
+            "text-title-lg",
+            "text-title-md",
+            "text-title-sm",
+            "text-body-lg",
+            "text-body",
+            "text-body-sm",
+            "text-detail",
+            "text-caption"
+        ],
+        "colors": [
+            "text-primary",
+            "text-secondary",
+            "text-tertiary",
+            "text-brand",
+            "text-inverse"
+        ],
+        "layout": [
+            "container",
+            "stack",
+            "grid",
+            "flex",
+            "hidden"
+        ],
+        "spacing": [
+            "m-{0-8}",
+            "p-{0-8}",
+            "gap-{0-8}"
+        ]
+    }
+}

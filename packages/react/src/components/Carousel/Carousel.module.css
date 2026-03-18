@@ -196,7 +196,7 @@
 .card .cardTitle {
   font-family: var(--font-secondary);
   font-size: var(--font-size-24);
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   line-height: var(--line-height-tight);
   color: var(--text-on-dark);
   margin: 0;

@@ -1,0 +1,267 @@
+# CLI (@orion-ds/cli)
+
+The Orion CLI lets you copy individual components directly into your project — like shadcn/ui, but with zero dependencies and automatic dependency resolution.
+
+## Installation
+
+The CLI is included with the npm package. No separate install needed.
+
+## Commands
+
+### Init
+
+Initialize your project and create `orion.json` config file:
+
+```bash
+npx @orion-ds/cli init
+```
+
+This creates `orion.json` in your project root:
+
+```json
+{
+  "output": "./src/components",
+  "registry": "https://orion-ds.vercel.app/r"
+}
+```
+
+**Options:**
+- `output` — Where components are copied to (default: `./src/components`)
+- `registry` — Registry URL (default: official public registry)
+
+### Add
+
+Copy components to your project:
+
+```bash
+# Single component
+npx @orion-ds/cli add button
+
+# Multiple components
+npx @orion-ds/cli add button card modal
+
+# Add with dependencies automatically resolved
+npx @orion-ds/cli add data-table  # resolves Button, Table, Checkbox, etc.
+```
+
+**What gets copied:**
+- Component TypeScript files
+- CSS modules
+- Type definitions
+- All dependencies
+
+**Example output:**
+
+```
+src/components/
+├── button/
+│   ├── Button.tsx
+│   ├── Button.types.ts
+│   ├── Button.module.css
+│   └── index.ts
+├── card/
+│   ├── Card.tsx
+│   ├── Card.module.css
+│   └── index.ts
+└── ...
+```
+
+### List
+
+Show all available components and sections:
+
+```bash
+npx @orion-ds/cli list
+```
+
+**Options:**
+- `--type=component` — Show components only
+- `--type=section` — Show sections only
+- Filter by type:
+
+```bash
+npx @orion-ds/cli list --type=component
+npx @orion-ds/cli list --type=section
+```
+
+### Search
+
+Search for components by keyword:
+
+```bash
+npx @orion-ds/cli search button
+npx @orion-ds/cli search form
+```
+
+## Flags
+
+### `--yes`
+
+Skip interactive prompts, use defaults:
+
+```bash
+npx @orion-ds/cli add button --yes
+```
+
+### `--overwrite`
+
+Overwrite existing components:
+
+```bash
+npx @orion-ds/cli add button --overwrite
+```
+
+### `--local`
+
+Use local registry instead of HTTP (development):
+
+```bash
+npx @orion-ds/cli add button --local
+```
+
+## Dependency Resolution
+
+The CLI automatically installs required dependencies using **breadth-first search**:
+
+```bash
+npx @orion-ds/cli add data-table
+```
+
+This might resolve:
+1. DataTable (primary)
+2. Table, Button, Checkbox (dependencies of DataTable)
+3. Badge, Popover (dependencies of those)
+
+All required components are installed in the correct order.
+
+## Configuration
+
+Edit `orion.json` to customize behavior:
+
+```json
+{
+  "output": "./src/components/orion",
+  "registry": "https://custom-registry.com/r"
+}
+```
+
+**Settings:**
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `output` | string | `./src/components` | Output directory for components |
+| `registry` | string | Official registry URL | Component registry URL |
+
+## Package Manager
+
+The CLI auto-detects your package manager:
+
+```bash
+# Auto-detected and used
+npm
+pnpm
+yarn
+bun
+```
+
+No need to specify — it just works.
+
+## Monorepo Support
+
+Works in monorepo workspaces:
+
+```bash
+npx @orion-ds/cli add button
+```
+
+The CLI respects your workspace structure and installs to the correct package.
+
+## TypeScript
+
+All components are fully typed. Use them with full IntelliSense:
+
+```tsx
+import { Button } from '@/components/button';
+import type { ButtonProps } from '@/components/button';
+
+const MyButton: React.FC<ButtonProps> = (props) => (
+  <Button {...props} />
+);
+```
+
+## CSS
+
+Components use CSS Modules. Import them automatically:
+
+```tsx
+import { Button } from '@/components/button';
+// Button.module.css is already imported
+```
+
+Or import the CSS explicitly:
+
+```tsx
+import { Button } from '@/components/button';
+import styles from '@/components/button/Button.module.css';
+
+// Use styles.button, etc.
+```
+
+## Zero Dependencies
+
+Copied components have **zero runtime dependencies**. They use:
+- Only React (peer dependency)
+- Only CSS Modules (no CSS-in-JS)
+- Only standard web APIs
+
+This keeps your bundle size small and your dependencies clean.
+
+## Troubleshooting
+
+### "Component not found"
+
+Check the component name is correct:
+
+```bash
+npx @orion-ds/cli list
+```
+
+Component names use kebab-case (e.g., `data-table`, not `DataTable`).
+
+### "Registry not accessible"
+
+Check your internet connection or use local registry:
+
+```bash
+npx @orion-ds/cli add button --local
+```
+
+### "Dependency resolution failed"
+
+Some complex components may need manual installation. Install the primary component first, then its dependencies:
+
+```bash
+npx @orion-ds/cli add button
+npx @orion-ds/cli add data-table
+```
+
+### "Cannot find module"
+
+Ensure TypeScript can resolve component paths. Check `tsconfig.json`:
+
+```json
+{
+  "compilerOptions": {
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  }
+}
+```
+
+## Next Steps
+
+- [Getting Started](/docs/getting-started) — Framework setup
+- [Installation](/docs/installation) — Alternative npm install
+- [Components](/components) — Browse all available components
+- [Theming](/docs/theming) — Customize the look and feel

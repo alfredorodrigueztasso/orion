@@ -1,0 +1,214 @@
+# Getting Started
+
+Welcome to Orion Design System — an **AI-first design system** built on the **Chain of Truth** principle. This guide will get you up and running in minutes.
+
+## What is Orion?
+
+Orion is a comprehensive, production-ready component library for building web applications with:
+
+- **69+ components** — Buttons, cards, modals, forms, tables, charts, and more
+- **44 pre-built sections** — Hero, features, pricing, team, testimonials, and other full-page blocks
+- **12 complete templates** — Landing pages, dashboards, dashboards, login pages, and more
+- **Multi-brand support** — Switch between orion, red, deepblue, and orange brands with zero changes to component code
+- **Three visual modes** — Display (marketing), Product (dashboards), and App (mobile-first) for different contexts
+- **Tree-shakeable** — Import only what you use, keep bundles small
+- **Type-safe** — Full TypeScript support with auto-generated types
+
+## The Chain of Truth
+
+Orion eliminates UI hallucination by enforcing strict separation between **primitives**, **semantics**, and **components**:
+
+```
+Layer 1: Primitives (source truth)
+├─ Colors: #1B5BFF, #FFFFFF, #000000, etc.
+├─ Spacing: 4px, 8px, 12px, 16px, etc.
+├─ Typography: Libre Baskerville, DM Sans, JetBrains Mono
+└─ Radius: 6px, 12px, 16px, 9999px
+
+      ↓ (aliased as)
+
+Layer 2: Semantics (intent-based tokens)
+├─ --interactive-primary → uses brand color
+├─ --surface-base → uses light/dark background
+├─ --text-secondary → uses contrast-adjusted text
+└─ --radius-control → uses radius scale
+
+      ↓ (consumed by)
+
+Layer 3: Components (blind consumers)
+├─ Button: uses --interactive-primary, --radius-control, --font-secondary
+├─ Card: uses --surface-base, --border-subtle
+└─ All components automatically adapt to brand/theme/mode changes
+```
+
+## Installation
+
+Install Orion and its dependencies:
+
+<PackageManagerTabs packageName="@orion-ds/react" />
+
+Next, import the CSS file in your root layout or app component:
+
+```typescript
+import '@orion-ds/react/styles.css';
+```
+
+This single import includes:
+- ✅ All design tokens (colors, spacing, typography)
+- ✅ All component styles
+- ✅ Light/dark theme support
+- ✅ All brand overrides (orion, red, deepblue, orange)
+
+## Setup: ThemeProvider
+
+Wrap your app with the `ThemeProvider` at the root level. This enables:
+- Brand and theme switching
+- Dark/light mode persistence
+- Global style management
+
+**React:**
+```tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <YourContent />
+    </ThemeProvider>
+  );
+}
+```
+
+**Next.js (App Router):**
+```tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+Fonts load **automatically** — no manual Google Fonts setup needed.
+
+## Using Components
+
+Import components directly from `@orion-ds/react`:
+
+```tsx
+import { Button, Card, Badge, Alert } from '@orion-ds/react';
+
+export default function MyComponent() {
+  return (
+    <div>
+      <Card>
+        <Card.Header>
+          <h2>Welcome</h2>
+        </Card.Header>
+        <Card.Body>
+          <p>Build amazing UIs with Orion.</p>
+          <Button variant="primary">Get Started</Button>
+        </Card.Body>
+      </Card>
+    </div>
+  );
+}
+```
+
+All components automatically inherit:
+- ✅ The current brand (via `data-brand` attribute)
+- ✅ The current theme (light/dark)
+- ✅ The current mode (display/product/app)
+
+**No brand prop needed** — brand is global.
+
+## Multi-Brand Support
+
+Orion ships with 4 built-in brands:
+
+| Brand | Accent Color | Radius | Use Case |
+|-------|-------------|--------|----------|
+| **orion** | Blue (#1B5BFF) | 12px | Default, professional |
+| **red** | Red (#D7282F) | 9999px (pill) | Bold, energetic |
+| **deepblue** | Deep Blue (#006FBA) | 12px | Conservative, corporate |
+| **orange** | Red-Orange (#F15D22) | 9999px (pill) | Warm, modern |
+
+Switch brands at runtime using the `useThemeContext()` hook or manually setting `data-brand`:
+
+```tsx
+import { useThemeContext } from '@orion-ds/react';
+
+export function BrandSwitcher() {
+  const { brand, setBrand } = useThemeContext();
+
+  return (
+    <div>
+      <p>Current brand: {brand}</p>
+      <button onClick={() => setBrand('red')}>Switch to Red</button>
+      <button onClick={() => setBrand('orion')}>Back to Orion</button>
+    </div>
+  );
+}
+```
+
+## Dark Mode
+
+Orion supports light and dark themes out of the box. Switch themes using `useThemeContext()`:
+
+```tsx
+import { useThemeContext } from '@orion-ds/react';
+
+export function ThemeToggle() {
+  const { theme, setTheme } = useThemeContext();
+
+  return (
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      {theme === 'light' ? '🌙 Dark Mode' : '☀️ Light Mode'}
+    </button>
+  );
+}
+```
+
+The theme preference is **automatically persisted** to localStorage.
+
+## Using the CLI
+
+For faster setup, use the CLI to copy components directly into your project:
+
+```bash
+# Initialize your project
+npx @orion-ds/cli init
+
+# Add specific components
+npx @orion-ds/cli add button card modal
+
+# List all available items
+npx @orion-ds/cli list
+```
+
+Learn more in the [CLI documentation](/docs/cli).
+
+## Next Steps
+
+- **[Installation Guide](/docs/installation)** — Detailed setup for different frameworks
+- **[Theming](/docs/theming)** — Customize brands, colors, and modes
+- **[Components](/components)** — Browse all 69+ components
+- **[CLI Docs](/docs/cli)** — Copy components into your project
+- **[Token Reference](/docs/tokens)** — Understand the token system
+
+## Getting Help
+
+- Browse component examples on the [Components page](/components)
+- Check [Accessibility](/docs/accessibility) for inclusive design patterns
+- Report issues on [GitHub](https://github.com/orion-ds/orion)
+
+Happy building! 🚀

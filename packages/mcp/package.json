@@ -1,0 +1,39 @@
+{
+  "name": "@orion-ds/mcp",
+  "version": "1.0.0",
+  "description": "Orion Design System MCP Server — AI-native component discovery, validation, and code generation",
+  "type": "module",
+  "main": "dist/server.js",
+  "bin": {
+    "orion-mcp": "./dist/server.js"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "type-check": "tsc --noEmit"
+  },
+  "keywords": [
+    "mcp",
+    "model-context-protocol",
+    "orion",
+    "design-system",
+    "ai-native",
+    "component-library"
+  ],
+  "license": "MIT",
+  "dependencies": {
+    "@modelcontextprotocol/sdk": "^1.12.1"
+  },
+  "devDependencies": {
+    "@types/node": "^22.0.0",
+    "typescript": "^5.9.3"
+  },
+  "publishConfig": {
+    "access": "public",
+    "registry": "https://registry.npmjs.org/"
+  }
+}

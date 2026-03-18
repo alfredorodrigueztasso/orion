@@ -1,0 +1,383 @@
+{
+    "name": "Orion Utility Classes",
+    "version": "1.0.0",
+    "description": "Machine-readable utility class definitions for AI agents",
+    "typography": {
+        "display": {
+            "text-display-xl": {
+                "size": "80px",
+                "weight": 700,
+                "lineHeight": 1
+            },
+            "text-display-lg": {
+                "size": "64px",
+                "weight": 700,
+                "lineHeight": 1.25
+            },
+            "text-display-sm": {
+                "size": "48px",
+                "weight": 700,
+                "lineHeight": 1.25
+            }
+        },
+        "title": {
+            "text-title-lg": {
+                "size": "48px",
+                "weight": 700,
+                "lineHeight": 1.25
+            },
+            "text-title-md": {
+                "size": "32px",
+                "weight": 500,
+                "lineHeight": 1.375
+            },
+            "text-title-sm": {
+                "size": "24px",
+                "weight": 500,
+                "lineHeight": 1.375
+            }
+        },
+        "body": {
+            "text-body-lg": {
+                "size": "18px",
+                "weight": 400,
+                "lineHeight": 1.625
+            },
+            "text-body": {
+                "size": "16px",
+                "weight": 400,
+                "lineHeight": 1.5
+            },
+            "text-body-sm": {
+                "size": "14px",
+                "weight": 400,
+                "lineHeight": 1.5
+            }
+        },
+        "small": {
+            "text-detail": {
+                "size": "13px",
+                "weight": 400,
+                "lineHeight": 1.5
+            },
+            "text-caption": {
+                "size": "12px",
+                "weight": 400,
+                "lineHeight": 1.5
+            }
+        }
+    },
+    "layout": {
+        "display": [
+            "block",
+            "inline-block",
+            "flex",
+            "grid",
+            "hidden",
+            "inline-flex"
+        ],
+        "position": [
+            "relative",
+            "absolute",
+            "fixed",
+            "sticky"
+        ],
+        "flexbox": {
+            "direction": [
+                "flex-row",
+                "flex-col",
+                "flex-row-reverse",
+                "flex-col-reverse"
+            ],
+            "justify": [
+                "justify-start",
+                "justify-center",
+                "justify-end",
+                "justify-between",
+                "justify-around"
+            ],
+            "align": [
+                "items-start",
+                "items-center",
+                "items-end",
+                "items-stretch",
+                "items-baseline"
+            ],
+            "flex": [
+                "flex-1",
+                "flex-auto",
+                "flex-none",
+                "flex-grow",
+                "flex-shrink-0"
+            ]
+        },
+        "grid": {
+            "cols": [
+                "grid-cols-1",
+                "grid-cols-2",
+                "grid-cols-3",
+                "grid-cols-4",
+                "grid-cols-6",
+                "grid-cols-12"
+            ],
+            "span": [
+                "col-span-1",
+                "col-span-2",
+                "col-span-3",
+                "col-span-4",
+                "col-span-6",
+                "col-span-full"
+            ]
+        },
+        "size": [
+            "w-full",
+            "h-full",
+            "w-screen",
+            "h-screen",
+            "min-h-screen"
+        ]
+    },
+    "spacing": {
+        "margin": {
+            "all": [
+                "m-0",
+                "m-1",
+                "m-2",
+                "m-3",
+                "m-4",
+                "m-6",
+                "m-8"
+            ],
+            "horizontal": [
+                "mx-0",
+                "mx-1",
+                "mx-2",
+                "mx-3",
+                "mx-4",
+                "mx-auto"
+            ],
+            "vertical": [
+                "my-0",
+                "my-1",
+                "my-2",
+                "my-3",
+                "my-4",
+                "my-6",
+                "my-8"
+            ],
+            "top": [
+                "mt-0",
+                "mt-1",
+                "mt-2",
+                "mt-3",
+                "mt-4",
+                "mt-6",
+                "mt-8"
+            ],
+            "bottom": [
+                "mb-0",
+                "mb-1",
+                "mb-2",
+                "mb-3",
+                "mb-4",
+                "mb-6",
+                "mb-8"
+            ],
+            "left": [
+                "ml-0",
+                "ml-1",
+                "ml-2",
+                "ml-3",
+                "ml-4",
+                "ml-auto"
+            ],
+            "right": [
+                "mr-0",
+                "mr-1",
+                "mr-2",
+                "mr-3",
+                "mr-4",
+                "mr-auto"
+            ]
+        },
+        "padding": {
+            "all": [
+                "p-0",
+                "p-1",
+                "p-2",
+                "p-3",
+                "p-4",
+                "p-6",
+                "p-8"
+            ],
+            "horizontal": [
+                "px-0",
+                "px-1",
+                "px-2",
+                "px-3",
+                "px-4",
+                "px-6",
+                "px-8"
+            ],
+            "vertical": [
+                "py-0",
+                "py-1",
+                "py-2",
+                "py-3",
+                "py-4",
+                "py-6",
+                "py-8"
+            ]
+        },
+        "gap": [
+            "gap-0",
+            "gap-1",
+            "gap-2",
+            "gap-3",
+            "gap-4",
+            "gap-6",
+            "gap-8"
+        ]
+    },
+    "colors": {
+        "text": [
+            "text-primary",
+            "text-secondary",
+            "text-tertiary",
+            "text-brand",
+            "text-inverse"
+        ],
+        "background": [
+            "bg-base",
+            "bg-subtle",
+            "bg-layer"
+        ],
+        "border": [
+            "border-subtle",
+            "border-strong",
+            "border-interactive"
+        ]
+    },
+    "effects": {
+        "shadow": [
+            "shadow-sm",
+            "shadow-md",
+            "shadow-lg",
+            "shadow-xl"
+        ],
+        "radius": [
+            "rounded-sm",
+            "rounded-md",
+            "rounded-lg",
+            "rounded-full"
+        ],
+        "opacity": [
+            "opacity-0",
+            "opacity-50",
+            "opacity-100"
+        ]
+    },
+    "responsive": {
+        "breakpoints": {
+            "sm": "640px",
+            "md": "768px",
+            "lg": "1024px",
+            "xl": "1280px"
+        },
+        "prefixes": [
+            "sm:",
+            "md:",
+            "lg:",
+            "xl:"
+        ],
+        "example": "hidden md:block lg:flex"
+    },
+    "accessibility": {
+        "screen-reader": [
+            "sr-only",
+            "not-sr-only"
+        ],
+        "focus": [
+            "focus-visible",
+            "focus-ring"
+        ],
+        "skip": [
+            "skip-link"
+        ]
+    },
+    "animation": {
+        "keyframes": [
+            "animate-fade-in",
+            "animate-slide-up",
+            "animate-slide-down",
+            "animate-scale-in",
+            "animate-bounce",
+            "animate-pulse",
+            "animate-shake"
+        ],
+        "duration": [
+            "duration-75",
+            "duration-100",
+            "duration-150",
+            "duration-200",
+            "duration-300",
+            "duration-500"
+        ],
+        "delay": [
+            "animation-delay-100",
+            "animation-delay-200",
+            "animation-delay-300",
+            "animation-delay-500"
+        ]
+    },
+    "text": {
+        "align": [
+            "text-left",
+            "text-center",
+            "text-right"
+        ],
+        "overflow": [
+            "truncate",
+            "line-clamp-2",
+            "line-clamp-3",
+            "whitespace-nowrap"
+        ],
+        "transform": [
+            "uppercase",
+            "lowercase",
+            "capitalize"
+        ]
+    },
+    "positioning": {
+        "inset": [
+            "top-0",
+            "right-0",
+            "bottom-0",
+            "left-0",
+            "inset-0"
+        ],
+        "z-index": [
+            "z-0",
+            "z-10",
+            "z-20",
+            "z-50"
+        ]
+    },
+    "containers": {
+        "layout": [
+            "container",
+            "stack",
+            "layout-shell",
+            "layout-shell-full",
+            "layout-shell-narrow"
+        ],
+        "stack-gaps": [
+            "stack-gap-1",
+            "stack-gap-2",
+            "stack-gap-4",
+            "stack-gap-8",
+            "stack-gap-16",
+            "stack-gap-24"
+        ]
+    }
+}

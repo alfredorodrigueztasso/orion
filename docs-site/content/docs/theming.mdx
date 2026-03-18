@@ -1,0 +1,268 @@
+# Theming
+
+Orion supports multiple brands, themes, and visual modes out of the box. Customize the look and feel of your entire application with zero component code changes.
+
+## Brands
+
+Orion comes with 4 built-in brands. Each has its own accent color and visual style. Switch brands at runtime — all components automatically adapt:
+
+| Brand | Accent Color | Radius | Visual Style | Best For |
+|-------|-------------|--------|--------------|----------|
+| **orion** | Blue (#1B5BFF) | 12px | Professional, balanced | Default choice |
+| **red** | Red (#D7282F) | 9999px (pill) | Bold, energetic | Bold brands |
+| **deepblue** | Deep Blue (#006FBA) | 12px | Conservative, corporate | Enterprise |
+| **orange** | Red-Orange (#F15D22) | 9999px (pill) | Warm, modern | Creative brands |
+
+### Switching Brands
+
+Use `useThemeContext()` hook to switch brands at runtime:
+
+```tsx
+import { useThemeContext } from '@orion-ds/react';
+
+export function BrandSwitcher() {
+  const { brand, setBrand } = useThemeContext();
+
+  return (
+    <div>
+      <p>Current brand: <strong>{brand}</strong></p>
+      <button onClick={() => setBrand('orion')}>Orion</button>
+      <button onClick={() => setBrand('red')}>Red</button>
+      <button onClick={() => setBrand('deepblue')}>Deep Blue</button>
+      <button onClick={() => setBrand('orange')}>Orange</button>
+    </div>
+  );
+}
+```
+
+### The Brand CSS Variable
+
+Every component uses `--radius-button`, `--interactive-primary`, and other brand-aware tokens. These automatically change when you switch brands:
+
+```css
+/* orion brand */
+--interactive-primary: #1B5BFF;
+--radius-button: 12px;
+
+/* red brand */
+--interactive-primary: #D7282F;
+--radius-button: 9999px;
+```
+
+**No component code changes needed.** The entire UI instantly adapts.
+
+## Dark Mode / Light Mode
+
+Orion supports light and dark themes. Toggle with `useThemeContext()`:
+
+```tsx
+import { useThemeContext } from '@orion-ds/react';
+
+export function ThemeToggle() {
+  const { theme, setTheme } = useThemeContext();
+
+  return (
+    <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+      {theme === 'light' ? '🌙 Dark' : '☀️ Light'}
+    </button>
+  );
+}
+```
+
+**Theme preference is automatically saved** to `localStorage` and restored on page load.
+
+### Color Adaptation
+
+The same components look different in light vs dark mode without code changes:
+
+```tsx
+/* Light theme */
+--surface-base: #FFFFFF;
+--text-primary: #000000;
+--border-subtle: #E0E0E0;
+
+/* Dark theme */
+--surface-base: #0A0A0A;
+--text-primary: #FFFFFF;
+--border-subtle: #2A2A2A;
+```
+
+All components automatically use the appropriate colors for the current theme.
+
+## Visual Modes
+
+Orion supports 3 visual modes for different contexts. Each mode has distinct typography, spacing, and interaction patterns:
+
+### Display Mode (Marketing)
+
+For landing pages and hero sections. Features atmospheric, spacious design:
+
+```tsx
+<div data-mode="display">
+  <Button variant="primary">Get Started</Button>
+</div>
+```
+
+**Characteristics:**
+- Generous spacing (16px+ body font)
+- Glassmorphism effects (backdrop blur)
+- Dramatic hover effects (translateY -4px)
+- Hero-scale typography
+
+### Product Mode (Dashboards)
+
+For SaaS dashboards and admin panels. Features geometric, dense design:
+
+```tsx
+<div data-mode="product">
+  <DataTable columns={columns} />
+</div>
+```
+
+**Characteristics:**
+- Compact spacing (12-14px body font)
+- No glassmorphism (solid backgrounds)
+- Minimal hover effects (color change only)
+- Efficient use of space
+
+### App Mode (Mobile)
+
+For mobile apps and touch interfaces. Features tactile, native design:
+
+```tsx
+<div data-mode="app">
+  <Button size="lg">Touch-Friendly</Button>
+</div>
+```
+
+**Characteristics:**
+- Touch-friendly sizing (16px+ body minimum)
+- Native shadows (Material 3 style)
+- Subtle hover effects (translateY -2px)
+- Natural elevation
+
+### Switching Modes
+
+Use `useThemeContext()` or set `data-mode` manually:
+
+```tsx
+import { useThemeContext } from '@orion-ds/react';
+
+export function ModeSwitcher() {
+  const { mode, setMode } = useThemeContext();
+
+  return (
+    <>
+      <button onClick={() => setMode('display')}>Display</button>
+      <button onClick={() => setMode('product')}>Product</button>
+      <button onClick={() => setMode('app')}>App</button>
+    </>
+  );
+}
+```
+
+## CSS Variables (Tokens)
+
+All styling uses CSS variables. Access or override them:
+
+### Common Tokens
+
+```css
+/* Colors */
+--surface-base: /* main background */
+--surface-subtle: /* secondary background */
+--text-primary: /* body text */
+--text-secondary: /* descriptions */
+--text-brand: /* brand color text */
+--interactive-primary: /* primary button */
+--border-subtle: /* dividers */
+
+/* Spacing (base unit: 4px) */
+--spacing-1: 4px;
+--spacing-2: 8px;
+--spacing-3: 12px;
+--spacing-4: 16px;
+--spacing-6: 24px;
+--spacing-8: 32px;
+
+/* Typography */
+--font-primary: /* headings */
+--font-secondary: /* body */
+--font-mono: /* code */
+
+/* Radius */
+--radius-sm: 6px;
+--radius-control: 12px;
+--radius-container: 16px;
+--radius-full: 9999px;
+```
+
+### Override Tokens
+
+Create a CSS file to customize tokens:
+
+```css
+/* styles/theme-overrides.css */
+:root {
+  --spacing-4: 20px; /* larger base spacing */
+  --radius-control: 8px; /* more square buttons */
+  --font-secondary: 'Inter', sans-serif; /* custom font */
+}
+```
+
+Import it after the Orion styles:
+
+```tsx
+import '@orion-ds/react/styles.css';
+import './styles/theme-overrides.css';
+```
+
+## Combining Brand + Theme + Mode
+
+All three systems work together:
+
+```tsx
+<div data-brand="red" data-theme="dark" data-mode="product">
+  <Button variant="primary">
+    Red brand, dark theme, product mode
+  </Button>
+</div>
+```
+
+## ThemeProvider Props
+
+Customize theme behavior:
+
+```tsx
+<ThemeProvider
+  disableAutoFontLoading={false}  // default: load fonts automatically
+  disableFontWarnings={false}     // default: warn if fonts fail to load
+>
+  {children}
+</ThemeProvider>
+```
+
+## Persistence
+
+Theme preferences are saved to `localStorage`:
+
+```
+localStorage.getItem('orion-theme')  // 'light' or 'dark'
+localStorage.getItem('orion-brand')  // 'orion', 'red', 'deepblue', 'orange'
+localStorage.getItem('orion-mode')   // 'display', 'product', 'app'
+```
+
+Clear preferences:
+
+```tsx
+localStorage.removeItem('orion-theme');
+localStorage.removeItem('orion-brand');
+localStorage.removeItem('orion-mode');
+```
+
+## Next Steps
+
+- [Installation](/docs/installation) — Framework-specific setup
+- [Getting Started](/docs/getting-started) — Overview and quick start
+- [Token Reference](/docs/tokens) — All available CSS variables
+- [Components](/components) — See theming in action

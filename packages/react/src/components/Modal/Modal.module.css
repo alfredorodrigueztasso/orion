@@ -97,7 +97,7 @@
   padding: var(--spacing-6);
   border-bottom: 1px solid var(--border-subtle);
   font-size: var(--font-size-20);
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   color: var(--text-primary);
 }
 

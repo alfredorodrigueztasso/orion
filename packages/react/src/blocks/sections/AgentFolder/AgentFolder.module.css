@@ -84,7 +84,7 @@
 .title {
   font-family: var(--font-secondary);
   font-size: var(--font-size-18);
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   color: var(--text-primary);
   margin: 0;
   line-height: 1.4;

@@ -92,7 +92,7 @@
 
 /* Today */
 .today:not(.selected):not(.rangeStart):not(.rangeEnd) {
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   color: var(--interactive-primary);
 }
 

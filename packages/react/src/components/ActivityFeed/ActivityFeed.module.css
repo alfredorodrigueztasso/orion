@@ -151,7 +151,7 @@
 }
 
 .actorName {
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;
   white-space: nowrap;

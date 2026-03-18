@@ -1,0 +1,297 @@
+# Design Tokens Reference
+
+Orion uses a three-layer token system to eliminate UI hallucination and ensure consistency across all components.
+
+## The Chain of Truth
+
+Tokens flow through three distinct layers:
+
+```
+Layer 1: Primitives (Raw Values)
+├── #1B5BFF (blue)
+├── #FFFFFF (white)
+├── 4px, 8px, 12px (spacing)
+└── 12px (radius)
+         ↓ (aliased as)
+
+Layer 2: Semantics (Intent-Based)
+├── --interactive-primary → #1B5BFF
+├── --surface-base → #FFFFFF
+├── --spacing-4 → 4px
+└── --radius-control → 12px
+         ↓ (consumed by)
+
+Layer 3: Components (Blind Consumers)
+├── Button: uses --interactive-primary, --radius-control
+├── Card: uses --surface-base, --border-subtle
+└── All components automatically adapt to brand/theme changes
+```
+
+This separation ensures:
+- ✅ **Single source of truth** — Change a primitive, update everywhere
+- ✅ **Intent clarity** — Semantic tokens describe purpose, not color
+- ✅ **Zero hallucination** — Components can't hardcode invalid values
+- ✅ **Brand flexibility** — Switch brands, all tokens update automatically
+
+## Color Tokens
+
+### Surface Colors (Backgrounds)
+
+| Token | Light | Dark | Purpose |
+|-------|-------|------|---------|
+| `--surface-base` | #FFFFFF | #0A0A0A | Main background |
+| `--surface-subtle` | #F5F5F5 | #1A1A1A | Secondary background |
+| `--surface-layer` | #FAFAFA | #121212 | Card backgrounds |
+| `--surface-sunken` | #F0F0F0 | #000000 | Recessed surfaces |
+
+### Text Colors
+
+| Token | Light | Dark | Purpose |
+|-------|-------|------|---------|
+| `--text-primary` | #000000 | #FFFFFF | Body text |
+| `--text-secondary` | #666666 | #CCCCCC | Descriptions, labels |
+| `--text-tertiary` | #999999 | #888888 | Captions, hints, disabled |
+| `--text-brand` | Brand color | Brand color | Brand accent text |
+
+### Interactive Colors
+
+| Token | Purpose |
+|-------|---------|
+| `--interactive-primary` | Primary button, main actions |
+| `--interactive-primary-hover` | Primary button hover state |
+| `--interactive-primary-text` | Text on primary button |
+| `--interactive-secondary` | Secondary button |
+| `--interactive-secondary-text` | Text on secondary button |
+
+### Border Colors
+
+| Token | Light | Dark | Purpose |
+|-------|-------|------|---------|
+| `--border-subtle` | #E0E0E0 | #2A2A2A | Dividers, outlines |
+| `--border-strong` | #CCCCCC | #444444 | Stronger borders |
+
+## Spacing Tokens
+
+Base unit: **4px**
+
+All spacing values are multiples of 4px for visual consistency:
+
+| Token | Value | Common Uses |
+|-------|-------|-------------|
+| `--spacing-1` | 4px | Tiny gaps |
+| `--spacing-2` | 8px | Small padding |
+| `--spacing-3` | 12px | Medium padding |
+| `--spacing-4` | 16px | **Standard padding** |
+| `--spacing-6` | 24px | Large padding |
+| `--spacing-8` | 32px | Section gaps |
+| `--spacing-12` | 48px | Large section gaps |
+| `--spacing-16` | 64px | Hero sections |
+| `--spacing-24` | 96px | Page padding |
+| `--spacing-32` | 128px | Maximum spacing |
+
+## Typography Tokens
+
+### Fonts
+
+| Token | Font | Use Case |
+|-------|------|----------|
+| `--font-primary` | Libre Baskerville | Headings (serif) |
+| `--font-secondary` | DM Sans | Body text (sans-serif) |
+| `--font-mono` | JetBrains Mono | Code (monospace) |
+
+**Fonts load automatically via `ThemeProvider`** — no manual Google Fonts setup needed.
+
+### Font Sizes
+
+Semantic sizing by context:
+
+| Token | Size | Use Case |
+|-------|------|----------|
+| `--font-xs` | 12px | Captions, small labels |
+| `--font-sm` | 14px | Secondary text |
+| `--font-base` | 16px | Body text (default) |
+| `--font-md` | 18px | Subheadings |
+| `--font-lg` | 20px | Headings level 3 |
+| `--font-xl` | 24px | Headings level 2 |
+| `--font-2xl` | 32px | Page titles |
+
+### Font Weights
+
+| Token | Weight | Use Case |
+|-------|--------|----------|
+| `--font-weight-normal` | 400 | Body text |
+| `--font-weight-medium` | 500 | Emphasis |
+| `--font-weight-semibold` | 600 | Subheadings |
+| `--font-weight-bold` | 700 | Headings |
+
+## Radius Tokens
+
+Consistent corner rounding across components:
+
+| Token | Value | Use Case |
+|-------|-------|----------|
+| `--radius-sm` | 6px | Small elements |
+| `--radius-control` | 12px | **Buttons, inputs, cards** |
+| `--radius-container` | 16px | Large containers |
+| `--radius-full` | 9999px | Pills, circles |
+
+**Brand Override:** The `--radius-control` token changes per brand:
+- **orion** → 12px (rounded corners)
+- **red** → 9999px (pill buttons)
+- **deepblue** → 12px (rounded)
+- **orange** → 9999px (pill buttons)
+
+## Shadow Tokens
+
+Contextual elevation based on visual mode:
+
+### Display Mode
+
+```css
+--mode-shadow-hover: /* generous shadow for hero feel */
+--mode-hover-lift: -4px; /* dramatic hover effect */
+```
+
+### Product Mode
+
+```css
+--mode-shadow-hover: /* minimal shadow for clean UI */
+--mode-hover-lift: 0px; /* no lift, just color change */
+```
+
+### App Mode
+
+```css
+--mode-shadow-hover: /* native material shadow */
+--mode-hover-lift: -2px; /* subtle tactile feedback */
+```
+
+## Using Tokens in Custom Styles
+
+### In CSS
+
+```css
+.my-component {
+  padding: var(--spacing-4);
+  background: var(--surface-base);
+  border: 1px solid var(--border-subtle);
+  border-radius: var(--radius-control);
+  color: var(--text-primary);
+  font-family: var(--font-secondary);
+}
+```
+
+### In CSS Modules
+
+```css
+/* styles.module.css */
+.button {
+  padding: var(--spacing-3) var(--spacing-4);
+  background: var(--interactive-primary);
+  color: var(--interactive-primary-text);
+  border-radius: var(--radius-control);
+}
+
+.button:hover {
+  opacity: 0.9;
+}
+```
+
+### In React Inline Styles
+
+```tsx
+<div style={{
+  padding: 'var(--spacing-4)',
+  background: 'var(--surface-base)',
+  borderRadius: 'var(--radius-control)',
+}}>
+  Content
+</div>
+```
+
+### In Tailwind CSS (with Custom Config)
+
+```js
+// tailwind.config.js
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        surface: 'var(--surface-base)',
+        text: 'var(--text-primary)',
+      },
+      spacing: {
+        xs: 'var(--spacing-1)',
+        sm: 'var(--spacing-2)',
+        md: 'var(--spacing-4)',
+      },
+    },
+  },
+};
+```
+
+## Per-Component Tokens
+
+Each component in the component documentation shows which tokens it uses. For example:
+
+**Button component tokens:**
+- `--interactive-primary` (background)
+- `--interactive-primary-hover` (hover state)
+- `--interactive-primary-text` (text color)
+- `--radius-control` (border radius)
+- `--font-secondary` (typography)
+- `--spacing-4` (padding)
+
+See the component's documentation page for its specific token requirements.
+
+## Overriding Tokens
+
+Create a custom CSS file to override defaults:
+
+```css
+/* styles/custom-tokens.css */
+:root {
+  --spacing-4: 18px; /* larger standard padding */
+  --radius-control: 8px; /* more square buttons */
+  --font-base: 17px; /* slightly larger body text */
+}
+```
+
+Import after Orion styles:
+
+```tsx
+import '@orion-ds/react/styles.css';
+import './styles/custom-tokens.css';
+```
+
+Changes apply globally to all components.
+
+## Token Browser
+
+To see all available tokens and their current values:
+
+1. Open DevTools (F12)
+2. Inspect any element
+3. In the Styles panel, scroll to `:root`
+4. All CSS variables are listed with current values
+
+## Best Practices
+
+✅ **DO:**
+- Use semantic tokens (`--text-primary`, not `--color-gray-800`)
+- Reference tokens in custom styles
+- Override tokens globally via CSS
+- Trust tokens for consistent spacing and colors
+
+❌ **DON'T:**
+- Hardcode colors (`#FFFFFF` instead of `var(--surface-base)`)
+- Hardcode spacing (`16px` instead of `var(--spacing-4)`)
+- Use component-specific overrides (change at token level)
+- Mix hardcoded and token-based values
+
+## Next Steps
+
+- [Theming](/docs/theming) — Brands, dark mode, visual modes
+- [Installation](/docs/installation) — Getting started
+- [Components](/components) — See tokens in action
+- [Getting Started](/docs/getting-started) — Overview

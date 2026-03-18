@@ -138,7 +138,7 @@
   flex-shrink: 0;
   font-family: var(--font-secondary);
   font-size: var(--font-size-18);
-  font-weight: var(--font-weight-bold);
+  font-weight: 600;
   color: var(--text-primary);
   text-decoration: none;
   transition: opacity var(--transition-fast);

@@ -1,0 +1,456 @@
+{
+    "name": "Orion Design System Token Index",
+    "version": "1.0.0",
+    "description": "Unified token reference for AI agents - single source of truth",
+    "brands": {
+        "orion": {
+            "description": "Default brand - Vibrant Blue",
+            "accent": "#1B5BFF",
+            "radius": "12px"
+        },
+        "unitec": {
+            "description": "Unitec brand - Vibrant Orange",
+            "accent": "#f68b1f",
+            "radius": "12px"
+        },
+        "uvm": {
+            "description": "UVM brand - Neutral/Black with pill buttons",
+            "accent": "#737373",
+            "radius": "9999px"
+        },
+        "laureate": {
+            "description": "Laureate brand - Red-Orange",
+            "accent": "#F15D22",
+            "radius": "9999px"
+        }
+    },
+    "primitives": {
+        "color": {
+            "brand": {
+                "orion": {
+                    "50": "#e8f0ff",
+                    "100": "#c7daff",
+                    "200": "#a3c2ff",
+                    "300": "#7ea9ff",
+                    "400": "#5990ff",
+                    "500": "#1B5BFF",
+                    "600": "#1850e6",
+                    "700": "#1544cc",
+                    "800": "#1139b3",
+                    "900": "#0d2d99",
+                    "950": "#071a5c"
+                },
+                "unitec": {
+                    "50": "#fef3e8",
+                    "100": "#fcdcbb",
+                    "200": "#fac58f",
+                    "300": "#f8ad62",
+                    "400": "#f79c40",
+                    "500": "#f68b1f",
+                    "600": "#dd7d1b",
+                    "700": "#c46f18",
+                    "800": "#9f5a14",
+                    "900": "#7b450f",
+                    "950": "#492909"
+                },
+                "uvm": {
+                    "50": "#fafafa",
+                    "100": "#f5f5f5",
+                    "200": "#e5e5e5",
+                    "300": "#d4d4d4",
+                    "400": "#a3a3a3",
+                    "500": "#737373",
+                    "600": "#525252",
+                    "700": "#404040",
+                    "800": "#262626",
+                    "900": "#171717",
+                    "950": "#0a0a0a"
+                },
+                "laureate": {
+                    "50": "#fef0eb",
+                    "100": "#fdd5c9",
+                    "200": "#fcb9a5",
+                    "300": "#fa9d80",
+                    "400": "#f87d52",
+                    "500": "#F15D22",
+                    "600": "#d9531f",
+                    "700": "#c0491b",
+                    "800": "#a63f17",
+                    "900": "#8c3513",
+                    "950": "#59220c"
+                }
+            },
+            "neutral": {
+                "0": "#ffffff",
+                "50": "#f8fafc",
+                "100": "#f1f5f9",
+                "200": "#e2e8f0",
+                "300": "#cbd5e1",
+                "400": "#94a3b8",
+                "500": "#64748b",
+                "600": "#475569",
+                "700": "#334155",
+                "800": "#1e293b",
+                "900": "#0f172a",
+                "950": "#020617",
+                "1000": "#000000"
+            },
+            "status": {
+                "success": "#22c55e",
+                "warning": "#eab308",
+                "error": "#ef4444",
+                "info": "#3b82f6"
+            }
+        },
+        "typography": {
+            "family": {
+                "primary": "Libre Baskerville, system-ui, sans-serif",
+                "secondary": "Inter, system-ui, sans-serif",
+                "mono": "JetBrains Mono, monospace"
+            },
+            "size": {
+                "10": "0.625rem",
+                "12": "0.75rem",
+                "13": "0.8125rem",
+                "14": "0.875rem",
+                "16": "1rem",
+                "18": "1.125rem",
+                "20": "1.25rem",
+                "24": "1.5rem",
+                "32": "2rem",
+                "48": "3rem",
+                "64": "4rem",
+                "80": "5rem"
+            },
+            "weight": {
+                "regular": 400,
+                "medium": 500,
+                "bold": 700
+            },
+            "lineHeight": {
+                "none": 1,
+                "tight": 1.25,
+                "snug": 1.375,
+                "normal": 1.5,
+                "relaxed": 1.625
+            }
+        },
+        "spacing": {
+            "0": "0",
+            "px": "1px",
+            "05": "2px",
+            "1": "4px",
+            "2": "8px",
+            "3": "12px",
+            "4": "16px",
+            "5": "20px",
+            "6": "24px",
+            "8": "32px",
+            "10": "40px",
+            "12": "48px",
+            "16": "64px",
+            "20": "80px",
+            "24": "96px",
+            "32": "128px"
+        },
+        "radius": {
+            "0": "0",
+            "sm": "8px",
+            "md": "10px",
+            "control": "12px",
+            "container": "16px",
+            "lg": "20px",
+            "xl": "24px",
+            "full": "9999px"
+        },
+        "shadow": {
+            "sm": "0 1px 2px rgba(0,0,0,0.05)",
+            "md": "0 4px 6px rgba(0,0,0,0.1)",
+            "lg": "0 10px 15px rgba(0,0,0,0.1)",
+            "xl": "0 20px 25px rgba(0,0,0,0.15)"
+        },
+        "blur": {
+            "sm": "4px",
+            "md": "8px",
+            "lg": "12px",
+            "xl": "24px"
+        },
+        "transition": {
+            "fast": "100ms ease",
+            "normal": "200ms ease",
+            "slow": "300ms ease"
+        }
+    },
+    "semantics": {
+        "light": {
+            "surface": {
+                "base": "{neutral.0}",
+                "subtle": "{neutral.50}",
+                "layer": "{neutral.100}",
+                "sunken": "{neutral.50}",
+                "brand-soft": "{brand.100}",
+                "glass": "rgba(255,255,255,0.7)",
+                "overlay": "rgba(0,0,0,0.5)"
+            },
+            "text": {
+                "primary": "{neutral.900}",
+                "secondary": "{neutral.500}",
+                "tertiary": "{neutral.400}",
+                "brand": "{brand.500}",
+                "inverse": "{neutral.0}"
+            },
+            "border": {
+                "subtle": "{neutral.200}",
+                "strong": "{neutral.300}",
+                "interactive": "{brand.500}"
+            },
+            "interactive": {
+                "primary": "{brand.500}",
+                "primary-hover": "{brand.700}",
+                "primary-text": "{neutral.0}",
+                "secondary": "{neutral.100}",
+                "secondary-hover": "{neutral.200}",
+                "secondary-text": "{neutral.900}"
+            }
+        },
+        "dark": {
+            "surface": {
+                "base": "{neutral.950}",
+                "subtle": "{neutral.900}",
+                "layer": "{neutral.800}",
+                "sunken": "{neutral.950}",
+                "brand-soft": "{brand.900}",
+                "glass": "rgba(15,23,42,0.6)",
+                "overlay": "rgba(0,0,0,0.7)"
+            },
+            "text": {
+                "primary": "{neutral.50}",
+                "secondary": "{neutral.400}",
+                "tertiary": "{neutral.600}",
+                "brand": "{brand.400}",
+                "inverse": "{neutral.950}"
+            },
+            "border": {
+                "subtle": "{neutral.800}",
+                "strong": "{neutral.700}",
+                "interactive": "{brand.500}"
+            },
+            "interactive": {
+                "primary": "{brand.500}",
+                "primary-hover": "{brand.400}",
+                "primary-text": "{neutral.0}",
+                "secondary": "{neutral.800}",
+                "secondary-hover": "{neutral.700}",
+                "secondary-text": "{neutral.50}"
+            }
+        }
+    },
+    "css_variables": {
+        "surface": [
+            "--surface-base",
+            "--surface-subtle",
+            "--surface-layer",
+            "--surface-primary",
+            "--surface-secondary",
+            "--surface-sunken",
+            "--surface-glass",
+            "--surface-overlay"
+        ],
+        "text": [
+            "--text-primary",
+            "--text-secondary",
+            "--text-tertiary",
+            "--text-brand",
+            "--text-inverse"
+        ],
+        "typography": {
+            "family": [
+                "--font-primary",
+                "--font-secondary",
+                "--font-mono"
+            ],
+            "size": [
+                "--font-size-10",
+                "--font-size-12",
+                "--font-size-13",
+                "--font-size-14",
+                "--font-size-16",
+                "--font-size-18",
+                "--font-size-20",
+                "--font-size-24",
+                "--font-size-32",
+                "--font-size-48",
+                "--font-size-64",
+                "--font-size-80",
+                "--font-size-96",
+                "--font-size-display-lg",
+                "--font-size-display-xl"
+            ],
+            "weight": [
+                "--font-weight-regular",
+                "--font-weight-medium",
+                "--font-weight-bold"
+            ],
+            "lineHeight": [
+                "--line-height-none",
+                "--line-height-tight",
+                "--line-height-snug",
+                "--line-height-normal",
+                "--line-height-relaxed",
+                "--line-height-loose"
+            ]
+        },
+        "spacing": [
+            "--spacing-1",
+            "--spacing-2",
+            "--spacing-3",
+            "--spacing-4",
+            "--spacing-6",
+            "--spacing-8",
+            "--spacing-12",
+            "--spacing-16",
+            "--spacing-24",
+            "--spacing-32"
+        ],
+        "border": [
+            "--border-subtle",
+            "--border-strong",
+            "--border-interactive"
+        ],
+        "interactive": [
+            "--interactive-primary",
+            "--interactive-primary-hover",
+            "--interactive-primary-text",
+            "--interactive-secondary",
+            "--interactive-secondary-hover",
+            "--interactive-secondary-text"
+        ],
+        "status": [
+            "--status-success",
+            "--status-warning",
+            "--status-error",
+            "--status-info"
+        ],
+        "geometry": [
+            "--radius-sm",
+            "--radius-md",
+            "--radius-control",
+            "--radius-container",
+            "--radius-lg",
+            "--radius-xl",
+            "--radius-full"
+        ],
+        "shadow": [
+            "--shadow-sm",
+            "--shadow-md",
+            "--shadow-lg",
+            "--shadow-xl"
+        ]
+    },
+    "tri_modal_system": {
+        "description": "Three distinct UI contexts with density and interaction patterns optimized for each use case",
+        "modes": {
+            "display": {
+                "description": "Marketing and landing pages - maximum visual impact",
+                "density": "spacious",
+                "typography": "large",
+                "touch_target": "40px",
+                "use_cases": [
+                    "Landing pages",
+                    "Marketing sites",
+                    "Hero sections",
+                    "Brand showcases"
+                ],
+                "variables": [
+                    "--mode-text-display: var(--font-size-96)",
+                    "--mode-text-title: var(--font-size-64)",
+                    "--mode-text-body: var(--font-size-20)",
+                    "--mode-spacing-section: var(--spacing-32)",
+                    "--mode-touch-target: 40px",
+                    "--mode-effect-glass: blur(12px)",
+                    "--mode-visual-style: \"atmospheric\""
+                ]
+            },
+            "product": {
+                "description": "SaaS applications - information density and efficiency",
+                "density": "compact",
+                "typography": "medium",
+                "touch_target": "32px",
+                "use_cases": [
+                    "SaaS dashboards",
+                    "Admin panels",
+                    "Data tables",
+                    "Analytics views"
+                ],
+                "variables": [
+                    "--mode-text-display: var(--font-size-48)",
+                    "--mode-text-title: var(--font-size-24)",
+                    "--mode-text-body: var(--font-size-14)",
+                    "--mode-spacing-section: var(--spacing-12)",
+                    "--mode-touch-target: 32px",
+                    "--mode-visual-style: \"functional\""
+                ]
+            },
+            "app": {
+                "description": "Mobile and touch applications - optimized for thumb-friendly interaction",
+                "density": "mobile",
+                "typography": "readable",
+                "touch_target": "44px",
+                "use_cases": [
+                    "Mobile apps",
+                    "PWAs",
+                    "Touch interfaces",
+                    "Kiosk systems"
+                ],
+                "variables": [
+                    "--mode-text-display: var(--font-size-32)",
+                    "--mode-text-title: var(--font-size-24)",
+                    "--mode-text-body: var(--font-size-16)",
+                    "--mode-spacing-section: var(--spacing-16)",
+                    "--mode-touch-target: 44px",
+                    "--mode-safe-area-top: env(safe-area-inset-top, 0)",
+                    "--mode-safe-area-bottom: env(safe-area-inset-bottom, 0)",
+                    "--mode-visual-style: \"tactile\""
+                ]
+            }
+        },
+        "utility_classes": {
+            "typography": [
+                ".mode-display",
+                ".mode-title",
+                ".mode-body"
+            ],
+            "spacing": [
+                ".mode-section-gap"
+            ],
+            "interaction": [
+                ".mode-touch-target"
+            ],
+            "buttons": [
+                ".btn-mode-display",
+                ".btn-mode-product",
+                ".btn-mode-app"
+            ],
+            "cards": [
+                ".card-mode-display",
+                ".card-mode-product"
+            ],
+            "layout": [
+                ".mode-safe-area-top",
+                ".mode-safe-area-bottom"
+            ]
+        },
+        "combinations": {
+            "marketing_site_light": "<html data-theme=\"light\" data-mode=\"display\" data-brand=\"orion\">",
+            "saas_dashboard_dark": "<html data-theme=\"dark\" data-mode=\"product\" data-brand=\"uvm\">",
+            "mobile_app_branded": "<html data-theme=\"light\" data-mode=\"app\" data-brand=\"unitec\">"
+        }
+    },
+    "usage": {
+        "theme_switch": "<html data-theme=\"light|dark\">",
+        "brand_switch": "<html data-theme=\"light|dark\" data-brand=\"uvm\">",
+        "mode_switch": "<html data-mode=\"display|product|app\">",
+        "full_config": "<html data-theme=\"dark\" data-brand=\"uvm\" data-mode=\"product\">",
+        "css_import": "<link rel=\"stylesheet\" href=\"theme.css\">"
+    }
+}
