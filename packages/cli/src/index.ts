@@ -11,6 +11,7 @@
 import { init } from "./commands/init.js";
 import { add } from "./commands/add.js";
 import { list } from "./commands/list.js";
+import { create } from "./commands/create.js";
 import * as logger from "./lib/logger.js";
 
 const VERSION = "1.0.0";
@@ -20,9 +21,19 @@ function showHelp(): void {
   ${logger.bold("@orion-ds/cli")} — Add Orion components to your project
 
   ${logger.bold("Usage:")}
+    orion create <project>           Scaffold a new Orion project
     orion init                       Initialize orion.json
     orion add <name...>              Add components to your project
     orion list                       List available components
+
+  ${logger.bold("Create options:")}
+    --template=<react-app|vite-app|nextjs-app>   Project template (default: react-app)
+    --package-manager=<npm|pnpm|yarn|bun>        Package manager (auto-detect)
+    --brand=<orion|red|deepblue|orange>          Brand (default: orion)
+    --mode=<display|product|app>                 Mode (default: product)
+    --no-install                                 Skip npm install
+    --no-git                                     Skip git init
+    --overwrite                                  Overwrite existing directory
 
   ${logger.bold("Init options:")}
     --yes, -y                        Skip prompts, use defaults
@@ -37,9 +48,11 @@ function showHelp(): void {
     --local                               Use local registry
 
   ${logger.bold("Examples:")}
+    npx @orion-ds/cli create my-app
+    npx @orion-ds/cli create my-app --template=nextjs-app --brand=red
+    npx @orion-ds/cli create my-app --package-manager=pnpm --no-git
     npx @orion-ds/cli init
     npx @orion-ds/cli add button card modal
-    npx @orion-ds/cli add theme-controller --yes
     npx @orion-ds/cli list --type=section
 `);
 }
@@ -50,6 +63,9 @@ async function main(): Promise<void> {
   const commandArgs = args.slice(1);
 
   switch (command) {
+    case "create":
+      await create(commandArgs);
+      break;
     case "init":
       await init(commandArgs);
       break;

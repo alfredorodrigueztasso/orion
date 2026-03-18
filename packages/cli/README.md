@@ -6,12 +6,89 @@ Copy individual components, sections, and templates directly into your project. 
 
 ## Quick Start
 
+### Create a New Project (Recommended)
+
+```bash
+npx @orion-ds/cli create my-app
+cd my-app
+npm run dev
+```
+
+### Add Components to Existing Project
+
 ```bash
 npx @orion-ds/cli init
 npx @orion-ds/cli add button card modal
 ```
 
 ## Commands
+
+### `orion create <project-name>`
+
+Scaffold a new React/Next.js/Vite project with Orion pre-configured.
+
+```bash
+npx @orion-ds/cli create my-app                    # React + Vite template (default)
+npx @orion-ds/cli create my-app --template=nextjs-app  # Next.js 15
+npx @orion-ds/cli create my-app --template=vite-app    # Lightweight Vite
+```
+
+**Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--template=<name>` | Project template: `react-app`, `vite-app`, `nextjs-app` | `react-app` |
+| `--package-manager=<pm>` | Force package manager: `npm`, `pnpm`, `yarn`, `bun` | Auto-detect |
+| `--brand=<name>` | Brand: `orion`, `red`, `deepblue`, `orange` | `orion` |
+| `--mode=<name>` | Mode: `display`, `product`, `app` | `product` |
+| `--no-install` | Skip npm install | (install by default) |
+| `--no-git` | Skip git initialization | (git init by default) |
+| `--overwrite` | Overwrite existing directory | (fail if exists) |
+
+**What you get:**
+
+- ✅ TypeScript configured
+- ✅ Vite or Next.js 15 build
+- ✅ @orion-ds/react pre-installed
+- ✅ Orion CSS variables (theme, brand, mode)
+- ✅ ThemeProvider wrapped at root
+- ✅ Testing setup (Vitest, Playwright, Jest)
+- ✅ Linting & formatting (ESLint, Prettier)
+- ✅ Storybook configured (react-app only)
+- ✅ orion.json ready to use
+- ✅ Git repo initialized
+- ✅ Sample components and pages
+
+**Templates:**
+
+1. **`react-app`** (default) — Full-featured React + Vite
+   - Testing: Vitest + Playwright
+   - Documentation: Storybook
+   - Best for: Production React apps
+
+2. **`vite-app`** — Lightweight Vite + React
+   - Minimal dependencies
+   - Fast dev server
+   - Best for: Simple projects, demos
+
+3. **`nextjs-app`** — Next.js 15 with App Router
+   - Server components
+   - Built-in optimization
+   - Best for: Full-stack apps, SSR
+
+**Examples:**
+
+```bash
+# React app with red brand
+npx @orion-ds/cli create my-app --brand=red
+
+# Next.js with pnpm
+npx @orion-ds/cli create my-app --template=nextjs-app --package-manager=pnpm
+
+# Quick scaffolding without install
+npx @orion-ds/cli create my-app --no-install
+cd my-app && npm install
+```
 
 ### `orion init`
 

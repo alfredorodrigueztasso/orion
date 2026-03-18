@@ -1,0 +1,10 @@
+{
+  "$schema": "https://orion-ds.dev/schema/cli-config.json",
+  "registryUrl": "https://orion-ds.dev/r",
+  "componentDir": "src/components/orion",
+  "sectionDir": "src/sections/orion",
+  "templateDir": "src/templates/orion",
+  "typescript": true,
+  "brand": "orion",
+  "mode": "product"
+}

@@ -1,0 +1,23 @@
+.container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--spacing-4);
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+.card {
+  max-width: 500px;
+  text-align: center;
+}
+
+.card h1 {
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.card p {
+  color: var(--text-secondary);
+  margin: 0 0 var(--spacing-6) 0;
+}

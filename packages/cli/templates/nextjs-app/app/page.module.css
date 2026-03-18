@@ -1,0 +1,81 @@
+.container {
+  min-height: 100vh;
+  padding: var(--spacing-8);
+  background: var(--surface-base);
+  color: var(--text-primary);
+}
+
+.header {
+  text-align: center;
+  margin-bottom: var(--spacing-8);
+}
+
+.header h1 {
+  font-size: var(--font-size-3xl);
+  font-weight: 700;
+  margin: 0 0 var(--spacing-2) 0;
+}
+
+.subtitle {
+  font-size: var(--font-size-lg);
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+.card {
+  max-width: 600px;
+  margin: var(--spacing-6) auto;
+}
+
+.cardContent {
+  padding: var(--spacing-6);
+}
+
+.cardContent h2 {
+  margin: 0 0 var(--spacing-4) 0;
+}
+
+.feature {
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: flex-start;
+  padding: var(--spacing-4);
+  border-radius: var(--radius-control);
+  background: var(--surface-subtle);
+}
+
+.feature h3 {
+  margin: 0 0 var(--spacing-1) 0;
+  font-size: var(--font-size-base);
+  font-weight: 600;
+}
+
+.feature p {
+  margin: 0;
+  font-size: var(--font-size-sm);
+  color: var(--text-secondary);
+}
+
+.buttons {
+  display: flex;
+  gap: var(--spacing-4);
+  justify-content: center;
+  margin: var(--spacing-6) 0;
+}
+
+.badges {
+  display: flex;
+  gap: var(--spacing-3);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: var(--spacing-4);
+  }
+
+  .buttons {
+    flex-direction: column;
+  }
+}
