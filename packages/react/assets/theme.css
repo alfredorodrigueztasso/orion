@@ -863,29 +863,27 @@
 
 /* ─── Ember Brand Primitives ─── */
 [data-brand="ember"] {
-    /* Typography: DM Sans (same as orange) */
+    /* Typography: DM Sans */
     --font-primary: 'DM Sans', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
     --font-secondary: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
 
-    /* Brand Colors: Orange palette (accent only) */
-    --color-brand-50: #fef0eb;
-    --color-brand-100: #fdd5c9;
-    --color-brand-200: #fcb9a5;
-    --color-brand-300: #fa9d80;
-    --color-brand-400: #f87d52;
-    --color-brand-500: #F15D22;
-    --color-brand-600: #d9531f;
-    --color-brand-700: #c0491b;
-    --color-brand-800: #a63f17;
-    --color-brand-900: #8c3513;
-    --color-brand-950: #59220c;
+    /* Brand Colors: Ember (Warm Red-Orange - Fire-like) */
+    --color-brand-50: #fdf2ed;
+    --color-brand-100: #fcddcf;
+    --color-brand-200: #fac4aa;
+    --color-brand-300: #f8a885;
+    --color-brand-400: #f58c5f;
+    --color-brand-500: #ED5A2A;
+    --color-brand-600: #d64f23;
+    --color-brand-700: #c1431d;
+    --color-brand-800: #a63917;
+    --color-brand-900: #8c2f12;
+    --color-brand-950: #5a1c0a;
 
-    /* Geometry: Rectangular buttons like deepblue */
+    /* Geometry: Rounded Buttons */
     --radius-control: var(--radius-md);
-    --radius-button: var(--radius-md);
-    --radius-container: var(--radius-xl);
 
-    /* Override Neutrals to Pure Scale (same as orange) */
+    /* Override Neutrals to Pure Scale */
     --color-neutral-0: var(--color-neutral-pure-0);
     --color-neutral-50: var(--color-neutral-pure-50);
     --color-neutral-100: var(--color-neutral-pure-100);
@@ -903,89 +901,63 @@
 
 /* ─── Ember Light Mode Semantics ─── */
 [data-theme="light"][data-brand="ember"] {
-    /* Interactive — Orange (button overrides applied separately) */
+    /* Interactive (Buttons) */
     --interactive-primary: var(--color-brand-500);
     --interactive-primary-hover: var(--color-brand-700);
     --interactive-primary-text: var(--color-neutral-0);
 
-    /* Secondary Button */
+    /* Secondary Button (Neutral) */
     --interactive-secondary: var(--color-neutral-100);
     --interactive-secondary-hover: var(--color-neutral-200);
     --interactive-secondary-text: var(--color-neutral-900);
 
-    /* Text accents remain orange */
+    /* Text Colors */
+    --text-primary: var(--color-neutral-900);
+    --text-secondary: var(--color-neutral-600);
+    --text-tertiary: var(--color-neutral-500);
     --text-brand: var(--color-brand-600);
+    --text-inverse: var(--color-neutral-0);
 
-    /* Borders */
-    --border-interactive: var(--color-brand-500);
+    /* Surfaces */
+    --surface-base: var(--color-neutral-pure-0);
+    --surface-subtle: var(--color-neutral-pure-50);
+    --surface-layer: var(--color-neutral-pure-100);
+    --surface-sunken: var(--color-neutral-pure-200);
 
-    /* Glass Effect */
-    --surface-glass: color-mix(in srgb, var(--color-neutral-100) 70%, transparent);
-    --surface-sunken: color-mix(in srgb, var(--color-neutral-50) 40%, transparent);
-
-    /* Hero Gradients (orange accent) */
-    --hero-gradient-1: var(--color-brand-600);
-    --hero-gradient-2: var(--color-brand-800);
-
-    /* Feature Gradients */
-    --surface-brand-gradient: linear-gradient(135deg, var(--color-brand-soft) 0%, transparent 100%);
-    --status-warning-bg: color-mix(in srgb, var(--color-warning-500) 10%, transparent);
+    /* Borders and Dividers */
+    --border-subtle: var(--color-neutral-pure-200);
+    --border-subtle-secondary: var(--color-neutral-pure-100);
 }
 
 /* ─── Ember Dark Mode Semantics ─── */
 [data-theme="dark"][data-brand="ember"] {
-    /* Interactive — Orange (button overrides applied separately) */
+    /* Interactive (Buttons) */
     --interactive-primary: var(--color-brand-500);
     --interactive-primary-hover: var(--color-brand-400);
-    --interactive-primary-text: var(--color-neutral-0);
+    --interactive-primary-text: var(--color-neutral-1000);
 
-    /* Secondary Button */
-    --interactive-secondary: var(--color-neutral-800);
-    --interactive-secondary-hover: var(--color-neutral-700);
-    --interactive-secondary-text: var(--color-neutral-50);
+    /* Secondary Button (Muted) */
+    --interactive-secondary: var(--color-neutral-pure-800);
+    --interactive-secondary-hover: var(--color-neutral-pure-700);
+    --interactive-secondary-text: var(--color-neutral-pure-100);
 
-    /* Text accents remain orange */
+    /* Text Colors */
+    --text-primary: var(--color-neutral-pure-100);
+    --text-secondary: var(--color-neutral-pure-400);
+    --text-tertiary: var(--color-neutral-pure-500);
     --text-brand: var(--color-brand-400);
+    --text-inverse: var(--color-neutral-1000);
 
-    /* Borders */
-    --border-interactive: var(--color-brand-500);
+    /* Surfaces */
+    --surface-base: var(--color-neutral-pure-950);
+    --surface-subtle: var(--color-neutral-pure-900);
+    --surface-layer: var(--color-neutral-pure-800);
+    --surface-sunken: var(--color-neutral-pure-700);
 
-    /* Glass Effect */
-    --surface-glass: color-mix(in srgb, var(--color-neutral-900) 60%, transparent);
-    --surface-sunken: color-mix(in srgb, var(--color-neutral-950) 40%, transparent);
-
-    /* Hero Gradients */
-    --hero-gradient-1: var(--color-brand-600);
-    --hero-gradient-2: var(--color-brand-800);
-
-    /* Feature Gradients */
-    --surface-brand-gradient: linear-gradient(135deg, var(--color-brand-soft) 0%, transparent 100%);
-    --status-warning-bg: color-mix(in srgb, var(--color-warning-500) 15%, transparent);
+    /* Borders and Dividers */
+    --border-subtle: var(--color-neutral-pure-800);
+    --border-subtle-secondary: var(--color-neutral-pure-900);
 }
-
-/* ─── Ember Component Overrides ─── */
-[data-brand="ember"] .badge {
-    border-radius: var(--radius-md);
-}
-
-[data-brand="ember"] .badge-primary {
-    background: var(--color-neutral-900);
-    color: var(--color-neutral-0);
-}
-
-/* ─── Ember Brand Card Padding ─── */
-[data-brand="ember"] {
-    --card-padding: var(--spacing-6);
-    --card-padding-gap: var(--spacing-3);
-}
-
-/* ═══════════════════════════════════════════════════════════════════════════
-   LEMON BRAND — Bright Lime Green Theme Override
-   Usage: <html data-theme="light|dark" data-brand="lemon">
-   Features: Pill buttons, highly rounded design, Anton display font
-   ═══════════════════════════════════════════════════════════════════════════ */
-
-/* ─── Lemon Brand Primitives ─── */
 [data-brand="lemon"] {
     /* Typography: Anton (display) + Work Sans (body) */
     --font-primary: 'Anton', system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
