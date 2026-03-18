@@ -1,0 +1,276 @@
+TIER 3 PLANNING MANIFEST
+========================
+
+Created: March 18, 2026
+Status: READY FOR ARCHITECTURE REVIEW
+Total Documentation: 2,721 lines
+
+FILES GENERATED:
+================
+
+1. TIER3_PLAN.md (441 lines) — ROOT
+   Type: Executive Summary
+   Audience: Product managers, stakeholders
+   Purpose: 1-page overview of entire Tier 3 plan
+   Contains: Timeline, metrics, 7 épicas, next steps
+   READ TIME: 10 minutes
+
+2. TIER3_USER_STORIES.md (1,181 lines) — ROOT
+   Type: Complete Specification Document
+   Audience: Engineering team, product team
+   Purpose: Detailed 50 user stories with full specs
+   Contains: us-3.1 through us-3.50, AC, estimates, dependencies
+   READ TIME: 30 minutes (full), 5 minutes (skim by épica)
+
+3. .claude/TIER3_SUMMARY.md (290 lines)
+   Type: Quick Reference
+   Audience: Project managers, planners
+   Purpose: 2-page compressed version of all stories
+   Contains: Story matrix, distribution, metrics, phases
+   READ TIME: 10 minutes
+
+4. .claude/TIER3_TECHNICAL_DECISIONS.md (432 lines)
+   Type: Architecture Review Document
+   Audience: Architects, technical leads
+   Purpose: 8 key decisions requiring validation
+   Contains: Decisions 1-8 with pros/cons and sign-off checklist
+   READ TIME: 20 minutes
+
+5. .claude/TIER3_INDEX.md (377 lines)
+   Type: Navigation Guide
+   Audience: Project planning tools, teams
+   Purpose: Complete index for cross-referencing
+   Contains: Stories by épica, phase, priority, context
+   READ TIME: 15 minutes (reference doc)
+
+SUMMARY STATISTICS:
+===================
+
+Scope:
+  • 50 User Stories (numbered us-3.1 to us-3.50)
+  • 7 Épicas (CLI, MCP, Docs, Release, Perf, Advanced, Ecosystem)
+  • 4 Implementation Phases (6, 6, 8, and ongoing weeks)
+  • 464 Hours total estimation
+
+Priority Distribution:
+  • P1 (High):    14 stories = 122 hours = 26%
+  • P2 (Medium):  24 stories = 234 hours = 50%
+  • P3 (Low):     12 stories = 108 hours = 24%
+
+Phase Distribution:
+  • Phase 1: 14 stories, 122 hours, 8 people, 6 weeks
+  • Phase 2: 11 stories, 110 hours, 6 people, 6 weeks (parallel)
+  • Phase 3: 15 stories, 130 hours, 4 people, 8 weeks
+  • Phase 4: 10 stories, 102 hours, 2 people, ongoing
+
+7 ÉPICAS:
+=========
+
+1. CLI Expansion (10 stories)
+   Stories: us-3.1 to us-3.10
+   Hours: ~70
+   Key: orion create, build, docs, audit, add, update, upgrade, export, dev, config
+
+2. MCP Server Features (7 stories)
+   Stories: us-3.11 to us-3.17
+   Hours: ~86
+   Key: generate-component, generate-page, validate-design, semantic search
+
+3. Documentation (9 stories)
+   Stories: us-3.18 to us-3.26
+   Hours: ~108
+   Key: Getting Started, API docs, examples, playground, video tutorials
+
+4. Production & Release (6 stories)
+   Stories: us-3.27 to us-3.32
+   Hours: ~54
+   Key: semver automation, changelog, CI/CD, approval gates
+
+5. Performance & Observability (8 stories)
+   Stories: us-3.33 to us-3.40
+   Hours: ~76
+   Key: bundle tracking, visual regression, benchmarks, a11y scoring
+
+6. Advanced Features & Integrations (6 stories)
+   Stories: us-3.41 to us-3.46
+   Hours: ~76
+   Key: Figma plugin, VS Code, Storybook, Next.js/Remix, testing utilities
+
+7. Ecosystem & Community (4 stories)
+   Stories: us-3.47 to us-3.50
+   Hours: ~24
+   Key: contribution guidelines, forum, showcase, partner program
+
+8 KEY ARCHITECTURAL DECISIONS:
+==============================
+
+1. CLI Architecture
+   Decision: Minimal core (create, build, add) → phased expansion
+   Questions: Sub-command structure?
+
+2. MCP Tool Strategy
+   Decision: Lazy-load heavy tools, cache aggressively
+   Questions: Max response time (2s vs 5s)?
+
+3. Documentation
+   Decision: Hybrid (auto-generated + manual content)
+   Questions: API docs in Storybook or separate?
+
+4. Release & Versioning
+   Decision: Strict semver, 3-version support
+   Questions: Deprecation timeline (3 vs 5 majors)?
+
+5. Bundle Budget
+   Decision: 150KB gzipped, 5% threshold blocks PR
+   Questions: Is 5% too aggressive?
+
+6. Visual Regression
+   Decision: Playwright Phase 1, Percy Phase 2
+   Questions: 1% pixel tolerance acceptable?
+
+7. Docs Versioning
+   Decision: Keep 3 major versions (v3, v4, v5)
+   Questions: How many versions to maintain?
+
+8. Community Platform
+   Decision: GitHub Discussions Phase 1 → Discourse Phase 2
+   Questions: Partner program scope?
+
+SUCCESS METRICS:
+================
+
+Adoption:
+  • 1000+ monthly npm downloads
+  • 100+ GitHub stars
+  • 50+ community projects
+
+Quality:
+  • 95%+ documentation coverage
+  • 95%+ test coverage
+  • 100% WCAG AA compliance
+  • <2% visual regression rate
+
+Performance:
+  • <150KB bundle size (gzipped)
+  • >90 Lighthouse score
+  • <2s CLI latency
+
+Developer Experience:
+  • <5 minutes setup to first component
+  • <24 hour community response
+  • Zero onboarding friction
+
+HOW TO USE THIS DOCUMENTATION:
+=============================
+
+For Product Managers:
+  1. Start: TIER3_PLAN.md (10 min)
+  2. Review: Timeline, budget, metrics
+  3. Decide: Resource allocation & stakeholder communication
+
+For Architects:
+  1. Start: .claude/TIER3_TECHNICAL_DECISIONS.md (20 min)
+  2. Validate: 8 decisions, ask clarifying questions
+  3. Sign-off: Approve recommendations or adjust
+
+For Engineers:
+  1. Start: TIER3_USER_STORIES.md (find your épica)
+  2. Read: Full story, acceptance criteria, dependencies
+  3. Implement: Phase 1 stories starting Week 1
+
+For Teams:
+  1. Use: .claude/TIER3_INDEX.md as import for Jira/Linear
+  2. Sort by: Phase, priority, épica
+  3. Track: Burndown, velocity, blockers
+
+NEXT STEPS:
+===========
+
+1. ARCHITECTURE REVIEW (1 day)
+   → Read .claude/TIER3_TECHNICAL_DECISIONS.md
+   → Validate 8 decisions with sign-off checklist
+   → Provide feedback or approval
+
+2. STAKEHOLDER APPROVAL (1 day)
+   → Review TIER3_PLAN.md
+   → Approve resource allocation
+   → Communicate timeline to organization
+
+3. SPRINT PLANNING (1 day)
+   → Convert Phase 1 stories to tasks
+   → Create Jira/Linear issues
+   → Assign team members
+
+4. KICKOFF (Day 1 of Phase 1)
+   → Begin Phase 1 stories
+   → Daily standups
+   → Target: Core production features in 6 weeks
+
+RISKS & MITIGATION:
+===================
+
+Scope Creep (High Likelihood, High Impact)
+  → Fixed story definitions, sprint boundaries
+
+Documentation Staleness (High Likelihood, Medium Impact)
+  → Auto-generate where possible, CI checks
+
+Community Inactivity (Medium Likelihood, Low Impact)
+  → Clear guidelines, showcase, partner program
+
+Performance Regressions (Medium Likelihood, High Impact)
+  → Automated tracking, blocked PRs
+
+Release Failures (Low Likelihood, Critical Impact)
+  → Dry-run before publish, rollback capability
+
+QUESTIONS & FEEDBACK:
+====================
+
+For Technical Questions:
+  → See .claude/TIER3_TECHNICAL_DECISIONS.md (each decision has questions)
+
+For Story Clarification:
+  → See TIER3_USER_STORIES.md (find story us-3.X)
+
+For Timeline/Resource Concerns:
+  → See TIER3_PLAN.md (phase allocation, team sizes)
+
+To Propose Changes:
+  → Create GitHub Issue with label "tier-3"
+  → Reference specific story or decision number
+
+DOCUMENT LOCATIONS:
+===================
+
+Root Directory:
+  /Users/alfredo/Documents/AI First DS Library/TIER3_PLAN.md
+  /Users/alfredo/Documents/AI First DS Library/TIER3_USER_STORIES.md
+
+.claude/ Directory:
+  /Users/alfredo/Documents/AI First DS Library/.claude/TIER3_INDEX.md
+  /Users/alfredo/Documents/AI First DS Library/.claude/TIER3_SUMMARY.md
+  /Users/alfredo/Documents/AI First DS Library/.claude/TIER3_TECHNICAL_DECISIONS.md
+  /Users/alfredo/Documents/AI First DS Library/.claude/TIER3_MANIFEST.txt (this file)
+
+VERSION HISTORY:
+================
+
+Version 1.0 — March 18, 2026
+  • Initial creation: 50 stories across 7 épicas
+  • 2,721 lines of documentation
+  • Ready for architecture review
+
+STATUS:
+=======
+
+✓ PLANNING: Complete
+◄ REVIEW: Architecture review needed
+  APPROVAL: Awaiting stakeholder sign-off
+  EXECUTION: Phase 1 kickoff pending approval
+
+Created by: Product Owner (AI)
+For: Orion Design System Team
+Next Review: After architecture validation
+
+================================================================================
