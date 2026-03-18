@@ -1,8 +1,10 @@
-#!/usr/bin/env sh
-. "$(dirname "$0")/_/husky.sh"
-
 # Sync AI manifest before validation
 node scripts/sync-manifest.js
+
+# Validate Tier 2 data integrity (P2)
+node scripts/validate-spec-yaml.js
+node scripts/validate-registry-metadata.js
+node scripts/validate-ai-manifest.js
 
 # Run linters on staged files
 npx lint-staged

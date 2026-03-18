@@ -37,22 +37,9 @@ props:
     description: "Currently being dragged @internal"
     required: false
   availableFolders:
-    type: "Array<{ id: string"
-    description: "Available folders the agent can be moved to"
+    type: "Array<Folder>"
+    description: "Available folders"
     required: false
-
-ai_rules:
-  - "Never add brand prop (brand is global via ThemeProvider)"
-  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
-  - "Check data-theme context before styling (light/dark)"
-
-examples:
-  - title: "Basic Usage"
-    code: |
-      <AgentCard />
-  - title: "With Props"
-    code: |
-      <AgentCard {...props} />
 
 tokens:
   - "--spacing-4"
