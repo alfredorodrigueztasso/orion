@@ -1,96 +1,1590 @@
 {
   "components": {
     "button": {
-      "tags": ["action", "interaction", "cta", "control", "primary", "submit"],
-      "related_components": ["Field", "Modal", "Card"],
-      "common_patterns": ["used in Modal actions", "paired with Field in forms", "Icon + Button pattern", "button group layouts"]
+      "tags": [
+        "action",
+        "interaction",
+        "cta",
+        "control",
+        "primary",
+        "submit"
+      ],
+      "related_components": [
+        "Field",
+        "Modal",
+        "Card"
+      ],
+      "common_patterns": [
+        "used in Modal actions",
+        "paired with Field in forms",
+        "Icon + Button pattern",
+        "button group layouts"
+      ]
     },
     "card": {
-      "tags": ["container", "layout", "grouping", "surface", "elevation", "content"],
-      "related_components": ["Badge", "Button", "Stack"],
-      "common_patterns": ["card grid layouts", "card with header/footer", "interactive cards", "featured content cards"]
+      "tags": [
+        "container",
+        "layout",
+        "grouping",
+        "surface",
+        "elevation",
+        "content"
+      ],
+      "related_components": [
+        "Badge",
+        "Button",
+        "Stack"
+      ],
+      "common_patterns": [
+        "card grid layouts",
+        "card with header/footer",
+        "interactive cards",
+        "featured content cards"
+      ]
     },
     "field": {
-      "tags": ["form", "input", "validation", "text", "control", "user-input"],
-      "related_components": ["Button", "Label", "Alert"],
-      "common_patterns": ["form rows", "search input", "email validation", "password with toggle"]
+      "tags": [
+        "form",
+        "input",
+        "validation",
+        "text",
+        "control",
+        "user-input"
+      ],
+      "related_components": [
+        "Button",
+        "Label",
+        "Alert"
+      ],
+      "common_patterns": [
+        "form rows",
+        "search input",
+        "email validation",
+        "password with toggle"
+      ]
     },
     "modal": {
-      "tags": ["dialog", "overlay", "focus-trap", "alert", "confirmation", "form"],
-      "related_components": ["Button", "Field", "Alert"],
-      "common_patterns": ["confirmation dialog", "form modal", "alert modal", "action modal"]
+      "tags": [
+        "dialog",
+        "overlay",
+        "focus-trap",
+        "alert",
+        "confirmation",
+        "form"
+      ],
+      "related_components": [
+        "Button",
+        "Field",
+        "Alert"
+      ],
+      "common_patterns": [
+        "confirmation dialog",
+        "form modal",
+        "alert modal",
+        "action modal"
+      ]
     },
     "alert": {
-      "tags": ["notification", "status", "feedback", "warning", "error", "success", "info"],
-      "related_components": ["Icon", "Button", "Card"],
-      "common_patterns": ["success message", "error notification", "warning banner", "inline alerts"]
+      "tags": [
+        "notification",
+        "status",
+        "feedback",
+        "warning",
+        "error",
+        "success",
+        "info"
+      ],
+      "related_components": [
+        "Icon",
+        "Button",
+        "Card"
+      ],
+      "common_patterns": [
+        "success message",
+        "error notification",
+        "warning banner",
+        "inline alerts"
+      ]
     },
     "badge": {
-      "tags": ["label", "tag", "status", "indicator", "accent", "pill"],
-      "related_components": ["Button", "Card"],
-      "common_patterns": ["status badges", "skill tags", "category labels", "count badges"]
+      "tags": [
+        "label",
+        "tag",
+        "status",
+        "indicator",
+        "accent",
+        "pill"
+      ],
+      "related_components": [
+        "Button",
+        "Card"
+      ],
+      "common_patterns": [
+        "status badges",
+        "skill tags",
+        "category labels",
+        "count badges"
+      ]
     },
     "checkbox": {
-      "tags": ["form", "input", "control", "selection", "boolean"],
-      "related_components": ["Field", "RadioGroup", "Button"],
-      "common_patterns": ["checkbox list", "terms acceptance", "filter options"]
+      "tags": [
+        "form",
+        "input",
+        "control",
+        "selection",
+        "boolean"
+      ],
+      "related_components": [
+        "Field",
+        "RadioGroup",
+        "Button"
+      ],
+      "common_patterns": [
+        "checkbox list",
+        "terms acceptance",
+        "filter options"
+      ]
     },
     "avatar": {
-      "tags": ["profile", "user", "image", "initials", "display"],
-      "related_components": ["UserMenu", "Card"],
-      "common_patterns": ["user profile", "team member list", "comment author"]
+      "tags": [
+        "profile",
+        "user",
+        "image",
+        "initials",
+        "display"
+      ],
+      "related_components": [
+        "UserMenu",
+        "Card"
+      ],
+      "common_patterns": [
+        "user profile",
+        "team member list",
+        "comment author"
+      ]
     },
     "tabs": {
-      "tags": ["navigation", "layout", "tabbed-content", "sections", "switching"],
-      "related_components": ["Button", "Card"],
-      "common_patterns": ["tabbed interface", "content sections", "navigation tabs"]
+      "tags": [
+        "navigation",
+        "layout",
+        "tabbed-content",
+        "sections",
+        "switching"
+      ],
+      "related_components": [
+        "Button",
+        "Card"
+      ],
+      "common_patterns": [
+        "tabbed interface",
+        "content sections",
+        "navigation tabs"
+      ]
     },
     "stepper": {
-      "tags": ["progress", "wizard", "steps", "multi-step", "flow"],
-      "related_components": ["Button", "Card"],
-      "common_patterns": ["form wizard", "checkout steps", "onboarding flow"]
+      "tags": [
+        "progress",
+        "wizard",
+        "steps",
+        "multi-step",
+        "flow"
+      ],
+      "related_components": [
+        "Button",
+        "Card"
+      ],
+      "common_patterns": [
+        "form wizard",
+        "checkout steps",
+        "onboarding flow"
+      ]
+    },
+    "accordion": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "accordion"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "activity-feed": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "activity feed"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "agent-card": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "agent card"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "alert-dialog": {
+      "tags": [
+        "overlay",
+        "modal",
+        "popup",
+        "popover",
+        "dropdown",
+        "alert dialog"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Modal dialog",
+        "Dropdown menu",
+        "Floating panel"
+      ]
+    },
+    "banner": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "banner"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "breadcrumb": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "breadcrumb"
+      ],
+      "related_components": [
+        "Link",
+        "Navigation"
+      ],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "calendar": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "calendar"
+      ],
+      "related_components": [
+        "DatePicker",
+        "Stepper"
+      ],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "carousel": {
+      "tags": [
+        "media",
+        "visual",
+        "image",
+        "icon",
+        "gallery",
+        "carousel"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Icon set",
+        "Image gallery",
+        "Avatar display"
+      ]
+    },
+    "chart": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "chart"
+      ],
+      "related_components": [
+        "DataTable",
+        "MetricCards"
+      ],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "chat": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "chat"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "chip": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "chip"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "code-editor": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "code editor"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "collapsible-folder": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "collapsible folder"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "collapsible": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "collapsible"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "combobox": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "combobox"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "command-bar": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "command bar"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "command": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "command"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "data-table": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "data table"
+      ],
+      "related_components": [
+        "Pagination",
+        "FilterBar",
+        "DataTable"
+      ],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "date-picker": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "date picker"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "detail-panel": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "detail panel"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "divider": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "divider"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "drawer": {
+      "tags": [
+        "overlay",
+        "modal",
+        "popup",
+        "popover",
+        "dropdown",
+        "drawer"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Modal dialog",
+        "Dropdown menu",
+        "Floating panel"
+      ]
+    },
+    "dropdown": {
+      "tags": [
+        "overlay",
+        "modal",
+        "popup",
+        "popover",
+        "dropdown"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Modal dialog",
+        "Dropdown menu",
+        "Floating panel"
+      ]
+    },
+    "empty-state": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "empty state"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "error-boundary": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "error boundary"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "file-uploader": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "file uploader"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "filter-bar": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "filter bar"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "form-section": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "form section"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "icon": {
+      "tags": [
+        "media",
+        "visual",
+        "image",
+        "icon",
+        "gallery"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Icon set",
+        "Image gallery",
+        "Avatar display"
+      ]
+    },
+    "input-otp": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "input otp"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "kanban-board": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "kanban board"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "link": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "list": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "metric-cards": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "metric cards"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "nav-tree": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "nav tree"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "navbar": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "navbar"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "notification-center": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "notification center"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "page-header": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "page header"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "pagination": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "pagination"
+      ],
+      "related_components": [
+        "DataTable",
+        "List"
+      ],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "popover": {
+      "tags": [
+        "overlay",
+        "modal",
+        "popup",
+        "popover",
+        "dropdown"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Modal dialog",
+        "Dropdown menu",
+        "Floating panel"
+      ]
+    },
+    "progress-bar": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "progress bar"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "quick-actions": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "quick actions"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "radio": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "radio"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "search-input": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "search input"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "select": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "select"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "sidebar": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "sidebar"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "skeleton": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "skeleton"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "slider": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "slider"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "spinner": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "spinner"
+      ],
+      "related_components": [
+        "ProgressBar",
+        "Skeleton"
+      ],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "stack": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "stack"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "switch": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "switch"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "table": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "textarea": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "textarea"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "theme-controller": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "theme controller"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "toast": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "toast"
+      ],
+      "related_components": [
+        "Alert",
+        "NotificationCenter"
+      ],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "toggle-group": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "toggle group"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "toggle": {
+      "tags": [
+        "form",
+        "input",
+        "interactive",
+        "validation",
+        "toggle"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Login form",
+        "Registration form",
+        "Inline form"
+      ]
+    },
+    "tooltip": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "tooltip"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "user-menu": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "user menu"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "workspace-switcher": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "workspace switcher"
+      ],
+      "related_components": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
     }
   },
   "sections": {
     "hero": {
-      "tags": ["landing", "hero", "headline", "cta", "banner", "display"],
-      "related_sections": ["Features", "CTA"],
-      "common_patterns": ["page hero", "section hero", "hero with background image"]
+      "tags": [
+        "landing",
+        "hero",
+        "headline",
+        "cta",
+        "banner",
+        "display"
+      ],
+      "related_sections": [
+        "Features",
+        "CTA"
+      ],
+      "common_patterns": [
+        "page hero",
+        "section hero",
+        "hero with background image"
+      ]
     },
     "features": {
-      "tags": ["benefits", "highlights", "grid", "cards", "product"],
-      "related_sections": ["Hero", "Pricing"],
-      "common_patterns": ["feature grid", "feature list", "feature cards"]
+      "tags": [
+        "benefits",
+        "highlights",
+        "grid",
+        "cards",
+        "product"
+      ],
+      "related_sections": [
+        "Hero",
+        "Pricing"
+      ],
+      "common_patterns": [
+        "feature grid",
+        "feature list",
+        "feature cards"
+      ]
     },
     "pricing": {
-      "tags": ["commerce", "plans", "pricing-table", "tiers", "comparison"],
-      "related_sections": ["CTA", "Features"],
-      "common_patterns": ["pricing tiers", "comparison table", "plan selection"]
+      "tags": [
+        "commerce",
+        "plans",
+        "pricing-table",
+        "tiers",
+        "comparison"
+      ],
+      "related_sections": [
+        "CTA",
+        "Features"
+      ],
+      "common_patterns": [
+        "pricing tiers",
+        "comparison table",
+        "plan selection"
+      ]
     },
     "cta": {
-      "tags": ["call-to-action", "conversion", "action", "button", "highlight"],
-      "related_sections": ["Hero", "Footer"],
-      "common_patterns": ["end-of-page CTA", "section CTA", "prominent call-to-action"]
+      "tags": [
+        "call-to-action",
+        "conversion",
+        "action",
+        "button",
+        "highlight"
+      ],
+      "related_sections": [
+        "Hero",
+        "Footer"
+      ],
+      "common_patterns": [
+        "end-of-page CTA",
+        "section CTA",
+        "prominent call-to-action"
+      ]
     },
     "footer": {
-      "tags": ["navigation", "links", "company-info", "copyright", "legal"],
-      "related_sections": ["CTA"],
-      "common_patterns": ["page footer", "multi-column footer", "minimal footer"]
+      "tags": [
+        "navigation",
+        "links",
+        "company-info",
+        "copyright",
+        "legal"
+      ],
+      "related_sections": [
+        "CTA"
+      ],
+      "common_patterns": [
+        "page footer",
+        "multi-column footer",
+        "minimal footer"
+      ]
     },
     "testimonials": {
-      "tags": ["social-proof", "quotes", "customers", "reviews", "feedback"],
-      "related_sections": ["Features", "LogoCloud"],
-      "common_patterns": ["testimonial carousel", "testimonial grid", "featured testimonial"]
+      "tags": [
+        "social-proof",
+        "quotes",
+        "customers",
+        "reviews",
+        "feedback"
+      ],
+      "related_sections": [
+        "Features",
+        "LogoCloud"
+      ],
+      "common_patterns": [
+        "testimonial carousel",
+        "testimonial grid",
+        "featured testimonial"
+      ]
     },
     "faq": {
-      "tags": ["questions", "accordion", "help", "support", "faqs"],
-      "related_sections": ["Contact"],
-      "common_patterns": ["accordion FAQ", "FAQ grid", "searchable FAQ"]
+      "tags": [
+        "questions",
+        "accordion",
+        "help",
+        "support",
+        "faqs"
+      ],
+      "related_sections": [
+        "Contact"
+      ],
+      "common_patterns": [
+        "accordion FAQ",
+        "FAQ grid",
+        "searchable FAQ"
+      ]
     },
     "contact": {
-      "tags": ["form", "contact-form", "feedback", "inquiry", "support"],
-      "related_sections": ["Footer", "FAQ"],
-      "common_patterns": ["contact page", "inline contact form", "contact section"]
+      "tags": [
+        "form",
+        "contact-form",
+        "feedback",
+        "inquiry",
+        "support"
+      ],
+      "related_sections": [
+        "Footer",
+        "FAQ"
+      ],
+      "common_patterns": [
+        "contact page",
+        "inline contact form",
+        "contact section"
+      ]
+    },
+    "activity-feed-section": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "activity feed section"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "agent-folder": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "agent folder"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "app-download": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "app download"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "blog": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "blog"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "breadcrumbs": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "breadcrumbs"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "carousel-section": {
+      "tags": [
+        "media",
+        "visual",
+        "image",
+        "icon",
+        "gallery",
+        "carousel section"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Icon set",
+        "Image gallery",
+        "Avatar display"
+      ]
+    },
+    "chat-section": {
+      "tags": [
+        "data",
+        "display",
+        "table",
+        "list",
+        "visualization",
+        "chat section"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Data table",
+        "List view",
+        "Card grid"
+      ]
+    },
+    "comparison": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "comparison"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "container": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "empty-state-section": {
+      "tags": [
+        "feedback",
+        "status",
+        "notification",
+        "alert",
+        "empty state section"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Error message",
+        "Success state",
+        "Loading state"
+      ]
+    },
+    "gallery": {
+      "tags": [
+        "media",
+        "visual",
+        "image",
+        "icon",
+        "gallery"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Icon set",
+        "Image gallery",
+        "Avatar display"
+      ]
+    },
+    "logo-cloud": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "logo cloud"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "newsletter": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "newsletter"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "section": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "section"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "settings-layout": {
+      "tags": [
+        "layout",
+        "structure",
+        "container",
+        "grid",
+        "settings layout"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Dashboard layout",
+        "Content container",
+        "Sidebar layout"
+      ]
+    },
+    "social-proof": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "social proof"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "stats": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "stats"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "stepper-section": {
+      "tags": [
+        "navigation",
+        "routing",
+        "menu",
+        "link",
+        "stepper section"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Main navigation",
+        "Breadcrumbs",
+        "Menu dropdown"
+      ]
+    },
+    "team": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "team"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
+    },
+    "timeline": {
+      "tags": [
+        "marketing",
+        "section",
+        "hero",
+        "landing",
+        "page",
+        "timeline"
+      ],
+      "related_sections": [],
+      "common_patterns": [
+        "Landing page section",
+        "Hero banner",
+        "Feature showcase"
+      ]
     }
   }
 }
