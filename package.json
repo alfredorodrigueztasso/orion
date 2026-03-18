@@ -49,7 +49,8 @@
     "create:component": "node scripts/create-component.js",
     "prepare": "husky",
     "sync:manifest": "node scripts/sync-manifest.js",
-    "enrich:registry": "node scripts/enrich-registry.js"
+    "enrich:registry": "node scripts/enrich-registry.js",
+    "audit:visual": "node scripts/audit-visual-consistency.js"
   },
   "keywords": [
     "design-system",
