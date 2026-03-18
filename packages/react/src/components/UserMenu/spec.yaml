@@ -21,11 +21,11 @@ props:
     description: "Trigger element (custom trigger button)"
     required: false
   align:
-    type: ""start" | "end""
+    type: "start | end"
     description: "Menu alignment @default "end""
     required: false
   placement:
-    type: ""top" | "bottom""
+    type: "top | bottom"
     description: "Dropdown placement direction @default "bottom""
     required: false
   showHeader:

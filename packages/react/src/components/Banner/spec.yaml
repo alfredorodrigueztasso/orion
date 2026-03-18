@@ -45,7 +45,7 @@ props:
     description: "Side image URL (for 'split' variant)"
     required: false
   imagePosition:
-    type: ""left" | "right""
+    type: "left | right"
     description: "Image position for split variant @default 'right'"
     required: false
   backgroundColor:

@@ -37,7 +37,7 @@ props:
     description: "Whether completed steps should be marked with a checkmark @default true"
     required: false
   labelPosition:
-    type: ""bottom" | "right""
+    type: "bottom | right"
     description: "Alternative label position (only for horizontal orientation) @default 'bottom'"
     required: false
   scrollable:
