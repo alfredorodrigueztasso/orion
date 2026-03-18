@@ -3,12 +3,8 @@
 ## Setup (Required)
 
 ```tsx
-// Option 1: Single import (recommended)
+// Single import: tokens + components + theme switching
 import "@orion-ds/react/styles.css";
-
-// Option 2: Separate imports
-// import '@orion-ds/core/theme.css';
-// import '@orion-ds/react/dist/react.css';
 
 import { ThemeProvider } from "@orion-ds/react";
 

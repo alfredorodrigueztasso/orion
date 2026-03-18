@@ -6,7 +6,6 @@ const config: StorybookConfig = {
   stories: [
     "../src/**/*.mdx",
     "../src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
-    "../../blocks/src/**/*.stories.@(js|jsx|mjs|ts|tsx)",
   ],
   addons: [
     "@storybook/addon-links",
@@ -31,11 +30,6 @@ const config: StorybookConfig = {
           "@orion-ds/react/theme.css": path.resolve(
             __dirname,
             "../../theme.css",
-          ),
-          // Resolve @orion-ds/blocks to source for hot-reload (CSS modules handled by Vite)
-          "@orion-ds/blocks": path.resolve(
-            __dirname,
-            "../../packages/blocks/src",
           ),
         },
       },

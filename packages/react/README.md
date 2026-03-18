@@ -89,7 +89,7 @@ import { Button, Card, Field, useTheme, ThemeProvider } from '@orion-ds/react';
 
 function App() {
 return (
-<ThemeProvider> {/_ Fonts load automatically! _/}
+<ThemeProvider> {/* Fonts load automatically! */}
 <MyApp />
 </ThemeProvider>
 );
@@ -268,7 +268,7 @@ Pre-built page sections for rapid development:
 | **Navigation** | ActivityFeed, CarouselSection, AppDownload                         |
 
 \`\`\`tsx
-import { Hero, Features, Pricing } from '@orion-ds/react/sections';
+import { Hero, Features, Pricing } from '@orion-ds/react/blocks';
 
 <Hero title="Welcome" description="Build faster" />
 <Features items={[...]} columns={3} />
@@ -379,7 +379,7 @@ import { Chat } from "@orion-ds/react/rich"; // requires react-markdown
 ### Sections & Templates
 
 ```typescript
-import { Hero, Features, Pricing } from "@orion-ds/react/sections";
+import { Hero, Features, Pricing } from "@orion-ds/react/blocks";
 import { DashboardTemplate, LoginTemplate } from "@orion-ds/react/templates";
 ```
 

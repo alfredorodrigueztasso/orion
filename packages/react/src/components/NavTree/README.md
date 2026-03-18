@@ -5,7 +5,7 @@ A Notion-style hierarchical navigation sidebar with collapsible sections, folder
 ## Quick Start
 
 ```tsx
-import { NavTree } from "@orion-ds/react/sections";
+import { NavTree } from "@orion-ds/react/blocks";
 import { Home, BookOpen, FolderOpen } from "lucide-react";
 
 const sections = [

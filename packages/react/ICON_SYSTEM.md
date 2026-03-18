@@ -17,7 +17,7 @@ We use a **hybrid approach** combining:
 
 ```tsx
 // Pattern: Import Lucide icon + use Icon wrapper
-import { Icon } from "@orion/react";
+import { Icon } from "@orion-ds/react";
 import { Search } from "lucide-react";
 
 <Icon icon={Search} size="md" decorative />;
@@ -128,7 +128,7 @@ packages/react/
 #### Button with Icons
 
 ```tsx
-import { Button } from '@orion/react';
+import { Button } from '@orion-ds/react';
 import { Download, ChevronDown, Settings } from 'lucide-react';
 
 // Icon on left
@@ -156,7 +156,7 @@ import { Download, ChevronDown, Settings } from 'lucide-react';
 #### Field with Icon
 
 ```tsx
-import { Field } from '@orion/react';
+import { Field } from '@orion-ds/react';
 import { Search, Eye, EyeOff } from 'lucide-react';
 
 // Search input
@@ -176,7 +176,7 @@ import { Search, Eye, EyeOff } from 'lucide-react';
 #### Alert with Custom Icon
 
 ```tsx
-import { Alert } from '@orion/react';
+import { Alert } from '@orion-ds/react';
 import { Rocket, Bell } from 'lucide-react';
 
 // Uses default icon for variant
@@ -193,7 +193,7 @@ import { Rocket, Bell } from 'lucide-react';
 #### Using the Icon Wrapper (Advanced)
 
 ```tsx
-import { Icon } from '@orion/react';
+import { Icon } from '@orion-ds/react';
 import { AlertCircle, Check, Star } from 'lucide-react';
 
 // Decorative icon (hidden from screen readers)
@@ -425,7 +425,7 @@ Override with custom icon:
 
 ### Import Pattern
 ```tsx
-import { Icon, Button, Field, Alert } from '@orion/react';
+import { Icon, Button, Field, Alert } from '@orion-ds/react';
 import { Search, Download, AlertCircle } from 'lucide-react';
 ````
 

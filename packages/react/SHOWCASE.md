@@ -71,8 +71,8 @@ Esta página funciona inmediatamente sin build, usando el CSS existente del desi
 Una vez que Node.js esté instalado y el proyecto compilado:
 
 ```tsx
-import { ComponentShowcase } from "@orion/react";
-import "@orion/core/theme.css";
+import { ComponentShowcase } from "@orion-ds/react";
+import "@orion-ds/react/styles.css";
 
 function App() {
   return <ComponentShowcase />;
@@ -183,14 +183,14 @@ Una vez que Node.js esté instalado:
    cd react-showcase
    npm create vite@latest . -- --template react-ts
    npm install
-   npm install @orion/react @orion/core
+   npm install @orion-ds/react
    ```
 
    Luego en `src/App.tsx`:
 
    ```tsx
-   import { ComponentShowcase } from "@orion/react";
-   import "@orion/core/theme.css";
+   import { ComponentShowcase } from "@orion-ds/react";
+   import "@orion-ds/react/styles.css";
 
    export default function App() {
      return <ComponentShowcase />;

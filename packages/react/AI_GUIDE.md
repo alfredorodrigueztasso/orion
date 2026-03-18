@@ -37,11 +37,8 @@ Need a UI element?
 ## Setup (Required)
 
 ```tsx
-// 1. Import styles (choose ONE method)
-import "@orion-ds/react/styles.css"; // Recommended: single import
-// OR
-// import '@orion-ds/core/theme.css';
-// import '@orion-ds/react/dist/react.css';
+// 1. Import styles (only ONE method needed)
+import "@orion-ds/react/styles.css"; // Everything you need: tokens + components
 
 // 2. Wrap app with ThemeProvider
 import { ThemeProvider } from "@orion-ds/react";

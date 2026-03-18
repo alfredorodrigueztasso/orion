@@ -1,3 +1,6 @@
+export { AgentFolder } from "./AgentFolder";
+export type { AgentFolderProps } from "./AgentFolder";
+
 export { ActivityFeed } from "./ActivityFeed";
 export type { ActivityFeedProps } from "./ActivityFeed";
 

@@ -7,7 +7,7 @@ Orion React includes **Lucide icons** - a comprehensive icon library with 5000+ 
 ### 1. Import Icons
 
 ```tsx
-import { Button } from "@orion/react";
+import { Button } from "@orion-ds/react";
 import { Search, Download, Settings } from "lucide-react";
 
 // Use with Button
@@ -41,7 +41,7 @@ The following components support icons via `ReactNode` props:
 - `icon` - Icon displayed inside input field
 
 ```tsx
-import { Field } from "@orion/react";
+import { Field } from "@orion-ds/react";
 import { Mail } from "lucide-react";
 
 <Field type="email" placeholder="Email" icon={<Mail size={18} />} />;
@@ -52,7 +52,7 @@ import { Mail } from "lucide-react";
 - `icon` - Custom icon for alert (replaces default status icon)
 
 ```tsx
-import { Alert } from "@orion/react";
+import { Alert } from "@orion-ds/react";
 import { AlertCircle } from "lucide-react";
 
 <Alert variant="error" icon={<AlertCircle size={20} />}>
@@ -65,7 +65,7 @@ import { AlertCircle } from "lucide-react";
 - Custom icon support via `children`
 
 ```tsx
-import { Badge } from "@orion/react";
+import { Badge } from "@orion-ds/react";
 import { Star } from "lucide-react";
 
 <Badge variant="brand">
@@ -236,7 +236,7 @@ Combine icons with loading state:
 Use CSS variables to match your theme:
 
 ```tsx
-import { useThemeContext } from "@orion/react";
+import { useThemeContext } from "@orion-ds/react";
 
 function MyComponent() {
   return (
@@ -275,10 +275,10 @@ import { RotateCw } from "lucide-react";
 
 ```tsx
 import React from "react";
-import { Button, Field, Alert, ThemeProvider } from "@orion/react";
+import { Button, Field, Alert, ThemeProvider } from "@orion-ds/react";
 import { Search, Download, AlertCircle, Settings } from "lucide-react";
-import "@orion/core/theme.css";
-import "@orion/react/dist/react.css";
+import "@orion-ds/react/styles.css";
+import "@orion-ds/react/dist/react.css";
 
 function App() {
   return (
@@ -358,8 +358,8 @@ export default App;
 1. Make sure CSS is imported:
 
    ```tsx
-   import "@orion/core/theme.css";
-   import "@orion/react/dist/react.css";
+   import "@orion-ds/react/styles.css";
+   import "@orion-ds/react/dist/react.css";
    ```
 
 2. Check if icon is inside a component that supports icons:

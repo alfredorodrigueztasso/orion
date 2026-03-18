@@ -1,6 +1,6 @@
 # Orion React JSON Schemas
 
-This directory contains JSON Schema definitions for `@orion/react` components. These schemas enable AI models to generate valid component code with proper props and usage patterns.
+This directory contains JSON Schema definitions for `@orion-ds/react` components. These schemas enable AI models to generate valid component code with proper props and usage patterns.
 
 ## Purpose
 
@@ -50,13 +50,13 @@ Each schema includes:
 ### 1. Load Schema Index
 
 ```javascript
-const schemas = require("@orion/react/schemas/index.json");
+const schemas = require("@orion-ds/react/schemas/index.json");
 ```
 
 ### 2. Reference in Prompts
 
 ```
-Use the Button component from @orion/react with these valid props:
+Use the Button component from @orion-ds/react with these valid props:
 - variant: "primary" | "secondary" | "ghost" | "danger"
 - size: "sm" | "md" | "lg"
 - loading: boolean
