@@ -1,0 +1,38 @@
+name: WorkspaceSwitcher
+title: "WorkspaceSwitcher"
+description: "Workspace selection dropdown"
+category: "component"
+
+props:
+  currentOrg:
+    type: "CurrentWorkspaceOrg"
+    description: "The currentOrg prop"
+    required: true
+  organizations:
+    type: "WorkspaceOrg[]"
+    description: "The organizations prop"
+    required: true
+  fullWidth:
+    type: "boolean"
+    description: "Whether the trigger stretches to full width. @default true"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <WorkspaceSwitcher />
+  - title: "With Props"
+    code: |
+      <WorkspaceSwitcher {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

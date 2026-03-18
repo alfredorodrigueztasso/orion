@@ -1,0 +1,110 @@
+name: DataTable
+title: "DataTable"
+description: "Tabular data display"
+category: "complex"
+
+props:
+  columns:
+    type: "DataTableColumn<T>[]"
+    description: "Column definitions"
+    required: true
+  data:
+    type: "T[]"
+    description: "Data rows"
+    required: true
+  searchable:
+    type: "boolean"
+    description: "Enable search functionality @default false"
+    required: false
+  searchPlaceholder:
+    type: "string"
+    description: "Search placeholder text"
+    required: false
+  searchValue:
+    type: "string"
+    description: "Current search value (controlled)"
+    required: false
+  filters:
+    type: "DataTableFilter[]"
+    description: "Filter definitions"
+    required: false
+  filterValues:
+    type: "Record<string, unknown>"
+    description: "Active filter values"
+    required: false
+  pagination:
+    type: "DataTablePagination"
+    description: "Pagination configuration"
+    required: false
+  selectable:
+    type: "boolean"
+    description: "Enable row selection @default false"
+    required: false
+  selectedKeys:
+    type: "Key[]"
+    description: "Selected row keys"
+    required: false
+  bulkActions:
+    type: "DataTableBulkAction[]"
+    description: "Bulk actions for selected rows"
+    required: false
+  rowActions:
+    type: "DataTableRowAction<T>[]"
+    description: "Per-row actions"
+    required: false
+  sort:
+    type: "DataTableSort"
+    description: "Current sort state"
+    required: false
+  emptyState:
+    type: "DataTableEmptyState"
+    description: "Empty state configuration"
+    required: false
+  loading:
+    type: "boolean"
+    description: "Loading state @default false"
+    required: false
+  striped:
+    type: "boolean"
+    description: "Striped rows @default false"
+    required: false
+  hoverable:
+    type: "boolean"
+    description: "Hoverable rows @default true"
+    required: false
+  compact:
+    type: "boolean"
+    description: "Compact mode @default false"
+    required: false
+  stickyHeader:
+    type: "boolean"
+    description: "Sticky header @default false"
+    required: false
+  maxHeight:
+    type: "string"
+    description: "Table max height (enables scrolling)"
+    required: false
+  toolbar:
+    type: "ReactNode"
+    description: "Toolbar content (rendered before table)"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <DataTable />
+  - title: "With Props"
+    code: |
+      <DataTable {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Pagination", "Icon", "Button", "Field"]

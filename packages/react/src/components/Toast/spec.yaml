@@ -1,0 +1,45 @@
+name: Toast
+title: "Toast"
+description: "Toast notification"
+category: "feedback"
+
+props:
+  children:
+    type: "ReactNode"
+    description: "Children to wrap"
+    required: true
+  position:
+    type: "ToastPosition"
+    description: "Default position for toasts @default 'bottom-right'"
+    required: false
+  maxToasts:
+    type: "number"
+    description: "Maximum number of toasts to show at once @default 5"
+    required: false
+  defaultDuration:
+    type: "number"
+    description: "Default duration for toasts @default 5000"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Toast />
+  - title: "With Props"
+    code: |
+      <Toast {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Alert", "Button", "Icon", "Card"]

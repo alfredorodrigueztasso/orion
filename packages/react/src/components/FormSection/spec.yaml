@@ -1,0 +1,72 @@
+name: FormSection
+title: "FormSection"
+description: "Form section container"
+category: "layout"
+
+props:
+  title:
+    type: "string"
+    description: "Section title (optional) If not provided, header is omitted unless collapsible is true"
+    required: false
+  description:
+    type: "string"
+    description: "Description text below title"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Form field children"
+    required: true
+  actions:
+    type: "ReactNode"
+    description: "Action buttons (save, cancel, etc.)"
+    required: false
+  collapsible:
+    type: "boolean"
+    description: "Make section collapsible @default false"
+    required: false
+  defaultCollapsed:
+    type: "boolean"
+    description: "Default collapsed state (only when collapsible) @default false"
+    required: false
+  divider:
+    type: "boolean"
+    description: "Show divider below section @default false"
+    required: false
+  variant:
+    type: "FormSectionVariant"
+    description: "Visual variant - default: Simple layout with border - card: Wrapped in card container - inline: Side-by-side title/fields layout @default 'default'"
+    required: false
+  icon:
+    type: "ReactNode"
+    description: "Custom icon for section header"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "Disable all fields in section @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Layout"
+    code: |
+      <FormSection>
+        <h2>Title</h2>
+        <p>Content</p>
+      </FormSection>
+  - title: "With Props"
+    code: |
+      <FormSection {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Icon", "Divider"]

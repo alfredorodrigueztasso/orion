@@ -1,0 +1,34 @@
+name: ErrorBoundary
+title: "ErrorBoundary"
+description: "Error boundary wrapper"
+category: "error"
+
+props:
+  children:
+    type: "ReactNode"
+    description: "The children prop"
+    required: true
+  resetKey:
+    type: "string | number"
+    description: "The resetKey prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <ErrorBoundary />
+  - title: "With Props"
+    code: |
+      <ErrorBoundary {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

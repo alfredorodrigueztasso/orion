@@ -1,0 +1,63 @@
+name: Breadcrumb
+title: "Breadcrumb"
+description: "Navigation breadcrumb trail"
+category: "navigation"
+
+props:
+  items:
+    type: "BreadcrumbItem[]"
+    description: "Breadcrumb items"
+    required: true
+  separator:
+    type: "BreadcrumbSeparator"
+    description: "Separator type @default 'chevron'"
+    required: false
+  customSeparator:
+    type: "ReactNode"
+    description: "Custom separator element (only used if separator is 'custom')"
+    required: false
+  showHomeIcon:
+    type: "boolean"
+    description: "Show home icon for first item @default false"
+    required: false
+  maxItems:
+    type: "number"
+    description: "Maximum number of items to display (items in middle will be collapsed if exceeded)"
+    required: false
+  size:
+    type: "BreadcrumbSize"
+    description: "Breadcrumb size @default 'md'"
+    required: false
+  className:
+    type: "string"
+    description: "Additional CSS class"
+    required: false
+  linkProps:
+    type: "Omit<AnchorHTMLAttributes<HTMLAnchorElement>, "href">"
+    description: "Link props (applied to all anchor elements)"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use semantic HTML (nav, link, list)"
+  - "Support keyboard navigation (Tab, Arrow keys)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Breadcrumb />
+  - title: "With Props"
+    code: |
+      <Breadcrumb {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Link", "Avatar"]

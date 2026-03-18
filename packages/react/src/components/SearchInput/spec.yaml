@@ -1,0 +1,63 @@
+name: SearchInput
+title: "SearchInput"
+description: "Search input field"
+category: "interactive"
+
+props:
+  size:
+    type: "SearchInputSize"
+    description: "Size variant @default 'md'"
+    required: false
+  showClear:
+    type: "boolean"
+    description: "Whether to show the clear button when there's a value @default true"
+    required: false
+  showSearchButton:
+    type: "boolean"
+    description: "Whether to show a search button @default false"
+    required: false
+  searchIcon:
+    type: "ReactNode"
+    description: "Custom search icon"
+    required: false
+  clearLabel:
+    type: "string"
+    description: "Label for the clear button (accessibility) @default 'Clear search'"
+    required: false
+  searchLabel:
+    type: "string"
+    description: "Label for the search button (accessibility) @default 'Search'"
+    required: false
+  loading:
+    type: "boolean"
+    description: "Whether the input is in a loading state @default false"
+    required: false
+  fullWidth:
+    type: "boolean"
+    description: "Make the input take full width @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <SearchInput trigger="Click me">Content</SearchInput>
+  - title: "With Props"
+    code: |
+      <SearchInput {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Icon", "Popover"]

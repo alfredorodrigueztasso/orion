@@ -1,0 +1,84 @@
+name: DetailPanel
+title: "DetailPanel"
+description: "Side panel for detailed information"
+category: "layout"
+
+props:
+  open:
+    type: "boolean"
+    description: "Whether the panel is open"
+    required: true
+  title:
+    type: "ReactNode"
+    description: "Panel title"
+    required: true
+  description:
+    type: "ReactNode"
+    description: "Optional description text below title"
+    required: false
+  subtitle:
+    type: "ReactNode"
+    description: "@deprecated Use `description` instead. Will be removed in v3.0."
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Panel content"
+    required: true
+  size:
+    type: "DetailPanelSize"
+    description: "Panel size - sm: 320px - md: 480px - lg: 640px - xl: 800px @default 'md'"
+    required: false
+  position:
+    type: "DetailPanelPosition"
+    description: "Panel position @default 'right'"
+    required: false
+  headerActions:
+    type: "ReactNode"
+    description: "Header actions (buttons in header area)"
+    required: false
+  footer:
+    type: "ReactNode"
+    description: "Footer content"
+    required: false
+  overlay:
+    type: "boolean"
+    description: "Show overlay backdrop @default true"
+    required: false
+  closeOnOverlayClick:
+    type: "boolean"
+    description: "Close on overlay click @default true"
+    required: false
+  closeOnEscape:
+    type: "boolean"
+    description: "Close on Escape key @default true"
+    required: false
+  loading:
+    type: "boolean"
+    description: "Loading state @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Layout"
+    code: |
+      <DetailPanel>
+        <h2>Title</h2>
+        <p>Content</p>
+      </DetailPanel>
+  - title: "With Props"
+    code: |
+      <DetailPanel {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Icon", "Divider"]

@@ -1,0 +1,83 @@
+name: FileUploader
+title: "FileUploader"
+description: "File upload input"
+category: "form"
+
+props:
+  accept:
+    type: "string[]"
+    description: "Accepted file types (MIME types or extensions)"
+    required: false
+  maxFiles:
+    type: "number"
+    description: "Maximum number of files"
+    required: false
+  maxSize:
+    type: "number"
+    description: "Maximum file size in bytes"
+    required: false
+  multiple:
+    type: "boolean"
+    description: "Allow multiple files @default true"
+    required: false
+  files:
+    type: "UploadedFile[]"
+    description: "Current uploaded files (controlled)"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "Disabled state"
+    required: false
+  dropzoneContent:
+    type: "ReactNode"
+    description: "Custom dropzone content"
+    required: false
+  placeholder:
+    type: "string"
+    description: "Custom placeholder text @default "Drag and drop files here, or click to browse""
+    required: false
+  showFileList:
+    type: "boolean"
+    description: "Show file list below dropzone @default true"
+    required: false
+  compact:
+    type: "boolean"
+    description: "Compact mode @default false"
+    required: false
+  variant:
+    type: ""default" | "minimal" | "card""
+    description: "Variant style @default "default""
+    required: false
+  error:
+    type: "string"
+    description: "Error message"
+    required: false
+  helperText:
+    type: "string"
+    description: "Helper text"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <FileUploader label="Option" />
+  - title: "With Props"
+    code: |
+      <FileUploader {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

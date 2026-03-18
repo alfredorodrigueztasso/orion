@@ -1,0 +1,59 @@
+name: Dropdown
+title: "Dropdown"
+description: "Dropdown menu"
+category: "interactive"
+
+props:
+  trigger:
+    type: "ReactNode"
+    description: "The trigger element that opens the dropdown"
+    required: true
+  items:
+    type: "DropdownItem[]"
+    description: "Menu items (flat list or grouped)"
+    required: false
+  groups:
+    type: "DropdownGroup[]"
+    description: "Grouped menu items"
+    required: false
+  placement:
+    type: "DropdownPlacement"
+    description: "Placement of the dropdown @default 'bottom-start'"
+    required: false
+  open:
+    type: "boolean"
+    description: "Whether the dropdown is open (controlled)"
+    required: false
+  minWidth:
+    type: "number"
+    description: "Minimum width of the dropdown menu @default 180"
+    required: false
+  closeOnSelect:
+    type: "boolean"
+    description: "Whether to close when an item is selected @default true"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <Dropdown trigger="Click me">Content</Dropdown>
+  - title: "With Props"
+    code: |
+      <Dropdown {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Popover", "Menu", "Button", "Icon"]

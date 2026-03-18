@@ -1,0 +1,42 @@
+name: MetricCards
+title: "MetricCards"
+description: "Cards displaying metrics"
+category: "component"
+
+props:
+  metrics:
+    type: "MetricItem[]"
+    description: "Array of metric items"
+    required: true
+  columns:
+    type: "MetricCardsColumns"
+    description: "Number of grid columns @default 4"
+    required: false
+  variant:
+    type: "MetricCardsVariant"
+    description: "Visual variant - default: Standard cards with borders - compact: Smaller padding and text - detailed: Includes sparklines and descriptions @default 'default'"
+    required: false
+  loading:
+    type: "boolean"
+    description: "Loading state for all cards @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <MetricCards />
+  - title: "With Props"
+    code: |
+      <MetricCards {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

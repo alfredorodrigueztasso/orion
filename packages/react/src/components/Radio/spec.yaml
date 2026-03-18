@@ -1,0 +1,47 @@
+name: Radio
+title: "Radio"
+description: "Radio button control"
+category: "form"
+
+props:
+  label:
+    type: "string"
+    description: "Radio label text. Required for accessibility unless aria-label is provided."
+    required: false
+  helperText:
+    type: "string"
+    description: "Helper text displayed below the radio. Automatically linked via aria-describedby."
+    required: false
+  error:
+    type: "string"
+    description: "Error message. Shows error state and displays message below radio."
+    required: false
+  size:
+    type: "RadioSize"
+    description: "Radio size variant. @default 'md'"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Radio label="Option" />
+  - title: "Different Sizes"
+    code: |
+      <Radio label="Option" size="lg" />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Checkbox", "Toggle", "Field", "Option"]

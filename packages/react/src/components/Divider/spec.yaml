@@ -1,0 +1,47 @@
+name: Divider
+title: "Divider"
+description: "Visual separator"
+category: "display"
+
+props:
+  orientation:
+    type: "DividerOrientation"
+    description: "Orientation of the divider @default 'horizontal'"
+    required: false
+  variant:
+    type: "DividerVariant"
+    description: "Visual variant of the divider @default 'solid'"
+    required: false
+  spacing:
+    type: ""none" | "sm" | "md" | "lg""
+    description: "Spacing around the divider @default 'md'"
+    required: false
+  label:
+    type: "string"
+    description: "Optional label to display in the center of the divider"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Primary Variant"
+    code: |
+      <Divider variant="primary">Content</Divider>
+  - title: "Secondary Variant"
+    code: |
+      <Divider variant="secondary">Content</Divider>
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Badge", "Stack", "Icon"]

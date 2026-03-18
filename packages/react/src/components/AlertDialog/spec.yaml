@@ -1,0 +1,53 @@
+name: AlertDialog
+title: "AlertDialog"
+description: "The AlertDialog component"
+category: "modal"
+
+props:
+  open:
+    type: "boolean"
+    description: "Whether the dialog is open"
+    required: true
+  closeOnBackdrop:
+    type: "boolean"
+    description: "Close on backdrop click @default false"
+    required: false
+  closeOnEscape:
+    type: "boolean"
+    description: "Close on Escape key @default false"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Dialog content (use compound components)"
+    required: false
+  className:
+    type: "string"
+    description: "Additional class name"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Trap focus within modal for accessibility"
+  - "Support keyboard dismissal (Escape key)"
+
+examples:
+  - title: "Default"
+    code: |
+      <AlertDialog isOpen={open} onClose={handleClose}>
+        Content
+      </AlertDialog>
+  - title: "With Props"
+    code: |
+      <AlertDialog {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Card", "Divider"]

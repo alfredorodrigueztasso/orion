@@ -1,0 +1,59 @@
+name: Chip
+title: "Chip"
+description: "Compact label or tag"
+category: "display"
+
+props:
+  variant:
+    type: "ChipVariant"
+    description: "Visual variant of the chip @default 'default'"
+    required: false
+  size:
+    type: "ChipSize"
+    description: "Size of the chip @default 'md'"
+    required: false
+  icon:
+    type: "ReactNode"
+    description: "Icon to display before the label"
+    required: false
+  clickable:
+    type: "boolean"
+    description: "Whether the chip is clickable @default false"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "Whether the chip is disabled @default false"
+    required: false
+  selected:
+    type: "boolean"
+    description: "Whether the chip is selected (for selectable chips) @default false"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Chip content"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Primary Variant"
+    code: |
+      <Chip variant="primary">Content</Chip>
+  - title: "Secondary Variant"
+    code: |
+      <Chip variant="secondary">Content</Chip>
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Badge", "Stack", "Icon"]

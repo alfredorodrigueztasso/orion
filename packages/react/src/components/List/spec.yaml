@@ -1,0 +1,50 @@
+name: List
+title: "List"
+description: "Vertical list of items"
+category: "complex"
+
+props:
+  items:
+    type: "ListItem[]"
+    description: "List items"
+    required: true
+  size:
+    type: "ListSize"
+    description: "Size variant @default 'md'"
+    required: false
+  variant:
+    type: "ListVariant"
+    description: "Visual variant @default 'default'"
+    required: false
+  interactive:
+    type: "boolean"
+    description: "Whether the list items are interactive (hoverable/clickable) @default false"
+    required: false
+  selectable:
+    type: "boolean"
+    description: "Whether items can be selected @default false"
+    required: false
+  emptyContent:
+    type: "ReactNode"
+    description: "Custom empty state when no items"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <List />
+  - title: "With Props"
+    code: |
+      <List {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Button", "Icon", "Pagination"]

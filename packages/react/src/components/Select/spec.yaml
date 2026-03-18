@@ -1,0 +1,43 @@
+name: Select
+title: "Select"
+description: "Dropdown select"
+category: "interactive"
+
+props:
+  value:
+    type: "string"
+    description: "Option value"
+    required: true
+  children:
+    type: "React.ReactNode"
+    description: "Option label (displayed text)"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "Disabled state"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <Select trigger="Click me">Content</Select>
+  - title: "With Props"
+    code: |
+      <Select {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Combobox", "Field", "Option", "Button"]

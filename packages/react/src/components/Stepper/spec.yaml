@@ -1,0 +1,66 @@
+name: Stepper
+title: "Stepper"
+description: "Step-by-step process indicator"
+category: "complex"
+
+props:
+  steps:
+    type: "StepItem[]"
+    description: "Array of step items"
+    required: true
+  currentStep:
+    type: "number"
+    description: "Current active step index (0-based) @default 0"
+    required: false
+  clickable:
+    type: "boolean"
+    description: "Whether steps are clickable @default false"
+    required: false
+  orientation:
+    type: "StepperOrientation"
+    description: "Stepper orientation @default 'horizontal'"
+    required: false
+  size:
+    type: "StepperSize"
+    description: "Size variant @default 'md'"
+    required: false
+  showNumbers:
+    type: "boolean"
+    description: "Whether to show step numbers @default true"
+    required: false
+  showConnectors:
+    type: "boolean"
+    description: "Whether to show connector lines between steps @default true"
+    required: false
+  showCheckmarks:
+    type: "boolean"
+    description: "Whether completed steps should be marked with a checkmark @default true"
+    required: false
+  labelPosition:
+    type: ""bottom" | "right""
+    description: "Alternative label position (only for horizontal orientation) @default 'bottom'"
+    required: false
+  scrollable:
+    type: "boolean"
+    description: "Enable horizontal scrolling on mobile for better UX with many steps When enabled, labels remain visible and the stepper scrolls horizontally. Auto-scrolls to center the current step when it changes. @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Stepper />
+  - title: "With Props"
+    code: |
+      <Stepper {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Icon", "Button", "Divider"]

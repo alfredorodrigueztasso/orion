@@ -1,0 +1,63 @@
+name: InputOTP
+title: "InputOTP"
+description: "One-time password input"
+category: "form"
+
+props:
+  maxLength:
+    type: "number"
+    description: "The maxLength prop"
+    required: true
+  value:
+    type: "string"
+    description: "The value prop"
+    required: false
+  defaultValue:
+    type: "string"
+    description: "The defaultValue prop"
+    required: false
+  type:
+    type: "InputOTPType"
+    description: "The type prop"
+    required: false
+  size:
+    type: "InputOTPSize"
+    description: "The size prop"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "The disabled prop"
+    required: false
+  autoFocus:
+    type: "boolean"
+    description: "The autoFocus prop"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "The children prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <InputOTP label="Option" />
+  - title: "Different Sizes"
+    code: |
+      <InputOTP label="Option" size="lg" />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

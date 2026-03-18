@@ -1,0 +1,51 @@
+name: Toggle
+title: "Toggle"
+description: "Toggle button"
+category: "form"
+
+props:
+  pressed:
+    type: "boolean"
+    description: "The pressed prop"
+    required: false
+  defaultPressed:
+    type: "boolean"
+    description: "The defaultPressed prop"
+    required: false
+  variant:
+    type: "ToggleVariant"
+    description: "The variant prop"
+    required: false
+  size:
+    type: "ToggleSize"
+    description: "The size prop"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "The children prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Toggle label="Option" />
+  - title: "Different Sizes"
+    code: |
+      <Toggle label="Option" size="lg" />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

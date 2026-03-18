@@ -1,0 +1,53 @@
+name: EmptyState
+title: "EmptyState"
+description: "Empty state placeholder"
+category: "feedback"
+
+props:
+  icon:
+    type: "ReactNode"
+    description: "Icon or illustration to display"
+    required: false
+  title:
+    type: "string"
+    description: "Main title text"
+    required: true
+  description:
+    type: "string"
+    description: "Description text"
+    required: false
+  action:
+    type: "ReactNode"
+    description: "Primary action button"
+    required: false
+  secondaryAction:
+    type: "ReactNode"
+    description: "Secondary action button"
+    required: false
+  size:
+    type: "EmptyStateSize"
+    description: "Size variant @default 'md'"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <EmptyState />
+  - title: "With Props"
+    code: |
+      <EmptyState {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Card", "Stack"]

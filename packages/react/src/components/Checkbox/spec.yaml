@@ -1,0 +1,51 @@
+name: Checkbox
+title: "Checkbox"
+description: "Checkbox input control"
+category: "form"
+
+props:
+  label:
+    type: "string"
+    description: "Checkbox label text. Required for accessibility unless aria-label is provided."
+    required: false
+  helperText:
+    type: "string"
+    description: "Helper text displayed below the checkbox. Automatically linked via aria-describedby."
+    required: false
+  error:
+    type: "string"
+    description: "Error message. Shows error state and displays message below checkbox."
+    required: false
+  size:
+    type: "CheckboxSize"
+    description: "Checkbox size variant. @default 'md'"
+    required: false
+  indeterminate:
+    type: "boolean"
+    description: "Indeterminate state (partially checked). Used for "select all" patterns where some items are selected. Sets aria-checked="mixed" for screen readers. @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Checkbox label="Option" />
+  - title: "Different Sizes"
+    code: |
+      <Checkbox label="Option" size="lg" />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Radio", "Toggle", "Switch", "Field"]

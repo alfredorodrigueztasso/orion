@@ -1,0 +1,67 @@
+name: Link
+title: "Link"
+description: "Navigation link"
+category: "navigation"
+
+props:
+  variant:
+    type: "LinkVariant"
+    description: "Visual variant of the link @default 'default'"
+    required: false
+  size:
+    type: "LinkSize"
+    description: "Size of the link @default 'md'"
+    required: false
+  external:
+    type: "boolean"
+    description: "Whether the link opens in a new tab Automatically adds rel="noopener noreferrer" for security @default false"
+    required: false
+  underline:
+    type: "boolean"
+    description: "Whether to show an underline @default true"
+    required: false
+  showExternalIcon:
+    type: "boolean"
+    description: "Whether to show the external link icon automatically when external is true @default true"
+    required: false
+  icon:
+    type: "ReactNode"
+    description: "Icon to display before the link text"
+    required: false
+  iconRight:
+    type: "ReactNode"
+    description: "Icon to display after the link text (e.g., external link icon)"
+    required: false
+  iconAnimation:
+    type: "LinkIconAnimation"
+    description: "Icon hover animation type - 'arrow': moves icon right on hover - 'arrow-left': moves icon left on hover - 'external': diagonal movement for external links - 'none': no animation"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Link content"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use semantic HTML (nav, link, list)"
+  - "Support keyboard navigation (Tab, Arrow keys)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Link />
+  - title: "With Props"
+    code: |
+      <Link {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Link", "Avatar"]

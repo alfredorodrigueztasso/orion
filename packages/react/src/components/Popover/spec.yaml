@@ -1,0 +1,83 @@
+name: Popover
+title: "Popover"
+description: "Floating popover panel"
+category: "interactive"
+
+props:
+  trigger:
+    type: "ReactNode"
+    description: "The trigger element that opens the popover"
+    required: true
+  content:
+    type: "ReactNode"
+    description: "The content to display in the popover"
+    required: true
+  placement:
+    type: "PopoverPlacement"
+    description: "Placement of the popover relative to the trigger @default 'bottom'"
+    required: false
+  triggerType:
+    type: "PopoverTrigger"
+    description: "How to trigger the popover @default 'click'"
+    required: false
+  open:
+    type: "boolean"
+    description: "Whether the popover is open (controlled mode)"
+    required: false
+  defaultOpen:
+    type: "boolean"
+    description: "Default open state (uncontrolled mode) @default false"
+    required: false
+  showArrow:
+    type: "boolean"
+    description: "Whether to show an arrow pointing to the trigger @default true"
+    required: false
+  offset:
+    type: "number"
+    description: "Offset from the trigger in pixels @default 8"
+    required: false
+  closeOnClickOutside:
+    type: "boolean"
+    description: "Whether to close when clicking outside @default true"
+    required: false
+  closeOnEscape:
+    type: "boolean"
+    description: "Whether to close when pressing Escape @default true"
+    required: false
+  openDelay:
+    type: "number"
+    description: "Delay before showing (for hover trigger) @default 0"
+    required: false
+  closeDelay:
+    type: "number"
+    description: "Delay before hiding (for hover trigger) @default 150"
+    required: false
+  fullWidth:
+    type: "boolean"
+    description: "Whether the trigger wrapper should stretch to fill its container Set to true when Popover is placed inside a constrained container (e.g., sidebar header) Changes trigger from display: inline-block to display: block with width: 100% @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <Popover trigger="Click me">Content</Popover>
+  - title: "With Props"
+    code: |
+      <Popover {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Tooltip", "Dropdown", "Card", "Button"]

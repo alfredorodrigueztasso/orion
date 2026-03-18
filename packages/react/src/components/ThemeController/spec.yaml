@@ -1,0 +1,50 @@
+name: ThemeController
+title: "ThemeController"
+description: "Theme switching controller"
+category: "component"
+
+props:
+  showBrandSelector:
+    type: "boolean"
+    description: "Show brand selector @default true"
+    required: false
+  showThemeToggle:
+    type: "boolean"
+    description: "Show theme toggle @default true"
+    required: false
+  showSummary:
+    type: "boolean"
+    description: "Show current settings summary @default true"
+    required: false
+  compact:
+    type: "boolean"
+    description: "Compact mode (horizontal layout) @default false"
+    required: false
+  className:
+    type: "string"
+    description: "Additional CSS class"
+    required: false
+  style:
+    type: "CSSProperties"
+    description: "Inline styles"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <ThemeController />
+  - title: "With Props"
+    code: |
+      <ThemeController {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

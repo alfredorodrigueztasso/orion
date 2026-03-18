@@ -1,0 +1,55 @@
+name: Tooltip
+title: "Tooltip"
+description: "Tooltip popover"
+category: "interactive"
+
+props:
+  content:
+    type: "ReactNode"
+    description: "Tooltip content"
+    required: true
+  placement:
+    type: "TooltipPlacement"
+    description: "Tooltip placement @default 'top'"
+    required: false
+  delay:
+    type: "number"
+    description: "Delay before showing (ms) @default 200"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Element to attach tooltip to"
+    required: true
+  disabled:
+    type: "boolean"
+    description: "Disable tooltip @default false"
+    required: false
+  className:
+    type: "string"
+    description: "Additional class name"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <Tooltip trigger="Click me">Content</Tooltip>
+  - title: "With Props"
+    code: |
+      <Tooltip {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Icon", "Button", "Popover", "Badge"]

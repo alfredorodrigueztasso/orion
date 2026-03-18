@@ -1,0 +1,43 @@
+name: Command
+title: "Command"
+description: "Command palette interface"
+category: "interactive"
+
+props:
+  value:
+    type: "string"
+    description: "Controlled search value"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Children (compound components)"
+    required: false
+  className:
+    type: "string"
+    description: "Additional class name"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <Command trigger="Click me">Content</Command>
+  - title: "With Props"
+    code: |
+      <Command {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Icon", "Popover"]

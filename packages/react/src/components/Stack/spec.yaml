@@ -1,0 +1,56 @@
+name: Stack
+title: "Stack"
+description: "Flexible layout stack"
+category: "layout"
+
+props:
+  direction:
+    type: "StackDirection"
+    description: "Stack direction @default 'vertical'"
+    required: false
+  gap:
+    type: "StackGap"
+    description: "Gap between children (uses design system spacing tokens) @default 'md'"
+    required: false
+  align:
+    type: "StackAlign"
+    description: "Align items (flex align-items) @default 'stretch'"
+    required: false
+  justify:
+    type: "StackJustify"
+    description: "Justify content (flex justify-content) @default 'flex-start'"
+    required: false
+  wrap:
+    type: "StackWrap"
+    description: "Flex wrap behavior @default 'nowrap'"
+    required: false
+  as:
+    type: "ElementType"
+    description: "Custom element type to render as @default 'div'"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Layout"
+    code: |
+      <Stack>
+        <h2>Title</h2>
+        <p>Content</p>
+      </Stack>
+  - title: "With Props"
+    code: |
+      <Stack {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Icon", "Divider"]

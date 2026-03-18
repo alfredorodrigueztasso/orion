@@ -1,0 +1,63 @@
+name: Avatar
+title: "Avatar"
+description: "User profile image or initials"
+category: "display"
+
+props:
+  src:
+    type: "string"
+    description: "Avatar image source"
+    required: false
+  alt:
+    type: "string"
+    description: "Alt text for image"
+    required: false
+  initials:
+    type: "string"
+    description: "User initials (fallback if no image)"
+    required: false
+  icon:
+    type: "ReactNode"
+    description: "Icon element (fallback if no image or initials)"
+    required: false
+  size:
+    type: "AvatarSize"
+    description: "Avatar size @default 'md'"
+    required: false
+  color:
+    type: "AvatarColor"
+    description: "Avatar background color When not provided, auto-derived from initials using a deterministic hash (same initials always get the same color)"
+    required: false
+  status:
+    type: ""online" | "offline" | "away" | "busy""
+    description: "Show online status indicator @default false"
+    required: false
+  interactive:
+    type: "boolean"
+    description: "Make avatar clickable @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Avatar>Content</Avatar>
+  - title: "With Props"
+    code: |
+      <Avatar {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Badge", "Card", "UserMenu", "Navbar"]

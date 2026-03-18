@@ -1,0 +1,55 @@
+name: Skeleton
+title: "Skeleton"
+description: "Loading skeleton"
+category: "display"
+
+props:
+  variant:
+    type: "SkeletonVariant"
+    description: "Shape variant of the skeleton @default 'text'"
+    required: false
+  animation:
+    type: "SkeletonAnimation"
+    description: "Animation type @default 'pulse'"
+    required: false
+  width:
+    type: "number | string"
+    description: "Width of the skeleton Can be a number (pixels) or string (e.g., '100%', '10rem')"
+    required: false
+  height:
+    type: "number | string"
+    description: "Height of the skeleton Can be a number (pixels) or string (e.g., '100%', '2rem')"
+    required: false
+  lines:
+    type: "number"
+    description: "Number of skeleton lines to render (for text variant) @default 1"
+    required: false
+  borderRadius:
+    type: "number | string"
+    description: "Border radius override"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Primary Variant"
+    code: |
+      <Skeleton variant="primary">Content</Skeleton>
+  - title: "Secondary Variant"
+    code: |
+      <Skeleton variant="secondary">Content</Skeleton>
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Badge", "Stack", "Icon"]

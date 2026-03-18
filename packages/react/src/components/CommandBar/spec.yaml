@@ -1,0 +1,55 @@
+name: CommandBar
+title: "CommandBar"
+description: "Top command bar for actions"
+category: "interactive"
+
+props:
+  open:
+    type: "boolean"
+    description: "Whether the command bar is open"
+    required: true
+  commands:
+    type: "CommandItem[]"
+    description: "Flat list of commands (will be grouped by category if specified)"
+    required: true
+  recentCommands:
+    type: "CommandItem[]"
+    description: "Recent commands to show at the top"
+    required: false
+  placeholder:
+    type: "string"
+    description: "Placeholder text for search input @default "Type a command or search...""
+    required: false
+  emptyMessage:
+    type: "string"
+    description: "Empty state message when no results @default "No results found.""
+    required: false
+  footer:
+    type: "ReactNode"
+    description: "Custom footer content"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Position prop controls placement (top/bottom/left/right)"
+  - "Manage open/close state with isOpen prop"
+
+examples:
+  - title: "Default State"
+    code: |
+      <CommandBar trigger="Click me">Content</CommandBar>
+  - title: "With Props"
+    code: |
+      <CommandBar {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Icon", "Popover"]

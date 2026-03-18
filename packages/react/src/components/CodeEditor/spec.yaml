@@ -1,0 +1,54 @@
+name: CodeEditor
+title: "CodeEditor"
+description: "Syntax-highlighted code input"
+category: "component"
+
+props:
+  value:
+    type: "string"
+    description: "Current editor content"
+    required: false
+  language:
+    type: "string"
+    description: "Language name or type (shown as a badge, informational only) @default undefined"
+    required: false
+  readOnly:
+    type: "boolean"
+    description: "Whether the editor is read-only @default false"
+    required: false
+  showLineNumbers:
+    type: "boolean"
+    description: "Whether to show line numbers on the left @default true"
+    required: false
+  placeholder:
+    type: "string"
+    description: "Placeholder text when empty"
+    required: false
+  minRows:
+    type: "number"
+    description: "Minimum number of rows to display @default 10"
+    required: false
+  className:
+    type: "string"
+    description: "Additional CSS class name"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <CodeEditor />
+  - title: "With Props"
+    code: |
+      <CodeEditor {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

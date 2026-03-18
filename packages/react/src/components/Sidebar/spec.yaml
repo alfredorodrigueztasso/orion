@@ -1,0 +1,63 @@
+name: Sidebar
+title: "Sidebar"
+description: "Side navigation panel"
+category: "navigation"
+
+props:
+  sections:
+    type: "SidebarSection[]"
+    description: "Array of navigation sections"
+    required: true
+  activeItem:
+    type: "string"
+    description: "Currently active item ID"
+    required: false
+  collapsed:
+    type: "boolean"
+    description: "Collapsed state (icon-only) @default false"
+    required: false
+  header:
+    type: "ReactNode"
+    description: "Header content (logo, app name)"
+    required: false
+  footer:
+    type: "ReactNode"
+    description: "Footer content (user menu, settings)"
+    required: false
+  variant:
+    type: "SidebarVariant"
+    description: "Visual variant - default: Standard sidebar - floating: Floating overlay style @default 'default'"
+    required: false
+  width:
+    type: "number"
+    description: "Width in pixels (when not collapsed) @default 240"
+    required: false
+  collapsedWidth:
+    type: "number"
+    description: "Collapsed width in pixels @default 64"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use semantic HTML (nav, link, list)"
+  - "Support keyboard navigation (Tab, Arrow keys)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Sidebar />
+  - title: "With Props"
+    code: |
+      <Sidebar {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["NavTree", "Avatar", "Icon", "Divider"]

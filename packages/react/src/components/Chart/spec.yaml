@@ -1,0 +1,38 @@
+name: Chart
+title: "Chart"
+description: "Data visualization component"
+category: "complex"
+
+props:
+  config:
+    type: "ChartConfig"
+    description: "Chart configuration mapping data keys to colors/labels"
+    required: true
+  children:
+    type: "ReactNode"
+    description: "The Recharts chart element"
+    required: true
+  className:
+    type: "string"
+    description: "Additional class name"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Chart />
+  - title: "With Props"
+    code: |
+      <Chart {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Button", "Icon", "Pagination"]

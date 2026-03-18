@@ -1,0 +1,50 @@
+name: Tabs
+title: "Tabs"
+description: "Tabbed content interface"
+category: "complex"
+
+props:
+  tabs:
+    type: "TabItem[]"
+    description: "Array of tabs"
+    required: true
+  defaultTab:
+    type: "string"
+    description: "Default active tab ID"
+    required: false
+  activeTab:
+    type: "string"
+    description: "Controlled active tab ID"
+    required: false
+  fullWidth:
+    type: "boolean"
+    description: "Full width tabs @default false"
+    required: false
+  className:
+    type: "string"
+    description: "Additional class name"
+    required: false
+  noPanelPadding:
+    type: "boolean"
+    description: "Remove top and bottom padding from the tab panel. Useful when Tabs is inside a Card, Modal, or other padded container. @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Tabs />
+  - title: "With Props"
+    code: |
+      <Tabs {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["List", "Card", "Icon", "Button"]

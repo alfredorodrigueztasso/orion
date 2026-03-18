@@ -1,0 +1,54 @@
+name: NotificationCenter
+title: "NotificationCenter"
+description: "Notification hub"
+category: "component"
+
+props:
+  notifications:
+    type: "NotificationItem[]"
+    description: "Notification items"
+    required: true
+  title:
+    type: "string"
+    description: "Header title @default "Notifications""
+    required: false
+  emptyMessage:
+    type: "string"
+    description: "Empty state message @default "No notifications""
+    required: false
+  loading:
+    type: "boolean"
+    description: "Loading state"
+    required: false
+  maxHeight:
+    type: "string"
+    description: "Maximum height before scrolling"
+    required: false
+  groupByCategory:
+    type: "boolean"
+    description: "Group notifications by category @default false"
+    required: false
+  showUnreadCount:
+    type: "boolean"
+    description: "Show unread count badge @default true"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <NotificationCenter />
+  - title: "With Props"
+    code: |
+      <NotificationCenter {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

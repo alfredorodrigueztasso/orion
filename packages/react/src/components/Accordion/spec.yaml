@@ -1,0 +1,50 @@
+name: Accordion
+title: "Accordion"
+description: "Expandable content sections"
+category: "complex"
+
+props:
+  items:
+    type: "AccordionItem[]"
+    description: "Array of accordion items"
+    required: true
+  variant:
+    type: "AccordionVariant"
+    description: "Visual variant of the accordion @default 'default'"
+    required: false
+  allowMultiple:
+    type: "boolean"
+    description: "Allow multiple items to be expanded at once @default false"
+    required: false
+  defaultExpanded:
+    type: "string[]"
+    description: "Default expanded item IDs (uncontrolled)"
+    required: false
+  expanded:
+    type: "string[]"
+    description: "Controlled expanded item IDs"
+    required: false
+  animated:
+    type: "boolean"
+    description: "Whether to animate the expand/collapse @default true"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Accordion />
+  - title: "With Props"
+    code: |
+      <Accordion {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Tabs", "Collapsible", "Card", "Icon"]

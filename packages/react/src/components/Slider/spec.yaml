@@ -1,0 +1,79 @@
+name: Slider
+title: "Slider"
+description: "Range slider input"
+category: "form"
+
+props:
+  value:
+    type: "number"
+    description: "Current value"
+    required: true
+  min:
+    type: "number"
+    description: "Minimum value @default 0"
+    required: false
+  max:
+    type: "number"
+    description: "Maximum value @default 100"
+    required: false
+  step:
+    type: "number"
+    description: "Step increment @default 1"
+    required: false
+  size:
+    type: "SliderSize"
+    description: "Size variant @default 'md'"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "Whether the slider is disabled @default false"
+    required: false
+  showValue:
+    type: "boolean"
+    description: "Show the current value above the thumb @default false"
+    required: false
+  showLabels:
+    type: "boolean"
+    description: "Show min and max labels @default false"
+    required: false
+  showTicks:
+    type: "boolean"
+    description: "Show tick marks @default false"
+    required: false
+  tickValues:
+    type: "number[]"
+    description: "Custom tick values (if not provided, uses step)"
+    required: false
+  label:
+    type: "string"
+    description: "Label for the slider (accessibility)"
+    required: false
+  id:
+    type: "string"
+    description: "ID for the slider input"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Slider label="Option" />
+  - title: "Different Sizes"
+    code: |
+      <Slider label="Option" size="lg" />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

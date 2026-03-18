@@ -1,0 +1,30 @@
+name: CollapsibleFolder
+title: "CollapsibleFolder"
+description: "Folder tree with collapsible items"
+category: "component"
+
+props:
+  id:
+    type: "string"
+    description: "The id prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <CollapsibleFolder />
+  - title: "With Props"
+    code: |
+      <CollapsibleFolder {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

@@ -1,0 +1,62 @@
+name: ActivityFeed
+title: "ActivityFeed"
+description: "Timeline of user activities"
+category: "component"
+
+props:
+  activities:
+    type: "ActivityItem[]"
+    description: "Array of activity items"
+    required: true
+  showFilters:
+    type: "boolean"
+    description: "Show filter controls @default false"
+    required: false
+  filters:
+    type: "ActivityFilter[]"
+    description: "Filter options"
+    required: false
+  activeFilter:
+    type: "string"
+    description: "Current filter value"
+    required: false
+  hasMore:
+    type: "boolean"
+    description: "Whether more items are available"
+    required: false
+  loading:
+    type: "boolean"
+    description: "Loading state"
+    required: false
+  emptyMessage:
+    type: "string"
+    description: "Empty state message"
+    required: false
+  showConnectors:
+    type: "boolean"
+    description: "Show connector lines between items @default true"
+    required: false
+  compact:
+    type: "boolean"
+    description: "Compact mode @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <ActivityFeed />
+  - title: "With Props"
+    code: |
+      <ActivityFeed {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

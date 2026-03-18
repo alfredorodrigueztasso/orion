@@ -1,0 +1,61 @@
+name: Drawer
+title: "Drawer"
+description: "Slide-out panel"
+category: "modal"
+
+props:
+  open:
+    type: "boolean"
+    description: "Whether the drawer is open"
+    required: true
+  placement:
+    type: "DrawerPlacement"
+    description: "Placement of the drawer @default 'right'"
+    required: false
+  size:
+    type: "DrawerSize"
+    description: "Size of the drawer @default 'md'"
+    required: false
+  closeOnBackdrop:
+    type: "boolean"
+    description: "Whether to close when clicking the backdrop @default true"
+    required: false
+  closeOnEscape:
+    type: "boolean"
+    description: "Whether to close when pressing Escape @default true"
+    required: false
+  showCloseButton:
+    type: "boolean"
+    description: "Whether to show a close button @default true"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Drawer content"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Trap focus within modal for accessibility"
+  - "Support keyboard dismissal (Escape key)"
+
+examples:
+  - title: "Default"
+    code: |
+      <Drawer isOpen={open} onClose={handleClose}>
+        Content
+      </Drawer>
+  - title: "With Props"
+    code: |
+      <Drawer {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Card", "Divider"]

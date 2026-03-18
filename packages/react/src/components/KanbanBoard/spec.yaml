@@ -1,0 +1,42 @@
+name: KanbanBoard
+title: "KanbanBoard"
+description: "Kanban task board"
+category: "complex"
+
+props:
+  columns:
+    type: "KanbanColumn[]"
+    description: "Board columns"
+    required: true
+  compact:
+    type: "boolean"
+    description: "Compact card display @default false"
+    required: false
+  showCardCount:
+    type: "boolean"
+    description: "Show card count in column headers @default true"
+    required: false
+  draggable:
+    type: "boolean"
+    description: "Enable drag and drop (visual only - actual DnD needs external library) @default true"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <KanbanBoard />
+  - title: "With Props"
+    code: |
+      <KanbanBoard {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Button", "Icon", "Pagination"]

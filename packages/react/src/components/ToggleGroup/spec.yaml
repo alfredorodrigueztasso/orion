@@ -1,0 +1,59 @@
+name: ToggleGroup
+title: "ToggleGroup"
+description: "Group of toggle buttons"
+category: "form"
+
+props:
+  type:
+    type: "ToggleGroupType"
+    description: "The type prop"
+    required: true
+  value:
+    type: "string | string[]"
+    description: "The value prop"
+    required: false
+  defaultValue:
+    type: "string | string[]"
+    description: "The defaultValue prop"
+    required: false
+  variant:
+    type: "ToggleGroupVariant"
+    description: "The variant prop"
+    required: false
+  size:
+    type: "ToggleGroupSize"
+    description: "The size prop"
+    required: false
+  disabled:
+    type: "boolean"
+    description: "The disabled prop"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "The children prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Support checked/unchecked states with onChange callback"
+  - "Always include accessible labels (visible or aria-label)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <ToggleGroup label="Option" />
+  - title: "Different Sizes"
+    code: |
+      <ToggleGroup label="Option" size="lg" />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

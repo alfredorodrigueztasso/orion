@@ -1,0 +1,62 @@
+name: UserMenu
+title: "UserMenu"
+description: "User account menu"
+category: "component"
+
+props:
+  user:
+    type: "UserInfo"
+    description: "User information"
+    required: true
+  sections:
+    type: "UserMenuSection[]"
+    description: "Menu sections"
+    required: true
+  open:
+    type: "boolean"
+    description: "Open state (controlled)"
+    required: false
+  trigger:
+    type: "ReactNode"
+    description: "Trigger element (custom trigger button)"
+    required: false
+  align:
+    type: ""start" | "end""
+    description: "Menu alignment @default "end""
+    required: false
+  placement:
+    type: ""top" | "bottom""
+    description: "Dropdown placement direction @default "bottom""
+    required: false
+  showHeader:
+    type: "boolean"
+    description: "Show user info header in dropdown @default true"
+    required: false
+  compact:
+    type: "boolean"
+    description: "Compact mode (smaller trigger) @default false"
+    required: false
+  fullWidth:
+    type: "boolean"
+    description: "Whether the menu wrapper should stretch to fill its container Set to true when UserMenu is inside a constrained container (e.g., sidebar footer) Changes wrapper from display: inline-block to display: block with width: 100% @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <UserMenu />
+  - title: "With Props"
+    code: |
+      <UserMenu {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

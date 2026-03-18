@@ -1,0 +1,63 @@
+name: PageHeader
+title: "PageHeader"
+description: "Page header with title and actions"
+category: "navigation"
+
+props:
+  title:
+    type: "ReactNode"
+    description: "Page title"
+    required: true
+  description:
+    type: "ReactNode"
+    description: "Optional description below title"
+    required: false
+  breadcrumbs:
+    type: "BreadcrumbItem[]"
+    description: "Breadcrumb navigation items"
+    required: false
+  actions:
+    type: "ReactNode"
+    description: "Action buttons/elements aligned right"
+    required: false
+  tabs:
+    type: "PageHeaderTab[]"
+    description: "Tab navigation items"
+    required: false
+  activeTab:
+    type: "string"
+    description: "Currently active tab ID"
+    required: false
+  label:
+    type: "string"
+    description: "Back link for navigation"
+    required: false
+  href:
+    type: "string"
+    description: "The href prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use semantic HTML (nav, link, list)"
+  - "Support keyboard navigation (Tab, Arrow keys)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <PageHeader />
+  - title: "With Props"
+    code: |
+      <PageHeader {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Link", "Avatar"]

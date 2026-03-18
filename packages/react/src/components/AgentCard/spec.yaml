@@ -1,0 +1,62 @@
+name: AgentCard
+title: "AgentCard"
+description: "Card for displaying AI agents"
+category: "component"
+
+props:
+  id:
+    type: "string"
+    description: "Unique agent identifier"
+    required: true
+  avatar:
+    type: "string | ReactNode"
+    description: "Agent avatar (image URL or ReactNode icon)"
+    required: true
+  title:
+    type: "string"
+    description: "Agent title/name"
+    required: true
+  description:
+    type: "string"
+    description: "Agent description (max 2 lines with ellipsis). Space is always reserved for 2 lines even when empty, ensuring consistent card height in grids."
+    required: false
+  timestamp:
+    type: "string"
+    description: "Timestamp text (e.g., "Hace 2 horas")"
+    required: false
+  isMultiAgent:
+    type: "boolean"
+    description: "When true, shows a "Multi" badge indicating this is a multi-agent. Only multi-agents show a badge; single agents show nothing."
+    required: false
+  draggable:
+    type: "boolean"
+    description: "Enable drag & drop functionality @default false"
+    required: false
+  isDragging:
+    type: "boolean"
+    description: "Currently being dragged @internal"
+    required: false
+  availableFolders:
+    type: "Array<{ id: string"
+    description: "Available folders the agent can be moved to"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <AgentCard />
+  - title: "With Props"
+    code: |
+      <AgentCard {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

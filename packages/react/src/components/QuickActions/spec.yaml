@@ -1,0 +1,58 @@
+name: QuickActions
+title: "QuickActions"
+description: "Quick action buttons"
+category: "component"
+
+props:
+  actions:
+    type: "QuickAction[]"
+    description: "Array of quick actions"
+    required: true
+  variant:
+    type: "QuickActionsVariant"
+    description: "Display variant - fab: Floating action button that expands - bar: Horizontal action bar - menu: Vertical menu style @default 'fab'"
+    required: false
+  position:
+    type: "QuickActionsPosition"
+    description: "Position on screen @default 'bottom-right'"
+    required: false
+  primaryAction:
+    type: "QuickAction"
+    description: "Primary action (shown when FAB is collapsed)"
+    required: false
+  triggerIcon:
+    type: "ReactNode"
+    description: "Custom trigger icon for FAB"
+    required: false
+  showLabels:
+    type: "boolean"
+    description: "Always show labels (bar variant) @default true for bar, false for fab"
+    required: false
+  fixed:
+    type: "boolean"
+    description: "Fixed position @default true"
+    required: false
+  offset:
+    type: "number"
+    description: "Offset from edge in pixels @default 24"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <QuickActions />
+  - title: "With Props"
+    code: |
+      <QuickActions {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

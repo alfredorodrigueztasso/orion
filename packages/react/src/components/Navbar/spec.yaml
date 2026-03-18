@@ -1,0 +1,59 @@
+name: Navbar
+title: "Navbar"
+description: "Top navigation bar"
+category: "navigation"
+
+props:
+  children:
+    type: "ReactNode"
+    description: "Navbar content"
+    required: true
+  height:
+    type: "NavbarHeight"
+    description: "Navbar height @default 'md'"
+    required: false
+  variant:
+    type: "NavbarVariant"
+    description: "Navbar variant @default 'solid'"
+    required: false
+  colorScheme:
+    type: "NavbarColorScheme"
+    description: "Color scheme for text/links when using transparent or glass variants - 'auto': Uses default theme colors (dark text on light, light text on dark) - 'light': Forces light/white text (use on dark backgrounds) - 'dark': Forces dark text (use on light backgrounds) @default 'auto'"
+    required: false
+  sticky:
+    type: "boolean"
+    description: "Sticky positioning @default false"
+    required: false
+  bordered:
+    type: "boolean"
+    description: "Border on bottom @default true"
+    required: false
+  className:
+    type: "string"
+    description: "Additional CSS class"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use semantic HTML (nav, link, list)"
+  - "Support keyboard navigation (Tab, Arrow keys)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Navbar />
+  - title: "With Props"
+    code: |
+      <Navbar {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Avatar", "Icon", "Link", "Button"]

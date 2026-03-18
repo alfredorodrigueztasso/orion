@@ -1,0 +1,47 @@
+name: Spinner
+title: "Spinner"
+description: "Loading spinner"
+category: "display"
+
+props:
+  size:
+    type: "SpinnerSize"
+    description: "Spinner size @default 'md'"
+    required: false
+  variant:
+    type: "SpinnerVariant"
+    description: "Spinner variant (color) @default 'primary'"
+    required: false
+  label:
+    type: "string"
+    description: "Loading label (for accessibility) @default 'Loading...'"
+    required: false
+  showLabel:
+    type: "boolean"
+    description: "Show label text below spinner @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Primary Variant"
+    code: |
+      <Spinner variant="primary">Content</Spinner>
+  - title: "Secondary Variant"
+    code: |
+      <Spinner variant="secondary">Content</Spinner>
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Badge", "Stack", "Icon"]

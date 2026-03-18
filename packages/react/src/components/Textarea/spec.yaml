@@ -1,0 +1,58 @@
+name: Textarea
+title: "Textarea"
+description: "Multi-line text input"
+category: "component"
+
+props:
+  label:
+    type: "string"
+    description: "Textarea label text. Required for accessibility unless aria-label is provided."
+    required: false
+  helperText:
+    type: "string"
+    description: "Helper text displayed below the textarea. Automatically linked via aria-describedby."
+    required: false
+  error:
+    type: "string"
+    description: "Error message. Shows error state and displays message below textarea."
+    required: false
+  size:
+    type: "TextareaSize"
+    description: "Textarea size variant. @default 'md'"
+    required: false
+  resize:
+    type: "TextareaResize"
+    description: "Resize behavior. @default 'vertical'"
+    required: false
+  showCounter:
+    type: "boolean"
+    description: "Show character counter. Counter is announced to screen readers via aria-live. @default false"
+    required: false
+  maxLength:
+    type: "number"
+    description: "Maximum character length. Required if showCounter is true."
+    required: false
+  optional:
+    type: "boolean"
+    description: "Shows "(optional)" indicator next to label. @default false"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Textarea />
+  - title: "With Props"
+    code: |
+      <Textarea {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

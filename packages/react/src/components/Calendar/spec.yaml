@@ -1,0 +1,34 @@
+name: Calendar
+title: "Calendar"
+description: "Date selection calendar"
+category: "complex"
+
+props:
+  mode:
+    type: ""single""
+    description: "The mode prop"
+    required: false
+  selected:
+    type: "Date"
+    description: "The selected prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Calendar />
+  - title: "With Props"
+    code: |
+      <Calendar {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Button", "Icon", "Pagination"]

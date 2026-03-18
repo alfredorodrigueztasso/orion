@@ -1,0 +1,97 @@
+name: Banner
+title: "Banner"
+description: "Full-width notification bar"
+category: "feedback"
+
+props:
+  eyebrow:
+    type: "ReactNode"
+    description: "Optional eyebrow/badge text"
+    required: false
+  title:
+    type: "ReactNode"
+    description: "Banner title"
+    required: true
+  description:
+    type: "ReactNode"
+    description: "Banner description"
+    required: false
+  ctaLabel:
+    type: "string"
+    description: "Primary CTA button label"
+    required: false
+  ctaHref:
+    type: "string"
+    description: "Primary CTA button href"
+    required: false
+  secondaryCtaLabel:
+    type: "string"
+    description: "Secondary CTA label"
+    required: false
+  secondaryCtaHref:
+    type: "string"
+    description: "Secondary CTA href"
+    required: false
+  variant:
+    type: "BannerVariant"
+    description: "Banner variant @default 'default'"
+    required: false
+  backgroundImage:
+    type: "string"
+    description: "Background image URL (for 'image' and 'split' variants)"
+    required: false
+  sideImage:
+    type: "string"
+    description: "Side image URL (for 'split' variant)"
+    required: false
+  imagePosition:
+    type: ""left" | "right""
+    description: "Image position for split variant @default 'right'"
+    required: false
+  backgroundColor:
+    type: "string"
+    description: "Custom background color"
+    required: false
+  gradient:
+    type: "string"
+    description: "Custom gradient (overrides default)"
+    required: false
+  dismissible:
+    type: "boolean"
+    description: "Dismissible banner @default false"
+    required: false
+  fullWidth:
+    type: "boolean"
+    description: "Full width (no max-width constraint) @default false"
+    required: false
+  compact:
+    type: "boolean"
+    description: "Compact mode @default false"
+    required: false
+  centered:
+    type: "boolean"
+    description: "Center content @default true"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Banner />
+  - title: "With Props"
+    code: |
+      <Banner {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--interactive-primary"
+  - "--border-default"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Card", "Stack"]

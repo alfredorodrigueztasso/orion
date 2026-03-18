@@ -1,0 +1,70 @@
+name: Table
+title: "Table"
+description: "Data table"
+category: "component"
+
+props:
+  columns:
+    type: "TableColumn<T>[]"
+    description: "Column definitions"
+    required: true
+  data:
+    type: "T[]"
+    description: "Table data"
+    required: true
+  size:
+    type: "TableSize"
+    description: "Table size @default 'md'"
+    required: false
+  striped:
+    type: "boolean"
+    description: "Striped rows @default false"
+    required: false
+  hoverable:
+    type: "boolean"
+    description: "Hoverable rows @default true"
+    required: false
+  bordered:
+    type: "boolean"
+    description: "Show borders @default false"
+    required: false
+  borderless:
+    type: "boolean"
+    description: "Remove container border (for integration inside Cards) @default false"
+    required: false
+  caption:
+    type: "ReactNode"
+    description: "Table caption"
+    required: false
+  emptyMessage:
+    type: "ReactNode"
+    description: "Empty state message"
+    required: false
+  columnKey:
+    type: "string"
+    description: "Current sort state (for controlled sorting)"
+    required: true
+  direction:
+    type: "SortDirection"
+    description: "The direction prop"
+    required: true
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Table />
+  - title: "With Props"
+    code: |
+      <Table {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Card", "Field", "Stack"]

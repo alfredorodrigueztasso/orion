@@ -1,0 +1,47 @@
+name: Badge
+title: "Badge"
+description: "Small status indicator"
+category: "display"
+
+props:
+  variant:
+    type: "BadgeVariant"
+    description: "Badge visual variant @default 'secondary'"
+    required: false
+  size:
+    type: "BadgeSize"
+    description: "Badge size @default 'md'"
+    required: false
+  dot:
+    type: "boolean"
+    description: "Show dot indicator @default false"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Badge content"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Primary Variant"
+    code: |
+      <Badge variant="primary">Content</Badge>
+  - title: "Secondary Variant"
+    code: |
+      <Badge variant="secondary">Content</Badge>
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Chip", "Avatar", "Tag", "Stack"]

@@ -1,0 +1,42 @@
+name: Carousel
+title: "Carousel"
+description: "Rotating content slider"
+category: "complex"
+
+props:
+  canScrollLeft:
+    type: "boolean"
+    description: "The canScrollLeft prop"
+    required: true
+  canScrollRight:
+    type: "boolean"
+    description: "The canScrollRight prop"
+    required: true
+  activeIndex:
+    type: "number"
+    description: "The activeIndex prop"
+    required: true
+  totalItems:
+    type: "number"
+    description: "The totalItems prop"
+    required: true
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <Carousel />
+  - title: "With Props"
+    code: |
+      <Carousel {...props} />
+
+tokens:
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Icon", "Button", "Card", "Pagination"]

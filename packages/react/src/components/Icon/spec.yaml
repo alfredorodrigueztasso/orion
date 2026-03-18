@@ -1,0 +1,51 @@
+name: Icon
+title: "Icon"
+description: "Icon display"
+category: "display"
+
+props:
+  disabled:
+    type: "boolean"
+    description: "Disables the component"
+    required: false
+  className:
+    type: "string"
+    description: "Additional CSS classes"
+    required: false
+  children:
+    type: "ReactNode"
+    description: "Component content"
+    required: false
+  variant:
+    type: "string"
+    description: "Visual variant"
+    required: false
+  size:
+    type: "string"
+    description: "Component size"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use variant prop for visual differentiation, not hardcoded styles"
+  - "Support size prop scaling across sm/md/lg"
+
+examples:
+  - title: "Primary Variant"
+    code: |
+      <Icon variant="primary">Content</Icon>
+  - title: "Secondary Variant"
+    code: |
+      <Icon variant="secondary">Content</Icon>
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Card", "Badge", "Stack", "Icon"]

@@ -1,0 +1,67 @@
+name: NavTree
+title: "NavTree"
+description: "Navigation tree structure"
+category: "navigation"
+
+props:
+  sections:
+    type: "NavTreeSection[]"
+    description: "The sections prop"
+    required: true
+  activeNodeId:
+    type: "string"
+    description: "The activeNodeId prop"
+    required: false
+  actions:
+    type: "NavTreeActionConfig"
+    description: "The actions prop"
+    required: false
+  persistKey:
+    type: "string"
+    description: "The persistKey prop"
+    required: false
+  header:
+    type: "ReactNode"
+    description: "The header prop"
+    required: false
+  footer:
+    type: "ReactNode"
+    description: "The footer prop"
+    required: false
+  width:
+    type: "number | string"
+    description: "The width prop"
+    required: false
+  className:
+    type: "string"
+    description: "The className prop"
+    required: false
+  headless:
+    type: "boolean"
+    description: "The headless prop"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic color tokens only (var(--text-primary), var(--interactive-primary), etc)"
+  - "Check data-theme context before styling (light/dark)"
+  - "Use semantic HTML (nav, link, list)"
+  - "Support keyboard navigation (Tab, Arrow keys)"
+
+examples:
+  - title: "Basic Usage"
+    code: |
+      <NavTree />
+  - title: "With Props"
+    code: |
+      <NavTree {...props} />
+
+tokens:
+  - "--text-primary"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--spacing-4"
+  - "--radius-control"
+  - "--font-secondary"
+
+related_components: ["Button", "Icon", "Link", "Avatar"]
