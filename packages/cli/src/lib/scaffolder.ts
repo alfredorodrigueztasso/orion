@@ -136,7 +136,8 @@ export function scaffoldProject(
         basename.endsWith(".ts") ||
         basename.endsWith(".tsx") ||
         basename.endsWith(".md") ||
-        basename.endsWith(".css")
+        basename.endsWith(".css") ||
+        basename.endsWith(".html")
       ) {
         // Interpolate template variables
         content = interpolate(content, vars);

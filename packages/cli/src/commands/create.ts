@@ -169,7 +169,7 @@ export async function create(args: string[]): Promise<void> {
 
   logger.info(
     logger.bold(
-      `Creating ${projectName} (${template} template) with {{${brand}}} brand`,
+      `Creating ${projectName} (${template} template) with ${brand} brand`,
     ),
   );
   logger.info("");
