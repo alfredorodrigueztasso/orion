@@ -232,8 +232,8 @@ async function release() {
       process.exit(1);
     }
 
-    log('\n  Running npm run build...');
-    const buildResult = exec('npm run build');
+    log('\n  Running npm run build:release...');
+    const buildResult = exec('npm run build:release');
     if (!buildResult.success) {
       logError('Build failed. Please fix issues before releasing.');
       process.exit(1);

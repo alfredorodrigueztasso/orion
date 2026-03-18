@@ -68,14 +68,15 @@
     },
     "brands": {
       "total": 5,
-      "implemented": 4,
+      "implemented": 5,
       "tested": 5,
       "names": [
         "orion",
         "red",
         "deepblue",
         "orange",
-        "lemon"
+        "lemon",
+        "ember"
       ]
     },
     "utilities": {
@@ -346,6 +347,12 @@
         "accent_color": "#5CE629",
         "radius": "9999px",
         "description": "Lime green accent, pill-style buttons"
+      },
+      {
+        "name": "ember",
+        "accent_color": "#ED5A2A",
+        "radius": "12px",
+        "description": "Warm red-orange accent, modern fire-like aesthetic"
       }
     ]
   },

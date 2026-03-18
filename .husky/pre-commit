@@ -1,5 +1,13 @@
 #!/usr/bin/env sh
 . "$(dirname "$0")/_/husky.sh"
 
+# Sync AI manifest before validation
+node scripts/sync-manifest.js
+
+# Run linters on staged files
 npx lint-staged
-node scripts/validate-preview-modules.js
+
+# Stage manifest if it was updated
+if ! git diff --quiet -- tokens/ai-manifest.json; then
+  git add tokens/ai-manifest.json
+fi
