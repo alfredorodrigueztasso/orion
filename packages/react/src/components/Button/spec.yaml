@@ -1,0 +1,68 @@
+name: Button
+title: "Button"
+description: "Primary interactive element for actions"
+category: "actions"
+
+props:
+  variant:
+    type: "string"
+    enum: ["primary", "secondary", "ghost", "danger"]
+    default: "primary"
+    description: "Visual variant of the button"
+  size:
+    type: "string"
+    enum: ["sm", "md", "lg"]
+    default: "md"
+    description: "Button size"
+  disabled:
+    type: "boolean"
+    default: false
+    description: "Disables the button"
+  isLoading:
+    type: "boolean"
+    default: false
+    description: "Shows loading spinner"
+  icon:
+    type: "ReactNode"
+    description: "Icon displayed on left side (from lucide-react)"
+  iconRight:
+    type: "ReactNode"
+    description: "Icon displayed on right side"
+  iconOnly:
+    type: "boolean"
+    description: "Shows only icon, no text (requires aria-label)"
+  children:
+    type: "ReactNode"
+    description: "Button text content"
+
+ai_rules:
+  - "Always use variant prop: primary, secondary, ghost, danger (NOT brand prop)"
+  - "Icon-only buttons MUST have aria-label for accessibility"
+  - "Use lucide-react icons with size={20} for md buttons"
+  - "Button is globally themed via ThemeProvider (do not add brand prop)"
+
+examples:
+  - title: "Primary Button"
+    code: |
+      <Button variant="primary">Click me</Button>
+  - title: "With Icon"
+    code: |
+      import { Download } from 'lucide-react';
+      <Button icon={<Download size={20} />}>Download</Button>
+  - title: "Icon Only"
+    code: |
+      import { Settings } from 'lucide-react';
+      <Button iconOnly icon={<Settings size={20} />} aria-label="Settings" />
+
+tokens:
+  - "--interactive-primary"
+  - "--interactive-secondary"
+  - "--radius-control"
+  - "--font-secondary"
+  - "--spacing-4"
+
+related_components: ["Field", "Modal", "Card"]
+common_patterns:
+  - "used in Modal actions"
+  - "paired with Field in forms"
+  - "Icon + Button pattern"

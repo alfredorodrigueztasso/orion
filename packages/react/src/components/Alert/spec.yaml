@@ -1,0 +1,45 @@
+name: Alert
+title: "Alert"
+description: "Notification with status indicator"
+category: "feedback"
+
+props:
+  variant:
+    type: "string"
+    enum: ["success", "error", "warning", "info"]
+    description: "Alert type (auto-selects icon)"
+  children:
+    type: "ReactNode"
+    description: "Alert message"
+  icon:
+    type: "ReactNode"
+    description: "Custom icon (overrides default)"
+  title:
+    type: "string"
+    description: "Alert title"
+
+ai_rules:
+  - "Icons are automatic: CheckCircle (success), XCircle (error), AlertTriangle (warning), Info (info)"
+  - "Custom icon overrides default via 'icon' prop"
+  - "Variant controls semantic color, not a brand prop"
+
+examples:
+  - title: "Success Alert"
+    code: |
+      <Alert variant="success">Changes saved successfully</Alert>
+  - title: "Error Alert"
+    code: |
+      <Alert variant="error" title="Error">Something went wrong</Alert>
+  - title: "Custom Icon"
+    code: |
+      import { Rocket } from 'lucide-react';
+      <Alert variant="info" icon={<Rocket size={20} />}>New feature available</Alert>
+
+tokens:
+  - "--color-success-50"
+  - "--color-error-50"
+  - "--color-warning-50"
+  - "--color-info-50"
+  - "--radius-control"
+
+related_components: ["Icon", "Button", "Card"]

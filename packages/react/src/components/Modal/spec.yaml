@@ -1,0 +1,45 @@
+name: Modal
+title: "Modal"
+description: "Dialog overlay for focused user interaction"
+category: "dialog"
+
+props:
+  isOpen:
+    type: "boolean"
+    description: "Controls modal visibility"
+  onClose:
+    type: "function"
+    description: "Callback when user closes modal"
+  title:
+    type: "string"
+    description: "Modal title"
+  children:
+    type: "ReactNode"
+    description: "Modal content"
+  footer:
+    type: "ReactNode"
+    description: "Footer content (usually buttons)"
+
+ai_rules:
+  - "Modal content should be semantic and scrollable if needed"
+  - "Footer typically contains Button components"
+  - "Focus trap is automatic - do not override"
+  - "Escape key closes modal (handle via onClose)"
+
+examples:
+  - title: "Confirmation Modal"
+    code: |
+      <Modal isOpen={true} onClose={onClose} title="Confirm Action">
+        Are you sure you want to proceed?
+        <Modal.Footer>
+          <Button variant="secondary" onClick={onClose}>Cancel</Button>
+          <Button variant="primary" onClick={handleConfirm}>Confirm</Button>
+        </Modal.Footer>
+      </Modal>
+
+tokens:
+  - "--surface-base"
+  - "--shadow-lg"
+  - "--radius-container"
+
+related_components: ["Button", "Field", "Alert"]

@@ -1,0 +1,53 @@
+name: Card
+title: "Card"
+description: "Content container with optional header and footer"
+category: "layout"
+
+props:
+  variant:
+    type: "string"
+    enum: ["outline", "filled"]
+    default: "outline"
+    description: "Visual variant"
+  children:
+    type: "ReactNode"
+    description: "Card content"
+
+subcomponents:
+  - name: "Card.Header"
+    props:
+      children: "ReactNode - header content"
+  - name: "Card.Body"
+    props:
+      children: "ReactNode - body content"
+  - name: "Card.Footer"
+    props:
+      children: "ReactNode - footer content"
+
+ai_rules:
+  - "Always use Card with proper semantic children (Header, Body, Footer)"
+  - "Variant is outline or filled (NOT brand-specific)"
+  - "Use CSS variables for spacing and colors"
+
+examples:
+  - title: "Basic Card"
+    code: |
+      <Card>
+        <Card.Header>Title</Card.Header>
+        <Card.Body>Content here</Card.Body>
+      </Card>
+  - title: "With Footer"
+    code: |
+      <Card variant="filled">
+        <Card.Header>Title</Card.Header>
+        <Card.Body>Content</Card.Body>
+        <Card.Footer>Footer</Card.Footer>
+      </Card>
+
+tokens:
+  - "--surface-base"
+  - "--surface-layer"
+  - "--radius-container"
+  - "--spacing-6"
+
+related_components: ["Badge", "Button", "Stack"]
