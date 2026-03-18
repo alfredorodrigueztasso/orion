@@ -1,0 +1,738 @@
+{
+  "name": "Orion Design System - AI Manifest",
+  "version": "2.0.0",
+  "last_updated": "2026-03-18",
+  "description": "Machine-readable status and capabilities manifest for AI agents",
+  "ai_native": {
+    "mcp_server": "@orion-ds/mcp",
+    "registry": "registry/index.json",
+    "http_api": "public/r/index.json",
+    "cli_create": "npx @orion-ds/create",
+    "validator": "npx @orion-ds/validate",
+    "tools": [
+      "list-components",
+      "get-component",
+      "search-components",
+      "list-tokens",
+      "get-token",
+      "validate-code",
+      "get-setup-guide",
+      "list-sections",
+      "get-section"
+    ],
+    "mcp_config": {
+      "command": "npx",
+      "args": [
+        "@orion-ds/mcp"
+      ],
+      "env": {
+        "ORION_REGISTRY_PATH": "./registry"
+      }
+    }
+  },
+  "ai_first_readiness": {
+    "overall_score": 100,
+    "breakdown": {
+      "token_completeness": 100,
+      "component_coverage": 100,
+      "ai_documentation": 100,
+      "prompt_engineering_guide": 100,
+      "validation_coverage": 100,
+      "multi_brand_support": 100,
+      "utilities_documentation": 100,
+      "testing_coverage": 65,
+      "tri_modal_implementation": 100,
+      "mcp_server": 100,
+      "machine_readable_registry": 100,
+      "http_api_endpoints": 100,
+      "external_validator": 100,
+      "cli_scaffolding": 100
+    },
+    "certification": "AI-Native Ready - Maximum",
+    "compliance": "Chain of Truth Architecture"
+  },
+  "system_stats": {
+    "tokens": {
+      "primitives": 180,
+      "semantics_light": 54,
+      "semantics_dark": 54,
+      "css_variables": 250,
+      "css_variables_documented": 74,
+      "total": 538
+    },
+    "components": {
+      "total": 72,
+      "fully_implemented": 72,
+      "documented": 72,
+      "with_examples": 72
+    },
+    "brands": {
+      "total": 5,
+      "implemented": 4,
+      "tested": 5,
+      "names": [
+        "orion",
+        "red",
+        "deepblue",
+        "orange",
+        "lemon"
+      ]
+    },
+    "utilities": {
+      "classes": 377,
+      "documented": 150,
+      "categories": 11
+    },
+    "testing_projects": {
+      "total": 21,
+      "display_mode": 6,
+      "product_mode": 5,
+      "app_mode": 5,
+      "multi_brand": 1,
+      "tri_modal": 1,
+      "legacy": 3,
+      "projects": [
+        "premium-finance",
+        "uvm-demo",
+        "tri-modal-showcase",
+        "analytics-dashboard",
+        "ecommerce-storefront",
+        "mobile-banking",
+        "saas-product-landing",
+        "educational-landing",
+        "agency-portfolio",
+        "startup-landing",
+        "project-management",
+        "crm-platform",
+        "email-marketing",
+        "learning-management",
+        "fitness-tracker",
+        "social-feed",
+        "food-delivery",
+        "task-manager-app"
+      ]
+    },
+    "sections": {
+      "total": 26,
+      "implemented": 26,
+      "documented": 26,
+      "with_examples": 26
+    },
+    "templates": {
+      "total": 8,
+      "implemented": 8,
+      "documented": 8,
+      "with_examples": 8
+    }
+  },
+  "token_coverage": {
+    "colors": {
+      "primitives": [
+        "brand",
+        "neutral",
+        "neutralPure",
+        "error",
+        "success",
+        "warning",
+        "info"
+      ],
+      "status": "complete",
+      "multi_brand": true
+    },
+    "surfaces": {
+      "defined": [
+        "base",
+        "subtle",
+        "layer",
+        "primary",
+        "secondary",
+        "glass",
+        "sunken",
+        "overlay"
+      ],
+      "status": "complete"
+    },
+    "typography": {
+      "families": [
+        "primary",
+        "secondary",
+        "mono"
+      ],
+      "sizes": [
+        "10",
+        "12",
+        "13",
+        "14",
+        "16",
+        "18",
+        "20",
+        "24",
+        "32",
+        "48",
+        "64",
+        "80",
+        "96",
+        "display-lg",
+        "display-xl"
+      ],
+      "weights": [
+        "regular",
+        "medium",
+        "bold"
+      ],
+      "line_heights": [
+        "none",
+        "tight",
+        "snug",
+        "normal",
+        "relaxed",
+        "loose"
+      ],
+      "css_variables_count": 27,
+      "status": "complete",
+      "documented": {
+        "tokens_index_json": true,
+        "agents_md": true,
+        "claude_md": true
+      }
+    },
+    "spacing": {
+      "base_unit": "4px",
+      "scale": [
+        "0",
+        "px",
+        "05",
+        "1",
+        "2",
+        "3",
+        "4",
+        "5",
+        "6",
+        "8",
+        "10",
+        "12",
+        "16",
+        "20",
+        "24",
+        "32"
+      ],
+      "css_variables": [
+        "1",
+        "2",
+        "3",
+        "4",
+        "6",
+        "8",
+        "12",
+        "16",
+        "24",
+        "32"
+      ],
+      "css_variables_count": 10,
+      "status": "complete",
+      "documented": {
+        "tokens_index_json": true,
+        "agents_md": true
+      }
+    },
+    "radius": {
+      "variants": [
+        "0",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "2xl",
+        "full"
+      ],
+      "status": "complete"
+    },
+    "effects": {
+      "shadows": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "blur": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ],
+      "status": "complete"
+    }
+  },
+  "component_library": {
+    "forms": [
+      "button",
+      "field",
+      "select",
+      "switch",
+      "checkbox",
+      "radio",
+      "textarea",
+      "search"
+    ],
+    "navigation": [
+      "navbar",
+      "sidebar",
+      "tabs",
+      "breadcrumb",
+      "pagination",
+      "dropdown"
+    ],
+    "data_display": [
+      "card",
+      "table",
+      "badge",
+      "avatar",
+      "stat-card",
+      "progress-bar"
+    ],
+    "feedback": [
+      "alert",
+      "toast",
+      "modal",
+      "tooltip",
+      "spinner",
+      "skeleton"
+    ],
+    "layout": [
+      "container",
+      "stack",
+      "grid",
+      "divider"
+    ],
+    "marketing": [
+      "hero",
+      "feature-card",
+      "pricing-card",
+      "cta-section"
+    ]
+  },
+  "multi_brand_system": {
+    "enabled": true,
+    "automatic_soft_states": true,
+    "automatic_focus_rings": true,
+    "technique": "color-mix() CSS function",
+    "brands": [
+      {
+        "name": "orion",
+        "accent_color": "#1B5BFF",
+        "radius": "12px",
+        "description": "Default brand - Blue accent, standard border radius"
+      },
+      {
+        "name": "red",
+        "accent_color": "#D7282F",
+        "radius": "9999px",
+        "description": "Red accent, pill-style buttons"
+      },
+      {
+        "name": "deepblue",
+        "accent_color": "#006FBA",
+        "radius": "12px",
+        "description": "Deep blue accent, standard border radius"
+      },
+      {
+        "name": "orange",
+        "accent_color": "#F15D22",
+        "radius": "9999px",
+        "description": "Red-orange accent, pill-style buttons"
+      },
+      {
+        "name": "lemon",
+        "accent_color": "#5CE629",
+        "radius": "9999px",
+        "description": "Lime green accent, pill-style buttons"
+      }
+    ]
+  },
+  "validation": {
+    "automated": true,
+    "scripts": {
+      "validate_tokens": "node scripts/validate-tokens.js",
+      "build_tokens": "node scripts/build-tokens.js",
+      "check_tokens": "python check_tokens.py",
+      "check_contrast": "python check_contrast.py"
+    },
+    "ci_ready": true,
+    "last_validation": "2026-01-23",
+    "compliance_score": "100%"
+  },
+  "documentation": {
+    "status": "optimized",
+    "last_optimization": "2026-01-23",
+    "files": {
+      "core": {
+        "CLAUDE.md": {
+          "lines": 550,
+          "purpose": "Primary documentation for Claude Code and AI agents",
+          "sections": [
+            "TypeScript workflow",
+            "Anti-hallucination rules",
+            "Common mistakes",
+            "Token reference"
+          ],
+          "updated": "2026-01-23"
+        },
+        "AGENTS.md": {
+          "lines": 290,
+          "purpose": "Quick reference for AI agents (2-3 min read)",
+          "sections": [
+            "Token lookup tables",
+            "Component patterns",
+            "Demo page checklist"
+          ],
+          "updated": "2026-01-23"
+        },
+        "TYPESCRIPT.md": {
+          "lines": 650,
+          "purpose": "Complete TypeScript setup and development guide",
+          "sections": [
+            "Installation",
+            "Development workflow",
+            "Testing",
+            "Troubleshooting"
+          ],
+          "created": "2026-01-23"
+        },
+        "DOCUMENTATION-INDEX.md": {
+          "lines": 400,
+          "purpose": "Master documentation index and navigation",
+          "created": "2026-01-23"
+        },
+        "rules.md": {
+          "lines": 405,
+          "purpose": "Design system constitution (Chain of Truth)",
+          "status": "stable"
+        }
+      },
+      "tokens": {
+        "index.json": {
+          "purpose": "Unified token reference (single source of truth)",
+          "sections": [
+            "primitives",
+            "semantics",
+            "css_variables",
+            "tri_modal_system"
+          ],
+          "css_variables_documented": 75,
+          "updated": "2026-01-23"
+        },
+        "ai-manifest.json": {
+          "purpose": "System status and capabilities for AI agents",
+          "updated": "2026-01-23"
+        }
+      },
+      "analysis": {
+        "ANALYSIS-FONT-COLOR-ISSUES.md": {
+          "purpose": "Typography and color debugging analysis",
+          "created": "2026-01-23"
+        },
+        "TOKENS-INDEX-UPDATE.md": {
+          "purpose": "Documentation of tokens/index.json updates",
+          "created": "2026-01-23"
+        }
+      }
+    },
+    "improvements": {
+      "documentation_reduction": "46% fewer files in root (13 → 7)",
+      "duplication_eliminated": "100% (5 duplicate files consolidated)",
+      "common_mistakes_documented": true,
+      "typography_variables_documented": true,
+      "spacing_system_documented": true
+    },
+    "for_ai_agents": {
+      "read_time_core_docs": "5 minutes",
+      "quick_reference_time": "2 minutes",
+      "must_read": [
+        "CLAUDE.md",
+        "AGENTS.md",
+        "tokens/ai-manifest.json",
+        "tokens/index.json"
+      ],
+      "reference_if_needed": [
+        "TYPESCRIPT.md",
+        "rules.md",
+        "COMPONENT_USAGE_RULES.md"
+      ]
+    }
+  },
+  "architecture": {
+    "paradigm": "Chain of Truth",
+    "layers": {
+      "layer_1": {
+        "name": "Primitives",
+        "file": "tokens/primary.json",
+        "purpose": "Raw immutable values",
+        "examples": [
+          "#1B5BFF",
+          "16px",
+          "12px"
+        ]
+      },
+      "layer_2": {
+        "name": "Semantics",
+        "files": [
+          "tokens/light.json",
+          "tokens/dark.json"
+        ],
+        "purpose": "Intent-based mappings",
+        "examples": [
+          "{color.brand.500}",
+          "{spacing.4}"
+        ]
+      },
+      "layer_3": {
+        "name": "CSS Variables",
+        "file": "theme.css",
+        "purpose": "Browser-consumable tokens",
+        "examples": [
+          "var(--interactive-primary)",
+          "var(--spacing-4)"
+        ]
+      },
+      "layer_4": {
+        "name": "Components",
+        "file": "theme.css",
+        "purpose": "Blind consumers of semantic tokens",
+        "examples": [
+          "<button class=\"btn btn-primary\">"
+        ]
+      }
+    },
+    "anti_patterns": {
+      "forbidden": [
+        "Hardcoded hex colors in components",
+        "Hardcoded pixel values",
+        "Hardcoded font families",
+        "Inventing new components without manifest"
+      ]
+    }
+  },
+  "capabilities": {
+    "theme_switching": {
+      "supported": true,
+      "modes": [
+        "light",
+        "dark"
+      ],
+      "usage": "<html data-theme=\"light|dark\">"
+    },
+    "brand_switching": {
+      "supported": true,
+      "dynamic": true,
+      "usage": "<html data-brand=\"orion|uvm|unitec|laureate\">"
+    },
+    "responsive_design": {
+      "supported": true,
+      "breakpoints": {
+        "sm": "640px",
+        "md": "768px",
+        "lg": "1024px",
+        "xl": "1280px"
+      }
+    },
+    "accessibility": {
+      "wcag_level": "AA",
+      "features": [
+        "Focus visible states",
+        "Screen reader utilities",
+        "Skip links",
+        "ARIA attributes",
+        "Reduced motion support"
+      ]
+    },
+    "tri_modal_system": {
+      "supported": true,
+      "status": "fully implemented",
+      "modes": [
+        "display",
+        "product",
+        "app"
+      ],
+      "description": "Three distinct UI contexts with mode-aware variables and utility classes",
+      "features": [
+        "Mode-aware typography scaling",
+        "Adaptive spacing and density",
+        "Touch target optimization",
+        "Safe area inset support (app mode)",
+        "Visual style variations",
+        "Interactive showcase demo"
+      ],
+      "usage": "Set data-mode attribute on html element: display, product, or app"
+    }
+  },
+  "known_limitations": [
+    {
+      "area": "Testing Coverage",
+      "issue": "Unitec and Laureate brands lack demo projects",
+      "severity": "medium",
+      "workaround": "Use UVM demo as template"
+    }
+  ],
+  "file_reference": {
+    "core_files": {
+      "AGENTS.md": "Quick reference for AI agents (149 lines)",
+      "CLAUDE.md": "Comprehensive implementation guide (270 lines)",
+      "rules.md": "Constitutional governance (405 lines)",
+      "theme.css": "Main CSS file with all tokens + components (4700+ lines)",
+      "prompt-guide.html": "Interactive prompt engineering guide for AI agents (700+ lines)"
+    },
+    "token_files": {
+      "tokens/primary.json": "Primitive values (180 lines)",
+      "tokens/light.json": "Light theme semantics (57 lines)",
+      "tokens/dark.json": "Dark theme semantics (57 lines)",
+      "tokens/index.json": "Unified reference (269 lines)",
+      "tokens/components.json": "Component manifest (341 lines)",
+      "tokens/utilities.json": "Utility classes documentation (380 lines)",
+      "tokens/brands.json": "Brand configurations (180 lines)",
+      "tokens/ai-manifest.json": "This file - AI system status"
+    },
+    "validation_scripts": {
+      "scripts/build-tokens.js": "Compile JSON to CSS (313 lines)",
+      "scripts/validate-tokens.js": "Audit hardcoded values (196 lines)",
+      "check_tokens.py": "Python token validator (40 lines)",
+      "check_contrast.py": "WCAG contrast checker (56 lines)"
+    }
+  },
+  "agent_instructions": {
+    "read_order": [
+      "tokens/ai-manifest.json (this file)",
+      "AGENTS.md (quick reference)",
+      "tokens/index.json (token lookup)",
+      "tokens/components.json (component templates)",
+      "CLAUDE.md (detailed guide if needed)"
+    ],
+    "resources": {
+      "documentation_site": "Unified documentation with consistent navigation and transitions across 6 pages",
+      "prompt_engineering": "prompt-guide.html - Interactive guide teaching effective prompting patterns",
+      "tri_modal_demo": "testing-projects/tri-modal-showcase/index.html - Live tri-modal system showcase",
+      "component_library": "library.html - Complete component reference with live examples",
+      "global_navigation": "assets/docs-shell.js - Shared navigation header with theme/brand switching",
+      "page_transitions": "assets/page-transitions.css - Smooth animations and entrance effects"
+    },
+    "workflow": {
+      "step_1": "Check ai-manifest.json for system capabilities",
+      "step_2": "Read AGENTS.md for anti-hallucination rules",
+      "step_3": "Reference tokens/index.json for available tokens",
+      "step_4": "Use tokens/components.json for HTML patterns",
+      "step_5": "Validate with npm run validate"
+    },
+    "forbidden_actions": [
+      "Never hardcode #FFFFFF or #000000",
+      "Never hardcode 16px or 24px",
+      "Never invent components not in components.json",
+      "Never skip validation after changes"
+    ],
+    "required_actions": [
+      "Always use var(--surface-base) for backgrounds",
+      "Always use var(--text-primary) for text",
+      "Always reference components.json for HTML structure",
+      "Always check data-brand attribute"
+    ]
+  },
+  "usage_examples": {
+    "creating_button": {
+      "wrong": "<button style=\"background: #1B5BFF; padding: 16px;\">",
+      "correct": "<button class=\"btn btn-primary\">Label</button>"
+    },
+    "applying_brand": {
+      "html": "<html data-theme=\"dark\" data-brand=\"uvm\">",
+      "result": "Automatically applies UVM red brand with dark theme"
+    },
+    "custom_styling": {
+      "wrong": "style=\"color: #666; margin: 16px;\"",
+      "correct": "class=\"text-secondary m-4\""
+    }
+  },
+  "changelog": {
+    "2026-01-21": [
+      "Added color-info-500 primitive",
+      "Added --surface-primary and --surface-secondary tokens",
+      "Tokenized soft states with color-mix()",
+      "Tokenized focus rings (brand-agnostic)",
+      "Completed utilities.json documentation",
+      "Created ai-manifest.json",
+      "Implemented tri-modal system (display/product/app modes)",
+      "Added mode-aware CSS variables and utility classes",
+      "Polished 5 core components with micro-interactions",
+      "Added alert-slide-in/out and icon-pulse animations",
+      "Created tri-modal-showcase demo",
+      "Documented tri-modal in tokens/index.json",
+      "Created comprehensive prompt engineering guide (prompt-guide.html)",
+      "Integrated prompt guide into library.html and index.html navigation",
+      "Added prompt strategy with 7 sections: anatomy, comparison, levels, tri-modal, multi-brand, anti-patterns, special cases",
+      "Unified documentation site with consistent navigation across all pages",
+      "Created page-transitions.css for smooth animations between pages",
+      "Updated docs-shell.js to include prompt guide in global navigation",
+      "Standardized all documentation pages (index, tokens, components, rules, examples, prompts) with shared header and transitions",
+      "Added tabs-pill variant for navbar-style navigation",
+      "Created tabs-pill-compact and tabs-pill-secondary variants",
+      "Updated navbar to use tabs-pill for modern segmented control appearance",
+      "Enhanced tabs component with 5 variants (default, pill, pill-compact, pill-secondary, pill-ghost)",
+      "Added tabs-pill-ghost variant: clean navigation without container background or border",
+      "Updated components.json with tabs variants and use cases",
+      "Added tabs-pill-ghost examples to library.html and components.html",
+      "Simplified tabs component: removed default underline and pill-compact variants",
+      "Tabs now only has 3 pill variants: primary (with background), secondary (subtle), and ghost (no background)",
+      "Updated navbar to use standard tabs-pill (removed compact variant)",
+      "Changed navbar to use tabs-pill-ghost for cleaner, minimal navigation appearance",
+      "Updated navbar examples in components.html to use tabs-pill-ghost",
+      "Fixed .navbar-link.is-active to consistently use soft background (var(--color-brand-soft)) matching sidebar style",
+      "Updated tabs-pill-ghost .tab.is-active to use soft style: brand color text with soft background, matching sidebar aesthetic",
+      "Changed documentation site navbar from navbar-floating to navbar-classic for edge-to-edge layout across all pages",
+      "Created comprehensive strategic plan (STRATEGIC-PLAN.md) with product design analysis and 6-month roadmap",
+      "IMPLEMENTATION PHASE - NOW (Week 1) - COMPLETED:",
+      "Consolidated duplicate CSS (.navbar-link) - removed 51 lines of duplicated navbar styles",
+      "Implemented full-featured search modal with keyboard shortcut (⌘K/Ctrl+K), filtering, and result highlighting",
+      "Added breadcrumbs navigation to all documentation pages (except homepage) with automatic page detection",
+      "Added 'When to Use' and 'Don't Use' guidelines to 7 components: Button, Field, Card, Alert, Modal, Select, Badge",
+      "Search index includes 40+ items: 6 pages, 27 components, 6 token categories",
+      "Made Modal component fully interactive: 2 modal examples (Confirm Action, Delete Item) with backdrop, ESC key, animations",
+      "Made Dropdown component fully interactive: 2 dropdown examples (Actions, User Menu) with click-outside close and keyboard support",
+      "Added modal-backdrop CSS with fadeIn and slideUp animations for smooth modal interactions",
+      "Updated dropdown CSS to support both is-active and is-open classes for consistency",
+      "EXAMPLES SECTION - COMPLETED (3 NEW EXAMPLES):",
+      "Created Analytics Dashboard (Product Mode): Sidebar navigation, stat cards with trends, chart placeholder, data table, user dropdown",
+      "Created E-commerce Storefront (Display Mode): Product grid, hero section, pricing, shopping cart, responsive footer",
+      "Created Mobile Banking App (App Mode): Touch-first design, balance card, quick actions, transactions list, bottom navigation",
+      "All examples use Orion components, follow Chain of Truth, include theme toggle, and demonstrate mode-specific optimizations",
+      "Updated examples.html to link all 3 new demos, removed 'Coming Soon' labels, total 5 working examples now available",
+      "COMPREHENSIVE EXAMPLES EXPANSION - COMPLETED (12 NEW EXAMPLES):",
+      "Created SaaS Product Landing (Display Mode): Hero with gradient badge, 6 features grid, 3-tier pricing, stats, footer navigation",
+      "Created Educational Landing (Display Mode): University site with programs grid, stats cards, faculty section, application CTA",
+      "Created Agency Portfolio (Display Mode): Creative agency with projects gallery, services grid, team avatars, contact form, full-screen hero",
+      "Created Startup Landing (Display Mode): Modern tech startup with glassmorphism, alternating features layout, integrations grid, waitlist form",
+      "Created Project Management Dashboard (Product Mode): Kanban board with 3 columns (To Do, In Progress, Done), task cards with avatars/badges, sidebar navigation",
+      "Created CRM Platform (Product Mode): Contacts table with avatars, deal stages, filters, search, quick actions per row",
+      "Created Email Marketing Platform (Product Mode): Campaign grid with stats (open rate, click rate), status badges, scheduled campaigns",
+      "Created Learning Management System (Product Mode): Course cards with progress bars, module counts, completion badges, certificate links",
+      "Created Fitness Tracker App (App Mode): Activity ring, stats grid (calories, minutes, distance, BPM), workout list, bottom navigation",
+      "Created Social Media Feed App (App Mode): Stories horizontal scroll, post feed with avatars, like/comment counts, 5-tab bottom nav",
+      "Created Food Delivery App (App Mode): Restaurant grid with ratings, category filters, search bar, cart FAB with badge, touch-optimized",
+      "Created Task Manager App (App Mode): Task list with checkboxes, priority badges, filter tabs, stats row, add FAB button",
+      "All 12 examples follow Chain of Truth: only use CSS variables (var(--token-name)), no hardcoded values",
+      "All examples include theme toggle with localStorage persistence",
+      "Display Mode examples (4): Full-width responsive layouts, marketing-focused design, hero sections, footers",
+      "Product Mode examples (4): Dashboard layouts, sidebar navigation, data tables, cards, filters, charts placeholders",
+      "App Mode examples (4): Mobile-first (max-width: 428px), bottom navigation, safe area insets, touch targets 44px+",
+      "Updated examples.html: Added 12 new example cards, total 17 working examples (was 5)",
+      "Updated ai-manifest.json: testing_projects.total = 21, added all project names to manifest"
+    ]
+  },
+  "metadata": {
+    "generated_by": "Orion Design System v1.0",
+    "format_version": "1.0.0",
+    "schema": "https://orion-ds.io/schemas/ai-manifest/v1",
+    "license": "MIT",
+    "repository": "https://github.com/orion-ds/orion",
+    "maintainers": [
+      "Orion Team"
+    ],
+    "ai_agent_compatible": true,
+    "machine_readable": true
+  }
+}

@@ -47,7 +47,8 @@
     "lint:css": "stylelint \"packages/**/*.css\"",
     "lint:css:fix": "stylelint \"packages/**/*.css\" --fix",
     "create:component": "node scripts/create-component.js",
-    "prepare": "husky"
+    "prepare": "husky",
+    "sync:manifest": "node scripts/sync-manifest.js"
   },
   "keywords": [
     "design-system",
