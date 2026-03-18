@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "profile-page-template",
+  "type": "registry:template",
+  "title": "Profile Page",
+  "description": "ProfilePage page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/ProfilePageTemplate/ProfilePageTemplate.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#profile-page-template",
+    "local": "/library.html#profile-page-template"
+  },
+  "import": "import { ProfilePageTemplate } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

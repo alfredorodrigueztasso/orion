@@ -1,0 +1,105 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "list",
+  "type": "registry:component",
+  "title": "List",
+  "description": "List component",
+  "category": "data-display",
+  "files": [
+    {
+      "path": "packages/react/src/components/List/List.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * List Component\n *\n * A flexible list component for displaying items with various layouts.\n *\n * @example\n * ```tsx\n * <List\n *   items={[\n *     { id: '1', primary: 'Item 1', secondary: 'Description' },\n *     { id: '2', primary: 'Item 2', leading: <UserIcon /> },\n *   ]}\n *   interactive\n * />\n * ```\n */\n\nimport { forwardRef, useCallback } from \"react\";\nimport { Check } from \"lucide-react\";\nimport type { ListProps, ListItem, ListItemProps } from \"./List.types\";\nimport styles from \"./List.module.css\";\n\n/**\n * Single List Item\n */\nconst ListItemComponent = ({\n  item,\n  size,\n  interactive,\n  selectable,\n  onClick,\n}: ListItemProps) => {\n  const handleClick = useCallback(() => {\n    if (!item.disabled && (interactive || selectable) && item.onClick) {\n      item.onClick();\n    }\n    onClick?.();\n  }, [item, interactive, selectable, onClick]);\n\n  const handleKeyDown = useCallback(\n    (e: React.KeyboardEvent) => {\n      if ((e.key === \"Enter\" || e.key === \" \") && (interactive || selectable)) {\n        e.preventDefault();\n        handleClick();\n      }\n    },\n    [interactive, selectable, handleClick],\n  );\n\n  const itemClasses = [\n    styles.item,\n    styles[size],\n    interactive && styles.interactive,\n    selectable && styles.selectable,\n    item.selected && styles.selected,\n    item.disabled && styles.disabled,\n    item.className,\n  ]\n    .filter(Boolean)\n    .join(\" \");\n\n  const isClickable =\n    !item.disabled && (interactive || selectable || item.onClick);\n\n  return (\n    <li\n      className={itemClasses}\n      role={selectable ? \"option\" : interactive ? \"button\" : undefined}\n      tabIndex={isClickable ? 0 : undefined}\n      aria-selected={selectable ? item.selected : undefined}\n      aria-disabled={item.disabled}\n      onClick={isClickable ? handleClick : undefined}\n      onKeyDown={isClickable ? handleKeyDown : undefined}\n    >\n      {item.leading && (\n        <span className={styles.leading} aria-hidden=\"true\">\n          {item.leading}\n        </span>\n      )}\n\n      <div className={styles.content}>\n        <span className={styles.primary}>{item.primary}</span>\n        {item.secondary && (\n          <span className={styles.secondary}>{item.secondary}</span>\n        )}\n      </div>\n\n      {item.trailing && (\n        <span className={styles.trailing}>{item.trailing}</span>\n      )}\n\n      {selectable && item.selected && (\n        <span className={styles.checkmark} aria-hidden=\"true\">\n          <Check size={size === \"sm\" ? 14 : size === \"lg\" ? 20 : 16} />\n        </span>\n      )}\n    </li>\n  );\n};\n\nexport const List = forwardRef<HTMLUListElement, ListProps>(\n  (\n    {\n      items,\n      size = \"md\",\n      variant = \"default\",\n      interactive = false,\n      selectable = false,\n      onSelect,\n      renderItem,\n      emptyContent,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const handleItemClick = useCallback(\n      (item: ListItem) => {\n        if (onSelect && !item.disabled) {\n          onSelect(item);\n        }\n      },\n      [onSelect],\n    );\n\n    const listClasses = [styles.list, styles[variant], className]\n      .filter(Boolean)\n      .join(\" \");\n\n    if (items.length === 0 && emptyContent) {\n      return <div className={styles.empty}>{emptyContent}</div>;\n    }\n\n    return (\n      <ul\n        ref={ref}\n        className={listClasses}\n        role={selectable ? \"listbox\" : \"list\"}\n        {...rest}\n      >\n        {items.map((item, index) =>\n          renderItem ? (\n            <li key={item.id} className={styles.customItem}>\n              {renderItem(item, index)}\n            </li>\n          ) : (\n            <ListItemComponent\n              key={item.id}\n              item={item}\n              size={size}\n              interactive={interactive}\n              selectable={selectable}\n              onClick={() => handleItemClick(item)}\n            />\n          ),\n        )}\n      </ul>\n    );\n  },\n);\n\nList.displayName = \"List\";\n"
+    },
+    {
+      "path": "packages/react/src/components/List/List.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * List Component Types\n *\n * Type definitions for the Orion List component.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * List size variants\n */\nexport type ListSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * List variant\n */\nexport type ListVariant = \"default\" | \"bordered\" | \"divided\";\n\n/**\n * List item\n */\nexport interface ListItem {\n  /**\n   * Unique identifier\n   */\n  id: string;\n\n  /**\n   * Primary content (text or element)\n   */\n  primary: ReactNode;\n\n  /**\n   * Secondary content (smaller text below primary)\n   */\n  secondary?: ReactNode;\n\n  /**\n   * Icon or avatar on the left\n   */\n  leading?: ReactNode;\n\n  /**\n   * Content on the right (icon, badge, etc.)\n   */\n  trailing?: ReactNode;\n\n  /**\n   * Whether this item is disabled\n   */\n  disabled?: boolean;\n\n  /**\n   * Whether this item is selected (for selectable lists)\n   */\n  selected?: boolean;\n\n  /**\n   * Click handler for the item\n   */\n  onClick?: () => void;\n\n  /**\n   * Additional class name for the item\n   */\n  className?: string;\n}\n\n/**\n * List component props\n *\n * @example\n * ```tsx\n * <List\n *   items={[\n *     { id: '1', primary: 'Item 1', secondary: 'Description' },\n *     { id: '2', primary: 'Item 2', leading: <UserIcon /> },\n *   ]}\n * />\n * ```\n */\nexport interface ListProps extends Omit<\n  HTMLAttributes<HTMLUListElement>,\n  \"onSelect\"\n> {\n  /**\n   * List items\n   */\n  items: ListItem[];\n\n  /**\n   * Size variant\n   * @default 'md'\n   */\n  size?: ListSize;\n\n  /**\n   * Visual variant\n   * @default 'default'\n   */\n  variant?: ListVariant;\n\n  /**\n   * Whether the list items are interactive (hoverable/clickable)\n   * @default false\n   */\n  interactive?: boolean;\n\n  /**\n   * Whether items can be selected\n   * @default false\n   */\n  selectable?: boolean;\n\n  /**\n   * Callback when an item is selected\n   */\n  onSelect?: (item: ListItem) => void;\n\n  /**\n   * Render custom list item content\n   */\n  renderItem?: (item: ListItem, index: number) => ReactNode;\n\n  /**\n   * Custom empty state when no items\n   */\n  emptyContent?: ReactNode;\n}\n\n/**\n * List Item component props (internal)\n */\nexport interface ListItemProps {\n  item: ListItem;\n  size: ListSize;\n  interactive: boolean;\n  selectable: boolean;\n  onClick?: () => void;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/List/List.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * List Component Styles\n */\n\n.list {\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n/* Variants */\n.bordered {\n  border: 1px solid var(--border-subtle);\n  border-radius: var(--radius-control);\n  overflow: hidden;\n}\n\n.divided .item:not(:last-child) {\n  border-bottom: 1px solid var(--border-subtle);\n}\n\n.bordered .item:not(:last-child) {\n  border-bottom: 1px solid var(--border-subtle);\n}\n\n/* List Item */\n.item {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-3);\n  padding: var(--spacing-3) var(--spacing-4);\n  background: var(--surface-base);\n  transition: background-color var(--duration-fast) var(--ease-out);\n}\n\n/* Size variants */\n.sm {\n  gap: var(--spacing-2);\n  padding: var(--spacing-2) var(--spacing-3);\n  font-size: var(--font-size-sm);\n}\n\n.md {\n  font-size: var(--font-size-base);\n}\n\n.lg {\n  gap: var(--spacing-4);\n  padding: var(--spacing-4) var(--spacing-5);\n  font-size: var(--font-size-lg);\n}\n\n/* Interactive items */\n.interactive {\n  cursor: pointer;\n}\n\n.interactive:hover:not(.disabled) {\n  background: var(--surface-subtle);\n}\n\n.interactive:active:not(.disabled) {\n  background: var(--surface-layer);\n}\n\n.interactive:focus-visible {\n  outline: 2px solid var(--interactive-primary);\n  outline-offset: -2px;\n}\n\n/* Selectable items */\n.selectable {\n  cursor: pointer;\n  padding-right: var(--spacing-10);\n}\n\n.selectable:hover:not(.disabled) {\n  background: var(--surface-subtle);\n}\n\n.selected {\n  background: var(--interactive-primary-subtle);\n}\n\n.selected:hover:not(.disabled) {\n  background: var(--interactive-primary-subtle);\n}\n\n/* Disabled state */\n.disabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n}\n\n/* Leading content (icon/avatar) */\n.leading {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n  color: var(--text-secondary);\n}\n\n.sm .leading {\n  width: 20px;\n  height: 20px;\n}\n\n.md .leading {\n  width: 24px;\n  height: 24px;\n}\n\n.lg .leading {\n  width: 32px;\n  height: 32px;\n}\n\n/* Content */\n.content {\n  flex: 1;\n  min-width: 0;\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-1);\n}\n\n.primary {\n  font-weight: var(--font-weight-medium);\n  color: var(--text-primary);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n\n.secondary {\n  font-size: var(--font-size-sm);\n  color: var(--text-secondary);\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n\n.sm .secondary {\n  font-size: var(--font-size-xs);\n}\n\n.lg .secondary {\n  font-size: var(--font-size-base);\n}\n\n/* Trailing content */\n.trailing {\n  display: flex;\n  align-items: center;\n  flex-shrink: 0;\n  color: var(--text-tertiary);\n}\n\n/* Checkmark for selectable */\n.checkmark {\n  position: absolute;\n  right: var(--spacing-3);\n  display: flex;\n  align-items: center;\n  color: var(--interactive-primary);\n}\n\n.selectable {\n  position: relative;\n}\n\n/* Custom item wrapper */\n.customItem {\n  list-style: none;\n}\n\n/* Empty state */\n.empty {\n  padding: var(--spacing-8);\n  text-align: center;\n  color: var(--text-secondary);\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/List/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * List Component - Vertical item list display.\n *\n * @example\n * ```tsx\n * import { List } from '@orion-ds/react';\n * import { User, Settings, LogOut } from 'lucide-react';\n *\n * <List\n *   items={[\n *     { id: '1', label: 'Profile', icon: <User size={18} />, onClick: goToProfile },\n *     { id: '2', label: 'Settings', icon: <Settings size={18} />, onClick: goToSettings },\n *     { id: '3', label: 'Log out', icon: <LogOut size={18} />, onClick: handleLogout },\n *   ]}\n * />\n * ```\n */\nexport { List } from \"./List\";\nexport type { ListProps, ListItem, ListSize, ListVariant } from \"./List.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "items",
+      "type": "ListItem[]",
+      "description": "List items",
+      "required": true
+    },
+    {
+      "name": "size",
+      "type": "ListSize",
+      "description": "Size variant",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "variant",
+      "type": "ListVariant",
+      "description": "Visual variant",
+      "default": "default",
+      "values": [
+        "default",
+        "bordered",
+        "divided"
+      ]
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "description": "Whether the list items are interactive (hoverable/clickable)",
+      "default": false
+    },
+    {
+      "name": "selectable",
+      "type": "boolean",
+      "description": "Whether items can be selected",
+      "default": false
+    },
+    {
+      "name": "onSelect",
+      "type": "(item: ListItem) => void",
+      "description": "Callback when an item is selected"
+    },
+    {
+      "name": "renderItem",
+      "type": "(item: ListItem, index: number) => ReactNode",
+      "description": "Render custom list item content"
+    },
+    {
+      "name": "emptyContent",
+      "type": "ReactNode",
+      "description": "Custom empty state when no items"
+    }
+  ],
+  "tokens": [
+    "--surface-base",
+    "--border-subtle",
+    "--text-primary"
+  ],
+  "examples": [
+    {
+      "title": "Basic list",
+      "code": "<List\n  items={[\n    { id: '1', primary: 'Item 1', secondary: 'Description' },\n    { id: '2', primary: 'Item 2', secondary: 'Description' },\n  ]}\n/>"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#list",
+    "local": "/library.html#list"
+  },
+  "import": "import { List } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

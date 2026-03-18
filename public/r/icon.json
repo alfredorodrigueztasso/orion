@@ -1,0 +1,95 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "icon",
+  "type": "registry:component",
+  "title": "Icon",
+  "description": "Icon component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/Icon/Icon.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Icon Component\n *\n * A normalized wrapper for Lucide icons that provides:\n * - Consistent sizing via design tokens\n * - Semantic color variants\n * - Proper accessibility handling\n * - Tree-shaking friendly (icons imported directly from lucide-react)\n *\n * @example Basic usage\n * ```tsx\n * import { Icon } from '@orion/react';\n * import { Search, AlertCircle, Check } from 'lucide-react';\n *\n * // Decorative icon (hidden from screen readers)\n * <Icon icon={Search} size=\"md\" decorative />\n *\n * // Semantic icon (announced to screen readers)\n * <Icon icon={AlertCircle} size=\"lg\" label=\"Warning\" color=\"warning\" />\n *\n * // Custom pixel size\n * <Icon icon={Check} size={18} color=\"success\" />\n * ```\n *\n * @example In Button component\n * ```tsx\n * import { Button, Icon } from '@orion/react';\n * import { Download } from 'lucide-react';\n *\n * <Button icon={<Icon icon={Download} decorative />}>\n *   Download File\n * </Button>\n * ```\n */\n\nimport { forwardRef, useMemo } from \"react\";\nimport type { IconProps, IconSize } from \"./Icon.types\";\nimport styles from \"./Icon.module.css\";\n\n/**\n * Size token to pixel mapping\n * These values must match the CSS variables in theme.css\n */\nconst SIZE_MAP: Record<IconSize, number> = {\n  xs: 12,\n  sm: 16,\n  md: 20,\n  lg: 24,\n  xl: 32,\n};\n\nexport const Icon = forwardRef<SVGSVGElement, IconProps>(\n  (\n    {\n      icon: IconComponent,\n      size = \"md\",\n      color = \"current\",\n      strokeWidth = 2,\n      label,\n      decorative = false,\n      disabled = false,\n      className,\n      style,\n      ...rest\n    },\n    ref,\n  ) => {\n    // Resolve size to pixels\n    const resolvedSize = useMemo(() => {\n      if (typeof size === \"number\") {\n        return size;\n      }\n      return SIZE_MAP[size];\n    }, [size]);\n\n    // Build class names\n    const classNames = useMemo(() => {\n      const classes = [styles.icon];\n\n      // Add size class only for token sizes (not custom pixels)\n      if (typeof size === \"string\") {\n        classes.push(styles[size]);\n      }\n\n      // Add color class\n      classes.push(styles[color]);\n\n      // Add state classes\n      if (disabled) {\n        classes.push(styles.disabled);\n      }\n\n      // Add custom class\n      if (className) {\n        classes.push(className);\n      }\n\n      return classes.filter(Boolean).join(\" \");\n    }, [size, color, disabled, className]);\n\n    // Accessibility attributes\n    const a11yProps = useMemo(() => {\n      if (decorative) {\n        // Decorative icons are hidden from screen readers\n        return {\n          \"aria-hidden\": true as const,\n          role: \"presentation\" as const,\n        };\n      }\n\n      // Semantic icons need accessible name\n      return {\n        \"aria-label\": label,\n        role: \"img\" as const,\n      };\n    }, [decorative, label]);\n\n    // Merge custom styles with size override for pixel values\n    const mergedStyle = useMemo(() => {\n      if (typeof size === \"number\") {\n        return {\n          width: size,\n          height: size,\n          ...style,\n        };\n      }\n      return style;\n    }, [size, style]);\n\n    return (\n      <IconComponent\n        ref={ref}\n        className={classNames}\n        size={resolvedSize}\n        strokeWidth={strokeWidth}\n        style={mergedStyle}\n        {...a11yProps}\n        {...rest}\n      />\n    );\n  },\n);\n\nIcon.displayName = \"Icon\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Icon/Icon.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Icon Component Types\n *\n * Type definitions for the Orion Icon wrapper component.\n * Provides normalized icon rendering with design token integration.\n *\n * @see https://lucide.dev for available icons\n */\n\nimport type { LucideIcon, LucideProps } from \"lucide-react\";\nimport type { SVGProps } from \"react\";\n\n/**\n * Icon size tokens (mapped to CSS variables)\n * - xs: 12px (--icon-size-xs) - Badges, compact UI\n * - sm: 16px (--icon-size-sm) - Inline text, small buttons\n * - md: 20px (--icon-size-md) - Default for buttons/inputs\n * - lg: 24px (--icon-size-lg) - Section headers\n * - xl: 32px (--icon-size-xl) - Large callouts\n */\nexport type IconSize = \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\";\n\n/**\n * Icon color variants (mapped to semantic tokens)\n */\nexport type IconColor =\n  | \"current\" // currentColor (inherits from parent)\n  | \"primary\" // --text-primary\n  | \"secondary\" // --text-secondary\n  | \"tertiary\" // --text-tertiary\n  | \"brand\" // --text-brand\n  | \"success\" // --status-success\n  | \"warning\" // --status-warning\n  | \"error\" // --status-error\n  | \"info\" // --status-info\n  | \"inverse\"; // --text-inverse\n\n/**\n * Icon component props\n *\n * @example Decorative icon (hidden from screen readers)\n * ```tsx\n * import { Icon } from '@orion/react';\n * import { Search } from 'lucide-react';\n *\n * <Icon icon={Search} size=\"md\" decorative />\n * ```\n *\n * @example Semantic icon (announced to screen readers)\n * ```tsx\n * <Icon icon={AlertCircle} size=\"lg\" label=\"Warning\" color=\"warning\" />\n * ```\n *\n * @example Custom size in pixels\n * ```tsx\n * <Icon icon={Star} size={18} />\n * ```\n */\nexport interface IconProps extends Omit<SVGProps<SVGSVGElement>, \"ref\"> {\n  /**\n   * Lucide icon component to render\n   * Import directly from lucide-react for tree-shaking\n   *\n   * @example\n   * import { Search } from 'lucide-react';\n   * <Icon icon={Search} />\n   */\n  icon: LucideIcon;\n\n  /**\n   * Icon size - uses design tokens or custom pixel value\n   * @default 'md'\n   */\n  size?: IconSize | number;\n\n  /**\n   * Icon color variant - uses semantic tokens\n   * @default 'current'\n   */\n  color?: IconColor;\n\n  /**\n   * Stroke width (Lucide default: 2)\n   * @default 2\n   */\n  strokeWidth?: number;\n\n  /**\n   * Accessible label for screen readers\n   * Required when decorative=false\n   *\n   * @example\n   * <Icon icon={AlertCircle} label=\"Error occurred\" />\n   */\n  label?: string;\n\n  /**\n   * Mark icon as decorative (hidden from screen readers)\n   * Use when icon is purely visual and adjacent text provides meaning\n   * @default false\n   *\n   * @example\n   * <Button icon={<Icon icon={Search} decorative />}>Search</Button>\n   */\n  decorative?: boolean;\n\n  /**\n   * Disabled state (applies muted styling)\n   * @default false\n   */\n  disabled?: boolean;\n\n  /**\n   * Additional CSS class name\n   */\n  className?: string;\n}\n\n/**\n * Props passed to Lucide icon components\n * Used internally for consistent rendering\n */\nexport type IconRenderProps = LucideProps;\n"
+    },
+    {
+      "path": "packages/react/src/components/Icon/Icon.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Icon Component Styles\n *\n * Normalized icon styling with design token integration.\n * All sizes and colors use CSS variables for theming.\n */\n\n/* Base icon wrapper */\n.icon {\n  /* Layout */\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n\n  /* Default to inherit color */\n  color: currentColor;\n\n  /* Smooth transitions for state changes */\n  transition:\n    color var(--transition-fast),\n    opacity var(--transition-fast);\n}\n\n/* ============================================================================\n * SIZES (mapped to --icon-size-* tokens)\n * ============================================================================ */\n\n.xs {\n  width: var(--icon-size-sm); /* 16px - xs uses sm token as minimum */\n  height: var(--icon-size-sm);\n}\n\n.sm {\n  width: var(--icon-size-sm); /* 16px */\n  height: var(--icon-size-sm);\n}\n\n.md {\n  width: var(--icon-size-md); /* 20px */\n  height: var(--icon-size-md);\n}\n\n.lg {\n  width: var(--icon-size-lg); /* 24px */\n  height: var(--icon-size-lg);\n}\n\n.xl {\n  width: var(--icon-size-xl); /* 32px */\n  height: var(--icon-size-xl);\n}\n\n/* ============================================================================\n * COLORS (mapped to semantic tokens)\n * ============================================================================ */\n\n.current {\n  color: currentColor;\n}\n\n.primary {\n  color: var(--text-primary);\n}\n\n.secondary {\n  color: var(--text-secondary);\n}\n\n.tertiary {\n  color: var(--text-tertiary);\n}\n\n.brand {\n  color: var(--text-brand);\n}\n\n.success {\n  color: var(--status-success);\n}\n\n.warning {\n  color: var(--status-warning);\n}\n\n.error {\n  color: var(--status-error);\n}\n\n.info {\n  color: var(--status-info);\n}\n\n.inverse {\n  color: var(--text-inverse);\n}\n\n/* ============================================================================\n * STATES\n * ============================================================================ */\n\n.disabled {\n  opacity: 0.5;\n  pointer-events: none;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Icon/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Icon Component - Render Lucide icons with Orion styling.\n *\n * Prefer importing icons directly from lucide-react for better tree-shaking.\n *\n * @example\n * ```tsx\n * import { Icon } from '@orion-ds/react';\n * // Or directly: import { Search, Settings } from 'lucide-react';\n *\n * <Icon name=\"search\" size=\"md\" />\n * <Icon name=\"settings\" size=\"lg\" color=\"brand\" />\n *\n * // Preferred: Direct import from lucide-react\n * import { Search } from 'lucide-react';\n * <Search size={20} />\n * ```\n */\nexport { Icon } from \"./Icon\";\nexport type {\n  IconProps,\n  IconSize,\n  IconColor,\n  IconRenderProps,\n} from \"./Icon.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "icon",
+      "type": "LucideIcon",
+      "description": "Lucide icon component to render",
+      "required": true
+    },
+    {
+      "name": "size",
+      "type": "IconSize | number",
+      "description": "Icon size - uses design tokens or custom pixel value",
+      "default": "md"
+    },
+    {
+      "name": "color",
+      "type": "IconColor",
+      "description": "Icon color variant - uses semantic tokens",
+      "default": "current"
+    },
+    {
+      "name": "strokeWidth",
+      "type": "number",
+      "description": "Stroke width (Lucide default: 2)",
+      "default": 2
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Accessible label for screen readers"
+    },
+    {
+      "name": "decorative",
+      "type": "boolean",
+      "description": "Mark icon as decorative (hidden from screen readers)",
+      "default": false
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disabled state (applies muted styling)",
+      "default": false
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Additional CSS class name"
+    }
+  ],
+  "tokens": [],
+  "examples": [
+    {
+      "title": "Basic icon",
+      "code": "<Icon name=\"search\" size=\"md\" />"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#icon",
+    "local": "/library.html#icon"
+  },
+  "import": "import { Icon } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "dependencies": [
+    "lucide-react"
+  ]
+}

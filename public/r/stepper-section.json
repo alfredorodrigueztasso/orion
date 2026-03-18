@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "stepper-section",
+  "type": "registry:section",
+  "title": "Stepper",
+  "description": "Stepper section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Stepper/Stepper.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Stepper/Stepper.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Stepper/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#stepper-section",
+    "local": "/library.html#stepper-section"
+  },
+  "import": "import { Stepper } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

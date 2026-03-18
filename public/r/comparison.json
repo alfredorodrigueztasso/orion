@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "comparison",
+  "type": "registry:section",
+  "title": "Comparison",
+  "description": "Comparison section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Comparison/Comparison.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Comparison/Comparison.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Comparison/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#comparison",
+    "local": "/library.html#comparison"
+  },
+  "import": "import { Comparison } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

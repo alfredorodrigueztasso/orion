@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "dashboard-template",
+  "type": "registry:template",
+  "title": "Dashboard",
+  "description": "Dashboard page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/DashboardTemplate/DashboardTemplate.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#dashboard-template",
+    "local": "/library.html#dashboard-template"
+  },
+  "import": "import { DashboardTemplate } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

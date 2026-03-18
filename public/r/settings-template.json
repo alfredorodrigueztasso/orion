@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "settings-template",
+  "type": "registry:template",
+  "title": "Settings",
+  "description": "Settings page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/SettingsTemplate/SettingsTemplate.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#settings-template",
+    "local": "/library.html#settings-template"
+  },
+  "import": "import { SettingsTemplate } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

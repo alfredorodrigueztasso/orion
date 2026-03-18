@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "chat-page-template",
+  "type": "registry:template",
+  "title": "Chat Page",
+  "description": "ChatPage page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/ChatPageTemplate/ChatPageTemplate.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#chat-page-template",
+    "local": "/library.html#chat-page-template"
+  },
+  "import": "import { ChatPageTemplate } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

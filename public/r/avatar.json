@@ -1,0 +1,140 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "avatar",
+  "type": "registry:component",
+  "title": "Avatar",
+  "description": "User profile image or initials",
+  "category": "data-display",
+  "files": [
+    {
+      "path": "packages/react/src/components/Avatar/Avatar.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Avatar Component\n *\n * User profile picture or initials display with status indicators.\n *\n * @example\n * ```tsx\n * <Avatar src=\"/user.jpg\" alt=\"John Doe\" />\n * <Avatar initials=\"JD\" size=\"lg\" />\n * <Avatar icon={<UserIcon />} status=\"online\" />\n * <Avatar src=\"/user.jpg\" status=\"away\" interactive />\n * ```\n */\n\nimport React, { useState, useMemo } from \"react\";\nimport { User } from \"lucide-react\";\nimport type { AvatarProps, AvatarColor } from \"./Avatar.types\";\nimport styles from \"./Avatar.module.css\";\n\n// Map size prop to CSS class names\nconst sizeClassMap: Record<string, string> = {\n  xs: \"xs\",\n  sm: \"sm\",\n  md: \"md\",\n  lg: \"lg\",\n  xl: \"xl\",\n  \"2xl\": \"xxl\",\n  \"3xl\": \"xxxl\",\n  \"4xl\": \"xxxxl\",\n  \"5xl\": \"xxxxxl\",\n  profile: \"profile\",\n};\n\n// Available colors for auto-derivation\nconst AVATAR_COLORS: AvatarColor[] = [\n  \"blue\",\n  \"green\",\n  \"purple\",\n  \"orange\",\n  \"red\",\n  \"teal\",\n  \"pink\",\n];\n\n/**\n * Derive a deterministic color from a string using a simple hash\n * Same input always produces the same color\n */\nconst getColorFromString = (str: string): AvatarColor => {\n  if (!str) return \"blue\"; // default fallback\n\n  // Simple hash function\n  let hash = 0;\n  for (let i = 0; i < str.length; i++) {\n    const char = str.charCodeAt(i);\n    hash = (hash << 5) - hash + char;\n    hash = hash & hash; // Convert to 32-bit integer\n  }\n\n  // Use absolute value to index into colors array\n  const index = Math.abs(hash) % AVATAR_COLORS.length;\n  return AVATAR_COLORS[index]!;\n};\n\nexport const Avatar: React.FC<AvatarProps> = ({\n  src,\n  alt = \"\",\n  initials,\n  icon,\n  size = \"md\",\n  status,\n  interactive = false,\n  color,\n  className,\n  ...rest\n}) => {\n  const [imageError, setImageError] = useState(false);\n\n  const sizeClass = sizeClassMap[size] || size;\n\n  // Derive color from initials if not provided\n  const resolvedColor = useMemo((): AvatarColor => {\n    if (color) return color;\n    if (initials) return getColorFromString(initials);\n    return \"blue\"; // default fallback\n  }, [color, initials]);\n\n  const classNames = [\n    styles.avatar,\n    styles[sizeClass],\n    styles[resolvedColor],\n    interactive && styles.interactive,\n    className,\n  ]\n    .filter(Boolean)\n    .join(\" \");\n\n  // Determine what to display\n  const showImage = src && !imageError;\n  const showInitials = !showImage && initials;\n  const showIcon = !showImage && !showInitials && icon;\n\n  return (\n    <div className={classNames} {...rest}>\n      {/* Image */}\n      {showImage && (\n        <img\n          src={src}\n          alt={alt}\n          className={styles.image}\n          onError={() => setImageError(true)}\n        />\n      )}\n\n      {/* Initials */}\n      {showInitials && <span className={styles.initials}>{initials}</span>}\n\n      {/* Icon */}\n      {showIcon && <span className={styles.icon}>{icon}</span>}\n\n      {/* Default fallback icon */}\n      {!showImage && !showInitials && !showIcon && (\n        <span className={styles.icon}>\n          <User />\n        </span>\n      )}\n\n      {/* Status indicator */}\n      {status && (\n        <span\n          className={`${styles.statusIndicator} ${styles[status]}`}\n          aria-label={`Status: ${status}`}\n        />\n      )}\n    </div>\n  );\n};\n\nAvatar.displayName = \"Avatar\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Avatar/Avatar.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Avatar Component Types\n *\n * Type definitions for the Orion Avatar component.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Avatar sizes\n */\nexport type AvatarSize =\n  | \"xs\"\n  | \"sm\"\n  | \"md\"\n  | \"lg\"\n  | \"xl\"\n  | \"2xl\"\n  | \"3xl\"\n  | \"4xl\"\n  | \"5xl\"\n  | \"profile\";\n\n/**\n * Avatar colors\n */\nexport type AvatarColor =\n  | \"blue\"\n  | \"green\"\n  | \"purple\"\n  | \"orange\"\n  | \"red\"\n  | \"teal\"\n  | \"pink\";\n\n/**\n * Avatar component props\n *\n * @example\n * ```tsx\n * // With image\n * <Avatar src=\"/user.jpg\" alt=\"John Doe\" />\n *\n * // With initials and explicit color\n * <Avatar initials=\"JD\" color=\"blue\" />\n *\n * // With initials and auto-derived color (deterministic from initials)\n * <Avatar initials=\"JD\" />\n *\n * // With icon\n * <Avatar icon={<UserIcon />} />\n * ```\n */\nexport interface AvatarProps extends HTMLAttributes<HTMLDivElement> {\n  /**\n   * Avatar image source\n   */\n  src?: string;\n\n  /**\n   * Alt text for image\n   */\n  alt?: string;\n\n  /**\n   * User initials (fallback if no image)\n   */\n  initials?: string;\n\n  /**\n   * Icon element (fallback if no image or initials)\n   */\n  icon?: ReactNode;\n\n  /**\n   * Avatar size\n   * @default 'md'\n   */\n  size?: AvatarSize;\n\n  /**\n   * Avatar background color\n   * When not provided, auto-derived from initials using a deterministic hash\n   * (same initials always get the same color)\n   */\n  color?: AvatarColor;\n\n  /**\n   * Show online status indicator\n   * @default false\n   */\n  status?: \"online\" | \"offline\" | \"away\" | \"busy\";\n\n  /**\n   * Make avatar clickable\n   * @default false\n   */\n  interactive?: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Avatar/Avatar.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Avatar Component Styles\n *\n * User profile picture or initials display.\n */\n\n/* Base avatar */\n.avatar {\n  position: relative;\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n\n  /* Styling */\n  background: var(--surface-layer);\n  border-radius: 50%;\n  user-select: none;\n\n  /* Typography */\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-primary);\n\n  /* Interaction */\n  transition: all var(--transition-fast);\n}\n\n/* Avatar image */\n.image {\n  width: 100%;\n  height: 100%;\n  object-fit: cover;\n  border-radius: 50%;\n}\n\n/* Initials */\n.initials {\n  text-transform: uppercase;\n  line-height: 1;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 100%;\n}\n\n/* Icon */\n.icon {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-tertiary);\n}\n\n.icon svg {\n  width: 100%;\n  height: 100%;\n}\n\n/* ============================================================================\n * SIZES\n * ============================================================================ */\n\n.xs {\n  width: 24px;\n  height: 24px;\n  font-size: var(--font-size-10);\n}\n\n.xs .icon {\n  width: 12px;\n  height: 12px;\n}\n\n.sm {\n  width: 32px;\n  height: 32px;\n  font-size: var(--font-size-12);\n}\n\n.sm .icon {\n  width: 16px;\n  height: 16px;\n}\n\n.md {\n  width: 40px;\n  height: 40px;\n  font-size: var(--font-size-14);\n}\n\n.md .icon {\n  width: 20px;\n  height: 20px;\n}\n\n.lg {\n  width: 48px;\n  height: 48px;\n  font-size: var(--font-size-16);\n}\n\n.lg .icon {\n  width: 24px;\n  height: 24px;\n}\n\n.xl {\n  width: 64px;\n  height: 64px;\n  font-size: var(--font-size-20);\n}\n\n.xl .icon {\n  width: 32px;\n  height: 32px;\n}\n\n.xxl {\n  width: 96px;\n  height: 96px;\n  font-size: var(--font-size-32);\n}\n\n.xxl .icon {\n  width: 48px;\n  height: 48px;\n}\n\n.profile {\n  width: 120px;\n  height: 120px;\n  font-size: var(--font-size-48);\n}\n\n.profile .icon {\n  width: 56px;\n  height: 56px;\n}\n\n.xxxl {\n  width: 120px;\n  height: 120px;\n  font-size: var(--font-size-48);\n}\n\n.xxxl .icon {\n  width: 56px;\n  height: 56px;\n}\n\n.xxxxl {\n  width: 160px;\n  height: 160px;\n  font-size: var(--font-size-64);\n}\n\n.xxxxl .icon {\n  width: 72px;\n  height: 72px;\n}\n\n.xxxxxl {\n  width: 200px;\n  height: 200px;\n  font-size: var(--font-size-80);\n}\n\n.xxxxxl .icon {\n  width: 96px;\n  height: 96px;\n}\n\n/* ============================================================================\n * INTERACTIVE\n * ============================================================================ */\n\n.interactive {\n  cursor: pointer;\n\n  &:hover {\n    transform: scale(1.05);\n    box-shadow: var(--shadow-md);\n  }\n\n  &:active {\n    transform: scale(0.98);\n  }\n\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n  }\n}\n\n/* ============================================================================\n * STATUS INDICATOR\n * ============================================================================ */\n\n.statusIndicator {\n  position: absolute;\n  bottom: 0;\n  right: 0;\n  width: 25%;\n  height: 25%;\n  min-width: 8px;\n  min-height: 8px;\n  border-radius: 50%;\n  border: 2px solid var(--surface-base);\n}\n\n.online {\n  background: var(--status-success);\n}\n\n.offline {\n  background: var(--text-tertiary);\n}\n\n.away {\n  background: var(--status-warning);\n}\n\n.busy {\n  background: var(--status-error);\n}\n\n/* ============================================================================\n * COLORS (for initials background)\n * ============================================================================ */\n\n.blue {\n  background: var(--color-brand-100);\n  color: var(--color-brand-700);\n}\n\n.green {\n  background: var(--color-success-100);\n  color: var(--color-success-700);\n}\n\n.purple {\n  background: var(--color-info-100);\n  color: var(--color-info-700);\n}\n\n.orange {\n  background: var(--color-warning-100);\n  color: var(--color-warning-700);\n}\n\n.red {\n  background: var(--color-error-100);\n  color: var(--color-error-700);\n}\n\n.teal {\n  background: #d0f0eb;\n  color: #0d6e67;\n}\n\n.pink {\n  background: #f8d7e8;\n  color: #ae3366;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Avatar/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Avatar Component - User/entity profile images.\n *\n * @example\n * ```tsx\n * import { Avatar } from '@orion-ds/react';\n *\n * <Avatar src=\"/user.jpg\" name=\"John Doe\" />\n * <Avatar name=\"Jane Smith\" /> // Shows initials \"JS\"\n * <Avatar src=\"/profile.jpg\" size=\"lg\" />\n * ```\n */\nexport { Avatar } from \"./Avatar\";\nexport type { AvatarProps, AvatarSize } from \"./Avatar.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "src",
+      "type": "string",
+      "description": "Avatar image source"
+    },
+    {
+      "name": "alt",
+      "type": "string",
+      "description": "Alt text for image"
+    },
+    {
+      "name": "initials",
+      "type": "string",
+      "description": "User initials (fallback if no image)"
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "description": "Icon element (fallback if no image or initials)"
+    },
+    {
+      "name": "size",
+      "type": "AvatarSize",
+      "description": "Avatar size",
+      "default": "md",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl",
+        "2xl",
+        "3xl",
+        "4xl",
+        "5xl",
+        "profile"
+      ]
+    },
+    {
+      "name": "color",
+      "type": "AvatarColor",
+      "description": "Avatar background color",
+      "values": [
+        "blue",
+        "green",
+        "purple",
+        "orange",
+        "red",
+        "teal",
+        "pink"
+      ]
+    },
+    {
+      "name": "status",
+      "type": "\"online\" | \"offline\" | \"away\" | \"busy\"",
+      "description": "Show online status indicator",
+      "default": false,
+      "values": [
+        "online",
+        "offline",
+        "away",
+        "busy"
+      ]
+    },
+    {
+      "name": "interactive",
+      "type": "boolean",
+      "description": "Make avatar clickable",
+      "default": false
+    }
+  ],
+  "tokens": [
+    "--surface-layer",
+    "--text-secondary",
+    "--radius-full"
+  ],
+  "examples": [
+    {
+      "title": "With image",
+      "code": "<Avatar src=\"/user.jpg\" alt=\"John Doe\" size=\"md\" />"
+    },
+    {
+      "title": "With initials",
+      "code": "<Avatar initials=\"JD\" size=\"lg\" />"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#avatar",
+    "local": "/library.html#avatar"
+  },
+  "import": "import { Avatar } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "profile",
+    "user",
+    "image",
+    "initials",
+    "display"
+  ],
+  "related_components": [
+    "UserMenu",
+    "Card"
+  ],
+  "common_patterns": [
+    "user profile",
+    "team member list",
+    "comment author"
+  ]
+}

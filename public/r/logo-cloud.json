@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "logo-cloud",
+  "type": "registry:section",
+  "title": "LogoCloud",
+  "description": "LogoCloud section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/LogoCloud/LogoCloud.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/LogoCloud/LogoCloud.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/LogoCloud/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#logo-cloud",
+    "local": "/library.html#logo-cloud"
+  },
+  "import": "import { LogoCloud } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

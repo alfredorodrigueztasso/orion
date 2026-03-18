@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "newsletter",
+  "type": "registry:section",
+  "title": "Newsletter",
+  "description": "Newsletter section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Newsletter/Newsletter.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Newsletter/Newsletter.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Newsletter/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#newsletter",
+    "local": "/library.html#newsletter"
+  },
+  "import": "import { Newsletter } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

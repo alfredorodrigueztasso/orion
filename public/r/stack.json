@@ -1,0 +1,106 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "stack",
+  "type": "registry:component",
+  "title": "Stack",
+  "description": "Stack component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/Stack/Stack.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Stack Component\n *\n * A flexible layout component for arranging children in a row or column\n * with consistent spacing using design system tokens.\n *\n * @example\n * ```tsx\n * // Vertical stack (default)\n * <Stack gap=\"md\">\n *   <Card />\n *   <Card />\n * </Stack>\n *\n * // Horizontal stack\n * <Stack direction=\"horizontal\" gap=\"sm\" align=\"center\">\n *   <Button>Save</Button>\n *   <Button variant=\"secondary\">Cancel</Button>\n * </Stack>\n * ```\n */\n\nimport React from \"react\";\nimport type { StackProps } from \"./Stack.types\";\nimport styles from \"./Stack.module.css\";\n\nexport const Stack = React.forwardRef<HTMLElement, StackProps>(\n  (\n    {\n      direction = \"vertical\",\n      gap = \"md\",\n      align = \"stretch\",\n      justify = \"flex-start\",\n      wrap = \"nowrap\",\n      as: Component = \"div\",\n      className,\n      children,\n      ...rest\n    },\n    ref,\n  ) => {\n    const classNames = [\n      styles.stack,\n      styles[direction],\n      styles[`gap-${gap}`],\n      styles[`align-${align}`],\n      styles[`justify-${justify}`],\n      styles[`wrap-${wrap}`],\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <Component ref={ref as any} className={classNames} {...rest}>\n        {children}\n      </Component>\n    );\n  },\n);\n\nStack.displayName = \"Stack\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Stack/Stack.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Stack Component Types\n *\n * Type definitions for the Orion Stack layout component.\n */\n\nimport type { HTMLAttributes, ElementType, PropsWithChildren } from \"react\";\n\n/**\n * Stack gap (spacing between children)\n * Maps to design system spacing tokens\n */\nexport type StackGap = \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\";\n\n/**\n * Stack direction\n */\nexport type StackDirection = \"horizontal\" | \"vertical\";\n\n/**\n * Flex align-items values\n */\nexport type StackAlign =\n  | \"flex-start\"\n  | \"center\"\n  | \"flex-end\"\n  | \"stretch\"\n  | \"baseline\";\n\n/**\n * Flex justify-content values\n */\nexport type StackJustify =\n  | \"flex-start\"\n  | \"center\"\n  | \"flex-end\"\n  | \"space-between\"\n  | \"space-around\"\n  | \"space-evenly\";\n\n/**\n * Flex wrap values\n */\nexport type StackWrap = \"nowrap\" | \"wrap\" | \"wrap-reverse\";\n\n/**\n * Stack component props\n *\n * @example\n * ```tsx\n * // Vertical stack with medium gap (default)\n * <Stack gap=\"md\">\n *   <Card />\n *   <Card />\n *   <Card />\n * </Stack>\n *\n * // Horizontal stack\n * <Stack direction=\"horizontal\" gap=\"sm\" align=\"center\">\n *   <Button>Action</Button>\n *   <Button>Cancel</Button>\n * </Stack>\n *\n * // Custom element type\n * <Stack as=\"form\" direction=\"vertical\" gap=\"lg\">\n *   <Field label=\"Name\" />\n *   <Field label=\"Email\" />\n *   <Button type=\"submit\">Submit</Button>\n * </Stack>\n * ```\n */\nexport interface StackProps extends PropsWithChildren<\n  HTMLAttributes<HTMLElement>\n> {\n  /**\n   * Stack direction\n   * @default 'vertical'\n   */\n  direction?: StackDirection;\n\n  /**\n   * Gap between children (uses design system spacing tokens)\n   * @default 'md'\n   */\n  gap?: StackGap;\n\n  /**\n   * Align items (flex align-items)\n   * @default 'stretch'\n   */\n  align?: StackAlign;\n\n  /**\n   * Justify content (flex justify-content)\n   * @default 'flex-start'\n   */\n  justify?: StackJustify;\n\n  /**\n   * Flex wrap behavior\n   * @default 'nowrap'\n   */\n  wrap?: StackWrap;\n\n  /**\n   * Custom element type to render as\n   * @default 'div'\n   */\n  as?: ElementType;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Stack/Stack.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Stack Component Styles\n *\n * Flexible layout container for arranging children with consistent spacing.\n */\n\n/* Base stack */\n.stack {\n  display: flex;\n  box-sizing: border-box;\n}\n\n/* ============================================================================\n * DIRECTION\n * ============================================================================ */\n\n.vertical {\n  flex-direction: column;\n}\n\n.horizontal {\n  flex-direction: row;\n}\n\n/* ============================================================================\n * GAP (Spacing between children using design tokens)\n * ============================================================================ */\n\n.gap-xs {\n  gap: var(--spacing-2); /* 8px */\n}\n\n.gap-sm {\n  gap: var(--spacing-3); /* 12px */\n}\n\n.gap-md {\n  gap: var(--spacing-4); /* 16px */\n}\n\n.gap-lg {\n  gap: var(--spacing-6); /* 24px */\n}\n\n.gap-xl {\n  gap: var(--spacing-8); /* 32px */\n}\n\n/* ============================================================================\n * ALIGN ITEMS\n * ============================================================================ */\n\n.align-flex-start {\n  align-items: flex-start;\n}\n\n.align-center {\n  align-items: center;\n}\n\n.align-flex-end {\n  align-items: flex-end;\n}\n\n.align-stretch {\n  align-items: stretch;\n}\n\n.align-baseline {\n  align-items: baseline;\n}\n\n/* ============================================================================\n * JUSTIFY CONTENT\n * ============================================================================ */\n\n.justify-flex-start {\n  justify-content: flex-start;\n}\n\n.justify-center {\n  justify-content: center;\n}\n\n.justify-flex-end {\n  justify-content: flex-end;\n}\n\n.justify-space-between {\n  justify-content: space-between;\n}\n\n.justify-space-around {\n  justify-content: space-around;\n}\n\n.justify-space-evenly {\n  justify-content: space-evenly;\n}\n\n/* ============================================================================\n * WRAP\n * ============================================================================ */\n\n.wrap-nowrap {\n  flex-wrap: nowrap;\n}\n\n.wrap-wrap {\n  flex-wrap: wrap;\n}\n\n.wrap-wrap-reverse {\n  flex-wrap: wrap-reverse;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Stack/index.ts",
+      "type": "registry:index",
+      "content": "export { Stack } from \"./Stack\";\nexport type {\n  StackProps,\n  StackGap,\n  StackDirection,\n  StackAlign,\n  StackJustify,\n  StackWrap,\n} from \"./Stack.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "direction",
+      "type": "StackDirection",
+      "description": "Stack direction",
+      "default": "vertical",
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    {
+      "name": "gap",
+      "type": "StackGap",
+      "description": "Gap between children (uses design system spacing tokens)",
+      "default": "md",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    {
+      "name": "align",
+      "type": "StackAlign",
+      "description": "Align items (flex align-items)",
+      "default": "stretch",
+      "values": [
+        "flex-start",
+        "center",
+        "flex-end",
+        "stretch",
+        "baseline"
+      ]
+    },
+    {
+      "name": "justify",
+      "type": "StackJustify",
+      "description": "Justify content (flex justify-content)",
+      "default": "flex-start",
+      "values": [
+        "flex-start",
+        "center",
+        "flex-end",
+        "space-between",
+        "space-around",
+        "space-evenly"
+      ]
+    },
+    {
+      "name": "wrap",
+      "type": "StackWrap",
+      "description": "Flex wrap behavior",
+      "default": "nowrap",
+      "values": [
+        "nowrap",
+        "wrap",
+        "wrap-reverse"
+      ]
+    },
+    {
+      "name": "as",
+      "type": "ElementType",
+      "description": "Custom element type to render as",
+      "default": "div"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#stack",
+    "local": "/library.html#stack"
+  },
+  "import": "import { Stack } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

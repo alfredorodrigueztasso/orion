@@ -1,0 +1,45 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "hero",
+  "type": "registry:section",
+  "title": "Hero",
+  "description": "Hero section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Hero/Hero.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Hero/Hero.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Hero/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#hero",
+    "local": "/library.html#hero"
+  },
+  "import": "import { Hero } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "landing",
+    "hero",
+    "headline",
+    "cta",
+    "banner",
+    "display"
+  ],
+  "related_sections": [
+    "Features",
+    "CTA"
+  ],
+  "common_patterns": [
+    "page hero",
+    "section hero",
+    "hero with background image"
+  ]
+}

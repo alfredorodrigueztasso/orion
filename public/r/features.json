@@ -1,0 +1,44 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "features",
+  "type": "registry:section",
+  "title": "Features",
+  "description": "Features section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Features/Features.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Features/Features.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Features/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#features",
+    "local": "/library.html#features"
+  },
+  "import": "import { Features } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "benefits",
+    "highlights",
+    "grid",
+    "cards",
+    "product"
+  ],
+  "related_sections": [
+    "Hero",
+    "Pricing"
+  ],
+  "common_patterns": [
+    "feature grid",
+    "feature list",
+    "feature cards"
+  ]
+}

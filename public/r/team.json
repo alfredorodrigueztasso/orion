@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "team",
+  "type": "registry:section",
+  "title": "Team",
+  "description": "Team section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Team/Team.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Team/Team.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Team/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#team",
+    "local": "/library.html#team"
+  },
+  "import": "import { Team } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

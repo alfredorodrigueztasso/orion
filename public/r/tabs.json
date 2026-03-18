@@ -1,0 +1,125 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "tabs",
+  "type": "registry:component",
+  "title": "Tabs",
+  "description": "Pill-style navigation tabs with segmented control appearance",
+  "category": "navigation",
+  "files": [
+    {
+      "path": "packages/react/src/components/Tabs/Tabs.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Tabs Component\n *\n * Navigation tabs for switching between content sections.\n *\n * @example\n * ```tsx\n * <Tabs\n *   tabs={[\n *     {\n *       id: 'profile',\n *       label: 'Profile',\n *       content: <ProfileContent />,\n *       icon: <UserIcon />\n *     },\n *     {\n *       id: 'settings',\n *       label: 'Settings',\n *       content: <SettingsContent />,\n *       badge: 3\n *     },\n *     {\n *       id: 'billing',\n *       label: 'Billing',\n *       content: <BillingContent />,\n *       disabled: true\n *     }\n *   ]}\n *   defaultTab=\"profile\"\n * />\n * ```\n */\n\nimport React, { useState, useRef, useCallback } from \"react\";\nimport type { TabsProps } from \"./Tabs.types\";\nimport styles from \"./Tabs.module.css\";\n\nexport const Tabs: React.FC<TabsProps> = ({\n  tabs,\n  defaultTab,\n  activeTab: controlledActiveTab,\n  onChange,\n  fullWidth = false,\n  noPanelPadding = false,\n  className,\n}) => {\n  // Determine if controlled or uncontrolled\n  const isControlled = controlledActiveTab !== undefined;\n\n  // Internal state for uncontrolled mode\n  const [internalActiveTab, setInternalActiveTab] = useState(\n    defaultTab || tabs[0]?.id || \"\",\n  );\n\n  // Refs for tab buttons\n  const tabRefs = useRef<Map<string, HTMLButtonElement>>(new Map());\n\n  // Get current active tab\n  const activeTab = isControlled ? controlledActiveTab : internalActiveTab;\n\n  // Handle tab change\n  const handleTabChange = (tabId: string) => {\n    if (!isControlled) {\n      setInternalActiveTab(tabId);\n    }\n    onChange?.(tabId);\n  };\n\n  // Get enabled tabs (filter out disabled)\n  const getEnabledTabs = useCallback(() => {\n    return tabs.filter((tab) => !tab.disabled);\n  }, [tabs]);\n\n  // Focus a specific tab by index in the enabled tabs list\n  const focusTabByIndex = useCallback(\n    (index: number) => {\n      const enabledTabs = getEnabledTabs();\n      if (enabledTabs.length === 0) return;\n\n      // Wrap around\n      const wrappedIndex =\n        ((index % enabledTabs.length) + enabledTabs.length) %\n        enabledTabs.length;\n      const targetTab = enabledTabs[wrappedIndex];\n      if (!targetTab) return;\n      const tabElement = tabRefs.current.get(targetTab.id);\n      tabElement?.focus();\n    },\n    [getEnabledTabs],\n  );\n\n  // Handle keyboard navigation\n  const handleKeyDown = useCallback(\n    (event: React.KeyboardEvent, currentTabId: string) => {\n      const enabledTabs = getEnabledTabs();\n      const currentIndex = enabledTabs.findIndex(\n        (tab) => tab.id === currentTabId,\n      );\n\n      switch (event.key) {\n        case \"ArrowLeft\":\n          event.preventDefault();\n          focusTabByIndex(currentIndex - 1);\n          break;\n        case \"ArrowRight\":\n          event.preventDefault();\n          focusTabByIndex(currentIndex + 1);\n          break;\n        case \"Home\":\n          event.preventDefault();\n          focusTabByIndex(0);\n          break;\n        case \"End\":\n          event.preventDefault();\n          focusTabByIndex(enabledTabs.length - 1);\n          break;\n      }\n    },\n    [getEnabledTabs, focusTabByIndex],\n  );\n\n  // Find active tab content\n  const activeTabData = tabs.find((tab) => tab.id === activeTab);\n\n  const containerClasses = [\n    styles.container,\n    fullWidth && styles.fullWidth,\n    noPanelPadding && styles.noPanelPadding,\n    className,\n  ]\n    .filter(Boolean)\n    .join(\" \");\n\n  return (\n    <div className={containerClasses}>\n      {/* Tab list */}\n      <div className={styles.tabList} role=\"tablist\">\n        {tabs.map((tab) => {\n          const isActive = tab.id === activeTab;\n\n          const tabClasses = [styles.tab, isActive && styles.active]\n            .filter(Boolean)\n            .join(\" \");\n\n          return (\n            <button\n              key={tab.id}\n              ref={(el) => {\n                if (el) {\n                  tabRefs.current.set(tab.id, el);\n                } else {\n                  tabRefs.current.delete(tab.id);\n                }\n              }}\n              type=\"button\"\n              role=\"tab\"\n              aria-selected={isActive}\n              aria-controls={`panel-${tab.id}`}\n              id={`tab-${tab.id}`}\n              className={tabClasses}\n              onClick={() => handleTabChange(tab.id)}\n              onKeyDown={(e) => handleKeyDown(e, tab.id)}\n              disabled={tab.disabled}\n              tabIndex={isActive ? 0 : -1}\n            >\n              {/* Icon */}\n              {tab.icon && <span className={styles.icon}>{tab.icon}</span>}\n\n              {/* Label */}\n              <span>{tab.label}</span>\n\n              {/* Badge */}\n              {tab.badge !== undefined && (\n                <span className={styles.badge}>{tab.badge}</span>\n              )}\n            </button>\n          );\n        })}\n      </div>\n\n      {/* Tab panel (content) */}\n      {activeTabData && (\n        <div\n          key={activeTab}\n          className={styles.panel}\n          role=\"tabpanel\"\n          id={`panel-${activeTab}`}\n          aria-labelledby={`tab-${activeTab}`}\n        >\n          {activeTabData.content}\n        </div>\n      )}\n    </div>\n  );\n};\n\nTabs.displayName = \"Tabs\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Tabs/Tabs.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Tabs Component Types\n *\n * Type definitions for the Orion Tabs component.\n */\n\nimport type { ReactNode } from \"react\";\n\n/**\n * Tab item\n */\nexport interface TabItem {\n  /**\n   * Unique tab identifier\n   */\n  id: string;\n\n  /**\n   * Tab label\n   */\n  label: string;\n\n  /**\n   * Tab content\n   */\n  content: ReactNode;\n\n  /**\n   * Optional icon\n   */\n  icon?: ReactNode;\n\n  /**\n   * Disabled state\n   * @default false\n   */\n  disabled?: boolean;\n\n  /**\n   * Badge/count indicator\n   */\n  badge?: string | number;\n}\n\n/**\n * Tabs component props\n *\n * @example\n * ```tsx\n * <Tabs\n *   tabs={[\n *     { id: 'tab1', label: 'Profile', content: <Profile /> },\n *     { id: 'tab2', label: 'Settings', content: <Settings /> }\n *   ]}\n * />\n * ```\n */\nexport interface TabsProps {\n  /**\n   * Array of tabs\n   */\n  tabs: TabItem[];\n\n  /**\n   * Default active tab ID\n   */\n  defaultTab?: string;\n\n  /**\n   * Controlled active tab ID\n   */\n  activeTab?: string;\n\n  /**\n   * Callback when tab changes\n   */\n  onChange?: (tabId: string) => void;\n\n  /**\n   * Full width tabs\n   * @default false\n   */\n  fullWidth?: boolean;\n\n  /**\n   * Additional class name\n   */\n  className?: string;\n\n  /**\n   * Remove top and bottom padding from the tab panel.\n   * Useful when Tabs is inside a Card, Modal, or other padded container.\n   * @default false\n   */\n  noPanelPadding?: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Tabs/Tabs.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Tabs Component Styles\n *\n * Navigation tabs for switching between content sections.\n */\n\n/* Container */\n.container {\n  display: flex;\n  flex-direction: column;\n  width: 100%;\n}\n\n/* Tab list */\n.tabList {\n  display: flex;\n  gap: var(--spacing-1);\n  border-bottom: 1px solid var(--border-subtle);\n  overflow-x: auto;\n  overflow-y: hidden;\n\n  /* Hide scrollbar but keep functionality */\n  scrollbar-width: none;\n  -ms-overflow-style: none;\n\n  &::-webkit-scrollbar {\n    display: none;\n  }\n}\n\n.fullWidth .tabList {\n  width: 100%;\n}\n\n/* Tab button */\n.tab {\n  /* Layout */\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  padding: var(--spacing-3) var(--spacing-4);\n  white-space: nowrap;\n\n  /* Typography */\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-16);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-secondary);\n  line-height: var(--line-height-tight);\n\n  /* Styling */\n  background: transparent;\n  border: none;\n  border-bottom: 2px solid transparent;\n  cursor: pointer;\n\n  /* Interaction */\n  transition: all var(--transition-fast);\n  outline: none;\n\n  /* Hover state */\n  &:hover:not(:disabled) {\n    color: var(--text-primary);\n    background: var(--interactive-ghost-hover);\n  }\n\n  /* Focus state */\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: -2px;\n    border-radius: var(--radius-sm);\n  }\n\n  /* Disabled state */\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n    pointer-events: none;\n  }\n}\n\n/* Full width tabs */\n.fullWidth .tab {\n  flex: 1;\n  justify-content: center;\n}\n\n/* Active tab */\n.active {\n  color: var(--text-brand);\n  border-bottom-color: var(--interactive-primary);\n\n  &:hover {\n    color: var(--text-brand);\n  }\n}\n\n/* Tab icon */\n.icon {\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n\n/* Tab badge */\n.badge {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  min-width: 20px;\n  height: 20px;\n  padding: 0 var(--spacing-1);\n  font-size: var(--text-xs);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-inverse);\n  background: var(--text-tertiary);\n  border-radius: var(--radius-full);\n  line-height: 1;\n}\n\n.active .badge {\n  background: var(--interactive-primary);\n}\n\n/* Tab panel (content) */\n.panel {\n  padding: var(--spacing-4) 0;\n  animation: fadeIn 200ms ease;\n}\n\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n    transform: translateY(4px);\n  }\n  to {\n    opacity: 1;\n    transform: translateY(0);\n  }\n}\n\n/* Reduced motion */\n@media (prefers-reduced-motion: reduce) {\n  .panel {\n    animation: none;\n  }\n}\n\n/* No panel padding variant */\n.noPanelPadding .panel {\n  padding: 0;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Tabs/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Tabs Component - Content section switching.\n *\n * @example\n * ```tsx\n * import { Tabs } from '@orion-ds/react';\n *\n * <Tabs\n *   items={[\n *     { id: 'overview', label: 'Overview', content: <OverviewPanel /> },\n *     { id: 'settings', label: 'Settings', content: <SettingsPanel /> },\n *     { id: 'users', label: 'Users', content: <UsersPanel /> },\n *   ]}\n *   defaultTab=\"overview\"\n * />\n * ```\n */\nexport { Tabs } from \"./Tabs\";\nexport type { TabsProps, TabItem } from \"./Tabs.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "tabs",
+      "type": "TabItem[]",
+      "description": "Array of tabs",
+      "required": true
+    },
+    {
+      "name": "defaultTab",
+      "type": "string",
+      "description": "Default active tab ID"
+    },
+    {
+      "name": "activeTab",
+      "type": "string",
+      "description": "Controlled active tab ID"
+    },
+    {
+      "name": "onChange",
+      "type": "(tabId: string) => void",
+      "description": "Callback when tab changes"
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "description": "Full width tabs",
+      "default": false
+    },
+    {
+      "name": "className",
+      "type": "string",
+      "description": "Additional class name"
+    },
+    {
+      "name": "noPanelPadding",
+      "type": "boolean",
+      "description": "Remove top and bottom padding from the tab panel.",
+      "default": false
+    }
+  ],
+  "tokens": [
+    "--text-secondary",
+    "--text-primary",
+    "--interactive-primary",
+    "--interactive-primary-text",
+    "--surface-layer",
+    "--border-subtle"
+  ],
+  "examples": [
+    {
+      "title": "Basic tabs",
+      "code": "<Tabs\n  items={[\n    { id: 'overview', label: 'Overview', content: <Overview /> },\n    { id: 'details', label: 'Details', content: <Details /> },\n    { id: 'history', label: 'History', content: <History /> },\n  ]}\n/>"
+    }
+  ],
+  "accessibility": {
+    "role": "tablist",
+    "ariaAttributes": [
+      "aria-selected",
+      "role=\"tab\"",
+      "role=\"tabpanel\""
+    ],
+    "keyboardNav": [
+      {
+        "key": "ArrowLeft/Right",
+        "action": "Navigate tabs"
+      },
+      {
+        "key": "Home/End",
+        "action": "First/last tab"
+      }
+    ]
+  },
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#tabs",
+    "local": "/library.html#tabs"
+  },
+  "import": "import { Tabs } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "layout",
+    "tabbed-content",
+    "sections",
+    "switching"
+  ],
+  "related_components": [
+    "Button",
+    "Card"
+  ],
+  "common_patterns": [
+    "tabbed interface",
+    "content sections",
+    "navigation tabs"
+  ]
+}

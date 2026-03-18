@@ -1,0 +1,59 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "collapsible",
+  "type": "registry:component",
+  "title": "Collapsible",
+  "description": "Collapsible component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/Collapsible/Collapsible.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport {\n  forwardRef,\n  useState,\n  useCallback,\n  useContext,\n  useId,\n  createContext,\n  cloneElement,\n  isValidElement,\n} from \"react\";\nimport type {\n  CollapsibleProps,\n  CollapsibleTriggerProps,\n  CollapsibleContentProps,\n  CollapsibleContextValue,\n} from \"./Collapsible.types\";\nimport styles from \"./Collapsible.module.css\";\n\nconst CollapsibleContext = createContext<CollapsibleContextValue | null>(null);\n\nfunction useCollapsibleContext(): CollapsibleContextValue {\n  const ctx = useContext(CollapsibleContext);\n  if (!ctx) {\n    throw new Error(\n      \"Collapsible.Trigger/Content must be used within a Collapsible\",\n    );\n  }\n  return ctx;\n}\n\nconst CollapsibleTrigger = forwardRef<\n  HTMLButtonElement,\n  CollapsibleTriggerProps\n>(({ asChild, className, children, onClick, ...rest }, ref) => {\n  const { open, disabled, toggle, contentId, triggerId } =\n    useCollapsibleContext();\n\n  const handleClick = useCallback(\n    (e: React.MouseEvent<HTMLButtonElement>) => {\n      toggle();\n      onClick?.(e);\n    },\n    [toggle, onClick],\n  );\n\n  if (asChild && isValidElement(children)) {\n    return cloneElement(\n      children as React.ReactElement<Record<string, unknown>>,\n      {\n        id: triggerId,\n        \"aria-expanded\": open,\n        \"aria-controls\": contentId,\n        disabled,\n        onClick: handleClick,\n      },\n    );\n  }\n\n  const classNames = [styles.trigger, className].filter(Boolean).join(\" \");\n\n  return (\n    <button\n      ref={ref}\n      id={triggerId}\n      type=\"button\"\n      className={classNames}\n      aria-expanded={open}\n      aria-controls={contentId}\n      disabled={disabled}\n      onClick={handleClick}\n      {...rest}\n    >\n      {children}\n    </button>\n  );\n});\n\nCollapsibleTrigger.displayName = \"Collapsible.Trigger\";\n\nconst CollapsibleContent = forwardRef<HTMLDivElement, CollapsibleContentProps>(\n  ({ forceMount, className, children, ...rest }, ref) => {\n    const { open, triggerId, contentId } = useCollapsibleContext();\n\n    if (!forceMount && !open) {\n      return null;\n    }\n\n    const contentClasses = [\n      styles.content,\n      open && styles.contentOpen,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div\n        ref={ref}\n        id={contentId}\n        role=\"region\"\n        aria-labelledby={triggerId}\n        className={contentClasses}\n        {...rest}\n      >\n        <div className={styles.contentInner}>{children}</div>\n      </div>\n    );\n  },\n);\n\nCollapsibleContent.displayName = \"Collapsible.Content\";\n\nconst CollapsibleRoot = forwardRef<HTMLDivElement, CollapsibleProps>(\n  (\n    {\n      open,\n      defaultOpen = false,\n      onOpenChange,\n      disabled = false,\n      className,\n      children,\n      ...rest\n    },\n    ref,\n  ) => {\n    const [internalOpen, setInternalOpen] = useState(defaultOpen);\n    const isControlled = open !== undefined;\n    const isOpen = isControlled ? open : internalOpen;\n\n    const contentId = useId();\n    const triggerId = useId();\n\n    const toggle = useCallback(() => {\n      if (disabled) return;\n      const next = !isOpen;\n      if (!isControlled) {\n        setInternalOpen(next);\n      }\n      onOpenChange?.(next);\n    }, [isOpen, isControlled, disabled, onOpenChange]);\n\n    const classNames = [styles.collapsible, className]\n      .filter(Boolean)\n      .join(\" \");\n\n    const ctx: CollapsibleContextValue = {\n      open: isOpen,\n      disabled,\n      toggle,\n      contentId,\n      triggerId,\n    };\n\n    return (\n      <CollapsibleContext.Provider value={ctx}>\n        <div\n          ref={ref}\n          className={classNames}\n          data-state={isOpen ? \"open\" : \"closed\"}\n          {...rest}\n        >\n          {children}\n        </div>\n      </CollapsibleContext.Provider>\n    );\n  },\n);\n\nCollapsibleRoot.displayName = \"Collapsible\";\n\nexport const Collapsible = Object.assign(CollapsibleRoot, {\n  Trigger: CollapsibleTrigger,\n  Content: CollapsibleContent,\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/Collapsible/Collapsible.types.ts",
+      "type": "registry:types",
+      "content": "import type { HTMLAttributes, ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport interface CollapsibleProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"defaultValue\"\n> {\n  /** Controlled open state. */\n  open?: boolean;\n  /** Default open state for uncontrolled usage. */\n  defaultOpen?: boolean;\n  /** Callback when open state changes. */\n  onOpenChange?: (open: boolean) => void;\n  /** Disable the trigger. */\n  disabled?: boolean;\n  children?: ReactNode;\n}\n\nexport interface CollapsibleTriggerProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  /** Render as child element instead of a wrapper button. */\n  asChild?: boolean;\n  children?: ReactNode;\n}\n\nexport interface CollapsibleContentProps extends HTMLAttributes<HTMLDivElement> {\n  /** Keep content mounted in the DOM even when closed. */\n  forceMount?: boolean;\n  children?: ReactNode;\n}\n\nexport interface CollapsibleContextValue {\n  open: boolean;\n  disabled: boolean;\n  toggle: () => void;\n  contentId: string;\n  triggerId: string;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Collapsible/Collapsible.module.css",
+      "type": "registry:styles",
+      "content": "/* Collapsible Component Styles */\n\n.collapsible {\n  width: 100%;\n}\n\n/* Trigger - unstyled button that inherits parent styling */\n.trigger {\n  display: inline-flex;\n  align-items: center;\n  background: none;\n  border: none;\n  padding: 0;\n  margin: 0;\n  font: inherit;\n  color: inherit;\n  cursor: pointer;\n\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n    border-radius: var(--radius-sm);\n  }\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n  }\n}\n\n/* Content - CSS grid trick for smooth height animation */\n.content {\n  display: grid;\n  grid-template-rows: 0fr;\n  transition: grid-template-rows var(--transition-normal);\n}\n\n.contentOpen {\n  grid-template-rows: 1fr;\n}\n\n.contentInner {\n  overflow: hidden;\n}\n\n/* Reduced motion */\n@media (prefers-reduced-motion: reduce) {\n  .content {\n    transition: none;\n  }\n}\n\n/* Forced colors (high contrast mode) */\n@media (forced-colors: active) {\n  .trigger:focus-visible {\n    outline: 2px solid ButtonText;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Collapsible/index.ts",
+      "type": "registry:index",
+      "content": "export { Collapsible } from \"./Collapsible\";\nexport type {\n  CollapsibleProps,\n  CollapsibleTriggerProps,\n  CollapsibleContentProps,\n} from \"./Collapsible.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "Controlled open state. */"
+    },
+    {
+      "name": "defaultOpen",
+      "type": "boolean",
+      "description": "Default open state for uncontrolled usage. */"
+    },
+    {
+      "name": "onOpenChange",
+      "type": "(open: boolean) => void",
+      "description": "Callback when open state changes. */"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable the trigger. */"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#collapsible",
+    "local": "/library.html#collapsible"
+  },
+  "import": "import { Collapsible } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

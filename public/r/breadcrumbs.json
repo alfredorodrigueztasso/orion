@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "breadcrumbs",
+  "type": "registry:section",
+  "title": "Breadcrumbs",
+  "description": "Breadcrumbs section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Breadcrumbs/Breadcrumbs.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Breadcrumbs/Breadcrumbs.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Breadcrumbs/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#breadcrumbs",
+    "local": "/library.html#breadcrumbs"
+  },
+  "import": "import { Breadcrumbs } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

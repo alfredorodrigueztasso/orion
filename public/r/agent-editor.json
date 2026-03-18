@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "agent-editor",
+  "type": "registry:template",
+  "title": "Agent Editor",
+  "description": "AgentEditor page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/AgentEditor/AgentEditor.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#agent-editor",
+    "local": "/library.html#agent-editor"
+  },
+  "import": "import { AgentEditor } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

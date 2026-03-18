@@ -1,0 +1,91 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "spinner",
+  "type": "registry:component",
+  "title": "Spinner",
+  "description": "Loading indicator",
+  "category": "loading",
+  "files": [
+    {
+      "path": "packages/react/src/components/Spinner/Spinner.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Spinner Component\n *\n * Loading indicator with multiple sizes and variants.\n *\n * @example\n * ```tsx\n * <Spinner />\n * <Spinner size=\"lg\" variant=\"primary\" />\n * <Spinner label=\"Loading data...\" showLabel />\n * ```\n */\n\nimport React from \"react\";\nimport type { SpinnerProps } from \"./Spinner.types\";\nimport styles from \"./Spinner.module.css\";\n\nexport const Spinner: React.FC<SpinnerProps> = ({\n  size = \"md\",\n  variant = \"primary\",\n  label = \"Loading...\",\n  showLabel = false,\n  className,\n  ...rest\n}) => {\n  const containerClasses = [styles.container, className]\n    .filter(Boolean)\n    .join(\" \");\n\n  const spinnerClasses = [styles.spinner, styles[size], styles[variant]]\n    .filter(Boolean)\n    .join(\" \");\n\n  return (\n    <div className={containerClasses} {...rest}>\n      <div\n        className={spinnerClasses}\n        role=\"status\"\n        aria-label={label}\n        aria-live=\"polite\"\n      />\n      {showLabel && <span className={styles.label}>{label}</span>}\n    </div>\n  );\n};\n\nSpinner.displayName = \"Spinner\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Spinner/Spinner.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Spinner Component Types\n *\n * Type definitions for the Orion Spinner component (loading indicator).\n */\n\nimport type { HTMLAttributes } from \"react\";\n\n/**\n * Spinner sizes\n */\nexport type SpinnerSize = \"xs\" | \"sm\" | \"md\" | \"lg\" | \"xl\";\n\n/**\n * Spinner variants\n */\nexport type SpinnerVariant = \"primary\" | \"secondary\" | \"neutral\" | \"inverse\";\n\n/**\n * Spinner component props\n *\n * @example\n * ```tsx\n * <Spinner />\n * <Spinner size=\"lg\" variant=\"primary\" />\n * <Spinner label=\"Loading...\" />\n * ```\n */\nexport interface SpinnerProps extends HTMLAttributes<HTMLDivElement> {\n  /**\n   * Spinner size\n   * @default 'md'\n   */\n  size?: SpinnerSize;\n\n  /**\n   * Spinner variant (color)\n   * @default 'primary'\n   */\n  variant?: SpinnerVariant;\n\n  /**\n   * Loading label (for accessibility)\n   * @default 'Loading...'\n   */\n  label?: string;\n\n  /**\n   * Show label text below spinner\n   * @default false\n   */\n  showLabel?: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Spinner/Spinner.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Spinner Component Styles\n *\n * Loading indicator with animation.\n */\n\n/* Container */\n.container {\n  display: inline-flex;\n  flex-direction: column;\n  align-items: center;\n  gap: var(--spacing-2);\n}\n\n/* Spinner */\n.spinner {\n  border-radius: 50%;\n  border-style: solid;\n  animation: spin 600ms linear infinite;\n\n  /* Reduce motion for accessibility */\n  @media (prefers-reduced-motion: reduce) {\n    animation: spin 1200ms linear infinite;\n  }\n}\n\n/* Spin animation */\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n/* ============================================================================\n * SIZES\n * ============================================================================ */\n\n.xs {\n  width: 12px;\n  height: 12px;\n  border-width: 2px;\n}\n\n.sm {\n  width: 16px;\n  height: 16px;\n  border-width: 2px;\n}\n\n.md {\n  width: 24px;\n  height: 24px;\n  border-width: 3px;\n}\n\n.lg {\n  width: 32px;\n  height: 32px;\n  border-width: 3px;\n}\n\n.xl {\n  width: 48px;\n  height: 48px;\n  border-width: 4px;\n}\n\n/* ============================================================================\n * VARIANTS\n * ============================================================================ */\n\n.primary {\n  border-color: var(--interactive-primary);\n  border-top-color: transparent;\n}\n\n.secondary {\n  border-color: var(--text-tertiary);\n  border-top-color: transparent;\n}\n\n.neutral {\n  border-color: var(--border-strong);\n  border-top-color: transparent;\n}\n\n.inverse {\n  border-color: var(--text-inverse);\n  border-top-color: transparent;\n}\n\n/* ============================================================================\n * LABEL\n * ============================================================================ */\n\n.label {\n  font-size: var(--font-size-12);\n  color: var(--text-secondary);\n  font-weight: var(--font-weight-medium);\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Spinner/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Spinner Component - Loading indicator.\n *\n * @example\n * ```tsx\n * import { Spinner } from '@orion-ds/react';\n *\n * <Spinner />\n * <Spinner size=\"lg\" variant=\"brand\" />\n * <Spinner size=\"sm\" /> Loading...\n * ```\n */\nexport { Spinner } from \"./Spinner\";\nexport type {\n  SpinnerProps,\n  SpinnerSize,\n  SpinnerVariant,\n} from \"./Spinner.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "size",
+      "type": "SpinnerSize",
+      "description": "Spinner size",
+      "default": "md",
+      "values": [
+        "xs",
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    {
+      "name": "variant",
+      "type": "SpinnerVariant",
+      "description": "Spinner variant (color)",
+      "default": "primary",
+      "values": [
+        "primary",
+        "secondary",
+        "neutral",
+        "inverse"
+      ]
+    },
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Loading label (for accessibility)",
+      "default": "Loading..."
+    },
+    {
+      "name": "showLabel",
+      "type": "boolean",
+      "description": "Show label text below spinner",
+      "default": false
+    }
+  ],
+  "tokens": [
+    "--interactive-primary"
+  ],
+  "examples": [
+    {
+      "title": "Basic spinner",
+      "code": "<Spinner size=\"md\" />"
+    }
+  ],
+  "accessibility": {
+    "role": "status",
+    "ariaAttributes": [
+      "aria-label=\"Loading\""
+    ]
+  },
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#spinner",
+    "local": "/library.html#spinner"
+  },
+  "import": "import { Spinner } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

@@ -1,0 +1,123 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "textarea",
+  "type": "registry:component",
+  "title": "Textarea",
+  "description": "Textarea component",
+  "category": "forms",
+  "files": [
+    {
+      "path": "packages/react/src/components/Textarea/Textarea.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Textarea Component\n *\n * Multi-line text input with label, error states, and character counter.\n * Implements WCAG 2.1 AA accessibility guidelines.\n *\n * @example\n * ```tsx\n * <Textarea\n *   label=\"Description\"\n *   placeholder=\"Enter description...\"\n *   helperText=\"Provide detailed information\"\n * />\n *\n * <Textarea\n *   label=\"Bio\"\n *   maxLength={500}\n *   showCounter\n *   resize=\"vertical\"\n * />\n *\n * <Textarea\n *   label=\"Comments\"\n *   error=\"This field is required\"\n *   size=\"lg\"\n * />\n * ```\n */\n\nimport React, {\n  forwardRef,\n  useState,\n  useCallback,\n  useEffect,\n  useId,\n} from \"react\";\nimport { AlertCircle } from \"lucide-react\";\nimport type { TextareaProps } from \"./Textarea.types\";\nimport styles from \"./Textarea.module.css\";\n\nexport const Textarea = forwardRef<HTMLTextAreaElement, TextareaProps>(\n  (\n    {\n      label,\n      helperText,\n      error,\n      size = \"md\",\n      resize = \"vertical\",\n      showCounter = false,\n      maxLength,\n      className,\n      id,\n      value,\n      defaultValue,\n      onChange,\n      disabled,\n      required,\n      optional = false,\n      \"aria-label\": ariaLabel,\n      \"aria-describedby\": ariaDescribedBy,\n      ...rest\n    },\n    ref,\n  ) => {\n    // Use React's useId for stable, unique IDs (SSR-safe)\n    const generatedId = useId();\n    const textareaId = id || `textarea-${generatedId}`;\n\n    // IDs for accessible associations\n    const errorId = `${textareaId}-error`;\n    const helperId = `${textareaId}-helper`;\n    const counterId = `${textareaId}-counter`;\n\n    // Track character count for controlled/uncontrolled components\n    const [charCount, setCharCount] = useState<number>(() => {\n      if (value !== undefined) {\n        return String(value).length;\n      }\n      if (defaultValue !== undefined) {\n        return String(defaultValue).length;\n      }\n      return 0;\n    });\n\n    // Update character count when value prop changes (controlled component)\n    useEffect(() => {\n      if (value !== undefined) {\n        setCharCount(String(value).length);\n      }\n    }, [value]);\n\n    // Handle change event\n    const handleChange = useCallback(\n      (event: React.ChangeEvent<HTMLTextAreaElement>) => {\n        setCharCount(event.target.value.length);\n        onChange?.(event);\n      },\n      [onChange],\n    );\n\n    // Build aria-describedby from multiple sources\n    const describedByIds: string[] = [];\n    if (error) describedByIds.push(errorId);\n    if (helperText && !error) describedByIds.push(helperId);\n    if (showCounter && maxLength) describedByIds.push(counterId);\n    if (ariaDescribedBy) describedByIds.push(ariaDescribedBy);\n    const computedDescribedBy =\n      describedByIds.length > 0 ? describedByIds.join(\" \") : undefined;\n\n    // Ensure textarea has an accessible name\n    const hasAccessibleName = Boolean(label || ariaLabel);\n    if (!hasAccessibleName && process.env.NODE_ENV === \"development\") {\n      console.warn(\n        \"Textarea: Missing accessible name. Provide either a `label` prop or `aria-label` for screen reader users.\",\n      );\n    }\n\n    // Calculate counter classes and status\n    const getCounterStatus = () => {\n      if (!maxLength) return \"normal\";\n      const percentage = (charCount / maxLength) * 100;\n      if (percentage >= 100) return \"error\";\n      if (percentage >= 90) return \"warning\";\n      return \"normal\";\n    };\n\n    const counterStatus = getCounterStatus();\n    const counterClasses = [\n      styles.counter,\n      counterStatus === \"warning\" && styles.counterWarning,\n      counterStatus === \"error\" && styles.counterError,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    // Container classes\n    const containerClasses = [\n      styles.container,\n      styles[size],\n      styles[`resize${resize.charAt(0).toUpperCase()}${resize.slice(1)}`],\n      error && styles.error,\n      disabled && styles.disabled,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    // Show footer if counter or helper text exists\n    const showFooter = showCounter || (helperText && !error);\n\n    return (\n      <div className={containerClasses}>\n        {/* Label */}\n        {label && (\n          <label htmlFor={textareaId} className={styles.label}>\n            <span className={styles.labelText}>{label}</span>\n            {optional && (\n              <span className={styles.optional} aria-hidden=\"true\">\n                (optional)\n              </span>\n            )}\n            {required && !optional && (\n              <span className={styles.required} aria-hidden=\"true\">\n                *\n              </span>\n            )}\n          </label>\n        )}\n\n        {/* Textarea */}\n        <textarea\n          ref={ref}\n          id={textareaId}\n          className={styles.textarea}\n          value={value}\n          defaultValue={defaultValue}\n          maxLength={maxLength}\n          onChange={handleChange}\n          disabled={disabled}\n          required={required}\n          aria-required={required || undefined}\n          aria-invalid={error ? \"true\" : \"false\"}\n          aria-describedby={computedDescribedBy}\n          aria-label={!label ? ariaLabel : undefined}\n          {...rest}\n        />\n\n        {/* Footer (Counter + Helper Text) */}\n        {showFooter && (\n          <div className={styles.footer}>\n            {/* Helper text */}\n            {helperText && !error && (\n              <p id={helperId} className={styles.helperText}>\n                {helperText}\n              </p>\n            )}\n\n            {/* Character counter - announced to screen readers */}\n            {showCounter && maxLength && (\n              <span\n                id={counterId}\n                className={counterClasses}\n                aria-live=\"polite\"\n                aria-atomic=\"true\"\n              >\n                {charCount}/{maxLength}\n              </span>\n            )}\n          </div>\n        )}\n\n        {/* Error message */}\n        {error && (\n          <p\n            id={errorId}\n            className={styles.errorMessage}\n            role=\"alert\"\n            aria-live=\"assertive\"\n          >\n            <AlertCircle size={14} aria-hidden=\"true\" />\n            <span>{error}</span>\n          </p>\n        )}\n      </div>\n    );\n  },\n);\n\nTextarea.displayName = \"Textarea\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Textarea/Textarea.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Textarea Component Types\n *\n * Type definitions for the Orion Textarea component.\n * Implements WCAG 2.1 AA accessibility guidelines.\n */\n\nimport type { TextareaHTMLAttributes } from \"react\";\n\n/**\n * Textarea sizes\n */\nexport type TextareaSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * Textarea resize behavior\n */\nexport type TextareaResize = \"none\" | \"vertical\" | \"horizontal\" | \"both\";\n\n/**\n * Textarea component props\n *\n * @example\n * ```tsx\n * <Textarea label=\"Description\" placeholder=\"Enter description...\" />\n * <Textarea\n *   label=\"Bio\"\n *   helperText=\"Tell us about yourself\"\n *   maxLength={500}\n *   showCounter\n * />\n * ```\n */\nexport interface TextareaProps extends Omit<\n  TextareaHTMLAttributes<HTMLTextAreaElement>,\n  \"size\"\n> {\n  /**\n   * Textarea label text.\n   * Required for accessibility unless aria-label is provided.\n   */\n  label?: string;\n\n  /**\n   * Helper text displayed below the textarea.\n   * Automatically linked via aria-describedby.\n   */\n  helperText?: string;\n\n  /**\n   * Error message.\n   * Shows error state and displays message below textarea.\n   */\n  error?: string;\n\n  /**\n   * Textarea size variant.\n   * @default 'md'\n   */\n  size?: TextareaSize;\n\n  /**\n   * Resize behavior.\n   * @default 'vertical'\n   */\n  resize?: TextareaResize;\n\n  /**\n   * Show character counter.\n   * Counter is announced to screen readers via aria-live.\n   * @default false\n   */\n  showCounter?: boolean;\n\n  /**\n   * Maximum character length.\n   * Required if showCounter is true.\n   */\n  maxLength?: number;\n\n  /**\n   * Shows \"(optional)\" indicator next to label.\n   * @default false\n   */\n  optional?: boolean;\n\n  // ============================================================================\n  // ACCESSIBILITY PROPS\n  // ============================================================================\n\n  /**\n   * Accessible label for screen readers when no visible label is provided.\n   * REQUIRED if `label` prop is not provided.\n   *\n   * @example\n   * ```tsx\n   * <Textarea\n   *   aria-label=\"Additional comments\"\n   *   placeholder=\"Enter your comments...\"\n   * />\n   * ```\n   */\n  \"aria-label\"?: string;\n\n  /**\n   * Additional element IDs that describe this textarea.\n   * Automatically includes error, helper text, and counter IDs when provided.\n   */\n  \"aria-describedby\"?: string;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Textarea/Textarea.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Textarea Component Styles\n *\n * Multi-line text input with label, error states, and character counter.\n * Implements WCAG 2.1 AA accessibility guidelines.\n * Aligned with Field component styles.\n */\n\n/* ============================================================================\n * CONTAINER\n * ============================================================================ */\n\n.container {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-2);\n}\n\n.disabled {\n  opacity: 0.6;\n}\n\n/* ============================================================================\n * LABEL (aligned with Field)\n * ============================================================================ */\n\n.label {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-1);\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-primary);\n  line-height: var(--line-height-tight);\n  cursor: pointer;\n}\n\n.disabled .label {\n  cursor: not-allowed;\n}\n\n.labelText {\n  /* Allows label text to be styled separately if needed */\n}\n\n.optional {\n  font-size: var(--font-size-11);\n  font-weight: var(--font-weight-normal);\n  color: var(--text-tertiary);\n}\n\n.required {\n  color: var(--status-error);\n  font-weight: var(--font-weight-medium);\n  margin-left: 2px;\n}\n\n/* ============================================================================\n * TEXTAREA (aligned with Field input)\n * ============================================================================ */\n\n.textarea {\n  /* Layout */\n  width: 100%;\n  display: block;\n\n  /* Typography */\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-16);\n  font-weight: var(--font-weight-normal);\n  color: var(--text-primary);\n  line-height: var(--line-height-normal);\n\n  /* Background & Border */\n  background: var(--surface-base);\n  border: 1px solid var(--border-subtle);\n  border-radius: var(--radius-control);\n\n  /* Interaction */\n  transition: all var(--transition-fast);\n  outline: none;\n\n  /* Placeholder */\n  &::placeholder {\n    color: var(--text-tertiary);\n  }\n\n  /* Hover state */\n  &:hover:not(:disabled):not(:read-only) {\n    border-color: var(--border-strong);\n  }\n\n  /* Focus state - visible for all focus methods */\n  &:focus {\n    border-color: var(--interactive-primary);\n    box-shadow: 0 0 0 3px var(--soft-brand);\n  }\n\n  /* Focus-visible - box-shadow provides sufficient focus indicator */\n  &:focus-visible {\n    border-color: var(--interactive-primary);\n    box-shadow: 0 0 0 3px var(--soft-brand);\n  }\n\n  /* Disabled state */\n  &:disabled {\n    background: var(--surface-subtle);\n    color: var(--text-tertiary);\n    cursor: not-allowed;\n    opacity: 0.5;\n  }\n\n  /* Read-only state */\n  &:read-only {\n    background: var(--surface-subtle);\n    border-color: var(--border-subtle);\n    cursor: default;\n  }\n\n  /* Autofill styling - maintains accessible contrast */\n  &:-webkit-autofill,\n  &:-webkit-autofill:hover,\n  &:-webkit-autofill:focus {\n    -webkit-text-fill-color: var(--text-primary);\n    box-shadow: 0 0 0px 1000px var(--surface-subtle) inset;\n    transition: background-color 5000s ease-in-out 0s;\n  }\n}\n\n/* ============================================================================\n * ERROR STATE\n * ============================================================================ */\n\n.error .textarea {\n  border-color: var(--status-error);\n\n  &:focus {\n    border-color: var(--status-error);\n    box-shadow: 0 0 0 3px var(--soft-error);\n  }\n\n  &:focus-visible {\n    border-color: var(--status-error);\n    box-shadow: 0 0 0 3px var(--soft-error);\n  }\n}\n\n/* ============================================================================\n * SIZES\n * ============================================================================ */\n\n.sm .textarea {\n  padding: var(--spacing-2);\n  font-size: var(--font-size-12);\n  min-height: 80px;\n}\n\n.md .textarea {\n  padding: var(--spacing-3);\n  font-size: var(--font-size-14);\n  min-height: 120px;\n}\n\n.lg .textarea {\n  padding: var(--spacing-4);\n  font-size: var(--font-size-16);\n  min-height: 160px;\n}\n\n/* ============================================================================\n * RESIZE BEHAVIOR\n * ============================================================================ */\n\n.resizeNone .textarea {\n  resize: none;\n}\n\n.resizeVertical .textarea {\n  resize: vertical;\n}\n\n.resizeHorizontal .textarea {\n  resize: horizontal;\n}\n\n.resizeBoth .textarea {\n  resize: both;\n}\n\n/* ============================================================================\n * FOOTER (Counter + Helper Text)\n * ============================================================================ */\n\n.footer {\n  display: flex;\n  justify-content: space-between;\n  align-items: flex-start;\n  gap: var(--spacing-2);\n}\n\n.footer .helperText {\n  flex: 1;\n}\n\n/* ============================================================================\n * HELPER TEXT (aligned with Field)\n * ============================================================================ */\n\n.helperText {\n  margin: 0;\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--text-secondary);\n  line-height: var(--line-height-snug);\n}\n\n/* ============================================================================\n * ERROR MESSAGE (aligned with Field)\n * ============================================================================ */\n\n.errorMessage {\n  display: flex;\n  align-items: flex-start;\n  gap: var(--spacing-1);\n  margin: 0;\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--status-error);\n  line-height: var(--line-height-snug);\n}\n\n/* ============================================================================\n * CHARACTER COUNTER\n * ============================================================================ */\n\n.counter {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  font-variant-numeric: tabular-nums;\n  color: var(--text-tertiary);\n  text-align: right;\n  line-height: var(--line-height-tight);\n  flex-shrink: 0;\n}\n\n.counter.counterWarning {\n  color: var(--status-warning);\n}\n\n.counter.counterError {\n  color: var(--status-error);\n  font-weight: var(--font-weight-medium);\n}\n\n/* ============================================================================\n * HIGH CONTRAST MODE SUPPORT\n * ============================================================================ */\n\n@media (forced-colors: active) {\n  .textarea {\n    border: 2px solid CanvasText;\n    background: Canvas;\n    color: CanvasText;\n  }\n\n  .textarea:focus,\n  .textarea:focus-visible {\n    outline: 3px solid Highlight;\n    outline-offset: 2px;\n  }\n\n  .textarea:disabled {\n    border-color: GrayText;\n    color: GrayText;\n  }\n\n  .error .textarea {\n    border-color: LinkText;\n  }\n\n  .errorMessage {\n    color: LinkText;\n  }\n\n  .required {\n    color: LinkText;\n  }\n\n  .counterError {\n    color: LinkText;\n  }\n}\n\n/* ============================================================================\n * REDUCED MOTION\n * ============================================================================ */\n\n@media (prefers-reduced-motion: reduce) {\n  .textarea {\n    transition: none;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Textarea/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Textarea Component - Multi-line text input.\n *\n * @example\n * ```tsx\n * import { Textarea } from '@orion-ds/react';\n *\n * <Textarea label=\"Message\" placeholder=\"Enter your message...\" />\n * <Textarea label=\"Bio\" rows={4} resize=\"vertical\" />\n * <Textarea label=\"Notes\" error=\"This field is required\" />\n * ```\n */\nexport { Textarea } from \"./Textarea\";\nexport type {\n  TextareaProps,\n  TextareaSize,\n  TextareaResize,\n} from \"./Textarea.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Textarea label text."
+    },
+    {
+      "name": "helperText",
+      "type": "string",
+      "description": "Helper text displayed below the textarea."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "description": "Error message."
+    },
+    {
+      "name": "size",
+      "type": "TextareaSize",
+      "description": "Textarea size variant.",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "resize",
+      "type": "TextareaResize",
+      "description": "Resize behavior.",
+      "default": "vertical",
+      "values": [
+        "none",
+        "vertical",
+        "horizontal",
+        "both"
+      ]
+    },
+    {
+      "name": "showCounter",
+      "type": "boolean",
+      "description": "Show character counter.",
+      "default": false
+    },
+    {
+      "name": "maxLength",
+      "type": "number",
+      "description": "Maximum character length."
+    },
+    {
+      "name": "optional",
+      "type": "boolean",
+      "description": "Shows \"(optional)\" indicator next to label.",
+      "default": false
+    },
+    {
+      "name": "aria-label",
+      "type": "string",
+      "description": "Accessible label for screen readers when no visible label is provided.",
+      "required": true
+    },
+    {
+      "name": "aria-describedby",
+      "type": "string",
+      "description": "Additional element IDs that describe this textarea.",
+      "required": true
+    }
+  ],
+  "tokens": [
+    "--surface-base",
+    "--border-subtle",
+    "--text-primary",
+    "--radius-control",
+    "--font-secondary"
+  ],
+  "examples": [
+    {
+      "title": "Basic textarea",
+      "code": "<Textarea label=\"Message\" placeholder=\"Type your message...\" rows={4} />"
+    },
+    {
+      "title": "With character count",
+      "code": "<Textarea label=\"Bio\" maxLength={280} showCount />"
+    }
+  ],
+  "modeAware": true,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#textarea",
+    "local": "/library.html#textarea"
+  },
+  "import": "import { Textarea } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

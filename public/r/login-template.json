@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "login-template",
+  "type": "registry:template",
+  "title": "Login",
+  "description": "Login page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/LoginTemplate/LoginTemplate.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#login-template",
+    "local": "/library.html#login-template"
+  },
+  "import": "import { LoginTemplate } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

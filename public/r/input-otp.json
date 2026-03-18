@@ -1,0 +1,96 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "input-otp",
+  "type": "registry:component",
+  "title": "InputOTP",
+  "description": "InputOTP component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/InputOTP/InputOTP.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport {\n  forwardRef,\n  useState,\n  useCallback,\n  useContext,\n  useRef,\n  useEffect,\n  createContext,\n} from \"react\";\nimport type {\n  InputOTPProps,\n  InputOTPGroupProps,\n  InputOTPSlotProps,\n  InputOTPSeparatorProps,\n  InputOTPContextValue,\n} from \"./InputOTP.types\";\nimport styles from \"./InputOTP.module.css\";\n\nconst InputOTPContext = createContext<InputOTPContextValue | null>(null);\n\nfunction useInputOTPContext(): InputOTPContextValue {\n  const ctx = useContext(InputOTPContext);\n  if (!ctx) {\n    throw new Error(\n      \"InputOTP.Slot/Group/Separator must be used within an InputOTP\",\n    );\n  }\n  return ctx;\n}\n\nconst InputOTPGroup = forwardRef<HTMLDivElement, InputOTPGroupProps>(\n  ({ className, children, ...rest }, ref) => {\n    const classNames = [styles.group, className].filter(Boolean).join(\" \");\n    return (\n      <div ref={ref} className={classNames} {...rest}>\n        {children}\n      </div>\n    );\n  },\n);\n\nInputOTPGroup.displayName = \"InputOTP.Group\";\n\nconst InputOTPSlot = forwardRef<HTMLDivElement, InputOTPSlotProps>(\n  ({ index, className, ...rest }, ref) => {\n    const {\n      value,\n      activeIndex,\n      size: _size,\n      disabled,\n      isFocused,\n      focusInput,\n    } = useInputOTPContext();\n    const char = value[index];\n    const isActive = isFocused && index === activeIndex;\n    const isFilled = char !== undefined && char !== \"\";\n\n    const classNames = [\n      styles.slot,\n      isActive && styles.slotActive,\n      isFilled && styles.slotFilled,\n      disabled && styles.slotDisabled,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div ref={ref} className={classNames} onClick={focusInput} {...rest}>\n        {isFilled ? char : isActive ? <span className={styles.caret} /> : null}\n      </div>\n    );\n  },\n);\n\nInputOTPSlot.displayName = \"InputOTP.Slot\";\n\nconst InputOTPSeparator = forwardRef<HTMLDivElement, InputOTPSeparatorProps>(\n  ({ className, children, ...rest }, ref) => {\n    const classNames = [styles.separator, className].filter(Boolean).join(\" \");\n    return (\n      <div ref={ref} className={classNames} role=\"separator\" {...rest}>\n        {children ?? <span aria-hidden=\"true\">&ndash;</span>}\n      </div>\n    );\n  },\n);\n\nInputOTPSeparator.displayName = \"InputOTP.Separator\";\n\nconst InputOTPRoot = forwardRef<HTMLDivElement, InputOTPProps>(\n  (\n    {\n      maxLength,\n      value,\n      defaultValue = \"\",\n      onChange,\n      onComplete,\n      type = \"numeric\",\n      size = \"md\",\n      disabled = false,\n      autoFocus = false,\n      className,\n      children,\n      ...rest\n    },\n    ref,\n  ) => {\n    const [internalValue, setInternalValue] = useState(defaultValue);\n    const [isFocused, setIsFocused] = useState(false);\n    const inputRef = useRef<HTMLInputElement>(null);\n    const isControlled = value !== undefined;\n    const currentValue = isControlled ? value : internalValue;\n    const activeIndex = Math.min(currentValue.length, maxLength - 1);\n\n    const pattern = type === \"numeric\" ? \"[0-9]\" : \"[a-zA-Z0-9]\";\n    const regex = type === \"numeric\" ? /[^0-9]/g : /[^a-zA-Z0-9]/g;\n\n    useEffect(() => {\n      if (autoFocus) {\n        inputRef.current?.focus();\n      }\n    }, [autoFocus]);\n\n    const updateValue = useCallback(\n      (newValue: string) => {\n        const filtered = newValue.replace(regex, \"\").slice(0, maxLength);\n        if (!isControlled) {\n          setInternalValue(filtered);\n        }\n        onChange?.(filtered);\n        if (filtered.length === maxLength) {\n          onComplete?.(filtered);\n        }\n      },\n      [maxLength, regex, isControlled, onChange, onComplete],\n    );\n\n    const handleInput = useCallback(\n      (e: React.ChangeEvent<HTMLInputElement>) => {\n        updateValue(e.target.value);\n      },\n      [updateValue],\n    );\n\n    const handleKeyDown = useCallback(\n      (e: React.KeyboardEvent<HTMLInputElement>) => {\n        if (e.key === \"Backspace\" && currentValue.length === 0) {\n          e.preventDefault();\n        }\n      },\n      [currentValue],\n    );\n\n    const handlePaste = useCallback(\n      (e: React.ClipboardEvent<HTMLInputElement>) => {\n        e.preventDefault();\n        const pasted = e.clipboardData.getData(\"text/plain\");\n        updateValue(pasted);\n      },\n      [updateValue],\n    );\n\n    const focusInput = useCallback(() => {\n      if (!disabled) {\n        inputRef.current?.focus();\n      }\n    }, [disabled]);\n\n    const classNames = [styles.root, styles[size], className]\n      .filter(Boolean)\n      .join(\" \");\n\n    const ctx: InputOTPContextValue = {\n      value: currentValue,\n      activeIndex,\n      size,\n      disabled,\n      isFocused,\n      focusInput,\n    };\n\n    return (\n      <InputOTPContext.Provider value={ctx}>\n        <div\n          ref={ref}\n          className={classNames}\n          onClick={focusInput}\n          data-otp-container\n          {...rest}\n        >\n          <input\n            ref={inputRef}\n            className={styles.hiddenInput}\n            type=\"text\"\n            inputMode={type === \"numeric\" ? \"numeric\" : \"text\"}\n            pattern={`${pattern}*`}\n            maxLength={maxLength}\n            value={currentValue}\n            disabled={disabled}\n            autoComplete=\"one-time-code\"\n            aria-label={`OTP input, ${maxLength} digits`}\n            onChange={handleInput}\n            onKeyDown={handleKeyDown}\n            onPaste={handlePaste}\n            onFocus={() => setIsFocused(true)}\n            onBlur={() => setIsFocused(false)}\n            tabIndex={0}\n          />\n          {children}\n        </div>\n      </InputOTPContext.Provider>\n    );\n  },\n);\n\nInputOTPRoot.displayName = \"InputOTP\";\n\nexport const InputOTP = Object.assign(InputOTPRoot, {\n  Group: InputOTPGroup,\n  Slot: InputOTPSlot,\n  Separator: InputOTPSeparator,\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/InputOTP/InputOTP.types.ts",
+      "type": "registry:types",
+      "content": "import type { HTMLAttributes, ReactNode } from \"react\";\n\nexport type InputOTPType = \"numeric\" | \"alphanumeric\";\nexport type InputOTPSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface InputOTPProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"onChange\" | \"defaultValue\"\n> {\n  /** Number of OTP slots. */\n  maxLength: number;\n  /** Controlled value. */\n  value?: string;\n  /** Default value for uncontrolled usage. */\n  defaultValue?: string;\n  /** Callback when value changes. */\n  onChange?: (value: string) => void;\n  /** Callback when all slots are filled. */\n  onComplete?: (value: string) => void;\n  /** Input type — determines keyboard and allowed characters. @default 'numeric' */\n  type?: InputOTPType;\n  /** Size of the OTP slots. @default 'md' */\n  size?: InputOTPSize;\n  /** Disable the input. */\n  disabled?: boolean;\n  /** Auto-focus the input on mount. */\n  autoFocus?: boolean;\n  children?: ReactNode;\n}\n\nexport interface InputOTPGroupProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n}\n\nexport interface InputOTPSlotProps extends HTMLAttributes<HTMLDivElement> {\n  /** Index of this slot (0-based). */\n  index: number;\n}\n\nexport interface InputOTPSeparatorProps extends HTMLAttributes<HTMLDivElement> {\n  children?: ReactNode;\n}\n\nexport interface InputOTPContextValue {\n  value: string;\n  activeIndex: number;\n  size: InputOTPSize;\n  disabled: boolean;\n  isFocused: boolean;\n  focusInput: () => void;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/InputOTP/InputOTP.module.css",
+      "type": "registry:styles",
+      "content": "/* InputOTP Component Styles */\n\n.root {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  position: relative;\n}\n\n/* Hidden input that captures keyboard events */\n.hiddenInput {\n  position: absolute;\n  inset: 0;\n  opacity: 0;\n  pointer-events: none;\n}\n\n/* Group container */\n.group {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-1);\n}\n\n/* Individual slot */\n.slot {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  border: 1px solid var(--border-subtle);\n  border-radius: var(--radius-control);\n  font-family: var(--font-mono);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-primary);\n  background: var(--surface-base);\n  transition: all var(--transition-fast);\n  cursor: text;\n  user-select: none;\n  position: relative;\n}\n\n.slot:hover:not(.slotDisabled) {\n  border-color: var(--border-strong);\n}\n\n/* Active slot — matches Field focus pattern (border + soft-brand shadow) */\n.slotActive {\n  border-color: var(--interactive-primary);\n  box-shadow: 0 0 0 3px var(--soft-brand);\n}\n\n/* Filled slot */\n.slotFilled {\n  color: var(--text-primary);\n}\n\n/* Disabled */\n.slotDisabled {\n  opacity: 0.5;\n  cursor: not-allowed;\n  background: var(--surface-subtle);\n}\n\n/* Caret animation */\n.caret {\n  width: 1px;\n  height: 50%;\n  background: var(--text-primary);\n  animation: blink 1s step-end infinite;\n}\n\n/* ============================================================================\n * SIZES — Slot dimensions scale proportionally (sm 36, md 44, lg 52)\n * Font sizes aligned with Field input tokens\n * ============================================================================ */\n\n.sm .slot,\n.sm.slot {\n  width: 36px;\n  height: 36px;\n  font-size: var(--font-size-14);\n}\n\n.md .slot,\n.md.slot {\n  width: 44px;\n  height: 44px;\n  font-size: var(--font-size-18);\n}\n\n.lg .slot,\n.lg.slot {\n  width: 52px;\n  height: 52px;\n  font-size: var(--font-size-24);\n}\n\n/* Separator */\n.separator {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-tertiary);\n  font-size: var(--font-size-18);\n}\n\n@keyframes blink {\n  0%,\n  100% {\n    opacity: 1;\n  }\n  50% {\n    opacity: 0;\n  }\n}\n\n/* Reduced motion */\n@media (prefers-reduced-motion: reduce) {\n  .slot {\n    transition: none;\n  }\n\n  .caret {\n    animation: none;\n    opacity: 1;\n  }\n}\n\n/* Forced colors (high contrast mode) */\n@media (forced-colors: active) {\n  .slot {\n    border: 1px solid ButtonText;\n  }\n\n  .slotActive {\n    border-color: Highlight;\n    outline: 1px solid Highlight;\n    box-shadow: none;\n  }\n\n  .caret {\n    background: ButtonText;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/InputOTP/index.ts",
+      "type": "registry:index",
+      "content": "export { InputOTP } from \"./InputOTP\";\nexport type {\n  InputOTPProps,\n  InputOTPGroupProps,\n  InputOTPSlotProps,\n  InputOTPSeparatorProps,\n  InputOTPType,\n  InputOTPSize,\n} from \"./InputOTP.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "maxLength",
+      "type": "number",
+      "description": "Number of OTP slots. */",
+      "required": true
+    },
+    {
+      "name": "value",
+      "type": "string",
+      "description": "Controlled value. */"
+    },
+    {
+      "name": "defaultValue",
+      "type": "string",
+      "description": "Default value for uncontrolled usage. */"
+    },
+    {
+      "name": "onChange",
+      "type": "(value: string) => void",
+      "description": "Callback when value changes. */"
+    },
+    {
+      "name": "onComplete",
+      "type": "(value: string) => void",
+      "description": "Callback when all slots are filled. */"
+    },
+    {
+      "name": "type",
+      "type": "InputOTPType",
+      "description": "Input type — determines keyboard and allowed characters. @default 'numeric' */",
+      "default": "numeric",
+      "values": [
+        "numeric",
+        "alphanumeric"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "InputOTPSize",
+      "description": "Size of the OTP slots. @default 'md' */",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable the input. */"
+    },
+    {
+      "name": "autoFocus",
+      "type": "boolean",
+      "description": "Auto-focus the input on mount. */"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#input-otp",
+    "local": "/library.html#input-otp"
+  },
+  "import": "import { InputOTP } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

@@ -1,0 +1,90 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "toggle-group",
+  "type": "registry:component",
+  "title": "ToggleGroup",
+  "description": "ToggleGroup component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/ToggleGroup/ToggleGroup.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport {\n  forwardRef,\n  useState,\n  useCallback,\n  useContext,\n  useRef,\n  createContext,\n} from \"react\";\nimport type {\n  ToggleGroupProps,\n  ToggleGroupItemProps,\n  ToggleGroupContextValue,\n} from \"./ToggleGroup.types\";\nimport styles from \"./ToggleGroup.module.css\";\n\nconst ToggleGroupContext = createContext<ToggleGroupContextValue | null>(null);\n\nfunction useToggleGroupContext(): ToggleGroupContextValue {\n  const ctx = useContext(ToggleGroupContext);\n  if (!ctx) {\n    throw new Error(\"ToggleGroup.Item must be used within a ToggleGroup\");\n  }\n  return ctx;\n}\n\nconst ToggleGroupItem = forwardRef<HTMLButtonElement, ToggleGroupItemProps>(\n  ({ value, disabled: itemDisabled, className, children, ...rest }, ref) => {\n    const {\n      type: _type,\n      value: groupValue,\n      onItemToggle,\n      variant: _variant,\n      size: _size,\n      disabled: groupDisabled,\n    } = useToggleGroupContext();\n    const isPressed = groupValue.includes(value);\n    const isDisabled = itemDisabled || groupDisabled;\n\n    const classNames = [styles.item, isPressed && styles.itemPressed, className]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        className={classNames}\n        aria-pressed={isPressed}\n        disabled={isDisabled}\n        onClick={() => onItemToggle(value)}\n        {...rest}\n      >\n        {children}\n      </button>\n    );\n  },\n);\n\nToggleGroupItem.displayName = \"ToggleGroup.Item\";\n\nconst ToggleGroupRoot = forwardRef<HTMLDivElement, ToggleGroupProps>(\n  (\n    {\n      type,\n      value,\n      defaultValue,\n      onValueChange,\n      variant = \"default\",\n      size = \"md\",\n      disabled = false,\n      className,\n      children,\n      ...rest\n    },\n    ref,\n  ) => {\n    const normalizeValue = (v: string | string[] | undefined): string[] => {\n      if (v === undefined) return [];\n      return Array.isArray(v) ? v : [v];\n    };\n\n    const [internalValue, setInternalValue] = useState<string[]>(\n      normalizeValue(defaultValue),\n    );\n    const isControlled = value !== undefined;\n    const currentValue = isControlled ? normalizeValue(value) : internalValue;\n\n    const groupRef = useRef<HTMLDivElement>(null);\n\n    const handleItemToggle = useCallback(\n      (itemValue: string) => {\n        let next: string[];\n        if (currentValue.includes(itemValue)) {\n          next = currentValue.filter((v) => v !== itemValue);\n        } else if (type === \"multiple\") {\n          next = [...currentValue, itemValue];\n        } else {\n          next = [itemValue];\n        }\n\n        if (!isControlled) {\n          setInternalValue(next);\n        }\n        onValueChange?.(type === \"single\" ? (next[0] ?? \"\") : next);\n      },\n      [currentValue, type, isControlled, onValueChange],\n    );\n\n    const handleKeyDown = useCallback(\n      (e: React.KeyboardEvent<HTMLDivElement>) => {\n        const container = groupRef.current;\n        if (!container) return;\n\n        const items = Array.from(\n          container.querySelectorAll<HTMLButtonElement>(\n            \"button:not(:disabled)\",\n          ),\n        );\n        const currentIndex = items.indexOf(e.target as HTMLButtonElement);\n        if (currentIndex === -1) return;\n\n        let nextIndex: number | undefined;\n        if (e.key === \"ArrowRight\" || e.key === \"ArrowDown\") {\n          nextIndex = (currentIndex + 1) % items.length;\n        } else if (e.key === \"ArrowLeft\" || e.key === \"ArrowUp\") {\n          nextIndex = (currentIndex - 1 + items.length) % items.length;\n        } else if (e.key === \"Home\") {\n          nextIndex = 0;\n        } else if (e.key === \"End\") {\n          nextIndex = items.length - 1;\n        }\n\n        if (nextIndex !== undefined) {\n          e.preventDefault();\n          items[nextIndex]?.focus();\n        }\n      },\n      [],\n    );\n\n    const classNames = [styles.group, styles[variant], styles[size], className]\n      .filter(Boolean)\n      .join(\" \");\n\n    const ctx: ToggleGroupContextValue = {\n      type,\n      value: currentValue,\n      onItemToggle: handleItemToggle,\n      variant,\n      size,\n      disabled,\n    };\n\n    return (\n      <ToggleGroupContext.Provider value={ctx}>\n        <div\n          ref={(node) => {\n            (\n              groupRef as React.MutableRefObject<HTMLDivElement | null>\n            ).current = node;\n            if (typeof ref === \"function\") ref(node);\n            else if (ref)\n              (ref as React.MutableRefObject<HTMLDivElement | null>).current =\n                node;\n          }}\n          role=\"group\"\n          className={classNames}\n          onKeyDown={handleKeyDown}\n          {...rest}\n        >\n          {children}\n        </div>\n      </ToggleGroupContext.Provider>\n    );\n  },\n);\n\nToggleGroupRoot.displayName = \"ToggleGroup\";\n\nexport const ToggleGroup = Object.assign(ToggleGroupRoot, {\n  Item: ToggleGroupItem,\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/ToggleGroup/ToggleGroup.types.ts",
+      "type": "registry:types",
+      "content": "import type { HTMLAttributes, ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type ToggleGroupType = \"single\" | \"multiple\";\nexport type ToggleGroupVariant = \"default\" | \"outline\";\nexport type ToggleGroupSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface ToggleGroupProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"onChange\" | \"defaultValue\"\n> {\n  /** Whether single or multiple items can be pressed. */\n  type: ToggleGroupType;\n  /** Controlled value (string for single, string[] for multiple). */\n  value?: string | string[];\n  /** Default value for uncontrolled usage. */\n  defaultValue?: string | string[];\n  /** Callback when value changes. */\n  onValueChange?: (value: string | string[]) => void;\n  /** Visual variant propagated to items. @default 'default' */\n  variant?: ToggleGroupVariant;\n  /** Size propagated to items. @default 'md' */\n  size?: ToggleGroupSize;\n  /** Disable all items. */\n  disabled?: boolean;\n  children?: ReactNode;\n}\n\nexport interface ToggleGroupItemProps extends Omit<\n  ButtonHTMLAttributes<HTMLButtonElement>,\n  \"value\"\n> {\n  /** Unique value for this item. */\n  value: string;\n  children?: ReactNode;\n}\n\nexport interface ToggleGroupContextValue {\n  type: ToggleGroupType;\n  value: string[];\n  onItemToggle: (itemValue: string) => void;\n  variant: ToggleGroupVariant;\n  size: ToggleGroupSize;\n  disabled: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/ToggleGroup/ToggleGroup.module.css",
+      "type": "registry:styles",
+      "content": "/* ToggleGroup Component Styles */\n\n.group {\n  display: inline-flex;\n  align-items: center;\n  border-radius: var(--radius-button);\n}\n\n/* Items joined together */\n.item {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: var(--spacing-2);\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  line-height: var(--line-height-tight);\n  cursor: pointer;\n  user-select: none;\n  transition: all var(--transition-fast);\n  border: 1px solid transparent;\n  outline: none;\n  background: transparent;\n  color: var(--text-secondary);\n\n  &:hover:not(:disabled) {\n    background: var(--interactive-ghost-hover);\n    color: var(--text-primary);\n  }\n\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n    box-shadow: 0 0 0 4px var(--soft-brand);\n    z-index: var(--z-dropdown);\n    position: relative;\n  }\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n    pointer-events: none;\n  }\n\n  /* Remove inner border-radius for joined items */\n  border-radius: 0;\n\n  &:first-child {\n    border-top-left-radius: var(--radius-button);\n    border-bottom-left-radius: var(--radius-button);\n  }\n\n  &:last-child {\n    border-top-right-radius: var(--radius-button);\n    border-bottom-right-radius: var(--radius-button);\n  }\n}\n\n/* Pressed state */\n.itemPressed {\n  background: var(--soft-brand);\n  color: var(--text-brand);\n\n  &:hover:not(:disabled) {\n    background: var(--soft-brand-hover);\n    color: var(--text-brand);\n  }\n}\n\n/* Outline variant */\n.outline .item {\n  border-color: var(--border-subtle);\n  margin-left: -1px;\n\n  &:first-child {\n    margin-left: 0;\n  }\n\n  &:hover:not(:disabled) {\n    border-color: var(--border-strong);\n    z-index: var(--z-dropdown);\n    position: relative;\n  }\n}\n\n.outline .itemPressed {\n  border-color: var(--border-interactive);\n  background: var(--soft-brand);\n  color: var(--text-brand);\n  z-index: var(--z-dropdown);\n  position: relative;\n}\n\n/* ============================================================================\n * SIZES — Aligned with Button (32/40/48px, same font-size & padding scale)\n * ============================================================================ */\n\n.sm .item {\n  height: 32px;\n  min-width: 32px;\n  padding: 0 var(--spacing-3);\n  font-size: var(--font-size-12);\n}\n\n.md .item {\n  height: 40px;\n  min-width: 40px;\n  padding: 0 var(--spacing-4);\n  font-size: var(--font-size-16);\n}\n\n.lg .item {\n  height: 48px;\n  min-width: 48px;\n  padding: 0 var(--spacing-6);\n  font-size: var(--font-size-18);\n}\n\n/* Reduced motion */\n@media (prefers-reduced-motion: reduce) {\n  .item {\n    transition: none;\n  }\n}\n\n/* Forced colors (high contrast mode) */\n@media (forced-colors: active) {\n  .item {\n    border: 1px solid ButtonText;\n  }\n\n  .item:focus-visible {\n    box-shadow: none;\n    outline: 3px solid Highlight;\n    outline-offset: 2px;\n  }\n\n  .itemPressed {\n    background: Highlight;\n    color: HighlightText;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/ToggleGroup/index.ts",
+      "type": "registry:index",
+      "content": "export { ToggleGroup } from \"./ToggleGroup\";\nexport type {\n  ToggleGroupProps,\n  ToggleGroupItemProps,\n  ToggleGroupType,\n  ToggleGroupVariant,\n  ToggleGroupSize,\n} from \"./ToggleGroup.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "type",
+      "type": "ToggleGroupType",
+      "description": "Whether single or multiple items can be pressed. */",
+      "required": true,
+      "values": [
+        "single",
+        "multiple"
+      ]
+    },
+    {
+      "name": "value",
+      "type": "string | string[]",
+      "description": "Controlled value (string for single, string[] for multiple). */"
+    },
+    {
+      "name": "defaultValue",
+      "type": "string | string[]",
+      "description": "Default value for uncontrolled usage. */"
+    },
+    {
+      "name": "onValueChange",
+      "type": "(value: string | string[]) => void",
+      "description": "Callback when value changes. */"
+    },
+    {
+      "name": "variant",
+      "type": "ToggleGroupVariant",
+      "description": "Visual variant propagated to items. @default 'default' */",
+      "default": "default",
+      "values": [
+        "default",
+        "outline"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "ToggleGroupSize",
+      "description": "Size propagated to items. @default 'md' */",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable all items. */"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#toggle-group",
+    "local": "/library.html#toggle-group"
+  },
+  "import": "import { ToggleGroup } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

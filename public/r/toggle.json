@@ -1,0 +1,75 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "toggle",
+  "type": "registry:component",
+  "title": "Toggle",
+  "description": "Toggle component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/Toggle/Toggle.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport { forwardRef, useState, useCallback } from \"react\";\nimport type { ToggleProps } from \"./Toggle.types\";\nimport styles from \"./Toggle.module.css\";\n\nexport const Toggle = forwardRef<HTMLButtonElement, ToggleProps>(\n  (\n    {\n      pressed,\n      defaultPressed = false,\n      onPressedChange,\n      variant = \"default\",\n      size = \"md\",\n      disabled,\n      className,\n      children,\n      onClick,\n      ...rest\n    },\n    ref,\n  ) => {\n    const [internalPressed, setInternalPressed] = useState(defaultPressed);\n    const isControlled = pressed !== undefined;\n    const isPressed = isControlled ? pressed : internalPressed;\n\n    const handleClick = useCallback(\n      (e: React.MouseEvent<HTMLButtonElement>) => {\n        const next = !isPressed;\n        if (!isControlled) {\n          setInternalPressed(next);\n        }\n        onPressedChange?.(next);\n        onClick?.(e);\n      },\n      [isPressed, isControlled, onPressedChange, onClick],\n    );\n\n    const classNames = [\n      styles.toggle,\n      styles[variant],\n      styles[size],\n      isPressed && styles.pressed,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <button\n        ref={ref}\n        type=\"button\"\n        className={classNames}\n        aria-pressed={isPressed}\n        disabled={disabled}\n        onClick={handleClick}\n        {...rest}\n      >\n        {children}\n      </button>\n    );\n  },\n);\n\nToggle.displayName = \"Toggle\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Toggle/Toggle.types.ts",
+      "type": "registry:types",
+      "content": "import type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\nexport type ToggleVariant = \"default\" | \"outline\";\nexport type ToggleSize = \"sm\" | \"md\" | \"lg\";\n\nexport interface ToggleProps extends Omit<\n  ButtonHTMLAttributes<HTMLButtonElement>,\n  \"onChange\"\n> {\n  /** Controlled pressed state. */\n  pressed?: boolean;\n  /** Default pressed state for uncontrolled usage. */\n  defaultPressed?: boolean;\n  /** Callback when pressed state changes. */\n  onPressedChange?: (pressed: boolean) => void;\n  /** Visual variant. @default 'default' */\n  variant?: ToggleVariant;\n  /** Size of the toggle. @default 'md' */\n  size?: ToggleSize;\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Toggle/Toggle.module.css",
+      "type": "registry:styles",
+      "content": "/* Toggle Component Styles */\n\n.toggle {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: var(--spacing-2);\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  line-height: var(--line-height-tight);\n  cursor: pointer;\n  user-select: none;\n  transition: all var(--transition-fast);\n  border: 1px solid transparent;\n  outline: none;\n  background: transparent;\n  color: var(--text-secondary);\n\n  &:hover:not(:disabled) {\n    background: var(--interactive-ghost-hover);\n    color: var(--text-primary);\n  }\n\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n    box-shadow: 0 0 0 4px var(--soft-brand);\n  }\n\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n    pointer-events: none;\n  }\n}\n\n/* Pressed state */\n.pressed {\n  background: var(--soft-brand);\n  color: var(--text-brand);\n\n  &:hover:not(:disabled) {\n    background: var(--soft-brand-hover);\n    color: var(--text-brand);\n  }\n}\n\n/* Outline variant */\n.outline {\n  border-color: var(--border-subtle);\n\n  &:hover:not(:disabled) {\n    border-color: var(--border-strong);\n  }\n\n  &.pressed {\n    border-color: var(--border-interactive);\n    background: var(--soft-brand);\n    color: var(--text-brand);\n  }\n}\n\n/* ============================================================================\n * SIZES — Aligned with Button (32/40/48px, same font-size & padding scale)\n * ============================================================================ */\n\n.sm {\n  height: 32px;\n  min-width: 32px;\n  padding: 0 var(--spacing-3);\n  font-size: var(--font-size-12);\n  border-radius: var(--radius-button);\n}\n\n.md {\n  height: 40px;\n  min-width: 40px;\n  padding: 0 var(--spacing-4);\n  font-size: var(--font-size-16);\n  border-radius: var(--radius-button);\n}\n\n.lg {\n  height: 48px;\n  min-width: 48px;\n  padding: 0 var(--spacing-6);\n  font-size: var(--font-size-18);\n  border-radius: var(--radius-button);\n}\n\n/* Reduced motion */\n@media (prefers-reduced-motion: reduce) {\n  .toggle {\n    transition: none;\n  }\n}\n\n/* Forced colors (high contrast mode) */\n@media (forced-colors: active) {\n  .toggle {\n    border: 1px solid ButtonText;\n  }\n\n  .toggle:focus-visible {\n    box-shadow: none;\n    outline: 3px solid Highlight;\n    outline-offset: 2px;\n  }\n\n  .pressed {\n    background: Highlight;\n    color: HighlightText;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Toggle/index.ts",
+      "type": "registry:index",
+      "content": "export { Toggle } from \"./Toggle\";\nexport type { ToggleProps, ToggleVariant, ToggleSize } from \"./Toggle.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "pressed",
+      "type": "boolean",
+      "description": "Controlled pressed state. */"
+    },
+    {
+      "name": "defaultPressed",
+      "type": "boolean",
+      "description": "Default pressed state for uncontrolled usage. */"
+    },
+    {
+      "name": "onPressedChange",
+      "type": "(pressed: boolean) => void",
+      "description": "Callback when pressed state changes. */"
+    },
+    {
+      "name": "variant",
+      "type": "ToggleVariant",
+      "description": "Visual variant. @default 'default' */",
+      "default": "default",
+      "values": [
+        "default",
+        "outline"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "ToggleSize",
+      "description": "Size of the toggle. @default 'md' */",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#toggle",
+    "local": "/library.html#toggle"
+  },
+  "import": "import { Toggle } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

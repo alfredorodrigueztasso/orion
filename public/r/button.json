@@ -1,0 +1,177 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "button",
+  "type": "registry:component",
+  "title": "Button",
+  "description": "Primary interactive element for actions",
+  "category": "actions",
+  "files": [
+    {
+      "path": "packages/react/src/components/Button/Button.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Button Component\n *\n * A type-safe, accessible button component that uses the Orion Design System tokens.\n *\n * @example\n * ```tsx\n * <Button variant=\"primary\" size=\"md\">\n *   Click me\n * </Button>\n *\n * <Button variant=\"secondary\" icon={<SearchIcon />}>\n *   Search\n * </Button>\n *\n * <Button variant=\"ghost\" iconOnly icon={<MenuIcon />} aria-label=\"Menu\" />\n * ```\n */\n\nimport { forwardRef } from \"react\";\nimport type { ButtonProps } from \"./Button.types\";\nimport styles from \"./Button.module.css\";\n\n// Convert kebab-case to camelCase for CSS Modules\nconst toCamelCase = (str: string) =>\n  str.replace(/-([a-z])/g, (g) => g[1]?.toUpperCase() || \"\");\n\nexport const Button = forwardRef<HTMLButtonElement, ButtonProps>(\n  (\n    {\n      variant = \"primary\",\n      size = \"md\",\n      isLoading = false,\n      loadingText,\n      fullWidth = false,\n      icon,\n      iconRight,\n      iconOnly = false,\n      className,\n      children,\n      disabled,\n      type = \"button\",\n      ...rest\n    },\n    ref,\n  ) => {\n    // Convert variant to camelCase for CSS Modules access\n    const variantClass = styles[toCamelCase(variant) as keyof typeof styles] as\n      | string\n      | undefined;\n\n    // Combine class names\n    const classNames = [\n      styles.button,\n      variantClass,\n      styles[size],\n      fullWidth && styles.fullWidth,\n      iconOnly && styles.iconOnly,\n      isLoading && styles.loading,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    // Determine if button should be disabled\n    const isDisabled = disabled || isLoading;\n\n    const contentClass = isLoading ? styles.loadingContent : undefined;\n\n    return (\n      <button\n        ref={ref}\n        type={type}\n        className={classNames}\n        disabled={isDisabled}\n        {...rest}\n      >\n        {isLoading && <span className={styles.spinner} aria-hidden=\"true\" />}\n\n        {icon && !iconOnly && (\n          <span\n            className={`${styles.icon} ${contentClass || \"\"}`}\n            aria-hidden=\"true\"\n          >\n            {icon}\n          </span>\n        )}\n\n        {iconOnly && icon ? (\n          <span\n            className={`${styles.icon} ${contentClass || \"\"}`}\n            aria-hidden=\"true\"\n          >\n            {icon}\n          </span>\n        ) : (\n          <span className={contentClass}>\n            {isLoading && loadingText ? loadingText : children}\n          </span>\n        )}\n\n        {iconRight && !iconOnly && (\n          <span\n            className={`${styles.icon} ${styles.iconRight} ${contentClass || \"\"}`}\n            aria-hidden=\"true\"\n          >\n            {iconRight}\n          </span>\n        )}\n      </button>\n    );\n  },\n);\n\nButton.displayName = \"Button\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Button/Button.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Button Component Types\n *\n * Type definitions for the Orion Button component.\n *\n * @module Button\n * @see {@link ./README.md} for full documentation\n */\n\nimport type { ButtonHTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Button visual variants - each has specific semantic meaning.\n *\n * @semanticGuide\n * - `primary`: Main CTA - Submit, Save, Continue, Get Started\n * - `secondary`: Supporting action ON LIGHT BACKGROUNDS - Cancel, Back, Learn More\n * - `secondaryInverse`: Supporting action ON DARK/COLORED BACKGROUNDS - Learn More on hero photo\n * - `ghost`: Subtle/tertiary action ON LIGHT BACKGROUNDS - Close, Dismiss, Skip\n * - `ghostInverse`: Subtle/tertiary action ON DARK/COLORED BACKGROUNDS - Skip on banner\n * - `danger`: Destructive action - Delete, Remove, Unsubscribe\n * - `inverse`: Primary CTA on colored backgrounds - Hero CTAs, Banners\n *\n * @backgroundContext\n * Use regular variants (secondary, ghost) on light/white backgrounds.\n * Use inverse variants (secondaryInverse, ghostInverse) on dark/colored/photo backgrounds.\n *\n * @example Light background context\n * ```tsx\n * <Button variant=\"primary\">Save</Button>           // Main action\n * <Button variant=\"secondary\">Cancel</Button>       // Supporting\n * <Button variant=\"ghost\">Skip</Button>             // Tertiary\n * ```\n *\n * @example Dark/colored background context (hero, photo, colored banner)\n * ```tsx\n * <Button variant=\"inverse\">Get Started</Button>         // Primary on brand bg\n * <Button variant=\"secondaryInverse\">Learn More</Button> // Supporting on photo\n * <Button variant=\"ghostInverse\">Skip</Button>           // Tertiary on dark bg\n * ```\n */\nexport type ButtonVariant =\n  | \"primary\"\n  | \"secondary\"\n  | \"secondaryInverse\"\n  | \"ghost\"\n  | \"ghostInverse\"\n  | \"danger\"\n  | \"inverse\";\n\n/**\n * Button sizes - automatically adapt to current mode (display/product/app).\n *\n * @modeAware Sizes scale per data-mode:\n * - Display mode: sm=40px, md=56px, lg=64px (spacious, marketing)\n * - Product mode: sm=28px, md=32px, lg=36px (compact, SaaS)\n * - App mode: sm=40px, md=44px, lg=48px (touch-friendly, mobile)\n *\n * @semanticGuide\n * - `sm`: Dense UIs, tables, inline actions\n * - `md`: Default - most buttons (recommended)\n * - `lg`: Hero CTAs, prominent actions\n *\n * @example\n * ```tsx\n * <Button size=\"sm\">Edit</Button>           // Dense UI\n * <Button size=\"md\">Submit</Button>         // Default\n * <Button size=\"lg\">Get Started</Button>    // Hero CTA\n * ```\n */\nexport type ButtonSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * Button component props\n *\n * @example Basic usage\n * ```tsx\n * <Button variant=\"primary\" size=\"md\">\n *   Click me\n * </Button>\n * ```\n *\n * @example With icon\n * ```tsx\n * import { Download } from 'lucide-react';\n *\n * <Button icon={<Download size={20} />}>\n *   Download\n * </Button>\n * ```\n *\n * @example Icon-only (requires aria-label)\n * ```tsx\n * import { Settings } from 'lucide-react';\n *\n * <Button\n *   iconOnly\n *   icon={<Settings size={20} />}\n *   aria-label=\"Settings\"\n * />\n * ```\n *\n * @example Loading state\n * ```tsx\n * <Button isLoading>\n *   Saving...\n * </Button>\n * ```\n */\nexport interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {\n  /**\n   * Visual variant of the button.\n   *\n   * @semanticGuide\n   * - `primary`: Main CTA (Submit, Save, Continue)\n   * - `secondary`: Supporting action on LIGHT backgrounds (Cancel, Back)\n   * - `secondaryInverse`: Supporting action on DARK/COLORED backgrounds\n   * - `ghost`: Subtle action on LIGHT backgrounds (Close, Dismiss)\n   * - `ghostInverse`: Subtle action on DARK/COLORED backgrounds\n   * - `danger`: Destructive action (Delete, Remove)\n   * - `inverse`: Primary CTA on colored backgrounds\n   *\n   * @backgroundContext\n   * Use `secondary`/`ghost` on white/light backgrounds.\n   * Use `secondaryInverse`/`ghostInverse` on dark/colored/photo backgrounds.\n   *\n   * @default 'primary'\n   */\n  variant?: ButtonVariant;\n\n  /**\n   * Size of the button. Automatically adapts to current mode.\n   *\n   * @modeAware\n   * - Display: 40/56/64px heights (spacious)\n   * - Product: 28/32/36px heights (compact)\n   * - App: 40/44/48px heights (touch-friendly)\n   *\n   * @default 'md'\n   */\n  size?: ButtonSize;\n\n  /**\n   * Loading state - shows spinner and disables interaction.\n   * Button text remains visible but dimmed.\n   *\n   * @example\n   * ```tsx\n   * <Button isLoading>Saving...</Button>\n   * ```\n   *\n   * @default false\n   */\n  isLoading?: boolean;\n\n  /**\n   * Text to display during loading state instead of children.\n   * Screen-reader accessible alternative for custom loading messaging.\n   *\n   * @example\n   * ```tsx\n   * <Button isLoading loadingText=\"Saving...\">Save Changes</Button>\n   * ```\n   *\n   * @default undefined (uses children)\n   */\n  loadingText?: string;\n\n  /**\n   * Full width button - expands to fill container.\n   * Useful for form submissions and card footers.\n   *\n   * @example\n   * ```tsx\n   * <Card.Footer>\n   *   <Button fullWidth>Continue</Button>\n   * </Card.Footer>\n   * ```\n   *\n   * @default false\n   */\n  fullWidth?: boolean;\n\n  /**\n   * Icon to display on the left side of button text.\n   * Use 20px icons (size={20}) for best results.\n   *\n   * @example\n   * ```tsx\n   * import { Download } from 'lucide-react';\n   * <Button icon={<Download size={20} />}>Download</Button>\n   * ```\n   */\n  icon?: ReactNode;\n\n  /**\n   * Icon to display on the right side of button text.\n   * Commonly used for chevrons/arrows indicating action direction.\n   *\n   * @example\n   * ```tsx\n   * import { ChevronRight } from 'lucide-react';\n   * <Button iconRight={<ChevronRight size={20} />}>Continue</Button>\n   * ```\n   */\n  iconRight?: ReactNode;\n\n  /**\n   * Icon-only button (no text, just icon).\n   *\n   * @requires aria-label - MUST provide aria-label for accessibility\n   *\n   * @example\n   * ```tsx\n   * import { Settings } from 'lucide-react';\n   *\n   * // CORRECT - has aria-label\n   * <Button iconOnly icon={<Settings size={20} />} aria-label=\"Settings\" />\n   *\n   * // WRONG - missing aria-label (accessibility violation)\n   * <Button iconOnly icon={<Settings size={20} />} />\n   * ```\n   *\n   * @default false\n   */\n  iconOnly?: boolean;\n\n  /**\n   * Button content (text and/or elements).\n   * Ignored when iconOnly is true.\n   */\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Button/Button.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Button Component Styles\n *\n * Uses CSS Modules for scoped styling.\n * All values reference semantic tokens via CSS variables.\n */\n\n/* Base button styles */\n.button {\n  /* Layout */\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  gap: var(--spacing-2);\n\n  /* Typography */\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  line-height: var(--line-height-tight);\n\n  /* Interaction */\n  cursor: pointer;\n  user-select: none;\n  transition: all var(--transition-fast);\n\n  /* Borders */\n  border: 1px solid transparent;\n  outline: none;\n\n  /* Focus state */\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n  }\n\n  /* Disabled state */\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n    pointer-events: none;\n  }\n}\n\n/* ============================================================================\n * VARIANTS\n * ============================================================================ */\n\n/* Primary variant */\n.primary {\n  background: var(--interactive-primary);\n  color: var(--interactive-primary-text);\n\n  &:hover:not(:disabled) {\n    background: var(--interactive-primary-hover);\n  }\n\n  &:active:not(:disabled) {\n    transform: translateY(1px);\n  }\n}\n\n/* Secondary variant - light mode uses semantic tokens, dark mode uses glassmorphism */\n.secondary {\n  /* Light mode: fondo claro con tokens semánticos */\n  background: var(--interactive-secondary);\n  color: var(--interactive-secondary-text);\n  border: 1px solid var(--border-subtle);\n\n  &:hover:not(:disabled) {\n    background: var(--interactive-secondary-hover);\n    border-color: var(--border-subtle);\n  }\n\n  &:active:not(:disabled) {\n    background: var(--surface-layer);\n    transform: translateY(1px);\n  }\n\n  /* Dark mode: mantener glassmorphism existente */\n  :global([data-theme=\"dark\"]) & {\n    background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);\n    border-color: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);\n    color: var(--text-primary);\n    backdrop-filter: blur(var(--mode-blur-amount, var(--blur-md)));\n    -webkit-backdrop-filter: blur(var(--mode-blur-amount, var(--blur-md)));\n\n    &:hover:not(:disabled) {\n      background: color-mix(in srgb, var(--color-neutral-0) 22%, transparent);\n      border-color: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);\n    }\n\n    &:active:not(:disabled) {\n      background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);\n    }\n  }\n}\n\n/* Secondary Inverse variant - for DARK/COLORED backgrounds */\n/* Always the same in light and dark mode (theme-invariant) */\n.secondaryInverse {\n  /* Fixed 20% white overlay — uses color-neutral-0 (primitive, never changes) */\n  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);\n  color: var(--color-neutral-0); /* Always white regardless of theme */\n  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);\n\n  &:hover:not(:disabled) {\n    background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);\n    border-color: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);\n  }\n\n  &:active:not(:disabled) {\n    background: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);\n    transform: translateY(1px);\n  }\n}\n\n/* Ghost variant */\n.ghost {\n  background: transparent;\n  color: var(--text-primary);\n\n  &:hover:not(:disabled) {\n    background: var(--interactive-ghost-hover);\n  }\n\n  &:active:not(:disabled) {\n    transform: scale(0.98);\n  }\n}\n\n/* Ghost Inverse variant - for dark/colored backgrounds */\n/* Always the same in light and dark mode (theme-invariant) */\n.ghostInverse {\n  background: transparent;\n  color: var(--color-neutral-0); /* Always white regardless of theme */\n\n  &:hover:not(:disabled) {\n    background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);\n  }\n\n  &:active:not(:disabled) {\n    transform: scale(0.98);\n  }\n}\n\n/* Danger variant */\n.danger {\n  background: var(--status-error);\n  color: var(--color-neutral-0);\n\n  &:hover:not(:disabled) {\n    background: color-mix(\n      in srgb,\n      var(--status-error) 85%,\n      var(--color-neutral-1000)\n    );\n  }\n\n  &:active:not(:disabled) {\n    transform: translateY(1px);\n  }\n}\n\n/* Inverse variant - for use on colored backgrounds */\n/* Always white background (doesn't change in dark mode) */\n.inverse {\n  background: var(--color-neutral-0);\n  color: var(--interactive-primary);\n  border-color: transparent;\n\n  &:hover:not(:disabled) {\n    background: color-mix(\n      in srgb,\n      var(--color-neutral-0) 92%,\n      var(--color-neutral-900)\n    );\n  }\n\n  &:active:not(:disabled) {\n    transform: translateY(1px);\n  }\n}\n\n/* Lemon brand uses black text for better contrast on white */\n:global([data-brand=\"lemon\"]) .inverse {\n  color: var(--color-neutral-1000);\n}\n\n/* ============================================================================\n * SIZES\n * ============================================================================ */\n\n.sm {\n  height: 32px;\n  padding: 0 var(--spacing-3);\n  font-size: var(--font-size-12);\n  border-radius: var(--radius-button);\n}\n\n.md {\n  height: 40px;\n  padding: 0 var(--spacing-4);\n  font-size: var(--font-size-16);\n  border-radius: var(--radius-button);\n}\n\n.lg {\n  height: 48px;\n  padding: 0 var(--spacing-6);\n  font-size: var(--font-size-18);\n  border-radius: var(--radius-button);\n}\n\n/* ============================================================================\n * MODIFIERS\n * ============================================================================ */\n\n/* Full width */\n.fullWidth {\n  width: 100%;\n}\n\n/* Icon only */\n.iconOnly {\n  &.sm {\n    width: 32px;\n    padding: 0;\n  }\n\n  &.md {\n    width: 40px;\n    padding: 0;\n  }\n\n  &.lg {\n    width: 48px;\n    padding: 0;\n  }\n}\n\n/* Loading state */\n.loading {\n  position: relative;\n  pointer-events: none;\n}\n\n.spinner {\n  position: absolute;\n  top: 50%;\n  left: 50%;\n  transform: translate(-50%, -50%);\n  width: 16px;\n  height: 16px;\n  border-radius: 50%;\n  animation: spin 600ms linear infinite;\n}\n\n/* Spinner colors per variant */\n.primary .spinner {\n  border: 2px solid var(--interactive-primary-text);\n  border-top-color: transparent;\n}\n\n.secondary .spinner {\n  border: 2px solid var(--text-primary);\n  border-top-color: transparent;\n}\n\n.secondaryInverse .spinner {\n  border: 2px solid var(--color-neutral-0); /* Always white - theme-invariant */\n  border-top-color: transparent;\n}\n\n.ghost .spinner {\n  border: 2px solid var(--text-primary);\n  border-top-color: transparent;\n}\n\n.ghostInverse .spinner {\n  border: 2px solid var(--color-neutral-0); /* Always white - theme-invariant */\n  border-top-color: transparent;\n}\n\n.danger .spinner {\n  border: 2px solid var(--color-neutral-0);\n  border-top-color: transparent;\n}\n\n.inverse .spinner {\n  border: 2px solid var(--interactive-primary);\n  border-top-color: transparent;\n}\n\n/* Lemon brand spinner uses black for visibility */\n:global([data-brand=\"lemon\"]) .inverse .spinner {\n  border: 2px solid var(--color-neutral-1000);\n  border-top-color: transparent;\n}\n\n/* ============================================================================\n * EMBER BRAND — Black primary buttons (light) / Light grey primary (dark)\n * ============================================================================ */\n\n/* Ember: Dark primary buttons in light mode */\n:global([data-theme=\"light\"][data-brand=\"ember\"]) .primary {\n  background: var(--color-neutral-900);\n  color: var(--color-neutral-0);\n\n  &:hover:not(:disabled) {\n    background: var(--color-neutral-700);\n  }\n}\n\n/* Ember: Light grey primary buttons in dark mode */\n:global([data-theme=\"dark\"][data-brand=\"ember\"]) .primary {\n  background: var(--color-neutral-100);\n  color: var(--color-neutral-900);\n\n  &:hover:not(:disabled) {\n    background: var(--color-neutral-0);\n  }\n}\n\n/* Hide content when loading */\n.loadingContent {\n  visibility: hidden;\n}\n\n/* ============================================================================\n * CONTEXT: data-dark-bg=\"true\" — Dark background contexts\n * (e.g. Hero variant=\"background\", CTA variant=\"brand\")\n *\n * Maps light-context button variants to their inverse counterparts automatically.\n * This allows buttons to inherit correct styling when inside dark backgrounds\n * without requiring developers to manually switch to inverse variants.\n * ============================================================================ */\n\n/* primary → inverse behavior (white bg, brand text) */\n:global([data-dark-bg=\"true\"]) .primary {\n  background: var(--color-neutral-0);\n  color: var(--interactive-primary);\n  border-color: transparent;\n\n  &:hover:not(:disabled) {\n    background: color-mix(\n      in srgb,\n      var(--color-neutral-0) 92%,\n      var(--color-neutral-900)\n    );\n  }\n\n  &:active:not(:disabled) {\n    transform: translateY(1px);\n  }\n}\n\n/* secondary → secondaryInverse behavior (20% white frosted, white text) */\n:global([data-dark-bg=\"true\"]) .secondary {\n  background: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);\n  color: var(--color-neutral-0);\n  border: 1px solid color-mix(in srgb, var(--color-neutral-0) 20%, transparent);\n  backdrop-filter: none;\n  -webkit-backdrop-filter: none;\n\n  &:hover:not(:disabled) {\n    background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);\n    border-color: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);\n  }\n\n  &:active:not(:disabled) {\n    background: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);\n    transform: translateY(1px);\n  }\n}\n\n/* ghost → ghostInverse behavior (transparent, white text) */\n:global([data-dark-bg=\"true\"]) .ghost {\n  background: transparent;\n  color: var(--color-neutral-0);\n\n  &:hover:not(:disabled) {\n    background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);\n  }\n\n  &:active:not(:disabled) {\n    transform: scale(0.98);\n  }\n}\n\n/* Spinners in dark context */\n:global([data-dark-bg=\"true\"]) .primary .spinner {\n  border: 2px solid var(--interactive-primary);\n  border-top-color: transparent;\n}\n\n:global([data-dark-bg=\"true\"]) .secondary .spinner,\n:global([data-dark-bg=\"true\"]) .ghost .spinner {\n  border: 2px solid var(--color-neutral-0);\n  border-top-color: transparent;\n}\n\n/* Lemon brand in dark context: primary uses black text for contrast */\n:global([data-brand=\"lemon\"][data-dark-bg=\"true\"]) .primary {\n  color: var(--color-neutral-1000);\n}\n\n@keyframes spin {\n  to {\n    transform: translate(-50%, -50%) rotate(360deg);\n  }\n}\n\n/* Icon styles */\n.icon {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  width: 20px;\n  height: 20px;\n  flex-shrink: 0;\n}\n\n.iconRight {\n  order: 1;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Button/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Button Component - Primary action element for triggering events.\n *\n * @example\n * ```tsx\n * import { Button } from '@orion-ds/react';\n *\n * <Button variant=\"primary\">Click me</Button>\n * <Button variant=\"secondary\" icon={<Plus size={20} />}>Add Item</Button>\n * <Button iconOnly icon={<Settings size={20} />} aria-label=\"Settings\" />\n * <Button variant=\"danger\" size=\"sm\">Delete</Button>\n * ```\n */\nexport { Button } from \"./Button\";\nexport type { ButtonProps, ButtonVariant, ButtonSize } from \"./Button.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "ButtonVariant",
+      "description": "Visual variant of the button.",
+      "default": "primary",
+      "values": [
+        "primary",
+        "secondary",
+        "secondaryInverse",
+        "ghost",
+        "ghostInverse",
+        "danger",
+        "inverse"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "ButtonSize",
+      "description": "Size of the button. Automatically adapts to current mode.",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "isLoading",
+      "type": "boolean",
+      "description": "Loading state - shows spinner and disables interaction.",
+      "default": false
+    },
+    {
+      "name": "loadingText",
+      "type": "string",
+      "description": "Text to display during loading state instead of children.",
+      "default": "undefined (uses children)"
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "description": "Full width button - expands to fill container.",
+      "default": false
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "description": "Icon to display on the left side of button text."
+    },
+    {
+      "name": "iconRight",
+      "type": "ReactNode",
+      "description": "Icon to display on the right side of button text."
+    },
+    {
+      "name": "iconOnly",
+      "type": "boolean",
+      "description": "Icon-only button (no text, just icon).",
+      "default": false
+    }
+  ],
+  "tokens": [
+    "--interactive-primary",
+    "--interactive-primary-hover",
+    "--interactive-primary-text",
+    "--interactive-secondary",
+    "--radius-control",
+    "--font-secondary"
+  ],
+  "examples": [
+    {
+      "title": "Primary button",
+      "code": "<Button variant=\"primary\">Save</Button>"
+    },
+    {
+      "title": "With icon",
+      "code": "import { Download } from 'lucide-react';\n\n<Button icon={<Download size={20} />}>Download</Button>"
+    },
+    {
+      "title": "Icon-only",
+      "code": "import { Settings } from 'lucide-react';\n\n<Button iconOnly icon={<Settings size={20} />} aria-label=\"Settings\" />"
+    },
+    {
+      "title": "Loading state",
+      "code": "<Button isLoading>Saving...</Button>"
+    },
+    {
+      "title": "Full width",
+      "code": "<Button fullWidth variant=\"primary\">Continue</Button>"
+    },
+    {
+      "title": "Danger action",
+      "code": "import { Trash2 } from 'lucide-react';\n\n<Button variant=\"danger\" icon={<Trash2 size={20} />}>Delete</Button>"
+    }
+  ],
+  "accessibility": {
+    "role": "button",
+    "ariaAttributes": [
+      "aria-label",
+      "aria-pressed",
+      "aria-disabled"
+    ],
+    "keyboardNav": [
+      {
+        "key": "Enter",
+        "action": "Activate button"
+      },
+      {
+        "key": "Space",
+        "action": "Activate button"
+      }
+    ],
+    "notes": [
+      "Icon-only buttons MUST have aria-label",
+      "Loading state automatically sets aria-busy"
+    ]
+  },
+  "modeAware": true,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#button",
+    "local": "/library.html#button"
+  },
+  "import": "import { Button } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "dependencies": [
+    "lucide-react"
+  ],
+  "tags": [
+    "action",
+    "interaction",
+    "cta",
+    "control",
+    "primary",
+    "submit"
+  ],
+  "related_components": [
+    "Field",
+    "Modal",
+    "Card"
+  ],
+  "common_patterns": [
+    "used in Modal actions",
+    "paired with Field in forms",
+    "Icon + Button pattern",
+    "button group layouts"
+  ]
+}

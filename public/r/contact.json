@@ -1,0 +1,44 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "contact",
+  "type": "registry:section",
+  "title": "Contact",
+  "description": "Contact section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Contact/Contact.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Contact/Contact.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Contact/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#contact",
+    "local": "/library.html#contact"
+  },
+  "import": "import { Contact } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "contact-form",
+    "feedback",
+    "inquiry",
+    "support"
+  ],
+  "related_sections": [
+    "Footer",
+    "FAQ"
+  ],
+  "common_patterns": [
+    "contact page",
+    "inline contact form",
+    "contact section"
+  ]
+}

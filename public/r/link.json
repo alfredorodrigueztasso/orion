@@ -1,0 +1,114 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "link",
+  "type": "registry:component",
+  "title": "Link",
+  "description": "Link component",
+  "category": "text",
+  "files": [
+    {
+      "path": "packages/react/src/components/Link/Link.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Link Component\n *\n * A styled anchor element for navigation.\n *\n * @example\n * ```tsx\n * <Link href=\"/about\">About us</Link>\n * <Link href=\"https://docs.example.com\" external>Documentation</Link>\n * <Link href=\"/profile\" variant=\"brand\">View Profile</Link>\n * ```\n */\n\nimport { forwardRef } from \"react\";\nimport { ExternalLink as ExternalLinkIcon } from \"lucide-react\";\nimport type { LinkProps } from \"./Link.types\";\nimport styles from \"./Link.module.css\";\n\nexport const Link = forwardRef<HTMLAnchorElement, LinkProps>(\n  (\n    {\n      variant = \"default\",\n      size = \"md\",\n      external = false,\n      underline = true,\n      showExternalIcon = true,\n      icon,\n      iconRight,\n      iconAnimation,\n      className,\n      children,\n      ...rest\n    },\n    ref,\n  ) => {\n    const classNames = [\n      styles.link,\n      styles[variant],\n      styles[size],\n      underline && styles.underline,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    // Security attributes for external links\n    const externalProps = external\n      ? {\n          target: \"_blank\",\n          rel: \"noopener noreferrer\",\n        }\n      : {};\n\n    // Get icon size based on link size\n    const getIconSize = () => {\n      switch (size) {\n        case \"sm\":\n          return 12;\n        case \"lg\":\n          return 16;\n        default:\n          return 14;\n      }\n    };\n\n    // Get icon animation class\n    const getIconAnimationClass = (position: \"left\" | \"right\") => {\n      if (!iconAnimation) {\n        // Default animations based on context\n        if (position === \"right\" && external) return styles.iconExternal;\n        return \"\";\n      }\n      switch (iconAnimation) {\n        case \"arrow\":\n          return styles.iconArrow;\n        case \"arrow-left\":\n          return styles.iconArrowLeft;\n        case \"external\":\n          return styles.iconExternal;\n        default:\n          return \"\";\n      }\n    };\n\n    // Determine the right icon to show\n    const renderRightIcon = () => {\n      if (iconRight) {\n        return (\n          <span\n            className={`${styles.icon} ${styles.iconRight} ${getIconAnimationClass(\"right\")}`}\n            aria-hidden=\"true\"\n          >\n            {iconRight}\n          </span>\n        );\n      }\n\n      // Auto-show external icon if external and showExternalIcon is true\n      if (external && showExternalIcon) {\n        return (\n          <span\n            className={`${styles.icon} ${styles.iconRight} ${styles.iconExternal}`}\n            aria-hidden=\"true\"\n          >\n            <ExternalLinkIcon size={getIconSize()} />\n          </span>\n        );\n      }\n\n      return null;\n    };\n\n    return (\n      <a ref={ref} className={classNames} {...externalProps} {...rest}>\n        {icon && (\n          <span\n            className={`${styles.icon} ${getIconAnimationClass(\"left\")}`}\n            aria-hidden=\"true\"\n          >\n            {icon}\n          </span>\n        )}\n        <span>{children}</span>\n        {renderRightIcon()}\n      </a>\n    );\n  },\n);\n\nLink.displayName = \"Link\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Link/Link.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Link Component Types\n *\n * Type definitions for the Orion Link component.\n */\n\nimport type { AnchorHTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Link visual variants\n */\nexport type LinkVariant = \"default\" | \"subtle\" | \"brand\";\n\n/**\n * Link sizes\n */\nexport type LinkSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * Icon animation types\n */\nexport type LinkIconAnimation = \"arrow\" | \"arrow-left\" | \"external\" | \"none\";\n\n/**\n * Link component props\n *\n * @example\n * ```tsx\n * <Link href=\"/about\">About us</Link>\n * <Link href=\"/docs\" variant=\"brand\" external>Documentation</Link>\n * ```\n */\nexport interface LinkProps extends AnchorHTMLAttributes<HTMLAnchorElement> {\n  /**\n   * Visual variant of the link\n   * @default 'default'\n   */\n  variant?: LinkVariant;\n\n  /**\n   * Size of the link\n   * @default 'md'\n   */\n  size?: LinkSize;\n\n  /**\n   * Whether the link opens in a new tab\n   * Automatically adds rel=\"noopener noreferrer\" for security\n   * @default false\n   */\n  external?: boolean;\n\n  /**\n   * Whether to show an underline\n   * @default true\n   */\n  underline?: boolean;\n\n  /**\n   * Whether to show the external link icon automatically when external is true\n   * @default true\n   */\n  showExternalIcon?: boolean;\n\n  /**\n   * Icon to display before the link text\n   */\n  icon?: ReactNode;\n\n  /**\n   * Icon to display after the link text (e.g., external link icon)\n   */\n  iconRight?: ReactNode;\n\n  /**\n   * Icon hover animation type\n   * - 'arrow': moves icon right on hover\n   * - 'arrow-left': moves icon left on hover\n   * - 'external': diagonal movement for external links\n   * - 'none': no animation\n   */\n  iconAnimation?: LinkIconAnimation;\n\n  /**\n   * Link content\n   */\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Link/Link.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Link Component Styles\n *\n * Uses CSS Modules for scoped styling.\n * All values reference semantic tokens via CSS variables.\n */\n\n/* Base link styles */\n.link {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  text-decoration: none;\n  cursor: pointer;\n  transition: color var(--transition-fast);\n\n  &:focus-visible {\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n    border-radius: var(--radius-sm);\n  }\n}\n\n/* ============================================================================\n * VARIANTS\n * ============================================================================ */\n\n.default {\n  color: var(--text-primary);\n\n  &:hover {\n    color: var(--text-brand);\n  }\n}\n\n.subtle {\n  color: var(--text-secondary);\n\n  &:hover {\n    color: var(--text-primary);\n  }\n}\n\n.brand {\n  color: var(--text-brand);\n\n  &:hover {\n    color: var(--interactive-primary-hover);\n  }\n}\n\n/* ============================================================================\n * SIZES\n * ============================================================================ */\n\n.sm {\n  font-size: var(--font-size-12);\n  gap: var(--spacing-1);\n}\n\n.md {\n  font-size: var(--font-size-14);\n  gap: var(--spacing-2);\n}\n\n.lg {\n  font-size: var(--font-size-16);\n  gap: var(--spacing-2);\n}\n\n/* ============================================================================\n * MODIFIERS\n * ============================================================================ */\n\n.underline {\n  text-decoration: underline;\n  text-decoration-color: color-mix(in srgb, currentColor 30%, transparent);\n  text-underline-offset: 3px;\n  text-decoration-thickness: 1px;\n\n  &:hover {\n    text-decoration-color: currentColor;\n  }\n}\n\n/* ============================================================================\n * ICONS\n * ============================================================================ */\n\n.icon {\n  display: inline-flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n  opacity: 0.7;\n  transition:\n    opacity var(--transition-fast),\n    transform var(--transition-fast);\n}\n\n.link:hover .icon {\n  opacity: 1;\n}\n\n/* Icon sizes based on link size */\n.sm .icon {\n  width: 12px;\n  height: 12px;\n}\n\n.md .icon {\n  width: 14px;\n  height: 14px;\n}\n\n.lg .icon {\n  width: 16px;\n  height: 16px;\n}\n\n/* Right icon (external, arrow, etc.) */\n.iconRight {\n  /* Animation on hover - subtle movement */\n}\n\n/* External link icon animation */\n.link:hover .iconExternal {\n  transform: translate(1px, -1px);\n}\n\n/* Arrow right animation */\n.link:hover .iconArrow {\n  transform: translateX(2px);\n}\n\n/* Arrow left animation */\n.link:hover .iconArrowLeft {\n  transform: translateX(-2px);\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Link/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Link Component - Navigation links.\n *\n * @example\n * ```tsx\n * import { Link } from '@orion-ds/react';\n *\n * <Link href=\"/about\">About Us</Link>\n * <Link href=\"/docs\" variant=\"subtle\">Documentation</Link>\n * <Link href=\"/pricing\" variant=\"brand\">View Pricing</Link>\n * <Link href=\"https://example.com\" external>External Link</Link>\n * ```\n */\nexport { Link } from \"./Link\";\nexport type { LinkProps, LinkVariant, LinkSize } from \"./Link.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "variant",
+      "type": "LinkVariant",
+      "description": "Visual variant of the link",
+      "default": "default",
+      "values": [
+        "default",
+        "subtle",
+        "brand"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "LinkSize",
+      "description": "Size of the link",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "external",
+      "type": "boolean",
+      "description": "Whether the link opens in a new tab",
+      "default": false
+    },
+    {
+      "name": "underline",
+      "type": "boolean",
+      "description": "Whether to show an underline",
+      "default": true
+    },
+    {
+      "name": "showExternalIcon",
+      "type": "boolean",
+      "description": "Whether to show the external link icon automatically when external is true",
+      "default": true
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "description": "Icon to display before the link text"
+    },
+    {
+      "name": "iconRight",
+      "type": "ReactNode",
+      "description": "Icon to display after the link text (e.g., external link icon)"
+    },
+    {
+      "name": "iconAnimation",
+      "type": "LinkIconAnimation",
+      "description": "Icon hover animation type",
+      "values": [
+        "arrow",
+        "arrow-left",
+        "external",
+        "none"
+      ]
+    }
+  ],
+  "tokens": [
+    "--interactive-primary",
+    "--text-primary"
+  ],
+  "examples": [
+    {
+      "title": "Basic link",
+      "code": "<Link href=\"/about\">About Us</Link>"
+    },
+    {
+      "title": "External link",
+      "code": "<Link href=\"https://example.com\" external>Visit Site</Link>"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#link",
+    "local": "/library.html#link"
+  },
+  "import": "import { Link } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

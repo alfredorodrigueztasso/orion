@@ -1,0 +1,158 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "field",
+  "type": "registry:component",
+  "title": "Field",
+  "description": "Text input wrapper with label and error state",
+  "category": "forms",
+  "files": [
+    {
+      "path": "packages/react/src/components/Field/Field.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Field Component\n *\n * A type-safe, accessible input field with label, error states, and icon support.\n * Implements WCAG 2.1 AA accessibility guidelines.\n *\n * @example\n * ```tsx\n * <Field\n *   label=\"Email\"\n *   type=\"email\"\n *   placeholder=\"Enter your email\"\n *   error=\"Invalid email address\"\n * />\n *\n * <Field\n *   label=\"Search\"\n *   leftIcon={<SearchIcon />}\n *   placeholder=\"Search...\"\n * />\n * ```\n */\n\nimport { forwardRef, useId } from \"react\";\nimport { AlertCircle } from \"lucide-react\";\nimport type { FieldProps } from \"./Field.types\";\nimport styles from \"./Field.module.css\";\n\nexport const Field = forwardRef<HTMLInputElement, FieldProps>(\n  (\n    {\n      label,\n      error,\n      helperText,\n      leftIcon,\n      rightIcon,\n      fullWidth = false,\n      size = \"md\",\n      optional = false,\n      className,\n      id,\n      disabled,\n      required,\n      \"aria-label\": ariaLabel,\n      \"aria-describedby\": ariaDescribedBy,\n      ...rest\n    },\n    ref,\n  ) => {\n    // Use React's useId for stable, unique IDs (SSR-safe)\n    const generatedId = useId();\n    const inputId = id || `field-${generatedId}`;\n\n    // IDs for accessible associations\n    const errorId = `${inputId}-error`;\n    const helperId = `${inputId}-helper`;\n\n    // Determine if we should show error icon\n    const showErrorIcon = error && !rightIcon;\n\n    // Build aria-describedby from multiple sources\n    const describedByIds: string[] = [];\n    if (error) describedByIds.push(errorId);\n    if (helperText && !error) describedByIds.push(helperId);\n    if (ariaDescribedBy) describedByIds.push(ariaDescribedBy);\n    const computedDescribedBy =\n      describedByIds.length > 0 ? describedByIds.join(\" \") : undefined;\n\n    // Ensure input has an accessible name\n    const hasAccessibleName = Boolean(label || ariaLabel);\n    if (!hasAccessibleName && process.env.NODE_ENV === \"development\") {\n      console.warn(\n        \"Field: Missing accessible name. Provide either a `label` prop or `aria-label` for screen reader users.\",\n      );\n    }\n\n    // Combine class names\n    const containerClasses = [\n      styles.fieldContainer,\n      fullWidth && styles.fullWidth,\n      error && styles.error,\n      disabled && styles.disabled,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    const inputClasses = [\n      styles.input,\n      styles[size],\n      leftIcon && styles.hasLeftIcon,\n      (rightIcon || showErrorIcon) && styles.hasRightIcon,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    // Icon sizes based on field size\n    const iconSize = size === \"sm\" ? 14 : size === \"lg\" ? 20 : 16;\n\n    return (\n      <div className={containerClasses}>\n        {/* Label */}\n        {label && (\n          <label htmlFor={inputId} className={styles.label}>\n            <span className={styles.labelText}>{label}</span>\n            {optional && (\n              <span className={styles.optional} aria-hidden=\"true\">\n                (optional)\n              </span>\n            )}\n            {required && !optional && (\n              <span className={styles.required} aria-hidden=\"true\">\n                *\n              </span>\n            )}\n          </label>\n        )}\n\n        {/* Input wrapper (for icon positioning) */}\n        <div className={styles.inputWrapper}>\n          {/* Left icon */}\n          {leftIcon && (\n            <span className={styles.leftIcon} aria-hidden=\"true\">\n              {leftIcon}\n            </span>\n          )}\n\n          {/* Input */}\n          <input\n            ref={ref}\n            id={inputId}\n            className={inputClasses}\n            disabled={disabled}\n            required={required}\n            aria-required={required || undefined}\n            aria-invalid={error ? \"true\" : \"false\"}\n            aria-describedby={computedDescribedBy}\n            aria-label={!label ? ariaLabel : undefined}\n            {...rest}\n          />\n\n          {/* Right icon - check if it's interactive */}\n          {rightIcon && (\n            <span\n              className={`${styles.rightIcon} ${styles.rightIconInteractive}`}\n              // Only hide from AT if it's purely decorative (not a button/interactive element)\n            >\n              {rightIcon}\n            </span>\n          )}\n\n          {/* Error icon (if no right icon provided) */}\n          {showErrorIcon && (\n            <span\n              className={`${styles.rightIcon} ${styles.errorIconInline}`}\n              aria-hidden=\"true\"\n            >\n              <AlertCircle size={iconSize} />\n            </span>\n          )}\n        </div>\n\n        {/* Helper text */}\n        {helperText && !error && (\n          <p id={helperId} className={styles.helperText}>\n            {helperText}\n          </p>\n        )}\n\n        {/* Error message - role=\"alert\" announces to screen readers immediately */}\n        {error && (\n          <p\n            id={errorId}\n            className={styles.errorMessage}\n            role=\"alert\"\n            aria-live=\"assertive\"\n          >\n            <AlertCircle\n              size={14}\n              aria-hidden=\"true\"\n              className={styles.errorIconMessage}\n            />\n            <span>{error}</span>\n          </p>\n        )}\n      </div>\n    );\n  },\n);\n\nField.displayName = \"Field\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Field/Field.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Field Component Types\n *\n * Type definitions for the Orion Field component (input with label and error).\n *\n * @important Field is a SELF-CONTAINED component - it renders its own input.\n * Do NOT use children to pass an input element.\n *\n * @module Field\n * @see {@link ./README.md} for full documentation\n */\n\nimport type { InputHTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Field component props\n *\n * @important Field is PROPS-BASED, not a wrapper. It renders its own `<input>`.\n *\n * @example Basic usage\n * ```tsx\n * <Field\n *   label=\"Email\"\n *   type=\"email\"\n *   placeholder=\"you@example.com\"\n * />\n * ```\n *\n * @example With validation error\n * ```tsx\n * <Field\n *   label=\"Email\"\n *   type=\"email\"\n *   value={email}\n *   onChange={(e) => setEmail(e.target.value)}\n *   error={emailError}\n * />\n * ```\n *\n * @example With icons\n * ```tsx\n * import { Mail, Eye } from 'lucide-react';\n *\n * <Field\n *   label=\"Email\"\n *   type=\"email\"\n *   leftIcon={<Mail size={18} />}\n *   placeholder=\"you@example.com\"\n * />\n * ```\n *\n * @example WRONG - Don't use children\n * ```tsx\n * // WRONG - Field doesn't accept children for input\n * <Field label=\"Email\">\n *   <input type=\"email\" />  // This won't work!\n * </Field>\n *\n * // CORRECT - Use props\n * <Field label=\"Email\" type=\"email\" />\n * ```\n */\nexport interface FieldProps extends Omit<\n  InputHTMLAttributes<HTMLInputElement>,\n  \"size\"\n> {\n  /**\n   * Input label text displayed above the input.\n   * Required for accessibility unless aria-label is provided.\n   *\n   * @example\n   * ```tsx\n   * <Field label=\"Email Address\" type=\"email\" />\n   * ```\n   */\n  label?: string;\n\n  /**\n   * Error message - shows error state and displays message below input.\n   * Takes precedence over helperText when both are provided.\n   * Automatically associated with input via aria-describedby.\n   *\n   * @example\n   * ```tsx\n   * <Field\n   *   label=\"Email\"\n   *   type=\"email\"\n   *   error=\"Please enter a valid email address\"\n   * />\n   * ```\n   */\n  error?: string;\n\n  /**\n   * Helper text displayed below input (when no error).\n   * Provides additional context or instructions.\n   *\n   * @example\n   * ```tsx\n   * <Field\n   *   label=\"Password\"\n   *   type=\"password\"\n   *   helperText=\"Must be at least 8 characters\"\n   * />\n   * ```\n   */\n  helperText?: string;\n\n  /**\n   * Icon to display on the left side of input.\n   * Use 18px icons (size={18}) for best results.\n   *\n   * @example\n   * ```tsx\n   * import { Mail } from 'lucide-react';\n   * <Field leftIcon={<Mail size={18} />} label=\"Email\" type=\"email\" />\n   * ```\n   */\n  leftIcon?: ReactNode;\n\n  /**\n   * Icon to display on the right side of input.\n   * Can be an icon or interactive element (e.g., password toggle).\n   *\n   * @example\n   * ```tsx\n   * import { Eye, EyeOff } from 'lucide-react';\n   *\n   * <Field\n   *   label=\"Password\"\n   *   type={showPassword ? 'text' : 'password'}\n   *   rightIcon={\n   *     <button onClick={() => setShowPassword(!showPassword)}>\n   *       {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}\n   *     </button>\n   *   }\n   * />\n   * ```\n   */\n  rightIcon?: ReactNode;\n\n  /**\n   * Full width input - expands to fill container.\n   *\n   * @example\n   * ```tsx\n   * <form style={{ maxWidth: '400px' }}>\n   *   <Field label=\"Name\" fullWidth />\n   *   <Field label=\"Email\" type=\"email\" fullWidth />\n   * </form>\n   * ```\n   *\n   * @default false\n   */\n  fullWidth?: boolean;\n\n  /**\n   * Input size variant.\n   *\n   * @semanticGuide\n   * - `sm`: Dense UIs, tables, compact forms\n   * - `md`: Default - most forms (recommended)\n   * - `lg`: Prominent forms, search inputs\n   *\n   * @default 'md'\n   */\n  size?: \"sm\" | \"md\" | \"lg\";\n\n  /**\n   * Shows \"(optional)\" indicator next to label.\n   * Use when most fields are required but some are optional.\n   *\n   * @example\n   * ```tsx\n   * <Field label=\"Phone Number\" type=\"tel\" optional />\n   * ```\n   *\n   * @default false\n   */\n  optional?: boolean;\n\n  // ============================================================================\n  // ACCESSIBILITY PROPS (inherited from InputHTMLAttributes but documented here)\n  // ============================================================================\n\n  /**\n   * Accessible label for screen readers when no visible label is provided.\n   * REQUIRED if `label` prop is not provided.\n   *\n   * @example\n   * ```tsx\n   * // Icon-only search input\n   * <Field\n   *   aria-label=\"Search\"\n   *   leftIcon={<Search size={18} />}\n   *   placeholder=\"Search...\"\n   * />\n   * ```\n   */\n  \"aria-label\"?: string;\n\n  /**\n   * Additional element IDs that describe this input.\n   * Automatically includes error and helper text IDs when provided.\n   *\n   * @example\n   * ```tsx\n   * <p id=\"password-requirements\">Must be 8+ characters</p>\n   * <Field\n   *   label=\"Password\"\n   *   type=\"password\"\n   *   aria-describedby=\"password-requirements\"\n   * />\n   * ```\n   */\n  \"aria-describedby\"?: string;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Field/Field.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Field Component Styles\n *\n * Input field with label, error states, and icons.\n * Implements WCAG 2.1 AA accessibility guidelines.\n */\n\n/* Container */\n.fieldContainer {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-2);\n}\n\n.fullWidth {\n  width: 100%;\n}\n\n.disabled {\n  opacity: 0.6;\n}\n\n/* Label */\n.label {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-1);\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-primary);\n  line-height: var(--line-height-tight);\n  cursor: pointer;\n}\n\n.disabled .label {\n  cursor: not-allowed;\n}\n\n.labelText {\n  /* Allows label text to be styled separately if needed */\n}\n\n.optional {\n  font-size: var(--font-size-11);\n  font-weight: var(--font-weight-normal);\n  color: var(--text-tertiary);\n}\n\n.required {\n  color: var(--status-error);\n  font-weight: var(--font-weight-medium);\n  margin-left: 2px;\n}\n\n/* Input wrapper (for icons) */\n.inputWrapper {\n  position: relative;\n  display: flex;\n  align-items: center;\n}\n\n/* Input */\n.input {\n  /* Layout */\n  width: 100%;\n  display: block;\n\n  /* Typography */\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-16);\n  line-height: var(--line-height-normal);\n  color: var(--text-primary);\n\n  /* Styling */\n  background: var(--surface-base);\n  border: 1px solid var(--border-subtle);\n  border-radius: var(--radius-control);\n\n  /* Interaction */\n  transition: all var(--transition-fast);\n  outline: none;\n\n  /* Placeholder */\n  &::placeholder {\n    color: var(--text-tertiary);\n  }\n\n  /* Hover state */\n  &:hover:not(:disabled):not(:read-only) {\n    border-color: var(--border-strong);\n  }\n\n  /* Focus state - visible for all focus methods */\n  &:focus {\n    border-color: var(--interactive-primary);\n    box-shadow: 0 0 0 3px var(--soft-brand);\n  }\n\n  /* Focus-visible - box-shadow provides sufficient focus indicator */\n  &:focus-visible {\n    border-color: var(--interactive-primary);\n    box-shadow: 0 0 0 3px var(--soft-brand);\n  }\n\n  /* Disabled state */\n  &:disabled {\n    opacity: 0.5;\n    cursor: not-allowed;\n    background: var(--surface-subtle);\n  }\n\n  /* Read-only state */\n  &:read-only {\n    background: var(--surface-subtle);\n    border-color: var(--border-subtle);\n    cursor: default;\n  }\n\n  /* Autofill styling - maintains accessible contrast */\n  &:-webkit-autofill,\n  &:-webkit-autofill:hover,\n  &:-webkit-autofill:focus {\n    -webkit-text-fill-color: var(--text-primary);\n    box-shadow: 0 0 0px 1000px var(--surface-subtle) inset;\n    transition: background-color 5000s ease-in-out 0s;\n  }\n}\n\n/* Error state */\n.error .input {\n  border-color: var(--status-error);\n\n  &:focus {\n    border-color: var(--status-error);\n    box-shadow: 0 0 0 3px var(--soft-error);\n  }\n\n  &:focus-visible {\n    border-color: var(--status-error);\n    box-shadow: 0 0 0 3px var(--soft-error);\n  }\n}\n\n/* Icons */\n.leftIcon,\n.rightIcon {\n  position: absolute;\n  top: 50%;\n  transform: translateY(-50%);\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  color: var(--text-tertiary);\n  pointer-events: none;\n}\n\n.leftIcon {\n  left: var(--spacing-3);\n}\n\n.rightIcon {\n  right: var(--spacing-3);\n}\n\n/* Interactive right icon (e.g., password toggle button) */\n.rightIconInteractive {\n  pointer-events: auto;\n}\n\n/* Ensure buttons inside rightIcon are accessible */\n.rightIconInteractive button,\n.rightIconInteractive [role=\"button\"] {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  padding: var(--spacing-1);\n  background: transparent;\n  border: none;\n  border-radius: var(--radius-sm);\n  cursor: pointer;\n  color: var(--text-tertiary);\n  transition: color var(--transition-fast);\n}\n\n.rightIconInteractive button:hover,\n.rightIconInteractive [role=\"button\"]:hover {\n  color: var(--text-primary);\n}\n\n.rightIconInteractive button:focus-visible,\n.rightIconInteractive [role=\"button\"]:focus-visible {\n  outline: 2px solid var(--interactive-primary);\n  outline-offset: 2px;\n}\n\n/* Error icon inline (in input) */\n.errorIconInline {\n  color: var(--status-error);\n  pointer-events: none;\n}\n\n/* Error icon in message */\n.errorIconMessage {\n  flex-shrink: 0;\n}\n\n/* Sizes - use explicit padding to allow icon padding overrides */\n.sm {\n  height: 32px;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: var(--spacing-3);\n  padding-right: var(--spacing-3);\n  font-size: var(--font-size-12);\n}\n\n.md {\n  height: 40px;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: var(--spacing-4);\n  padding-right: var(--spacing-4);\n  font-size: var(--font-size-16);\n}\n\n.lg {\n  height: 48px;\n  padding-top: 0;\n  padding-bottom: 0;\n  padding-left: var(--spacing-4);\n  padding-right: var(--spacing-4);\n  font-size: var(--font-size-18);\n}\n\n/* Input with icons - MUST come after size rules to override padding */\n.input.hasLeftIcon {\n  padding-left: var(--spacing-10);\n}\n\n.input.hasRightIcon {\n  padding-right: var(--spacing-10);\n}\n\n/* Helper text */\n.helperText {\n  margin: 0;\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--text-secondary);\n  line-height: var(--line-height-snug);\n}\n\n/* Error message */\n.errorMessage {\n  display: flex;\n  align-items: flex-start;\n  gap: var(--spacing-1);\n  margin: 0;\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--status-error);\n  line-height: var(--line-height-snug);\n}\n\n/* ============================================================================\n * HIGH CONTRAST MODE SUPPORT\n * Ensures visibility in Windows High Contrast Mode and forced-colors\n * ============================================================================ */\n\n@media (forced-colors: active) {\n  .input {\n    border: 2px solid CanvasText;\n    background: Canvas;\n    color: CanvasText;\n  }\n\n  .input:focus,\n  .input:focus-visible {\n    outline: 3px solid Highlight;\n    outline-offset: 2px;\n  }\n\n  .input:disabled {\n    border-color: GrayText;\n    color: GrayText;\n  }\n\n  .error .input {\n    border-color: LinkText;\n  }\n\n  .errorMessage,\n  .errorIconInline,\n  .errorIconMessage {\n    color: LinkText;\n  }\n\n  .required {\n    color: LinkText;\n  }\n\n  .leftIcon,\n  .rightIcon {\n    color: CanvasText;\n  }\n}\n\n/* ============================================================================\n * CONTEXT: data-dark-bg=\"true\" — Dark background contexts\n * (e.g. Hero variant=\"background\")\n *\n * Makes Field visible on dark backgrounds without needing variants.\n * Label, input border, and text automatically adapt for readability.\n * ============================================================================ */\n\n:global([data-dark-bg=\"true\"]) .label {\n  color: var(--color-neutral-0);\n}\n\n:global([data-dark-bg=\"true\"]) .optional {\n  color: var(--color-neutral-200);\n}\n\n:global([data-dark-bg=\"true\"]) .required {\n  color: var(--status-error);\n}\n\n:global([data-dark-bg=\"true\"]) .input {\n  background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);\n  border-color: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);\n  color: var(--color-neutral-0);\n\n  &::placeholder {\n    color: var(--color-neutral-300);\n  }\n\n  &:hover:not(:disabled):not(:read-only) {\n    border-color: color-mix(in srgb, var(--color-neutral-0) 60%, transparent);\n  }\n\n  &:focus {\n    border-color: var(--interactive-primary);\n    box-shadow: 0 0 0 3px var(--soft-brand);\n  }\n\n  &:focus-visible {\n    border-color: var(--interactive-primary);\n    box-shadow: 0 0 0 3px var(--soft-brand);\n    outline: 2px solid var(--interactive-primary);\n    outline-offset: 2px;\n  }\n\n  &:disabled {\n    background: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);\n    border-color: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);\n  }\n\n  &:read-only {\n    background: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);\n    border-color: color-mix(in srgb, var(--color-neutral-0) 20%, transparent);\n  }\n\n  &:-webkit-autofill,\n  &:-webkit-autofill:hover,\n  &:-webkit-autofill:focus {\n    -webkit-text-fill-color: var(--color-neutral-0);\n    box-shadow: 0 0 0px 1000px\n      color-mix(in srgb, var(--color-neutral-0) 15%, transparent) inset;\n  }\n}\n\n:global([data-dark-bg=\"true\"]) .error .input {\n  border-color: var(--status-error);\n\n  &:focus {\n    border-color: var(--status-error);\n    box-shadow: 0 0 0 3px var(--soft-error);\n  }\n\n  &:focus-visible {\n    border-color: var(--status-error);\n    box-shadow: 0 0 0 3px var(--soft-error);\n  }\n}\n\n:global([data-dark-bg=\"true\"]) .leftIcon,\n:global([data-dark-bg=\"true\"]) .rightIcon {\n  color: var(--color-neutral-300);\n}\n\n:global([data-dark-bg=\"true\"]) .rightIconInteractive button,\n:global([data-dark-bg=\"true\"]) .rightIconInteractive [role=\"button\"] {\n  color: var(--color-neutral-300);\n}\n\n:global([data-dark-bg=\"true\"]) .rightIconInteractive button:hover,\n:global([data-dark-bg=\"true\"]) .rightIconInteractive [role=\"button\"]:hover {\n  color: var(--color-neutral-0);\n}\n\n:global([data-dark-bg=\"true\"]) .helperText {\n  color: var(--color-neutral-300);\n}\n\n:global([data-dark-bg=\"true\"]) .errorMessage {\n  color: var(--status-error);\n}\n\n:global([data-dark-bg=\"true\"]) .errorIconInline {\n  color: var(--status-error);\n}\n\n/* ============================================================================\n * REDUCED MOTION\n * Respects user preference for reduced motion\n * ============================================================================ */\n\n@media (prefers-reduced-motion: reduce) {\n  .input {\n    transition: none;\n  }\n\n  .rightIconInteractive button,\n  .rightIconInteractive [role=\"button\"] {\n    transition: none;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Field/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Field Component - Text input with label, validation, and icons.\n *\n * @example\n * ```tsx\n * import { Field } from '@orion-ds/react';\n * import { Mail, Eye } from 'lucide-react';\n *\n * <Field label=\"Email\" type=\"email\" placeholder=\"you@example.com\" />\n * <Field label=\"Password\" type=\"password\" error=\"Required\" />\n * <Field label=\"Search\" icon={<Search size={18} />} />\n * ```\n */\nexport { Field } from \"./Field\";\nexport type { FieldProps } from \"./Field.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Input label text displayed above the input."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "description": "Error message - shows error state and displays message below input."
+    },
+    {
+      "name": "helperText",
+      "type": "string",
+      "description": "Helper text displayed below input (when no error)."
+    },
+    {
+      "name": "leftIcon",
+      "type": "ReactNode",
+      "description": "Icon to display on the left side of input."
+    },
+    {
+      "name": "rightIcon",
+      "type": "ReactNode",
+      "description": "Icon to display on the right side of input."
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "description": "Full width input - expands to fill container.",
+      "default": false
+    },
+    {
+      "name": "size",
+      "type": "\"sm\" | \"md\" | \"lg\"",
+      "description": "Input size variant.",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "optional",
+      "type": "boolean",
+      "description": "Shows \"(optional)\" indicator next to label.",
+      "default": false
+    },
+    {
+      "name": "aria-label",
+      "type": "string",
+      "description": "Accessible label for screen readers when no visible label is provided.",
+      "required": true
+    },
+    {
+      "name": "aria-describedby",
+      "type": "string",
+      "description": "Additional element IDs that describe this input.",
+      "required": true
+    }
+  ],
+  "tokens": [
+    "--surface-base",
+    "--border-subtle",
+    "--border-interactive",
+    "--text-primary",
+    "--text-secondary",
+    "--radius-control",
+    "--font-secondary"
+  ],
+  "examples": [
+    {
+      "title": "Basic field",
+      "code": "<Field label=\"Email\" type=\"email\" placeholder=\"you@example.com\" />"
+    },
+    {
+      "title": "With error",
+      "code": "<Field label=\"Email\" type=\"email\" error=\"Please enter a valid email\" />"
+    },
+    {
+      "title": "With icons",
+      "code": "import { Mail } from 'lucide-react';\n\n<Field label=\"Email\" type=\"email\" leftIcon={<Mail size={18} />} />"
+    },
+    {
+      "title": "With helper text",
+      "code": "<Field label=\"Password\" type=\"password\" helperText=\"Must be at least 8 characters\" />"
+    }
+  ],
+  "accessibility": {
+    "role": "textbox",
+    "ariaAttributes": [
+      "aria-label",
+      "aria-describedby",
+      "aria-invalid",
+      "aria-required"
+    ],
+    "notes": [
+      "Error message auto-associated via aria-describedby",
+      "Label required unless aria-label provided"
+    ]
+  },
+  "modeAware": true,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#field",
+    "local": "/library.html#field"
+  },
+  "import": "import { Field } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "validation",
+    "text",
+    "control",
+    "user-input"
+  ],
+  "related_components": [
+    "Button",
+    "Label",
+    "Alert"
+  ],
+  "common_patterns": [
+    "form rows",
+    "search input",
+    "email validation",
+    "password with toggle"
+  ]
+}

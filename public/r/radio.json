@@ -1,0 +1,99 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "radio",
+  "type": "registry:component",
+  "title": "Radio",
+  "description": "Radio button for single selection",
+  "category": "forms",
+  "files": [
+    {
+      "path": "packages/react/src/components/Radio/Radio.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Radio Component\n *\n * Single-select radio input with label and validation.\n * Implements WCAG 2.1 AA accessibility guidelines.\n *\n * @example\n * ```tsx\n * <Radio name=\"plan\" value=\"free\" label=\"Free Plan\" />\n * <Radio name=\"plan\" value=\"pro\" label=\"Pro Plan\" checked />\n * <Radio name=\"plan\" value=\"enterprise\" label=\"Enterprise\" />\n *\n * <Radio\n *   name=\"size\"\n *   value=\"small\"\n *   label=\"Small\"\n *   helperText=\"Recommended for personal use\"\n * />\n * ```\n */\n\nimport { forwardRef, useId } from \"react\";\nimport { AlertCircle } from \"lucide-react\";\nimport type { RadioProps } from \"./Radio.types\";\nimport styles from \"./Radio.module.css\";\n\nexport const Radio = forwardRef<HTMLInputElement, RadioProps>(\n  (\n    {\n      label,\n      helperText,\n      error,\n      size = \"md\",\n      className,\n      id,\n      disabled,\n      required,\n      \"aria-label\": ariaLabel,\n      \"aria-describedby\": ariaDescribedBy,\n      ...rest\n    },\n    ref,\n  ) => {\n    // Use React's useId for stable, unique IDs (SSR-safe)\n    const generatedId = useId();\n    const radioId = id || `radio-${generatedId}`;\n\n    // IDs for accessible associations\n    const errorId = `${radioId}-error`;\n    const helperId = `${radioId}-helper`;\n\n    // Build aria-describedby from multiple sources\n    const describedByIds: string[] = [];\n    if (error) describedByIds.push(errorId);\n    if (helperText && !error) describedByIds.push(helperId);\n    if (ariaDescribedBy) describedByIds.push(ariaDescribedBy);\n    const computedDescribedBy =\n      describedByIds.length > 0 ? describedByIds.join(\" \") : undefined;\n\n    // Ensure radio has an accessible name\n    const hasAccessibleName = Boolean(label || ariaLabel);\n    if (!hasAccessibleName && process.env.NODE_ENV === \"development\") {\n      console.warn(\n        \"Radio: Missing accessible name. Provide either a `label` prop or `aria-label` for screen reader users.\",\n      );\n    }\n\n    const containerClasses = [\n      styles.container,\n      styles[size],\n      error && styles.error,\n      disabled && styles.disabled,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div className={containerClasses}>\n        {/* Hidden input */}\n        <input\n          ref={ref}\n          type=\"radio\"\n          id={radioId}\n          className={styles.input}\n          disabled={disabled}\n          required={required}\n          aria-required={required || undefined}\n          aria-invalid={error ? \"true\" : \"false\"}\n          aria-describedby={computedDescribedBy}\n          aria-label={!label ? ariaLabel : undefined}\n          {...rest}\n        />\n\n        {/* Label wrapper (clickable area) */}\n        <label htmlFor={radioId} className={styles.labelWrapper}>\n          {/* Custom radio indicator */}\n          <span className={styles.radio} aria-hidden=\"true\">\n            <span className={styles.dot} />\n          </span>\n\n          {/* Label text */}\n          {label && (\n            <span className={styles.label}>\n              {label}\n              {required && (\n                <span className={styles.required} aria-hidden=\"true\">\n                  *\n                </span>\n              )}\n            </span>\n          )}\n        </label>\n\n        {/* Helper text */}\n        {helperText && !error && (\n          <p id={helperId} className={styles.helperText}>\n            {helperText}\n          </p>\n        )}\n\n        {/* Error message */}\n        {error && (\n          <p\n            id={errorId}\n            className={styles.errorMessage}\n            role=\"alert\"\n            aria-live=\"assertive\"\n          >\n            <AlertCircle size={14} aria-hidden=\"true\" />\n            <span>{error}</span>\n          </p>\n        )}\n      </div>\n    );\n  },\n);\n\nRadio.displayName = \"Radio\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Radio/Radio.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Radio Component Types\n *\n * Type definitions for the Orion Radio component.\n * Implements WCAG 2.1 AA accessibility guidelines.\n */\n\nimport type { InputHTMLAttributes } from \"react\";\n\n/**\n * Radio sizes\n */\nexport type RadioSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * Radio component props\n *\n * @example\n * ```tsx\n * <Radio name=\"plan\" value=\"free\" label=\"Free Plan\" />\n * <Radio name=\"plan\" value=\"pro\" label=\"Pro Plan\" checked />\n * ```\n */\nexport interface RadioProps extends Omit<\n  InputHTMLAttributes<HTMLInputElement>,\n  \"size\" | \"type\"\n> {\n  /**\n   * Radio label text.\n   * Required for accessibility unless aria-label is provided.\n   */\n  label?: string;\n\n  /**\n   * Helper text displayed below the radio.\n   * Automatically linked via aria-describedby.\n   */\n  helperText?: string;\n\n  /**\n   * Error message.\n   * Shows error state and displays message below radio.\n   */\n  error?: string;\n\n  /**\n   * Radio size variant.\n   * @default 'md'\n   */\n  size?: RadioSize;\n\n  // ============================================================================\n  // ACCESSIBILITY PROPS\n  // ============================================================================\n\n  /**\n   * Accessible label for screen readers when no visible label is provided.\n   * REQUIRED if `label` prop is not provided.\n   *\n   * @example\n   * ```tsx\n   * <Radio\n   *   name=\"color\"\n   *   value=\"red\"\n   *   aria-label=\"Red color\"\n   *   style={{ background: 'red' }}\n   * />\n   * ```\n   */\n  \"aria-label\"?: string;\n\n  /**\n   * Additional element IDs that describe this radio.\n   * Automatically includes error and helper text IDs when provided.\n   */\n  \"aria-describedby\"?: string;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Radio/Radio.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Radio Component Styles\n *\n * Single-select radio input.\n * Implements WCAG 2.1 AA accessibility guidelines.\n */\n\n/* ============================================================================\n * CONTAINER\n * ============================================================================ */\n\n.container {\n  display: inline-flex;\n  flex-direction: column;\n  gap: var(--spacing-1);\n}\n\n.disabled {\n  opacity: 0.5;\n}\n\n/* ============================================================================\n * LABEL WRAPPER (clickable area)\n * ============================================================================ */\n\n.labelWrapper {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-3);\n  cursor: pointer;\n  user-select: none;\n}\n\n.disabled .labelWrapper {\n  cursor: not-allowed;\n  pointer-events: none;\n}\n\n/* ============================================================================\n * HIDDEN INPUT\n * ============================================================================ */\n\n.input {\n  position: absolute;\n  opacity: 0;\n  width: 0;\n  height: 0;\n  pointer-events: none;\n}\n\n/* ============================================================================\n * CUSTOM RADIO INDICATOR\n * ============================================================================ */\n\n.radio {\n  position: relative;\n  flex-shrink: 0;\n  display: flex;\n  align-items: center;\n  justify-content: center;\n\n  /* Default size (md) */\n  width: 20px;\n  height: 20px;\n\n  /* Styling */\n  background: var(--surface-base);\n  border: 2px solid var(--border-strong);\n  border-radius: 50%;\n\n  /* Interaction */\n  transition: all var(--transition-fast);\n}\n\n/* Radio dot (inner circle) */\n.dot {\n  width: 10px;\n  height: 10px;\n  background: var(--interactive-primary-text);\n  border-radius: 50%;\n  opacity: 0;\n  transform: scale(0);\n  transition: all var(--transition-fast);\n}\n\n/* ============================================================================\n * SIZES\n * ============================================================================ */\n\n.sm .radio {\n  width: 16px;\n  height: 16px;\n}\n\n.sm .dot {\n  width: 8px;\n  height: 8px;\n}\n\n.md .radio {\n  width: 20px;\n  height: 20px;\n}\n\n.md .dot {\n  width: 10px;\n  height: 10px;\n}\n\n.lg .radio {\n  width: 24px;\n  height: 24px;\n}\n\n.lg .dot {\n  width: 12px;\n  height: 12px;\n}\n\n/* ============================================================================\n * CHECKED STATE\n * ============================================================================ */\n\n.input:checked + .labelWrapper .radio {\n  background: var(--interactive-primary);\n  border-color: var(--interactive-primary);\n}\n\n.input:checked + .labelWrapper .dot {\n  opacity: 1;\n  transform: scale(1);\n}\n\n/* ============================================================================\n * HOVER STATE\n * ============================================================================ */\n\n.labelWrapper:hover .radio {\n  border-color: var(--interactive-primary);\n}\n\n.input:checked + .labelWrapper:hover .radio {\n  background: var(--interactive-primary-hover);\n  border-color: var(--interactive-primary-hover);\n}\n\n/* ============================================================================\n * FOCUS STATE\n * ============================================================================ */\n\n.input:focus-visible + .labelWrapper .radio {\n  outline: 2px solid var(--interactive-primary);\n  outline-offset: 2px;\n  box-shadow: 0 0 0 4px var(--soft-brand);\n}\n\n/* ============================================================================\n * DISABLED STATE\n * ============================================================================ */\n\n.input:disabled + .labelWrapper {\n  opacity: 0.5;\n  cursor: not-allowed;\n  pointer-events: none;\n}\n\n.input:disabled + .labelWrapper .radio {\n  background: var(--surface-subtle);\n  border-color: var(--border-subtle);\n}\n\n.input:disabled:checked + .labelWrapper .radio {\n  background: var(--text-tertiary);\n  border-color: var(--text-tertiary);\n}\n\n/* ============================================================================\n * ERROR STATE\n * ============================================================================ */\n\n.error .radio {\n  border-color: var(--status-error);\n}\n\n.error .labelWrapper:hover .radio {\n  border-color: var(--status-error);\n}\n\n.error .input:focus-visible + .labelWrapper .radio {\n  outline-color: var(--status-error);\n  box-shadow: 0 0 0 4px var(--soft-error);\n}\n\n/* ============================================================================\n * LABEL & TEXT\n * ============================================================================ */\n\n.label {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-14);\n  font-weight: var(--font-weight-normal);\n  color: var(--text-primary);\n  line-height: 1.4;\n}\n\n.sm .label {\n  font-size: var(--font-size-13);\n}\n\n.lg .label {\n  font-size: var(--font-size-16);\n}\n\n.required {\n  color: var(--status-error);\n  margin-left: 2px;\n}\n\n/* Helper text - aligned with label */\n.helperText {\n  margin: 0;\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--text-secondary);\n  line-height: var(--line-height-snug);\n  padding-left: calc(20px + var(--spacing-3)); /* radio width + gap */\n}\n\n.sm .helperText {\n  padding-left: calc(16px + var(--spacing-3));\n}\n\n.lg .helperText {\n  padding-left: calc(24px + var(--spacing-3));\n}\n\n/* Error message */\n.errorMessage {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-1);\n  margin: 0;\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--status-error);\n  line-height: var(--line-height-snug);\n  padding-left: calc(20px + var(--spacing-3));\n}\n\n.sm .errorMessage {\n  padding-left: calc(16px + var(--spacing-3));\n}\n\n.lg .errorMessage {\n  padding-left: calc(24px + var(--spacing-3));\n}\n\n/* ============================================================================\n * HIGH CONTRAST MODE SUPPORT\n * ============================================================================ */\n\n@media (forced-colors: active) {\n  .radio {\n    border: 2px solid CanvasText;\n    background: Canvas;\n  }\n\n  .input:checked + .labelWrapper .radio {\n    background: Highlight;\n    border-color: Highlight;\n  }\n\n  .dot {\n    background: Canvas;\n  }\n\n  .input:focus-visible + .labelWrapper .radio {\n    outline: 3px solid Highlight;\n    outline-offset: 2px;\n  }\n\n  .input:disabled + .labelWrapper .radio {\n    border-color: GrayText;\n  }\n\n  .error .radio {\n    border-color: LinkText;\n  }\n\n  .errorMessage {\n    color: LinkText;\n  }\n\n  .label {\n    color: CanvasText;\n  }\n}\n\n/* ============================================================================\n * REDUCED MOTION\n * ============================================================================ */\n\n@media (prefers-reduced-motion: reduce) {\n  .radio,\n  .dot {\n    transition: none;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Radio/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Radio Component - Single selection from a group.\n *\n * @example\n * ```tsx\n * import { Radio } from '@orion-ds/react';\n *\n * <Radio label=\"Option A\" name=\"choice\" value=\"a\" />\n * <Radio label=\"Option B\" name=\"choice\" value=\"b\" />\n * <Radio label=\"Option C\" name=\"choice\" value=\"c\" checked />\n * ```\n */\nexport { Radio } from \"./Radio\";\nexport type { RadioProps, RadioSize } from \"./Radio.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "label",
+      "type": "string",
+      "description": "Radio label text."
+    },
+    {
+      "name": "helperText",
+      "type": "string",
+      "description": "Helper text displayed below the radio."
+    },
+    {
+      "name": "error",
+      "type": "string",
+      "description": "Error message."
+    },
+    {
+      "name": "size",
+      "type": "RadioSize",
+      "description": "Radio size variant.",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "aria-label",
+      "type": "string",
+      "description": "Accessible label for screen readers when no visible label is provided.",
+      "required": true
+    },
+    {
+      "name": "aria-describedby",
+      "type": "string",
+      "description": "Additional element IDs that describe this radio.",
+      "required": true
+    }
+  ],
+  "tokens": [
+    "--interactive-primary",
+    "--border-subtle"
+  ],
+  "examples": [
+    {
+      "title": "Radio group",
+      "code": "<Radio name=\"plan\" label=\"Free\" value=\"free\" />\n<Radio name=\"plan\" label=\"Pro\" value=\"pro\" />\n<Radio name=\"plan\" label=\"Enterprise\" value=\"enterprise\" />"
+    }
+  ],
+  "accessibility": {
+    "role": "radio",
+    "ariaAttributes": [
+      "aria-checked"
+    ],
+    "keyboardNav": [
+      {
+        "key": "ArrowUp/Down",
+        "action": "Navigate options"
+      }
+    ]
+  },
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#radio",
+    "local": "/library.html#radio"
+  },
+  "import": "import { Radio } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

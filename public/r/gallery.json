@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "gallery",
+  "type": "registry:section",
+  "title": "Gallery",
+  "description": "Gallery section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Gallery/Gallery.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Gallery/Gallery.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Gallery/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#gallery",
+    "local": "/library.html#gallery"
+  },
+  "import": "import { Gallery } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

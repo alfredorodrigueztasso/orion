@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "timeline",
+  "type": "registry:section",
+  "title": "Timeline",
+  "description": "Timeline section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Timeline/Timeline.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Timeline/Timeline.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Timeline/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#timeline",
+    "local": "/library.html#timeline"
+  },
+  "import": "import { Timeline } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

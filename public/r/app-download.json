@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "app-download",
+  "type": "registry:section",
+  "title": "AppDownload",
+  "description": "AppDownload section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/AppDownload/AppDownload.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/AppDownload/AppDownload.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/AppDownload/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#app-download",
+    "local": "/library.html#app-download"
+  },
+  "import": "import { AppDownload } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

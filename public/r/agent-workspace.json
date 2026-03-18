@@ -1,0 +1,20 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "agent-workspace",
+  "type": "registry:template",
+  "title": "Agent Workspace",
+  "description": "AgentWorkspace page template",
+  "category": "app",
+  "files": [
+    {
+      "path": "packages/react/src/templates/app/AgentWorkspace/AgentWorkspace.tsx",
+      "type": "registry:component"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#agent-workspace",
+    "local": "/library.html#agent-workspace"
+  },
+  "import": "import { AgentWorkspace } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

@@ -1,0 +1,31 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "section",
+  "type": "registry:section",
+  "title": "Section",
+  "description": "Section section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Section/Section.tsx",
+      "type": "registry:component",
+      "content": "/**\n * Section Component\n *\n * A semantic section wrapper that provides consistent vertical spacing and backgrounds.\n * Part of the Orion Sections library for building complete page layouts.\n *\n * @example\n * ```tsx\n * <Section spacing=\"lg\" background=\"subtle\">\n *   <Container>\n *     <h2>Section Title</h2>\n *     <p>Section content</p>\n *   </Container>\n * </Section>\n * ```\n */\n\nimport { forwardRef, createElement } from \"react\";\nimport type { SectionProps } from \"./Section.types\";\nimport styles from \"./Section.module.css\";\n\nexport const Section = forwardRef<HTMLElement, SectionProps>(\n  (\n    {\n      as = \"section\",\n      spacing = \"lg\",\n      background = \"none\",\n      borderTop = false,\n      borderBottom = false,\n      className,\n      children,\n      ...rest\n    },\n    ref,\n  ) => {\n    const classNames = [\n      styles.section,\n      styles[`spacing-${spacing}`],\n      styles[`bg-${background}`],\n      borderTop && styles.borderTop,\n      borderBottom && styles.borderBottom,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return createElement(\n      as,\n      {\n        ref,\n        className: classNames,\n        ...rest,\n      },\n      children,\n    );\n  },\n);\n\nSection.displayName = \"Section\";\n"
+    },
+    {
+      "path": "packages/react/src/sections/Section/Section.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Section Component Types\n *\n * Type definitions for the Orion Section wrapper component.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Section spacing variants (vertical padding)\n */\nexport type SectionSpacing = \"sm\" | \"md\" | \"lg\" | \"xl\" | \"none\";\n\n/**\n * Section background variants\n */\nexport type SectionBackground = \"base\" | \"subtle\" | \"sunken\" | \"brand\" | \"none\";\n\n/**\n * Section component props\n *\n * @example\n * ```tsx\n * <Section spacing=\"lg\" background=\"subtle\">\n *   <Container>\n *     <Content />\n *   </Container>\n * </Section>\n * ```\n */\nexport interface SectionProps extends HTMLAttributes<HTMLElement> {\n  /**\n   * HTML element to render\n   * @default 'section'\n   */\n  as?: \"section\" | \"div\" | \"article\" | \"aside\" | \"header\" | \"footer\";\n\n  /**\n   * Vertical spacing (padding)\n   * - none: 0\n   * - sm: spacing-8 (32px)\n   * - md: spacing-16 (64px)\n   * - lg: spacing-24 (96px)\n   * - xl: spacing-32 (128px)\n   * @default 'lg'\n   */\n  spacing?: SectionSpacing;\n\n  /**\n   * Background style\n   * - base: surface-base (main background)\n   * - subtle: surface-subtle (gray background)\n   * - sunken: surface-sunken (recessed)\n   * - brand: interactive-primary (brand color)\n   * - none: transparent\n   * @default 'none'\n   */\n  background?: SectionBackground;\n\n  /**\n   * Add top border\n   * @default false\n   */\n  borderTop?: boolean;\n\n  /**\n   * Add bottom border\n   * @default false\n   */\n  borderBottom?: boolean;\n\n  /**\n   * Section content\n   */\n  children?: ReactNode;\n}\n"
+    },
+    {
+      "path": "packages/react/src/sections/Section/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Section Component Exports\n */\n\nexport { Section } from \"./Section\";\nexport type {\n  SectionProps,\n  SectionSpacing,\n  SectionBackground,\n} from \"./Section.types\";\n"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#section",
+    "local": "/library.html#section"
+  },
+  "import": "import { Section } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

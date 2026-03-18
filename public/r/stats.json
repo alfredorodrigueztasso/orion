@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "stats",
+  "type": "registry:section",
+  "title": "Stats",
+  "description": "Stats section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Stats/Stats.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Stats/Stats.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Stats/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#stats",
+    "local": "/library.html#stats"
+  },
+  "import": "import { Stats } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

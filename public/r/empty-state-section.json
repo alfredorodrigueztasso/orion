@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "empty-state-section",
+  "type": "registry:section",
+  "title": "EmptyState",
+  "description": "EmptyState section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/EmptyState/EmptyState.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/EmptyState/EmptyState.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/EmptyState/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#empty-state-section",
+    "local": "/library.html#empty-state-section"
+  },
+  "import": "import { EmptyState } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

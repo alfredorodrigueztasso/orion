@@ -1,0 +1,94 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "form-section",
+  "type": "registry:component",
+  "title": "FormSection",
+  "description": "FormSection component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/FormSection/FormSection.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * FormSection Component\n *\n * A form section for settings pages and structured form layouts.\n * Optimized for Product Mode with clear hierarchy and efficient space usage.\n *\n * @example\n * ```tsx\n * <FormSection\n *   title=\"Profile Information\"\n *   description=\"Update your personal details\"\n *   actions={<Button>Save</Button>}\n * >\n *   <FormSection.Group columns={2}>\n *     <Field label=\"First Name\" type=\"text\" />\n *     <Field label=\"Last Name\" type=\"text\" />\n *   </FormSection.Group>\n *   <Field label=\"Email\" type=\"email\" />\n * </FormSection>\n * ```\n */\n\nimport { forwardRef, useState } from \"react\";\nimport { ChevronDown } from \"lucide-react\";\nimport type {\n  FormSectionProps,\n  FormSectionGroupProps,\n  FormSectionActionsProps,\n} from \"./FormSection.types\";\nimport styles from \"./FormSection.module.css\";\n\n// Sub-component: Group\nconst FormSectionGroup = forwardRef<HTMLDivElement, FormSectionGroupProps>(\n  ({ label, helpText, children, columns = 1, className, ...rest }, ref) => {\n    const classNames = [styles.group, styles[`columns-${columns}`], className]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div ref={ref} className={classNames} {...rest}>\n        {label && <div className={styles.groupLabel}>{label}</div>}\n        <div className={styles.groupFields}>{children}</div>\n        {helpText && <div className={styles.groupHelp}>{helpText}</div>}\n      </div>\n    );\n  },\n);\n\nFormSectionGroup.displayName = \"FormSection.Group\";\n\n// Sub-component: Actions\nconst FormSectionActions = forwardRef<HTMLDivElement, FormSectionActionsProps>(\n  ({ children, align = \"end\", className, ...rest }, ref) => {\n    const classNames = [styles.actions, styles[`align-${align}`], className]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div ref={ref} className={classNames} {...rest}>\n        {children}\n      </div>\n    );\n  },\n);\n\nFormSectionActions.displayName = \"FormSection.Actions\";\n\n// Main component\nconst FormSectionBase = forwardRef<HTMLDivElement, FormSectionProps>(\n  (\n    {\n      title,\n      description,\n      children,\n      actions,\n      collapsible = false,\n      defaultCollapsed = false,\n      divider = false,\n      variant = \"default\",\n      icon,\n      disabled = false,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const [collapsed, setCollapsed] = useState(defaultCollapsed);\n\n    const classNames = [\n      styles.formSection,\n      styles[`variant-${variant}`],\n      divider && styles.divider,\n      disabled && styles.disabled,\n      collapsible && styles.collapsible,\n      collapsed && styles.collapsed,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    const handleToggle = () => {\n      if (collapsible) {\n        setCollapsed(!collapsed);\n      }\n    };\n\n    const HeaderTag = collapsible ? \"button\" : \"div\";\n    const headerProps = collapsible\n      ? {\n          type: \"button\" as const,\n          onClick: handleToggle,\n          \"aria-expanded\": !collapsed,\n        }\n      : {};\n\n    // Only render header if there's content to show\n    const hasHeader = title || icon || collapsible;\n\n    return (\n      <div ref={ref} className={classNames} {...rest}>\n        {hasHeader && (\n          <HeaderTag className={styles.header} {...headerProps}>\n            <div className={styles.headerContent}>\n              {icon && <span className={styles.icon}>{icon}</span>}\n              {(title || description) && (\n                <div className={styles.headerText}>\n                  {title && <h3 className={styles.title}>{title}</h3>}\n                  {description && (\n                    <p className={styles.description}>{description}</p>\n                  )}\n                </div>\n              )}\n            </div>\n            {collapsible && (\n              <ChevronDown\n                size={20}\n                className={`${styles.collapseIcon} ${collapsed ? styles.iconCollapsed : \"\"}`}\n              />\n            )}\n          </HeaderTag>\n        )}\n\n        {(!collapsible || !collapsed) && (\n          <div className={styles.content}>\n            <div className={styles.fields}>{children}</div>\n            {actions && <div className={styles.actionsWrapper}>{actions}</div>}\n          </div>\n        )}\n      </div>\n    );\n  },\n);\n\nFormSectionBase.displayName = \"FormSection\";\n\n// Compose with sub-components\nexport const FormSection = Object.assign(FormSectionBase, {\n  Group: FormSectionGroup,\n  Actions: FormSectionActions,\n});\n"
+    },
+    {
+      "path": "packages/react/src/components/FormSection/FormSection.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * FormSection Component Types\n *\n * Type definitions for the Orion FormSection section component.\n * Designed for Product Mode (SaaS dashboards) settings and form layouts.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * FormSection visual variant\n */\nexport type FormSectionVariant = \"default\" | \"card\" | \"inline\";\n\n/**\n * FormSection section props\n *\n * @example\n * ```tsx\n * <FormSection\n *   title=\"Profile Information\"\n *   description=\"Update your personal details\"\n * >\n *   <Field label=\"Name\" type=\"text\" />\n *   <Field label=\"Email\" type=\"email\" />\n * </FormSection>\n * ```\n */\nexport interface FormSectionProps extends HTMLAttributes<HTMLDivElement> {\n  /**\n   * Section title (optional)\n   * If not provided, header is omitted unless collapsible is true\n   */\n  title?: string;\n\n  /**\n   * Description text below title\n   */\n  description?: string;\n\n  /**\n   * Form field children\n   */\n  children: ReactNode;\n\n  /**\n   * Action buttons (save, cancel, etc.)\n   */\n  actions?: ReactNode;\n\n  /**\n   * Make section collapsible\n   * @default false\n   */\n  collapsible?: boolean;\n\n  /**\n   * Default collapsed state (only when collapsible)\n   * @default false\n   */\n  defaultCollapsed?: boolean;\n\n  /**\n   * Show divider below section\n   * @default false\n   */\n  divider?: boolean;\n\n  /**\n   * Visual variant\n   * - default: Simple layout with border\n   * - card: Wrapped in card container\n   * - inline: Side-by-side title/fields layout\n   * @default 'default'\n   */\n  variant?: FormSectionVariant;\n\n  /**\n   * Custom icon for section header\n   */\n  icon?: ReactNode;\n\n  /**\n   * Disable all fields in section\n   * @default false\n   */\n  disabled?: boolean;\n}\n\n/**\n * FormSection.Group props for grouping related fields\n */\nexport interface FormSectionGroupProps extends HTMLAttributes<HTMLDivElement> {\n  /**\n   * Group label\n   */\n  label?: string;\n\n  /**\n   * Help text for the group\n   */\n  helpText?: string;\n\n  /**\n   * Field children\n   */\n  children: ReactNode;\n\n  /**\n   * Number of columns for field layout\n   * @default 1\n   */\n  columns?: 1 | 2 | 3;\n}\n\n/**\n * FormSection.Actions props for action button group\n */\nexport interface FormSectionActionsProps extends HTMLAttributes<HTMLDivElement> {\n  /**\n   * Action button children\n   */\n  children: ReactNode;\n\n  /**\n   * Alignment of actions\n   * @default 'end'\n   */\n  align?: \"start\" | \"center\" | \"end\" | \"between\";\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/FormSection/FormSection.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * FormSection Component Styles\n *\n * Optimized for Product Mode (SaaS dashboards).\n * Clean, efficient layout for settings and form pages.\n */\n\n.formSection {\n  display: flex;\n  flex-direction: column;\n}\n\n.divider {\n  border-bottom: 1px solid var(--border-subtle);\n  padding-bottom: var(--mode-spacing-block);\n  margin-bottom: var(--mode-spacing-block);\n}\n\n.disabled {\n  opacity: 0.6;\n  pointer-events: none;\n}\n\n/* ============================================================================\n * HEADER\n * ============================================================================ */\n\n.header {\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  gap: var(--spacing-4);\n  width: 100%;\n  text-align: left;\n  background: none;\n  border: none;\n  padding: 0;\n  margin-bottom: var(--mode-spacing-element);\n}\n\n.collapsible .header {\n  cursor: pointer;\n  padding: var(--spacing-3);\n  margin: calc(var(--spacing-3) * -1);\n  margin-bottom: var(--spacing-3);\n  border-radius: var(--radius-sm);\n  transition: background-color var(--mode-hover-duration);\n}\n\n.collapsible .header:hover {\n  background: var(--surface-subtle);\n}\n\n.collapsed .header {\n  margin-bottom: 0;\n}\n\n.headerContent {\n  display: flex;\n  align-items: flex-start;\n  gap: var(--spacing-3);\n}\n\n.headerText {\n  flex: 1;\n  min-width: 0;\n}\n\n.icon {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 40px;\n  height: 40px;\n  background: var(--surface-subtle);\n  border-radius: var(--radius-control);\n  color: var(--interactive-primary);\n  flex-shrink: 0;\n}\n\n.title {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-16);\n  font-weight: var(--font-weight-semibold);\n  color: var(--text-primary);\n  margin: 0;\n  line-height: var(--line-height-tight);\n}\n\n.description {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  color: var(--text-secondary);\n  margin: var(--spacing-1) 0 0 0;\n  line-height: var(--line-height-relaxed);\n}\n\n.collapseIcon {\n  color: var(--text-tertiary);\n  flex-shrink: 0;\n  transition: transform var(--mode-hover-duration);\n}\n\n.iconCollapsed {\n  transform: rotate(-90deg);\n}\n\n/* ============================================================================\n * CONTENT\n * ============================================================================ */\n\n.content {\n  display: flex;\n  flex-direction: column;\n  gap: var(--mode-spacing-element);\n}\n\n.fields {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-4);\n}\n\n.actionsWrapper {\n  margin-top: var(--spacing-4);\n  padding-top: var(--spacing-4);\n  border-top: 1px solid var(--border-subtle);\n}\n\n/* ============================================================================\n * GROUP SUB-COMPONENT\n * ============================================================================ */\n\n.group {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-2);\n}\n\n.groupLabel {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-secondary);\n}\n\n.groupFields {\n  display: grid;\n  gap: var(--spacing-4);\n}\n\n.columns-1 .groupFields {\n  grid-template-columns: 1fr;\n}\n\n.columns-2 .groupFields {\n  grid-template-columns: repeat(2, 1fr);\n}\n\n.columns-3 .groupFields {\n  grid-template-columns: repeat(3, 1fr);\n}\n\n.groupHelp {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--text-tertiary);\n  line-height: var(--line-height-relaxed);\n}\n\n/* ============================================================================\n * ACTIONS SUB-COMPONENT\n * ============================================================================ */\n\n.actions {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-3);\n  flex-wrap: wrap;\n}\n\n.align-start {\n  justify-content: flex-start;\n}\n\n.align-center {\n  justify-content: center;\n}\n\n.align-end {\n  justify-content: flex-end;\n}\n\n.align-between {\n  justify-content: space-between;\n}\n\n/* ============================================================================\n * VARIANT: CARD\n * ============================================================================ */\n\n.variant-card {\n  background: var(--surface-base);\n  border: 1px solid var(--border-subtle);\n  border-radius: var(--radius-container);\n  padding: var(--mode-spacing-element);\n}\n\n.variant-card .header {\n  margin-bottom: var(--spacing-4);\n}\n\n.variant-card .actionsWrapper {\n  margin-top: var(--spacing-6);\n}\n\n/* ============================================================================\n * VARIANT: INLINE\n * ============================================================================ */\n\n.variant-inline {\n  display: grid;\n  grid-template-columns: 280px 1fr;\n  gap: var(--spacing-8);\n}\n\n.variant-inline .header {\n  margin-bottom: 0;\n  position: sticky;\n  top: var(--spacing-4);\n  align-self: start;\n}\n\n.variant-inline .content {\n  flex: 1;\n}\n\n.variant-inline .collapseIcon {\n  display: none;\n}\n\n/* ============================================================================\n * RESPONSIVE\n * ============================================================================ */\n\n@media (max-width: 768px) {\n  .variant-inline {\n    grid-template-columns: 1fr;\n    gap: var(--spacing-4);\n  }\n\n  .variant-inline .header {\n    position: static;\n  }\n\n  .columns-2 .groupFields,\n  .columns-3 .groupFields {\n    grid-template-columns: 1fr;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/FormSection/index.ts",
+      "type": "registry:index",
+      "content": "export { FormSection } from \"./FormSection\";\nexport type {\n  FormSectionProps,\n  FormSectionVariant,\n  FormSectionGroupProps,\n  FormSectionActionsProps,\n} from \"./FormSection.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "title",
+      "type": "string",
+      "description": "Section title (optional)"
+    },
+    {
+      "name": "description",
+      "type": "string",
+      "description": "Description text below title"
+    },
+    {
+      "name": "actions",
+      "type": "ReactNode",
+      "description": "Action buttons (save, cancel, etc.)"
+    },
+    {
+      "name": "collapsible",
+      "type": "boolean",
+      "description": "Make section collapsible",
+      "default": false
+    },
+    {
+      "name": "defaultCollapsed",
+      "type": "boolean",
+      "description": "Default collapsed state (only when collapsible)",
+      "default": false
+    },
+    {
+      "name": "divider",
+      "type": "boolean",
+      "description": "Show divider below section",
+      "default": false
+    },
+    {
+      "name": "variant",
+      "type": "FormSectionVariant",
+      "description": "Visual variant",
+      "default": "default",
+      "values": [
+        "default",
+        "card",
+        "inline"
+      ]
+    },
+    {
+      "name": "icon",
+      "type": "ReactNode",
+      "description": "Custom icon for section header"
+    },
+    {
+      "name": "disabled",
+      "type": "boolean",
+      "description": "Disable all fields in section",
+      "default": false
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#form-section",
+    "local": "/library.html#form-section"
+  },
+  "import": "import { FormSection } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

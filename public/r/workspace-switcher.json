@@ -1,0 +1,77 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "workspace-switcher",
+  "type": "registry:component",
+  "title": "WorkspaceSwitcher",
+  "description": "WorkspaceSwitcher component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/WorkspaceSwitcher/WorkspaceSwitcher.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\nimport { useState, forwardRef } from \"react\";\nimport { Building2, ChevronDown, Settings, Users, Plus } from \"lucide-react\";\nimport { Popover } from \"../../components/Popover\";\nimport { Avatar } from \"../../components/Avatar\";\nimport { Badge } from \"../../components/Badge\";\nimport { Button } from \"../../components/Button\";\nimport { Divider } from \"../../components/Divider\";\nimport styles from \"./WorkspaceSwitcher.module.css\";\nimport type { WorkspaceSwitcherProps } from \"./WorkspaceSwitcher.types\";\n\nexport const WorkspaceSwitcher = forwardRef<\n  HTMLDivElement,\n  WorkspaceSwitcherProps\n>(\n  (\n    {\n      currentOrg,\n      organizations,\n      onSettings,\n      onParticipants,\n      onCreateOrganization,\n      onOrgChange,\n      fullWidth = true,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const [isOpen, setIsOpen] = useState(false);\n\n    const trigger = (\n      <button className={styles.trigger}>\n        <Avatar size=\"xs\" icon={<Building2 size={16} />} />\n        <span className={styles.triggerName}>{currentOrg.name}</span>\n        <ChevronDown\n          size={16}\n          className={`${styles.chevron} ${isOpen ? styles.chevronOpen : \"\"}`}\n        />\n      </button>\n    );\n\n    const content = (\n      <div className={styles.content}>\n        {/* Active workspace */}\n        <div className={styles.activeWorkspace}>\n          <Avatar size=\"lg\" icon={<Building2 size={20} />} />\n          <Badge variant=\"secondary\" size=\"sm\">\n            {currentOrg.role}\n          </Badge>\n          <div>\n            <div className={styles.orgName}>{currentOrg.name}</div>\n            <div className={styles.orgMeta}>\n              {currentOrg.memberCount} participantes\n            </div>\n          </div>\n        </div>\n\n        {/* Action buttons */}\n        <div className={styles.actionButtons}>\n          <Button\n            variant=\"secondary\"\n            size=\"sm\"\n            icon={<Settings size={16} />}\n            onClick={onSettings}\n          >\n            Configuración\n          </Button>\n          <Button\n            variant=\"secondary\"\n            size=\"sm\"\n            icon={<Users size={16} />}\n            onClick={onParticipants}\n          >\n            Participantes\n          </Button>\n        </div>\n\n        {/* Divider */}\n        <div className={styles.dividerWrapper}>\n          <Divider />\n        </div>\n\n        {/* Other orgs label */}\n        <div className={styles.sectionLabel}>Otras organizaciones</div>\n\n        {/* Org list */}\n        <div className={styles.orgList}>\n          {organizations.map((org) => (\n            <div\n              key={org.name}\n              className={styles.orgItem}\n              onClick={() => onOrgChange?.(org.name)}\n            >\n              <Avatar size=\"xs\" initials={org.name.slice(0, 2).toUpperCase()} />\n              <div>\n                <div className={styles.orgItemName}>{org.name}</div>\n                <div className={styles.orgItemRole}>{org.role}</div>\n              </div>\n            </div>\n          ))}\n        </div>\n\n        {/* Footer */}\n        <Button\n          variant=\"ghost\"\n          size=\"sm\"\n          icon={<Plus size={16} />}\n          fullWidth\n          onClick={onCreateOrganization}\n        >\n          Nueva organización\n        </Button>\n      </div>\n    );\n\n    return (\n      <div\n        ref={ref}\n        className={[className].filter(Boolean).join(\" \") || undefined}\n        {...rest}\n      >\n        <Popover\n          trigger={trigger}\n          content={content}\n          onOpenChange={setIsOpen}\n          placement=\"bottom-start\"\n          showArrow={false}\n          fullWidth={fullWidth}\n        />\n      </div>\n    );\n  },\n);\n\nWorkspaceSwitcher.displayName = \"WorkspaceSwitcher\";\n"
+    },
+    {
+      "path": "packages/react/src/components/WorkspaceSwitcher/WorkspaceSwitcher.types.ts",
+      "type": "registry:types",
+      "content": "import type { HTMLAttributes } from \"react\";\n\nexport interface WorkspaceOrg {\n  /** Organization display name */\n  name: string;\n  /** User's role in this organization */\n  role: string;\n}\n\nexport interface CurrentWorkspaceOrg extends WorkspaceOrg {\n  /** Number of members */\n  memberCount: number;\n}\n\nexport interface WorkspaceSwitcherProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"children\"\n> {\n  /** The currently active organization */\n  currentOrg: CurrentWorkspaceOrg;\n  /** List of other organizations to switch to */\n  organizations: WorkspaceOrg[];\n  /** Called when Settings button is clicked */\n  onSettings?: () => void;\n  /** Called when Participants button is clicked */\n  onParticipants?: () => void;\n  /** Called when \"Nueva organización\" button is clicked */\n  onCreateOrganization?: () => void;\n  /** Called when user clicks another organization to switch to */\n  onOrgChange?: (orgName: string) => void;\n  /**\n   * Whether the trigger stretches to full width.\n   * @default true\n   */\n  fullWidth?: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/WorkspaceSwitcher/WorkspaceSwitcher.module.css",
+      "type": "registry:styles",
+      "content": "/* Trigger button */\n.trigger {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  padding: var(--spacing-2) var(--spacing-3);\n  border: none;\n  border-radius: var(--radius-control);\n  background: transparent;\n  color: var(--text-primary);\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-14);\n  font-weight: var(--font-weight-medium);\n  cursor: pointer;\n  width: 100%;\n  box-sizing: border-box;\n  text-align: left;\n  transition: background-color var(--mode-hover-duration);\n}\n\n.trigger:hover {\n  background: var(--surface-subtle);\n}\n\n.triggerName {\n  flex: 1;\n  overflow: hidden;\n  text-overflow: ellipsis;\n  white-space: nowrap;\n}\n\n/* Chevron animation */\n.chevron {\n  flex-shrink: 0;\n  color: var(--text-tertiary);\n  transition: transform var(--mode-hover-duration);\n}\n\n.chevronOpen {\n  transform: rotate(180deg);\n}\n\n/* Popover content */\n.content {\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-3);\n  min-width: 260px;\n}\n\n/* Active workspace header */\n.activeWorkspace {\n  display: flex;\n  flex-direction: column;\n  align-items: center;\n  gap: var(--spacing-2);\n  padding-top: var(--spacing-3);\n  padding-bottom: var(--spacing-3);\n  text-align: center;\n}\n\n.orgName {\n  font-weight: var(--font-weight-semibold);\n  font-size: var(--font-size-16);\n}\n\n.orgMeta {\n  font-size: var(--font-size-12);\n  color: var(--text-tertiary);\n}\n\n/* Action buttons */\n.actionButtons {\n  display: flex;\n  gap: var(--spacing-2);\n}\n\n/* Divider with reduced spacing */\n.dividerWrapper {\n  margin: calc(-1 * var(--spacing-1)) calc(-1 * var(--spacing-4));\n}\n\n/* Section label */\n.sectionLabel {\n  font-size: var(--font-size-12);\n  color: var(--text-tertiary);\n  font-weight: var(--font-weight-medium);\n  text-transform: uppercase;\n  letter-spacing: 0.05em;\n}\n\n/* Org list */\n.orgList {\n  max-height: 300px;\n  overflow-y: auto;\n  display: flex;\n  flex-direction: column;\n  gap: var(--spacing-1);\n}\n\n.orgItem {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  padding: var(--spacing-2);\n  border-radius: var(--radius-control);\n  cursor: pointer;\n  transition: background-color var(--transition-fast);\n}\n\n.orgItem:hover {\n  background-color: var(--surface-layer);\n}\n\n.orgItemName {\n  font-size: var(--font-size-14);\n  font-weight: var(--font-weight-medium);\n}\n\n.orgItemRole {\n  font-size: var(--font-size-12);\n  color: var(--text-tertiary);\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/WorkspaceSwitcher/index.ts",
+      "type": "registry:index",
+      "content": "export { WorkspaceSwitcher } from \"./WorkspaceSwitcher\";\nexport type {\n  WorkspaceSwitcherProps,\n  WorkspaceOrg,\n  CurrentWorkspaceOrg,\n} from \"./WorkspaceSwitcher.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "currentOrg",
+      "type": "CurrentWorkspaceOrg",
+      "description": "The currently active organization */",
+      "required": true
+    },
+    {
+      "name": "organizations",
+      "type": "WorkspaceOrg[]",
+      "description": "List of other organizations to switch to */",
+      "required": true
+    },
+    {
+      "name": "onSettings",
+      "type": "() => void",
+      "description": "Called when Settings button is clicked */"
+    },
+    {
+      "name": "onParticipants",
+      "type": "() => void",
+      "description": "Called when Participants button is clicked */"
+    },
+    {
+      "name": "onCreateOrganization",
+      "type": "() => void",
+      "description": "Called when \"Nueva organización\" button is clicked */"
+    },
+    {
+      "name": "onOrgChange",
+      "type": "(orgName: string) => void",
+      "description": "Called when user clicks another organization to switch to */"
+    },
+    {
+      "name": "fullWidth",
+      "type": "boolean",
+      "description": "Whether the trigger stretches to full width.",
+      "default": true
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#workspace-switcher",
+    "local": "/library.html#workspace-switcher"
+  },
+  "import": "import { WorkspaceSwitcher } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

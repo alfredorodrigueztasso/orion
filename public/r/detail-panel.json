@@ -1,0 +1,122 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "detail-panel",
+  "type": "registry:component",
+  "title": "DetailPanel",
+  "description": "DetailPanel component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/DetailPanel/DetailPanel.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * DetailPanel Component\n *\n * A slide-over panel for viewing and editing entity details.\n * Optimized for Product Mode with focused interactions.\n *\n * @example\n * ```tsx\n * <DetailPanel\n *   open={isOpen}\n *   onClose={() => setIsOpen(false)}\n *   title=\"User Details\"\n *   description=\"Edit user profile information\"\n *   footer={<Button>Save Changes</Button>}\n * >\n *   <UserForm />\n * </DetailPanel>\n * ```\n */\n\nimport { forwardRef, useEffect, useRef } from \"react\";\nimport { X } from \"lucide-react\";\nimport type { DetailPanelProps } from \"./DetailPanel.types\";\nimport styles from \"./DetailPanel.module.css\";\n\nexport const DetailPanel = forwardRef<HTMLDivElement, DetailPanelProps>(\n  (\n    {\n      open,\n      onClose,\n      title,\n      description,\n      subtitle,\n      children,\n      size = \"md\",\n      position = \"right\",\n      headerActions,\n      footer,\n      overlay = true,\n      closeOnOverlayClick = true,\n      closeOnEscape = true,\n      loading = false,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const panelRef = useRef<HTMLDivElement>(null);\n\n    // Support deprecated subtitle prop with warning\n    const effectiveDescription = description ?? subtitle;\n\n    // Deprecation warning\n    useEffect(() => {\n      if (subtitle && process.env.NODE_ENV === \"development\") {\n        console.warn(\n          '[DetailPanel] The \"subtitle\" prop is deprecated. Use \"description\" instead. ' +\n            \"subtitle will be removed in v3.0.\",\n        );\n      }\n    }, [subtitle]);\n\n    // Handle Escape key\n    useEffect(() => {\n      if (!open || !closeOnEscape) return;\n\n      const handleKeyDown = (e: KeyboardEvent) => {\n        if (e.key === \"Escape\") {\n          onClose();\n        }\n      };\n\n      document.addEventListener(\"keydown\", handleKeyDown);\n      return () => document.removeEventListener(\"keydown\", handleKeyDown);\n    }, [open, closeOnEscape, onClose]);\n\n    // Trap focus and prevent body scroll\n    useEffect(() => {\n      if (open) {\n        const originalOverflow = document.body.style.overflow;\n        document.body.style.overflow = \"hidden\";\n\n        // Focus the panel\n        setTimeout(() => {\n          panelRef.current?.focus();\n        }, 0);\n\n        return () => {\n          document.body.style.overflow = originalOverflow;\n        };\n      }\n    }, [open]);\n\n    if (!open) return null;\n\n    const handleOverlayClick = () => {\n      if (closeOnOverlayClick) {\n        onClose();\n      }\n    };\n\n    const classNames = [\n      styles.panel,\n      styles[`size-${size}`],\n      styles[`position-${position}`],\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div className={styles.container}>\n        {/* Overlay */}\n        {overlay && (\n          <div\n            className={styles.overlay}\n            onClick={handleOverlayClick}\n            aria-hidden=\"true\"\n          />\n        )}\n\n        {/* Panel */}\n        <div\n          ref={ref || panelRef}\n          className={classNames}\n          role=\"dialog\"\n          aria-modal=\"true\"\n          aria-labelledby=\"detail-panel-title\"\n          tabIndex={-1}\n          {...rest}\n        >\n          {/* Header */}\n          <div className={styles.header}>\n            <div className={styles.headerContent}>\n              <h2 id=\"detail-panel-title\" className={styles.title}>\n                {title}\n              </h2>\n              {effectiveDescription && (\n                <p className={styles.subtitle}>{effectiveDescription}</p>\n              )}\n            </div>\n            <div className={styles.headerActions}>\n              {headerActions}\n              <button\n                type=\"button\"\n                className={styles.closeButton}\n                onClick={onClose}\n                aria-label=\"Close panel\"\n              >\n                <X size={20} />\n              </button>\n            </div>\n          </div>\n\n          {/* Body */}\n          <div className={styles.body}>\n            {loading ? (\n              <div className={styles.loading}>\n                <div className={styles.spinner} />\n              </div>\n            ) : (\n              children\n            )}\n          </div>\n\n          {/* Footer */}\n          {footer && <div className={styles.footer}>{footer}</div>}\n        </div>\n      </div>\n    );\n  },\n);\n\nDetailPanel.displayName = \"DetailPanel\";\n"
+    },
+    {
+      "path": "packages/react/src/components/DetailPanel/DetailPanel.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * DetailPanel Component Types\n *\n * Type definitions for the Orion DetailPanel section component.\n * A slide-over panel for viewing and editing entity details.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * DetailPanel size\n */\nexport type DetailPanelSize = \"sm\" | \"md\" | \"lg\" | \"xl\";\n\n/**\n * DetailPanel position\n */\nexport type DetailPanelPosition = \"right\" | \"left\";\n\n/**\n * DetailPanel section props\n *\n * @example\n * ```tsx\n * <DetailPanel\n *   open={isOpen}\n *   onClose={() => setIsOpen(false)}\n *   title=\"User Details\"\n *   description=\"Edit user profile information\"\n *   footer={<Button>Save</Button>}\n * >\n *   <UserForm />\n * </DetailPanel>\n * ```\n */\nexport interface DetailPanelProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"title\"\n> {\n  /**\n   * Whether the panel is open\n   */\n  open: boolean;\n\n  /**\n   * Close callback\n   */\n  onClose: () => void;\n\n  /**\n   * Panel title\n   */\n  title: ReactNode;\n\n  /**\n   * Optional description text below title\n   */\n  description?: ReactNode;\n\n  /**\n   * @deprecated Use `description` instead. Will be removed in v3.0.\n   */\n  subtitle?: ReactNode;\n\n  /**\n   * Panel content\n   */\n  children: ReactNode;\n\n  /**\n   * Panel size\n   * - sm: 320px\n   * - md: 480px\n   * - lg: 640px\n   * - xl: 800px\n   * @default 'md'\n   */\n  size?: DetailPanelSize;\n\n  /**\n   * Panel position\n   * @default 'right'\n   */\n  position?: DetailPanelPosition;\n\n  /**\n   * Header actions (buttons in header area)\n   */\n  headerActions?: ReactNode;\n\n  /**\n   * Footer content\n   */\n  footer?: ReactNode;\n\n  /**\n   * Show overlay backdrop\n   * @default true\n   */\n  overlay?: boolean;\n\n  /**\n   * Close on overlay click\n   * @default true\n   */\n  closeOnOverlayClick?: boolean;\n\n  /**\n   * Close on Escape key\n   * @default true\n   */\n  closeOnEscape?: boolean;\n\n  /**\n   * Loading state\n   * @default false\n   */\n  loading?: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/DetailPanel/DetailPanel.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * DetailPanel Component Styles\n *\n * Optimized for Product Mode (SaaS dashboards).\n * Slide-over panel for focused detail views.\n */\n\n.container {\n  position: fixed;\n  inset: 0;\n  z-index: var(--z-modal);\n  display: flex;\n}\n\n/* ============================================================================\n * OVERLAY\n * ============================================================================ */\n\n.overlay {\n  position: absolute;\n  inset: 0;\n  background: var(--surface-overlay);\n  animation: fadeIn 200ms ease-out;\n}\n\n@keyframes fadeIn {\n  from {\n    opacity: 0;\n  }\n  to {\n    opacity: 1;\n  }\n}\n\n/* ============================================================================\n * PANEL\n * ============================================================================ */\n\n.panel {\n  position: absolute;\n  top: 0;\n  bottom: 0;\n  display: flex;\n  flex-direction: column;\n  background: var(--surface-base);\n  box-shadow: var(--shadow-xl);\n  outline: none;\n}\n\n.position-right {\n  right: 0;\n  border-left: 1px solid var(--border-subtle);\n  animation: slideInRight 200ms ease-out;\n}\n\n.position-left {\n  left: 0;\n  border-right: 1px solid var(--border-subtle);\n  animation: slideInLeft 200ms ease-out;\n}\n\n@keyframes slideInRight {\n  from {\n    transform: translateX(100%);\n  }\n  to {\n    transform: translateX(0);\n  }\n}\n\n@keyframes slideInLeft {\n  from {\n    transform: translateX(-100%);\n  }\n  to {\n    transform: translateX(0);\n  }\n}\n\n/* Sizes */\n.size-sm {\n  width: 320px;\n}\n\n.size-md {\n  width: 480px;\n}\n\n.size-lg {\n  width: 640px;\n}\n\n.size-xl {\n  width: 800px;\n}\n\n/* ============================================================================\n * HEADER\n * ============================================================================ */\n\n.header {\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  gap: var(--spacing-4);\n  padding: var(--spacing-4) var(--spacing-6);\n  border-bottom: 1px solid var(--border-subtle);\n  flex-shrink: 0;\n}\n\n.headerContent {\n  flex: 1;\n  min-width: 0;\n}\n\n.title {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-18);\n  font-weight: var(--font-weight-semibold);\n  color: var(--text-primary);\n  margin: 0;\n  line-height: var(--line-height-tight);\n}\n\n.subtitle {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  color: var(--text-secondary);\n  margin: var(--spacing-1) 0 0 0;\n  line-height: var(--line-height-relaxed);\n}\n\n.headerActions {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  flex-shrink: 0;\n}\n\n.closeButton {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  width: 36px;\n  height: 36px;\n  background: none;\n  border: none;\n  border-radius: var(--radius-sm);\n  cursor: pointer;\n  color: var(--text-secondary);\n  transition:\n    background-color var(--mode-hover-duration),\n    color var(--mode-hover-duration);\n}\n\n.closeButton:hover {\n  background: var(--surface-subtle);\n  color: var(--text-primary);\n}\n\n.closeButton:focus-visible {\n  outline: 2px solid var(--interactive-primary);\n  outline-offset: 2px;\n}\n\n/* ============================================================================\n * BODY\n * ============================================================================ */\n\n.body {\n  flex: 1;\n  overflow-y: auto;\n  padding: var(--spacing-6);\n}\n\n/* ============================================================================\n * FOOTER\n * ============================================================================ */\n\n.footer {\n  display: flex;\n  align-items: center;\n  justify-content: flex-end;\n  gap: var(--spacing-3);\n  padding: var(--spacing-4) var(--spacing-6);\n  border-top: 1px solid var(--border-subtle);\n  background: var(--surface-subtle);\n  flex-shrink: 0;\n}\n\n/* ============================================================================\n * LOADING\n * ============================================================================ */\n\n.loading {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  height: 200px;\n}\n\n.spinner {\n  width: 32px;\n  height: 32px;\n  border: 3px solid var(--surface-subtle);\n  border-top-color: var(--interactive-primary);\n  border-radius: 50%;\n  animation: spin 0.8s linear infinite;\n}\n\n@keyframes spin {\n  to {\n    transform: rotate(360deg);\n  }\n}\n\n/* ============================================================================\n * RESPONSIVE\n * ============================================================================ */\n\n@media (max-width: 640px) {\n  .panel {\n    width: 100% !important;\n    max-width: 100%;\n  }\n\n  .header,\n  .body,\n  .footer {\n    padding-left: var(--spacing-4);\n    padding-right: var(--spacing-4);\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/DetailPanel/index.ts",
+      "type": "registry:index",
+      "content": "export { DetailPanel } from \"./DetailPanel\";\nexport type {\n  DetailPanelProps,\n  DetailPanelSize,\n  DetailPanelPosition,\n} from \"./DetailPanel.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "open",
+      "type": "boolean",
+      "description": "Whether the panel is open",
+      "required": true
+    },
+    {
+      "name": "onClose",
+      "type": "() => void",
+      "description": "Close callback",
+      "required": true
+    },
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "description": "Panel title"
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "description": "Optional description text below title"
+    },
+    {
+      "name": "subtitle",
+      "type": "ReactNode",
+      "description": "@deprecated Use `description` instead. Will be removed in v3.0."
+    },
+    {
+      "name": "size",
+      "type": "DetailPanelSize",
+      "description": "Panel size",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg",
+        "xl"
+      ]
+    },
+    {
+      "name": "position",
+      "type": "DetailPanelPosition",
+      "description": "Panel position",
+      "default": "right",
+      "values": [
+        "right",
+        "left"
+      ]
+    },
+    {
+      "name": "headerActions",
+      "type": "ReactNode",
+      "description": "Header actions (buttons in header area)"
+    },
+    {
+      "name": "footer",
+      "type": "ReactNode",
+      "description": "Footer content"
+    },
+    {
+      "name": "overlay",
+      "type": "boolean",
+      "description": "Show overlay backdrop",
+      "default": true
+    },
+    {
+      "name": "closeOnOverlayClick",
+      "type": "boolean",
+      "description": "Close on overlay click",
+      "default": true
+    },
+    {
+      "name": "closeOnEscape",
+      "type": "boolean",
+      "description": "Close on Escape key",
+      "default": true
+    },
+    {
+      "name": "loading",
+      "type": "boolean",
+      "description": "Loading state",
+      "default": false
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#detail-panel",
+    "local": "/library.html#detail-panel"
+  },
+  "import": "import { DetailPanel } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

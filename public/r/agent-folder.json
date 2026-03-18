@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "agent-folder",
+  "type": "registry:section",
+  "title": "AgentFolder",
+  "description": "AgentFolder section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/AgentFolder/AgentFolder.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/AgentFolder/AgentFolder.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/AgentFolder/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#agent-folder",
+    "local": "/library.html#agent-folder"
+  },
+  "import": "import { AgentFolder } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

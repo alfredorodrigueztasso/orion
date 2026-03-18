@@ -1,0 +1,145 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "stepper",
+  "type": "registry:component",
+  "title": "Stepper",
+  "description": "Stepper component",
+  "category": "navigation",
+  "files": [
+    {
+      "path": "packages/react/src/components/Stepper/Stepper.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * Stepper Component\n *\n * A component to display progress through a multi-step process.\n *\n * @example\n * ```tsx\n * <Stepper\n *   steps={[\n *     { id: '1', title: 'Account', description: 'Create your account' },\n *     { id: '2', title: 'Profile', description: 'Set up your profile' },\n *     { id: '3', title: 'Complete', description: 'Review and finish' },\n *   ]}\n *   currentStep={1}\n * />\n * ```\n */\n\nimport { forwardRef, useCallback, useRef, useEffect } from \"react\";\nimport { Check, AlertCircle } from \"lucide-react\";\nimport type { StepperProps, StepProps, StepStatus } from \"./Stepper.types\";\nimport styles from \"./Stepper.module.css\";\n\n/**\n * Individual Step Component\n */\nconst Step = ({\n  step,\n  index,\n  status,\n  size,\n  showNumber,\n  showCheckmark,\n  clickable,\n  onClick,\n  labelPosition,\n}: StepProps) => {\n  const handleClick = useCallback(() => {\n    if (clickable && !step.disabled && onClick) {\n      onClick();\n    }\n  }, [clickable, step.disabled, onClick]);\n\n  const handleKeyDown = useCallback(\n    (e: React.KeyboardEvent) => {\n      if ((e.key === \"Enter\" || e.key === \" \") && clickable && !step.disabled) {\n        e.preventDefault();\n        onClick?.();\n      }\n    },\n    [clickable, step.disabled, onClick],\n  );\n\n  const stepClasses = [\n    styles.step,\n    styles[status],\n    styles[size],\n    styles[`label-${labelPosition}`],\n    clickable && !step.disabled && styles.clickable,\n    step.disabled && styles.disabled,\n  ]\n    .filter(Boolean)\n    .join(\" \");\n\n  const iconSize = size === \"sm\" ? 14 : size === \"lg\" ? 20 : 16;\n\n  const renderIndicator = () => {\n    // Error state\n    if (status === \"error\" || step.error) {\n      return <AlertCircle size={iconSize} />;\n    }\n\n    // Custom icon\n    if (step.icon) {\n      return step.icon;\n    }\n\n    // Checkmark for completed\n    if (status === \"complete\" && showCheckmark) {\n      return <Check size={iconSize} />;\n    }\n\n    // Number\n    if (showNumber) {\n      return <span className={styles.number}>{index + 1}</span>;\n    }\n\n    return null;\n  };\n\n  return (\n    <div\n      className={stepClasses}\n      role={clickable ? \"button\" : undefined}\n      tabIndex={clickable && !step.disabled ? 0 : undefined}\n      aria-current={status === \"current\" ? \"step\" : undefined}\n      aria-disabled={step.disabled}\n      onClick={handleClick}\n      onKeyDown={handleKeyDown}\n    >\n      <div className={styles.indicator}>{renderIndicator()}</div>\n\n      <div className={styles.content}>\n        <span className={styles.title}>\n          {step.title}\n          {step.optional && <span className={styles.optional}>(Optional)</span>}\n        </span>\n        {step.description && (\n          <span className={styles.description}>{step.description}</span>\n        )}\n        {(step.error || status === \"error\") && step.errorMessage && (\n          <span className={styles.errorMessage}>{step.errorMessage}</span>\n        )}\n      </div>\n    </div>\n  );\n};\n\nexport const Stepper = forwardRef<HTMLDivElement, StepperProps>(\n  (\n    {\n      steps,\n      currentStep = 0,\n      onStepClick,\n      clickable = false,\n      orientation = \"horizontal\",\n      size = \"md\",\n      showNumbers = true,\n      showConnectors = true,\n      showCheckmarks = true,\n      labelPosition = \"bottom\",\n      scrollable = false,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const listRef = useRef<HTMLOListElement>(null);\n\n    // Auto-scroll to current step when scrollable is enabled\n    useEffect(() => {\n      if (scrollable && listRef.current) {\n        const items = listRef.current.children;\n        const currentItem = items[currentStep] as HTMLElement | undefined;\n        if (currentItem) {\n          currentItem.scrollIntoView({\n            behavior: \"smooth\",\n            block: \"nearest\",\n            inline: \"center\",\n          });\n        }\n      }\n    }, [currentStep, scrollable]);\n\n    const getStepStatus = (index: number): StepStatus => {\n      if (steps[index]?.error) return \"error\";\n      if (index < currentStep) return \"complete\";\n      if (index === currentStep) return \"current\";\n      return \"upcoming\";\n    };\n\n    const handleStepClick = useCallback(\n      (index: number) => {\n        const step = steps[index];\n        if (onStepClick && step && !step.disabled) {\n          onStepClick(index, step);\n        }\n      },\n      [onStepClick, steps],\n    );\n\n    const containerClasses = [\n      styles.stepper,\n      styles[orientation],\n      styles[size],\n      showConnectors && styles.withConnectors,\n      scrollable && styles.scrollable,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    return (\n      <div\n        ref={ref}\n        className={containerClasses}\n        role=\"navigation\"\n        aria-label=\"Progress\"\n        {...rest}\n      >\n        <ol ref={listRef} className={styles.list}>\n          {steps.map((step, index) => (\n            <li key={step.id} className={styles.item}>\n              <Step\n                step={step}\n                index={index}\n                status={getStepStatus(index)}\n                size={size}\n                showNumber={showNumbers}\n                showCheckmark={showCheckmarks}\n                clickable={clickable}\n                onClick={() => handleStepClick(index)}\n                labelPosition={labelPosition}\n              />\n              {showConnectors && index < steps.length - 1 && (\n                <div\n                  className={`${styles.connector} ${index < currentStep ? styles.complete : \"\"}`}\n                  aria-hidden=\"true\"\n                />\n              )}\n            </li>\n          ))}\n        </ol>\n      </div>\n    );\n  },\n);\n\nStepper.displayName = \"Stepper\";\n"
+    },
+    {
+      "path": "packages/react/src/components/Stepper/Stepper.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * Stepper Component Types\n *\n * Type definitions for the Orion Stepper/Wizard component.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Stepper orientation\n */\nexport type StepperOrientation = \"horizontal\" | \"vertical\";\n\n/**\n * Stepper size variants\n */\nexport type StepperSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * Step status\n */\nexport type StepStatus = \"complete\" | \"current\" | \"upcoming\" | \"error\";\n\n/**\n * Step item definition\n */\nexport interface StepItem {\n  /**\n   * Unique identifier for the step\n   */\n  id: string;\n\n  /**\n   * Step title/label\n   */\n  title: string;\n\n  /**\n   * Optional description\n   */\n  description?: string;\n\n  /**\n   * Custom icon for the step\n   */\n  icon?: ReactNode;\n\n  /**\n   * Whether this step is optional\n   */\n  optional?: boolean;\n\n  /**\n   * Whether this step has an error\n   */\n  error?: boolean;\n\n  /**\n   * Error message to display\n   */\n  errorMessage?: string;\n\n  /**\n   * Whether this step is disabled\n   */\n  disabled?: boolean;\n}\n\n/**\n * Stepper component props\n *\n * @example\n * ```tsx\n * <Stepper\n *   steps={[\n *     { id: '1', title: 'Account', description: 'Create your account' },\n *     { id: '2', title: 'Profile', description: 'Set up your profile' },\n *     { id: '3', title: 'Complete', description: 'Review and finish' },\n *   ]}\n *   currentStep={1}\n * />\n * ```\n */\nexport interface StepperProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"onChange\"\n> {\n  /**\n   * Array of step items\n   */\n  steps: StepItem[];\n\n  /**\n   * Current active step index (0-based)\n   * @default 0\n   */\n  currentStep?: number;\n\n  /**\n   * Callback when a step is clicked (if clickable)\n   */\n  onStepClick?: (stepIndex: number, step: StepItem) => void;\n\n  /**\n   * Whether steps are clickable\n   * @default false\n   */\n  clickable?: boolean;\n\n  /**\n   * Stepper orientation\n   * @default 'horizontal'\n   */\n  orientation?: StepperOrientation;\n\n  /**\n   * Size variant\n   * @default 'md'\n   */\n  size?: StepperSize;\n\n  /**\n   * Whether to show step numbers\n   * @default true\n   */\n  showNumbers?: boolean;\n\n  /**\n   * Whether to show connector lines between steps\n   * @default true\n   */\n  showConnectors?: boolean;\n\n  /**\n   * Whether completed steps should be marked with a checkmark\n   * @default true\n   */\n  showCheckmarks?: boolean;\n\n  /**\n   * Alternative label position (only for horizontal orientation)\n   * @default 'bottom'\n   */\n  labelPosition?: \"bottom\" | \"right\";\n\n  /**\n   * Enable horizontal scrolling on mobile for better UX with many steps\n   * When enabled, labels remain visible and the stepper scrolls horizontally.\n   * Auto-scrolls to center the current step when it changes.\n   * @default false\n   */\n  scrollable?: boolean;\n}\n\n/**\n * Step component props (internal)\n */\nexport interface StepProps {\n  step: StepItem;\n  index: number;\n  status: StepStatus;\n  size: StepperSize;\n  showNumber: boolean;\n  showCheckmark: boolean;\n  clickable: boolean;\n  onClick?: () => void;\n  labelPosition: \"bottom\" | \"right\";\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Stepper/Stepper.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * Stepper Component Styles\n *\n * Minimalist Linear-style stepper with elegant, refined design.\n * - Thin borders and subtle colors\n * - No heavy backgrounds on indicators\n * - Clean typography with generous spacing\n */\n\n.stepper {\n  width: 100%;\n}\n\n.list {\n  display: flex;\n  margin: 0;\n  padding: 0;\n  list-style: none;\n}\n\n/* ============================================================================\n * MOBILE-FIRST: HORIZONTAL (Default)\n * Compact dots with labels hidden, current step info shown separately\n * ============================================================================ */\n\n.horizontal .list {\n  flex-direction: row;\n  align-items: center;\n  justify-content: center;\n  gap: 0;\n}\n\n.horizontal .item {\n  display: flex;\n  align-items: center;\n  flex: 1;\n  max-width: 120px;\n}\n\n.horizontal .item:last-child {\n  flex: 0;\n  max-width: none;\n}\n\n/* ============================================================================\n * STEP\n * ============================================================================ */\n\n.step {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-3);\n}\n\n.horizontal .step {\n  flex-direction: column;\n  align-items: center;\n  text-align: center;\n}\n\n.horizontal .label-right .step {\n  flex-direction: row;\n  text-align: left;\n}\n\n/* ============================================================================\n * INDICATOR - Minimalist Style\n * ============================================================================ */\n\n.indicator {\n  display: flex;\n  align-items: center;\n  justify-content: center;\n  flex-shrink: 0;\n  border-radius: 50%;\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  transition: all var(--transition-fast);\n  position: relative;\n  z-index: var(--z-base);\n}\n\n/* Mobile sizes - smaller and more elegant */\n.sm .indicator {\n  width: 20px;\n  height: 20px;\n  font-size: var(--font-size-11);\n}\n\n.md .indicator {\n  width: 24px;\n  height: 24px;\n  font-size: var(--font-size-12);\n}\n\n.lg .indicator {\n  width: 28px;\n  height: 28px;\n  font-size: var(--font-size-13);\n}\n\n/* ============================================================================\n * STATUS STYLES - Minimalist (Linear-inspired)\n * ============================================================================ */\n\n/* Upcoming - thin border, transparent background */\n.upcoming .indicator {\n  background: transparent;\n  border: 1px solid var(--border-subtle);\n  color: var(--text-tertiary);\n}\n\n/* Current - brand border only, no fill */\n.current .indicator {\n  background: transparent;\n  border: 1.5px solid var(--interactive-primary);\n  color: var(--interactive-primary);\n  /* No shadow, no glow - clean and minimal */\n}\n\n/* Complete - no border, just the checkmark */\n.complete .indicator {\n  background: transparent;\n  border: none;\n  color: var(--status-success);\n}\n\n/* Error - no border, just the icon */\n.error .indicator {\n  background: transparent;\n  border: none;\n  color: var(--status-error);\n}\n\n/* ============================================================================\n * NUMBER\n * ============================================================================ */\n\n.number {\n  font-variant-numeric: tabular-nums;\n}\n\n/* ============================================================================\n * CONTENT (Labels)\n * ============================================================================ */\n\n.content {\n  display: none; /* Hidden on mobile by default */\n  flex-direction: column;\n  gap: var(--spacing-1);\n  min-width: 0;\n}\n\n/* ============================================================================\n * TITLE - Clean typography\n * ============================================================================ */\n\n.title {\n  font-family: var(--font-secondary);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-primary);\n  line-height: 1.4;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.sm .title {\n  font-size: var(--font-size-12);\n}\n.md .title {\n  font-size: var(--font-size-13);\n}\n.lg .title {\n  font-size: var(--font-size-14);\n}\n\n.upcoming .title {\n  color: var(--text-tertiary);\n}\n.complete .title {\n  color: var(--text-secondary);\n}\n\n/* ============================================================================\n * OPTIONAL\n * ============================================================================ */\n\n.optional {\n  font-size: var(--font-size-10);\n  font-weight: var(--font-weight-normal);\n  color: var(--text-tertiary);\n  margin-left: var(--spacing-1);\n}\n\n/* ============================================================================\n * DESCRIPTION - Subtle secondary text\n * ============================================================================ */\n\n.description {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-12);\n  color: var(--text-tertiary);\n  line-height: 1.4;\n  white-space: nowrap;\n  overflow: hidden;\n  text-overflow: ellipsis;\n}\n\n.upcoming .description {\n  color: var(--text-tertiary);\n  opacity: 0.7;\n}\n\n/* ============================================================================\n * ERROR MESSAGE\n * ============================================================================ */\n\n.errorMessage {\n  color: var(--status-error);\n  font-size: var(--font-size-11);\n}\n\n/* ============================================================================\n * CONNECTOR - Thin and elegant (1px)\n * ============================================================================ */\n\n.connector {\n  flex: 1;\n  height: 1px;\n  background: var(--border-subtle);\n  transition: background var(--transition-fast);\n  min-width: 24px;\n}\n\n.connector.complete {\n  background: color-mix(in srgb, var(--status-success) 50%, transparent);\n}\n\n/* Horizontal connector */\n.horizontal .connector {\n  margin: 0;\n}\n\n.horizontal.sm .connector {\n  height: 1px;\n}\n.horizontal.md .connector {\n  height: 1px;\n}\n.horizontal.lg .connector {\n  height: 1px;\n}\n\n/* When labels are shown, position connector properly */\n.horizontal .label-bottom .connector {\n  position: absolute;\n  top: 50%;\n  left: 100%;\n  right: 0;\n  transform: translateY(-50%);\n  margin: 0;\n}\n\n/* Vertical connector */\n.vertical .connector {\n  width: 1px;\n  height: 20px;\n  margin: var(--spacing-2) 0;\n  margin-left: 9px;\n  flex: none;\n}\n\n.vertical.sm .connector {\n  margin-left: 9px;\n  height: 16px;\n}\n.vertical.md .connector {\n  margin-left: 11px;\n  height: 20px;\n}\n.vertical.lg .connector {\n  margin-left: 13px;\n  height: 24px;\n}\n\n/* ============================================================================\n * VERTICAL ORIENTATION\n * ============================================================================ */\n\n.vertical .list {\n  flex-direction: column;\n  gap: 0;\n}\n\n.vertical .item {\n  display: flex;\n  flex-direction: column;\n}\n\n.vertical .step {\n  flex-direction: row;\n  align-items: flex-start;\n  text-align: left;\n  gap: var(--spacing-3);\n}\n\n.vertical .content {\n  display: flex;\n  padding-top: 2px;\n}\n\n/* ============================================================================\n * CLICKABLE - Subtle interaction\n * ============================================================================ */\n\n.clickable {\n  cursor: pointer;\n}\n\n.clickable:hover .indicator {\n  transform: scale(1.05);\n  opacity: 0.8;\n}\n\n.clickable:active .indicator {\n  transform: scale(0.98);\n}\n\n.clickable:focus-visible {\n  outline: none;\n}\n\n.clickable:focus-visible .indicator {\n  outline: 1.5px solid var(--interactive-primary);\n  outline-offset: 2px;\n}\n\n/* ============================================================================\n * DISABLED\n * ============================================================================ */\n\n.disabled {\n  opacity: 0.35;\n  cursor: not-allowed;\n  pointer-events: none;\n}\n\n/* ============================================================================\n * RESPONSIVE: TABLET AND UP (min-width: 640px)\n * Show labels on larger screens\n * ============================================================================ */\n\n@media (min-width: 640px) {\n  .horizontal .item {\n    max-width: 200px;\n  }\n\n  .horizontal .content {\n    display: flex;\n    margin-top: var(--spacing-3);\n  }\n\n  .horizontal .label-right .content {\n    margin-top: 0;\n    margin-left: var(--spacing-3);\n  }\n\n  /* Slightly larger indicators on desktop - still minimal */\n  .sm .indicator {\n    width: 22px;\n    height: 22px;\n    font-size: var(--font-size-11);\n  }\n\n  .md .indicator {\n    width: 26px;\n    height: 26px;\n    font-size: var(--font-size-12);\n  }\n\n  .lg .indicator {\n    width: 30px;\n    height: 30px;\n    font-size: var(--font-size-13);\n  }\n\n  /* Vertical spacing on desktop */\n  .vertical.sm .connector {\n    height: 20px;\n    margin-left: 10px;\n  }\n  .vertical.md .connector {\n    height: 24px;\n    margin-left: 12px;\n  }\n  .vertical.lg .connector {\n    height: 28px;\n    margin-left: 14px;\n  }\n}\n\n/* ============================================================================\n * RESPONSIVE: DESKTOP (min-width: 768px)\n * ============================================================================ */\n\n@media (min-width: 768px) {\n  .horizontal .item {\n    max-width: none;\n  }\n\n  .title {\n    white-space: normal;\n    overflow: visible;\n  }\n\n  .description {\n    white-space: normal;\n    overflow: visible;\n  }\n}\n\n/* ============================================================================\n * SCROLLABLE MODE\n * Enables horizontal scrolling on mobile for better UX with many steps\n * ============================================================================ */\n\n.scrollable .list {\n  overflow-x: auto;\n  -webkit-overflow-scrolling: touch;\n  scrollbar-width: none; /* Firefox */\n  scroll-behavior: smooth;\n  scroll-snap-type: x mandatory;\n  padding: var(--spacing-2) 0;\n  /* Override horizontal defaults for proper scrolling */\n  justify-content: flex-start;\n  flex-wrap: nowrap;\n}\n\n.scrollable .list::-webkit-scrollbar {\n  display: none; /* Chrome/Safari */\n}\n\n.scrollable .item {\n  flex: 0 0 auto;\n  min-width: 120px;\n  max-width: none;\n  scroll-snap-align: center;\n}\n\n.scrollable .item:last-child {\n  flex: 0 0 auto;\n  min-width: 120px;\n}\n\n/* In scrollable mode, always show labels */\n.scrollable .content {\n  display: flex;\n  margin-top: var(--spacing-2);\n}\n\n/* Scrollable connectors need proper sizing */\n.scrollable .connector {\n  min-width: 40px;\n  flex: 0 0 40px;\n}\n\n/* On tablet and up, scrollable items can be slightly larger */\n@media (min-width: 640px) {\n  .scrollable .item {\n    min-width: 140px;\n  }\n\n  .scrollable .item:last-child {\n    min-width: 140px;\n  }\n\n  .scrollable .content {\n    margin-top: var(--spacing-3);\n  }\n\n  .scrollable .connector {\n    min-width: 48px;\n    flex: 0 0 48px;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/Stepper/index.ts",
+      "type": "registry:index",
+      "content": "/**\n * Stepper Component - Multi-step process indicator.\n *\n * @example\n * ```tsx\n * import { Stepper } from '@orion-ds/react';\n *\n * <Stepper\n *   steps={[\n *     { id: '1', label: 'Account', status: 'completed' },\n *     { id: '2', label: 'Profile', status: 'current' },\n *     { id: '3', label: 'Review', status: 'pending' },\n *   ]}\n *   current={1}\n * />\n * ```\n */\nexport { Stepper } from \"./Stepper\";\nexport type {\n  StepperProps,\n  StepItem,\n  StepStatus,\n  StepperOrientation,\n  StepperSize,\n} from \"./Stepper.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "steps",
+      "type": "StepItem[]",
+      "description": "Array of step items",
+      "required": true
+    },
+    {
+      "name": "currentStep",
+      "type": "number",
+      "description": "Current active step index (0-based)",
+      "default": 0
+    },
+    {
+      "name": "onStepClick",
+      "type": "(stepIndex: number, step: StepItem) => void",
+      "description": "Callback when a step is clicked (if clickable)"
+    },
+    {
+      "name": "clickable",
+      "type": "boolean",
+      "description": "Whether steps are clickable",
+      "default": false
+    },
+    {
+      "name": "orientation",
+      "type": "StepperOrientation",
+      "description": "Stepper orientation",
+      "default": "horizontal",
+      "values": [
+        "horizontal",
+        "vertical"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "StepperSize",
+      "description": "Size variant",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "showNumbers",
+      "type": "boolean",
+      "description": "Whether to show step numbers",
+      "default": true
+    },
+    {
+      "name": "showConnectors",
+      "type": "boolean",
+      "description": "Whether to show connector lines between steps",
+      "default": true
+    },
+    {
+      "name": "showCheckmarks",
+      "type": "boolean",
+      "description": "Whether completed steps should be marked with a checkmark",
+      "default": true
+    },
+    {
+      "name": "labelPosition",
+      "type": "\"bottom\" | \"right\"",
+      "description": "Alternative label position (only for horizontal orientation)",
+      "default": "bottom",
+      "values": [
+        "bottom",
+        "right"
+      ]
+    },
+    {
+      "name": "scrollable",
+      "type": "boolean",
+      "description": "Enable horizontal scrolling on mobile for better UX with many steps",
+      "default": false
+    }
+  ],
+  "tokens": [
+    "--interactive-primary",
+    "--surface-layer",
+    "--text-primary",
+    "--text-secondary"
+  ],
+  "examples": [
+    {
+      "title": "Basic stepper",
+      "code": "<Stepper\n  steps={[\n    { label: 'Account', status: 'completed' },\n    { label: 'Profile', status: 'active' },\n    { label: 'Review', status: 'pending' },\n  ]}\n  activeStep={1}\n/>"
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#stepper",
+    "local": "/library.html#stepper"
+  },
+  "import": "import { Stepper } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "progress",
+    "wizard",
+    "steps",
+    "multi-step",
+    "flow"
+  ],
+  "related_components": [
+    "Button",
+    "Card"
+  ],
+  "common_patterns": [
+    "form wizard",
+    "checkout steps",
+    "onboarding flow"
+  ]
+}

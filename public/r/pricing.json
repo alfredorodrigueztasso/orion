@@ -1,0 +1,44 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "pricing",
+  "type": "registry:section",
+  "title": "Pricing",
+  "description": "Pricing section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Pricing/Pricing.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Pricing/Pricing.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Pricing/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#pricing",
+    "local": "/library.html#pricing"
+  },
+  "import": "import { Pricing } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "commerce",
+    "plans",
+    "pricing-table",
+    "tiers",
+    "comparison"
+  ],
+  "related_sections": [
+    "CTA",
+    "Features"
+  ],
+  "common_patterns": [
+    "pricing tiers",
+    "comparison table",
+    "plan selection"
+  ]
+}

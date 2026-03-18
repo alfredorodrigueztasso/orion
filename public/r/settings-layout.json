@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "settings-layout",
+  "type": "registry:section",
+  "title": "SettingsLayout",
+  "description": "SettingsLayout section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/SettingsLayout/SettingsLayout.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/SettingsLayout/SettingsLayout.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/SettingsLayout/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#settings-layout",
+    "local": "/library.html#settings-layout"
+  },
+  "import": "import { SettingsLayout } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

@@ -1,0 +1,35 @@
+{
+  "$schema": "https://orion-ds.dev/schema/styles.json",
+  "styles": [
+    {
+      "name": "display",
+      "label": "Display Mode",
+      "description": "Atmospheric & narrative — for marketing pages, landing pages, hero sections. Features glassmorphism, generous shadows, dramatic hover lifts.",
+      "cssVars": {
+        "--mode-shadow-hover": "var(--shadow-lg)",
+        "--mode-hover-lift": "-4px",
+        "--mode-hover-duration": "250ms"
+      }
+    },
+    {
+      "name": "product",
+      "label": "Product Mode",
+      "description": "Geometric precision — for SaaS dashboards, admin panels, data-heavy interfaces. No glassmorphism, minimal shadows, no hover lifts.",
+      "cssVars": {
+        "--mode-shadow-hover": "var(--shadow-sm)",
+        "--mode-hover-lift": "0px",
+        "--mode-hover-duration": "150ms"
+      }
+    },
+    {
+      "name": "app",
+      "label": "App Mode",
+      "description": "Tactile elevation — for mobile apps, touch interfaces, native feel. Subtle hover lifts, native shadows, borderless cards.",
+      "cssVars": {
+        "--mode-shadow-hover": "var(--shadow-lg)",
+        "--mode-hover-lift": "-2px",
+        "--mode-hover-duration": "200ms"
+      }
+    }
+  ]
+}

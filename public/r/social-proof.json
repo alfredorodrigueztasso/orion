@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "social-proof",
+  "type": "registry:section",
+  "title": "SocialProof",
+  "description": "SocialProof section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/SocialProof/SocialProof.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/SocialProof/SocialProof.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/SocialProof/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#social-proof",
+    "local": "/library.html#social-proof"
+  },
+  "import": "import { SocialProof } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

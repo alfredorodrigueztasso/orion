@@ -1,0 +1,130 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "page-header",
+  "type": "registry:component",
+  "title": "PageHeader",
+  "description": "PageHeader component",
+  "category": "utilities",
+  "files": [
+    {
+      "path": "packages/react/src/components/PageHeader/PageHeader.tsx",
+      "type": "registry:component",
+      "content": "\"use client\";\n\n/**\n * PageHeader Component\n *\n * A page header for SaaS dashboards with breadcrumbs, title, description, and actions.\n * Optimized for Product Mode with minimal visual noise and clear hierarchy.\n *\n * @example\n * ```tsx\n * <PageHeader\n *   breadcrumbs={[\n *     { label: 'Dashboard', href: '/' },\n *     { label: 'Users' }\n *   ]}\n *   title=\"Users\"\n *   description=\"Manage user accounts and permissions\"\n *   actions={<Button>Add User</Button>}\n * />\n * ```\n */\n\nimport { forwardRef } from \"react\";\nimport { ChevronRight, ChevronLeft } from \"lucide-react\";\nimport type { PageHeaderProps } from \"./PageHeader.types\";\nimport styles from \"./PageHeader.module.css\";\n\nexport const PageHeader = forwardRef<HTMLDivElement, PageHeaderProps>(\n  (\n    {\n      title,\n      description,\n      breadcrumbs,\n      actions,\n      tabs,\n      activeTab,\n      onTabChange,\n      backLink,\n      badge,\n      variant = \"default\",\n      size = \"md\",\n      bordered = true,\n      sticky = false,\n      className,\n      ...rest\n    },\n    ref,\n  ) => {\n    const classNames = [\n      styles.pageHeader,\n      styles[`variant-${variant}`],\n      styles[`size-${size}`],\n      bordered && styles.bordered,\n      sticky && styles.sticky,\n      className,\n    ]\n      .filter(Boolean)\n      .join(\" \");\n\n    const handleTabClick = (tabId: string, href?: string) => {\n      if (onTabChange) {\n        onTabChange(tabId);\n      }\n      if (href) {\n        window.location.href = href;\n      }\n    };\n\n    return (\n      <div ref={ref} className={classNames} {...rest}>\n        {/* Back link */}\n        {backLink && (\n          <div className={styles.backLink}>\n            {backLink.href ? (\n              <a href={backLink.href} className={styles.backLinkAnchor}>\n                <ChevronLeft size={16} />\n                <span>{backLink.label || \"Back\"}</span>\n              </a>\n            ) : (\n              <button\n                type=\"button\"\n                onClick={backLink.onClick}\n                className={styles.backLinkButton}\n              >\n                <ChevronLeft size={16} />\n                <span>{backLink.label || \"Back\"}</span>\n              </button>\n            )}\n          </div>\n        )}\n\n        {/* Breadcrumbs */}\n        {breadcrumbs && breadcrumbs.length > 0 && (\n          <nav className={styles.breadcrumbs} aria-label=\"Breadcrumb\">\n            <ol className={styles.breadcrumbList}>\n              {breadcrumbs.map((crumb, index) => (\n                <li key={crumb.label} className={styles.breadcrumbItem}>\n                  {index > 0 && (\n                    <ChevronRight\n                      size={14}\n                      className={styles.breadcrumbSeparator}\n                    />\n                  )}\n                  {crumb.href ? (\n                    <a href={crumb.href} className={styles.breadcrumbLink}>\n                      {crumb.label}\n                    </a>\n                  ) : crumb.onClick ? (\n                    <button\n                      type=\"button\"\n                      onClick={crumb.onClick}\n                      className={styles.breadcrumbButton}\n                    >\n                      {crumb.label}\n                    </button>\n                  ) : (\n                    <span\n                      className={styles.breadcrumbCurrent}\n                      aria-current=\"page\"\n                    >\n                      {crumb.label}\n                    </span>\n                  )}\n                </li>\n              ))}\n            </ol>\n          </nav>\n        )}\n\n        {/* Main header row */}\n        <div className={styles.main}>\n          <div className={styles.titleSection}>\n            <div className={styles.titleRow}>\n              <h1 className={styles.title}>{title}</h1>\n              {badge && <span className={styles.badge}>{badge}</span>}\n            </div>\n            {description && <p className={styles.description}>{description}</p>}\n          </div>\n\n          {actions && <div className={styles.actions}>{actions}</div>}\n        </div>\n\n        {/* Tabs */}\n        {tabs && tabs.length > 0 && (\n          <div className={styles.tabs} role=\"tablist\">\n            {tabs.map((tab) => (\n              <button\n                key={tab.id}\n                role=\"tab\"\n                type=\"button\"\n                aria-selected={activeTab === tab.id}\n                className={`${styles.tab} ${activeTab === tab.id ? styles.tabActive : \"\"}`}\n                onClick={() => handleTabClick(tab.id, tab.href)}\n              >\n                <span>{tab.label}</span>\n                {tab.badge && (\n                  <span className={styles.tabBadge}>{tab.badge}</span>\n                )}\n              </button>\n            ))}\n          </div>\n        )}\n      </div>\n    );\n  },\n);\n\nPageHeader.displayName = \"PageHeader\";\n"
+    },
+    {
+      "path": "packages/react/src/components/PageHeader/PageHeader.types.ts",
+      "type": "registry:types",
+      "content": "/**\n * PageHeader Component Types\n *\n * Type definitions for the Orion PageHeader section component.\n * Designed for Product Mode (SaaS dashboards) with breadcrumbs, actions, and tabs.\n */\n\nimport type { HTMLAttributes, ReactNode } from \"react\";\n\n/**\n * Breadcrumb item\n */\nexport interface BreadcrumbItem {\n  /**\n   * Display label\n   */\n  label: string;\n\n  /**\n   * Navigation URL (optional for current item)\n   */\n  href?: string;\n\n  /**\n   * Click handler (alternative to href)\n   */\n  onClick?: () => void;\n}\n\n/**\n * Tab item for page header navigation\n */\nexport interface PageHeaderTab {\n  /**\n   * Unique identifier\n   */\n  id: string;\n\n  /**\n   * Display label\n   */\n  label: string;\n\n  /**\n   * Optional badge/count\n   */\n  badge?: ReactNode;\n\n  /**\n   * Tab href for navigation\n   */\n  href?: string;\n}\n\n/**\n * PageHeader size variant\n */\nexport type PageHeaderSize = \"sm\" | \"md\" | \"lg\";\n\n/**\n * PageHeader visual variant\n */\nexport type PageHeaderVariant =\n  | \"default\"\n  | \"compact\"\n  | \"with-tabs\"\n  | \"transparent\";\n\n/**\n * PageHeader section props\n *\n * @example\n * ```tsx\n * <PageHeader\n *   breadcrumbs={[\n *     { label: 'Dashboard', href: '/' },\n *     { label: 'Users' }\n *   ]}\n *   title=\"Users\"\n *   description=\"Manage user accounts and permissions\"\n *   actions={<Button>Add User</Button>}\n * />\n * ```\n */\nexport interface PageHeaderProps extends Omit<\n  HTMLAttributes<HTMLDivElement>,\n  \"title\"\n> {\n  /**\n   * Page title\n   */\n  title: ReactNode;\n\n  /**\n   * Optional description below title\n   */\n  description?: ReactNode;\n\n  /**\n   * Breadcrumb navigation items\n   */\n  breadcrumbs?: BreadcrumbItem[];\n\n  /**\n   * Action buttons/elements aligned right\n   */\n  actions?: ReactNode;\n\n  /**\n   * Tab navigation items\n   */\n  tabs?: PageHeaderTab[];\n\n  /**\n   * Currently active tab ID\n   */\n  activeTab?: string;\n\n  /**\n   * Tab change handler\n   */\n  onTabChange?: (tabId: string) => void;\n\n  /**\n   * Back link for navigation\n   */\n  backLink?: {\n    label?: string;\n    href?: string;\n    onClick?: () => void;\n  };\n\n  /**\n   * Optional badge next to title\n   */\n  badge?: ReactNode;\n\n  /**\n   * Visual variant\n   * - default: Standard layout with padding\n   * - compact: Reduced spacing\n   * - with-tabs: Includes tab navigation\n   * @default 'default'\n   */\n  variant?: PageHeaderVariant;\n\n  /**\n   * Size variant\n   * @default 'md'\n   */\n  size?: PageHeaderSize;\n\n  /**\n   * Show border at bottom\n   * @default true\n   */\n  bordered?: boolean;\n\n  /**\n   * Sticky positioning\n   * @default false\n   */\n  sticky?: boolean;\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/PageHeader/PageHeader.module.css",
+      "type": "registry:styles",
+      "content": "/**\n * PageHeader Component Styles\n *\n * Modern, elegant page header.\n * Uses mode-aware tokens for responsive styling.\n */\n\n.pageHeader {\n  display: flex;\n  flex-direction: column;\n  background: var(--surface-base);\n  padding: var(--spacing-6) var(--mode-spacing-block);\n}\n\n.bordered {\n  border-bottom: 1px solid var(--border-subtle);\n}\n\n.sticky {\n  position: sticky;\n  top: 0;\n  z-index: var(--z-sticky);\n}\n\n/* ============================================================================\n * BACK LINK\n * ============================================================================ */\n\n.backLink {\n  margin-bottom: var(--spacing-2);\n}\n\n.backLinkAnchor,\n.backLinkButton {\n  display: inline-flex;\n  align-items: center;\n  gap: var(--spacing-1);\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-secondary);\n  text-decoration: none;\n  background: none;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  transition: color var(--mode-hover-duration);\n}\n\n.backLinkAnchor:hover,\n.backLinkButton:hover {\n  color: var(--text-primary);\n}\n\n/* ============================================================================\n * BREADCRUMBS\n * ============================================================================ */\n\n.breadcrumbs {\n  margin-bottom: var(--spacing-3);\n}\n\n.breadcrumbList {\n  display: flex;\n  align-items: center;\n  list-style: none;\n  margin: 0;\n  padding: 0;\n  gap: var(--spacing-1);\n}\n\n.breadcrumbItem {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-1);\n}\n\n.breadcrumbSeparator {\n  color: var(--text-tertiary);\n  flex-shrink: 0;\n}\n\n.breadcrumbLink,\n.breadcrumbButton {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  color: var(--text-secondary);\n  text-decoration: none;\n  background: none;\n  border: none;\n  padding: 0;\n  cursor: pointer;\n  transition: color var(--mode-hover-duration);\n}\n\n.breadcrumbLink:hover,\n.breadcrumbButton:hover {\n  color: var(--text-primary);\n}\n\n.breadcrumbCurrent {\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-13);\n  color: var(--text-tertiary);\n}\n\n/* ============================================================================\n * MAIN HEADER\n * ============================================================================ */\n\n.main {\n  display: flex;\n  align-items: flex-start;\n  justify-content: space-between;\n  gap: var(--mode-spacing-element);\n  flex-wrap: wrap;\n}\n\n.titleSection {\n  flex: 1;\n  min-width: 0;\n}\n\n.titleRow {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-3);\n  flex-wrap: wrap;\n}\n\n.title {\n  font-family: var(--font-primary);\n  font-size: var(--mode-text-title);\n  font-weight: 600;\n  line-height: var(--line-height-tight);\n  color: var(--text-primary);\n  margin: 0;\n  letter-spacing: -0.02em;\n}\n\n.badge {\n  flex-shrink: 0;\n}\n\n.description {\n  font-family: var(--font-secondary);\n  font-size: var(--mode-text-body);\n  color: var(--text-secondary);\n  line-height: var(--line-height-relaxed);\n  margin: var(--spacing-1) 0 0 0;\n  max-width: 600px;\n}\n\n/* ============================================================================\n * ACTIONS\n * ============================================================================ */\n\n.actions {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  flex-shrink: 0;\n  flex-wrap: wrap;\n}\n\n/* ============================================================================\n * TABS\n * ============================================================================ */\n\n.tabs {\n  display: flex;\n  gap: 0;\n  margin-top: var(--spacing-4);\n  border-bottom: 1px solid var(--border-subtle);\n  margin-bottom: calc(var(--mode-spacing-element) * -1);\n  margin-left: calc(var(--mode-spacing-block) * -1);\n  margin-right: calc(var(--mode-spacing-block) * -1);\n  padding-left: var(--mode-spacing-block);\n  padding-right: var(--mode-spacing-block);\n}\n\n.tab {\n  display: flex;\n  align-items: center;\n  gap: var(--spacing-2);\n  font-family: var(--font-secondary);\n  font-size: var(--font-size-14);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-secondary);\n  background: none;\n  border: none;\n  padding: var(--spacing-3) var(--spacing-4);\n  cursor: pointer;\n  border-bottom: 2px solid transparent;\n  margin-bottom: -1px;\n  transition:\n    color var(--mode-hover-duration),\n    border-color var(--mode-hover-duration);\n}\n\n.tab:hover {\n  color: var(--text-primary);\n}\n\n.tabActive {\n  color: var(--interactive-primary);\n  border-bottom-color: var(--interactive-primary);\n}\n\n.tabBadge {\n  font-size: var(--font-size-12);\n  font-weight: var(--font-weight-medium);\n  color: var(--text-tertiary);\n  background: var(--surface-subtle);\n  padding: var(--spacing-0-5) var(--spacing-2);\n  border-radius: var(--radius-full);\n}\n\n.tabActive .tabBadge {\n  background: var(--interactive-primary);\n  color: var(--interactive-primary-text);\n}\n\n/* ============================================================================\n * SIZE VARIANTS\n * ============================================================================ */\n\n.size-sm {\n  padding: var(--spacing-3) var(--spacing-4);\n}\n\n.size-sm .title {\n  font-size: var(--font-size-18);\n}\n\n.size-sm .description {\n  font-size: var(--font-size-13);\n}\n\n.size-lg {\n  padding: var(--spacing-8) var(--spacing-8);\n}\n\n.size-lg .title {\n  font-size: var(--font-size-32);\n}\n\n/* ============================================================================\n * VARIANT: COMPACT\n * ============================================================================ */\n\n.variant-compact {\n  padding: var(--spacing-3) var(--spacing-4);\n}\n\n.variant-compact .main {\n  gap: var(--spacing-4);\n}\n\n.variant-compact .title {\n  font-size: var(--font-size-16);\n}\n\n.variant-compact .description {\n  font-size: var(--font-size-12);\n  margin-top: 0;\n}\n\n.variant-compact .breadcrumbs {\n  margin-bottom: var(--spacing-2);\n}\n\n/* ============================================================================\n * VARIANT: WITH-TABS\n * ============================================================================ */\n\n.variant-with-tabs {\n  padding-bottom: 0;\n}\n\n/* ============================================================================\n * VARIANT: TRANSPARENT (Minimal Product UI)\n * ============================================================================ */\n\n.variant-transparent {\n  background: transparent;\n  border-bottom: none;\n  padding: 0 var(--spacing-6);\n  padding-top: var(--spacing-6);\n  padding-bottom: 0;\n}\n\n.variant-transparent.bordered {\n  border-bottom: none;\n}\n\n/* Tabs in transparent variant - clean, no background */\n.variant-transparent .tabs {\n  margin-left: 0;\n  margin-right: 0;\n  padding-left: 0;\n  padding-right: 0;\n  margin-top: var(--spacing-4);\n  margin-bottom: 0;\n  border-bottom: 1px solid var(--border-subtle);\n}\n\n.variant-transparent .tab:first-child {\n  padding-left: 0;\n}\n\n/* ============================================================================\n * RESPONSIVE\n * ============================================================================ */\n\n@media (max-width: 768px) {\n  .pageHeader {\n    padding: var(--spacing-4);\n  }\n\n  .main {\n    flex-direction: column;\n    align-items: stretch;\n    gap: var(--spacing-4);\n  }\n\n  .actions {\n    width: 100%;\n    justify-content: flex-start;\n  }\n\n  /* Transparent variant keeps actions inline on mobile (product/compact UI) */\n  .variant-transparent .main {\n    flex-direction: row;\n    align-items: center;\n  }\n\n  .variant-transparent .actions {\n    width: auto;\n    flex-shrink: 0;\n  }\n\n  .tabs {\n    margin-left: -var(--spacing-4);\n    margin-right: -var(--spacing-4);\n    padding-left: var(--spacing-4);\n    padding-right: var(--spacing-4);\n    overflow-x: auto;\n  }\n\n  .tab {\n    white-space: nowrap;\n  }\n}\n"
+    },
+    {
+      "path": "packages/react/src/components/PageHeader/index.ts",
+      "type": "registry:index",
+      "content": "export { PageHeader } from \"./PageHeader\";\nexport type {\n  PageHeaderProps,\n  PageHeaderVariant,\n  PageHeaderSize,\n  BreadcrumbItem,\n  PageHeaderTab,\n} from \"./PageHeader.types\";\n"
+    }
+  ],
+  "props": [
+    {
+      "name": "title",
+      "type": "ReactNode",
+      "description": "Page title",
+      "required": true
+    },
+    {
+      "name": "description",
+      "type": "ReactNode",
+      "description": "Optional description below title"
+    },
+    {
+      "name": "breadcrumbs",
+      "type": "BreadcrumbItem[]",
+      "description": "Breadcrumb navigation items"
+    },
+    {
+      "name": "actions",
+      "type": "ReactNode",
+      "description": "Action buttons/elements aligned right"
+    },
+    {
+      "name": "tabs",
+      "type": "PageHeaderTab[]",
+      "description": "Tab navigation items"
+    },
+    {
+      "name": "activeTab",
+      "type": "string",
+      "description": "Currently active tab ID"
+    },
+    {
+      "name": "onTabChange",
+      "type": "(tabId: string) => void",
+      "description": "Tab change handler"
+    },
+    {
+      "name": "backLink",
+      "type": "{\n    label?: string",
+      "description": "Back link for navigation"
+    },
+    {
+      "name": "href",
+      "type": "string",
+      "description": ""
+    },
+    {
+      "name": "onClick",
+      "type": "() => void",
+      "description": ""
+    },
+    {
+      "name": "badge",
+      "type": "ReactNode",
+      "description": "Optional badge next to title"
+    },
+    {
+      "name": "variant",
+      "type": "PageHeaderVariant",
+      "description": "Visual variant",
+      "default": "default",
+      "values": [
+        "default",
+        "compact",
+        "with-tabs",
+        "transparent"
+      ]
+    },
+    {
+      "name": "size",
+      "type": "PageHeaderSize",
+      "description": "Size variant",
+      "default": "md",
+      "values": [
+        "sm",
+        "md",
+        "lg"
+      ]
+    },
+    {
+      "name": "bordered",
+      "type": "boolean",
+      "description": "Show border at bottom",
+      "default": true
+    },
+    {
+      "name": "sticky",
+      "type": "boolean",
+      "description": "Sticky positioning",
+      "default": false
+    }
+  ],
+  "modeAware": false,
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#page-header",
+    "local": "/library.html#page-header"
+  },
+  "import": "import { PageHeader } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}

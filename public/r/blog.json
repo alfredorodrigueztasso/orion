@@ -1,0 +1,28 @@
+{
+  "$schema": "https://orion-ds.dev/schema/registry-item.json",
+  "name": "blog",
+  "type": "registry:section",
+  "title": "Blog",
+  "description": "Blog section component",
+  "category": "marketing",
+  "files": [
+    {
+      "path": "packages/react/src/sections/Blog/Blog.tsx",
+      "type": "registry:component"
+    },
+    {
+      "path": "packages/react/src/sections/Blog/Blog.types.ts",
+      "type": "registry:types"
+    },
+    {
+      "path": "packages/react/src/sections/Blog/index.ts",
+      "type": "registry:index"
+    }
+  ],
+  "preview": {
+    "url": "https://orion-ds.dev/library.html#blog",
+    "local": "/library.html#blog"
+  },
+  "import": "import { Blog } from '@orion-ds/react'",
+  "cssImport": "import '@orion-ds/react/styles.css'"
+}
