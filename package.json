@@ -15,7 +15,7 @@
     "build:tokens": "ts-node scripts/generate-types.ts && node scripts/build-tokens.js",
     "build:packages": "turbo run build",
     "build:react": "turbo run build --filter=@orion/core --filter=@orion/react",
-    "build:registry": "npx ts-node --transpile-only scripts/generate-registry.ts",
+    "build:registry": "npx ts-node --transpile-only scripts/generate-registry.ts && npm run enrich:registry",
     "build:registry-api": "npx ts-node --transpile-only scripts/build-registry-api.ts",
     "build:mcp": "cd packages/mcp && npx tsc",
     "build:cli": "cd packages/cli && npx tsc",
@@ -48,7 +48,8 @@
     "lint:css:fix": "stylelint \"packages/**/*.css\" --fix",
     "create:component": "node scripts/create-component.js",
     "prepare": "husky",
-    "sync:manifest": "node scripts/sync-manifest.js"
+    "sync:manifest": "node scripts/sync-manifest.js",
+    "enrich:registry": "node scripts/enrich-registry.js"
   },
   "keywords": [
     "design-system",

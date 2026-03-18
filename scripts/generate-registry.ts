@@ -1036,6 +1036,8 @@ function main() {
     return stat.isDirectory();
   });
 
+// Load metadata (tags, related, patterns)
+  const metadata = JSON.parse(fs.readFileSync(path.join(ROOT, 'tokens/registry-metadata.json'), 'utf-8'));
   const allItems: Array<{ name: string; title: string; description: string; category: string; type: string }> = [];
   let componentCount = 0;
 
@@ -1202,3 +1204,25 @@ function main() {
 }
 
 main();
+
+// ============================================================================
+// Add Tags and Metadata to Registry Items
+// ============================================================================
+
+function addMetadataToItem(itemName: string, itemType: 'registry:component' | 'registry:section', metadata: any, item: any): any {
+  const kebabName = itemName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+  const section = itemType === 'registry:component' ? 'components' : 'sections';
+  
+  if (metadata[section] && metadata[section][kebabName]) {
+    const meta = metadata[section][kebabName];
+    item.tags = meta.tags || [];
+    if (itemType === 'registry:component') {
+      item.related_components = meta.related_components || [];
+    } else {
+      item.related_sections = meta.related_sections || [];
+    }
+    item.common_patterns = meta.common_patterns || [];
+  }
+  
+  return item;
+}

@@ -1,0 +1,96 @@
+{
+  "components": {
+    "button": {
+      "tags": ["action", "interaction", "cta", "control", "primary", "submit"],
+      "related_components": ["Field", "Modal", "Card"],
+      "common_patterns": ["used in Modal actions", "paired with Field in forms", "Icon + Button pattern", "button group layouts"]
+    },
+    "card": {
+      "tags": ["container", "layout", "grouping", "surface", "elevation", "content"],
+      "related_components": ["Badge", "Button", "Stack"],
+      "common_patterns": ["card grid layouts", "card with header/footer", "interactive cards", "featured content cards"]
+    },
+    "field": {
+      "tags": ["form", "input", "validation", "text", "control", "user-input"],
+      "related_components": ["Button", "Label", "Alert"],
+      "common_patterns": ["form rows", "search input", "email validation", "password with toggle"]
+    },
+    "modal": {
+      "tags": ["dialog", "overlay", "focus-trap", "alert", "confirmation", "form"],
+      "related_components": ["Button", "Field", "Alert"],
+      "common_patterns": ["confirmation dialog", "form modal", "alert modal", "action modal"]
+    },
+    "alert": {
+      "tags": ["notification", "status", "feedback", "warning", "error", "success", "info"],
+      "related_components": ["Icon", "Button", "Card"],
+      "common_patterns": ["success message", "error notification", "warning banner", "inline alerts"]
+    },
+    "badge": {
+      "tags": ["label", "tag", "status", "indicator", "accent", "pill"],
+      "related_components": ["Button", "Card"],
+      "common_patterns": ["status badges", "skill tags", "category labels", "count badges"]
+    },
+    "checkbox": {
+      "tags": ["form", "input", "control", "selection", "boolean"],
+      "related_components": ["Field", "RadioGroup", "Button"],
+      "common_patterns": ["checkbox list", "terms acceptance", "filter options"]
+    },
+    "avatar": {
+      "tags": ["profile", "user", "image", "initials", "display"],
+      "related_components": ["UserMenu", "Card"],
+      "common_patterns": ["user profile", "team member list", "comment author"]
+    },
+    "tabs": {
+      "tags": ["navigation", "layout", "tabbed-content", "sections", "switching"],
+      "related_components": ["Button", "Card"],
+      "common_patterns": ["tabbed interface", "content sections", "navigation tabs"]
+    },
+    "stepper": {
+      "tags": ["progress", "wizard", "steps", "multi-step", "flow"],
+      "related_components": ["Button", "Card"],
+      "common_patterns": ["form wizard", "checkout steps", "onboarding flow"]
+    }
+  },
+  "sections": {
+    "hero": {
+      "tags": ["landing", "hero", "headline", "cta", "banner", "display"],
+      "related_sections": ["Features", "CTA"],
+      "common_patterns": ["page hero", "section hero", "hero with background image"]
+    },
+    "features": {
+      "tags": ["benefits", "highlights", "grid", "cards", "product"],
+      "related_sections": ["Hero", "Pricing"],
+      "common_patterns": ["feature grid", "feature list", "feature cards"]
+    },
+    "pricing": {
+      "tags": ["commerce", "plans", "pricing-table", "tiers", "comparison"],
+      "related_sections": ["CTA", "Features"],
+      "common_patterns": ["pricing tiers", "comparison table", "plan selection"]
+    },
+    "cta": {
+      "tags": ["call-to-action", "conversion", "action", "button", "highlight"],
+      "related_sections": ["Hero", "Footer"],
+      "common_patterns": ["end-of-page CTA", "section CTA", "prominent call-to-action"]
+    },
+    "footer": {
+      "tags": ["navigation", "links", "company-info", "copyright", "legal"],
+      "related_sections": ["CTA"],
+      "common_patterns": ["page footer", "multi-column footer", "minimal footer"]
+    },
+    "testimonials": {
+      "tags": ["social-proof", "quotes", "customers", "reviews", "feedback"],
+      "related_sections": ["Features", "LogoCloud"],
+      "common_patterns": ["testimonial carousel", "testimonial grid", "featured testimonial"]
+    },
+    "faq": {
+      "tags": ["questions", "accordion", "help", "support", "faqs"],
+      "related_sections": ["Contact"],
+      "common_patterns": ["accordion FAQ", "FAQ grid", "searchable FAQ"]
+    },
+    "contact": {
+      "tags": ["form", "contact-form", "feedback", "inquiry", "support"],
+      "related_sections": ["Footer", "FAQ"],
+      "common_patterns": ["contact page", "inline contact form", "contact section"]
+    }
+  }
+}
