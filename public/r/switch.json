@@ -97,5 +97,18 @@
     "local": "/library.html#switch"
   },
   "import": "import { Switch } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "interactive",
+    "validation",
+    "switch"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Login form",
+    "Registration form",
+    "Inline form"
+  ]
 }

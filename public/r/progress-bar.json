@@ -113,5 +113,18 @@
     "local": "/library.html#progress-bar"
   },
   "import": "import { ProgressBar } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "progress bar"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
+  ]
 }

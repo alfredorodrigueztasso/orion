@@ -86,5 +86,18 @@
     "local": "/library.html#toggle-group"
   },
   "import": "import { ToggleGroup } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "interactive",
+    "validation",
+    "toggle group"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Login form",
+    "Registration form",
+    "Inline form"
+  ]
 }

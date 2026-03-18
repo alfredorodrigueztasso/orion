@@ -289,32 +289,4 @@
  * ─────────────────────────────────────────────────────────
  */
 
-[data-brand="orion"] {
-  --brand-accent: #1B5BFF;
-  --brand-accent-rgb: 27, 91, 255;
-}
-
-[data-brand="red"] {
-  --brand-accent: #D7282F;
-  --brand-accent-rgb: 215, 40, 47;
-}
-
-[data-brand="deepblue"] {
-  --brand-accent: #006FBA;
-  --brand-accent-rgb: 0, 111, 186;
-}
-
-[data-brand="orange"] {
-  --brand-accent: #F15D22;
-  --brand-accent-rgb: 241, 93, 34;
-}
-
-[data-brand="lemon"] {
-  --brand-accent: #FFDD00;
-  --brand-accent-rgb: 255, 221, 0;
-}
-
-[data-brand="ember"] {
-  --brand-accent: #FF6B35;
-  --brand-accent-rgb: 255, 107, 53;
-}
+/* Brand overrides are composed from primitives - no hardcoded colors */

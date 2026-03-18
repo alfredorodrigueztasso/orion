@@ -105,5 +105,21 @@
     "local": "/library.html#breadcrumb"
   },
   "import": "import { Breadcrumb } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "routing",
+    "menu",
+    "link",
+    "breadcrumb"
+  ],
+  "related_components": [
+    "Link",
+    "Navigation"
+  ],
+  "common_patterns": [
+    "Main navigation",
+    "Breadcrumbs",
+    "Menu dropdown"
+  ]
 }

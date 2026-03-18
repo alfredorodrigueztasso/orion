@@ -27,5 +27,17 @@
     "local": "/library.html#container"
   },
   "import": "import { Container } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
+  ]
 }

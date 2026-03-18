@@ -24,5 +24,19 @@
     "local": "/library.html#carousel-section"
   },
   "import": "import { CarouselSection } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "media",
+    "visual",
+    "image",
+    "icon",
+    "gallery",
+    "carousel section"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Icon set",
+    "Image gallery",
+    "Avatar display"
+  ]
 }

@@ -48,5 +48,21 @@
     "local": "/library.html#toast"
   },
   "import": "import { Toast } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "toast"
+  ],
+  "related_components": [
+    "Alert",
+    "NotificationCenter"
+  ],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
+  ]
 }

@@ -89,5 +89,18 @@
     "button",
     "badge",
     "alert"
+  ],
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid",
+    "theme controller"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
   ]
 }

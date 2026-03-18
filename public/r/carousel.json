@@ -147,5 +147,19 @@
     "local": "/library.html#carousel"
   },
   "import": "import { Carousel } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "media",
+    "visual",
+    "image",
+    "icon",
+    "gallery",
+    "carousel"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Icon set",
+    "Image gallery",
+    "Avatar display"
+  ]
 }

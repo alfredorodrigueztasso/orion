@@ -145,5 +145,18 @@
     "local": "/library.html#table"
   },
   "import": "import { Table } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "data",
+    "display",
+    "table",
+    "list",
+    "visualization"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Data table",
+    "List view",
+    "Card grid"
+  ]
 }

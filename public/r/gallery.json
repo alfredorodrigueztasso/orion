@@ -24,5 +24,18 @@
     "local": "/library.html#gallery"
   },
   "import": "import { Gallery } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "media",
+    "visual",
+    "image",
+    "icon",
+    "gallery"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Icon set",
+    "Image gallery",
+    "Avatar display"
+  ]
 }

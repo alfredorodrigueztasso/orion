@@ -24,5 +24,19 @@
     "local": "/library.html#blog"
   },
   "import": "import { Blog } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "marketing",
+    "section",
+    "hero",
+    "landing",
+    "page",
+    "blog"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Landing page section",
+    "Hero banner",
+    "Feature showcase"
+  ]
 }

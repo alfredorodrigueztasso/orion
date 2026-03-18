@@ -19,8 +19,11 @@ const path = require('path');
 
 // Configuration
 const PACKAGES = [
-  { name: '@orion-ds/core', path: 'packages/core' },
-  { name: '@orion-ds/react', path: 'packages/react' }
+  { name: '@orion-ds/react', path: 'packages/react' },
+  { name: '@orion-ds/cli', path: 'packages/cli' },
+  { name: '@orion-ds/create', path: 'packages/create' },
+  { name: '@orion-ds/mcp', path: 'packages/mcp' },
+  { name: '@orion-ds/validate', path: 'packages/validate' }
 ];
 
 const ROOT_DIR = path.resolve(__dirname, '..');

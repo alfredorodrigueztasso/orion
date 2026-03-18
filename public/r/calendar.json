@@ -33,5 +33,21 @@
     "local": "/library.html#calendar"
   },
   "import": "import { Calendar } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "interactive",
+    "validation",
+    "calendar"
+  ],
+  "related_components": [
+    "DatePicker",
+    "Stepper"
+  ],
+  "common_patterns": [
+    "Login form",
+    "Registration form",
+    "Inline form"
+  ]
 }

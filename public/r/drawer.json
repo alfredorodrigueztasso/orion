@@ -133,5 +133,19 @@
     "local": "/library.html#drawer"
   },
   "import": "import { Drawer } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "overlay",
+    "modal",
+    "popup",
+    "popover",
+    "dropdown",
+    "drawer"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Modal dialog",
+    "Dropdown menu",
+    "Floating panel"
+  ]
 }

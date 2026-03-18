@@ -24,5 +24,18 @@
     "local": "/library.html#agent-folder"
   },
   "import": "import { AgentFolder } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "routing",
+    "menu",
+    "link",
+    "agent folder"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Main navigation",
+    "Breadcrumbs",
+    "Menu dropdown"
+  ]
 }

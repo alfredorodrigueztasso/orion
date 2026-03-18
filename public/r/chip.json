@@ -106,5 +106,18 @@
     "local": "/library.html#chip"
   },
   "import": "import { Chip } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "interactive",
+    "validation",
+    "chip"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Login form",
+    "Registration form",
+    "Inline form"
+  ]
 }

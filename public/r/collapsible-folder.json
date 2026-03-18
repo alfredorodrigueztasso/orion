@@ -155,5 +155,18 @@
     "local": "/library.html#collapsible-folder"
   },
   "import": "import { CollapsibleFolder } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "routing",
+    "menu",
+    "link",
+    "collapsible folder"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Main navigation",
+    "Breadcrumbs",
+    "Menu dropdown"
+  ]
 }

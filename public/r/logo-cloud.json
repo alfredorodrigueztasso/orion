@@ -24,5 +24,19 @@
     "local": "/library.html#logo-cloud"
   },
   "import": "import { LogoCloud } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "marketing",
+    "section",
+    "hero",
+    "landing",
+    "page",
+    "logo cloud"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Landing page section",
+    "Hero banner",
+    "Feature showcase"
+  ]
 }

@@ -24,5 +24,19 @@
     "local": "/library.html#activity-feed-section"
   },
   "import": "import { ActivityFeed } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "data",
+    "display",
+    "table",
+    "list",
+    "visualization",
+    "activity feed section"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Data table",
+    "List view",
+    "Card grid"
+  ]
 }

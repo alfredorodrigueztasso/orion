@@ -118,5 +118,18 @@
     "local": "/library.html#select"
   },
   "import": "import { Select } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "interactive",
+    "validation",
+    "select"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Login form",
+    "Registration form",
+    "Inline form"
+  ]
 }

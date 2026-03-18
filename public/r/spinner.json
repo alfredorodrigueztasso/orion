@@ -87,5 +87,21 @@
     "local": "/library.html#spinner"
   },
   "import": "import { Spinner } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "spinner"
+  ],
+  "related_components": [
+    "ProgressBar",
+    "Skeleton"
+  ],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
+  ]
 }

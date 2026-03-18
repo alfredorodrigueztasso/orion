@@ -27,5 +27,18 @@
     "local": "/library.html#section"
   },
   "import": "import { Section } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid",
+    "section"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
+  ]
 }

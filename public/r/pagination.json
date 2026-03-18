@@ -105,5 +105,21 @@
     "local": "/library.html#pagination"
   },
   "import": "import { Pagination } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "routing",
+    "menu",
+    "link",
+    "pagination"
+  ],
+  "related_components": [
+    "DataTable",
+    "List"
+  ],
+  "common_patterns": [
+    "Main navigation",
+    "Breadcrumbs",
+    "Menu dropdown"
+  ]
 }

@@ -86,5 +86,18 @@
     "local": "/library.html#divider"
   },
   "import": "import { Divider } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid",
+    "divider"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
+  ]
 }

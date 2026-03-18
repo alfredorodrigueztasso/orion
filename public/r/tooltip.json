@@ -88,5 +88,18 @@
     "local": "/library.html#tooltip"
   },
   "import": "import { Tooltip } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "tooltip"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
+  ]
 }

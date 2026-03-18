@@ -85,5 +85,18 @@
   "cssImport": "import '@orion-ds/react/styles.css'",
   "dependencies": [
     "lucide-react"
+  ],
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "empty state"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
   ]
 }

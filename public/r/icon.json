@@ -91,5 +91,18 @@
   "cssImport": "import '@orion-ds/react/styles.css'",
   "dependencies": [
     "lucide-react"
+  ],
+  "tags": [
+    "media",
+    "visual",
+    "image",
+    "icon",
+    "gallery"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Icon set",
+    "Image gallery",
+    "Avatar display"
   ]
 }

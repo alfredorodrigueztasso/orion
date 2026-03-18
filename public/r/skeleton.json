@@ -92,5 +92,18 @@
     "local": "/library.html#skeleton"
   },
   "import": "import { Skeleton } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "skeleton"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
+  ]
 }

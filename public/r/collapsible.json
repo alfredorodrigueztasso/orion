@@ -55,5 +55,18 @@
     "local": "/library.html#collapsible"
   },
   "import": "import { Collapsible } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid",
+    "collapsible"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
+  ]
 }

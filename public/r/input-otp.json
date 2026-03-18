@@ -92,5 +92,18 @@
     "local": "/library.html#input-otp"
   },
   "import": "import { InputOTP } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid",
+    "input otp"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
+  ]
 }

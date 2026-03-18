@@ -110,5 +110,17 @@
     "local": "/library.html#link"
   },
   "import": "import { Link } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "routing",
+    "menu",
+    "link"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Main navigation",
+    "Breadcrumbs",
+    "Menu dropdown"
+  ]
 }

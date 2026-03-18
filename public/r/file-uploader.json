@@ -120,5 +120,18 @@
     "local": "/library.html#file-uploader"
   },
   "import": "import { FileUploader } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "form",
+    "input",
+    "interactive",
+    "validation",
+    "file uploader"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Login form",
+    "Registration form",
+    "Inline form"
+  ]
 }

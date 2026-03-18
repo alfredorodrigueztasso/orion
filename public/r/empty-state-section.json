@@ -24,5 +24,18 @@
     "local": "/library.html#empty-state-section"
   },
   "import": "import { EmptyState } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "feedback",
+    "status",
+    "notification",
+    "alert",
+    "empty state section"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Error message",
+    "Success state",
+    "Loading state"
+  ]
 }

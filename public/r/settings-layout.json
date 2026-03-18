@@ -24,5 +24,18 @@
     "local": "/library.html#settings-layout"
   },
   "import": "import { SettingsLayout } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "layout",
+    "structure",
+    "container",
+    "grid",
+    "settings layout"
+  ],
+  "related_sections": [],
+  "common_patterns": [
+    "Dashboard layout",
+    "Content container",
+    "Sidebar layout"
+  ]
 }

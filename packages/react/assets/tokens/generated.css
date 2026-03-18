@@ -82,7 +82,6 @@
     --spacing-10: 40px;
     --spacing-11: 44px;
     --spacing-12: 48px;
-    --spacing-14: 56px;
     --spacing-16: 64px;
     --spacing-20: 80px;
     --spacing-24: 96px;
@@ -117,9 +116,9 @@
     --surface-layer: var(--color-neutral-100);
     --surface-primary: var(--color-neutral-100);
     --surface-secondary: var(--color-neutral-50);
-    --surface-glass: color-mix(in srgb, {color.neutral.0} 70%, transparent);
-    --surface-sunken: color-mix(in srgb, {color.neutral.0} 40%, transparent);
-    --surface-overlay: color-mix(in srgb, {color.neutral.1000} 50%, transparent);
+    --surface-glass: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
+    --surface-sunken: color-mix(in srgb, var(--color-neutral-0) 40%, transparent);
+    --surface-overlay: color-mix(in srgb, var(--color-neutral-1000) 50%, transparent);
 
     /* Text */
     --text-primary: var(--color-neutral-900);
@@ -158,6 +157,20 @@
     --chart-3: var(--color-brand-700);
     --chart-4: var(--color-success-500);
     --chart-5: var(--color-warning-500);
+
+    /* Alert */
+    --alert-success-bg: var(--color-success-100);
+    --alert-success-text: var(--color-success-700);
+    --alert-success-border: var(--color-success-500);
+    --alert-error-bg: var(--color-error-100);
+    --alert-error-text: var(--color-error-700);
+    --alert-error-border: var(--color-error-500);
+    --alert-warning-bg: var(--color-warning-100);
+    --alert-warning-text: var(--color-warning-700);
+    --alert-warning-border: var(--color-warning-500);
+    --alert-info-bg: var(--color-info-100);
+    --alert-info-text: var(--color-info-700);
+    --alert-info-border: var(--color-info-500);
 }
 
 /* ─── Dark Theme Semantics ─── */
@@ -168,9 +181,9 @@
     --surface-layer: var(--color-neutral-900);
     --surface-primary: var(--color-neutral-900);
     --surface-secondary: var(--color-neutral-900);
-    --surface-glass: color-mix(in srgb, {color.neutral.950} 60%, transparent);
-    --surface-sunken: color-mix(in srgb, {color.neutral.950} 40%, transparent);
-    --surface-overlay: color-mix(in srgb, {color.neutral.1000} 70%, transparent);
+    --surface-glass: color-mix(in srgb, var(--color-neutral-950) 60%, transparent);
+    --surface-sunken: color-mix(in srgb, var(--color-neutral-950) 40%, transparent);
+    --surface-overlay: color-mix(in srgb, var(--color-neutral-1000) 70%, transparent);
 
     /* Text */
     --text-primary: var(--color-neutral-50);
@@ -188,7 +201,7 @@
     /* Interactive */
     --interactive-primary: var(--color-brand-500);
     --interactive-primary-hover: var(--color-brand-400);
-    --interactive-primary-text: var(--color-neutral-0);
+    --interactive-primary-text: var(--color-neutral-900);
     --interactive-secondary: var(--color-neutral-800);
     --interactive-secondary-hover: var(--color-neutral-700);
     --interactive-secondary-text: var(--color-neutral-50);
@@ -209,6 +222,20 @@
     --chart-3: var(--color-brand-600);
     --chart-4: var(--color-success-500);
     --chart-5: var(--color-warning-500);
+
+    /* Alert */
+    --alert-success-bg: color-mix(in srgb, var(--color-success-500) 20%, transparent);
+    --alert-success-text: var(--color-success-300);
+    --alert-success-border: var(--color-success-500);
+    --alert-error-bg: color-mix(in srgb, var(--color-error-500) 20%, transparent);
+    --alert-error-text: var(--color-error-300);
+    --alert-error-border: var(--color-error-500);
+    --alert-warning-bg: color-mix(in srgb, var(--color-warning-500) 20%, transparent);
+    --alert-warning-text: var(--color-warning-300);
+    --alert-warning-border: var(--color-warning-500);
+    --alert-info-bg: color-mix(in srgb, var(--color-info-500) 20%, transparent);
+    --alert-info-text: var(--color-info-300);
+    --alert-info-border: var(--color-info-500);
 }
 
 /* ─── Radius Scale (Button → Container Derivation) ─── */
@@ -237,13 +264,6 @@
     /* Derived: button="full" (9999px) → container="3xl" (36px) */
     --radius-button: var(--radius-full);
     --radius-container: var(--radius-3xl);
-}
-
-/* ─── Ember Radius ─── */
-[data-brand="ember"] {
-    /* Derived: button="md" (12px) → container="xl" (24px) */
-    --radius-button: var(--radius-md);
-    --radius-container: var(--radius-xl);
 }
 
 /* ─── Lemon Radius ─── */

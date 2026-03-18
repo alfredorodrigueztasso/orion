@@ -73,5 +73,18 @@
     "local": "/library.html#workspace-switcher"
   },
   "import": "import { WorkspaceSwitcher } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "navigation",
+    "routing",
+    "menu",
+    "link",
+    "workspace switcher"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Main navigation",
+    "Breadcrumbs",
+    "Menu dropdown"
+  ]
 }

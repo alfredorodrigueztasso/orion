@@ -126,5 +126,18 @@
     "local": "/library.html#dropdown"
   },
   "import": "import { Dropdown } from '@orion-ds/react'",
-  "cssImport": "import '@orion-ds/react/styles.css'"
+  "cssImport": "import '@orion-ds/react/styles.css'",
+  "tags": [
+    "overlay",
+    "modal",
+    "popup",
+    "popover",
+    "dropdown"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Modal dialog",
+    "Dropdown menu",
+    "Floating panel"
+  ]
 }

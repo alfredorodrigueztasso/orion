@@ -50,5 +50,19 @@
   "cssImport": "import '@orion-ds/react/styles.css'",
   "registryDependencies": [
     "button"
+  ],
+  "tags": [
+    "data",
+    "display",
+    "table",
+    "list",
+    "visualization",
+    "chat"
+  ],
+  "related_components": [],
+  "common_patterns": [
+    "Data table",
+    "List view",
+    "Card grid"
   ]
 }
