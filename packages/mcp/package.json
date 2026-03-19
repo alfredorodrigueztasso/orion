@@ -1,6 +1,6 @@
 {
   "name": "@orion-ds/mcp",
-  "version": "4.6.5",
+  "version": "4.7.0",
   "description": "Orion Design System MCP Server — AI-native component discovery, validation, and code generation",
   "type": "module",
   "main": "dist/server.js",
