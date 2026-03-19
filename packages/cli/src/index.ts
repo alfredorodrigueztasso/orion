@@ -14,6 +14,7 @@ import { list } from "./commands/list.js";
 import { create } from "./commands/create.js";
 import { build } from "./commands/build.js";
 import { info } from "./commands/info.js";
+import { doctor } from "./commands/doctor.js";
 import * as logger from "./lib/logger.js";
 
 const VERSION = "1.0.0";
@@ -29,6 +30,7 @@ function showHelp(): void {
     orion build                      Optimize components for production
     orion list                       List available components
     orion info <name>                Inspect a component in detail
+    orion doctor                     Check project health and diagnose issues
 
   ${logger.bold("Create options:")}
     --template=<react-app|vite-app|nextjs-app>   Project template (default: react-app)
@@ -67,6 +69,10 @@ function showHelp(): void {
     --local                         Use local registry
     --type=<type>                   Disambiguate by type
 
+  ${logger.bold("Doctor options:")}
+    --json                          Output JSON for scripting/CI
+    --verbose                       Show detailed check info
+
   ${logger.bold("Examples:")}
     npx @orion-ds/cli create my-app
     npx @orion-ds/cli create my-app --template=nextjs-app --brand=red
@@ -100,6 +106,9 @@ async function main(): Promise<void> {
       break;
     case "info":
       await info(commandArgs);
+      break;
+    case "doctor":
+      await doctor(commandArgs);
       break;
     case "--version":
     case "-v":

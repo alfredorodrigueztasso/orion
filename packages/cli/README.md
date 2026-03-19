@@ -375,6 +375,75 @@ Did you mean:
   orion info badge
 ```
 
+### `orion doctor`
+
+Check your project health and diagnose common issues. Validates configuration, dependencies, CSS imports, and registry connectivity.
+
+**Basic usage:**
+
+```bash
+npx @orion-ds/cli doctor          # Run all checks
+npx @orion-ds/cli doctor --json   # Output JSON for CI/CD
+npx @orion-ds/cli doctor --verbose # Show detailed info per check
+```
+
+**What it checks (6 health checks):**
+
+| Check | Validates | Fix |
+|-------|-----------|-----|
+| `orion.json` | Project is initialized | `orion init` |
+| `Config fields` | Required fields and valid values | Edit `orion.json` |
+| `@orion-ds/react` | Package installed and correct version | `npm install @orion-ds/react` |
+| `CSS import` | Styles loaded in entry file | Add `import '@orion-ds/react/styles.css'` |
+| `Output directories` | Component/section/template dirs exist | `orion add button` |
+| `Registry` | HTTP API is reachable | Check network / change `registryUrl` |
+
+**Example output:**
+
+```
+Orion Doctor — Project Health Check
+──────────────────────────────────────────────────────
+
+  ✓  orion.json         Found at ./orion.json
+  ✓  Config fields      All required fields present
+  ✓  @orion-ds/react    v4.8.0 installed
+  ✗  CSS import         Not found in entry files
+  ⚠  Output dirs        componentDir not created yet
+  ✓  Registry           https://orion-ds.dev/r (145ms)
+
+──────────────────────────────────────────────────────
+1 error, 1 warning
+
+Issues:
+  ✗  CSS import — Add to your entry file:
+       import '@orion-ds/react/styles.css'
+
+  ⚠  Output dirs — Run orion add to create directories:
+       orion add button
+```
+
+**Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--json` | Output JSON for scripting/CI pipelines | (human-readable) |
+| `--verbose` | Show detailed check information | (standard output) |
+
+**Exit codes** (useful for CI/CD):
+
+- `0` — All checks passed
+- `1` — One or more errors detected (you should fix these)
+
+**CI/CD example:**
+
+```bash
+# Validate project before building
+orion doctor && npm run build
+
+# Or check only, don't fail:
+orion doctor --json | jq '.summary'
+```
+
 ## Configuration: `orion.json`
 
 Created by `orion init` in your project root:

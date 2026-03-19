@@ -106,3 +106,16 @@ export interface ResolvedComponent {
 }
 
 export type ItemType = "component" | "section" | "template";
+
+export interface DoctorArgs {
+  fix: boolean;
+  json: boolean;
+  verbose: boolean;
+}
+
+export interface DoctorCheck {
+  name: string;
+  status: "pass" | "fail" | "warn" | "skip";
+  message: string;
+  fix?: string;
+}
