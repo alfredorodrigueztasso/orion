@@ -13,6 +13,7 @@ import { add } from "./commands/add.js";
 import { list } from "./commands/list.js";
 import { create } from "./commands/create.js";
 import { build } from "./commands/build.js";
+import { info } from "./commands/info.js";
 import * as logger from "./lib/logger.js";
 
 const VERSION = "1.0.0";
@@ -27,6 +28,7 @@ function showHelp(): void {
     orion add <name...>              Add components to your project
     orion build                      Optimize components for production
     orion list                       List available components
+    orion info <name>                Inspect a component in detail
 
   ${logger.bold("Create options:")}
     --template=<react-app|vite-app|nextjs-app>   Project template (default: react-app)
@@ -58,6 +60,13 @@ function showHelp(): void {
     --type=<component|section|template>   Filter by type
     --local                               Use local registry
 
+  ${logger.bold("Info options:")}
+    --json                          Output raw JSON
+    --examples                      Show code examples
+    --props                         Show props table only
+    --local                         Use local registry
+    --type=<type>                   Disambiguate by type
+
   ${logger.bold("Examples:")}
     npx @orion-ds/cli create my-app
     npx @orion-ds/cli create my-app --template=nextjs-app --brand=red
@@ -88,6 +97,9 @@ async function main(): Promise<void> {
       break;
     case "list":
       await list(commandArgs);
+      break;
+    case "info":
+      await info(commandArgs);
       break;
     case "--version":
     case "-v":

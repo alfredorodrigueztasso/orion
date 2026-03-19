@@ -51,6 +51,22 @@ export interface RegistryFile {
   content: string;
 }
 
+export interface AccessibilityInfo {
+  role?: string;
+  ariaAttributes?: string[];
+  keyboardNav?: Array<{ key: string; action: string }>;
+  notes?: string[];
+}
+
+export interface InfoArgs {
+  name: string;
+  type?: "component" | "section" | "template";
+  json: boolean;
+  examples: boolean;
+  props: boolean;
+  local: boolean;
+}
+
 export interface RegistryItem {
   $schema?: string;
   name: string;
@@ -68,12 +84,17 @@ export interface RegistryItem {
   }>;
   tokens?: string[];
   examples?: Array<{ title: string; code: string }>;
-  accessibility?: Record<string, unknown>;
+  accessibility?: AccessibilityInfo;
   modeAware?: boolean;
   import?: string;
   cssImport?: string;
   dependencies?: string[];
   registryDependencies?: string[];
+  tags?: string[];
+  related_components?: string[];
+  related_sections?: string[];
+  common_patterns?: string[];
+  preview?: { url: string; local?: string };
 }
 
 export interface ResolvedComponent {

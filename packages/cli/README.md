@@ -283,6 +283,98 @@ npx @orion-ds/cli list --type=template       # Templates only (10)
 npx @orion-ds/cli list --local               # Use local registry
 ```
 
+### `orion info <name>`
+
+Inspect detailed information about any component, section, or template without installing it. Shows props, design tokens, dependencies, accessibility details, and examples.
+
+**Basic usage:**
+
+```bash
+npx @orion-ds/cli info button                    # Full info for Button component
+npx @orion-ds/cli info hero --type=section       # Full info for Hero section
+npx @orion-ds/cli info landing --type=template   # Full info for Landing template
+```
+
+**Output modes:**
+
+```bash
+npx @orion-ds/cli info button --json             # Raw JSON output (for scripting)
+npx @orion-ds/cli info button --props            # Props table only
+npx @orion-ds/cli info button --examples         # Code examples only
+npx @orion-ds/cli info button --local            # Use local registry
+```
+
+**Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--json` | Output raw JSON for scripting/piping | (human-readable) |
+| `--props` | Show props table only | (show full info) |
+| `--examples` | Show code examples only | (show full info) |
+| `--type=<type>` | Filter by type: `component`, `section`, `template` | (auto-detect) |
+| `--local` | Use local registry (for Orion developers) | (use HTTP registry) |
+
+**Example output:**
+
+```
+Button
+────────────────────────────────────────────────────
+Type:         component
+Category:     actions
+Mode-aware:   yes
+
+Description:
+  Primary interactive element for triggering actions
+
+Import:
+  import { Button } from '@orion-ds/react'
+
+Props (5):
+  variant            ButtonVariant  "primary"  primary | secondary | ghost | danger
+  size               ButtonSize     "md"       sm | md | lg
+  disabled           boolean        false
+  loading            boolean        false
+  icon               ReactNode      —
+
+Design Tokens (6):
+  --interactive-primary
+  --interactive-primary-hover
+  --radius-control
+
+Dependencies:
+  npm:    lucide-react
+
+Accessibility:
+  Role:    button
+  ARIA:    aria-label, aria-pressed
+  Keys:
+    Enter → Activate button
+
+Related:
+  components:  Field, Modal, Card
+  tags:        action, interaction, cta
+
+Preview:
+  https://orion-ds.dev/library.html#button
+
+────────────────────────────────────────────────────
+Install: orion add button
+```
+
+**Fuzzy matching:**
+
+If you misspell a name, the CLI suggests alternatives:
+
+```bash
+$ npx @orion-ds/cli info buton
+error: Component not found: buton
+
+Did you mean:
+  orion info button
+  orion info banner
+  orion info badge
+```
+
 ## Configuration: `orion.json`
 
 Created by `orion init` in your project root:
