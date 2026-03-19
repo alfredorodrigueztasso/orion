@@ -152,6 +152,74 @@ Import:
   import { Card } from './components/orion/card'
 ```
 
+### `orion build`
+
+Optimize copied components for production. Analyzes CSS, tree-shakes unused tokens, minifies output, and generates bundle analysis reports.
+
+```bash
+orion build                                  # Basic build with default settings
+orion build --analyze                        # Generate build analysis report (JSON)
+orion build --no-tree-shake-tokens          # Keep all tokens (for debugging)
+orion build --watch                          # Watch for changes and rebuild
+orion build --output-dir=dist/orion          # Custom output directory
+orion build --analyze --verbose              # Detailed logging + analysis
+```
+
+**What it does:**
+
+1. **Analyzes** all `.module.css` files in your component directory
+2. **Identifies** which CSS tokens are actually used
+3. **Tree-shakes** unused `:root` variables (60-80% reduction)
+4. **Minifies** CSS (remove comments, whitespace)
+5. **Generates** optimized artifacts in `.orion-build/`
+
+**Output artifacts:**
+
+```
+.orion-build/
+├── index.css              # Optimized, minified CSS (5-15 KB)
+├── variables.css          # Used tokens only (1-3 KB)
+└── build-analysis.json    # (with --analyze flag)
+```
+
+**Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--analyze` | Generate JSON analysis report | (disabled) |
+| `--no-minify` | Skip CSS minification | (enabled) |
+| `--no-tree-shake-tokens` | Keep all tokens | (enabled) |
+| `--watch` | Watch for changes and rebuild | (disabled) |
+| `--stats-only` | Show stats without writing files | (disabled) |
+| `--verbose` | Detailed logging | (disabled) |
+| `--output-dir=<path>` | Output directory | `.orion-build` |
+
+**Example workflow:**
+
+```bash
+# Add some components
+npx @orion-ds/cli add button card modal
+
+# Optimize for production
+orion build --analyze
+
+# Result:
+# ✓ Analyzed 3 components
+# ✓ Tree-shaking removed 205 unused tokens (71% reduction)
+# ✓ CSS minification saved 2.1 KB
+#
+# 📊 Build Summary
+#    Original:  28.5 KB
+#    Final:     5.8 KB
+#    Reduction: 77%
+#
+# 📁 Import in your app:
+#    import './.orion-build/index.css'
+
+# Or use analysis to optimize further
+cat .orion-build/build-analysis.json
+```
+
 ### `orion list`
 
 Show all 90+ available items, grouped by type and category. Marks installed components.

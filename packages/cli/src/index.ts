@@ -12,6 +12,7 @@ import { init } from "./commands/init.js";
 import { add } from "./commands/add.js";
 import { list } from "./commands/list.js";
 import { create } from "./commands/create.js";
+import { build } from "./commands/build.js";
 import * as logger from "./lib/logger.js";
 
 const VERSION = "1.0.0";
@@ -24,6 +25,7 @@ function showHelp(): void {
     orion create <project>           Scaffold a new Orion project
     orion init                       Initialize orion.json
     orion add <name...>              Add components to your project
+    orion build                      Optimize components for production
     orion list                       List available components
 
   ${logger.bold("Create options:")}
@@ -34,6 +36,15 @@ function showHelp(): void {
     --no-install                                 Skip npm install
     --no-git                                     Skip git init
     --overwrite                                  Overwrite existing directory
+
+  ${logger.bold("Build options:")}
+    --analyze                       Generate build analysis report (JSON)
+    --no-minify                     Skip CSS minification
+    --no-tree-shake-tokens          Keep all tokens (disable tree-shaking)
+    --watch                         Watch for changes and rebuild
+    --stats-only                    Show stats without writing files
+    --verbose                       Detailed logging
+    --output-dir=<path>             Output directory (default: .orion-build)
 
   ${logger.bold("Init options:")}
     --yes, -y                        Skip prompts, use defaults
@@ -71,6 +82,9 @@ async function main(): Promise<void> {
       break;
     case "add":
       await add(commandArgs);
+      break;
+    case "build":
+      await build(commandArgs);
       break;
     case "list":
       await list(commandArgs);
