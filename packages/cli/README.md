@@ -107,49 +107,100 @@ import "@orion-ds/react/styles.css";
 
 ### `orion add <name...>`
 
-Copy components from the registry into your project. Resolves dependencies automatically.
+Copy components, sections, or templates from the registry into your project. Resolves dependencies automatically.
+
+**Basic usage:**
 
 ```bash
 npx @orion-ds/cli add button                    # Single component
 npx @orion-ds/cli add button card modal          # Multiple components
 npx @orion-ds/cli add theme-controller --yes     # Skip confirmation (auto-resolves 6 deps)
+```
+
+**Filter by type, category, or tag:**
+
+```bash
 npx @orion-ds/cli add hero --type=section        # Add a section
+npx @orion-ds/cli add --category=forms --yes     # Add all form components (8 items)
+npx @orion-ds/cli add --tag=marketing --yes      # Add all marketing-tagged items
+```
+
+**Preview and options:**
+
+```bash
+npx @orion-ds/cli add button --dry-run           # Preview files without writing
+npx @orion-ds/cli add chart --no-install         # Copy files, skip npm install
 npx @orion-ds/cli add button --overwrite         # Overwrite existing files
 npx @orion-ds/cli add button --local             # Use local registry (for Orion devs)
 ```
 
+**Options:**
+
+| Option | Description | Default |
+|--------|-------------|---------|
+| `--type=<type>` | Filter by type: `component`, `section`, `template` | (no filter) |
+| `--category=<name>` | Add all items in category (e.g., `forms`, `navigation`) | (no filter) |
+| `--tag=<name>` | Add all items with tag (e.g., `marketing`, `pro`) | (no filter) |
+| `--dry-run` | Preview files without writing to disk | (disabled) |
+| `--no-install` | Copy files but skip npm dependency install | (install by default) |
+| `--yes` / `-y` | Skip all confirmation prompts | (prompt by default) |
+| `--overwrite` | Overwrite existing files | (skip existing) |
+| `--local` | Use local registry (for Orion contributors) | (use HTTP registry) |
+
 **What happens:**
 
-1. Fetches component JSON from the registry
-2. Resolves `registryDependencies` recursively (BFS)
-3. Asks confirmation if extra dependencies are needed
-4. Transforms imports (hooks/contexts -> `@orion-ds/react`, cross-component -> relative)
-5. Writes files to your configured directory
-6. Installs npm dependencies (e.g., `lucide-react`)
+1. Validates component/section/template names (or filters by category/tag)
+2. Checks if items are already installed (skips unless `--overwrite`)
+3. Shows fuzzy suggestions if name is misspelled (e.g., "botton" → "button, banner, badge?")
+4. Asks confirmation for dependencies and bulk adds (unless `--yes`)
+5. Fetches component JSON from registry
+6. Resolves `registryDependencies` recursively (BFS)
+7. Transforms imports (hooks/contexts -> `@orion-ds/react`, cross-component -> relative)
+8. Writes files to configured directory (or previews with `--dry-run`)
+9. Installs npm dependencies (unless `--no-install`)
 
-**Output example:**
+**Example outputs:**
 
+Single component:
 ```
-+ button
-+ card
-
 Files:
   src/components/orion/button/Button.tsx
   src/components/orion/button/Button.types.ts
   src/components/orion/button/Button.module.css
   src/components/orion/button/index.ts
-  src/components/orion/card/Card.tsx
-  src/components/orion/card/Card.types.ts
-  src/components/orion/card/Card.module.css
-  src/components/orion/card/index.ts
-
-Dependencies installed: lucide-react
 
 Done!
 
 Import:
   import { Button } from './components/orion/button'
-  import { Card } from './components/orion/card'
+
+Preview:
+  https://orion-ds.dev/library.html#button
+```
+
+Dry-run preview:
+```
+DRY RUN — These files would be created:
+  src/components/orion/theme-controller/ThemeController.tsx (new)
+  src/components/orion/card/Card.tsx (new)
+  src/components/orion/switch/Switch.tsx (new)
+
+Run without --dry-run to install these files.
+```
+
+Category bulk add:
+```
+8 items will be added:
+  field — Text input field
+  checkbox — Checkbox control
+  radio — Radio button
+  select — Select dropdown
+  combobox — Searchable select
+  slider — Range slider
+  textarea — Multi-line text input
+  switch — Toggle switch
+
+Proceed? (y/N)
 ```
 
 ### `orion build`

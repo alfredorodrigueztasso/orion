@@ -20,6 +20,22 @@ export interface RegistryIndexItem {
   description: string;
   category: string;
   registryUrl: string;
+  tags?: string[];
+  preview?: {
+    url: string;
+  };
+}
+
+export interface AddArgs {
+  names: string[];
+  type?: "component" | "section" | "template";
+  category?: string;
+  tag?: string;
+  dryRun: boolean;
+  yes: boolean;
+  overwrite: boolean;
+  local: boolean;
+  noInstall: boolean;
 }
 
 export interface RegistryIndex {
