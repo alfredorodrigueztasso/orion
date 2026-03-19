@@ -196,7 +196,30 @@ export function generateReport(
       gzipped: formatBytes(gzipSize),
     },
     recommendations: generateRecommendations(
-      {} as BuildStatistics,
+      {
+        timestamp: new Date().toISOString(),
+        projectName: "my-app",
+        buildTime: buildTimeMs,
+        components: components.map((c) => ({
+          name: c.name,
+          path: c.path,
+          cssSize: formatBytes(c.cssSize),
+          tokensReferenced: c.tokens.length,
+        })),
+        tokens: {
+          total: totalTokens,
+          referenced: referencedTokens,
+          percentage,
+          byCategory: categorizeTokens(Array.from(usedTokens)),
+        },
+        bundleSize: {
+          original: formatBytes(originalSize),
+          minified: formatBytes(minifiedSize),
+          reduction: `${reduction}%`,
+          gzipped: formatBytes(gzipSize),
+        },
+        recommendations: [],
+      } as BuildStatistics,
       totalTokens - referencedTokens,
     ),
   };
