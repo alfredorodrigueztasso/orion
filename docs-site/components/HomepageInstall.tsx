@@ -4,18 +4,22 @@ import { useState } from 'react';
 import { Card } from '@/components/ClientComponents';
 import { Terminal, Copy, Check } from 'lucide-react';
 
+type Tab = 'package' | 'mcp';
 type PM = 'npm' | 'pnpm' | 'yarn';
 
-const COMMANDS: Record<PM, string> = {
+const PACKAGE_COMMANDS: Record<PM, string> = {
   npm: 'npm install @orion-ds/react',
   pnpm: 'pnpm add @orion-ds/react',
   yarn: 'yarn add @orion-ds/react',
 };
 
+const MCP_COMMAND = 'npx @orion-ds/mcp';
+
 export default function HomepageInstall() {
+  const [tab, setTab] = useState<Tab>('package');
   const [pm, setPm] = useState<PM>('pnpm');
   const [copied, setCopied] = useState(false);
-  const command = COMMANDS[pm];
+  const command = tab === 'package' ? PACKAGE_COMMANDS[pm] : MCP_COMMAND;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(command);
@@ -49,7 +53,7 @@ export default function HomepageInstall() {
 
       <Card variant="base">
         <Card.Body style={{ padding: 'var(--spacing-4)' }}>
-          {/* Package manager tabs */}
+          {/* Main tabs: Package vs MCP */}
           <div
             style={{
               display: 'flex',
@@ -59,30 +63,67 @@ export default function HomepageInstall() {
               paddingBottom: 'var(--spacing-3)',
             }}
           >
-            {(['pnpm', 'npm', 'yarn'] as PM[]).map((p) => (
+            {(['package', 'mcp'] as Tab[]).map((t) => (
               <button
-                key={p}
-                onClick={() => setPm(p)}
+                key={t}
+                onClick={() => setTab(t)}
                 style={{
                   padding: 'var(--spacing-2) var(--spacing-3)',
                   border: 'none',
                   borderRadius: 'var(--radius-sm)',
-                  background: pm === p ? 'var(--interactive-primary)' : 'transparent',
+                  background: tab === t ? 'var(--interactive-primary)' : 'transparent',
                   color:
-                    pm === p
+                    tab === t
                       ? 'var(--interactive-primary-text)'
                       : 'var(--text-secondary)',
                   cursor: 'pointer',
                   fontSize: '0.8125rem',
-                  fontWeight: pm === p ? 600 : 400,
+                  fontWeight: tab === t ? 600 : 400,
                   fontFamily: 'var(--font-secondary)',
                   transition: 'all 0.15s',
+                  textTransform: 'capitalize',
                 }}
               >
-                {p}
+                {t === 'package' ? 'Package' : 'MCP Server'}
               </button>
             ))}
           </div>
+
+          {/* Package manager sub-tabs (only show for package tab) */}
+          {tab === 'package' && (
+            <div
+              style={{
+                display: 'flex',
+                gap: 'var(--spacing-2)',
+                marginBottom: 'var(--spacing-4)',
+                paddingBottom: 'var(--spacing-3)',
+              }}
+            >
+              {(['pnpm', 'npm', 'yarn'] as PM[]).map((p) => (
+                <button
+                  key={p}
+                  onClick={() => setPm(p)}
+                  style={{
+                    padding: 'var(--spacing-2) var(--spacing-3)',
+                    border: 'none',
+                    borderRadius: 'var(--radius-sm)',
+                    background: pm === p ? 'var(--surface-layer)' : 'transparent',
+                    color:
+                      pm === p
+                        ? 'var(--text-primary)'
+                        : 'var(--text-tertiary)',
+                    cursor: 'pointer',
+                    fontSize: '0.75rem',
+                    fontWeight: pm === p ? 600 : 400,
+                    fontFamily: 'var(--font-secondary)',
+                    transition: 'all 0.15s',
+                  }}
+                >
+                  {p}
+                </button>
+              ))}
+            </div>
+          )}
 
           {/* Command display */}
           <div
@@ -141,6 +182,22 @@ export default function HomepageInstall() {
               {copied ? <Check size={16} /> : <Copy size={16} />}
             </button>
           </div>
+
+          {/* MCP note */}
+          {tab === 'mcp' && (
+            <div
+              style={{
+                marginTop: 'var(--spacing-4)',
+                padding: 'var(--spacing-3)',
+                backgroundColor: 'var(--surface-layer)',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.875rem',
+                color: 'var(--text-secondary)',
+              }}
+            >
+              Claude Code can then install any Orion component directly from your conversation.
+            </div>
+          )}
         </Card.Body>
       </Card>
     </section>

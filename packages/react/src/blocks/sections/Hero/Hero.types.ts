@@ -13,6 +13,8 @@ export interface HeroHighlightProps {
 }
 
 export interface HeroProps {
+  /** Eyebrow badge above the title */
+  badge?: ReactNode;
   /** Heading content (can include Hero.Highlight) */
   title: ReactNode;
   /** Supporting text below the title */
@@ -21,6 +23,8 @@ export interface HeroProps {
   primaryAction?: ReactNode;
   /** Secondary call-to-action element */
   secondaryAction?: ReactNode;
+  /** Social proof / trust indicators below actions */
+  trustIndicators?: ReactNode;
   /** Text alignment */
   align?: HeroAlign;
   /** Size variant controlling spacing and typography */

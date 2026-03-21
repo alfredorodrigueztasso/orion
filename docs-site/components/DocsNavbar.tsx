@@ -4,10 +4,11 @@ import { usePathname } from 'next/navigation';
 import { Paintbrush, Sun, Moon, Check } from 'lucide-react';
 import { Navbar, Button, Popover } from '@/components/ClientComponents';
 import { useThemeContext } from '@orion-ds/react';
+import Link from 'next/link';
 
 // ─── Brand Picker ─────────────────────────────────────────────────────────────
 
-type BrandId = 'orion' | 'red' | 'deepblue' | 'orange';
+type BrandId = 'orion' | 'red' | 'deepblue' | 'orange' | 'ember' | 'lemon';
 
 // Brand accent colors — used only in this picker UI control, not in component styles
 const BRANDS: { id: BrandId; label: string; color: string }[] = [
@@ -15,6 +16,8 @@ const BRANDS: { id: BrandId; label: string; color: string }[] = [
   { id: 'red', label: 'Red', color: '#D7282F' },
   { id: 'deepblue', label: 'Deep Blue', color: '#006FBA' },
   { id: 'orange', label: 'Orange', color: '#F15D22' },
+  { id: 'ember', label: 'Ember', color: '#C1272D' },
+  { id: 'lemon', label: 'Lemon', color: '#FBBF24' },
 ];
 
 function BrandSwatch({
@@ -117,6 +120,7 @@ const NAV_LINKS = [
   { label: 'Components', href: '/components', match: '/components' },
   { label: 'Sections', href: '/sections', match: '/sections' },
   { label: 'Templates', href: '/templates', match: '/templates' },
+  { label: 'Pricing', href: '/pricing', match: '/pricing' },
 ];
 
 // ─── Navbar ───────────────────────────────────────────────────────────────────
@@ -130,7 +134,7 @@ export function DocsNavbar() {
         <span
           style={{
             fontWeight: 700,
-            fontSize: '0.9375rem',
+            fontSize: 'var(--font-size-base)',
             letterSpacing: '-0.02em',
           }}
         >
@@ -138,7 +142,7 @@ export function DocsNavbar() {
         </span>
         <span
           style={{
-            fontSize: '0.6875rem',
+            fontSize: 'var(--font-size-xs)',
             color: 'var(--text-tertiary)',
             marginLeft: 'var(--spacing-1)',
             fontWeight: 500,
@@ -163,10 +167,15 @@ export function DocsNavbar() {
       </Navbar.Nav>
 
       <Navbar.Actions>
+        <Link href="/pricing">
+          <Button variant="primary" size="sm">
+            Founding Member
+          </Button>
+        </Link>
         <BrandPicker />
         <ThemeToggle />
         <a
-          href="https://github.com/orion-ds/orion"
+          href="https://github.com/alfredorodrigueztasso/orion"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="View on GitHub"

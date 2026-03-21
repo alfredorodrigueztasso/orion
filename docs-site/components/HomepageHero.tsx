@@ -22,20 +22,21 @@ export default function HomepageHero({
       align="center"
       badge={
         <Badge variant="secondary" size="sm">
-          ✨ Chain of Truth
+          ✦ MCP Server included — Claude Code ready
         </Badge>
       }
       title={
         <>
-          The{' '}
+          The design system
+          <br />
           <Hero.Highlight>
-            AI-first
+            your AI agent
           </Hero.Highlight>
           <br />
-          Design System
+          already knows.
         </>
       }
-      description="Token-governed components that eliminate UI hallucination. Build consistent interfaces at scale — without visual drift."
+      description="Install components with a single instruction to Claude Code. 72 components, 26 sections, 10 templates — governed by Chain of Truth."
       primaryAction={
         <Link href="/docs/getting-started">
           <Button
@@ -43,18 +44,18 @@ export default function HomepageHero({
             variant="primary"
             iconRight={<ArrowRight size={20} />}
           >
-            Get Started
+            Get Started Free
           </Button>
         </Link>
       }
       secondaryAction={
         <Link
-          href="https://github.com/orion-ds/orion"
+          href="https://github.com/alfredorodrigueztasso/orion"
           target="_blank"
           rel="noopener noreferrer"
         >
           <Button size="lg" variant="ghost">
-            GitHub
+            View on GitHub
           </Button>
         </Link>
       }
@@ -67,15 +68,9 @@ export default function HomepageHero({
             flexWrap: 'wrap',
           }}
         >
-          <Link href="/components">
-            <Badge variant="secondary" size="sm">↗ {componentCount} components</Badge>
-          </Link>
-          <Link href="/sections">
-            <Badge variant="secondary" size="sm">↗ {sectionCount} sections</Badge>
-          </Link>
-          <Link href="/templates">
-            <Badge variant="secondary" size="sm">↗ {templateCount} templates</Badge>
-          </Link>
+          <Badge variant="secondary" size="sm">↗ 72 components</Badge>
+          <Badge variant="secondary" size="sm">↗ MCP Server</Badge>
+          <Badge variant="secondary" size="sm">↗ MIT License</Badge>
         </div>
       }
     />

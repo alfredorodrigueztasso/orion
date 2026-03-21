@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import ComponentPreview from './ComponentPreview';
 
-type Brand = 'orion' | 'red' | 'deepblue' | 'orange';
+type Brand = 'orion' | 'red' | 'deepblue' | 'orange' | 'ember' | 'lemon';
 type Mode = 'display' | 'product' | 'app';
 
 interface PreviewBrandModeBarProps {
@@ -15,6 +15,8 @@ const BRANDS: Array<{ id: Brand; label: string; color: string }> = [
   { id: 'red', label: 'Red', color: '#D7282F' },
   { id: 'deepblue', label: 'Deep Blue', color: '#006FBA' },
   { id: 'orange', label: 'Orange', color: '#F15D22' },
+  { id: 'ember', label: 'Ember', color: '#C1272D' },
+  { id: 'lemon', label: 'Lemon', color: '#FBBF24' },
 ];
 
 const MODES: Mode[] = ['display', 'product', 'app'];

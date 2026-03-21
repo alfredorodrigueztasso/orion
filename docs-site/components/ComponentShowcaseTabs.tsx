@@ -1,16 +1,19 @@
 'use client';
 
+import { Tabs } from '@orion-ds/react';
 import {
-  Tabs,
   Button,
   Badge,
   Card,
   Alert,
   Field,
+  Select,
+  Switch,
   Toggle,
   ProgressBar,
   Spinner,
   Avatar,
+  Chip,
   Breadcrumb,
   Pagination,
   SearchInput,
@@ -42,7 +45,7 @@ const ButtonShowcase = () => (
 
 const CardShowcase = () => (
   <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: 'var(--spacing-4)' }}>
-    {(['base', 'elevated', 'glass'] as const).map((variant) => (
+    {(['base', 'outlined', 'elevated'] as const).map((variant) => (
       <Card key={variant} variant={variant} interactive>
         <Card.Header>
           <span style={{ fontWeight: 600 }}>Card {variant}</span>
@@ -132,7 +135,7 @@ const NavigationShowcase = () => (
     </div>
     <div>
       <div style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: 'var(--spacing-3)' }}>Pagination</div>
-      <Pagination currentPage={1} totalPages={5} onPageChange={() => {}} />
+      <Pagination current={1} total={5} />
     </div>
   </div>
 );
@@ -141,12 +144,52 @@ const AvatarShowcase = () => (
   <div style={{ display: 'flex', gap: 'var(--spacing-4)', alignItems: 'center', flexWrap: 'wrap' }}>
     {['sm', 'md', 'lg'].map((size) => (
       <div key={size} style={{ textAlign: 'center' }}>
-        <Avatar size={size as any} alt="Alex Chen" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" />
+        <Avatar size={size as any} name="Alex Chen" src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" />
         <p style={{ fontSize: '0.75rem', color: 'var(--text-tertiary)', marginTop: 'var(--spacing-2)' }}>
           {size}
         </p>
       </div>
     ))}
+  </div>
+);
+
+const AIAgentsShowcase = () => (
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 'var(--spacing-8)' }}>
+    <div style={{
+      display: 'flex',
+      flexDirection: 'column',
+      alignItems: 'center',
+      gap: 'var(--spacing-4)',
+      padding: 'var(--spacing-8)',
+      background: 'var(--surface-layer)',
+      borderRadius: 'var(--radius-control)',
+      border: '1px solid var(--border-subtle)',
+    }}>
+      <Spinner size="lg" />
+      <p style={{ color: 'var(--text-secondary)', margin: 0 }}>Agent thinking...</p>
+    </div>
+
+    <div style={{ padding: 'var(--spacing-6)' }}>
+      <p style={{ fontSize: '0.875rem', color: 'var(--text-secondary)', marginBottom: 'var(--spacing-4)' }}>
+        Processing steps
+      </p>
+      <ProgressBar value={45} />
+    </div>
+
+    <div style={{
+      padding: 'var(--spacing-6)',
+      background: 'var(--surface-layer)',
+      borderRadius: 'var(--radius-control)',
+      border: '2px solid var(--interactive-primary)',
+      textAlign: 'center',
+    }}>
+      <p style={{ color: 'var(--text-primary)', margin: 0, fontWeight: 600 }}>
+        Full AI component library coming in Pro →
+      </p>
+      <p style={{ color: 'var(--text-secondary)', margin: 'var(--spacing-2) 0 0', fontSize: '0.875rem' }}>
+        AgentThinking, StreamText, ToolCall, ActionConfirmation, and more
+      </p>
+    </div>
   </div>
 );
 
@@ -176,6 +219,7 @@ export default function ComponentShowcaseTabs() {
           { id: 'feedback', label: 'Feedback', content: <FeedbackShowcase /> },
           { id: 'navigation', label: 'Navigation', content: <NavigationShowcase /> },
           { id: 'avatars', label: 'Avatars', content: <AvatarShowcase /> },
+          { id: 'ai-agents', label: 'AI Agents', content: <AIAgentsShowcase /> },
         ]}
         defaultTab="buttons"
       />

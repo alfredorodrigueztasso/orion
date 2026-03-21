@@ -16,7 +16,7 @@ export default function HomepageStats({ counts }: HomepageStatsProps) {
       eyebrow="The numbers"
       title="Everything you need, nothing you don't"
       description="Orion ships with a complete set of production-ready building blocks."
-      columns={4}
+      columns={5}
       variant="cards"
       background="subtle"
       highlightValue={true}
@@ -40,7 +40,12 @@ export default function HomepageStats({ counts }: HomepageStatsProps) {
         {
           value: '9',
           label: 'MCP Tools',
-          description: 'AI agent integrations',
+          description: 'AI agent integrations built-in',
+        },
+        {
+          value: '200',
+          label: 'Founding Member spots',
+          description: 'Limited early access pricing',
         },
       ]}
     />

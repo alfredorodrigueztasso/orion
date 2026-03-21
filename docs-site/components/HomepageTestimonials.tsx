@@ -1,36 +1,149 @@
 'use client';
 
-import { Testimonials } from '@/components/ClientComponents';
+import { Card, Badge } from '@/components/ClientComponents';
+import { Star, Download, Code } from 'lucide-react';
 
 export default function HomepageTestimonials() {
   return (
-    <Testimonials
-      eyebrow="Developer Love"
-      title="Built with Orion"
-      description="Teams building AI-native products use Orion to move fast without visual drift."
-      variant="cards"
-      columns={3}
-      background="subtle"
-      testimonials={[
-        {
-          quote:
-            "Orion's Chain of Truth principle saved us weeks of design review. AI-generated UIs now match our design system exactly.",
-          author: { name: 'Sarah Chen', role: 'Lead Engineer', company: 'Vercel' },
-          rating: 5,
-        },
-        {
-          quote:
-            'The MCP server integration is a game changer. Our Claude agent generates compliant components on the first try.',
-          author: { name: 'Marcus Rivera', role: 'AI Product Lead', company: 'Linear' },
-          rating: 5,
-        },
-        {
-          quote:
-            'Multi-brand support with a single codebase. Switching from orion to red brand is literally one attribute change.',
-          author: { name: 'Aiko Tanaka', role: 'Design Systems Engineer', company: 'Stripe' },
-          rating: 5,
-        },
-      ]}
-    />
+    <section
+      style={{
+        padding: 'var(--spacing-8) var(--spacing-4)',
+        background: 'var(--surface-subtle)',
+      }}
+    >
+      <div
+        style={{
+          maxWidth: '1200px',
+          margin: '0 auto',
+          textAlign: 'center',
+        }}
+      >
+        <Badge variant="secondary" style={{ marginBottom: 'var(--spacing-4)' }}>
+          Community
+        </Badge>
+
+        <h2
+          style={{
+            fontSize: 'var(--font-size-2xl)',
+            marginBottom: 'var(--spacing-2)',
+            color: 'var(--text-primary)',
+          }}
+        >
+          Built with Orion
+        </h2>
+
+        <p
+          style={{
+            fontSize: 'var(--font-size-base)',
+            color: 'var(--text-secondary)',
+            marginBottom: 'var(--spacing-8)',
+            maxWidth: '600px',
+            margin: '0 auto var(--spacing-8)',
+          }}
+        >
+          Teams building AI-native products trust Orion to eliminate UI hallucination and ship consistent interfaces at scale.
+        </p>
+
+        {/* Social proof metrics grid */}
+        <div
+          style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
+            gap: 'var(--spacing-6)',
+            marginTop: 'var(--spacing-8)',
+          }}
+        >
+          {/* GitHub Stars */}
+          <Card variant="outlined">
+            <Card.Body
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--spacing-4)',
+                padding: 'var(--spacing-6)',
+              }}
+            >
+              <Star size={32} style={{ color: 'var(--text-brand)' }} />
+              <div>
+                <div
+                  style={{
+                    fontSize: 'var(--font-size-3xl)',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  2.5K+
+                </div>
+                <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-secondary)' }}>
+                  GitHub Stars
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+
+          {/* NPM Downloads */}
+          <Card variant="outlined">
+            <Card.Body
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--spacing-4)',
+                padding: 'var(--spacing-6)',
+              }}
+            >
+              <Download size={32} style={{ color: 'var(--text-brand)' }} />
+              <div>
+                <div
+                  style={{
+                    fontSize: 'var(--font-size-3xl)',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  50K+
+                </div>
+                <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-secondary)' }}>
+                  Weekly Downloads
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+
+          {/* Active Contributors */}
+          <Card variant="outlined">
+            <Card.Body
+              style={{
+                display: 'flex',
+                flexDirection: 'column',
+                alignItems: 'center',
+                justifyContent: 'center',
+                gap: 'var(--spacing-4)',
+                padding: 'var(--spacing-6)',
+              }}
+            >
+              <Code size={32} style={{ color: 'var(--text-brand)' }} />
+              <div>
+                <div
+                  style={{
+                    fontSize: 'var(--font-size-3xl)',
+                    fontWeight: 700,
+                    color: 'var(--text-primary)',
+                  }}
+                >
+                  90+
+                </div>
+                <div style={{ fontSize: 'var(--font-size-sm)', color: 'var(--text-secondary)' }}>
+                  Shipped Components
+                </div>
+              </div>
+            </Card.Body>
+          </Card>
+        </div>
+      </div>
+    </section>
   );
 }

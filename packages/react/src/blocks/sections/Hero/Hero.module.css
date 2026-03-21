@@ -91,6 +91,25 @@
   background-clip: text;
 }
 
+/* Badge - eyebrow above title */
+.badge {
+  margin-bottom: var(--spacing-3);
+}
+
+/* Trust indicators - social proof below actions */
+.trustIndicators {
+  margin-top: var(--spacing-6);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--spacing-3);
+  justify-content: center;
+  opacity: 0.7;
+}
+
+.left .trustIndicators {
+  justify-content: flex-start;
+}
+
 @media (max-width: 768px) {
   .title {
     font-size: var(--font-size-2xl);

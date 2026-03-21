@@ -2,6 +2,7 @@
   padding: var(--spacing-16) var(--spacing-6);
   text-align: center;
   border-radius: var(--radius-container);
+  margin: var(--spacing-6) var(--spacing-4);
 }
 
 .default {

@@ -1,7 +1,7 @@
 'use client';
 
 import { usePathname } from 'next/navigation';
-import { Home, BookOpen, Download, Palette, Terminal, Layers, Grid3x3, Layout, FileText } from 'lucide-react';
+import { Home, BookOpen, Download, Palette, Terminal, Layers, Grid3x3, Layout, FileText, Bot } from 'lucide-react';
 import { Sidebar } from '@/components/ClientComponents';
 import type { SidebarSection } from '@orion-ds/react';
 
@@ -19,6 +19,7 @@ const sections: SidebarSection[] = [
       { id: 'theming', label: 'Theming', href: '/docs/theming', icon: <Palette size={18} /> },
       { id: 'cli', label: 'CLI', href: '/docs/cli', icon: <Terminal size={18} /> },
       { id: 'tokens', label: 'Tokens', href: '/docs/tokens', icon: <Layers size={18} /> },
+      { id: 'mcp', label: 'MCP Server', href: '/docs/mcp', icon: <Bot size={18} /> },
     ],
   },
   {
@@ -38,6 +39,7 @@ function getActiveItem(pathname: string): string {
   if (pathname === '/docs/theming') return 'theming';
   if (pathname === '/docs/cli') return 'cli';
   if (pathname === '/docs/tokens') return 'tokens';
+  if (pathname === '/docs/mcp') return 'mcp';
   if (pathname.startsWith('/components')) return 'components';
   if (pathname.startsWith('/sections')) return 'sections';
   if (pathname.startsWith('/templates')) return 'templates';

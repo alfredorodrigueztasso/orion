@@ -12,7 +12,7 @@ export const metadata: Metadata = {
     default: 'Orion Design System',
     template: '%s | Orion Design System',
   },
-  description: 'AI-first design system for beautiful, consistent interfaces built on the Chain of Truth principle',
+  description: 'The design system your AI agent already knows. 72 components, MCP Server native, Chain of Truth architecture.',
   keywords: [
     'design system',
     'react',
@@ -21,6 +21,11 @@ export const metadata: Metadata = {
     'typescript',
     'ai-first',
     'orion',
+    'mcp',
+    'claude code',
+    'cursor',
+    'ai-native',
+    'agent',
   ],
   authors: [
     {
@@ -31,15 +36,15 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     locale: 'en_US',
-    url: 'https://orion-ds.dev',
+    url: 'https://orionui.dev',
     title: 'Orion Design System',
-    description: 'AI-first design system for beautiful, consistent interfaces',
+    description: 'The design system your AI agent already knows. 72 components, MCP Server native, Chain of Truth architecture.',
     siteName: 'Orion Design System',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Orion Design System',
-    description: 'AI-first design system for beautiful, consistent interfaces',
+    description: 'The design system your AI agent already knows. 72 components, MCP Server native, Chain of Truth architecture.',
   },
 };
 

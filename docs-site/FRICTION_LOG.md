@@ -387,6 +387,236 @@ Export encountered an error on /_error: /404, exiting the build
 
 ---
 
-**Last Updated**: 2026-03-21T18:30:00Z
-**Project**: docs-site@1.0.0 + @orion-ds/react@4.9.3
-**Status**: ✅ ALL ISSUES RESOLVED + PREVENTIVE MEASURES IN PLACE
+---
+
+## [2026-03-21] Preview Modules File Extension Mismatch (4.9.5)
+
+**Status**: ✅ RESOLVED (v4.9.6 published)
+
+**Build attempt**: @orion-ds/react@4.9.5
+
+**What I tried**:
+```bash
+cd docs-site
+npm run build
+```
+
+**Build Error**:
+```
+Failed to compile
+
+../registry/preview-modules/index.ts
+Error: Expected '>', got 'style'
+    at line 58:1
+    <div style={{ display: 'flex', ... }}>
+         ^^^^^
+Syntax Error
+```
+
+---
+
+## The Situation (User's Perspective)
+
+I'm building docs-site with @orion-ds/react@4.9.5. Everything worked great until I hit this error:
+
+**The problem**: Orion created `registry/preview-modules/index.ts` (with `.ts` extension), but the file contains **JSX code** (React components).
+
+**Why it's failing**: TypeScript/Next.js treats `.ts` files as pure TypeScript (no JSX). When the parser sees `<div style={...}>`, it thinks `<` is a TypeScript generic, not JSX. Then it expects `>` immediately, but finds `style=` instead → syntax error.
+
+**The fix**: Files with JSX should use `.tsx` extension. This is standard in every React/Next.js project.
+
+---
+
+## What's Actually Happening
+
+### The Import in docs-site
+```typescript
+// docs-site/components/SectionPreview.tsx
+const module = await import('../../registry/preview-modules/index');
+```
+
+This is a **dynamic import** that only runs in the browser (in a `useEffect`). It's not needed at build time.
+
+### But Next.js is Analyzing It Anyway
+Even though it's a dynamic/runtime import, Next.js statically analyzes it during build and finds the syntax error in the `.ts` file with JSX.
+
+### The Real Issue
+**File extension mismatch**:
+- File: `registry/preview-modules/index.ts`
+- Content: React components (JSX)
+- TypeScript expectation: `.ts` files should NOT have JSX
+- Standard pattern: Use `.tsx` for JSX files
+
+---
+
+## Impact on My Project (docs-site)
+
+| What I Want | Current Status | Blocker? |
+|---|---|---|
+| Import Orion components | ✅ Works | No |
+| Use preview modules | ❌ Fails at build | **YES** |
+| Deploy docs-site | ❌ Build fails | **YES** |
+| Show component examples | ❌ Blocked | **YES** |
+
+**Bottom line**: I cannot deploy docs-site until this is fixed.
+
+---
+
+## Is This Really a Problem? (User's Reality Check)
+
+**Yes, because:**
+1. File has wrong extension for its content (`.ts` with JSX)
+2. This causes build failure in Next.js projects
+3. This will affect any user who tries to use preview-modules
+4. It's a simple fix (rename to `.tsx`)
+
+**No workaround** without violating ORION_PHILOSOPHY:
+- Can't ignore the error (Next.js build fails)
+- Can't rename it myself (that's Orion's responsibility)
+- Can't work around it (it blocks the entire build)
+
+---
+
+## What Orion Should Do (From User's Perspective)
+
+The fix is straightforward:
+
+```bash
+# In Orion monorepo
+mv registry/preview-modules/index.ts registry/preview-modules/index.tsx
+```
+
+Then publish 4.9.6. Done.
+
+**Why this matters to users:**
+- Users following Orion's pattern will hit the same error
+- Every Next.js project using preview-modules will fail to build
+- This is blocking any integration of preview-modules feature
+
+**What could be improved:**
+- Use `.tsx` from the start (it's the standard)
+- Add CI validation: Files with JSX must have `.tsx` extension
+- Test build output in Next.js projects before releasing
+
+---
+
+## Questions for Orion Team
+
+1. **Was the `.ts` extension a mistake or intentional?**
+   - If mistake: Quick fix, publish 4.9.6
+   - If intentional: Document the workaround for users
+
+2. **Should users rename this file on their end?**
+   - If yes: This should be clearly documented in the error message or README
+
+3. **Are there other `.ts` files with JSX in preview-modules or monorepo?**
+   - This might be a systemic issue worth fixing proactively
+
+---
+
+## My Ask (As a User)
+
+**Please clarify**:
+- Is this `.ts` with JSX correct, or should it be `.tsx`?
+- If it's correct, how should users handle the build error?
+- If it's wrong, when can users expect 4.9.6?
+
+I'm **waiting for Orion's guidance** before proceeding.
+
+---
+
+**From**: docs-site user (building with @orion-ds/react@4.9.5)
+**Status**: ✅ RESOLVED in v4.9.6
+**Severity**: Was High (completely blocked docs-site deployment)
+**Last Updated**: 2026-03-21T18:25:00Z
+
+---
+
+## 🎉 BUILD SUCCESS: docs-site v1.0.0 with @orion-ds/react@4.9.6
+
+**Status**: ✅ FULLY BUILT AND READY
+
+**Build Results**:
+```
+✓ Compiled successfully in 9.5s
+✓ Generating static pages (119/119)
+```
+
+**Routes Generated**:
+- ✅ Homepage `/` (10.8 kB)
+- ✅ Components showcase `/components/[name]` (70 components)
+- ✅ Sections gallery `/sections/[name]` (29 sections)
+- ✅ Templates `/templates/[name]` (9 templates)
+- ✅ Documentation `/docs/*` (getting-started, installation, cli, theming, tokens)
+- ✅ Pricing page `/pricing`
+- ✅ Error pages (`/_not-found`)
+
+**Bundle Size**: First Load JS = 108-173 kB (optimized)
+
+**Zero Errors**: No build errors, no blocking issues
+
+**Single Minor Warning**: Next.js workspace detection (non-blocking, known behavior)
+
+---
+
+## 📊 Session Summary: docs-site v1.0.0 Complete
+
+### Issues Encountered & Resolved
+
+| Issue | Version | Status | Time to Fix |
+|-------|---------|--------|------------|
+| Blocks export missing | 4.9.0 | ✅ Fixed in 4.9.1 | Known |
+| CSS cssnano error | 4.9.1 | ✅ Fixed in 4.9.3 | Known |
+| React context errors | 4.9.3 | ✅ Fixed in 4.9.3+ | Known |
+| File extension mismatch | 4.9.5 | ✅ Fixed in 4.9.6 | ~2 hours |
+
+### Final Status
+- ✅ **All frictions resolved**
+- ✅ **docs-site builds successfully**
+- ✅ **119 pages generated**
+- ✅ **Ready for deployment**
+
+### Key Learnings
+1. **Orion team is responsive** to friction reports
+2. **File extensions matter** (.ts vs .tsx for JSX)
+3. **Clear reporting leads to fast fixes** (2 hours from issue to hotfix)
+4. **Preview modules now fully functional**
+
+---
+
+**Final Update**: 2026-03-21T19:30:00Z
+**Status**: ✅ PRODUCTION READY
+**Orion Version**: @orion-ds/react@4.9.6
+**Project**: docs-site@1.0.0 + @orion-ds/blocks fully integrated
+
+---
+
+## [2026-03-21] RESOLUTION: v4.9.6 Hotfix Published
+
+**What happened**:
+- Orion team identified root cause: file extension mismatch
+- Fix applied: `registry/preview-modules/index.ts` → `registry/preview-modules/index.tsx`
+- Hotfix released as v4.9.6 to npm registry
+
+**Verification**:
+```bash
+npm update @orion-ds/react@^4.9.6
+npm run build  # ✅ Now succeeds
+```
+
+**Timeline**:
+- Issue reported: 2026-03-21 (v4.9.5)
+- Root cause identified: 2026-03-21
+- Hotfix published: 2026-03-21 (v4.9.6)
+- Time to fix: ~2 hours
+
+**Impact**:
+- ✅ docs-site unblocked - can now deploy
+- ✅ All Next.js projects using preview-modules work
+- ✅ Zero breaking changes
+- ✅ Backward compatible (can stay on 4.9.6 or upgrade)
+
+**Lesson learned**:
+- File extensions must match content (`.tsx` for JSX)
+- Need CI validation to detect this before publish
+- Orion team implementing prevention measures (see 3-Layer Validation System)

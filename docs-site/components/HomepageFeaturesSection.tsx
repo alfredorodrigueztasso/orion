@@ -9,8 +9,8 @@ interface HomepageFeaturesSectionProps {
 }
 
 export default function HomepageFeaturesSection({
-  componentCount = 39,
-  sectionCount = 41,
+  componentCount = 72,
+  sectionCount = 26,
 }: HomepageFeaturesSectionProps) {
   return (
     <Features
@@ -23,40 +23,40 @@ export default function HomepageFeaturesSection({
       centered={true}
       items={[
         {
+          icon: <Bot size={24} />,
+          title: 'MCP Server native',
+          description:
+            '9 tools for Claude Code, Cursor and Cline. Your AI agent discovers, searches and installs Orion components directly — without leaving the conversation.',
+        },
+        {
           icon: <Zap size={24} />,
           title: 'Chain of Truth',
           description:
-            'Token-governed architecture eliminates UI hallucination. Primitives, semantics, and components stay strictly separated.',
+            'Token-governed architecture that eliminates UI hallucination. Primitives, semantics, and components stay strictly separated — AI-generated code stays consistent.',
         },
         {
           icon: <Package size={24} />,
-          title: `${componentCount} Components`,
+          title: `${componentCount} components`,
           description:
-            'Production-ready React components with full TypeScript support, built-in accessibility, and Storybook coverage.',
+            'Production-ready React components with full TypeScript support, built-in accessibility, and AI-first validation.',
         },
         {
           icon: <Layers size={24} />,
-          title: `${sectionCount} Sections`,
+          title: `${sectionCount} sections`,
           description:
             'Pre-built page blocks for hero sections, features grids, pricing tables, and more — ready to compose.',
         },
         {
           icon: <Palette size={24} />,
-          title: '4 Brands',
+          title: '6 brands',
           description:
-            'Multi-brand architecture via data-brand. Switch between orion, red, deepblue, and orange with a single attribute.',
+            'Multi-brand architecture via data-brand. Switch between orion, red, deepblue, orange, ember and lemon with a single attribute.',
         },
         {
           icon: <Moon size={24} />,
-          title: 'Dark Mode',
+          title: 'Dark mode',
           description:
             'Full light/dark theme support with semantic token mappings. No hardcoded colors, zero visual drift.',
-        },
-        {
-          icon: <Bot size={24} />,
-          title: 'AI-Native',
-          description:
-            'MCP server, CLI installer, HTTP registry API, and validation tools purpose-built for AI-assisted development.',
         },
       ]}
     />

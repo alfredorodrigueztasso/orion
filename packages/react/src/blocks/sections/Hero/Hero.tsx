@@ -14,10 +14,12 @@ type HeroComponent = React.ForwardRefExoticComponent<
 export const Hero = React.forwardRef<HTMLElement, HeroProps>(
   (
     {
+      badge,
       title,
       description,
       primaryAction,
       secondaryAction,
+      trustIndicators,
       align = "center",
       size = "md",
       className,
@@ -33,6 +35,7 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
         className={`${styles.section} ${sizeClass} ${alignClass} ${className || ""}`}
       >
         <div className={styles.container}>
+          {badge && <div className={styles.badge}>{badge}</div>}
           <h1 className={styles.title}>{title}</h1>
           {description && <p className={styles.description}>{description}</p>}
           {(primaryAction || secondaryAction) && (
@@ -40,6 +43,9 @@ export const Hero = React.forwardRef<HTMLElement, HeroProps>(
               {primaryAction}
               {secondaryAction}
             </div>
+          )}
+          {trustIndicators && (
+            <div className={styles.trustIndicators}>{trustIndicators}</div>
           )}
         </div>
       </section>

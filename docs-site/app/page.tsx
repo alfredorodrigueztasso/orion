@@ -6,6 +6,7 @@ import HomepageLogoCloud from '@/components/HomepageLogoCloud';
 import HomepageFeaturesSection from '@/components/HomepageFeaturesSection';
 import HomepageTestimonials from '@/components/HomepageTestimonials';
 import HomepageStats from '@/components/HomepageStats';
+import HomepagePricing from '@/components/HomepagePricing';
 import HomepageCTA from '@/components/HomepageCTA';
 
 export default async function HomePage() {
@@ -41,8 +42,6 @@ export default async function HomePage() {
         sectionCount={metadata.sectionCount}
       />
 
-      <HomepageTestimonials />
-
       <HomepageStats
         counts={{
           components: metadata.componentCount,
@@ -50,6 +49,10 @@ export default async function HomePage() {
           templates: metadata.templateCount,
         }}
       />
+
+      <HomepagePricing />
+
+      <HomepageTestimonials />
 
       <HomepageCTA />
     </>

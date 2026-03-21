@@ -19,7 +19,7 @@ import type { BadgeProps } from "./Badge.types";
 import styles from "./Badge.module.css";
 
 export const Badge: React.FC<BadgeProps> = ({
-  variant = "neutral",
+  variant = "secondary",
   size = "md",
   dot = false,
   className,
