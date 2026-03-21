@@ -15,14 +15,23 @@ const events = [
   { id: "1", date: "Mar 2024", title: "Launch", description: "Public release" },
   { id: "2", date: "Jun 2024", title: "v2.0", description: "Major update" },
   { id: "3", date: "Sep 2024", title: "Growth", description: "10K users" },
-  { id: "4", date: "Mar 2025", title: "TypeScript", description: "Full TS support" },
+  {
+    id: "4",
+    date: "Mar 2025",
+    title: "TypeScript",
+    description: "Full TS support",
+  },
 ];
 
 export const Default: Story = { args: { title: "Journey", events } };
 
-export const Compact: Story = { args: { title: "Timeline", events: events.slice(0, 2), compact: true } };
+export const Compact: Story = {
+  args: { title: "Timeline", events: events.slice(0, 2), compact: true },
+};
 
-export const Vertical: Story = { args: { title: "Milestones", events, orientation: "vertical" } };
+export const Vertical: Story = {
+  args: { title: "Milestones", events, orientation: "vertical" },
+};
 
 export const AllVariants: Story = {
   args: {

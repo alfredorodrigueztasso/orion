@@ -4,46 +4,46 @@ A searchable command palette with keyboard navigation, similar to VS Code or Lin
 
 ## When to Use
 
-| Scenario | Use Command |
-|----------|-------------|
-| Global command palette (Cmd+K) | ✅ Yes - use Command.Dialog |
-| Searchable action menu | ✅ Yes - filters items as you type |
-| Inline command list | ✅ Yes - embeds directly in page |
-| Simple dropdown selection | ❌ No - use Select or Combobox instead |
-| Navigation menu | ❌ No - use Navbar or Sidebar instead |
+| Scenario                       | Use Command                            |
+| ------------------------------ | -------------------------------------- |
+| Global command palette (Cmd+K) | ✅ Yes - use Command.Dialog            |
+| Searchable action menu         | ✅ Yes - filters items as you type     |
+| Inline command list            | ✅ Yes - embeds directly in page       |
+| Simple dropdown selection      | ❌ No - use Select or Combobox instead |
+| Navigation menu                | ❌ No - use Navbar or Sidebar instead  |
 
 ## Props Reference
 
 ### Command (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | string | — | Controlled search value |
-| onValueChange | (value: string) => void | — | Search value change callback |
-| filter | (value, search) => number | — | Custom filter function (0=hide, 1=show) |
-| children | ReactNode | — | Compound components |
-| className | string | — | Additional class name |
+| Prop          | Type                      | Default | Description                             |
+| ------------- | ------------------------- | ------- | --------------------------------------- |
+| value         | string                    | —       | Controlled search value                 |
+| onValueChange | (value: string) => void   | —       | Search value change callback            |
+| filter        | (value, search) => number | —       | Custom filter function (0=hide, 1=show) |
+| children      | ReactNode                 | —       | Compound components                     |
+| className     | string                    | —       | Additional class name                   |
 
 ### Command.Dialog
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| open | boolean | — | Whether dialog is open |
-| onOpenChange | (open: boolean) => void | — | Open state change callback |
+| Prop         | Type                    | Default | Description                |
+| ------------ | ----------------------- | ------- | -------------------------- |
+| open         | boolean                 | —       | Whether dialog is open     |
+| onOpenChange | (open: boolean) => void | —       | Open state change callback |
 
 ### Command.Item
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| onSelect | () => void | — | Callback when item is selected |
-| disabled | boolean | false | Whether item is disabled |
-| value | string | — | Search value for filtering |
+| Prop     | Type       | Default | Description                    |
+| -------- | ---------- | ------- | ------------------------------ |
+| onSelect | () => void | —       | Callback when item is selected |
+| disabled | boolean    | false   | Whether item is disabled       |
+| value    | string     | —       | Search value for filtering     |
 
 ### Command.Group
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| heading | string | — | Group heading text |
+| Prop    | Type   | Default | Description        |
+| ------- | ------ | ------- | ------------------ |
+| heading | string | —       | Group heading text |
 
 ## Examples
 
@@ -65,7 +65,7 @@ import { Command } from "@orion-ds/react";
       </Command.Item>
     </Command.Group>
   </Command.List>
-</Command.Dialog>
+</Command.Dialog>;
 ```
 
 ### Inline Command List
@@ -76,7 +76,9 @@ import { Command } from "@orion-ds/react";
   <Command.List>
     <Command.Group heading="Navigation">
       <Command.Item onSelect={() => navigate("/home")}>Home</Command.Item>
-      <Command.Item onSelect={() => navigate("/settings")}>Settings</Command.Item>
+      <Command.Item onSelect={() => navigate("/settings")}>
+        Settings
+      </Command.Item>
     </Command.Group>
     <Command.Separator />
     <Command.Group heading="Account">

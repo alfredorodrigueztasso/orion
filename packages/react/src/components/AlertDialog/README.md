@@ -4,33 +4,33 @@ A modal dialog that forces user acknowledgment before proceeding, unlike Modal w
 
 ## When to Use
 
-| Scenario | Use AlertDialog |
-|----------|-----------------|
+| Scenario                             | Use AlertDialog                       |
+| ------------------------------------ | ------------------------------------- |
 | Destructive actions (delete, remove) | ✅ Yes - forces explicit confirmation |
-| Irreversible operations | ✅ Yes - prevents accidental actions |
-| Critical warnings requiring response | ✅ Yes - blocks until user responds |
-| Informational messages | ❌ No - use Modal or Toast instead |
-| Forms or complex content | ❌ No - use Modal instead |
+| Irreversible operations              | ✅ Yes - prevents accidental actions  |
+| Critical warnings requiring response | ✅ Yes - blocks until user responds   |
+| Informational messages               | ❌ No - use Modal or Toast instead    |
+| Forms or complex content             | ❌ No - use Modal instead             |
 
 ## Props Reference
 
 ### AlertDialog (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| open | boolean | — | Whether the dialog is open |
-| onClose | () => void | — | Callback when dialog should close |
-| closeOnBackdrop | boolean | false | Allow closing by clicking backdrop |
-| closeOnEscape | boolean | false | Allow closing with Escape key |
-| children | ReactNode | — | Dialog content (use compound components) |
-| className | string | — | Additional class name |
+| Prop            | Type       | Default | Description                              |
+| --------------- | ---------- | ------- | ---------------------------------------- |
+| open            | boolean    | —       | Whether the dialog is open               |
+| onClose         | () => void | —       | Callback when dialog should close        |
+| closeOnBackdrop | boolean    | false   | Allow closing by clicking backdrop       |
+| closeOnEscape   | boolean    | false   | Allow closing with Escape key            |
+| children        | ReactNode  | —       | Dialog content (use compound components) |
+| className       | string     | —       | Additional class name                    |
 
 ### AlertDialog.Icon
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| variant | 'info' \| 'warning' \| 'danger' | 'info' | Controls icon and accent color |
-| icon | ReactNode | — | Custom icon (overrides default) |
+| Prop    | Type                            | Default | Description                     |
+| ------- | ------------------------------- | ------- | ------------------------------- |
+| variant | 'info' \| 'warning' \| 'danger' | 'info'  | Controls icon and accent color  |
+| icon    | ReactNode                       | —       | Custom icon (overrides default) |
 
 ### AlertDialog.Title, AlertDialog.Description, AlertDialog.Actions
 
@@ -50,10 +50,14 @@ import { AlertDialog, Button } from "@orion-ds/react";
     This action cannot be undone.
   </AlertDialog.Description>
   <AlertDialog.Actions>
-    <Button variant="ghost" onClick={handleClose}>Cancel</Button>
-    <Button variant="primary" onClick={handleConfirm}>Delete</Button>
+    <Button variant="ghost" onClick={handleClose}>
+      Cancel
+    </Button>
+    <Button variant="primary" onClick={handleConfirm}>
+      Delete
+    </Button>
   </AlertDialog.Actions>
-</AlertDialog>
+</AlertDialog>;
 ```
 
 ### Warning Variant
@@ -66,8 +70,12 @@ import { AlertDialog, Button } from "@orion-ds/react";
     You have unsaved changes. Are you sure you want to leave?
   </AlertDialog.Description>
   <AlertDialog.Actions>
-    <Button variant="ghost" onClick={handleClose}>Stay</Button>
-    <Button variant="primary" onClick={handleLeave}>Leave</Button>
+    <Button variant="ghost" onClick={handleClose}>
+      Stay
+    </Button>
+    <Button variant="primary" onClick={handleLeave}>
+      Leave
+    </Button>
   </AlertDialog.Actions>
 </AlertDialog>
 ```

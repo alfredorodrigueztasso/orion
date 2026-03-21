@@ -18,7 +18,13 @@ const items = [
       name: "Sarah",
       role: "Director",
       company: "Tech Corp",
-      avatar: <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" alt="Sarah" style={{ width: "40px", height: "40px", borderRadius: "50%" }} />,
+      avatar: (
+        <img
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah"
+          alt="Sarah"
+          style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+        />
+      ),
     },
     rating: 5,
   },
@@ -28,7 +34,13 @@ const items = [
       name: "Alex",
       role: "Lead",
       company: "Digital",
-      avatar: <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" alt="Alex" style={{ width: "40px", height: "40px", borderRadius: "50%" }} />,
+      avatar: (
+        <img
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Alex"
+          alt="Alex"
+          style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+        />
+      ),
     },
     rating: 5,
   },
@@ -38,17 +50,33 @@ const items = [
       name: "Jordan",
       role: "CTO",
       company: "Labs",
-      avatar: <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan" alt="Jordan" style={{ width: "40px", height: "40px", borderRadius: "50%" }} />,
+      avatar: (
+        <img
+          src="https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan"
+          alt="Jordan"
+          style={{ width: "40px", height: "40px", borderRadius: "50%" }}
+        />
+      ),
     },
     rating: 5,
   },
 ];
 
-export const Default: Story = { args: { title: "Testimonials", description: "Loved worldwide", testimonials: items } };
+export const Default: Story = {
+  args: {
+    title: "Testimonials",
+    description: "Loved worldwide",
+    testimonials: items,
+  },
+};
 
-export const TwoColumns: Story = { args: { title: "Reviews", testimonials: items.slice(0, 2), columns: 2 } };
+export const TwoColumns: Story = {
+  args: { title: "Reviews", testimonials: items.slice(0, 2), columns: 2 },
+};
 
-export const Minimal: Story = { args: { title: "Feedback", testimonials: items, variant: "minimal" } };
+export const Minimal: Story = {
+  args: { title: "Feedback", testimonials: items, variant: "minimal" },
+};
 
 export const AllVariants: Story = {
   args: {
@@ -59,7 +87,11 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <Testimonials {...args} />
-      <Testimonials title="2-Col" testimonials={items.slice(0, 2)} columns={2} />
+      <Testimonials
+        title="2-Col"
+        testimonials={items.slice(0, 2)}
+        columns={2}
+      />
       <Testimonials title="Minimal" testimonials={items} variant="minimal" />
     </div>
   ),

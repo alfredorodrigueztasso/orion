@@ -29,7 +29,10 @@ const mockTasks = [
     priority: "high" as const,
     dueDate: new Date(Date.now() + 86400000),
     labels: ["design", "ui"],
-    assignee: { name: "Alice Chen", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=alice" },
+    assignee: {
+      name: "Alice Chen",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=alice",
+    },
   },
   {
     id: "task-2",
@@ -37,7 +40,10 @@ const mockTasks = [
     columnId: "in-progress",
     priority: "high" as const,
     labels: ["backend"],
-    assignee: { name: "Bob Smith", avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=bob" },
+    assignee: {
+      name: "Bob Smith",
+      avatar: "https://api.dicebear.com/7.x/avataaars/svg?seed=bob",
+    },
   },
   {
     id: "task-3",

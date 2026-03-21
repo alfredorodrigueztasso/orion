@@ -138,7 +138,8 @@ const HeroBase = forwardRef<HTMLElement, HeroProps>(
     const effectiveLayout = fullHeight ? "fullscreen" : layout;
 
     // Determine if we should show media
-    const effectiveMedia = media || (showDefaultMedia ? <DefaultMediaPlaceholder /> : null);
+    const effectiveMedia =
+      media || (showDefaultMedia ? <DefaultMediaPlaceholder /> : null);
     const hasMedia = !!effectiveMedia;
     const hasActions = primaryAction || secondaryAction;
     const isBackgroundVariant = variant === "background";
@@ -158,11 +159,7 @@ const HeroBase = forwardRef<HTMLElement, HeroProps>(
       .join(" ");
 
     return (
-      <section
-        ref={ref}
-        className={classNames}
-        {...rest}
-      >
+      <section ref={ref} className={classNames} {...rest}>
         {/* Background image for background variant */}
         {isBackgroundVariant && backgroundImage && (
           <>
@@ -193,10 +190,14 @@ const HeroBase = forwardRef<HTMLElement, HeroProps>(
               </div>
             )}
 
-            {trustIndicators && <div className={styles.trustIndicators}>{trustIndicators}</div>}
+            {trustIndicators && (
+              <div className={styles.trustIndicators}>{trustIndicators}</div>
+            )}
           </div>
 
-          {hasMedia && !isBackgroundVariant && <div className={styles.media}>{effectiveMedia}</div>}
+          {hasMedia && !isBackgroundVariant && (
+            <div className={styles.media}>{effectiveMedia}</div>
+          )}
         </div>
       </section>
     );

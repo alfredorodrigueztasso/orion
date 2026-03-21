@@ -12,7 +12,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { title: "Subscribe", description: "Get updates", placeholder: "Email" },
+  args: {
+    title: "Subscribe",
+    description: "Get updates",
+    placeholder: "Email",
+  },
 };
 
 export const WithDisclaimer: Story = {
@@ -25,7 +29,12 @@ export const WithDisclaimer: Story = {
 };
 
 export const Compact: Story = {
-  args: { title: "Newsletter", description: "Join us", placeholder: "Email", size: "sm" },
+  args: {
+    title: "Newsletter",
+    description: "Join us",
+    placeholder: "Email",
+    size: "sm",
+  },
 };
 
 export const AllVariants: Story = {
@@ -37,8 +46,18 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <Newsletter {...args} />
-      <Newsletter title="With Info" description="Stay informed" placeholder="your@email.com" disclaimer="Privacy respected" />
-      <Newsletter title="Compact" description="Join" placeholder="Email" size="sm" />
+      <Newsletter
+        title="With Info"
+        description="Stay informed"
+        placeholder="your@email.com"
+        disclaimer="Privacy respected"
+      />
+      <Newsletter
+        title="Compact"
+        description="Join"
+        placeholder="Email"
+        size="sm"
+      />
     </div>
   ),
 };

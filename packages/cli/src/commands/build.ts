@@ -14,8 +14,16 @@ import {
   loadComponentCSS,
   countUsedTokens,
 } from "../lib/build-analyzer.js";
-import { treeShakeTokens, calculateSavings, getUnusedTokens } from "../lib/tree-shaker.js";
-import { minifyCSS, calculateCompressionRatio, formatBytes } from "../lib/minifier.js";
+import {
+  treeShakeTokens,
+  calculateSavings,
+  getUnusedTokens,
+} from "../lib/tree-shaker.js";
+import {
+  minifyCSS,
+  calculateCompressionRatio,
+  formatBytes,
+} from "../lib/minifier.js";
 import {
   generateReport,
   formatStatsForConsole,
@@ -174,7 +182,9 @@ async function performBuild(
   }
 
   spin.stop();
-  logger.success(`Found ${components.length} component${components.length !== 1 ? "s" : ""}`);
+  logger.success(
+    `Found ${components.length} component${components.length !== 1 ? "s" : ""}`,
+  );
 
   if (args.verbose) {
     for (const comp of components) {
@@ -234,8 +244,12 @@ async function performBuild(
     logger.success(`Build artifacts written to ${logger.cyan(outputDir)}`);
 
     if (args.verbose) {
-      logger.info(`  ${logger.cyan(cssPath)} (${formatBytes(Buffer.byteLength(minifiedCSS, "utf-8"))})`);
-      logger.info(`  ${logger.cyan(varPath)} (${formatBytes(Buffer.byteLength(usedTokensOnly, "utf-8"))})`);
+      logger.info(
+        `  ${logger.cyan(cssPath)} (${formatBytes(Buffer.byteLength(minifiedCSS, "utf-8"))})`,
+      );
+      logger.info(
+        `  ${logger.cyan(varPath)} (${formatBytes(Buffer.byteLength(usedTokensOnly, "utf-8"))})`,
+      );
     }
   }
 
@@ -289,10 +303,7 @@ async function performBuild(
 /**
  * Extract only used tokens into a CSS file
  */
-function extractUsedTokensCSS(
-  cssContent: string,
-  usageMap: any,
-): string {
+function extractUsedTokensCSS(cssContent: string, usageMap: any): string {
   const usedTokens = new Set<string>();
 
   for (const tokens of Object.values(usageMap)) {
@@ -384,25 +395,32 @@ export async function build(args: string[]): Promise<void> {
     const watchFiles = new Map<string, number>();
     let debounceTimer: NodeJS.Timeout | null = null;
 
-    const watcher = fs.watch(componentDir, { recursive: true }, (event, filename) => {
-      if (!filename || !filename.endsWith(".module.css")) {
-        return;
-      }
-
-      // Debounce rapid changes
-      if (debounceTimer) {
-        clearTimeout(debounceTimer);
-      }
-
-      debounceTimer = setTimeout(async () => {
-        try {
-          logger.info(`\nRebuilding after change: ${logger.cyan(filename)}`);
-          await performBuild(componentDir, outputDir, { ...parsed, watch: false });
-        } catch (err) {
-          logger.error((err as Error).message);
+    const watcher = fs.watch(
+      componentDir,
+      { recursive: true },
+      (event, filename) => {
+        if (!filename || !filename.endsWith(".module.css")) {
+          return;
         }
-      }, 500);
-    });
+
+        // Debounce rapid changes
+        if (debounceTimer) {
+          clearTimeout(debounceTimer);
+        }
+
+        debounceTimer = setTimeout(async () => {
+          try {
+            logger.info(`\nRebuilding after change: ${logger.cyan(filename)}`);
+            await performBuild(componentDir, outputDir, {
+              ...parsed,
+              watch: false,
+            });
+          } catch (err) {
+            logger.error((err as Error).message);
+          }
+        }, 500);
+      },
+    );
 
     // Handle Ctrl+C gracefully
     process.on("SIGINT", () => {

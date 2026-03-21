@@ -51,13 +51,7 @@ describe("add command", () => {
     });
 
     it("should prioritize names in args", () => {
-      const args = [
-        "button",
-        "card",
-        "--yes",
-        "--category=forms",
-        "--dry-run",
-      ];
+      const args = ["button", "card", "--yes", "--category=forms", "--dry-run"];
       const names = args.filter(
         (a) => !a.startsWith("--") && !a.startsWith("-"),
       );

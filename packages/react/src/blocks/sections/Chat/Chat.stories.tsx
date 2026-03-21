@@ -13,9 +13,19 @@ type Story = StoryObj<typeof meta>;
 
 const messages = [
   { id: "1", role: "user" as const, content: "Hello! How can I use Orion?" },
-  { id: "2", role: "assistant" as const, content: "Orion is an AI-first design system with full component library support." },
+  {
+    id: "2",
+    role: "assistant" as const,
+    content:
+      "Orion is an AI-first design system with full component library support.",
+  },
   { id: "3", role: "user" as const, content: "What are the main features?" },
-  { id: "4", role: "assistant" as const, content: "Key features: components, design tokens, theming, and accessibility." },
+  {
+    id: "4",
+    role: "assistant" as const,
+    content:
+      "Key features: components, design tokens, theming, and accessibility.",
+  },
 ];
 
 export const Default: Story = { args: { messages } };

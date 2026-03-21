@@ -37,7 +37,14 @@ function interpolate(content: string, vars: Record<string, string>): string {
  */
 function shouldSkip(filePath: string): boolean {
   const basename = path.basename(filePath);
-  const skipped = [".git", "node_modules", ".next", "dist", ".env", ".env.local"];
+  const skipped = [
+    ".git",
+    "node_modules",
+    ".next",
+    "dist",
+    ".env",
+    ".env.local",
+  ];
   return skipped.includes(basename);
 }
 
@@ -112,7 +119,9 @@ export function scaffoldProject(
 
           content = JSON.stringify(pkg, null, 2) + "\n";
         } catch (err) {
-          warnings.push(`Failed to parse package.json: ${(err as Error).message}`);
+          warnings.push(
+            `Failed to parse package.json: ${(err as Error).message}`,
+          );
           // Fall back to regular interpolation
           content = interpolate(content, vars);
         }
@@ -125,7 +134,9 @@ export function scaffoldProject(
           orionCfg.typescript = config.typescript !== false;
           content = JSON.stringify(orionCfg, null, 2) + "\n";
         } catch (err) {
-          warnings.push(`Failed to parse orion.json: ${(err as Error).message}`);
+          warnings.push(
+            `Failed to parse orion.json: ${(err as Error).message}`,
+          );
           content = interpolate(content, vars);
         }
       } else if (

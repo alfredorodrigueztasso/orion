@@ -93,9 +93,7 @@ export const Blog = forwardRef<HTMLElement, BlogProps>(
         <div className={styles.container}>
           <div className={styles.header}>
             <h2 className={styles.title}>{title}</h2>
-            {description && (
-              <p className={styles.description}>{description}</p>
-            )}
+            {description && <p className={styles.description}>{description}</p>}
           </div>
           <div className={gridClass}>
             {articles.map((article) => (

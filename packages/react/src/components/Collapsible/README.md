@@ -4,38 +4,38 @@ A primitive component for toggling content visibility with a trigger. Supports b
 
 ## When to Use
 
-| Scenario | Use Collapsible |
-|----------|-----------------|
-| Show/hide a single section | ✅ Yes - simple toggle pattern |
-| Custom expandable UI elements | ✅ Yes - unstyled, fully composable |
-| FAQ or multiple expandable items | ❌ No - use Accordion instead |
-| Navigation tree with nested items | ❌ No - use NavTree instead |
+| Scenario                          | Use Collapsible                     |
+| --------------------------------- | ----------------------------------- |
+| Show/hide a single section        | ✅ Yes - simple toggle pattern      |
+| Custom expandable UI elements     | ✅ Yes - unstyled, fully composable |
+| FAQ or multiple expandable items  | ❌ No - use Accordion instead       |
+| Navigation tree with nested items | ❌ No - use NavTree instead         |
 
 ## Props Reference
 
 ### Collapsible (Root)
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| open | boolean | — | Controlled open state |
-| defaultOpen | boolean | — | Default open state (uncontrolled) |
-| onOpenChange | (open: boolean) => void | — | Callback when state changes |
-| disabled | boolean | — | Disable the trigger |
-| children | ReactNode | — | Trigger and content components |
+| Prop         | Type                    | Default | Description                       |
+| ------------ | ----------------------- | ------- | --------------------------------- |
+| open         | boolean                 | —       | Controlled open state             |
+| defaultOpen  | boolean                 | —       | Default open state (uncontrolled) |
+| onOpenChange | (open: boolean) => void | —       | Callback when state changes       |
+| disabled     | boolean                 | —       | Disable the trigger               |
+| children     | ReactNode               | —       | Trigger and content components    |
 
 ### Collapsible.Trigger
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| asChild | boolean | — | Render as child element instead of button |
-| children | ReactNode | — | Trigger content |
+| Prop     | Type      | Default | Description                               |
+| -------- | --------- | ------- | ----------------------------------------- |
+| asChild  | boolean   | —       | Render as child element instead of button |
+| children | ReactNode | —       | Trigger content                           |
 
 ### Collapsible.Content
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| forceMount | boolean | — | Keep content in DOM when closed |
-| children | ReactNode | — | Collapsible content |
+| Prop       | Type      | Default | Description                     |
+| ---------- | --------- | ------- | ------------------------------- |
+| forceMount | boolean   | —       | Keep content in DOM when closed |
+| children   | ReactNode | —       | Collapsible content             |
 
 ## Examples
 
@@ -49,7 +49,7 @@ import { Collapsible } from "@orion-ds/react";
   <Collapsible.Content>
     <p>Hidden content revealed on toggle.</p>
   </Collapsible.Content>
-</Collapsible>
+</Collapsible>;
 ```
 
 ### Controlled
@@ -58,13 +58,11 @@ import { Collapsible } from "@orion-ds/react";
 const [open, setOpen] = useState(false);
 
 <Collapsible open={open} onOpenChange={setOpen}>
-  <Collapsible.Trigger>
-    {open ? "Hide" : "Show"} details
-  </Collapsible.Trigger>
+  <Collapsible.Trigger>{open ? "Hide" : "Show"} details</Collapsible.Trigger>
   <Collapsible.Content>
     <p>Controlled collapsible content.</p>
   </Collapsible.Content>
-</Collapsible>
+</Collapsible>;
 ```
 
 ## Accessibility

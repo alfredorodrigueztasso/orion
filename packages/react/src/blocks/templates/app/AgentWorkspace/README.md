@@ -4,39 +4,39 @@ Main workspace for managing multiple AI agents in a grid layout. Displays agent 
 
 ## When to Use
 
-| Scenario | Use AgentWorkspace |
-|----------|------------------|
-| Agent management dashboard | ✅ Yes - shows all agents with actions |
-| Multi-agent workspace | ✅ Yes - organize and manage multiple agents |
-| Agent listing and selection | ✅ Yes - clickable agent cards |
-| Quick agent access | ✅ Yes - status and metadata at a glance |
+| Scenario                    | Use AgentWorkspace                           |
+| --------------------------- | -------------------------------------------- |
+| Agent management dashboard  | ✅ Yes - shows all agents with actions       |
+| Multi-agent workspace       | ✅ Yes - organize and manage multiple agents |
+| Agent listing and selection | ✅ Yes - clickable agent cards               |
+| Quick agent access          | ✅ Yes - status and metadata at a glance     |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Agent Workspace" | Page title |
-| agents | WorkspaceAgent[] | [] | Array of agents to display |
-| selectedAgentId | string | — | Currently selected agent ID |
-| onSelectAgent | (id: string) => void | — | Agent selection callback |
-| onCreateAgent | () => void | — | New agent creation callback |
-| onDeleteAgent | (id: string) => void | — | Agent deletion callback |
-| onEditAgent | (id: string) => void | — | Agent edit callback |
-| isLoading | boolean | false | Loading state |
-| error | string | — | Error message |
-| subtitle | string | — | Optional page subtitle |
-| className | string | — | Custom CSS class |
+| Prop            | Type                 | Default           | Description                 |
+| --------------- | -------------------- | ----------------- | --------------------------- |
+| title           | string               | "Agent Workspace" | Page title                  |
+| agents          | WorkspaceAgent[]     | []                | Array of agents to display  |
+| selectedAgentId | string               | —                 | Currently selected agent ID |
+| onSelectAgent   | (id: string) => void | —                 | Agent selection callback    |
+| onCreateAgent   | () => void           | —                 | New agent creation callback |
+| onDeleteAgent   | (id: string) => void | —                 | Agent deletion callback     |
+| onEditAgent     | (id: string) => void | —                 | Agent edit callback         |
+| isLoading       | boolean              | false             | Loading state               |
+| error           | string               | —                 | Error message               |
+| subtitle        | string               | —                 | Optional page subtitle      |
+| className       | string               | —                 | Custom CSS class            |
 
 ### WorkspaceAgent Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| name | string | Agent display name |
-| description | string | Brief description |
-| status | "active" \| "inactive" \| "error" | Current status |
-| lastUpdated | Date | Last modification time |
-| usageCount | number | Total usage count (optional) |
+| Property    | Type                              | Description                  |
+| ----------- | --------------------------------- | ---------------------------- |
+| id          | string                            | Unique identifier            |
+| name        | string                            | Agent display name           |
+| description | string                            | Brief description            |
+| status      | "active" \| "inactive" \| "error" | Current status               |
+| lastUpdated | Date                              | Last modification time       |
+| usageCount  | number                            | Total usage count (optional) |
 
 ## Key Features
 
@@ -71,14 +71,15 @@ const [agents, setAgents] = useState([
   onSelectAgent={(id) => console.log("Selected:", id)}
   onCreateAgent={() => setShowEditor(true)}
   onDeleteAgent={(id) => {
-    setAgents(agents.filter(a => a.id !== id));
+    setAgents(agents.filter((a) => a.id !== id));
   }}
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Card` — Agent card container with body
 - `Badge` — Status indicator variant
 - `Button` — New Agent action button

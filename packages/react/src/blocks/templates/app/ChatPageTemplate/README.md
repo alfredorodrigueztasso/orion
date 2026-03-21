@@ -4,48 +4,48 @@ Full-featured chat interface with message history, participants sidebar, typing 
 
 ## When to Use
 
-| Scenario | Use ChatPageTemplate |
-|----------|-------------------|
-| Chat application interface | ✅ Yes - complete message UI |
-| Real-time messaging | ✅ Yes - supports typing indicators |
-| Customer support chat | ✅ Yes - with participant selection |
-| One-on-one messaging | ✅ Yes - simplified for direct chat |
-| Group chat interface | ✅ Yes - shows all participants |
+| Scenario                   | Use ChatPageTemplate                |
+| -------------------------- | ----------------------------------- |
+| Chat application interface | ✅ Yes - complete message UI        |
+| Real-time messaging        | ✅ Yes - supports typing indicators |
+| Customer support chat      | ✅ Yes - with participant selection |
+| One-on-one messaging       | ✅ Yes - simplified for direct chat |
+| Group chat interface       | ✅ Yes - shows all participants     |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Chat" | Chat window title |
-| messages | ChatMessage[] | [] | Array of messages to display |
-| inputPlaceholder | string | "Type a message..." | Input field placeholder |
-| onSendMessage | (message: string) => void | — | Message send callback |
-| participants | ChatParticipant[] | [] | List of chat participants |
-| selectedParticipantId | string | — | Currently selected participant |
-| onSelectParticipant | (id: string) => void | — | Participant selection callback |
-| isTyping | boolean | false | Show typing indicator |
-| isLoading | boolean | false | Disable input during load |
-| error | string | — | Error message |
-| className | string | — | Custom CSS class |
+| Prop                  | Type                      | Default             | Description                    |
+| --------------------- | ------------------------- | ------------------- | ------------------------------ |
+| title                 | string                    | "Chat"              | Chat window title              |
+| messages              | ChatMessage[]             | []                  | Array of messages to display   |
+| inputPlaceholder      | string                    | "Type a message..." | Input field placeholder        |
+| onSendMessage         | (message: string) => void | —                   | Message send callback          |
+| participants          | ChatParticipant[]         | []                  | List of chat participants      |
+| selectedParticipantId | string                    | —                   | Currently selected participant |
+| onSelectParticipant   | (id: string) => void      | —                   | Participant selection callback |
+| isTyping              | boolean                   | false               | Show typing indicator          |
+| isLoading             | boolean                   | false               | Disable input during load      |
+| error                 | string                    | —                   | Error message                  |
+| className             | string                    | —                   | Custom CSS class               |
 
 ### ChatMessage Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique message ID |
-| role | "user" \| "assistant" | Message sender |
-| content | string | Message text |
-| timestamp | Date | Message time |
-| status | "sending" \| "sent" \| "error" | Delivery status |
+| Property  | Type                           | Description       |
+| --------- | ------------------------------ | ----------------- |
+| id        | string                         | Unique message ID |
+| role      | "user" \| "assistant"          | Message sender    |
+| content   | string                         | Message text      |
+| timestamp | Date                           | Message time      |
+| status    | "sending" \| "sent" \| "error" | Delivery status   |
 
 ### ChatParticipant Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Participant ID |
-| name | string | Display name |
-| avatar | string | Avatar image URL (optional) |
-| status | "online" \| "offline" | Online status |
+| Property | Type                  | Description                 |
+| -------- | --------------------- | --------------------------- |
+| id       | string                | Participant ID              |
+| name     | string                | Display name                |
+| avatar   | string                | Avatar image URL (optional) |
+| status   | "online" \| "offline" | Online status               |
 
 ## Key Features
 
@@ -69,24 +69,26 @@ const [messages, setMessages] = useState([]);
   title="Support Chat"
   messages={messages}
   onSendMessage={(text) => {
-    setMessages([...messages, {
-      id: Date.now().toString(),
-      role: "user",
-      content: text,
-      timestamp: new Date(),
-      status: "sent",
-    }]);
+    setMessages([
+      ...messages,
+      {
+        id: Date.now().toString(),
+        role: "user",
+        content: text,
+        timestamp: new Date(),
+        status: "sent",
+      },
+    ]);
   }}
-  participants={[
-    { id: "1", name: "Support Agent", status: "online" },
-  ]}
+  participants={[{ id: "1", name: "Support Agent", status: "online" }]}
   isTyping={false}
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Button` — Send action with icon
 - Lucide Icons — Send, Paperclip, Smile icons
 - Custom message bubbles — Styled for user/assistant roles

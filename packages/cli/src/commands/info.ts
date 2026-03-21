@@ -15,9 +15,11 @@ import * as logger from "../lib/logger.js";
 export function parseArgs(args: string[]): InfoArgs {
   const name =
     args.find((a) => !a.startsWith("--") && !a.startsWith("-")) ?? "";
-  const type = args
-    .find((a) => a.startsWith("--type="))
-    ?.split("=")[1] as "component" | "section" | "template" | undefined;
+  const type = args.find((a) => a.startsWith("--type="))?.split("=")[1] as
+    | "component"
+    | "section"
+    | "template"
+    | undefined;
   const json = args.includes("--json");
   const examples = args.includes("--examples");
   const props = args.includes("--props");
@@ -53,7 +55,12 @@ export function getRelated(item: RegistryItem): string[] {
 export function shouldShowAccessibility(item: RegistryItem): boolean {
   const a = item.accessibility;
   if (!a) return false;
-  return !!(a.role || a.ariaAttributes?.length || a.keyboardNav?.length || a.notes?.length);
+  return !!(
+    a.role ||
+    a.ariaAttributes?.length ||
+    a.keyboardNav?.length ||
+    a.notes?.length
+  );
 }
 
 function printPropsTable(item: RegistryItem): void {
@@ -68,7 +75,9 @@ function printPropsTable(item: RegistryItem): void {
     const values = formatValues(prop.values);
     const valuesStr = values ? `  ${values}` : "";
 
-    console.log(`  ${prop.name.padEnd(18)} ${type.padEnd(18)} "${defaultVal}"${valuesStr}`);
+    console.log(
+      `  ${prop.name.padEnd(18)} ${type.padEnd(18)} "${defaultVal}"${valuesStr}`,
+    );
     if (prop.description) {
       console.log(`    ${logger.dim(prop.description)}`);
     }
@@ -122,7 +131,9 @@ function printInfo(item: RegistryItem, _args: InfoArgs): void {
   }
 
   // Dependencies
-  const hasDeps = (item.dependencies?.length ?? 0) > 0 || (item.registryDependencies?.length ?? 0) > 0;
+  const hasDeps =
+    (item.dependencies?.length ?? 0) > 0 ||
+    (item.registryDependencies?.length ?? 0) > 0;
   if (hasDeps) {
     console.log(logger.bold("Dependencies:"));
     if (item.dependencies && item.dependencies.length > 0) {
@@ -161,7 +172,10 @@ function printInfo(item: RegistryItem, _args: InfoArgs): void {
 
   // Related & Tags
   const related = getRelated(item);
-  const hasRelated = related.length > 0 || (item.tags?.length ?? 0) > 0 || (item.common_patterns?.length ?? 0) > 0;
+  const hasRelated =
+    related.length > 0 ||
+    (item.tags?.length ?? 0) > 0 ||
+    (item.common_patterns?.length ?? 0) > 0;
   if (hasRelated) {
     console.log(logger.bold("Related:"));
     if (related.length > 0) {
@@ -177,7 +191,8 @@ function printInfo(item: RegistryItem, _args: InfoArgs): void {
   }
 
   // Preview URL
-  const previewUrl = item.preview?.url ?? `https://orion-ds.dev/library.html#${item.name}`;
+  const previewUrl =
+    item.preview?.url ?? `https://orion-ds.dev/library.html#${item.name}`;
   console.log(logger.bold("Preview:"));
   console.log(`  ${logger.cyan(previewUrl)}`);
 
@@ -214,7 +229,9 @@ export async function info(args: string[]): Promise<void> {
     console.log("  --examples      Show code examples");
     console.log("  --props         Show props table only");
     console.log("  --local         Use local registry");
-    console.log("  --type=<type>   Disambiguate by type (component|section|template)");
+    console.log(
+      "  --type=<type>   Disambiguate by type (component|section|template)",
+    );
     process.exit(1);
   }
 
@@ -235,13 +252,15 @@ export async function info(args: string[]): Promise<void> {
   const indexItem = index.items.find(
     (item) =>
       item.name === parsed.name &&
-      (!parsed.type || formatTypeLabel(item.type) === parsed.type)
+      (!parsed.type || formatTypeLabel(item.type) === parsed.type),
   );
 
   if (!indexItem) {
     // Fuzzy match
     const candidates = index.items
-      .filter((item) => !parsed.type || formatTypeLabel(item.type) === parsed.type)
+      .filter(
+        (item) => !parsed.type || formatTypeLabel(item.type) === parsed.type,
+      )
       .map((item) => item.name);
     const suggestions = fuzzyMatch(parsed.name, candidates);
 

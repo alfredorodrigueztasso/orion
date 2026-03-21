@@ -4,38 +4,38 @@ Flexible settings and configuration page with sidebar navigation and content sec
 
 ## When to Use
 
-| Scenario | Use SettingsTemplate |
-|----------|-------------------|
+| Scenario                  | Use SettingsTemplate                 |
+| ------------------------- | ------------------------------------ |
 | Application settings page | ✅ Yes - multi-section configuration |
-| Preferences management | ✅ Yes - organized settings |
-| Admin configuration panel | ✅ Yes - hierarchical settings |
-| User preferences hub | ✅ Yes - account and app settings |
-| Settings with draft state | ✅ Yes - unsaved changes tracking |
+| Preferences management    | ✅ Yes - organized settings          |
+| Admin configuration panel | ✅ Yes - hierarchical settings       |
+| User preferences hub      | ✅ Yes - account and app settings    |
+| Settings with draft state | ✅ Yes - unsaved changes tracking    |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Settings" | Page title |
-| sections | SettingsSection[] | [] | Settings sections to display |
-| activeSectionId | string | — | Default active section |
-| onSelectSection | (sectionId: string) => void | — | Section change callback |
-| onSave | () => void | — | Save settings callback |
-| onReset | () => void | — | Reset/discard callback |
-| isLoading | boolean | false | Loading state |
-| hasUnsavedChanges | boolean | false | Shows unsaved indicator |
-| error | string | — | Error message |
-| successMessage | string | — | Success message |
-| className | string | — | Custom CSS class |
+| Prop              | Type                        | Default    | Description                  |
+| ----------------- | --------------------------- | ---------- | ---------------------------- |
+| title             | string                      | "Settings" | Page title                   |
+| sections          | SettingsSection[]           | []         | Settings sections to display |
+| activeSectionId   | string                      | —          | Default active section       |
+| onSelectSection   | (sectionId: string) => void | —          | Section change callback      |
+| onSave            | () => void                  | —          | Save settings callback       |
+| onReset           | () => void                  | —          | Reset/discard callback       |
+| isLoading         | boolean                     | false      | Loading state                |
+| hasUnsavedChanges | boolean                     | false      | Shows unsaved indicator      |
+| error             | string                      | —          | Error message                |
+| successMessage    | string                      | —          | Success message              |
+| className         | string                      | —          | Custom CSS class             |
 
 ### SettingsSection Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique section identifier |
-| title | string | Section heading |
-| description | string | Section description (optional) |
-| content | ReactNode | Section form/content component |
+| Property    | Type      | Description                    |
+| ----------- | --------- | ------------------------------ |
+| id          | string    | Unique section identifier      |
+| title       | string    | Section heading                |
+| description | string    | Section description (optional) |
+| content     | ReactNode | Section form/content component |
 
 ## Key Features
 
@@ -85,12 +85,13 @@ const sections = [
   onReset={() => revertChanges()}
   hasUnsavedChanges={isDirty}
   isLoading={isSaving}
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Card` — Section content container
 - `Button` — Save and discard actions
 - Lucide Icons — AlertCircle and Check for messages

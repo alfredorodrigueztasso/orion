@@ -48,7 +48,7 @@ describe("build command", () => {
           brand: "orion",
           mode: "product",
         }),
-        "utf-8"
+        "utf-8",
       );
 
       let errorThrown = false;
@@ -72,7 +72,7 @@ describe("build command", () => {
       fs.writeFileSync(
         path.join(buttonDir, "Button.module.css"),
         ".button { color: var(--text-primary); }",
-        "utf-8"
+        "utf-8",
       );
 
       fs.writeFileSync(
@@ -86,7 +86,7 @@ describe("build command", () => {
           brand: "orion",
           mode: "product",
         }),
-        "utf-8"
+        "utf-8",
       );
 
       let errorThrown = false;
@@ -118,7 +118,7 @@ describe("build command", () => {
         }
         .button { color: var(--text-primary); }
       `,
-        "utf-8"
+        "utf-8",
       );
 
       fs.writeFileSync(
@@ -132,7 +132,7 @@ describe("build command", () => {
           brand: "orion",
           mode: "product",
         }),
-        "utf-8"
+        "utf-8",
       );
 
       const outputDir = path.join(tempDir, ".orion-build");
@@ -158,7 +158,7 @@ describe("build command", () => {
           padding: 10px;
         }
       `,
-        "utf-8"
+        "utf-8",
       );
 
       fs.writeFileSync(
@@ -172,14 +172,14 @@ describe("build command", () => {
           brand: "orion",
           mode: "product",
         }),
-        "utf-8"
+        "utf-8",
       );
 
       await build([]);
 
       const cssContent = fs.readFileSync(
         path.join(tempDir, ".orion-build", "index.css"),
-        "utf-8"
+        "utf-8",
       );
 
       // Minified CSS should not have unnecessary whitespace
@@ -205,7 +205,7 @@ describe("build command", () => {
         }
         .button { color: var(--text-primary); }
       `,
-        "utf-8"
+        "utf-8",
       );
 
       fs.writeFileSync(
@@ -219,7 +219,7 @@ describe("build command", () => {
           brand: "orion",
           mode: "product",
         }),
-        "utf-8"
+        "utf-8",
       );
     });
 
@@ -228,7 +228,7 @@ describe("build command", () => {
 
       const cssContent = fs.readFileSync(
         path.join(tempDir, ".orion-build", "index.css"),
-        "utf-8"
+        "utf-8",
       );
 
       // Non-minified CSS should have formatting
@@ -238,7 +238,11 @@ describe("build command", () => {
     it("should generate analysis report with --analyze flag", async () => {
       await build(["--analyze"]);
 
-      const reportPath = path.join(tempDir, ".orion-build", "build-analysis.json");
+      const reportPath = path.join(
+        tempDir,
+        ".orion-build",
+        "build-analysis.json",
+      );
       expect(fs.existsSync(reportPath)).toBe(true);
 
       const report = JSON.parse(fs.readFileSync(reportPath, "utf-8"));
@@ -252,7 +256,7 @@ describe("build command", () => {
       await build([`--output-dir=${customDir}`]);
 
       expect(fs.existsSync(path.join(tempDir, customDir, "index.css"))).toBe(
-        true
+        true,
       );
     });
 
@@ -262,21 +266,21 @@ describe("build command", () => {
 
       const withSize = Buffer.byteLength(
         fs.readFileSync(path.join(tempDir, withShaking, "index.css"), "utf-8"),
-        "utf-8"
+        "utf-8",
       );
 
       // Clean up
       fs.rmSync(path.join(tempDir, withShaking), { recursive: true });
 
       const withoutShaking = ".orion-build-no-shake";
-      await build([
-        "--no-tree-shake-tokens",
-        `--output-dir=${withoutShaking}`,
-      ]);
+      await build(["--no-tree-shake-tokens", `--output-dir=${withoutShaking}`]);
 
       const withoutSize = Buffer.byteLength(
-        fs.readFileSync(path.join(tempDir, withoutShaking, "index.css"), "utf-8"),
-        "utf-8"
+        fs.readFileSync(
+          path.join(tempDir, withoutShaking, "index.css"),
+          "utf-8",
+        ),
+        "utf-8",
       );
 
       // Without tree-shaking should be larger or equal

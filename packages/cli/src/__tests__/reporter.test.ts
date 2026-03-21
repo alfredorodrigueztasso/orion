@@ -40,7 +40,13 @@ describe("reporter", () => {
 
       const minifiedCSS = ".button{color:var(--text-primary)}";
 
-      const stats = generateReport(usageMap, components, originalCSS, minifiedCSS, 1000);
+      const stats = generateReport(
+        usageMap,
+        components,
+        originalCSS,
+        minifiedCSS,
+        1000,
+      );
 
       expect(stats).toHaveProperty("timestamp");
       expect(stats).toHaveProperty("components");
@@ -124,7 +130,13 @@ describe("reporter", () => {
       const originalCSS = "a".repeat(1000);
       const minifiedCSS = "a".repeat(500);
 
-      const stats = generateReport(usageMap, components, originalCSS, minifiedCSS, 0);
+      const stats = generateReport(
+        usageMap,
+        components,
+        originalCSS,
+        minifiedCSS,
+        0,
+      );
 
       expect(stats.bundleSize.reduction).toBe("50%");
     });
@@ -137,7 +149,9 @@ describe("reporter", () => {
       const stats = generateReport(usageMap, components, originalCSS, "", 0);
 
       expect(stats.timestamp).toBeTruthy();
-      expect(new Date(stats.timestamp).getTime()).toBeLessThanOrEqual(Date.now());
+      expect(new Date(stats.timestamp).getTime()).toBeLessThanOrEqual(
+        Date.now(),
+      );
     });
   });
 

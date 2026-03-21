@@ -28,9 +28,11 @@ import type { AddArgs, RegistryIndex, RegistryItem } from "../types.js";
 
 function parseArgs(args: string[]): AddArgs {
   const names = args.filter((a) => !a.startsWith("--") && !a.startsWith("-"));
-  const type = args
-    .find((a) => a.startsWith("--type="))
-    ?.split("=")[1] as "component" | "section" | "template" | undefined;
+  const type = args.find((a) => a.startsWith("--type="))?.split("=")[1] as
+    | "component"
+    | "section"
+    | "template"
+    | undefined;
   const category = args.find((a) => a.startsWith("--category="))?.split("=")[1];
   const tag = args.find((a) => a.startsWith("--tag="))?.split("=")[1];
   const dryRun = args.includes("--dry-run");
@@ -52,7 +54,11 @@ function parseArgs(args: string[]): AddArgs {
   };
 }
 
-function isInstalled(cwd: string, config: any, itemNames: string[]): Set<string> {
+function isInstalled(
+  cwd: string,
+  config: any,
+  itemNames: string[],
+): Set<string> {
   const installed = new Set<string>();
   for (const name of itemNames) {
     // Check all possible directories (component, section, template)

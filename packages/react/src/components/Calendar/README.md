@@ -4,26 +4,26 @@ A date picker calendar supporting single, range, and multiple date selection mod
 
 ## When to Use
 
-| Scenario | Use Calendar |
-|----------|--------------|
-| Inline date selection | ✅ Yes - renders directly in the page |
-| Date range picking | ✅ Yes - use mode="range" |
-| Multi-date selection | ✅ Yes - use mode="multiple" |
-| Date input with popover | ❌ No - use DatePicker instead |
+| Scenario                | Use Calendar                          |
+| ----------------------- | ------------------------------------- |
+| Inline date selection   | ✅ Yes - renders directly in the page |
+| Date range picking      | ✅ Yes - use mode="range"             |
+| Multi-date selection    | ✅ Yes - use mode="multiple"          |
+| Date input with popover | ❌ No - use DatePicker instead        |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| mode | 'single' \| 'range' \| 'multiple' | 'single' | Selection mode |
-| selected | Date \| DateRange \| Date[] | — | Currently selected value (varies by mode) |
-| onSelect | function | — | Callback when selection changes |
-| min | Date | — | Minimum selectable date |
-| max | Date | — | Maximum selectable date |
-| disabled | Date[] \| (date: Date) => boolean | — | Disabled dates |
-| weekStartsOn | 0-6 | 0 | Day the week starts on (0 = Sunday) |
-| showOutsideDays | boolean | true | Show days from adjacent months |
-| className | string | — | Additional class name |
+| Prop            | Type                              | Default  | Description                               |
+| --------------- | --------------------------------- | -------- | ----------------------------------------- |
+| mode            | 'single' \| 'range' \| 'multiple' | 'single' | Selection mode                            |
+| selected        | Date \| DateRange \| Date[]       | —        | Currently selected value (varies by mode) |
+| onSelect        | function                          | —        | Callback when selection changes           |
+| min             | Date                              | —        | Minimum selectable date                   |
+| max             | Date                              | —        | Maximum selectable date                   |
+| disabled        | Date[] \| (date: Date) => boolean | —        | Disabled dates                            |
+| weekStartsOn    | 0-6                               | 0        | Day the week starts on (0 = Sunday)       |
+| showOutsideDays | boolean                           | true     | Show days from adjacent months            |
+| className       | string                            | —        | Additional class name                     |
 
 ## Examples
 
@@ -32,11 +32,7 @@ A date picker calendar supporting single, range, and multiple date selection mod
 ```tsx
 import { Calendar } from "@orion-ds/react/calendar";
 
-<Calendar
-  mode="single"
-  selected={date}
-  onSelect={setDate}
-/>
+<Calendar mode="single" selected={date} onSelect={setDate} />;
 ```
 
 ### Date Range

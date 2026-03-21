@@ -127,7 +127,7 @@ function generateRecommendations(
   }
 
   // Recommend importing only index.css
-  recommendations.push('Import only the generated index.css in your app root');
+  recommendations.push("Import only the generated index.css in your app root");
 
   return recommendations;
 }
@@ -245,7 +245,9 @@ export function formatStatsForConsole(stats: BuildStatistics): string[] {
 
   // Tokens
   lines.push("");
-  lines.push(`Tokens: ${stats.tokens.referenced}/${stats.tokens.total} used (${stats.tokens.percentage}%)`);
+  lines.push(
+    `Tokens: ${stats.tokens.referenced}/${stats.tokens.total} used (${stats.tokens.percentage}%)`,
+  );
   lines.push(`  Colors: ${stats.tokens.byCategory.colors}`);
   lines.push(`  Spacing: ${stats.tokens.byCategory.spacing}`);
   lines.push(`  Typography: ${stats.tokens.byCategory.typography}`);

@@ -12,7 +12,12 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const logos = Array.from({ length: 6 }, (_, i) => ({
-  logo: <img src={`https://via.placeholder.com/150x50?text=Company+${i + 1}`} alt="" />,
+  logo: (
+    <img
+      src={`https://via.placeholder.com/150x50?text=Company+${i + 1}`}
+      alt=""
+    />
+  ),
   name: `Company ${i + 1}`,
 }));
 
@@ -20,7 +25,9 @@ export const Default: Story = { args: { title: "Trusted by", logos } };
 
 export const NoTitle: Story = { args: { logos } };
 
-export const Compact: Story = { args: { title: "Clients", logos: logos.slice(0, 3) } };
+export const Compact: Story = {
+  args: { title: "Clients", logos: logos.slice(0, 3) },
+};
 
 export const AllVariants: Story = {
   args: { title: "With Title", logos },

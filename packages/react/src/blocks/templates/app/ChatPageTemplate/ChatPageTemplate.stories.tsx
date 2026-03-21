@@ -24,7 +24,8 @@ const mockMessages = [
   {
     id: "2",
     role: "assistant" as const,
-    content: "Of course! I'd be happy to help. Can you provide your order number?",
+    content:
+      "Of course! I'd be happy to help. Can you provide your order number?",
     timestamp: new Date(Date.now() - 250000),
     status: "sent" as const,
   },

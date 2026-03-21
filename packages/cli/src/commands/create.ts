@@ -24,7 +24,13 @@ function getTemplateDir(templateName: string): string {
 
   // From src/commands/create.ts or dist/commands/create.js,
   // go up 2 levels to get to packages/cli, then templates/
-  const templatesDir = path.join(currentDir, "..", "..", "templates", templateName);
+  const templatesDir = path.join(
+    currentDir,
+    "..",
+    "..",
+    "templates",
+    templateName,
+  );
 
   if (fs.existsSync(templatesDir)) {
     return templatesDir;
@@ -260,9 +266,7 @@ export async function create(args: string[]): Promise<void> {
       });
       logger.success("Git repository initialized");
     } catch (err) {
-      logger.warn(
-        `Could not initialize git: ${(err as Error).message}`,
-      );
+      logger.warn(`Could not initialize git: ${(err as Error).message}`);
     }
   }
 

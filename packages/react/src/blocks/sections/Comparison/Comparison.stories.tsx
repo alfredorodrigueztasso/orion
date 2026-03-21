@@ -17,10 +17,7 @@ const columns = [
   { title: "Enterprise" },
 ];
 
-const twoColumns = [
-  { title: "v3" },
-  { title: "v4", highlighted: true },
-];
+const twoColumns = [{ title: "v3" }, { title: "v4", highlighted: true }];
 
 const features = [
   { name: "Component Library", values: [true, true, true] },
@@ -34,7 +31,11 @@ export const Default: Story = {
 };
 
 export const TwoColumn: Story = {
-  args: { title: "Compare", columns: twoColumns, features: features.slice(0, 3) },
+  args: {
+    title: "Compare",
+    columns: twoColumns,
+    features: features.slice(0, 3),
+  },
 };
 
 export const AllVariants: Story = {
@@ -42,7 +43,12 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <Comparison {...args} />
-      <Comparison {...args} title="Two Plans" columns={twoColumns} features={features.slice(0, 2)} />
+      <Comparison
+        {...args}
+        title="Two Plans"
+        columns={twoColumns}
+        features={features.slice(0, 2)}
+      />
     </div>
   ),
 };

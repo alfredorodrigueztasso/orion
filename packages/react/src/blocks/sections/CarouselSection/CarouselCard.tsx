@@ -13,9 +13,7 @@ export const CarouselCard: React.FC<CarouselCardProps> = ({
       <img src={image} alt={title} className={styles.cardImage} />
       <div className={styles.cardBody}>
         <h3 className={styles.cardTitle}>{title}</h3>
-        {description && (
-          <p className={styles.cardDescription}>{description}</p>
-        )}
+        {description && <p className={styles.cardDescription}>{description}</p>}
       </div>
     </div>
   );

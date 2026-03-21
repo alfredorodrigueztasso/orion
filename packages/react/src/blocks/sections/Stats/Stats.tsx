@@ -6,7 +6,10 @@ import { StatItemCard } from "./StatItemCard";
 import styles from "./Stats.module.css";
 
 export const Stats = forwardRef<HTMLElement, StatsProps>(
-  ({ title, stats, columns = 3, variant = "default", className, ...rest }, ref) => {
+  (
+    { title, stats, columns = 3, variant = "default", className, ...rest },
+    ref,
+  ) => {
     const isInline = variant === "inline";
 
     const colsClass =

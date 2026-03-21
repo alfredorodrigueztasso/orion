@@ -28,7 +28,9 @@ const navigation = [
   },
   {
     title: "Billing",
-    items: [{ id: "subscription", label: "Subscription", description: "Manage plan" }],
+    items: [
+      { id: "subscription", label: "Subscription", description: "Manage plan" },
+    ],
   },
 ];
 
@@ -63,7 +65,11 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <SettingsLayout {...args} title="Full Settings" />
-      <SettingsLayout {...args} navigation={navigation.slice(0, 2)} title="Basic Settings" />
+      <SettingsLayout
+        {...args}
+        navigation={navigation.slice(0, 2)}
+        title="Basic Settings"
+      />
     </div>
   ),
 };

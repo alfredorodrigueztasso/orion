@@ -28,9 +28,7 @@ function extractTokens(cssContent: string): string[] {
   const matches = cssContent.match(tokenRegex) || [];
 
   // Remove duplicates and extract token name (remove 'var(' and ')')
-  const tokens = new Set(
-    matches.map((match) => match.slice(4, -1))
-  );
+  const tokens = new Set(matches.map((match) => match.slice(4, -1)));
 
   return Array.from(tokens).sort();
 }
@@ -166,7 +164,9 @@ export function loadComponentCSS(componentDir: string): string {
  * Extract primitive token definitions from CSS
  * Returns all :root { --token: value; } declarations
  */
-export function extractTokenDefinitions(cssContent: string): Map<string, string> {
+export function extractTokenDefinitions(
+  cssContent: string,
+): Map<string, string> {
   const definitions = new Map<string, string>();
 
   // Match :root { ... }

@@ -17,9 +17,7 @@ import styles from "./Hero.module.css";
 
 export const HeroHighlight = ({ children, className }: HeroHighlightProps) => {
   return (
-    <span className={`${styles.highlight} ${className || ""}`}>
-      {children}
-    </span>
+    <span className={`${styles.highlight} ${className || ""}`}>{children}</span>
   );
 };
 
