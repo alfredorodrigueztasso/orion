@@ -1,2 +1,5 @@
 export { ProfilePageTemplate } from "./ProfilePageTemplate";
-export type { ProfilePageTemplateProps, UserProfile } from "./ProfilePageTemplate.types";
+export type {
+  ProfilePageTemplateProps,
+  UserProfile,
+} from "./ProfilePageTemplate.types";

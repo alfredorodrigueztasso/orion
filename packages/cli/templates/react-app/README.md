@@ -138,20 +138,18 @@ orion.json            # Orion CLI config
 The entire design system (colors, spacing, typography) is controlled by CSS variables from Orion. Change the brand and theme globally:
 
 **In React:**
+
 ```tsx
 import { useThemeContext } from '@orion-ds/react';
 
 function ThemeSwitcher() {
   const { brand, theme, setBrand, setTheme } = useThemeContext();
-  return (
-    <button onClick={() => setBrand('red')}>
-      Switch to Red Brand
-    </button>
-  );
+  return <button onClick={() => setBrand('red')}>Switch to Red Brand</button>;
 }
 ```
 
 **In HTML:**
+
 ```html
 <html data-brand="red" data-theme="dark">
   <!-- All Orion components automatically adapt -->
@@ -186,6 +184,7 @@ This creates an optimized `dist/` directory ready for deployment.
 ### Deployment Targets
 
 The built app can be deployed to:
+
 - **Vercel** - `npm run build` → auto-deploy
 - **Netlify** - Connect your repo → auto-deploy
 - **AWS S3 + CloudFront** - `npm run build` → sync to S3
@@ -208,6 +207,7 @@ VITE_API_URL=https://api.example.com
 ```
 
 Access in code:
+
 ```tsx
 const apiUrl = import.meta.env.VITE_API_URL;
 ```
@@ -225,6 +225,7 @@ ls -lah dist/
 ### Code Splitting
 
 Vite automatically splits code for:
+
 - `main.js` - App code
 - `vendor.js` - React, Orion, Lucide
 - Dynamic imports (lazy-loaded routes)
@@ -232,6 +233,7 @@ Vite automatically splits code for:
 ### Optimization Tips
 
 1. Lazy load heavy components:
+
    ```tsx
    const HeavyChart = lazy(() => import('./HeavyChart'));
    ```

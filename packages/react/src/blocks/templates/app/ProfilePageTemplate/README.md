@@ -4,48 +4,48 @@ User profile page with avatar, personal information, and tabbed sections for pro
 
 ## When to Use
 
-| Scenario | Use ProfilePageTemplate |
-|----------|------------------------|
-| User account page | ✅ Yes - profile display and editing |
-| Settings hub | ✅ Yes - multiple sections via tabs |
-| Account management | ✅ Yes - security and preferences |
+| Scenario                  | Use ProfilePageTemplate              |
+| ------------------------- | ------------------------------------ |
+| User account page         | ✅ Yes - profile display and editing |
+| Settings hub              | ✅ Yes - multiple sections via tabs  |
+| Account management        | ✅ Yes - security and preferences    |
 | Profile editing interface | ✅ Yes - user information management |
-| Account dashboard | ✅ Yes - personalized user view |
+| Account dashboard         | ✅ Yes - personalized user view      |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| user | User | Default user | User data to display |
-| onEditProfile | () => void | — | Edit profile callback |
-| onChangePassword | () => void | — | Change password callback |
-| onLogout | () => void | — | Logout callback |
-| tabs | Tab[] | Default tabs | Custom tab definitions |
-| activeTab | string | "profile" | Default active tab |
-| onSelectTab | (tabId: string) => void | — | Tab selection callback |
-| isLoading | boolean | false | Loading state |
-| error | string | — | Error message |
-| className | string | — | Custom CSS class |
+| Prop             | Type                    | Default      | Description              |
+| ---------------- | ----------------------- | ------------ | ------------------------ |
+| user             | User                    | Default user | User data to display     |
+| onEditProfile    | () => void              | —            | Edit profile callback    |
+| onChangePassword | () => void              | —            | Change password callback |
+| onLogout         | () => void              | —            | Logout callback          |
+| tabs             | Tab[]                   | Default tabs | Custom tab definitions   |
+| activeTab        | string                  | "profile"    | Default active tab       |
+| onSelectTab      | (tabId: string) => void | —            | Tab selection callback   |
+| isLoading        | boolean                 | false        | Loading state            |
+| error            | string                  | —            | Error message            |
+| className        | string                  | —            | Custom CSS class         |
 
 ### User Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| name | string | User display name |
-| email | string | Email address |
-| avatar | string | Avatar image URL (optional) |
-| bio | string | User biography (optional) |
-| phone | string | Phone number (optional) |
-| location | string | User location (optional) |
-| joinDate | Date | Account creation date (optional) |
+| Property | Type   | Description                      |
+| -------- | ------ | -------------------------------- |
+| id       | string | Unique identifier                |
+| name     | string | User display name                |
+| email    | string | Email address                    |
+| avatar   | string | Avatar image URL (optional)      |
+| bio      | string | User biography (optional)        |
+| phone    | string | Phone number (optional)          |
+| location | string | User location (optional)         |
+| joinDate | Date   | Account creation date (optional) |
 
 ### Tab Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique tab identifier |
-| label | string | Tab display label |
+| Property | Type   | Description           |
+| -------- | ------ | --------------------- |
+| id       | string | Unique tab identifier |
+| label    | string | Tab display label     |
 
 ## Key Features
 
@@ -81,12 +81,13 @@ const [user, setUser] = useState({
   onChangePassword={() => navigate("/change-password")}
   onLogout={() => logout()}
   activeTab="profile"
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Card` — Header and tab content containers
 - `Button` — Edit, logout, and action buttons
 - Lucide Icons — Edit2, Lock, LogOut, Calendar, MapPin, Phone

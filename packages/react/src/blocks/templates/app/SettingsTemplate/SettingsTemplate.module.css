@@ -88,7 +88,9 @@
   text-align: left;
   cursor: pointer;
   border-radius: var(--radius-control);
-  transition: background-color 150ms ease, border-color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    border-color 150ms ease;
   border-left: 3px solid transparent;
   margin: var(--spacing-1) 0;
 }

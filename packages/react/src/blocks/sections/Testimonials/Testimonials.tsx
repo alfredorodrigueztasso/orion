@@ -1,7 +1,10 @@
 "use client";
 
 import React from "react";
-import type { TestimonialsProps, TestimonialCardProps } from "./Testimonials.types";
+import type {
+  TestimonialsProps,
+  TestimonialCardProps,
+} from "./Testimonials.types";
 import { TestimonialCard } from "./TestimonialCard";
 import styles from "./Testimonials.module.css";
 
@@ -12,7 +15,17 @@ type TestimonialsComponent = React.ForwardRefExoticComponent<
 };
 
 export const Testimonials = React.forwardRef<HTMLElement, TestimonialsProps>(
-  ({ title, description, testimonials, columns = 3, variant = "default", className }, ref) => {
+  (
+    {
+      title,
+      description,
+      testimonials,
+      columns = 3,
+      variant = "default",
+      className,
+    },
+    ref,
+  ) => {
     const gridClass = columns === 2 ? styles.grid2 : styles.grid3;
 
     return (
@@ -28,11 +41,7 @@ export const Testimonials = React.forwardRef<HTMLElement, TestimonialsProps>(
           )}
           <div className={`${styles.grid} ${gridClass}`}>
             {testimonials.map((testimonial, index) => (
-              <TestimonialCard
-                key={index}
-                {...testimonial}
-                variant={variant}
-              />
+              <TestimonialCard key={index} {...testimonial} variant={variant} />
             ))}
           </div>
         </div>

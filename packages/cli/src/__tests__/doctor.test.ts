@@ -227,7 +227,9 @@ describe("doctor command", () => {
       };
 
       // Create the directories
-      fs.mkdirSync(path.join(tempDir, config.componentDir), { recursive: true });
+      fs.mkdirSync(path.join(tempDir, config.componentDir), {
+        recursive: true,
+      });
       fs.mkdirSync(path.join(tempDir, config.sectionDir), { recursive: true });
       fs.mkdirSync(path.join(tempDir, config.templateDir), { recursive: true });
 
@@ -257,7 +259,9 @@ describe("doctor command", () => {
       };
 
       // Only create componentDir
-      fs.mkdirSync(path.join(tempDir, config.componentDir), { recursive: true });
+      fs.mkdirSync(path.join(tempDir, config.componentDir), {
+        recursive: true,
+      });
 
       const result = checkOutputDirs(config, tempDir);
       expect(result.status).toBe("warn");

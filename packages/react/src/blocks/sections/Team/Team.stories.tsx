@@ -12,17 +12,39 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 const members = [
-  { name: "Sarah", role: "Design Lead", avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah" },
-  { name: "Alex", role: "Engineer", avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex" },
-  { name: "Jordan", role: "PM", avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan" },
-  { name: "Casey", role: "Advocate", avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Casey" },
+  {
+    name: "Sarah",
+    role: "Design Lead",
+    avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Sarah",
+  },
+  {
+    name: "Alex",
+    role: "Engineer",
+    avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Alex",
+  },
+  {
+    name: "Jordan",
+    role: "PM",
+    avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Jordan",
+  },
+  {
+    name: "Casey",
+    role: "Advocate",
+    avatarSrc: "https://api.dicebear.com/7.x/avataaars/svg?seed=Casey",
+  },
 ];
 
-export const Default: Story = { args: { title: "Our Team", description: "Talented people", members } };
+export const Default: Story = {
+  args: { title: "Our Team", description: "Talented people", members },
+};
 
-export const TwoColumns: Story = { args: { title: "Team", members, columns: 2 } };
+export const TwoColumns: Story = {
+  args: { title: "Team", members, columns: 2 },
+};
 
-export const ThreeColumns: Story = { args: { title: "People", members, columns: 3 } };
+export const ThreeColumns: Story = {
+  args: { title: "People", members, columns: 3 },
+};
 
 export const AllVariants: Story = {
   args: {

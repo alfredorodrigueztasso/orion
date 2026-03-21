@@ -44,7 +44,8 @@ export const Default: Story = {
     title: "Download Our App",
     description: "Available on iOS and Android",
     badges: appBadges,
-    appImage: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
+    appImage:
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
     features: appFeatures,
     layout: "centered",
   },
@@ -55,7 +56,8 @@ export const SplitLeftLayout: Story = {
     title: "Get the Mobile Experience",
     description: "Download our app for on-the-go access",
     badges: appBadges,
-    appImage: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
+    appImage:
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
     features: appFeatures,
     layout: "split-left",
   },
@@ -66,7 +68,8 @@ export const SplitRightLayout: Story = {
     title: "Take Productivity Everywhere",
     description: "Sync across all your devices seamlessly",
     badges: appBadges,
-    appImage: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
+    appImage:
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
     features: appFeatures,
     layout: "split-right",
   },
@@ -99,7 +102,8 @@ export const AllVariants: Story = {
     title: "Download Our App",
     description: "Available on iOS and Android",
     badges: appBadges,
-    appImage: "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
+    appImage:
+      "https://images.unsplash.com/photo-1607082348824-0a96f2a4b9da?w=400&h=800&fit=crop",
     features: appFeatures,
     layout: "centered",
   },

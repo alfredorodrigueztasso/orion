@@ -30,7 +30,13 @@ const preview: Preview = {
     },
     options: {
       storySort: {
-        order: ["Getting Started", "Icons", "Components", "Sections", "Templates"],
+        order: [
+          "Getting Started",
+          "Icons",
+          "Components",
+          "Sections",
+          "Templates",
+        ],
       },
     },
   },

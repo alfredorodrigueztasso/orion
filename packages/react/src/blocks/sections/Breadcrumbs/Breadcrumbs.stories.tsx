@@ -14,7 +14,11 @@ type Story = StoryObj<typeof meta>;
 const items = [
   { id: "home", label: "Home", href: "/" },
   { id: "products", label: "Products", href: "/products" },
-  { id: "design-system", label: "Design System", href: "/products/design-system" },
+  {
+    id: "design-system",
+    label: "Design System",
+    href: "/products/design-system",
+  },
   { id: "components", label: "Components" },
 ];
 

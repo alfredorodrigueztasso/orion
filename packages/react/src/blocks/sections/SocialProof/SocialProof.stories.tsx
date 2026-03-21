@@ -60,7 +60,12 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <SocialProof {...args} />
-      <SocialProof {...args} title="Compact" stats={stats.slice(0, 2)} compact={true} />
+      <SocialProof
+        {...args}
+        title="Compact"
+        stats={stats.slice(0, 2)}
+        compact={true}
+      />
     </div>
   ),
 };

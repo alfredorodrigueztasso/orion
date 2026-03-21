@@ -4,37 +4,37 @@ A configuration editor form for creating and editing AI agent profiles. Provides
 
 ## When to Use
 
-| Scenario | Use AgentEditor |
-|----------|-----------------|
-| Agent configuration workflow | ✅ Yes - create and edit agent settings |
+| Scenario                     | Use AgentEditor                               |
+| ---------------------------- | --------------------------------------------- |
+| Agent configuration workflow | ✅ Yes - create and edit agent settings       |
 | AI assistant setup interface | ✅ Yes - manage model and behavior parameters |
-| Agent creation modal | ✅ Yes - controlled form with save/cancel |
-| Bulk agent import | ❌ No - designed for single agent editing |
+| Agent creation modal         | ✅ Yes - controlled form with save/cancel     |
+| Bulk agent import            | ❌ No - designed for single agent editing     |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Edit Agent" | Form title |
-| agent | Agent | undefined | Agent being edited (undefined for new) |
-| availableModels | string[] | ["gpt-4", "gpt-3.5-turbo", "claude-3-opus"] | Model options |
-| onSave | (agent: Agent) => void | — | Called when user saves |
-| onCancel | () => void | — | Called when user cancels |
-| isLoading | boolean | false | Loading state during save |
-| error | string | — | Error message to display |
-| className | string | — | Custom CSS class |
+| Prop            | Type                   | Default                                     | Description                            |
+| --------------- | ---------------------- | ------------------------------------------- | -------------------------------------- |
+| title           | string                 | "Edit Agent"                                | Form title                             |
+| agent           | Agent                  | undefined                                   | Agent being edited (undefined for new) |
+| availableModels | string[]               | ["gpt-4", "gpt-3.5-turbo", "claude-3-opus"] | Model options                          |
+| onSave          | (agent: Agent) => void | —                                           | Called when user saves                 |
+| onCancel        | () => void             | —                                           | Called when user cancels               |
+| isLoading       | boolean                | false                                       | Loading state during save              |
+| error           | string                 | —                                           | Error message to display               |
+| className       | string                 | —                                           | Custom CSS class                       |
 
 ### Agent Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| name | string | Agent name |
-| description | string | Purpose and behavior |
-| model | string | LLM model selection |
+| Property     | Type   | Description               |
+| ------------ | ------ | ------------------------- |
+| id           | string | Unique identifier         |
+| name         | string | Agent name                |
+| description  | string | Purpose and behavior      |
+| model        | string | LLM model selection       |
 | systemPrompt | string | System-level instructions |
-| temperature | number | Response creativity (0-2) |
-| maxTokens | number | Token limit (1-32000) |
+| temperature  | number | Response creativity (0-2) |
+| maxTokens    | number | Token limit (1-32000)     |
 
 ## Key Features
 
@@ -63,12 +63,13 @@ const [agent, setAgent] = useState(null);
   }}
   onCancel={() => console.log("Cancelled")}
   isLoading={false}
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Card` — Form container with header, body, footer
 - `Button` — Save and cancel actions with loading state
 - `Field` — Text and number inputs with labels

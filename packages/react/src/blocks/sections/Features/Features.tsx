@@ -21,10 +21,7 @@ export const Features = React.forwardRef<HTMLElement, FeaturesProps>(
           : styles.grid3;
 
     return (
-      <section
-        ref={ref}
-        className={`${styles.section} ${className || ""}`}
-      >
+      <section ref={ref} className={`${styles.section} ${className || ""}`}>
         <div className={styles.container}>
           {(title || description) && (
             <div className={styles.header}>

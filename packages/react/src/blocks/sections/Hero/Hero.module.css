@@ -1,85 +1,166 @@
-.section {
+/**
+ * Hero Component Styles
+ *
+ * Uses CSS Modules for scoped styling.
+ * All values reference semantic tokens via CSS variables.
+ */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+
+.fullHeight {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  padding: var(--spacing-16) var(--spacing-6);
-  background: var(--surface-base);
-  text-align: center;
-  min-height: 400px;
-}
-
-.left {
-  align-items: flex-start;
-  text-align: left;
-}
-
-.sm {
-  padding: var(--spacing-8) var(--spacing-6);
-  min-height: auto;
-}
-
-.lg {
-  padding: var(--spacing-32) var(--spacing-6);
-  min-height: 560px;
 }
 
 .container {
-  max-width: 800px;
-  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-12);
 }
 
-.title {
-  font-family: var(--font-primary);
-  font-size: var(--font-size-3xl);
-  font-weight: 700;
-  color: var(--text-primary);
-  margin: 0 0 var(--spacing-4) 0;
-  line-height: 1.15;
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-6);
 }
 
-.lg .title {
-  font-size: 48px;
+/* ============================================================================
+ * ALIGNMENT VARIANTS
+ * ============================================================================ */
+
+.align-center {
+  text-align: center;
+
+  & .content {
+    align-items: center;
+  }
+
+  & .actions {
+    justify-content: center;
+  }
+
+  & .trustIndicators {
+    justify-content: center;
+  }
 }
 
-.sm .title {
-  font-size: var(--font-size-2xl);
+.align-left {
+  text-align: left;
+
+  & .content {
+    align-items: flex-start;
+  }
+
+  & .actions {
+    justify-content: flex-start;
+  }
+
+  & .trustIndicators {
+    justify-content: flex-start;
+  }
+}
+
+/* ============================================================================
+ * SIZE VARIANTS
+ * ============================================================================ */
+
+/* Small hero - subpages */
+.size-sm {
+  & .headline {
+    font-family: var(--font-primary);
+    font-size: var(--font-size-32);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--text-primary);
+  }
+
+  & .description {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-16);
+    color: var(--text-secondary);
+    max-width: 500px;
+    line-height: var(--line-height-relaxed);
+  }
+}
+
+/* Medium hero - standard */
+.size-md {
+  & .headline {
+    font-family: var(--font-primary);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: var(--font-weight-bold);
+    line-height: var(--line-height-tight);
+    color: var(--text-primary);
+  }
+
+  & .description {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-18);
+    color: var(--text-secondary);
+    max-width: 600px;
+    line-height: var(--line-height-relaxed);
+  }
+}
+
+/* Large hero - landing pages */
+.size-lg {
+  & .headline {
+    font-family: var(--font-primary);
+    font-size: clamp(2.5rem, 5vw, 4rem);
+    font-weight: var(--font-weight-bold);
+    line-height: 1.1;
+    color: var(--text-primary);
+  }
+
+  & .description {
+    font-family: var(--font-secondary);
+    font-size: var(--font-size-20);
+    color: var(--text-secondary);
+    max-width: 700px;
+    line-height: var(--line-height-relaxed);
+  }
+}
+
+/* ============================================================================
+ * CONTENT ELEMENTS
+ * ============================================================================ */
+
+.badge {
+  margin-bottom: var(--spacing-2);
+}
+
+.headline {
+  margin: 0;
 }
 
 .description {
-  font-family: var(--font-secondary);
-  font-size: var(--font-size-lg);
-  color: var(--text-secondary);
-  margin: 0 0 var(--spacing-8) 0;
-  line-height: 1.6;
-  max-width: 600px;
-}
-
-.left .description {
-  margin-left: 0;
-  margin-right: 0;
+  margin: 0;
 }
 
 .actions {
   display: flex;
-  gap: var(--spacing-3);
   flex-wrap: wrap;
+  gap: var(--spacing-4);
+  margin-top: var(--spacing-4);
 }
 
-.left .actions {
-  justify-content: flex-start;
+.trustIndicators {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--spacing-6);
+  margin-top: var(--spacing-8);
+  opacity: 0.7;
 }
 
-.section:not(.left) .actions {
-  justify-content: center;
-}
+/* ============================================================================
+ * TEXT HIGHLIGHT (Brand Gradient)
+ * ============================================================================ */
 
-.section:not(.left) .description {
-  margin-left: auto;
-  margin-right: auto;
-}
-
-/* Highlight sub-component */
 .highlight {
   background: linear-gradient(
     135deg,
@@ -91,36 +172,264 @@
   background-clip: text;
 }
 
-/* Badge - eyebrow above title */
-.badge {
-  margin-bottom: var(--spacing-3);
+/* ============================================================================
+ * LAYOUT: CONTAINED (Default)
+ * ============================================================================ */
+
+.layout-contained {
+  /* Default styles, no special overrides needed */
 }
 
-/* Trust indicators - social proof below actions */
-.trustIndicators {
-  margin-top: var(--spacing-6);
+/* ============================================================================
+ * LAYOUT: FULLSCREEN
+ * ============================================================================ */
+
+.layout-fullscreen {
+  min-height: 100vh;
+  min-height: 100dvh; /* Dynamic viewport height for mobile */
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--spacing-3);
+  align-items: center;
   justify-content: center;
-  opacity: 0.7;
+  padding: 0;
+  margin: 0;
+  width: 100vw;
+  margin-left: calc(-50vw + 50%); /* Break out of container */
 }
 
-.left .trustIndicators {
-  justify-content: flex-start;
+/* Reset container for fullscreen */
+.layout-fullscreen .container {
+  width: 100%;
+  max-width: 1280px;
+  padding-inline: var(--spacing-6);
 }
 
-@media (max-width: 768px) {
-  .title {
-    font-size: var(--font-size-2xl);
+/* ============================================================================
+ * LAYOUT: CARD
+ * ============================================================================ */
+
+.layout-card {
+  margin: var(--spacing-6);
+  border-radius: var(--radius-container);
+  overflow: hidden;
+  background: var(--surface-base);
+}
+
+/* Card with elevation */
+.layout-card.elevated {
+  box-shadow: var(--shadow-xl);
+}
+
+/* Responsive card margins */
+@media (min-width: 768px) {
+  .layout-card {
+    margin: var(--spacing-8);
+    border-radius: var(--radius-container);
+  }
+}
+
+@media (min-width: 1024px) {
+  .layout-card {
+    margin: var(--spacing-12);
+  }
+}
+
+/* ============================================================================
+ * VARIANT: BACKGROUND
+ * ============================================================================ */
+
+.variant-background {
+  position: relative;
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+}
+
+.backgroundImage {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+}
+
+.backgroundImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.backgroundOverlay {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+}
+
+.variant-background .container {
+  position: relative;
+  z-index: 2;
+}
+
+/* Text colors for background variant - use inverse/on-dark for readability */
+.variant-background .headline,
+.variant-background .description {
+  color: var(--text-inverse);
+}
+
+/* Ensure highlight still works on background */
+.variant-background .highlight {
+  /* Lighter gradient for visibility on dark backgrounds */
+  background: linear-gradient(
+    135deg,
+    var(--color-brand-300),
+    var(--color-brand-500)
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Fullscreen + background combo */
+.layout-fullscreen.variant-background {
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+/* Card + background combo */
+.layout-card.variant-background {
+  min-height: 60vh;
+}
+
+/* ============================================================================
+ * DEFAULT MEDIA PLACEHOLDER
+ * ============================================================================ */
+
+.defaultMedia {
+  background: linear-gradient(
+    135deg,
+    var(--surface-subtle) 0%,
+    var(--surface-layer) 100%
+  );
+  border-radius: var(--radius-container);
+  padding: var(--spacing-12);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  width: 100%;
+  border: 1px solid var(--border-subtle);
+}
+
+.defaultMediaIcon {
+  color: var(--text-tertiary);
+  opacity: 0.5;
+}
+
+/* ============================================================================
+ * MEDIA LAYOUT
+ * ============================================================================ */
+
+.hasMedia {
+  & .container {
+    flex-direction: row;
+    align-items: center;
   }
 
-  .lg .title {
-    font-size: var(--font-size-3xl);
+  /* Content takes ~40% for better media prominence */
+  & .content {
+    flex: 0 0 40%;
+    min-width: 0;
+  }
+
+  /* Media takes ~55% (with gap accounting for remaining) */
+  & .media {
+    flex: 0 0 55%;
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.media-left {
+  & .container {
+    flex-direction: row-reverse;
+  }
+}
+
+.media-right {
+  & .container {
+    flex-direction: row;
+  }
+}
+
+.media-bottom {
+  & .container {
+    flex-direction: column;
+  }
+
+  & .content {
+    align-items: center;
+    text-align: center;
+  }
+
+  & .actions {
+    justify-content: center;
+  }
+}
+
+/* ============================================================================
+ * RESPONSIVE ADJUSTMENTS
+ * ============================================================================ */
+
+@media (max-width: 768px) {
+  .hasMedia {
+    & .container {
+      flex-direction: column;
+      gap: var(--spacing-8);
+    }
+
+    /* Reset flex basis on mobile */
+    & .content,
+    & .media {
+      flex: 1 1 auto;
+    }
+  }
+
+  .media-left,
+  .media-right {
+    & .container {
+      flex-direction: column;
+    }
+
+    & .content {
+      align-items: center;
+      text-align: center;
+    }
+
+    & .actions {
+      justify-content: center;
+    }
   }
 
   .actions {
     flex-direction: column;
-    align-items: stretch;
+    width: 100%;
+
+    & > * {
+      width: 100%;
+    }
+  }
+
+  /* Fullscreen on mobile */
+  .layout-fullscreen {
+    padding-inline: var(--spacing-4);
+  }
+
+  .layout-fullscreen .container {
+    padding-inline: var(--spacing-4);
+  }
+
+  /* Card on mobile */
+  .layout-card {
+    margin: var(--spacing-4);
+    border-radius: var(--radius-container);
   }
 }

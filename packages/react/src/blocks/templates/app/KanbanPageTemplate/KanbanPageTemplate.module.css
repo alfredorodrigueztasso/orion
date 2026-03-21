@@ -142,7 +142,9 @@
   border-radius: var(--radius-control);
   padding: var(--spacing-3);
   cursor: grab;
-  transition: box-shadow 150ms ease, border-color 150ms ease;
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
 }
 
 .taskCard:hover {
@@ -192,7 +194,9 @@
   background: transparent;
   color: var(--text-secondary);
   cursor: pointer;
-  transition: color 150ms ease, background-color 150ms ease;
+  transition:
+    color 150ms ease,
+    background-color 150ms ease;
 }
 
 .taskActionButton:hover {

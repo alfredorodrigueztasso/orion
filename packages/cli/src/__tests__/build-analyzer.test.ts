@@ -32,7 +32,7 @@ describe("build-analyzer", () => {
       fs.writeFileSync(
         path.join(buttonDir, "Button.module.css"),
         `.button { color: var(--text-primary); background: var(--interactive-primary); }`,
-        "utf-8"
+        "utf-8",
       );
 
       const cardDir = path.join(tempDir, "card");
@@ -40,7 +40,7 @@ describe("build-analyzer", () => {
       fs.writeFileSync(
         path.join(cardDir, "Card.module.css"),
         `.card { background: var(--surface-base); }`,
-        "utf-8"
+        "utf-8",
       );
 
       const { usageMap, components, totalTokens } = analyzeComponents(tempDir);
@@ -65,7 +65,7 @@ describe("build-analyzer", () => {
           padding: var(--spacing-4);
         }
       `,
-        "utf-8"
+        "utf-8",
       );
 
       const { usageMap } = analyzeComponents(tempDir);
@@ -80,7 +80,7 @@ describe("build-analyzer", () => {
       fs.writeFileSync(
         path.join(nestedDir, "Button.module.css"),
         `.button { color: var(--text-primary); }`,
-        "utf-8"
+        "utf-8",
       );
 
       const { components } = analyzeComponents(tempDir);
@@ -100,8 +100,16 @@ describe("build-analyzer", () => {
     it("should ignore non-.module.css files", () => {
       const componentDir = path.join(tempDir, "button");
       fs.mkdirSync(componentDir);
-      fs.writeFileSync(path.join(componentDir, "Button.css"), ".button {}", "utf-8");
-      fs.writeFileSync(path.join(componentDir, "Button.module.css"), ".button { color: var(--text-primary); }", "utf-8");
+      fs.writeFileSync(
+        path.join(componentDir, "Button.css"),
+        ".button {}",
+        "utf-8",
+      );
+      fs.writeFileSync(
+        path.join(componentDir, "Button.module.css"),
+        ".button { color: var(--text-primary); }",
+        "utf-8",
+      );
 
       const { components } = analyzeComponents(tempDir);
 
@@ -117,7 +125,7 @@ describe("build-analyzer", () => {
         .button { color: var(--text-primary); }
         .button:hover { color: var(--text-primary); }
       `,
-        "utf-8"
+        "utf-8",
       );
 
       const { usageMap } = analyzeComponents(tempDir);
@@ -132,7 +140,11 @@ describe("build-analyzer", () => {
     it("should merge all component CSS", () => {
       const button = path.join(tempDir, "button");
       fs.mkdirSync(button);
-      fs.writeFileSync(path.join(button, "Button.module.css"), ".button {}", "utf-8");
+      fs.writeFileSync(
+        path.join(button, "Button.module.css"),
+        ".button {}",
+        "utf-8",
+      );
 
       const card = path.join(tempDir, "card");
       fs.mkdirSync(card);

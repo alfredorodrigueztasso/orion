@@ -172,11 +172,7 @@ export const AgentEditor = forwardRef<HTMLDivElement, AgentEditorProps>(
           </Card.Body>
 
           <Card.Footer className={styles.footer}>
-            <Button
-              variant="ghost"
-              onClick={onCancel}
-              disabled={isLoading}
-            >
+            <Button variant="ghost" onClick={onCancel} disabled={isLoading}>
               Cancel
             </Button>
             <Button

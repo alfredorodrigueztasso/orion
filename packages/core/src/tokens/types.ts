@@ -10,17 +10,17 @@
 // ============================================================================
 
 export type ColorShades = {
-  '50': string;
-  '100': string;
-  '200': string;
-  '300': string;
-  '400': string;
-  '500': string;
-  '600': string;
-  '700': string;
-  '800': string;
-  '900': string;
-  '950': string;
+  "50": string;
+  "100": string;
+  "200": string;
+  "300": string;
+  "400": string;
+  "500": string;
+  "600": string;
+  "700": string;
+  "800": string;
+  "900": string;
+  "950": string;
 };
 
 export interface BrandColors {
@@ -108,7 +108,7 @@ export interface TypographyPrimitives {
 export interface SpacingPrimitives {
   0: string;
   px: string;
-  '05': string;
+  "05": string;
   1: string;
   2: string;
   3: string;
@@ -132,9 +132,9 @@ export interface RadiusPrimitives {
   sm: string;
   md: string;
   lg: string;
-  'lg-2': string;
+  "lg-2": string;
   xl: string;
-  '2xl': string;
+  "2xl": string;
   full: string;
 }
 
@@ -230,15 +230,15 @@ export interface StatusSemantics {
 
 export interface SoftSemantics {
   brand: string;
-  'brand-hover': string;
+  "brand-hover": string;
   success: string;
-  'success-hover'?: string;
+  "success-hover"?: string;
   error: string;
-  'error-hover'?: string;
+  "error-hover"?: string;
   warning?: string;
-  'warning-hover'?: string;
+  "warning-hover"?: string;
   info?: string;
-  'info-hover'?: string;
+  "info-hover"?: string;
 }
 
 export interface SemanticTokens {
@@ -261,8 +261,8 @@ export interface SemanticTokens {
 // THEME & BRAND TYPES
 // ============================================================================
 
-export type Theme = 'light' | 'dark';
-export type Brand = 'orion' | 'deepblue' | 'red' | 'orange' | 'lemon';
+export type Theme = "light" | "dark";
+export type Brand = "orion" | "deepblue" | "red" | "orange" | "lemon";
 
 export interface ThemeConfig {
   theme: Theme;
@@ -314,10 +314,10 @@ export type ColorTokenPath =
   | `color.brand.${Brand}.${keyof ColorShades}`
   | `color.neutral.${keyof NeutralColors}`
   | `color.neutralPure.${keyof NeutralColors}`
-  | 'color.error.500'
-  | 'color.success.500'
-  | 'color.warning.500'
-  | 'color.info.500';
+  | "color.error.500"
+  | "color.success.500"
+  | "color.warning.500"
+  | "color.info.500";
 
 export type TypographyTokenPath =
   | `typography.family.${keyof TypographyFamily}`
@@ -354,62 +354,62 @@ export type CSSVariableName = `--${string}`;
 
 export interface CSSVariableMap {
   // Surface variables
-  '--surface-base': string;
-  '--surface-subtle': string;
-  '--surface-layer': string;
-  '--surface-primary': string;
-  '--surface-secondary': string;
-  '--surface-glass': string;
-  '--surface-sunken': string;
-  '--surface-overlay': string;
+  "--surface-base": string;
+  "--surface-subtle": string;
+  "--surface-layer": string;
+  "--surface-primary": string;
+  "--surface-secondary": string;
+  "--surface-glass": string;
+  "--surface-sunken": string;
+  "--surface-overlay": string;
 
   // Text variables
-  '--text-primary': string;
-  '--text-secondary': string;
-  '--text-tertiary': string;
-  '--text-inverse': string;
-  '--text-brand': string;
+  "--text-primary": string;
+  "--text-secondary": string;
+  "--text-tertiary": string;
+  "--text-inverse": string;
+  "--text-brand": string;
 
   // Interactive variables
-  '--interactive-primary': string;
-  '--interactive-primary-hover': string;
-  '--interactive-primary-text': string;
-  '--interactive-secondary': string;
-  '--interactive-secondary-hover': string;
-  '--interactive-secondary-text': string;
-  '--interactive-ghost-hover': string;
+  "--interactive-primary": string;
+  "--interactive-primary-hover": string;
+  "--interactive-primary-text": string;
+  "--interactive-secondary": string;
+  "--interactive-secondary-hover": string;
+  "--interactive-secondary-text": string;
+  "--interactive-ghost-hover": string;
 
   // Status variables
-  '--status-error': string;
-  '--status-success': string;
-  '--status-warning': string;
-  '--status-info': string;
+  "--status-error": string;
+  "--status-success": string;
+  "--status-warning": string;
+  "--status-info": string;
 
   // Border variables
-  '--border-subtle': string;
-  '--border-strong': string;
-  '--border-interactive': string;
+  "--border-subtle": string;
+  "--border-strong": string;
+  "--border-interactive": string;
 
   // Spacing variables (sample - extend as needed)
-  '--spacing-0': string;
-  '--spacing-px': string;
-  '--spacing-1': string;
-  '--spacing-2': string;
-  '--spacing-3': string;
-  '--spacing-4': string;
-  '--spacing-6': string;
-  '--spacing-8': string;
-  '--spacing-16': string;
-  '--spacing-32': string;
+  "--spacing-0": string;
+  "--spacing-px": string;
+  "--spacing-1": string;
+  "--spacing-2": string;
+  "--spacing-3": string;
+  "--spacing-4": string;
+  "--spacing-6": string;
+  "--spacing-8": string;
+  "--spacing-16": string;
+  "--spacing-32": string;
 
   // Radius variables
-  '--radius-sm': string;
-  '--radius-md': string;
-  '--radius-lg': string;
-  '--radius-xl': string;
-  '--radius-2xl': string;
-  '--radius-full': string;
-  '--radius-control': string;
+  "--radius-sm": string;
+  "--radius-md": string;
+  "--radius-lg": string;
+  "--radius-xl": string;
+  "--radius-2xl": string;
+  "--radius-full": string;
+  "--radius-control": string;
 }
 
 // ============================================================================
@@ -417,12 +417,14 @@ export interface CSSVariableMap {
 // ============================================================================
 
 /** Get nested property type from dot notation path */
-export type GetTokenValue<T, Path extends string> =
-  Path extends `${infer Key}.${infer Rest}`
-    ? Key extends keyof T
-      ? GetTokenValue<T[Key], Rest>
-      : never
-    : Path extends keyof T
+export type GetTokenValue<
+  T,
+  Path extends string,
+> = Path extends `${infer Key}.${infer Rest}`
+  ? Key extends keyof T
+    ? GetTokenValue<T[Key], Rest>
+    : never
+  : Path extends keyof T
     ? T[Path]
     : never;
 

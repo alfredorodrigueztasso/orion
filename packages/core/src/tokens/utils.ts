@@ -4,10 +4,10 @@
  * Helper functions for working with design tokens in TypeScript.
  */
 
-import type { Theme, Brand, TokenPath, SemanticTokenPath } from './types';
-import { primitives } from './primitives';
-import { themes } from './themes';
-import { brands } from './brands';
+import type { Theme, Brand, TokenPath, SemanticTokenPath } from "./types";
+import { primitives } from "./primitives";
+import { themes } from "./themes";
+import { brands } from "./brands";
 
 /**
  * Get a primitive token value by path
@@ -17,7 +17,7 @@ import { brands } from './brands';
  * getToken('spacing.4') // "16px"
  */
 export function getToken(path: TokenPath): string {
-  const keys = path.split('.');
+  const keys = path.split(".");
   let value: any = primitives;
 
   for (const key of keys) {
@@ -37,19 +37,28 @@ export function getToken(path: TokenPath): string {
  * getSemanticToken('light', 'surface.base') // "#ffffff"
  * getSemanticToken('dark', 'text.primary') // "#ffffff"
  */
-export function getSemanticToken(theme: Theme, path: SemanticTokenPath): string {
-  const keys = path.split('.');
+export function getSemanticToken(
+  theme: Theme,
+  path: SemanticTokenPath,
+): string {
+  const keys = path.split(".");
   let value: any = themes[theme].semantic;
 
   for (const key of keys) {
     value = value[key];
     if (value === undefined) {
-      throw new Error(`Semantic token path "${path}" not found in ${theme} theme`);
+      throw new Error(
+        `Semantic token path "${path}" not found in ${theme} theme`,
+      );
     }
   }
 
   // Resolve token references (e.g., "{color.neutral.0}")
-  if (typeof value === 'string' && value.startsWith('{') && value.endsWith('}')) {
+  if (
+    typeof value === "string" &&
+    value.startsWith("{") &&
+    value.endsWith("}")
+  ) {
     const refPath = value.slice(1, -1);
     return getToken(refPath as TokenPath);
   }
@@ -75,14 +84,14 @@ export function getBrand(brand: Brand) {
  * toCSSVariable('text.primary') // "--text-primary"
  */
 export function toCSSVariable(path: SemanticTokenPath): string {
-  return `--${path.replace(/\./g, '-')}`;
+  return `--${path.replace(/\./g, "-")}`;
 }
 
 /**
  * Type guard for valid theme
  */
 export function isValidTheme(value: string): value is Theme {
-  return value === 'light' || value === 'dark';
+  return value === "light" || value === "dark";
 }
 
 /**

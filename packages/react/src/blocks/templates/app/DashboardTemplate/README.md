@@ -4,54 +4,54 @@ Analytics and business intelligence dashboard with metrics grid, charts section,
 
 ## When to Use
 
-| Scenario | Use DashboardTemplate |
-|----------|----------------------|
-| Business analytics dashboard | ✅ Yes - metrics and charts |
-| Admin control panel | ✅ Yes - with activity feed |
-| Metrics overview page | ✅ Yes - display KPIs |
-| Real-time monitoring | ✅ Yes - activity log included |
-| Data visualization page | ✅ Yes - chart card layout |
+| Scenario                     | Use DashboardTemplate          |
+| ---------------------------- | ------------------------------ |
+| Business analytics dashboard | ✅ Yes - metrics and charts    |
+| Admin control panel          | ✅ Yes - with activity feed    |
+| Metrics overview page        | ✅ Yes - display KPIs          |
+| Real-time monitoring         | ✅ Yes - activity log included |
+| Data visualization page      | ✅ Yes - chart card layout     |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Dashboard" | Page title |
-| subtitle | string | — | Optional subtitle |
-| metrics | MetricCard[] | [] | Array of metric cards |
-| charts | ChartCard[] | [] | Array of chart cards |
-| activity | ActivityItem[] | [] | Recent activity items |
-| className | string | — | Custom CSS class |
+| Prop      | Type           | Default     | Description           |
+| --------- | -------------- | ----------- | --------------------- |
+| title     | string         | "Dashboard" | Page title            |
+| subtitle  | string         | —           | Optional subtitle     |
+| metrics   | MetricCard[]   | []          | Array of metric cards |
+| charts    | ChartCard[]    | []          | Array of chart cards  |
+| activity  | ActivityItem[] | []          | Recent activity items |
+| className | string         | —           | Custom CSS class      |
 
 ### MetricCard Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| label | string | Metric label |
-| value | string \| number | Current value |
-| change | number | Change percentage |
-| trend | "up" \| "down" \| "neutral" | Trend direction |
-| icon | ReactNode | Optional metric icon |
+| Property | Type                        | Description          |
+| -------- | --------------------------- | -------------------- |
+| id       | string                      | Unique identifier    |
+| label    | string                      | Metric label         |
+| value    | string \| number            | Current value        |
+| change   | number                      | Change percentage    |
+| trend    | "up" \| "down" \| "neutral" | Trend direction      |
+| icon     | ReactNode                   | Optional metric icon |
 
 ### ChartCard Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| title | string | Chart title |
-| type | string | Chart type (line, bar, etc) |
-| content | ReactNode | Chart visualization |
+| Property | Type      | Description                 |
+| -------- | --------- | --------------------------- |
+| id       | string    | Unique identifier           |
+| title    | string    | Chart title                 |
+| type     | string    | Chart type (line, bar, etc) |
+| content  | ReactNode | Chart visualization         |
 
 ### ActivityItem Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| title | string | Activity title |
+| Property    | Type   | Description          |
+| ----------- | ------ | -------------------- |
+| id          | string | Unique identifier    |
+| title       | string | Activity title       |
 | description | string | Optional description |
-| type | string | Activity type |
-| timestamp | Date | When it occurred |
+| type        | string | Activity type        |
+| timestamp   | Date   | When it occurred     |
 
 ## Key Features
 
@@ -99,12 +99,13 @@ import { Users, TrendingUp } from "lucide-react";
       timestamp: new Date(),
     },
   ]}
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Card` — Metric, chart, and activity containers
 - `Badge` — Chart type indicators
 - Lucide Icons — TrendingUp, TrendingDown, Clock

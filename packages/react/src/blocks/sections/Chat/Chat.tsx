@@ -15,123 +15,123 @@ export const ChatSection = React.forwardRef<HTMLElement, ChatSectionProps>(
       placeholder = "Type a message...",
       className,
     },
-    ref
+    ref,
   ) => {
-  const [messages, setMessages] = useState(messagesProp);
-  const [activeConversationId, setActiveConversationId] = useState(
-    activeIdProp || conversations?.[0]?.id || ""
-  );
-  const [inputValue, setInputValue] = useState("");
+    const [messages, setMessages] = useState(messagesProp);
+    const [activeConversationId, setActiveConversationId] = useState(
+      activeIdProp || conversations?.[0]?.id || "",
+    );
+    const [inputValue, setInputValue] = useState("");
 
-  const handleConversationSelect = (id: string) => {
-    setActiveConversationId(id);
-    onConversationSelect?.(id);
-  };
-
-  const handleSend = () => {
-    const content = inputValue.trim();
-    if (!content) return;
-
-    const newMessage = {
-      id: `msg-${Date.now()}`,
-      role: "user" as const,
-      content,
+    const handleConversationSelect = (id: string) => {
+      setActiveConversationId(id);
+      onConversationSelect?.(id);
     };
 
-    setMessages((prev) => [...prev, newMessage]);
-    setInputValue("");
-    onSendMessage?.(content);
-  };
+    const handleSend = () => {
+      const content = inputValue.trim();
+      if (!content) return;
 
-  const handleKeyDown = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter" && !e.shiftKey) {
-      e.preventDefault();
-      handleSend();
-    }
-  };
+      const newMessage = {
+        id: `msg-${Date.now()}`,
+        role: "user" as const,
+        content,
+      };
 
-  const hasSidebar = conversations && conversations.length > 0;
+      setMessages((prev) => [...prev, newMessage]);
+      setInputValue("");
+      onSendMessage?.(content);
+    };
 
-  return (
-    <section ref={ref} className={`${styles.section} ${className || ""}`}>
-      {hasSidebar && (
-        <aside className={styles.sidebar}>
-          <div className={styles.sidebarHeader}>Conversations</div>
-          <div className={styles.conversationList}>
-            {conversations.map((conv) => (
-              <button
-                key={conv.id}
-                className={`${styles.conversationItem} ${
-                  activeConversationId === conv.id
-                    ? styles.conversationItemActive
-                    : ""
+    const handleKeyDown = (e: React.KeyboardEvent) => {
+      if (e.key === "Enter" && !e.shiftKey) {
+        e.preventDefault();
+        handleSend();
+      }
+    };
+
+    const hasSidebar = conversations && conversations.length > 0;
+
+    return (
+      <section ref={ref} className={`${styles.section} ${className || ""}`}>
+        {hasSidebar && (
+          <aside className={styles.sidebar}>
+            <div className={styles.sidebarHeader}>Conversations</div>
+            <div className={styles.conversationList}>
+              {conversations.map((conv) => (
+                <button
+                  key={conv.id}
+                  className={`${styles.conversationItem} ${
+                    activeConversationId === conv.id
+                      ? styles.conversationItemActive
+                      : ""
+                  }`}
+                  onClick={() => handleConversationSelect(conv.id)}
+                  type="button"
+                >
+                  <span className={styles.conversationTitle}>{conv.title}</span>
+                </button>
+              ))}
+            </div>
+          </aside>
+        )}
+
+        <div className={styles.main}>
+          <div className={styles.messages}>
+            {messages.map((msg) => (
+              <div
+                key={msg.id}
+                className={`${styles.message} ${
+                  msg.role === "user"
+                    ? styles.messageUser
+                    : msg.role === "assistant"
+                      ? styles.messageAssistant
+                      : styles.messageSystem
                 }`}
-                onClick={() => handleConversationSelect(conv.id)}
-                type="button"
               >
-                <span className={styles.conversationTitle}>{conv.title}</span>
-              </button>
+                {msg.role !== "system" && (
+                  <div className={styles.messageAvatar}>
+                    {msg.role === "user" ? "U" : "A"}
+                  </div>
+                )}
+                <div
+                  className={`${styles.messageBubble} ${
+                    msg.role === "user"
+                      ? styles.messageBubbleUser
+                      : msg.role === "assistant"
+                        ? styles.messageBubbleAssistant
+                        : styles.messageBubbleSystem
+                  }`}
+                >
+                  {msg.content}
+                </div>
+              </div>
             ))}
           </div>
-        </aside>
-      )}
 
-      <div className={styles.main}>
-        <div className={styles.messages}>
-          {messages.map((msg) => (
-            <div
-              key={msg.id}
-              className={`${styles.message} ${
-                msg.role === "user"
-                  ? styles.messageUser
-                  : msg.role === "assistant"
-                    ? styles.messageAssistant
-                    : styles.messageSystem
-              }`}
+          <div className={styles.inputArea}>
+            <input
+              type="text"
+              className={styles.input}
+              placeholder={placeholder}
+              value={inputValue}
+              onChange={(e) => setInputValue(e.target.value)}
+              onKeyDown={handleKeyDown}
+              aria-label="Message input"
+            />
+            <button
+              className={styles.sendButton}
+              onClick={handleSend}
+              disabled={!inputValue.trim()}
+              type="button"
             >
-              {msg.role !== "system" && (
-                <div className={styles.messageAvatar}>
-                  {msg.role === "user" ? "U" : "A"}
-                </div>
-              )}
-              <div
-                className={`${styles.messageBubble} ${
-                  msg.role === "user"
-                    ? styles.messageBubbleUser
-                    : msg.role === "assistant"
-                      ? styles.messageBubbleAssistant
-                      : styles.messageBubbleSystem
-                }`}
-              >
-                {msg.content}
-              </div>
-            </div>
-          ))}
+              Send
+            </button>
+          </div>
         </div>
-
-        <div className={styles.inputArea}>
-          <input
-            type="text"
-            className={styles.input}
-            placeholder={placeholder}
-            value={inputValue}
-            onChange={(e) => setInputValue(e.target.value)}
-            onKeyDown={handleKeyDown}
-            aria-label="Message input"
-          />
-          <button
-            className={styles.sendButton}
-            onClick={handleSend}
-            disabled={!inputValue.trim()}
-            type="button"
-          >
-            Send
-          </button>
-        </div>
-      </div>
-    </section>
-  );
-  }
+      </section>
+    );
+  },
 );
 
 ChatSection.displayName = "ChatSection";

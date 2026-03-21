@@ -89,7 +89,7 @@ import { Button, Card, Field, useTheme, ThemeProvider } from '@orion-ds/react';
 
 function App() {
 return (
-<ThemeProvider> {/* Fonts load automatically! */}
+<ThemeProvider> {/_ Fonts load automatically! _/}
 <MyApp />
 </ThemeProvider>
 );

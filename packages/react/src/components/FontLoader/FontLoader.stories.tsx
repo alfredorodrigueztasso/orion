@@ -230,7 +230,9 @@ export const WithCallbacks: Story = {
                       : "var(--text-secondary)",
               }}
             />
-            <span style={{ fontSize: "var(--font-size-14)", fontWeight: "500" }}>
+            <span
+              style={{ fontSize: "var(--font-size-14)", fontWeight: "500" }}
+            >
               Status: {status}
             </span>
           </div>
@@ -274,7 +276,13 @@ export const TypographyDemo: Story = {
         Typography Demo
       </h2>
 
-      <div style={{ display: "flex", flexDirection: "column", gap: "var(--spacing-4)" }}>
+      <div
+        style={{
+          display: "flex",
+          flexDirection: "column",
+          gap: "var(--spacing-4)",
+        }}
+      >
         <div>
           <p
             style={{
@@ -319,8 +327,8 @@ export const TypographyDemo: Story = {
               color: "var(--text-primary)",
             }}
           >
-            This is body text using DM Sans. FontLoader automatically loads all required
-            fonts from Google Fonts when the component mounts.
+            This is body text using DM Sans. FontLoader automatically loads all
+            required fonts from Google Fonts when the component mounts.
           </p>
         </div>
 

@@ -4,40 +4,40 @@ An event timeline section displaying a chronological sequence of events. Designe
 
 ## When to Use
 
-| Scenario | Use Timeline |
-|----------|-------------|
-| Product roadmap | ✅ Yes - shows upcoming milestones |
-| Company history | ✅ Yes - displays historical events |
-| Process flow | ✅ Yes - shows sequential steps |
-| Journey progression | ✅ Yes - displays user progress |
-| Vertical timeline | ✅ Yes - compact vertical layout |
-| Data table | ❌ No - use DataTable component |
-| Simple list | ❌ No - use List component |
+| Scenario            | Use Timeline                        |
+| ------------------- | ----------------------------------- |
+| Product roadmap     | ✅ Yes - shows upcoming milestones  |
+| Company history     | ✅ Yes - displays historical events |
+| Process flow        | ✅ Yes - shows sequential steps     |
+| Journey progression | ✅ Yes - displays user progress     |
+| Vertical timeline   | ✅ Yes - compact vertical layout    |
+| Data table          | ❌ No - use DataTable component     |
+| Simple list         | ❌ No - use List component          |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | — | Section heading |
-| events | TimelineEvent[] | — | Array of timeline events (required) |
-| orientation | TimelineOrientation | "vertical" | Layout direction |
-| compact | boolean | — | Use compact layout |
-| className | string | — | Additional CSS class |
+| Prop        | Type                | Default    | Description                         |
+| ----------- | ------------------- | ---------- | ----------------------------------- |
+| title       | string              | —          | Section heading                     |
+| events      | TimelineEvent[]     | —          | Array of timeline events (required) |
+| orientation | TimelineOrientation | "vertical" | Layout direction                    |
+| compact     | boolean             | —          | Use compact layout                  |
+| className   | string              | —          | Additional CSS class                |
 
 ### TimelineEvent
 
-| Prop | Type | Description |
-|------|------|-------------|
-| id | string | Unique event identifier |
-| date | string | Event date/time display |
-| title | string | Event title (required) |
-| description | string | Optional event description |
-| icon | ReactNode | Optional icon element |
+| Prop        | Type      | Description                |
+| ----------- | --------- | -------------------------- |
+| id          | string    | Unique event identifier    |
+| date        | string    | Event date/time display    |
+| title       | string    | Event title (required)     |
+| description | string    | Optional event description |
+| icon        | ReactNode | Optional icon element      |
 
 ### TimelineOrientation
 
 ```typescript
-type TimelineOrientation = "horizontal" | "vertical"
+type TimelineOrientation = "horizontal" | "vertical";
 ```
 
 ## Examples
@@ -74,7 +74,7 @@ import { Rocket, CheckCircle, Star } from "lucide-react";
     },
   ]}
   orientation="vertical"
-/>
+/>;
 ```
 
 ### Compact Horizontal Timeline

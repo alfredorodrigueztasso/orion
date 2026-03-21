@@ -7,7 +7,7 @@ function App(): JSX.Element {
     <div className={styles.container}>
       <Stack gap={6} align="center" justify="center">
         <div className={styles.header}>
-          <h1>Welcome to {{projectName}}</h1>
+          <h1>Welcome to {{ projectName }}</h1>
           <p className={styles.subtitle}>
             Built with React, Vite, TypeScript, and Orion Design System
           </p>

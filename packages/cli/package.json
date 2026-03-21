@@ -1,6 +1,6 @@
 {
   "name": "@orion-ds/cli",
-  "version": "4.9.5",
+  "version": "5.0.0",
   "description": "Add Orion Design System components to your project — shadcn-style CLI",
   "type": "module",
   "bin": {

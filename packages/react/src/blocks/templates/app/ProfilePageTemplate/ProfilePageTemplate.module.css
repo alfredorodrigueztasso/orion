@@ -18,7 +18,11 @@
 }
 
 .headerCard {
-  background: linear-gradient(135deg, var(--surface-layer), var(--surface-base));
+  background: linear-gradient(
+    135deg,
+    var(--surface-layer),
+    var(--surface-base)
+  );
 }
 
 .headerBody {
@@ -139,7 +143,9 @@
   font-size: var(--font-size-sm);
   font-weight: 500;
   color: var(--text-secondary);
-  transition: color 150ms ease, border-color 150ms ease;
+  transition:
+    color 150ms ease,
+    border-color 150ms ease;
   white-space: nowrap;
 }
 
