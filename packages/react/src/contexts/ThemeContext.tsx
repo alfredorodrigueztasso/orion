@@ -52,9 +52,24 @@ import { getMissingFonts, GOOGLE_FONTS_URL, BRAND_FONTS } from "../utils/fonts";
 import { FontLoader } from "../components/FontLoader";
 
 /**
- * Theme Context - provides theme and brand state globally
+ * SSR-safe defaults for Theme Context
+ * Used when ThemeContext is accessed outside of ThemeProvider (e.g., during Next.js static prerendering)
  */
-const ThemeContext = createContext<UseThemeReturn | undefined>(undefined);
+const SSR_DEFAULTS: UseThemeReturn = {
+  theme: "light",
+  brand: "orion",
+  setTheme: () => {},
+  setBrand: () => {},
+  toggleTheme: () => {},
+  isDark: false,
+  isLight: true,
+};
+
+/**
+ * Theme Context - provides theme and brand state globally
+ * Initialized with SSR defaults to prevent null errors during static prerendering
+ */
+const ThemeContext = createContext<UseThemeReturn>(SSR_DEFAULTS);
 
 /**
  * Check if component styles (react.css) are loaded
@@ -227,9 +242,10 @@ export function ThemeProvider({
 /**
  * Hook to access global theme state
  *
- * ⚠️ IMPORTANT: Must be used inside a ThemeProvider
+ * ⚠️ IMPORTANT: Must be used inside a ThemeProvider for full functionality
  *
- * @throws Error if used outside ThemeProvider
+ * Returns SSR-safe defaults if used outside ThemeProvider (instead of throwing).
+ * In development, a warning is logged if context is accessed outside the provider.
  *
  * @example
  * ```tsx
@@ -243,19 +259,22 @@ export function ThemeProvider({
 export function useThemeContext(): UseThemeReturn {
   const context = useContext(ThemeContext);
 
-  if (context === undefined) {
-    throw new Error(
-      "❌ useTheme() must be used inside <ThemeProvider>\n\n" +
-        "Solution:\n" +
-        "Wrap your app with ThemeProvider:\n\n" +
-        "export default function App() {\n" +
-        "  return (\n" +
-        "    <ThemeProvider>\n" +
-        "      <YourComponents />\n" +
-        "    </ThemeProvider>\n" +
-        "  );\n" +
-        "}",
-    );
+  // Dev warning: detectar si se está usando fuera de ThemeProvider
+  // Solo warn si estamos en el cliente (typeof window !== "undefined")
+  if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
+    if (context === SSR_DEFAULTS) {
+      console.warn(
+        "⚠️ [Orion] useThemeContext() called outside <ThemeProvider>. Using SSR defaults.\n\n" +
+          "For full theme functionality, wrap your app with <ThemeProvider>:\n\n" +
+          "export default function App() {\n" +
+          "  return (\n" +
+          "    <ThemeProvider>\n" +
+          "      <YourComponents />\n" +
+          "    </ThemeProvider>\n" +
+          "  );\n" +
+          "}",
+      );
+    }
   }
 
   return context;

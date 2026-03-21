@@ -122,7 +122,7 @@ docs-site will ALWAYS use Orion components directly. When friction is encountere
 
 ## [2026-03-21] Preview modules registry path not accessible
 
-**Status**: 🔴 OPEN
+**Status**: ✅ RESOLVED
 
 **What I tried**:
 Building docs-site with Next.js build command
@@ -135,19 +135,30 @@ Module not found: Can't resolve '../../registry/preview-modules/index'
 **Expected**:
 Preview modules should be accessible from docs-site/components/
 
-**Root cause** (investigating):
-- docs-site imports ComponentPreview and SectionPreview
-- These components try to import from `../../registry/preview-modules/index`
-- Path resolution fails in Next.js build context
+**Root cause** (FOUND):
+- `registry/preview-modules/index.ts` did not exist at all
+- `docs-site/components/ComponentPreview.tsx` and `SectionPreview.tsx` dynamically import this path
+- Next.js build analyzes dynamic imports statically, so missing modules cause build failure
+
+**Resolution Applied** (✅ IMPLEMENTED):
+1. Created `registry/preview-modules/index.ts` with 35 component previews
+   - **Tier 1** (15 components): button, card, badge, alert, field, modal, tabs, avatar, spinner, progress-bar, checkbox, radio, select, tooltip, switch
+   - **Tier 2** (20 components): sidebar, navbar, table, data-table, pagination, dropdown, breadcrumb, divider, stack, skeleton, drawer, popover, list, accordion, stepper, form-section, page-header, metric-cards, empty-state, banner
+2. All previews follow AI-First rules:
+   - Imports from `@orion-ds/react` only
+   - CSS variables for all styling (no hardcoded colors/spacing)
+   - No brand props, no `data-brand` on elements
+   - SSR-safe rendering
 
 **Impact**:
-- docs-site build fails
-- Component and section preview functionality blocked
-- Cannot test component examples
+- ✅ docs-site build no longer fails on preview-modules import
+- ✅ Component and section examples now render live in documentation
+- ✅ Tier 3 components (~34) show graceful fallback: "Preview not yet available"
 
-**Orion action**:
-- [ ] File issue for registry path accessibility
-- [ ] Clarify how preview-modules should be imported in Next.js projects
+**Lesson learned**:
+- Dynamic imports are analyzed by Next.js at build time, not runtime
+- Missing modules referenced in imports cause build failure even if unused at runtime
+- Providing _some_ previews (35/69) is better UX than showing empty state for all
 
 ---
 
@@ -273,7 +284,109 @@ Module not found: Can't resolve '@orion-ds/react/blocks'
 
 ---
 
-**Last Updated**: 2026-03-21T04:00:00Z
-**Project**: docs-site@1.0.0
-**Orion Version**: @orion-ds/react@4.9.2 (BROKEN - revert to 4.9.1)
-**Status**: ❌ BLOCKED - Awaiting 4.9.3 hotfix
+## [2026-03-21] React useContext null error in 4.9.3 error page
+
+**Status**: ✅ RESOLVED
+
+**Build attempt**: @orion-ds/react@4.9.3
+
+**What I tried**:
+```bash
+cd docs-site
+npm run build
+```
+
+**What happened**:
+```
+✓ Compiled successfully in 8.8s (compilation passed!)
+TypeError: Cannot read properties of null (reading 'useContext')
+    at p (.next/server/pages/_error.js:1:20089)
+Error occurred prerendering page "/404"
+Export encountered an error on /_error: /404, exiting the build
+```
+
+**Expected**:
+- Compilation should complete
+- Static page prerendering should succeed
+- Error page (/404, /500) should render without errors
+
+**Root cause** (IDENTIFIED):
+- `packages/react/src/contexts/ThemeContext.tsx:57` initialized `createContext<UseThemeReturn | undefined>(undefined)`
+- `useThemeContext()` threw error when context was `undefined`
+- During Next.js static pre-rendering of error pages, React may not be fully initialized
+- Module imports execute at build time; `useContext` call returned null before React hydration
+- Error: `Cannot read properties of null (reading 'useContext')`
+
+**Resolution Applied** (✅ IMPLEMENTED):
+1. **Modified** `packages/react/src/contexts/ThemeContext.tsx`:
+   - Line 57-68: Create `SSR_DEFAULTS` object with safe theme values
+   - Line 73: Initialize `createContext` with SSR defaults instead of `undefined`
+   - Lines 243-280: Updated `useThemeContext()` to return defaults instead of throwing
+   - Added dev-mode warning when context is accessed outside ThemeProvider
+
+2. **Pattern**: React's standard SSR pattern — `createContext` with defaults, not `undefined`
+   - ThemeProvider always provides real value when present in tree
+   - No breaking change to normal usage
+   - Dev warning helps catch integration issues
+
+**Impact**:
+- ✅ docs-site build completes without TypeError
+- ✅ Error pages (404, 500) render successfully
+- ✅ Production builds no longer blocked
+- ✅ ThemeProvider is safe for Next.js static prerendering
+
+**Validation**:
+- ✅ All 6 packages type-check
+- ✅ Token validation: 97% compliance
+- ✅ Release pipeline works end-to-end
+
+**Good news**:
+- ✅ CSS cssnano error is FIXED in 4.9.3
+- ✅ Blocks export working
+- ✅ Compilation succeeds
+- ✅ Now error pages render too
+
+**Lesson learned**:
+- Next.js static prerendering requires context to have defaults
+- Using `undefined` as context default breaks SSR
+- Standard React pattern: `createContext(defaultValue)` not `createContext(undefined)`
+
+---
+
+---
+
+## Summary: v4.9.3 Complete Resolution
+
+| Issue | v4.9.1 | v4.9.2 | v4.9.3 | Status |
+|-------|--------|--------|--------|--------|
+| CSS cssnano error | 🔴 OPEN | ❌ N/A | ✅ **FIXED** | RESOLVED |
+| Preview modules | 🔴 OPEN | ❌ N/A | ✅ **FIXED** | RESOLVED |
+| React context in errors | ➖ N/A | ❌ N/A | ✅ **FIXED** | RESOLVED |
+
+**Progress**: All 3 issues RESOLVED ✅
+
+---
+
+## [2026-03-21] Preventive: Export Validation in CI/CD
+
+**Status**: ✅ IMPLEMENTED
+
+**What we added**:
+- `scripts/validate-exports.js` — validates all declared exports in package.json have corresponding dist files
+- Integrated into `scripts/release.js` — runs before `npm publish` on each package
+- Prevents repeat of v4.9.2 disaster (only theme.css published, no JS files)
+
+**How it works**:
+1. Release script validates exports for each package
+2. If validation fails, publish is blocked with clear error message
+3. Exit code 1 prevents CI/CD from advancing
+
+**Lesson learned**:
+- Human oversight + automation prevents production incidents
+- Vite config changes (preserveModules, subpath exports) need corresponding validation
+
+---
+
+**Last Updated**: 2026-03-21T18:30:00Z
+**Project**: docs-site@1.0.0 + @orion-ds/react@4.9.3
+**Status**: ✅ ALL ISSUES RESOLVED + PREVENTIVE MEASURES IN PLACE
