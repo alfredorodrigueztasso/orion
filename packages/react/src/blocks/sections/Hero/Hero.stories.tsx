@@ -91,3 +91,33 @@ export const AllVariants: Story = {
     </div>
   ),
 };
+
+export const Fullscreen: Story = {
+  args: {
+    layout: "fullscreen",
+    title: "Fullscreen Hero",
+    description: "Full viewport height hero",
+    primaryAction: <Button size="lg">Get Started</Button>,
+  },
+};
+
+export const Card: Story = {
+  args: {
+    layout: "card",
+    elevated: true,
+    title: "Card Layout",
+    description: "Hero in card format with elevation",
+    primaryAction: <Button size="lg">Action</Button>,
+  },
+};
+
+export const BackgroundVariant: Story = {
+  args: {
+    variant: "background",
+    backgroundImage: "https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&h=600&fit=crop",
+    backgroundOverlay: 0.5,
+    title: "Background Variant",
+    description: "With background image and overlay",
+    primaryAction: <Button size="lg">Learn More</Button>,
+  },
+};
