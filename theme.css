@@ -1,12 +1,4 @@
 /**
- * Orion Design System — Theme CSS
- * Generated from tokens/**/*.json
- * 
- * This file is the source of truth for all design tokens.
- * It's compiled from JSON token definitions and imported by all packages.
- */
-
-/**
  * ═══════════════════════════════════════════════════════════════════════════
  * ORION DESIGN SYSTEM — Generated Tokens
  * DO NOT EDIT MANUALLY - Generated from tokens/*.json
@@ -134,7 +126,9 @@
     --text-tertiary: var(--color-neutral-400);
     --text-inverse: var(--color-neutral-0);
     --text-brand: var(--color-brand-500);
-    --text-on-brand: [object Object];
+    --text-on-brand-primary: var(--color-neutral-0);
+    --text-on-brand-secondary: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
+    --text-on-brand-tertiary: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
 
     /* Borders */
     --border-subtle: var(--color-neutral-200);
@@ -199,7 +193,9 @@
     --text-tertiary: var(--color-neutral-600);
     --text-inverse: var(--color-neutral-950);
     --text-brand: var(--color-brand-400);
-    --text-on-brand: [object Object];
+    --text-on-brand-primary: var(--color-neutral-0);
+    --text-on-brand-secondary: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
+    --text-on-brand-tertiary: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
 
     /* Borders */
     --border-subtle: var(--color-neutral-800);
@@ -281,12 +277,3 @@
     --radius-container: var(--radius-3xl);
 }
 
-
-
-/**
- * ─────────────────────────────────────────────────────────
- * Brand Overrides (applied via data-brand attribute)
- * ─────────────────────────────────────────────────────────
- */
-
-/* Brand overrides are composed from primitives - no hardcoded colors */

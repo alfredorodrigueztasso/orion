@@ -17,11 +17,9 @@
       "tertiary": "{color.neutral.600}",
       "inverse": "{color.neutral.950}",
       "brand": "{color.brand.400}",
-      "on-brand": {
-        "primary": "{color.neutral.0}",
-        "secondary": "color-mix(in srgb, {color.neutral.0} 90%, transparent)",
-        "tertiary": "color-mix(in srgb, {color.neutral.0} 70%, transparent)"
-      }
+      "on-brand-primary": "{color.neutral.0}",
+      "on-brand-secondary": "color-mix(in srgb, {color.neutral.0} 90%, transparent)",
+      "on-brand-tertiary": "color-mix(in srgb, {color.neutral.0} 70%, transparent)"
     },
     "border": {
       "subtle": "{color.neutral.800}",
