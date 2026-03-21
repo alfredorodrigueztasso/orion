@@ -1,40 +1,183 @@
-import type { ReactNode } from "react";
+/**
+ * Hero Component Types
+ *
+ * Type definitions for the Orion Hero section component.
+ */
 
-export type HeroAlign = "center" | "left";
+import type { HTMLAttributes, ReactNode } from "react";
+
+/**
+ * Hero text alignment
+ */
+export type HeroAlign = "left" | "center";
+
+/**
+ * Hero size variants
+ */
 export type HeroSize = "sm" | "md" | "lg";
-export type HeroVariant = "default" | "gradient" | "image";
-export type HeroLayout = "stacked" | "split";
 
+/**
+ * Hero visual variant
+ * - 'default': Standard hero with optional side media
+ * - 'background': Full-width background image with content overlay
+ */
+export type HeroVariant = "default" | "background";
+
+/**
+ * Hero layout mode
+ * - 'contained': Default with container padding
+ * - 'fullscreen': 100vh height, vertically centered, edge-to-edge width
+ * - 'card': Inset with margins and border radius (floating card style)
+ */
+export type HeroLayout = "contained" | "fullscreen" | "card";
+
+/**
+ * Props for HeroHighlight compound component
+ */
 export interface HeroHighlightProps {
-  /** Content to highlight with gradient */
+  /**
+   * Text content to highlight with brand gradient
+   */
   children: ReactNode;
-  /** Additional CSS class */
+  /**
+   * Additional CSS class
+   */
   className?: string;
 }
 
-export interface HeroProps {
-  /** Eyebrow badge above the title */
+/**
+ * Hero component props
+ *
+ * @example
+ * ```tsx
+ * <Hero
+ *   badge={<Badge>New</Badge>}
+ *   title="Build faster with Orion"
+ *   description="The AI-first design system for modern apps"
+ *   primaryAction={<Button>Get Started</Button>}
+ *   secondaryAction={<Button variant="ghost">Learn More</Button>}
+ *   align="center"
+ * />
+ * ```
+ *
+ * @example Fullscreen with background
+ * ```tsx
+ * <Hero
+ *   layout="fullscreen"
+ *   variant="background"
+ *   backgroundImage="https://example.com/hero.jpg"
+ *   title={<>Build <Hero.Highlight>faster</Hero.Highlight></>}
+ * />
+ * ```
+ */
+export interface HeroProps extends Omit<HTMLAttributes<HTMLElement>, "title"> {
+  /**
+   * Optional badge/eyebrow element above title
+   */
   badge?: ReactNode;
-  /** Heading content (can include Hero.Highlight) */
-  title: ReactNode;
-  /** Supporting text below the title */
-  description?: string;
-  /** Primary call-to-action element */
+
+  /**
+   * Main title text or element.
+   * Can include <Hero.Highlight> for gradient text.
+   */
+  title?: ReactNode;
+
+  /**
+   * @deprecated Use `title` instead. Will be removed in v3.0.
+   */
+  headline?: ReactNode;
+
+  /**
+   * Optional description text below headline
+   */
+  description?: ReactNode;
+
+  /**
+   * Primary action button/element
+   */
   primaryAction?: ReactNode;
-  /** Secondary call-to-action element */
+
+  /**
+   * Secondary action button/element
+   */
   secondaryAction?: ReactNode;
-  /** Social proof / trust indicators below actions */
+
+  /**
+   * Optional media (image, video, illustration)
+   */
+  media?: ReactNode;
+
+  /**
+   * Media position when provided
+   * @default 'right'
+   */
+  mediaPosition?: "left" | "right" | "bottom";
+
+  /**
+   * Show default placeholder image when media is not provided
+   * @default false
+   */
+  showDefaultMedia?: boolean;
+
+  /**
+   * Trust indicators (logos, badges, social proof)
+   */
   trustIndicators?: ReactNode;
-  /** Text alignment */
+
+  /**
+   * Text alignment
+   * @default 'center'
+   */
   align?: HeroAlign;
-  /** Size variant controlling spacing and typography */
+
+  /**
+   * Size variant affecting typography scale
+   * - sm: Compact hero for sub-pages
+   * - md: Standard hero
+   * - lg: Large hero for landing pages
+   * @default 'lg'
+   */
   size?: HeroSize;
-  /** Visual variant */
-  variant?: HeroVariant;
-  /** Layout mode */
+
+  /**
+   * Hero layout mode
+   * - 'contained': Default with container padding
+   * - 'fullscreen': 100vh height, vertically centered, edge-to-edge width
+   * - 'card': Inset with margins and border radius
+   * @default 'contained'
+   */
   layout?: HeroLayout;
-  /** Background image URL (for image variant) */
+
+  /**
+   * Hero visual variant
+   * - 'default': Standard hero with optional side media
+   * - 'background': Full-width background image with content overlay
+   * @default 'default'
+   */
+  variant?: HeroVariant;
+
+  /**
+   * Background image URL (only applies when variant='background')
+   */
   backgroundImage?: string;
-  /** Additional CSS class */
-  className?: string;
+
+  /**
+   * Background overlay opacity (0-1). Only applies when variant='background'.
+   * @default 0.6
+   */
+  backgroundOverlay?: number;
+
+  /**
+   * Add elevation (shadow) to card layout.
+   * Only applies when layout='card'.
+   * @default false
+   */
+  elevated?: boolean;
+
+  /**
+   * Full viewport height
+   * @deprecated Use layout="fullscreen" instead
+   * @default false
+   */
+  fullHeight?: boolean;
 }
