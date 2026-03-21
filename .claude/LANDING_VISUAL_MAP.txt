@@ -1,0 +1,389 @@
+╔════════════════════════════════════════════════════════════════════════════════╗
+║          ORION LANDING PAGE - VISUAL COMPONENT MAP (TOP TO BOTTOM)              ║
+║                     Scope: /, /pricing, /docs/mcp                               ║
+╚════════════════════════════════════════════════════════════════════════════════╝
+
+┌─────────────────────────────────────────────────────────────────────────────────┐
+│ GLOBAL NAVBAR (ALL PAGES) — DocsNavbar.tsx                                      │
+├─────────────────────────────────────────────────────────────────────────────────┤
+│                                                                                 │
+│  [Orion DS] [Docs] [Components] [Sections] [Templates] [Pricing]               │
+│                                                    [Founding Member] [🎨] [🌙] [🐙]  │
+│                                                                                 │
+│  Orion Components: Navbar, Button (primary), Popover, BrandSwatch              │
+│  Lucide Icons: Sun, Moon, Paintbrush, Check, Github                            │
+│  Theme/Brand Controls: Global via data-theme, data-brand attributes            │
+│                                                                                 │
+└─────────────────────────────────────────────────────────────────────────────────┘
+
+┌──────────────────────────────────────────────────────────────┐
+│                     HOMEPAGE (/)                             │
+│                 (9 sections top-to-bottom)                   │
+└──────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ 1️⃣ HERO — HomepageHero.tsx                                  ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  [✦ MCP Server included — Claude Code ready]              ║
+║                                                              ║
+║  The design system                                           ║
+║  your AI agent                  ← Hero.Highlight            ║
+║  already knows.                                              ║
+║                                                              ║
+║  Install components with a single instruction...            ║
+║                                                              ║
+║  [Get Started Free →]  [View on GitHub]                    ║
+║                                                              ║
+║  [↗ 72 components]  [↗ MCP Server]  [↗ MIT License]         ║
+║                                                              ║
+║  Components: Hero, Badge (×4), Button (×2)                 ║
+║  Icons: ArrowRight                                          ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 2️⃣ INSTALL — HomepageInstall.tsx                           ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  $ [Package] [MCP Server]                                   ║
+║    [pnpm] [npm] [yarn]                                      ║
+║    npm install @orion-ds/react                   [📋 Copy]  ║
+║                                                              ║
+║  Components: Card (base), Custom tabs/buttons              ║
+║  Icons: Terminal, Copy, Check                              ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 3️⃣ LOGO CLOUD — HomepageLogoCloud.tsx                      ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  Built for AI-native workflows                             ║
+║  Your AI agent can use Orion directly                       ║
+║                                                              ║
+║  [Claude] [Cursor] [Cline] [Continue] [React] [Next] [TS]  ║
+║                                                              ║
+║  Components: LogoCloud (block with 7 custom SVG logos)     ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 4️⃣ SHOWCASE — ComponentShowcaseTabs.tsx                    ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  [Buttons] [Cards] [Badges] [Alerts] [Forms] ... [Data]    ║
+║                                                              ║
+║  ┌─ Button Showcase                                        ║
+║  │  [primary] [secondary] [ghost] [danger]                ║
+║  │  [sm] [md] [lg]                                         ║
+║  │                                                          ║
+║  │  Components: Button (×20), Card (×10), Badge (×10)      ║
+║  │  Alert (×4), Field, Select, Switch, Avatar, etc.        ║
+║  │  Icons: AlertCircle, CheckCircle, Info                  ║
+║  │                                                          ║
+║  │  ~15+ components total displayed in grid               ║
+║  └──────────────────────────────────────                   ║
+║                                                              ║
+║  Components: Tabs, Button, Card, Badge, Alert,             ║
+║             Field, Select, Switch, Avatar, Chip, etc.      ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 5️⃣ FEATURES — HomepageFeaturesSection.tsx                  ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  Why Orion                                                   ║
+║  Built for the AI era                                        ║
+║  Every design decision in Orion...                           ║
+║                                                              ║
+║  ┌──────────┐  ┌──────────┐  ┌──────────┐                  ║
+║  │ Bot      │  │ Zap      │  │ Package  │                  ║
+║  │ MCP      │  │ Chain    │  │ 72       │                  ║
+║  │ native   │  │ of Truth │  │ comps    │                  ║
+║  └──────────┘  └──────────┘  └──────────┘                  ║
+║                                                              ║
+║  ┌──────────┐  ┌──────────┐  ┌──────────┐                  ║
+║  │ Layers   │  │ Palette  │  │ Moon     │                  ║
+║  │ 26       │  │ 6        │  │ Dark     │                  ║
+║  │ sections │  │ brands   │  │ mode     │                  ║
+║  └──────────┘  └──────────┘  └──────────┘                  ║
+║                                                              ║
+║  Components: Features (block) — 3 columns                   ║
+║  Icons: Bot, Zap, Package, Layers, Palette, Moon            ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 6️⃣ STATS — HomepageStats.tsx                               ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  The numbers                                                 ║
+║  Everything you need, nothing you don't                      ║
+║                                                              ║
+║  ┌──────┐ ┌──────┐ ┌──────┐ ┌────┐ ┌───┐                   ║
+║  │ 72   │ │ 26   │ │ 10   │ │ 9  │ │200│                   ║
+║  │ Comp │ │ Sect │ │ Tmpl │ │Tool│ │FM │                   ║
+║  └──────┘ └──────┘ └──────┘ └────┘ └───┘                   ║
+║                                                              ║
+║  Components: Stats (block) — 5 columns, card variant        ║
+║  Props: highlightValue=true (gradient numbers)              ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 7️⃣ PRICING — HomepagePricing.tsx                           ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  Start free. Go Pro when you're ready.                       ║
+║                                                              ║
+║  ┌────────────┐  ┌──────────────┐  ┌────────────┐           ║
+║  │ Free       │  │ Founding     │  │ Team       │           ║
+║  │ $0         │  │ Member ⭐   │  │ $149       │           ║
+║  │ /forever   │  │ $29 / month  │  │ /month     │           ║
+║  │            │  │ (popular)    │  │            │           ║
+║  │ • 72 comps │  │ • 10+ AI     │  │ • Up to 5  │           ║
+║  │ • 26 sects │  │ • Figma Kit  │  │ • Design   │           ║
+║  │ • MIT      │  │ • Private    │  │ • Priority │           ║
+║  │            │  │   Slack      │  │   support  │           ║
+║  │ [Start]    │  │ [Become ≫]   │  │ [Contact]  │           ║
+║  └────────────┘  └──────────────┘  └────────────┘           ║
+║                                                              ║
+║  Components: Pricing (block), Button (×3: secondary,        ║
+║             primary with ArrowRight, ghost)                 ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 8️⃣ TESTIMONIALS — HomepageTestimonials.tsx                 ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  [Community]                                                 ║
+║                                                              ║
+║  Built with Orion                                            ║
+║  Teams building AI-native products...                        ║
+║                                                              ║
+║  ┌─────────────┐  ┌─────────────┐  ┌─────────────┐          ║
+║  │ ⭐ 2.5K+    │  │ ⬇ 50K+       │  │ 💻 90+      │          ║
+║  │ GitHub      │  │ Weekly      │  │ Shipped     │          ║
+║  │ Stars       │  │ Downloads   │  │ Components  │          ║
+║  └─────────────┘  └─────────────┘  └─────────────┘          ║
+║                                                              ║
+║  Components: Badge, Card (outlined, ×3)                    ║
+║  Icons: Star, Download, Code                                ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ 9️⃣ CTA + FOOTER — HomepageCTA.tsx                          ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  Start building with Orion today                             ║
+║  Join builders creating AI-native interfaces...              ║
+║                                                              ║
+║  [Become a Founding Member ≫]  [View on GitHub]            ║
+║                                                              ║
+║  Components: CTA (block), Button (×2)                       ║
+║  Icons: ArrowRight, Github                                  ║
+║                                                              ║
+║  ─────────────────────────────────────────────────           ║
+║                                                              ║
+║  © 2026 Orion Design System. Built with AI-first.           ║
+║  [GitHub]  [NPM]  [Docs]  [Pricing]                         ║
+║                                                              ║
+║  Components: CTA (block), custom HTML footer                ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│                     PRICING PAGE (/pricing)                  │
+│                 (Reuses + Extends Homepage)                  │
+└──────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ HEADER                                                       ║
+╟──────────────────────────────────────────────────────────────╢
+║  Simple, transparent pricing                                 ║
+║  Start building for free. Upgrade when...                    ║
+║                                                              ║
+║  Components: Custom H1 + P (not using Hero block)            ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ PRICING (REUSED)                                             ║
+║ [See Section 7️⃣ above]                                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ FAQ                                                          ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  Frequently asked questions                                  ║
+║                                                              ║
+║  ▶ Can I use Orion for free forever?                        ║
+║    └─ Yes. All 72 base components...                        ║
+║                                                              ║
+║  ▶ What happens when 200 Founding spots are gone?           ║
+║    └─ Price increases to $49/month...                       ║
+║                                                              ║
+║  ▶ Is the MCP Server included in free plan?                 ║
+║    └─ Yes. The MCP Server with 9 tools...                   ║
+║                                                              ║
+║  ▶ What are the AI/Agentic components in Pro?               ║
+║    └─ Pro includes AgentThinking, StreamText...             ║
+║                                                              ║
+║  ▶ How does the Team plan work?                             ║
+║    └─ Team plan gives up to 5 people...                     ║
+║                                                              ║
+║  ▶ Is there a refund policy?                                ║
+║    └─ Yes. First 14 days full refund...                     ║
+║                                                              ║
+║  Components: FAQ (block) — Accordion with 6 items           ║
+╚══════════════════════════════════════════════════════════════╝
+
+┌──────────────────────────────────────────────────────────────┐
+│                    MCP DOCS (/docs/mcp)                      │
+│                  (Custom docs page layout)                   │
+└──────────────────────────────────────────────────────────────┘
+
+╔══════════════════════════════════════════════════════════════╗
+║ HERO WITH BADGES                                             ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  MCP Server — AI-Native Component Discovery                  ║
+║  Give Claude, Cursor, and other AI tools...                  ║
+║                                                              ║
+║  [Model Context Protocol] [AI-First] [9 Tools]              ║
+║                                                              ║
+║  Components: DocsPageHero (custom), Badge (×3)              ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ WHAT YOU CAN DO (FEATURE GRID)                              ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  ┌─────────┐  ┌─────────┐  ┌─────────┐                      ║
+║  │ 🤖      │  │ ⚡      │  │ 💾      │                      ║
+║  │ AI-Nat. │  │ Live    │  │ Validat.│                      ║
+║  │ Integr. │  │ Registry│  │ Code    │                      ║
+║  └─────────┘  └─────────┘  └─────────┘                      ║
+║                                                              ║
+║  ┌─────────┐  ┌─────────┐  ┌─────────┐                      ║
+║  │ 📦      │  │ ⚙️      │  │ 📚      │                      ║
+║  │ Token   │  │ Setup   │  │ Multi-  │                      ║
+║  │ Introsp.│  │ Guides  │  │ Tools   │                      ║
+║  └─────────┘  └─────────┘  └─────────┘                      ║
+║                                                              ║
+║  Components: DocsFeatureGrid (custom 6-item grid)           ║
+║  Icons: Bot, Zap, Code2, Package, Settings, BookOpen        ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ QUICK START (CODE BLOCK)                                     ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  $ npx @orion-ds/mcp                                         ║
+║  # Configure your editor                                     ║
+║  # Ask Claude: "What components do you have?"                ║
+║                                                              ║
+║  Components: CodeBlockSimple (custom with syntax highlight) ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ THE 9 TOOLS (ACCORDION)                                      ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  ▶ list-components                                           ║
+║    └─ List all components, sections, and templates...        ║
+║      $ list-components(category: 'forms')                   ║
+║                                                              ║
+║  ▶ get-component                                             ║
+║    └─ Get complete details: props, code examples...          ║
+║      $ get-component(name: 'button')                        ║
+║                                                              ║
+║  ▶ search-components                                         ║
+║    └─ Semantic search with keyword matching...               ║
+║      $ search-components(query: 'form input')               ║
+║                                                              ║
+║  ▶ list-tokens                                               ║
+║    └─ List design tokens by category...                      ║
+║      $ list-tokens(category: 'color')                       ║
+║                                                              ║
+║  [4 more tools...]                                           ║
+║                                                              ║
+║  Components: Accordion (separated), CodeBlockSimple (×4+)   ║
+╚══════════════════════════════════════════════════════════════╝
+
+╔══════════════════════════════════════════════════════════════╗
+║ NEXT STEPS (LINK GRID)                                       ║
+╟──────────────────────────────────────────────────────────────╢
+║                                                              ║
+║  📚 Getting Started                 💻 Component Library     ║
+║  Install @orion-ds/react and        Browse all 69+           ║
+║  wrap your app with ThemeProvider.  components with live     ║
+║                                      previews.               ║
+║                                                              ║
+║  Components: DocsNextStepsGrid (custom 2-item grid)         ║
+║  Icons: BookOpen, Code2                                     ║
+╚══════════════════════════════════════════════════════════════╝
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+COMPONENT USAGE STATISTICS
+
+┌─────────────────────────────────────────────────────────────┐
+│ MOST USED                                                   │
+├─────────────────────────────────────────────────────────────┤
+│ Button        ... 30+ (primary, secondary, ghost, danger)   │
+│ Card          ... 15+ (base, outlined, elevated)            │
+│ Badge         ... 12+ (secondary, primary, success, etc)    │
+│ Block comps   ... 10+ (Hero, Features, CTA, Pricing, etc)   │
+├─────────────────────────────────────────────────────────────┤
+│ MODERATE USE                                                │
+├─────────────────────────────────────────────────────────────┤
+│ Alert         ... 4 (info, success, warning, error)         │
+│ Accordion     ... 2 (MCP tools, FAQ)                        │
+│ Tabs          ... 2 (Install, Showcase)                     │
+│ Field/Select  ... 5+ (in showcase)                          │
+├─────────────────────────────────────────────────────────────┤
+│ LUCIDE ICONS                                                │
+├─────────────────────────────────────────────────────────────┤
+│ Total icons used across all pages: 20+                      │
+│ Most common: ArrowRight, Bot, Zap, Package, Moon, Copy      │
+└─────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+GLOBAL STATE & THEMING
+
+┌─────────────────────────────────────────────────────────────┐
+│ Root Attributes (html element)                              │
+├─────────────────────────────────────────────────────────────┤
+│ data-theme="light" | "dark"         ← Theme toggle (Moon)  │
+│ data-brand="orion|red|deepblue|..." ← Brand picker (Brush) │
+│ data-mode="display"                 ← Visual mode (global)  │
+│                                                              │
+│ All components automatically inherit these values via        │
+│ CSS variables. No prop drilling needed!                     │
+└─────────────────────────────────────────────────────────────┘
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+KEY FILES QUICK LOOKUP
+
+Landing Home            → /docs-site/app/page.tsx
+Pricing Page            → /docs-site/app/pricing/page.tsx
+MCP Docs Page           → /docs-site/app/docs/mcp/page.tsx
+Global Layout           → /docs-site/app/layout.tsx
+
+COMPONENT DEFINITIONS:
+  Navbar                → /docs-site/components/DocsNavbar.tsx
+  Sidebar               → /docs-site/components/DocsSidebar.tsx
+  Hero Section          → /docs-site/components/HomepageHero.tsx
+  Install Section       → /docs-site/components/HomepageInstall.tsx
+  LogoCloud Section     → /docs-site/components/HomepageLogoCloud.tsx
+  Showcase Tabs         → /docs-site/components/ComponentShowcaseTabs.tsx
+  Features Section      → /docs-site/components/HomepageFeaturesSection.tsx
+  Stats Section         → /docs-site/components/HomepageStats.tsx
+  Pricing Section       → /docs-site/components/HomepagePricing.tsx
+  Testimonials Section  → /docs-site/components/HomepageTestimonials.tsx
+  CTA + Footer          → /docs-site/components/HomepageCTA.tsx
+  Re-exports            → /docs-site/components/ClientComponents.tsx
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+LAST UPDATED: March 21, 2026
+SEE ALSO: LANDING_COMPONENT_MAP.md (detailed), LANDING_QUICK_REFERENCE.md (concise)
+
