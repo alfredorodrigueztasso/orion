@@ -21,6 +21,7 @@ export const COMMON_EXTERNALS = [
   '@dnd-kit/core',
   '@dnd-kit/sortable',
   '@dnd-kit/utilities',
+  '@orion-ds/react',
 ];
 
 export const BLOCKS_EXTERNALS = [
@@ -42,7 +43,7 @@ export interface ViteConfigOptions {
 
 export function createViteConfig(options: ViteConfigOptions) {
   return defineConfig({
-    plugins: [react(), dts({ insertTypesEntry: true })],
+    plugins: [react(), dts({ insertTypesEntry: true, exclude: ['**/*.stories.tsx', '**/*.test.tsx', '**/*.test.ts'] })],
     resolve: options.resolveAlias ? { alias: options.resolveAlias } : undefined,
     build: {
       lib: {

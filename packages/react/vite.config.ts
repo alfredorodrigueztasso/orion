@@ -8,12 +8,7 @@ export default defineConfig(
       index: path.resolve(__dirname, "src/index.ts"),
       client: path.resolve(__dirname, "src/client.ts"),
       "tokens/index": path.resolve(__dirname, "src/tokens/index.ts"),
-      "sections/index": path.resolve(__dirname, "src/sections/index.ts"),
       "blocks/index": path.resolve(__dirname, "src/blocks/index.ts"),
-      "templates/index": path.resolve(
-        __dirname,
-        "src/blocks/templates/index.ts",
-      ),
       // Heavy component entry points (optional peer dependencies)
       chart: path.resolve(__dirname, "src/chart.ts"),
       calendar: path.resolve(__dirname, "src/calendar.ts"),

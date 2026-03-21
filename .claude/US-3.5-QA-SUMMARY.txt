@@ -1,0 +1,374 @@
+╔════════════════════════════════════════════════════════════════════════════╗
+║                  US-3.5 TEST STRATEGY REVIEW — FINAL REPORT               ║
+║                        QA Validation Complete                              ║
+╚════════════════════════════════════════════════════════════════════════════╝
+
+STORY: US-3.5 — Enhance `orion add` with Advanced Filtering
+SCOPE: --category, --tag, --filter, --brand, --no-deps, --dry-run, tab completion
+CODE: 284 LOC existing + 400 LOC new = 684 LOC total
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+VERDICT: ✅ READY FOR IMPLEMENTATION WITH EXPANSION
+
+Original Plan:     16 tests, 2.5 hours
+Recommended:       23-26 tests, 4-5 hours
+Status:            MINIMAL → ROBUST (approve expansion before coding)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+CRITICAL GAPS FOUND (Fix before implementation)
+
+1. AC COVERAGE INCOMPLETE (3/10 ACs not explicitly tested)
+   ❌ AC4: --brand flag (pre-configure brand in orion.json)
+   ❌ AC7: Tab completion (bash/zsh shell integration)
+   ❌ AC9: Preview URLs (validate output contains URLs)
+
+2. ERROR SCENARIOS MISSING (4 tests needed)
+   ❌ Unknown component error message quality
+   ❌ Missing orion.json guidance
+   ❌ Network/registry failure handling
+   ❌ Partial dependency resolution failure
+
+3. EDGE CASES NOT COVERED (3 tests needed)
+   ❌ Already-installed component skipping
+   ❌ Empty filter results (--category=nonexistent)
+   ❌ Deep dependency tree (5+ level resolution)
+
+4. NO COVERAGE TARGETS SPECIFIED
+   • Plan doesn't mention code coverage percentage
+   • Recommend: 80%+ for add.ts, 90%+ for utils.ts, 100% for writer.ts
+
+5. TIME ESTIMATE OPTIMISTIC
+   • Original: 2.5 hours (assumes infrastructure in place)
+   • Realistic: 4-5 hours (setup, mocking, fixtures, error scenarios)
+   • +1.5-2.5 hour overhead for first test file configuration
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TEST ARCHITECTURE REVIEW
+
+add.test.ts (8 → 10 tests)
+  Status: ⚠️ Incomplete
+  Issue: Missing AC4 (--brand), AC5 (--no-deps), AC9 (preview URLs) explicit tests
+  Fix: Add 2-3 tests for missing ACs
+
+utils.test.ts (5 tests)
+  Status: ✅ Sufficient
+  Coverage: Fuzzy matching (exact, dist=1-2, no-match), filtering, confirm()
+  Good as-is
+
+writer.test.ts (3 → 4 tests)
+  Status: ⚠️ Unclear API
+  Issue: dryRun behavior not specified; unclear return structure
+  Fix: Clarify with dev team before writing tests
+
+error-scenarios.test.ts (0 → 4 tests) [NEW FILE]
+  Status: ❌ Missing entirely
+  Critical for: Production CLI reliability
+  Add: Unknown component, missing config, network failure, partial resolution
+
+edge-cases.test.ts (0 → 3 tests) [NEW FILE]
+  Status: ❌ Missing entirely
+  Important for: Real-world usage patterns
+  Add: Already-installed skip, empty results, deep dependencies
+
+completion.test.ts (0 → 2-3 tests) [NEW FILE, OPTIONAL]
+  Status: ❌ Not in plan
+  Question: Is tab completion in scope for this US or separate?
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TEST COUNT ANALYSIS
+
+Component            Original   Recommended   Increase   Reason
+────────────────────────────────────────────────────────────────
+add.test.ts               8            10         +2    AC4, AC9
+utils.test.ts             5             5          —    Complete
+writer.test.ts            3             4         +1    dryRun output
+error-scenarios          0              4         +4    Production safety
+edge-cases               0              3         +3    Real-world patterns
+completion (optional)    0              2         +2    Shell integration
+
+TOTAL                    16           28-29       +12   62% increase
+
+Time Impact: 2.5h → 4-5h (+1.5-2.5h)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+ACCEPTANCE CRITERIA MAPPING
+
+AC#  Feature                      Test File              Status
+────────────────────────────────────────────────────────────────
+1    --category=forms             add.test.ts #6         ✅ Covered
+2    --tag=accessible             add.test.ts #7         ✅ Covered
+3    --filter regex               (Implicit/unclear)     ⚠️  Unclear
+4    --brand=red                  (MISSING)              ❌ ADD TEST
+5    --no-deps                    (Implicit/unclear)     ⚠️  Unclear
+6    --dry-run                    add.test.ts #4 + writer #2-3   ✅ Good
+7    Tab completion               (MISSING)              ❌ ADD FILE
+8    Already-installed skip       (MISSING)              ❌ ADD TEST
+9    Preview URLs in output       (Implicit)             ⚠️  Explicit test
+10   Documentation                (Not testable)         — Manual check
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+MUST-DO BEFORE IMPLEMENTATION
+
+[ ] 1. Expand test count from 16 to 23-26 tests
+       • Justification: 10 ACs require ~2.5 tests/AC minimum
+       • +4 error scenarios (unknown, missing config, network, partial)
+       • +3 edge cases (skip installed, empty results, deep deps)
+       • +2 missing AC tests (brand, preview URLs)
+
+[ ] 2. Create detailed AC-to-test mapping (see US-3.5-TEST-MAPPING-TABLE.md)
+       • Each AC explicitly mapped to test file + test name
+       • Identify overlaps and gaps
+
+[ ] 3. Clarify critical API signatures with dev team
+       • dryRun parameter: How does writeComponents() return dryRun files?
+       • --brand flag: Update orion.json after install?
+       • --no-deps flag: Skip resolveAll() entirely?
+
+[ ] 4. Define mock registry structure
+       • 10-15 test items covering all categories/tags
+       • Includes dependencies for resolver testing
+       • Ready-to-use in all test files
+
+[ ] 5. Add explicit coverage targets
+       • add.ts: 80%+ (complex logic)
+       • utils.ts: 90%+ (simple, well-bounded)
+       • writer.ts: 100% (file system operations)
+       • Overall: 85%+
+
+[ ] 6. Confirm tab completion scope
+       • Is completion.test.ts in scope for this US?
+       • Or separate story (us-3.X)?
+       • Affects effort estimate
+
+[ ] 7. Update test effort estimate in plan
+       • Original: 2.5h
+       • Revised: 4-5h
+       • Reason: Setup (0.5h) + 28-29 tests (3.5-4.5h)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NICE-TO-HAVE (After implementation)
+
+📌 Integration test file (add.integration.test.ts)
+   • Use real registry fixtures (button, field, hero)
+   • Slower but validates against real data
+   • Separate from unit tests
+
+📌 Performance benchmarks
+   • Fuzzy matching <200ms for 100+ items
+   • Dependency resolution <1s for 5 items
+   • Category filtering <50ms for 98 items
+
+📌 Manual QA checklist
+   • Smoke tests (basic add, multiple, deep deps)
+   • Filtering (category, tag, filter)
+   • Flags (dry-run, overwrite, no-install)
+   • Error scenarios (unknown, no config, offline)
+   • Output quality (URLs, formatting, colors)
+
+📌 Tab completion tests (if in scope)
+   • Shell script validation
+   • Bash and zsh support
+   • Integration with actual terminals
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+TEST DATA STRATEGY (Recommended)
+
+HYBRID APPROACH:
+
+Unit Tests (add.test.ts, utils.test.ts):
+  • Mocked registry data (JSON objects)
+  • 10-15 items covering all categories/tags
+  • Deterministic, fast (<1 second execution)
+  • No network calls, no file I/O
+
+Integration Tests (optional, add.integration.test.ts):
+  • Fixture files from registry/
+  • 5 real components (button, field, hero, etc.)
+  • Validates against real registry structure
+  • Slower but more realistic
+
+Error Mocks (error-scenarios.test.ts):
+  • Failed fetch functions
+  • Missing config files
+  • Network timeouts
+  • Partial resolution failures
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+RISK ASSESSMENT
+
+Risk                          Likelihood   Impact    Mitigation
+──────────────────────────────────────────────────────────────────
+Missing AC coverage             HIGH      HIGH      Use mapping table
+Error scenarios untested       MEDIUM     HIGH      Add 4 error tests
+Fuzzy match performance          LOW      MEDIUM    Add perf benchmarks
+Tab completion untestable     MEDIUM     MEDIUM    Create separate module
+dryRun API unclear            MEDIUM     HIGH      Clarify with dev
+Flaky async tests             MEDIUM     MEDIUM    Use mock registry
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+QUESTIONS FOR DEVELOPMENT TEAM
+
+1. Does writeComponents() accept dryRun parameter?
+   • If yes: What's the return structure?
+   • Current: { writtenFiles, npmDeps }
+   • With dryRun: { dryRunFiles?, npmDeps } ?
+
+2. Should --brand flag update orion.json?
+   • Assuming yes, but need confirmation
+   • Or is it just passed to registry lookups?
+
+3. Does --no-deps skip resolveAll() entirely?
+   • Yes: Fetch only requested items, no BFS
+   • Or: Fetch and show deps without prompt?
+
+4. Is tab completion in scope for US-3.5?
+   • Or separate story (us-3.X)?
+   • Affects effort estimate
+
+5. What are performance budgets?
+   • Fuzzy matching 100+ items: <200ms acceptable?
+   • Dependency resolution: <1s for 5 items?
+   • Category filtering: <50ms for 98 items?
+
+6. Error message requirements?
+   • Specific format/tone?
+   • Helpers to suggest fixes?
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DELIVERABLES
+
+✅ US-3.5-TEST-STRATEGY-REVIEW.md (Full 400-line report)
+   • Detailed AC mapping
+   • Test file breakdown
+   • Edge cases, error scenarios
+   • Risk assessment
+   • Coverage targets
+
+✅ US-3.5-TEST-MAPPING-TABLE.md (Quick reference)
+   • AC-to-test mapping matrix
+   • Detailed test cases for each AC
+   • Implementation checklist
+   • Questions for dev team
+
+✅ US-3.5-QA-SUMMARY.txt (This file)
+   • Executive summary
+   • Critical findings
+   • Action items
+   • Risk register
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+NEXT STEPS
+
+IMMEDIATE (Today):
+  1. Share this report with development team
+  2. Schedule clarification meeting (30 min)
+     • Confirm dryRun API
+     • Confirm --brand behavior
+     • Confirm tab completion scope
+  3. Update TIER3_USER_STORIES.md with revised test count
+
+BEFORE IMPLEMENTATION (Within 1 day):
+  1. Finalize test count (23-26 tests confirmed)
+  2. Create mock registry structure (JSON fixture)
+  3. Review existing build.test.ts pattern
+  4. Update effort estimate (2.5h → 4-5h)
+
+DURING IMPLEMENTATION (Week of development):
+  1. Pair with dev on AC mapping
+  2. Run tests as you implement
+  3. Track coverage% (target: 80%+)
+  4. Document any surprises for future ACs
+
+AFTER IMPLEMENTATION:
+  1. Run full test suite (target: 100% pass)
+  2. Validate coverage (target: 80%+)
+  3. Manual QA checklist (if time allows)
+  4. Integration tests (bonus: real registry)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+FINAL CHECKLIST
+
+Before you code:
+  [ ] Read full report (US-3.5-TEST-STRATEGY-REVIEW.md)
+  [ ] Review mapping table (US-3.5-TEST-MAPPING-TABLE.md)
+  [ ] Clarify 6 questions with dev team
+  [ ] Confirm test count expansion (16 → 23-26)
+  [ ] Get approval from lead
+
+While coding:
+  [ ] Use build.test.ts as pattern reference
+  [ ] Follow naming convention (describe + nested it blocks)
+  [ ] Create mock registry once, reuse in all tests
+  [ ] Validate coverage% (use npm test -- --coverage)
+  [ ] Test error scenarios (not just happy path)
+
+After finishing:
+  [ ] All 23-26 tests passing (100%)
+  [ ] Code coverage: 80%+ for add.ts
+  [ ] Coverage: 90%+ for utils.ts
+  [ ] Coverage: 100% for writer.ts
+  [ ] Manual QA (spot checks of key ACs)
+  [ ] Ready for integration → production
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+APPROVAL RECOMMENDATION
+
+✅ APPROVE FOR IMPLEMENTATION with conditional expansion:
+
+Required Approvals:
+  [ ] Development lead confirms test count increase (16 → 23-26)
+  [ ] Product owner confirms all 10 ACs are testable
+  [ ] Architecture review approves test approach (mocks vs fixtures)
+  [ ] QA lead signs off on coverage targets (80%+)
+
+Estimated Timeline:
+  • Clarifications: 30 min
+  • Test implementation: 4-5 hours
+  • Manual QA: 1-2 hours (if included)
+  • Total: 5-7 hours (down from 8-10 with full integration tests)
+
+Success Criteria:
+  • All 23-26 tests passing (100% pass rate)
+  • Code coverage ≥80% overall
+  • No hardcoded magic numbers in tests
+  • Clear, descriptive test names
+  • Error messages validated
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+DOCUMENT REFERENCE
+
+Full Report Location:
+  /Users/alfredo/Documents/AI First DS Library/.claude/US-3.5-TEST-STRATEGY-REVIEW.md
+
+Mapping Table Location:
+  /Users/alfredo/Documents/AI First DS Library/.claude/US-3.5-TEST-MAPPING-TABLE.md
+
+This Summary Location:
+  /Users/alfredo/Documents/AI First DS Library/.claude/US-3.5-QA-SUMMARY.txt
+
+Original Plan Location:
+  /Users/alfredo/Documents/AI First DS Library/TIER3_USER_STORIES.md (line 108-125)
+
+━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━
+
+Created: March 19, 2026
+QA Validator: Claude Code (Haiku 4.5)
+Status: READY FOR IMPLEMENTATION (with expansion)
+Effort Estimate: 4-5 hours (test implementation) + 1-2 hours (manual QA)
+
+╚════════════════════════════════════════════════════════════════════════════╝
