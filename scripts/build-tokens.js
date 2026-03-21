@@ -229,8 +229,16 @@ function generateCSS() {
         if (light.semantic.text) {
             css += `\n    /* Text */\n`;
             for (const [name, value] of Object.entries(light.semantic.text)) {
-                const resolvedValue = resolveTokenRef(value);
-                css += `    --text-${name}: ${resolvedValue};\n`;
+                if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                    // Handle nested objects like on-brand
+                    for (const [subname, subvalue] of Object.entries(value)) {
+                        const resolvedValue = resolveTokenRef(subvalue);
+                        css += `    --text-${name}-${subname}: ${resolvedValue};\n`;
+                    }
+                } else {
+                    const resolvedValue = resolveTokenRef(value);
+                    css += `    --text-${name}: ${resolvedValue};\n`;
+                }
             }
         }
 
@@ -296,6 +304,39 @@ function generateCSS() {
             }
         }
 
+        // Interactive Ghost
+        if (light.semantic.interactive?.ghost) {
+            css += `\n    /* Interactive Ghost */\n`;
+            for (const [name, value] of Object.entries(light.semantic.interactive.ghost)) {
+                const resolvedValue = resolveTokenRef(value);
+                css += `    --interactive-ghost-${name}: ${resolvedValue};\n`;
+            }
+        }
+
+        // Soft
+        if (light.semantic.soft) {
+            css += `\n    /* Soft Variants */\n`;
+            for (const [name, value] of Object.entries(light.semantic.soft)) {
+                const resolvedValue = resolveTokenRef(value);
+                css += `    --soft-${name}: ${resolvedValue};\n`;
+            }
+        }
+
+        // Focus Ring
+        if (light.semantic.focus?.ring) {
+            css += `\n    /* Focus Ring */\n`;
+            const ringValue = light.semantic.focus.ring;
+            if (typeof ringValue === 'string') {
+                const resolvedValue = resolveTokenRef(ringValue);
+                css += `    --focus-ring: ${resolvedValue};\n`;
+            } else if (typeof ringValue === 'object' && ringValue !== null && !Array.isArray(ringValue)) {
+                for (const [name, value] of Object.entries(ringValue)) {
+                    const resolvedValue = resolveTokenRef(value);
+                    css += `    --focus-ring-${name}: ${resolvedValue};\n`;
+                }
+            }
+        }
+
         css += `}\n\n`;
     }
 
@@ -317,8 +358,16 @@ function generateCSS() {
         if (dark.semantic.text) {
             css += `\n    /* Text */\n`;
             for (const [name, value] of Object.entries(dark.semantic.text)) {
-                const resolvedValue = resolveTokenRef(value);
-                css += `    --text-${name}: ${resolvedValue};\n`;
+                if (typeof value === 'object' && value !== null && !Array.isArray(value)) {
+                    // Handle nested objects like on-brand
+                    for (const [subname, subvalue] of Object.entries(value)) {
+                        const resolvedValue = resolveTokenRef(subvalue);
+                        css += `    --text-${name}-${subname}: ${resolvedValue};\n`;
+                    }
+                } else {
+                    const resolvedValue = resolveTokenRef(value);
+                    css += `    --text-${name}: ${resolvedValue};\n`;
+                }
             }
         }
 
@@ -380,6 +429,39 @@ function generateCSS() {
                 for (const [prop, value] of Object.entries(properties)) {
                     const resolvedValue = resolveTokenRef(value);
                     css += `    --alert-${variant}-${prop}: ${resolvedValue};\n`;
+                }
+            }
+        }
+
+        // Interactive Ghost
+        if (dark.semantic.interactive?.ghost) {
+            css += `\n    /* Interactive Ghost */\n`;
+            for (const [name, value] of Object.entries(dark.semantic.interactive.ghost)) {
+                const resolvedValue = resolveTokenRef(value);
+                css += `    --interactive-ghost-${name}: ${resolvedValue};\n`;
+            }
+        }
+
+        // Soft
+        if (dark.semantic.soft) {
+            css += `\n    /* Soft Variants */\n`;
+            for (const [name, value] of Object.entries(dark.semantic.soft)) {
+                const resolvedValue = resolveTokenRef(value);
+                css += `    --soft-${name}: ${resolvedValue};\n`;
+            }
+        }
+
+        // Focus Ring
+        if (dark.semantic.focus?.ring) {
+            css += `\n    /* Focus Ring */\n`;
+            const ringValue = dark.semantic.focus.ring;
+            if (typeof ringValue === 'string') {
+                const resolvedValue = resolveTokenRef(ringValue);
+                css += `    --focus-ring: ${resolvedValue};\n`;
+            } else if (typeof ringValue === 'object' && ringValue !== null && !Array.isArray(ringValue)) {
+                for (const [name, value] of Object.entries(ringValue)) {
+                    const resolvedValue = resolveTokenRef(value);
+                    css += `    --focus-ring-${name}: ${resolvedValue};\n`;
                 }
             }
         }

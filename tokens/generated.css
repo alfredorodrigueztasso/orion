@@ -126,7 +126,9 @@
     --text-tertiary: var(--color-neutral-400);
     --text-inverse: var(--color-neutral-0);
     --text-brand: var(--color-brand-500);
-    --text-on-brand: [object Object];
+    --text-on-brand-primary: var(--color-neutral-0);
+    --text-on-brand-secondary: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
+    --text-on-brand-tertiary: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
 
     /* Borders */
     --border-subtle: var(--color-neutral-200);
@@ -171,6 +173,20 @@
     --alert-info-bg: var(--color-info-100);
     --alert-info-text: var(--color-info-700);
     --alert-info-border: var(--color-info-500);
+
+    /* Interactive Ghost */
+    --interactive-ghost-hover: color-mix(in srgb, var(--color-neutral-1000) 5%, transparent);
+
+    /* Soft Variants */
+    --soft-brand: color-mix(in srgb, var(--color-brand-500) 10%, transparent);
+    --soft-brand-hover: color-mix(in srgb, var(--color-brand-500) 20%, transparent);
+    --soft-success: color-mix(in srgb, var(--color-success-500) 10%, transparent);
+    --soft-error: color-mix(in srgb, var(--color-error-500) 10%, transparent);
+    --soft-warning: color-mix(in srgb, var(--color-warning-500) 10%, transparent);
+    --soft-info: color-mix(in srgb, var(--color-info-500) 10%, transparent);
+
+    /* Focus Ring */
+    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-brand-500) 40%, transparent);
 }
 
 /* ─── Dark Theme Semantics ─── */
@@ -191,7 +207,9 @@
     --text-tertiary: var(--color-neutral-600);
     --text-inverse: var(--color-neutral-950);
     --text-brand: var(--color-brand-400);
-    --text-on-brand: [object Object];
+    --text-on-brand-primary: var(--color-neutral-0);
+    --text-on-brand-secondary: color-mix(in srgb, var(--color-neutral-0) 90%, transparent);
+    --text-on-brand-tertiary: color-mix(in srgb, var(--color-neutral-0) 70%, transparent);
 
     /* Borders */
     --border-subtle: var(--color-neutral-800);
@@ -236,6 +254,20 @@
     --alert-info-bg: color-mix(in srgb, var(--color-info-500) 20%, transparent);
     --alert-info-text: var(--color-info-300);
     --alert-info-border: var(--color-info-500);
+
+    /* Interactive Ghost */
+    --interactive-ghost-hover: color-mix(in srgb, var(--color-neutral-0) 10%, transparent);
+
+    /* Soft Variants */
+    --soft-brand: color-mix(in srgb, var(--color-brand-500) 15%, transparent);
+    --soft-brand-hover: color-mix(in srgb, var(--color-brand-500) 25%, transparent);
+    --soft-success: color-mix(in srgb, var(--color-success-500) 15%, transparent);
+    --soft-error: color-mix(in srgb, var(--color-error-500) 15%, transparent);
+    --soft-warning: color-mix(in srgb, var(--color-warning-500) 15%, transparent);
+    --soft-info: color-mix(in srgb, var(--color-info-500) 15%, transparent);
+
+    /* Focus Ring */
+    --focus-ring: 0 0 0 3px color-mix(in srgb, var(--color-brand-500) 50%, transparent);
 }
 
 /* ─── Radius Scale (Button → Container Derivation) ─── */
