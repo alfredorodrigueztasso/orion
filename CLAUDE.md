@@ -79,6 +79,25 @@ npm run dev:packages                    # Start all packages in watch mode
 node scripts/validate-components.js     # Check React components follow AI-first rules
 ```
 
+### Build Architecture Note (Turbo 2.x - v4.9.3+)
+
+**Root task exclusion**: The build pipeline uses explicit package filtering in Turbo 2.x to prevent infinite recursion:
+
+- Root `build` task → `npm run build:tokens && npm run build:packages`
+- `build:packages` → `turbo run build` with explicit package filters (excludes root by design)
+- Packages built: `@orion-ds/react`, `@orion-ds/cli`, `@orion-ds/mcp`, `@orion-ds/create`, `@orion-ds/validate`
+
+**Why this matters**:
+- Turbo 1.x supported negation syntax: `--filter=!name` (deprecated in 2.x)
+- Turbo 2.x requires explicit package names: `--filter=@orion-ds/react --filter=@orion-ds/cli ...`
+- Root task (`orion-design-system@1.0.0`) is NOT in the filter list, so it never gets re-executed by turbo
+- This breaks the infinite recursion loop that occurred when root task invoked turbo that included root
+
+**Result**:
+✅ `npm run build` completes in ~2-3 minutes (no recursion)
+✅ `npm run release:*` works correctly (uses explicit filters)
+✅ Matches Turbo 2.x API (future-proof)
+
 ### Release & Infrastructure (Post-Split Improvements - Feb 28 2026)
 
 **Problem**: After splitting @orion-ds/core into separate packages, the release pipeline became fragile:
