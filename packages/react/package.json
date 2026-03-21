@@ -1,6 +1,6 @@
 {
   "name": "@orion-ds/react",
-  "version": "4.9.8",
+  "version": "5.0.0",
   "type": "module",
   "description": "Orion Design System - React component library with 40+ AI-ready components and 9 templates",
   "author": "Orion Design System Team",
@@ -38,10 +38,10 @@
       "import": "./dist/blocks/index.mjs",
       "require": "./dist/blocks/index.cjs"
     },
-    "./templates": {
-      "types": "./dist/templates/index.d.ts",
-      "import": "./dist/templates/index.mjs",
-      "require": "./dist/templates/index.cjs"
+    "./blocks/templates": {
+      "types": "./dist/blocks/templates/index.d.ts",
+      "import": "./dist/blocks/templates/index.mjs",
+      "require": "./dist/blocks/templates/index.cjs"
     },
     "./chart": {
       "types": "./dist/chart.d.ts",
