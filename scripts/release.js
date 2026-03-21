@@ -235,10 +235,24 @@ async function release() {
       process.exit(1);
     }
 
-    log('\n  Running npm run build:release...');
-    const buildResult = exec('npm run build:release');
-    if (!buildResult.success) {
-      logError('Build failed. Please fix issues before releasing.');
+    log('\n  Running build (tokens + packages)...');
+
+    // P0 FIX: Avoid turbo recursion - run tokens then packages directly
+    const tokensBuildResult = exec('npm run build:tokens');
+    if (!tokensBuildResult.success) {
+      logError('Token build failed. Please fix issues before releasing.');
+      process.exit(1);
+    }
+    logSuccess('Tokens built');
+
+    log('\n  Running package builds...');
+    // List all packages explicitly to avoid Turbo 2.x filter syntax issues
+    // (Turbo 2.x does NOT support !name negation, use explicit package names instead)
+    const packagesBuildResult = exec(
+      'turbo run build --filter=@orion-ds/react --filter=@orion-ds/cli --filter=@orion-ds/mcp --filter=@orion-ds/create --filter=@orion-ds/validate'
+    );
+    if (!packagesBuildResult.success) {
+      logError('Package build failed. Please fix issues before releasing.');
       process.exit(1);
     }
     logSuccess('Audit and build completed');
