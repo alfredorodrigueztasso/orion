@@ -5,16 +5,16 @@
  */
 
 // Export all types
-export * from './types';
+export * from "./types";
 
 // Export primitive tokens
-export * from './primitives';
+export * from "./primitives";
 
 // Export themes
-export * from './themes';
+export * from "./themes";
 
 // Export brands
-export * from './brands';
+export * from "./brands";
 
 // Export utilities
-export * from './utils';
+export * from "./utils";

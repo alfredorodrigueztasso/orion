@@ -114,7 +114,8 @@ export const Card: Story = {
 export const BackgroundVariant: Story = {
   args: {
     variant: "background",
-    backgroundImage: "https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&h=600&fit=crop",
+    backgroundImage:
+      "https://images.unsplash.com/photo-1557821552-17105176677c?w=1200&h=600&fit=crop",
     backgroundOverlay: 0.5,
     title: "Background Variant",
     description: "With background image and overlay",
