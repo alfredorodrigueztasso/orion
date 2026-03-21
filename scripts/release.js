@@ -278,7 +278,8 @@ async function release() {
 
       // Validate exports before publishing (prevents incidents like v4.9.2)
       log(`  Validating exports...`);
-      const validateResult = exec(`node ${path.join(ROOT_DIR, 'scripts/validate-exports.js')} ${pkg.path}`);
+      const validateScriptPath = path.join(ROOT_DIR, 'scripts/validate-exports.js');
+      const validateResult = exec(`node "${validateScriptPath}" "${pkg.path}"`);
       if (!validateResult.success) {
         logError(`Export validation failed for ${pkg.name}`);
         publishResults.push({ pkg: pkg.name, success: false, error: 'Export validation failed' });
