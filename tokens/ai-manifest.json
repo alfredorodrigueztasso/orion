@@ -1,7 +1,7 @@
 {
   "name": "Orion Design System - AI Manifest",
   "version": "2.0.0",
-  "last_updated": "2026-03-18",
+  "last_updated": "2026-03-21",
   "description": "Machine-readable status and capabilities manifest for AI agents",
   "ai_native": {
     "mcp_server": "@orion-ds/mcp",
