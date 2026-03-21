@@ -1,6 +1,6 @@
 {
   "name": "@orion-ds/create",
-  "version": "4.9.4",
+  "version": "4.9.5",
   "description": "Create a new project with Orion Design System — zero configuration",
   "type": "module",
   "bin": {
