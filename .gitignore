@@ -36,6 +36,8 @@ pnpm-error.log*
 coverage/
 .nyc_output/
 *.lcov
+packages/*/test-results/
+packages/*/playwright-report/
 
 # Storybook
 storybook-static/
