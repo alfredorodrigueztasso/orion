@@ -39,3 +39,29 @@ coverage/
 
 # Storybook
 storybook-static/
+
+# Compiled artifacts (not source)
+theme.css
+tokens/generated.css
+*.tsbuildinfo
+
+# Generated API endpoints
+public/r/
+
+# Claude Code session documents (preserve skills/)
+.claude/*.md
+.claude/*.txt
+.claude/*.json
+.claude/worktrees/
+# Exception: skills are part of the project
+!.claude/skills/
+!.claude/skills/**
+
+# Local work documents
+ARCHITECTURE_REVIEW*.md
+TIER3_*.md
+US-3.3-*.md
+
+# Examples and local reports
+examples/lucide-icons-example.tsx
+docs/visual-audit-report.md
