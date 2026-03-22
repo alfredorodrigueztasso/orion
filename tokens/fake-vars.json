@@ -1,0 +1,182 @@
+{
+  "$schema": "Centralized fake/non-existent CSS variables prevention list",
+  "version": "5.0.0",
+  "updated": "2026-03-22",
+  "description": "Variables that commonly don't exist in Orion but LLMs frequently invent. Used by validation scripts, MCP code completion, and CLI guidance.",
+  "category": "AI-First Prevention Rules",
+  "usage": {
+    "validation": "scripts/validate-components.js",
+    "mcp": "packages/mcp/src/tools/code-completion.ts",
+    "docs": "Reference for variable naming best practices"
+  },
+  "fake_vars": {
+    "--font-sans": {
+      "description": "Non-existent: generic body text font",
+      "alternative": "var(--font-secondary)",
+      "reason": "Orion uses semantic font families, not generic names",
+      "category": "typography"
+    },
+    "--font-body": {
+      "description": "Non-existent: body text font",
+      "alternative": "var(--font-secondary)",
+      "reason": "Use semantic name instead",
+      "category": "typography"
+    },
+    "--color-primary": {
+      "description": "Non-existent: primary color (ambiguous context)",
+      "alternative": "var(--interactive-primary)",
+      "reason": "Use semantic token for interactive elements",
+      "category": "colors"
+    },
+    "--color-accent": {
+      "description": "Non-existent: accent color",
+      "alternative": "var(--text-brand)",
+      "reason": "Use semantic token matching your context",
+      "category": "colors"
+    },
+    "--bg-primary": {
+      "description": "Non-existent: primary background",
+      "alternative": "var(--surface-base)",
+      "reason": "Use surface token for backgrounds",
+      "category": "surfaces"
+    },
+    "--bg-secondary": {
+      "description": "Non-existent: secondary background",
+      "alternative": "var(--surface-subtle)",
+      "reason": "Use surface token for backgrounds",
+      "category": "surfaces"
+    },
+    "--text-muted": {
+      "description": "Non-existent: muted text color",
+      "alternative": "var(--text-tertiary)",
+      "reason": "Use semantic text color token",
+      "category": "text"
+    },
+    "--border-radius": {
+      "description": "Non-existent: border radius (singular, ambiguous)",
+      "alternative": "var(--radius-control)",
+      "reason": "Use semantic radius token",
+      "category": "spacing"
+    },
+    "--shadow-default": {
+      "description": "Non-existent: default shadow",
+      "alternative": "var(--shadow-md)",
+      "reason": "Use semantic shadow token",
+      "category": "effects"
+    },
+    "--transition-default": {
+      "description": "Non-existent: default transition variable",
+      "alternative": "transition: 150ms ease-in-out",
+      "reason": "Use inline transition property with standard timing",
+      "category": "effects"
+    },
+    "--padding-base": {
+      "description": "Non-existent: base padding",
+      "alternative": "var(--spacing-4)",
+      "reason": "Use spacing token",
+      "category": "spacing"
+    },
+    "--blue-500": {
+      "description": "Non-existent: specific blue shade",
+      "alternative": "var(--color-brand-orion)",
+      "reason": "Use brand-aware color token",
+      "category": "colors"
+    },
+    "--gray-100": {
+      "description": "Non-existent: gray color (too specific)",
+      "alternative": "var(--surface-subtle)",
+      "reason": "Use semantic surface token",
+      "category": "colors"
+    },
+    "--accent": {
+      "description": "Non-existent: accent color (ambiguous)",
+      "alternative": "var(--interactive-primary)",
+      "reason": "Use semantic interactive token",
+      "category": "colors"
+    },
+    "--font-weight-bold": {
+      "description": "Non-existent: bold font weight variable",
+      "alternative": "font-weight: 600",
+      "reason": "Use numeric font-weight, not CSS variable",
+      "category": "typography"
+    },
+    "--hover-bg": {
+      "description": "Non-existent: hover background",
+      "alternative": "var(--surface-layer)",
+      "reason": "Use surface token, apply in :hover pseudo-class",
+      "category": "surfaces"
+    },
+    "--primary": {
+      "description": "Non-existent: primary token (ambiguous context)",
+      "alternative": "var(--interactive-primary) or var(--text-brand)",
+      "reason": "Be specific: interactive or text context?",
+      "category": "colors"
+    },
+    "--secondary": {
+      "description": "Non-existent: secondary token (ambiguous)",
+      "alternative": "var(--interactive-secondary) or var(--text-secondary)",
+      "reason": "Be specific: interactive or text context?",
+      "category": "colors"
+    },
+    "--gradient-primary": {
+      "description": "Non-existent: primary gradient variable",
+      "alternative": "linear-gradient(135deg, var(--color-brand-400), var(--color-brand-600))",
+      "reason": "Use color tokens in gradient, not a gradient variable",
+      "category": "effects"
+    },
+    "--brand-accent-vivid": {
+      "description": "Non-existent: vivid brand accent",
+      "alternative": "var(--color-brand-500)",
+      "reason": "Use primitive color token",
+      "category": "colors"
+    },
+    "--error-bg": {
+      "description": "Non-existent: error background",
+      "alternative": "var(--color-error-50)",
+      "reason": "Use primitive error color token",
+      "category": "colors"
+    },
+    "--success-bg": {
+      "description": "Non-existent: success background",
+      "alternative": "var(--color-success-50)",
+      "reason": "Use primitive success color token",
+      "category": "colors"
+    },
+    "--warning-bg": {
+      "description": "Non-existent: warning background",
+      "alternative": "var(--color-warning-50)",
+      "reason": "Use primitive warning color token",
+      "category": "colors"
+    },
+    "--info-bg": {
+      "description": "Non-existent: info background",
+      "alternative": "var(--color-info-50)",
+      "reason": "Use primitive info color token",
+      "category": "colors"
+    },
+    "--danger-color": {
+      "description": "Non-existent: danger color",
+      "alternative": "var(--color-error-500)",
+      "reason": "Use semantic error color token",
+      "category": "colors"
+    },
+    "--spacing-lg": {
+      "description": "Non-existent: large spacing (ambiguous size)",
+      "alternative": "var(--spacing-8) or var(--spacing-12) or var(--spacing-16)",
+      "reason": "Be specific: which size do you need?",
+      "category": "spacing"
+    },
+    "--radius-lg": {
+      "description": "Non-existent: large radius",
+      "alternative": "var(--radius-container)",
+      "reason": "Use semantic radius token",
+      "category": "spacing"
+    },
+    "--focus-outline": {
+      "description": "Non-existent: focus outline variable",
+      "alternative": "outline: 2px solid var(--interactive-primary)",
+      "reason": "Define outline directly with semantic color",
+      "category": "effects"
+    }
+  }
+}

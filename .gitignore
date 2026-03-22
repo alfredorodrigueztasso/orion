@@ -67,3 +67,7 @@ US-3.3-*.md
 # Examples and local reports
 examples/lucide-icons-example.tsx
 docs/visual-audit-report.md
+
+# Legacy fake-vars (moved to tokens/fake-vars.json)
+shared/fake-vars.json
+shared/fake-vars.schema.json

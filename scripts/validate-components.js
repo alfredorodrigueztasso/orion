@@ -582,7 +582,9 @@ main();
 // ============================================================================
 
 function testNoFakeVars() {
-  const FAKE_VARS = require('../shared/fake-vars.json');
+  // Read centralized fake-vars from tokens/ (single source of truth)
+  const fakeVarsConfig = require('../tokens/fake-vars.json');
+  const FAKE_VARS = fakeVarsConfig.fake_vars;
   const fakeVarPattern = new RegExp(`var\\((${Object.keys(FAKE_VARS).map(v => v.replace(/--/g, '\\-\\-')).join('|')})\\)`, 'g');
   
   let testsPassed = 0;
