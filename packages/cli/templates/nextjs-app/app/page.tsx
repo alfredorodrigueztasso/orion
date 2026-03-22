@@ -1,13 +1,13 @@
-import { Button, Card, Stack, Badge } from '@orion-ds/react';
-import { Zap, Package, Palette } from 'lucide-react';
-import styles from './page.module.css';
+import { Button, Card, Stack, Badge } from "@orion-ds/react";
+import { Zap, Package, Palette } from "lucide-react";
+import styles from "./page.module.css";
 
 export default function Home() {
   return (
     <main className={styles.container}>
       <Stack gap={6} align="center" justify="center">
         <div className={styles.header}>
-          <h1>Welcome to {{projectName}}</h1>
+          <h1>Welcome to {{ projectName }}</h1>
           <p className={styles.subtitle}>
             Built with Next.js 15, TypeScript, and Orion Design System
           </p>

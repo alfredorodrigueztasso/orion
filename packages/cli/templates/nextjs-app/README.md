@@ -49,6 +49,7 @@ Components will be copied to `src/components/orion/` and can be imported and cus
 ### Orion CLI Config
 
 See `orion.json` for configuration. Edit to change:
+
 - Component directories
 - Brand (orion, red, deepblue, orange)
 - Mode (display, product, app)

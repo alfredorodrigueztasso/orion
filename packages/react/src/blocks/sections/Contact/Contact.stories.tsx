@@ -20,7 +20,11 @@ export const WithInfo: Story = {
     title: "Contact Us",
     description: "Have a question?",
     contactInfo: [
-      { label: "Email", value: "hello@orion.dev", href: "mailto:hello@orion.dev" },
+      {
+        label: "Email",
+        value: "hello@orion.dev",
+        href: "mailto:hello@orion.dev",
+      },
       { label: "Phone", value: "+1 (555) 123-4567", href: "tel:+15551234567" },
       { label: "Address", value: "123 Design St, SF CA" },
     ],
@@ -37,7 +41,11 @@ export const AllVariants: Story = {
         title="Full"
         description="With info"
         contactInfo={[
-          { label: "Email", value: "hello@orion.dev", href: "mailto:hello@orion.dev" },
+          {
+            label: "Email",
+            value: "hello@orion.dev",
+            href: "mailto:hello@orion.dev",
+          },
           { label: "Phone", value: "+1 (555) 123", href: "tel:+15551234567" },
           { label: "Address", value: "SF, CA" },
         ]}

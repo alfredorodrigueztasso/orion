@@ -4,27 +4,27 @@ A textarea-based code editor with synchronized line numbers and language badge d
 
 ## When to Use
 
-| Scenario | Use CodeEditor |
-|----------|----------------|
-| Code input or editing | ✅ Yes - provides line numbers and monospace styling |
-| Displaying editable code snippets | ✅ Yes - supports read-only mode |
-| Simple script/config editing | ✅ Yes - lightweight textarea-based |
-| Full IDE experience | ❌ No - use Monaco or CodeMirror |
-| Syntax highlighting | ❌ No - this is a plain text editor |
+| Scenario                          | Use CodeEditor                                       |
+| --------------------------------- | ---------------------------------------------------- |
+| Code input or editing             | ✅ Yes - provides line numbers and monospace styling |
+| Displaying editable code snippets | ✅ Yes - supports read-only mode                     |
+| Simple script/config editing      | ✅ Yes - lightweight textarea-based                  |
+| Full IDE experience               | ❌ No - use Monaco or CodeMirror                     |
+| Syntax highlighting               | ❌ No - this is a plain text editor                  |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| value | string | — | Current editor content |
-| onChange | (value: string) => void | — | Content change callback |
-| language | string | — | Language name shown as badge |
-| readOnly | boolean | false | Whether the editor is read-only |
-| showLineNumbers | boolean | true | Show line numbers on the left |
-| placeholder | string | — | Placeholder text when empty |
-| minRows | number | 10 | Minimum number of rows to display |
-| className | string | — | Additional class name |
-| aria-label | string | — | Accessible label |
+| Prop            | Type                    | Default | Description                       |
+| --------------- | ----------------------- | ------- | --------------------------------- |
+| value           | string                  | —       | Current editor content            |
+| onChange        | (value: string) => void | —       | Content change callback           |
+| language        | string                  | —       | Language name shown as badge      |
+| readOnly        | boolean                 | false   | Whether the editor is read-only   |
+| showLineNumbers | boolean                 | true    | Show line numbers on the left     |
+| placeholder     | string                  | —       | Placeholder text when empty       |
+| minRows         | number                  | 10      | Minimum number of rows to display |
+| className       | string                  | —       | Additional class name             |
+| aria-label      | string                  | —       | Accessible label                  |
 
 ## Examples
 
@@ -38,18 +38,13 @@ import { CodeEditor } from "@orion-ds/react/editor";
   onChange={setCode}
   language="javascript"
   placeholder="// Write your code here..."
-/>
+/>;
 ```
 
 ### Read-Only Display
 
 ```tsx
-<CodeEditor
-  value={snippet}
-  language="python"
-  readOnly
-  showLineNumbers
-/>
+<CodeEditor value={snippet} language="python" readOnly showLineNumbers />
 ```
 
 ### Minimal (No Line Numbers)

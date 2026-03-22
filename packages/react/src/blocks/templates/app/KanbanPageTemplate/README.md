@@ -4,48 +4,48 @@ Task management board with multiple columns and individual task cards. Designed 
 
 ## When to Use
 
-| Scenario | Use KanbanPageTemplate |
-|----------|----------------------|
-| Agile sprint board | ✅ Yes - organized by columns |
-| Task management interface | ✅ Yes - card-based layout |
-| Project workflow visualization | ✅ Yes - status columns |
-| Team task assignment | ✅ Yes - with metadata display |
-| Progress tracking | ✅ Yes - visual column layout |
+| Scenario                       | Use KanbanPageTemplate         |
+| ------------------------------ | ------------------------------ |
+| Agile sprint board             | ✅ Yes - organized by columns  |
+| Task management interface      | ✅ Yes - card-based layout     |
+| Project workflow visualization | ✅ Yes - status columns        |
+| Team task assignment           | ✅ Yes - with metadata display |
+| Progress tracking              | ✅ Yes - visual column layout  |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Kanban Board" | Board title |
-| columns | KanbanColumn[] | [] | Column definitions |
-| tasks | KanbanTask[] | [] | Array of tasks |
-| onTaskMove | (taskId: string, columnId: string) => void | — | Move task callback |
-| onCreateTask | (columnId: string) => void | — | New task callback |
-| onEditTask | (taskId: string) => void | — | Edit task callback |
-| onDeleteTask | (taskId: string) => void | — | Delete task callback |
-| isLoading | boolean | false | Loading state |
-| error | string | — | Error message |
-| className | string | — | Custom CSS class |
+| Prop         | Type                                       | Default        | Description          |
+| ------------ | ------------------------------------------ | -------------- | -------------------- |
+| title        | string                                     | "Kanban Board" | Board title          |
+| columns      | KanbanColumn[]                             | []             | Column definitions   |
+| tasks        | KanbanTask[]                               | []             | Array of tasks       |
+| onTaskMove   | (taskId: string, columnId: string) => void | —              | Move task callback   |
+| onCreateTask | (columnId: string) => void                 | —              | New task callback    |
+| onEditTask   | (taskId: string) => void                   | —              | Edit task callback   |
+| onDeleteTask | (taskId: string) => void                   | —              | Delete task callback |
+| isLoading    | boolean                                    | false          | Loading state        |
+| error        | string                                     | —              | Error message        |
+| className    | string                                     | —              | Custom CSS class     |
 
 ### KanbanColumn Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| title | string | Column header |
+| Property | Type   | Description       |
+| -------- | ------ | ----------------- |
+| id       | string | Unique identifier |
+| title    | string | Column header     |
 
 ### KanbanTask Interface
 
-| Property | Type | Description |
-|----------|------|-------------|
-| id | string | Unique identifier |
-| columnId | string | Parent column ID |
-| title | string | Task title |
-| description | string | Task details (optional) |
-| priority | "high" \| "medium" \| "low" | Priority level |
-| dueDate | Date | Deadline (optional) |
-| labels | string[] | Tag labels (optional) |
-| assignee | { name: string; avatar?: string } | Assignee info |
+| Property    | Type                              | Description             |
+| ----------- | --------------------------------- | ----------------------- |
+| id          | string                            | Unique identifier       |
+| columnId    | string                            | Parent column ID        |
+| title       | string                            | Task title              |
+| description | string                            | Task details (optional) |
+| priority    | "high" \| "medium" \| "low"       | Priority level          |
+| dueDate     | Date                              | Deadline (optional)     |
+| labels      | string[]                          | Tag labels (optional)   |
+| assignee    | { name: string; avatar?: string } | Assignee info           |
 
 ## Key Features
 
@@ -87,13 +87,14 @@ const columns = [
   tasks={tasks}
   onCreateTask={(columnId) => console.log("Add to:", columnId)}
   onEditTask={(taskId) => console.log("Edit:", taskId)}
-  onDeleteTask={(taskId) => setTasks(tasks.filter(t => t.id !== taskId))}
-/>
+  onDeleteTask={(taskId) => setTasks(tasks.filter((t) => t.id !== taskId))}
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Button` — Add task button with icon
 - `Badge` — Priority indicators
 - Lucide Icons — Plus, Edit2, Trash2, Calendar

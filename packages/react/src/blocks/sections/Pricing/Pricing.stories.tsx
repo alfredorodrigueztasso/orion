@@ -39,9 +39,13 @@ const plans = [
   },
 ];
 
-export const Default: Story = { args: { title: "Pricing", description: "Choose a plan", plans } };
+export const Default: Story = {
+  args: { title: "Pricing", description: "Choose a plan", plans },
+};
 
-export const TwoPlans: Story = { args: { title: "Plans", plans: plans.slice(0, 2) } };
+export const TwoPlans: Story = {
+  args: { title: "Plans", plans: plans.slice(0, 2) },
+};
 
 export const AllVariants: Story = {
   args: {
@@ -52,7 +56,11 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <Pricing {...args} />
-      <Pricing title="Two Plans" description="Options" plans={plans.slice(0, 2)} />
+      <Pricing
+        title="Two Plans"
+        description="Options"
+        plans={plans.slice(0, 2)}
+      />
     </div>
   ),
 };

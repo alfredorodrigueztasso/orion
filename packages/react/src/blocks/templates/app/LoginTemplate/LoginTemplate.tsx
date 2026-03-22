@@ -99,7 +99,9 @@ export const LoginTemplate = forwardRef<HTMLDivElement, LoginTemplateProps>(
                     type="button"
                     className={styles.showPasswordButton}
                     onClick={() => setShowPassword(!showPassword)}
-                    aria-label={showPassword ? "Hide password" : "Show password"}
+                    aria-label={
+                      showPassword ? "Hide password" : "Show password"
+                    }
                     disabled={isLoading}
                   >
                     {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}

@@ -1,6 +1,9 @@
 import type { Meta, StoryObj } from "@storybook/react";
 import { WorkspaceSwitcher } from "./WorkspaceSwitcher";
-import type { CurrentWorkspaceOrg, WorkspaceOrg } from "./WorkspaceSwitcher.types";
+import type {
+  CurrentWorkspaceOrg,
+  WorkspaceOrg,
+} from "./WorkspaceSwitcher.types";
 
 const meta = {
   title: "Components/Navigation/WorkspaceSwitcher",

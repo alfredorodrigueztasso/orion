@@ -15,9 +15,7 @@ export const Contact = forwardRef<HTMLElement, ContactProps>(
         <div className={styles.container}>
           <div className={styles.header}>
             <h2 className={styles.title}>{title}</h2>
-            {description && (
-              <p className={styles.description}>{description}</p>
-            )}
+            {description && <p className={styles.description}>{description}</p>}
           </div>
 
           {contactInfo && contactInfo.length > 0 && (

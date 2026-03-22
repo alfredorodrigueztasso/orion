@@ -69,7 +69,10 @@ export function fuzzyMatch(query: string, candidates: string[]): string[] {
   const matches = candidates
     .map((candidate) => ({
       candidate,
-      distance: levenshteinDistance(query.toLowerCase(), candidate.toLowerCase()),
+      distance: levenshteinDistance(
+        query.toLowerCase(),
+        candidate.toLowerCase(),
+      ),
     }))
     .filter((m) => m.distance <= 2)
     .sort((a, b) => a.distance - b.distance)
@@ -99,7 +102,9 @@ export function filterByTag(
   tag: string,
 ): RegistryIndexItem[] {
   return items.filter(
-    (item) => item.tags && item.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase()),
+    (item) =>
+      item.tags &&
+      item.tags.map((t) => t.toLowerCase()).includes(tag.toLowerCase()),
   );
 }
 

@@ -37,8 +37,18 @@ export function checkConfigExists(cwd: string): DoctorCheck {
 }
 
 export function checkConfigFields(config: OrionConfig): DoctorCheck {
-  const required = ["registryUrl", "componentDir", "sectionDir", "templateDir", "typescript", "brand", "mode"];
-  const missing = required.filter((field) => !(field in config) || (config as any)[field] === "");
+  const required = [
+    "registryUrl",
+    "componentDir",
+    "sectionDir",
+    "templateDir",
+    "typescript",
+    "brand",
+    "mode",
+  ];
+  const missing = required.filter(
+    (field) => !(field in config) || (config as any)[field] === "",
+  );
 
   if (missing.length > 0) {
     return {
@@ -122,11 +132,16 @@ export function checkPackageInstalled(cwd: string): DoctorCheck {
 
 export function checkCssImport(cwd: string): DoctorCheck {
   const entryFiles = [
-    "src/main.ts", "src/main.tsx",
-    "src/index.ts", "src/index.tsx",
-    "src/App.tsx", "src/App.ts",
-    "app/layout.tsx", "app/layout.ts",
-    "pages/_app.tsx", "pages/_app.ts",
+    "src/main.ts",
+    "src/main.tsx",
+    "src/index.ts",
+    "src/index.tsx",
+    "src/App.tsx",
+    "src/App.ts",
+    "app/layout.tsx",
+    "app/layout.ts",
+    "pages/_app.tsx",
+    "pages/_app.ts",
   ];
 
   const cssImportPatterns = [
@@ -200,7 +215,9 @@ export function checkOutputDirs(config: OrionConfig, cwd: string): DoctorCheck {
   };
 }
 
-export async function checkRegistryConnectivity(registryUrl: string): Promise<DoctorCheck> {
+export async function checkRegistryConnectivity(
+  registryUrl: string,
+): Promise<DoctorCheck> {
   const startTime = Date.now();
 
   try {
@@ -250,7 +267,9 @@ function printResults(checks: DoctorCheck[], _args: DoctorArgs): void {
   console.log(logger.dim("─".repeat(50)));
 
   if (fail > 0 || warn > 0) {
-    console.log(`${fail} error${fail !== 1 ? "s" : ""}, ${warn} warning${warn !== 1 ? "s" : ""}`);
+    console.log(
+      `${fail} error${fail !== 1 ? "s" : ""}, ${warn} warning${warn !== 1 ? "s" : ""}`,
+    );
     console.log("");
     console.log(logger.bold("Issues:"));
 

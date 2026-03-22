@@ -124,7 +124,10 @@ describe("minifier", () => {
       const original = "a".repeat(1000);
       const minified = "a".repeat(500);
 
-      const { percentage, bytes } = calculateCompressionRatio(original, minified);
+      const { percentage, bytes } = calculateCompressionRatio(
+        original,
+        minified,
+      );
 
       expect(percentage).toBe(50);
       expect(bytes).toBe(500);
@@ -149,7 +152,10 @@ describe("minifier", () => {
       const original = "short";
       const minified = "much longer string";
 
-      const { percentage, bytes } = calculateCompressionRatio(original, minified);
+      const { percentage, bytes } = calculateCompressionRatio(
+        original,
+        minified,
+      );
 
       expect(percentage).toBeGreaterThanOrEqual(0);
       expect(bytes).toBeGreaterThanOrEqual(0);

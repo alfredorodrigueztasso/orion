@@ -4,28 +4,28 @@ Clean authentication form for login functionality. Features email and password i
 
 ## When to Use
 
-| Scenario | Use LoginTemplate |
-|----------|------------------|
-| Login page | ✅ Yes - complete auth form |
-| Authentication flow | ✅ Yes - with remember me option |
+| Scenario                 | Use LoginTemplate                   |
+| ------------------------ | ----------------------------------- |
+| Login page               | ✅ Yes - complete auth form         |
+| Authentication flow      | ✅ Yes - with remember me option    |
 | Gated application access | ✅ Yes - standalone login interface |
-| Account signup page | ✅ Yes - can link to signup flow |
-| Password reset flow | ✅ Yes - forgot password link |
+| Account signup page      | ✅ Yes - can link to signup flow    |
+| Password reset flow      | ✅ Yes - forgot password link       |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| title | string | "Sign in" | Form heading |
-| subtitle | string | "Welcome back" | Optional subheading |
-| logo | ReactNode | — | Logo/branding element |
-| onSubmit | (email: string, password: string, rememberMe: boolean) => void | — | Form submission callback |
-| isLoading | boolean | false | Loading state during auth |
-| error | string | — | Error message display |
-| successMessage | string | — | Success confirmation message |
-| onSignupClick | () => void | — | Signup link callback |
-| onForgotPasswordClick | () => void | — | Forgot password callback |
-| className | string | — | Custom CSS class |
+| Prop                  | Type                                                           | Default        | Description                  |
+| --------------------- | -------------------------------------------------------------- | -------------- | ---------------------------- |
+| title                 | string                                                         | "Sign in"      | Form heading                 |
+| subtitle              | string                                                         | "Welcome back" | Optional subheading          |
+| logo                  | ReactNode                                                      | —              | Logo/branding element        |
+| onSubmit              | (email: string, password: string, rememberMe: boolean) => void | —              | Form submission callback     |
+| isLoading             | boolean                                                        | false          | Loading state during auth    |
+| error                 | string                                                         | —              | Error message display        |
+| successMessage        | string                                                         | —              | Success confirmation message |
+| onSignupClick         | () => void                                                     | —              | Signup link callback         |
+| onForgotPasswordClick | () => void                                                     | —              | Forgot password callback     |
+| className             | string                                                         | —              | Custom CSS class             |
 
 ## Key Features
 
@@ -57,12 +57,13 @@ import { LoginTemplate } from "@orion-ds/react";
   onForgotPasswordClick={() => navigate("/forgot-password")}
   error={loginError}
   isLoading={isAuthenticating}
-/>
+/>;
 ```
 
 ## Component Composition
 
 Built with:
+
 - `Card` — Form container and layout
 - `Button` — Submit action and links
 - `Field` — Email input with validation

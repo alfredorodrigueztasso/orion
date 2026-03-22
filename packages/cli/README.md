@@ -35,15 +35,15 @@ npx @orion-ds/cli create my-app --template=vite-app    # Lightweight Vite
 
 **Options:**
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--template=<name>` | Project template: `react-app`, `vite-app`, `nextjs-app` | `react-app` |
-| `--package-manager=<pm>` | Force package manager: `npm`, `pnpm`, `yarn`, `bun` | Auto-detect |
-| `--brand=<name>` | Brand: `orion`, `red`, `deepblue`, `orange` | `orion` |
-| `--mode=<name>` | Mode: `display`, `product`, `app` | `product` |
-| `--no-install` | Skip npm install | (install by default) |
-| `--no-git` | Skip git initialization | (git init by default) |
-| `--overwrite` | Overwrite existing directory | (fail if exists) |
+| Option                   | Description                                             | Default               |
+| ------------------------ | ------------------------------------------------------- | --------------------- |
+| `--template=<name>`      | Project template: `react-app`, `vite-app`, `nextjs-app` | `react-app`           |
+| `--package-manager=<pm>` | Force package manager: `npm`, `pnpm`, `yarn`, `bun`     | Auto-detect           |
+| `--brand=<name>`         | Brand: `orion`, `red`, `deepblue`, `orange`             | `orion`               |
+| `--mode=<name>`          | Mode: `display`, `product`, `app`                       | `product`             |
+| `--no-install`           | Skip npm install                                        | (install by default)  |
+| `--no-git`               | Skip git initialization                                 | (git init by default) |
+| `--overwrite`            | Overwrite existing directory                            | (fail if exists)      |
 
 **What you get:**
 
@@ -136,16 +136,16 @@ npx @orion-ds/cli add button --local             # Use local registry (for Orion
 
 **Options:**
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--type=<type>` | Filter by type: `component`, `section`, `template` | (no filter) |
-| `--category=<name>` | Add all items in category (e.g., `forms`, `navigation`) | (no filter) |
-| `--tag=<name>` | Add all items with tag (e.g., `marketing`, `pro`) | (no filter) |
-| `--dry-run` | Preview files without writing to disk | (disabled) |
-| `--no-install` | Copy files but skip npm dependency install | (install by default) |
-| `--yes` / `-y` | Skip all confirmation prompts | (prompt by default) |
-| `--overwrite` | Overwrite existing files | (skip existing) |
-| `--local` | Use local registry (for Orion contributors) | (use HTTP registry) |
+| Option              | Description                                             | Default              |
+| ------------------- | ------------------------------------------------------- | -------------------- |
+| `--type=<type>`     | Filter by type: `component`, `section`, `template`      | (no filter)          |
+| `--category=<name>` | Add all items in category (e.g., `forms`, `navigation`) | (no filter)          |
+| `--tag=<name>`      | Add all items with tag (e.g., `marketing`, `pro`)       | (no filter)          |
+| `--dry-run`         | Preview files without writing to disk                   | (disabled)           |
+| `--no-install`      | Copy files but skip npm dependency install              | (install by default) |
+| `--yes` / `-y`      | Skip all confirmation prompts                           | (prompt by default)  |
+| `--overwrite`       | Overwrite existing files                                | (skip existing)      |
+| `--local`           | Use local registry (for Orion contributors)             | (use HTTP registry)  |
 
 **What happens:**
 
@@ -162,6 +162,7 @@ npx @orion-ds/cli add button --local             # Use local registry (for Orion
 **Example outputs:**
 
 Single component:
+
 ```
 Files:
   src/components/orion/button/Button.tsx
@@ -179,6 +180,7 @@ Preview:
 ```
 
 Dry-run preview:
+
 ```
 DRY RUN — These files would be created:
   src/components/orion/theme-controller/ThemeController.tsx (new)
@@ -189,6 +191,7 @@ Run without --dry-run to install these files.
 ```
 
 Category bulk add:
+
 ```
 8 items will be added:
   field — Text input field
@@ -235,15 +238,15 @@ orion build --analyze --verbose              # Detailed logging + analysis
 
 **Options:**
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--analyze` | Generate JSON analysis report | (disabled) |
-| `--no-minify` | Skip CSS minification | (enabled) |
-| `--no-tree-shake-tokens` | Keep all tokens | (enabled) |
-| `--watch` | Watch for changes and rebuild | (disabled) |
-| `--stats-only` | Show stats without writing files | (disabled) |
-| `--verbose` | Detailed logging | (disabled) |
-| `--output-dir=<path>` | Output directory | `.orion-build` |
+| Option                   | Description                      | Default        |
+| ------------------------ | -------------------------------- | -------------- |
+| `--analyze`              | Generate JSON analysis report    | (disabled)     |
+| `--no-minify`            | Skip CSS minification            | (enabled)      |
+| `--no-tree-shake-tokens` | Keep all tokens                  | (enabled)      |
+| `--watch`                | Watch for changes and rebuild    | (disabled)     |
+| `--stats-only`           | Show stats without writing files | (disabled)     |
+| `--verbose`              | Detailed logging                 | (disabled)     |
+| `--output-dir=<path>`    | Output directory                 | `.orion-build` |
 
 **Example workflow:**
 
@@ -306,13 +309,13 @@ npx @orion-ds/cli info button --local            # Use local registry
 
 **Options:**
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--json` | Output raw JSON for scripting/piping | (human-readable) |
-| `--props` | Show props table only | (show full info) |
-| `--examples` | Show code examples only | (show full info) |
-| `--type=<type>` | Filter by type: `component`, `section`, `template` | (auto-detect) |
-| `--local` | Use local registry (for Orion developers) | (use HTTP registry) |
+| Option          | Description                                        | Default             |
+| --------------- | -------------------------------------------------- | ------------------- |
+| `--json`        | Output raw JSON for scripting/piping               | (human-readable)    |
+| `--props`       | Show props table only                              | (show full info)    |
+| `--examples`    | Show code examples only                            | (show full info)    |
+| `--type=<type>` | Filter by type: `component`, `section`, `template` | (auto-detect)       |
+| `--local`       | Use local registry (for Orion developers)          | (use HTTP registry) |
 
 **Example output:**
 
@@ -389,14 +392,14 @@ npx @orion-ds/cli doctor --verbose # Show detailed info per check
 
 **What it checks (6 health checks):**
 
-| Check | Validates | Fix |
-|-------|-----------|-----|
-| `orion.json` | Project is initialized | `orion init` |
-| `Config fields` | Required fields and valid values | Edit `orion.json` |
-| `@orion-ds/react` | Package installed and correct version | `npm install @orion-ds/react` |
-| `CSS import` | Styles loaded in entry file | Add `import '@orion-ds/react/styles.css'` |
-| `Output directories` | Component/section/template dirs exist | `orion add button` |
-| `Registry` | HTTP API is reachable | Check network / change `registryUrl` |
+| Check                | Validates                             | Fix                                       |
+| -------------------- | ------------------------------------- | ----------------------------------------- |
+| `orion.json`         | Project is initialized                | `orion init`                              |
+| `Config fields`      | Required fields and valid values      | Edit `orion.json`                         |
+| `@orion-ds/react`    | Package installed and correct version | `npm install @orion-ds/react`             |
+| `CSS import`         | Styles loaded in entry file           | Add `import '@orion-ds/react/styles.css'` |
+| `Output directories` | Component/section/template dirs exist | `orion add button`                        |
+| `Registry`           | HTTP API is reachable                 | Check network / change `registryUrl`      |
 
 **Example output:**
 
@@ -424,10 +427,10 @@ Issues:
 
 **Options:**
 
-| Option | Description | Default |
-|--------|-------------|---------|
-| `--json` | Output JSON for scripting/CI pipelines | (human-readable) |
-| `--verbose` | Show detailed check information | (standard output) |
+| Option      | Description                            | Default           |
+| ----------- | -------------------------------------- | ----------------- |
+| `--json`    | Output JSON for scripting/CI pipelines | (human-readable)  |
+| `--verbose` | Show detailed check information        | (standard output) |
 
 **Exit codes** (useful for CI/CD):
 

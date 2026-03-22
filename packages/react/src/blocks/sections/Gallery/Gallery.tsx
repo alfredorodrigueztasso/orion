@@ -24,11 +24,7 @@ export const Gallery = forwardRef<HTMLElement, GalleryProps>(
           <div className={`${styles.grid} ${colsClass}`}>
             {images.map((image) => (
               <div key={image.id} className={styles.item}>
-                <img
-                  src={image.src}
-                  alt={image.alt}
-                  className={styles.image}
-                />
+                <img src={image.src} alt={image.alt} className={styles.image} />
                 {image.caption && (
                   <p className={styles.caption}>{image.caption}</p>
                 )}

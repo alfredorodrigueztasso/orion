@@ -167,11 +167,7 @@ describe("writeComponents", () => {
         ],
       };
 
-      const result = writeComponents(
-        [mockItem, item2],
-        mockConfig,
-        tempDir,
-      );
+      const result = writeComponents([mockItem, item2], mockConfig, tempDir);
 
       expect(result.writtenFiles.length).toBeGreaterThanOrEqual(2);
     });

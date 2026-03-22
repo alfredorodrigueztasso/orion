@@ -14,7 +14,11 @@ export default meta;
 type Story = StoryObj<typeof meta>;
 
 export const Default: Story = {
-  args: { icon: <InboxIcon size={48} />, title: "No messages", description: "You're all caught up!" },
+  args: {
+    icon: <InboxIcon size={48} />,
+    title: "No messages",
+    description: "You're all caught up!",
+  },
 };
 
 export const WithAction: Story = {
@@ -27,11 +31,20 @@ export const WithAction: Story = {
 };
 
 export const AllVariants: Story = {
-  args: { icon: <InboxIcon size={48} />, title: "No items", description: "Nothing yet" },
+  args: {
+    icon: <InboxIcon size={48} />,
+    title: "No items",
+    description: "Nothing yet",
+  },
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <EmptyState {...args} />
-      <EmptyState icon={<SearchIcon size={48} />} title="No results" description="Try again" action={<Button>Reset</Button>} />
+      <EmptyState
+        icon={<SearchIcon size={48} />}
+        title="No results"
+        description="Try again"
+        action={<Button>Reset</Button>}
+      />
     </div>
   ),
 };

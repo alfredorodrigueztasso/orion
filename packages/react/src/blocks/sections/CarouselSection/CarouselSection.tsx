@@ -1,7 +1,10 @@
 "use client";
 
 import React, { useState, useEffect, useCallback } from "react";
-import type { CarouselSectionProps, CarouselCardProps } from "./CarouselSection.types";
+import type {
+  CarouselSectionProps,
+  CarouselCardProps,
+} from "./CarouselSection.types";
 import { CarouselCard } from "./CarouselCard";
 import styles from "./CarouselSection.module.css";
 
@@ -11,7 +14,10 @@ type CarouselSectionComponent = React.ForwardRefExoticComponent<
   Card: React.FC<CarouselCardProps>;
 };
 
-export const CarouselSection = React.forwardRef<HTMLElement, CarouselSectionProps>(
+export const CarouselSection = React.forwardRef<
+  HTMLElement,
+  CarouselSectionProps
+>(
   (
     {
       items,

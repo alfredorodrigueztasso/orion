@@ -17,7 +17,8 @@ export const Footer = React.forwardRef<HTMLElement, FooterProps>(
     ref,
   ) => {
     const year = new Date().getFullYear();
-    const copyrightText = copyright || `\u00A9 ${year} ${brand.name}. All rights reserved.`;
+    const copyrightText =
+      copyright || `\u00A9 ${year} ${brand.name}. All rights reserved.`;
 
     const layoutClass =
       variant === "centered"
@@ -119,11 +120,7 @@ export const Footer = React.forwardRef<HTMLElement, FooterProps>(
               <div key={group.title} className={styles.linkGroup}>
                 <h4 className={styles.linkGroupTitle}>{group.title}</h4>
                 {group.links.map((link) => (
-                  <a
-                    key={link.label}
-                    href={link.href}
-                    className={styles.link}
-                  >
+                  <a key={link.label} href={link.href} className={styles.link}>
                     {link.label}
                   </a>
                 ))}

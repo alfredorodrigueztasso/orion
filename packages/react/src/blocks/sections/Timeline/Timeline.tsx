@@ -22,9 +22,7 @@ export const Timeline: React.FC<TimelineProps> = ({
       {title && <h2 className={styles.title}>{title}</h2>}
 
       <div
-        className={
-          isVertical ? styles.eventsVertical : styles.eventsHorizontal
-        }
+        className={isVertical ? styles.eventsVertical : styles.eventsHorizontal}
       >
         {events.map((event, index) => (
           <React.Fragment key={event.id}>
@@ -42,9 +40,7 @@ export const Timeline: React.FC<TimelineProps> = ({
                 <p className={styles.eventDate}>{event.date}</p>
                 <p className={styles.eventTitle}>{event.title}</p>
                 {event.description && (
-                  <p className={styles.eventDescription}>
-                    {event.description}
-                  </p>
+                  <p className={styles.eventDescription}>{event.description}</p>
                 )}
               </div>
             </div>

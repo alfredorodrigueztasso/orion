@@ -1,6 +1,11 @@
 import type { ReactNode } from "react";
 
-export type ActivityIconVariant = "info" | "success" | "warning" | "error" | "primary";
+export type ActivityIconVariant =
+  | "info"
+  | "success"
+  | "warning"
+  | "error"
+  | "primary";
 
 export interface ActivityActor {
   name: string;

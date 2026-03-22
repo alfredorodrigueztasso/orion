@@ -16,7 +16,14 @@ export const Default: Story = {
   args: {
     title: "Ready to get started?",
     description: "Join thousands of teams",
-    actions: <><Button size="lg">Get Started</Button><Button size="lg" variant="secondary">Demo</Button></>,
+    actions: (
+      <>
+        <Button size="lg">Get Started</Button>
+        <Button size="lg" variant="secondary">
+          Demo
+        </Button>
+      </>
+    ),
   },
 };
 
@@ -34,7 +41,11 @@ export const SubtleVariant: Story = {
     title: "Learn More",
     description: "Download our guide",
     variant: "subtle",
-    actions: <Button size="lg" variant="secondary">Download</Button>,
+    actions: (
+      <Button size="lg" variant="secondary">
+        Download
+      </Button>
+    ),
   },
 };
 
@@ -48,8 +59,18 @@ export const AllVariants: Story = {
   render: (args) => (
     <div style={{ display: "flex", flexDirection: "column", gap: "60px" }}>
       <CTA {...args} />
-      <CTA variant="brand" title="Brand" description="Branded CTA" actions={<Button>Action</Button>} />
-      <CTA variant="subtle" title="Subtle" description="Minimal CTA" actions={<Button variant="secondary">Action</Button>} />
+      <CTA
+        variant="brand"
+        title="Brand"
+        description="Branded CTA"
+        actions={<Button>Action</Button>}
+      />
+      <CTA
+        variant="subtle"
+        title="Subtle"
+        description="Minimal CTA"
+        actions={<Button variant="secondary">Action</Button>}
+      />
     </div>
   ),
 };

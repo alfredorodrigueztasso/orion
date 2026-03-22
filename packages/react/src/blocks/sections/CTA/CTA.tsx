@@ -5,16 +5,7 @@ import type { CTAProps } from "./CTA.types";
 import styles from "./CTA.module.css";
 
 export const CTA = React.forwardRef<HTMLElement, CTAProps>(
-  (
-    {
-      title,
-      description,
-      variant = "default",
-      actions,
-      className,
-    },
-    ref
-  ) => {
+  ({ title, description, variant = "default", actions, className }, ref) => {
     return (
       <section
         ref={ref}
@@ -27,7 +18,7 @@ export const CTA = React.forwardRef<HTMLElement, CTAProps>(
         </div>
       </section>
     );
-  }
+  },
 );
 
 CTA.displayName = "CTA";

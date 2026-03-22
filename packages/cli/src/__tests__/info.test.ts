@@ -31,7 +31,13 @@ describe("info command", () => {
     });
 
     it("extracts all boolean flags", () => {
-      const result = parseArgs(["button", "--json", "--examples", "--props", "--local"]);
+      const result = parseArgs([
+        "button",
+        "--json",
+        "--examples",
+        "--props",
+        "--local",
+      ]);
       expect(result.name).toBe("button");
       expect(result.json).toBe(true);
       expect(result.examples).toBe(true);

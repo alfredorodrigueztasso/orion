@@ -22,9 +22,7 @@ export const PricingCard: React.FC<PricingCardProps> = ({
         <span className={styles.priceValue}>{price}</span>
         {period && <span className={styles.pricePeriod}>{period}</span>}
       </div>
-      {description && (
-        <p className={styles.cardDescription}>{description}</p>
-      )}
+      {description && <p className={styles.cardDescription}>{description}</p>}
       {features.length > 0 && (
         <ul className={styles.featureList}>
           {features.map((feature) => (

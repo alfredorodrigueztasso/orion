@@ -24,7 +24,9 @@ export const Progress: Story = { args: { steps, activeStep: 1 } };
 
 export const Completed: Story = { args: { steps, activeStep: 3 } };
 
-export const Vertical: Story = { args: { steps, activeStep: 1, orientation: "vertical" } };
+export const Vertical: Story = {
+  args: { steps, activeStep: 1, orientation: "vertical" },
+};
 
 export const AllVariants: Story = {
   args: {

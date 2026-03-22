@@ -4,29 +4,29 @@ A date selection component that composes Calendar with a Popover trigger, displa
 
 ## When to Use
 
-| Scenario | Use DatePicker |
-|----------|----------------|
-| Form date input | ✅ Yes - dropdown calendar with formatted display |
-| Date range selection in forms | ✅ Yes - use mode="range" |
-| Quick date presets ("Last 7 days") | ✅ Yes - supports presets |
-| Always-visible calendar | ❌ No - use Calendar directly |
+| Scenario                           | Use DatePicker                                    |
+| ---------------------------------- | ------------------------------------------------- |
+| Form date input                    | ✅ Yes - dropdown calendar with formatted display |
+| Date range selection in forms      | ✅ Yes - use mode="range"                         |
+| Quick date presets ("Last 7 days") | ✅ Yes - supports presets                         |
+| Always-visible calendar            | ❌ No - use Calendar directly                     |
 
 ## Props Reference
 
-| Prop | Type | Default | Description |
-|------|------|---------|-------------|
-| mode | 'single' \| 'range' | 'single' | Selection mode |
-| selected | Date \| DateRange | — | Currently selected value |
-| onSelect | function | — | Selection change callback |
-| min | Date | — | Minimum selectable date |
-| max | Date | — | Maximum selectable date |
-| disabledDates | Date[] \| (date: Date) => boolean | — | Disabled dates |
-| placeholder | string | 'Pick a date' | Trigger button placeholder |
-| presets | DatePickerPreset[] | — | Quick-select presets |
-| format | string | 'PPP' | date-fns format string |
-| disabled | boolean | false | Disable the trigger |
-| triggerClassName | string | — | Class name for trigger button |
-| className | string | — | Wrapper class name |
+| Prop             | Type                              | Default       | Description                   |
+| ---------------- | --------------------------------- | ------------- | ----------------------------- |
+| mode             | 'single' \| 'range'               | 'single'      | Selection mode                |
+| selected         | Date \| DateRange                 | —             | Currently selected value      |
+| onSelect         | function                          | —             | Selection change callback     |
+| min              | Date                              | —             | Minimum selectable date       |
+| max              | Date                              | —             | Maximum selectable date       |
+| disabledDates    | Date[] \| (date: Date) => boolean | —             | Disabled dates                |
+| placeholder      | string                            | 'Pick a date' | Trigger button placeholder    |
+| presets          | DatePickerPreset[]                | —             | Quick-select presets          |
+| format           | string                            | 'PPP'         | date-fns format string        |
+| disabled         | boolean                           | false         | Disable the trigger           |
+| triggerClassName | string                            | —             | Class name for trigger button |
+| className        | string                            | —             | Wrapper class name            |
 
 ## Examples
 
@@ -40,7 +40,7 @@ import { DatePicker } from "@orion-ds/react/calendar";
   selected={date}
   onSelect={setDate}
   placeholder="Select a date"
-/>
+/>;
 ```
 
 ### Date Range with Presets
@@ -51,8 +51,14 @@ import { DatePicker } from "@orion-ds/react/calendar";
   selected={range}
   onSelect={setRange}
   presets={[
-    { label: "Last 7 days", value: { from: subDays(new Date(), 7), to: new Date() } },
-    { label: "Last 30 days", value: { from: subDays(new Date(), 30), to: new Date() } },
+    {
+      label: "Last 7 days",
+      value: { from: subDays(new Date(), 7), to: new Date() },
+    },
+    {
+      label: "Last 30 days",
+      value: { from: subDays(new Date(), 30), to: new Date() },
+    },
   ]}
 />
 ```

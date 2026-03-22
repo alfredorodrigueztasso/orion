@@ -97,7 +97,9 @@
 
 .agentCard {
   cursor: pointer;
-  transition: box-shadow 150ms ease, border-color 150ms ease;
+  transition:
+    box-shadow 150ms ease,
+    border-color 150ms ease;
   border: 2px solid transparent;
 }
 
@@ -154,7 +156,9 @@
   background: var(--surface-subtle);
   color: var(--text-secondary);
   cursor: pointer;
-  transition: background-color 150ms ease, color 150ms ease;
+  transition:
+    background-color 150ms ease,
+    color 150ms ease;
 }
 
 .actionButton:hover {
