@@ -21,7 +21,7 @@
   /* Interaction */
   cursor: pointer;
   user-select: none;
-  transition: all var(--transition-fast);
+  transition: all 200ms cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* Borders */
   border: 1px solid transparent;
@@ -52,6 +52,8 @@
 
   &:hover:not(:disabled) {
     background: var(--interactive-primary-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
   }
 
   &:active:not(:disabled) {
@@ -69,6 +71,8 @@
   &:hover:not(:disabled) {
     background: var(--interactive-secondary-hover);
     border-color: var(--border-subtle);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
   }
 
   &:active:not(:disabled) {
@@ -106,6 +110,8 @@
   &:hover:not(:disabled) {
     background: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
     border-color: color-mix(in srgb, var(--color-neutral-0) 30%, transparent);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
   }
 
   &:active:not(:disabled) {
@@ -121,6 +127,8 @@
 
   &:hover:not(:disabled) {
     background: var(--interactive-ghost-hover);
+    transform: translateY(var(--mode-hover-lift));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--text-primary) 5%, transparent);
   }
 
   &:active:not(:disabled) {
@@ -136,6 +144,8 @@
 
   &:hover:not(:disabled) {
     background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
+    transform: translateY(var(--mode-hover-lift));
+    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-neutral-0) 8%, transparent);
   }
 
   &:active:not(:disabled) {
@@ -154,6 +164,8 @@
       var(--status-error) 85%,
       var(--color-neutral-1000)
     );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
   }
 
   &:active:not(:disabled) {
@@ -174,6 +186,8 @@
       var(--color-neutral-0) 92%,
       var(--color-neutral-900)
     );
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
   }
 
   &:active:not(:disabled) {
