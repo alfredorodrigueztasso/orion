@@ -1,0 +1,487 @@
+# Component Browser
+
+Discover and explore all 70+ components in the Orion Design System. Find exactly what you need to build your next feature.
+
+---
+
+## Quick Search
+
+Use the search functionality below to find components by name, category, or use case:
+
+<ComponentSearch />
+
+---
+
+## Browse by Category
+
+### Actions (5 components)
+Interactive elements that trigger operations or user actions.
+
+<ComponentGrid category="actions" items={[
+  { name: 'button', title: 'Button', description: 'Primary interactive element for actions' },
+  { name: 'link', title: 'Link', description: 'Hyperlink component' },
+  { name: 'toggle', title: 'Toggle', description: 'Toggle component' },
+  { name: 'toggle-group', title: 'Toggle Group', description: 'ToggleGroup component' },
+  { name: 'quick-actions', title: 'Quick Actions', description: 'Quick action panel' }
+]} />
+
+### Forms & Input (10 components)
+Collect user input and handle form submissions.
+
+<ComponentGrid category="forms" items={[
+  { name: 'field', title: 'Field', description: 'Text input wrapper with label and error state' },
+  { name: 'textarea', title: 'Textarea', description: 'Multi-line text input' },
+  { name: 'checkbox', title: 'Checkbox', description: 'Checkbox input for multiple selections' },
+  { name: 'radio', title: 'Radio', description: 'Radio button for single selection' },
+  { name: 'select', title: 'Select', description: 'Dropdown selection input' },
+  { name: 'combobox', title: 'Combobox', description: 'Searchable dropdown with custom input' },
+  { name: 'switch', title: 'Switch', description: 'Toggle switch for boolean settings' },
+  { name: 'slider', title: 'Slider', description: 'Range input slider' },
+  { name: 'input-otp', title: 'Input OTP', description: 'One-time password input' },
+  { name: 'date-picker', title: 'Date Picker', description: 'Calendar date selection' }
+]} />
+
+### Feedback & Status (8 components)
+Display feedback, alerts, and status information to users.
+
+<ComponentGrid category="feedback" items={[
+  { name: 'alert', title: 'Alert', description: 'Feedback message with icon' },
+  { name: 'badge', title: 'Badge', description: 'Status indicator or label' },
+  { name: 'toast', title: 'Toast', description: 'Temporary notification message' },
+  { name: 'progress-bar', title: 'Progress Bar', description: 'Visual progress indicator' },
+  { name: 'spinner', title: 'Spinner', description: 'Loading indicator' },
+  { name: 'empty-state', title: 'Empty State', description: 'State when no data available' },
+  { name: 'error-boundary', title: 'Error Boundary', description: 'Catch and display errors' },
+  { name: 'banner', title: 'Banner', description: 'Prominent message banner' }
+]} />
+
+### Data Display (6 components)
+Present data, lists, and complex information.
+
+<ComponentGrid category="data-display" items={[
+  { name: 'avatar', title: 'Avatar', description: 'User profile image or initials' },
+  { name: 'table', title: 'Table', description: 'Data grid with headers and rows' },
+  { name: 'list', title: 'List', description: 'List of items' },
+  { name: 'carousel', title: 'Carousel', description: 'Horizontal scrolling carousel' },
+  { name: 'card', title: 'Card', description: 'Container for grouped content' },
+  { name: 'metric-cards', title: 'Metric Cards', description: 'Display key metrics' }
+]} />
+
+### Navigation (7 components)
+Help users navigate your application.
+
+<ComponentGrid category="navigation" items={[
+  { name: 'breadcrumb', title: 'Breadcrumb', description: 'Navigation path indicator' },
+  { name: 'tabs', title: 'Tabs', description: 'Pill-style navigation tabs' },
+  { name: 'pagination', title: 'Pagination', description: 'Page navigation controls' },
+  { name: 'navbar', title: 'Navbar', description: 'Top navigation bar' },
+  { name: 'sidebar', title: 'Sidebar', description: 'Vertical navigation panel' },
+  { name: 'stepper', title: 'Stepper', description: 'Step-by-step progress indicator' },
+  { name: 'nav-tree', title: 'Nav Tree', description: 'Hierarchical navigation tree' }
+]} />
+
+### Overlays (5 components)
+Display content above the main page.
+
+<ComponentGrid category="overlays" items={[
+  { name: 'modal', title: 'Modal', description: 'Dialog overlay for focused interactions' },
+  { name: 'drawer', title: 'Drawer', description: 'Side panel drawer' },
+  { name: 'dropdown', title: 'Dropdown', description: 'Contextual menu on click' },
+  { name: 'popover', title: 'Popover', description: 'Floating content panel' },
+  { name: 'tooltip', title: 'Tooltip', description: 'Contextual help on hover' }
+]} />
+
+### Search (1 component)
+Search and filtering functionality.
+
+<ComponentGrid category="search" items={[
+  { name: 'search-input', title: 'Search Input', description: 'Search field with filters' }
+]} />
+
+### Layout (4 components)
+Structure and organize your page layout.
+
+<ComponentGrid category="layout" items={[
+  { name: 'card', title: 'Card', description: 'Container for grouped content' },
+  { name: 'divider', title: 'Divider', description: 'Visual separator between content' },
+  { name: 'accordion', title: 'Accordion', description: 'Collapsible section group' },
+  { name: 'stack', title: 'Stack', description: 'Flexible layout container' }
+]} />
+
+### Loading States (2 components)
+Indicate loading and placeholder content.
+
+<ComponentGrid category="loading" items={[
+  { name: 'skeleton', title: 'Skeleton', description: 'Placeholder for loading content' },
+  { name: 'spinner', title: 'Spinner', description: 'Animated loading indicator' }
+]} />
+
+### Tags & Labels (1 component)
+Display tags and labels.
+
+<ComponentGrid category="tags" items={[
+  { name: 'chip', title: 'Chip', description: 'Chip tag component' }
+]} />
+
+### Text (1 component)
+Text and typography elements.
+
+<ComponentGrid category="text" items={[
+  { name: 'link', title: 'Link', description: 'Hyperlink component' }
+]} />
+
+### Advanced (20+ components)
+Complex components for advanced use cases.
+
+<ComponentGrid category="utilities" items={[
+  { name: 'alert-dialog', title: 'Alert Dialog', description: 'Confirmation dialog' },
+  { name: 'activity-feed', title: 'Activity Feed', description: 'Timeline of activities' },
+  { name: 'agent-card', title: 'Agent Card', description: 'Agent information card' },
+  { name: 'calendar', title: 'Calendar', description: 'Full calendar widget' },
+  { name: 'chart', title: 'Chart', description: 'Data visualization charts' },
+  { name: 'chat', title: 'Chat', description: 'Chat interface component' },
+  { name: 'code-editor', title: 'Code Editor', description: 'Syntax-highlighted code editor' },
+  { name: 'collapsible', title: 'Collapsible', description: 'Collapsible content section' },
+  { name: 'collapsible-folder', title: 'Collapsible Folder', description: 'Folder tree structure' },
+  { name: 'command', title: 'Command', description: 'Command palette component' },
+  { name: 'command-bar', title: 'Command Bar', description: 'Application command bar' },
+  { name: 'data-table', title: 'Data Table', description: 'Advanced data table' },
+  { name: 'detail-panel', title: 'Detail Panel', description: 'Side detail panel' },
+  { name: 'file-uploader', title: 'File Uploader', description: 'File upload component' },
+  { name: 'filter-bar', title: 'Filter Bar', description: 'Data filtering controls' },
+  { name: 'form-section', title: 'Form Section', description: 'Organized form section' },
+  { name: 'icon', title: 'Icon', description: 'Icon wrapper component' },
+  { name: 'kanban-board', title: 'Kanban Board', description: 'Kanban board layout' },
+  { name: 'notification-center', title: 'Notification Center', description: 'Notification manager' },
+  { name: 'page-header', title: 'Page Header', description: 'Page title and actions header' },
+  { name: 'theme-controller', title: 'Theme Controller', description: 'Theme switcher' },
+  { name: 'user-menu', title: 'User Menu', description: 'User profile menu' },
+  { name: 'workspace-switcher', title: 'Workspace Switcher', description: 'Switch workspaces' }
+]} />
+
+---
+
+## Find by Use Case
+
+### "I want to collect user input"
+
+- **Single text input** → [Field](/docs/components/field)
+- **Multiple lines of text** → [Textarea](/docs/components/textarea)
+- **Choose from a list** → [Select](/docs/components/select) or [Combobox](/docs/components/combobox)
+- **Yes/No toggle** → [Switch](/docs/components/switch) or [Checkbox](/docs/components/checkbox)
+- **Multiple selections** → [Checkbox](/docs/components/checkbox)
+- **Single selection** → [Radio](/docs/components/radio)
+- **Date/time selection** → [DatePicker](/docs/components/date-picker) or [Calendar](/docs/components/calendar)
+- **Numeric range** → [Slider](/docs/components/slider)
+- **Verification code** → [InputOTP](/docs/components/input-otp)
+- **File upload** → [FileUploader](/docs/components/file-uploader)
+
+### "I want to show status or notification"
+
+- **Quick success/error** → [Toast](/docs/components/toast)
+- **Important message** → [Alert](/docs/components/alert) or [Banner](/docs/components/banner)
+- **Status badge** → [Badge](/docs/components/badge)
+- **Confirmation dialog** → [Modal](/docs/components/modal) or [AlertDialog](/docs/components/alert-dialog)
+- **Confirmation/choice** → [Modal](/docs/components/modal)
+- **Loading state** → [Spinner](/docs/components/spinner)
+- **Progress tracking** → [ProgressBar](/docs/components/progress-bar) or [Stepper](/docs/components/stepper)
+- **Inline help** → [Tooltip](/docs/components/tooltip)
+
+### "I want to organize navigation"
+
+- **Show page path** → [Breadcrumb](/docs/components/breadcrumb)
+- **Switch between sections** → [Tabs](/docs/components/tabs)
+- **Page-by-page navigation** → [Pagination](/docs/components/pagination)
+- **Top navigation** → [Navbar](/docs/components/navbar)
+- **Side navigation** → [Sidebar](/docs/components/sidebar)
+- **Step-by-step flow** → [Stepper](/docs/components/stepper)
+- **Hierarchical menu** → [NavTree](/docs/components/nav-tree)
+- **Contextual menu** → [Dropdown](/docs/components/dropdown)
+
+### "I want to display data"
+
+- **Simple list** → [List](/docs/components/list)
+- **Tabular data** → [Table](/docs/components/table) or [DataTable](/docs/components/data-table)
+- **Key metrics** → [MetricCards](/docs/components/metric-cards)
+- **User avatars** → [Avatar](/docs/components/avatar)
+- **Scrollable content** → [Carousel](/docs/components/carousel)
+- **No data yet** → [EmptyState](/docs/components/empty-state)
+
+### "I want to group related content"
+
+- **Content box** → [Card](/docs/components/card)
+- **Visual separator** → [Divider](/docs/components/divider)
+- **Collapsible sections** → [Accordion](/docs/components/accordion) or [Collapsible](/docs/components/collapsible)
+- **Flexible layout** → [Stack](/docs/components/stack)
+- **Side details** → [DetailPanel](/docs/components/detail-panel)
+
+### "I want to trigger an action"
+
+- **Primary button** → [Button](/docs/components/button) (variant="primary")
+- **Secondary action** → [Button](/docs/components/button) (variant="secondary")
+- **Subtle action** → [Button](/docs/components/button) (variant="ghost")
+- **Dangerous action** → [Button](/docs/components/button) (variant="danger")
+- **Icon button** → [Button](/docs/components/button) (iconOnly)
+- **Toggle between states** → [Toggle](/docs/components/toggle) or [ToggleGroup](/docs/components/toggle-group)
+- **Link navigation** → [Link](/docs/components/link)
+
+### "I want advanced features"
+
+- **Chat interface** → [Chat](/docs/components/chat)
+- **Code editing** → [CodeEditor](/docs/components/code-editor)
+- **Search/command** → [SearchInput](/docs/components/search-input) or [CommandBar](/docs/components/command-bar)
+- **Activity timeline** → [ActivityFeed](/docs/components/activity-feed)
+- **Drag & drop** → [KanbanBoard](/docs/components/kanban-board) or [CollapsibleFolder](/docs/components/collapsible-folder)
+- **Data visualization** → [Chart](/docs/components/chart)
+- **User profile menu** → [UserMenu](/docs/components/user-menu)
+- **Notifications** → [NotificationCenter](/docs/components/notification-center)
+
+---
+
+## Popular Components
+
+### Most Used
+
+1. **[Button](/docs/components/button)** — The foundation of interaction, used in almost every UI
+2. **[Field](/docs/components/field)** — Essential for any form, input field with validation
+3. **[Card](/docs/components/card)** — Flexible container for organizing content
+4. **[Modal](/docs/components/modal)** — Dialog for focused user interactions
+5. **[Toast](/docs/components/toast)** — Non-intrusive notifications
+
+### Quick Wins (Easy to Add)
+
+- [Badge](/docs/components/badge) — 1 line to add status
+- [Avatar](/docs/components/avatar) — 1 line to show user image
+- [Divider](/docs/components/divider) — 1 line to separate content
+- [Spinner](/docs/components/spinner) — 1 line for loading state
+- [Tooltip](/docs/components/tooltip) — 2 lines for helpful hints
+
+### Complex Features (Worth Learning)
+
+- [DataTable](/docs/components/data-table) — Advanced data tables with sorting, filtering, pagination
+- [Calendar](/docs/components/calendar) — Full calendar widget with multiple modes
+- [Chart](/docs/components/chart) — Interactive data visualization
+- [KanbanBoard](/docs/components/kanban-board) — Drag-and-drop board
+- [CommandBar](/docs/components/command-bar) — Keyboard shortcuts and command palette
+
+---
+
+## Pro Tips
+
+### Customization Patterns
+
+**Theming**
+All components automatically adapt to your theme and brand:
+```tsx
+import { ThemeProvider } from '@orion-ds/react';
+
+<ThemeProvider>
+  {/* All components inherit theme/brand */}
+  <Button>Click me</Button>
+</ThemeProvider>
+```
+
+**Responsive Sizing**
+Components automatically scale based on the current mode (Display, Product, App):
+```tsx
+<Button size="md">  {/* Adjusts to mode context */}
+  Submit
+</Button>
+```
+
+**Icon Integration**
+All components support Lucide icons:
+```tsx
+import { Download } from 'lucide-react';
+
+<Button icon={<Download size={20} />}>
+  Download
+</Button>
+```
+
+### Component Composition
+
+**Combine related components** for richer UIs:
+```tsx
+// Form workflow
+<Card>
+  <Card.Header>Login</Card.Header>
+  <Card.Body>
+    <Field label="Email" type="email" />
+    <Field label="Password" type="password" />
+    <Button fullWidth variant="primary">Sign In</Button>
+  </Card.Body>
+</Card>
+```
+
+**Use layout components** to organize:
+```tsx
+import { Stack, Divider, Card } from '@orion-ds/react';
+
+<Stack gap="spacious">
+  <Card>Profile</Card>
+  <Divider />
+  <Card>Settings</Card>
+</Stack>
+```
+
+**Nest navigational components**:
+```tsx
+<Navbar>
+  <Navbar.Brand>My App</Navbar.Brand>
+  <Tabs defaultTab="home" tabs={[
+    { id: 'home', label: 'Home', content: <Home /> },
+    { id: 'about', label: 'About', content: <About /> },
+  ]} />
+</Navbar>
+```
+
+### Common Patterns
+
+**Modal Confirmation**
+```tsx
+const [open, setOpen] = useState(false);
+
+<Modal open={open} onOpenChange={setOpen}>
+  <Modal.Header>Delete Item?</Modal.Header>
+  <Modal.Body>This action cannot be undone.</Modal.Body>
+  <Modal.Footer>
+    <Button variant="ghost" onClick={() => setOpen(false)}>Cancel</Button>
+    <Button variant="danger" onClick={handleDelete}>Delete</Button>
+  </Modal.Footer>
+</Modal>
+```
+
+**Form Validation**
+```tsx
+const [errors, setErrors] = useState({});
+
+<Field
+  label="Email"
+  error={errors.email}
+  onChange={(e) => validate(e.target.value)}
+/>
+```
+
+**Loading States**
+```tsx
+<Button isLoading={isSubmitting}>
+  {isSubmitting ? 'Saving...' : 'Save'}
+</Button>
+```
+
+**Empty States**
+```tsx
+{items.length === 0 ? (
+  <EmptyState
+    title="No items yet"
+    description="Create your first item to get started"
+    action={<Button>Create Item</Button>}
+  />
+) : (
+  <List items={items} />
+)}
+```
+
+---
+
+## Advanced Resources
+
+### Component Documentation
+Each component has detailed documentation with:
+- Complete prop API
+- Visual examples
+- Accessibility details
+- TypeScript types
+- Common patterns
+
+**Browse individual components** in the navigation menu.
+
+### Storybook
+See interactive examples of all components:
+- Visual variations
+- Live code editor
+- Responsive previews
+- Accessibility checklist
+
+**[Open Storybook](https://storybook.orion-ds.dev)** (in new tab)
+
+### Design Tokens
+Components use semantic tokens for styling. Learn about:
+- Color system
+- Spacing scale
+- Typography
+- Radius scale
+- Mode-aware styling
+
+**[Design Tokens Guide](/docs/tokens)**
+
+### Accessibility
+All components meet WCAG AA standards:
+- Keyboard navigation
+- Screen reader support
+- Focus management
+- Color contrast
+
+**[Accessibility Guide](/docs/accessibility)**
+
+### TypeScript Support
+Full type safety with auto-generated types:
+```tsx
+import { Button, type ButtonProps } from '@orion-ds/react';
+
+const CustomButton: React.FC<ButtonProps> = (props) => {
+  return <Button {...props} />;
+};
+```
+
+**[TypeScript Setup](/docs/typescript)**
+
+---
+
+## Troubleshooting
+
+### "I can't find a component for my use case"
+
+1. **Check the search** — Use the component search above
+2. **Browse by category** — Look through all categories
+3. **Check related components** — Components often can be combined
+4. **Request a component** — [GitHub Issues](https://github.com/orion-ds/orion/issues)
+
+### "A component doesn't look right"
+
+1. **Verify CSS import** — `import '@orion-ds/react/styles.css'`
+2. **Check ThemeProvider** — Wrap your app with `<ThemeProvider>`
+3. **Check variants** — Most components have multiple variants
+4. **Check responsive** — Size adjusts based on window size and mode
+
+### "I want to customize a component"
+
+1. **Use CSS variables** — Override theme tokens
+2. **Use component props** — Most customization is in props
+3. **Use CSS Modules** — Create custom styling
+4. **Check the guide** — [Customization Guide](/docs/customization)
+
+---
+
+## Next Steps
+
+### Ready to build?
+
+1. **[Install Orion](/docs/installation)** — 30 seconds setup
+2. **[Quick Start](/docs/quick-start)** — 5 minute walkthrough
+3. **[Pick a component](#popular-components)** — Start with Button or Field
+4. **[Explore Storybook](https://storybook.orion-ds.dev)** — See all variations
+
+### Want to learn more?
+
+- **[Theming Guide](/docs/theming)** — Customize brands and colors
+- **[Design Tokens](/docs/tokens)** — Understand the token system
+- **[AI Integration](/docs/ai-integration)** — Use MCP for AI-generated code
+- **[Accessibility](/docs/accessibility)** — WCAG AA compliance
+
+---
+
+**Questions?** [Check the FAQ](/docs/faq) or [open a GitHub issue](https://github.com/orion-ds/orion/issues).
+
+Happy building! 🚀

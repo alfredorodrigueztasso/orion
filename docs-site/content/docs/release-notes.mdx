@@ -1,0 +1,172 @@
+# Release Notes v5.0.0
+
+> **Orion v5.0.0** is here — the next generation of the AI-first design system. This release consolidates years of improvements into a cleaner, more powerful package.
+
+**Release Date**: March 2026
+**Status**: Production Ready
+
+---
+
+## What Changed in v5.0.0
+
+### Major Changes
+
+#### 1. Consolidated @orion-ds/core into @orion-ds/react
+
+The `@orion-ds/core` package has been merged into `@orion-ds/react`. This means:
+
+- ✅ **Single package install** — One npm install instead of two
+- ✅ **Simpler imports** — All components and tokens come from `@orion-ds/react`
+- ✅ **Smaller bundle** — Consolidated build, no duplicate code
+- ✅ **Better maintenance** — One package to update, not two
+
+**What you need to do:**
+- Remove `@orion-ds/core` from `package.json`
+- Update CSS import to `import '@orion-ds/react/styles.css'`
+- See the [Migration Guide](#migration-guide) below for step-by-step instructions
+
+#### 2. Auto-Generated TypeScript Types
+
+All TypeScript types are now auto-generated from JSON tokens. This ensures types always match your design tokens and eliminates drift between code and design.
+
+**What changed:**
+- Types are 100% generated from `tokens/primary.json`, `tokens/light.json`, `tokens/dark.json`
+- No manual type updates needed — if you change a token, types update automatically
+- Import types from `@orion-ds/react` with full autocomplete
+
+#### 3. ThemeProvider Now Includes Font Loading
+
+Fonts load automatically via `ThemeProvider`. No manual Google Fonts setup needed.
+
+**Before v5:**
+```tsx
+// Had to manually load fonts
+<FontLoader>
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+</FontLoader>
+```
+
+**After v5:**
+```tsx
+// Fonts load automatically
+<ThemeProvider>
+  <App />
+</ThemeProvider>
+```
+
+#### 4. MCP Server Included (AI Integration)
+
+Orion now ships with an MCP (Model Context Protocol) server for AI agents. Use with Claude Code, Cursor, Cline, and other AI tools to generate Orion-compliant code automatically.
+
+**Setup (3 steps):**
+```bash
+npm install @orion-ds/mcp
+```
+
+Then configure in your tool settings. See [AI Integration](/docs/ai-integration) for details.
+
+---
+
+## How to Upgrade
+
+### If you're on v4.x
+
+Upgrading to v5 takes about 30 minutes. Follow the [Migration Guide](/docs/migration-v5).
+
+### If you're new to Orion
+
+Great! Start with the [Quick Start Guide](/docs/quick-start).
+
+---
+
+## What You Get in v5.0.0
+
+### Improvements
+
+| Feature | Details |
+|---------|---------|
+| **70+ Components** | Fully typed, theme-aware, zero hallucination |
+| **25+ Sections** | Pre-built page blocks (Hero, Features, Pricing, etc.) |
+| **8 Templates** | Complete page layouts ready to customize |
+| **Multi-Brand** | 5 built-in brands (orion, red, deepblue, orange, lemon) |
+| **Dark Mode** | Light and dark themes, automatically persisted |
+| **TypeScript** | 100% auto-generated types with full autocomplete |
+| **Tree-Shakeable** | Import only what you use, keep bundles small |
+| **AI-Ready** | MCP server for generating Orion-compliant code |
+| **Accessible** | WCAG AA compliant components |
+| **Well-Documented** | Storybook + comprehensive docs |
+
+### New in v5.0.0
+
+- ✨ MCP server for AI agents (`@orion-ds/mcp`)
+- ✨ Auto-generated TypeScript types
+- ✨ Simplified package structure
+- ✨ Automatic font loading in ThemeProvider
+- ✨ Improved installation documentation
+
+---
+
+## Breaking Changes
+
+If you're upgrading from v4, read about breaking changes:
+
+| Change | Action Required |
+|--------|-----------------|
+| `@orion-ds/core` removed | Remove from `package.json`, update imports |
+| CSS import path changed | Use `@orion-ds/react/styles.css` |
+| `@orion-ds/react/client` entry point | Recommended for SSR (Next.js App Router) |
+| Types are auto-generated | No manual type maintenance needed |
+
+**⚠️ Important:** TypeScript types have changed. Run `npm install @orion-ds/react@latest` and verify no `@orion-ds/core` imports remain.
+
+---
+
+## Migration Guide
+
+Ready to upgrade? See the complete [Migration Guide from v4 to v5](/docs/migration-v5).
+
+**Quick steps:**
+1. Update `package.json`: `npm install @orion-ds/react@latest`
+2. Remove `@orion-ds/core` from `package.json`
+3. Update CSS import to `import '@orion-ds/react/styles.css'`
+4. Run tests to verify everything works
+
+Takes about 30 minutes for most projects.
+
+---
+
+## What's Next?
+
+### Get Started
+- **[Quick Start Guide](/docs/quick-start)** — 5 steps to your first Orion component
+- **[Installation Guide](/docs/installation)** — Detailed setup for different frameworks
+- **[Components Browser](/components)** — Browse all 70+ components
+
+### Integrate AI
+- **[AI Integration Guide](/docs/ai-integration)** — Set up MCP for AI agents
+- **[MCP Documentation](/docs/mcp)** — Complete MCP reference
+
+### Explore
+- **[Storybook](https://storybook.orion-ds.dev)** — Live component examples
+- **[Theming Guide](/docs/theming)** — Customize brands and colors
+- **[Design Tokens](/docs/tokens)** — Understand the token system
+
+---
+
+## Support
+
+Have questions about upgrading?
+
+- **[Migration FAQ](/docs/migration-v5#faq)** — Common upgrade questions
+- **[Troubleshooting](/docs/installation#troubleshooting)** — Fix common issues
+- **[GitHub Issues](https://github.com/orion-ds/orion/issues)** — Report bugs or request features
+
+---
+
+## Thank You
+
+This release represents the work of the entire Orion community. Thank you for using Orion and helping us build the best AI-first design system.
+
+Happy building! 🚀

@@ -56,11 +56,11 @@ npm run build:tokens  # Generates TypeScript types from JSON
 ```
 
 Generated files:
-- `packages/core/src/tokens/types.ts` - TypeScript interfaces
-- `packages/core/src/tokens/primitives.ts` - Typed constants
-- `packages/core/src/tokens/themes.ts` - Light/dark theme definitions
-- `packages/core/src/tokens/brands.ts` - Brand configurations
-- `packages/core/src/tokens/utils.ts` - Helper functions
+- `packages/react/src/tokens/types.ts` - TypeScript interfaces
+- `packages/react/src/tokens/primitives.ts` - Typed constants
+- `packages/react/src/tokens/themes.ts` - Light/dark theme definitions
+- `packages/react/src/tokens/brands.ts` - Brand configurations
+- `packages/react/src/tokens/utils.ts` - Helper functions
 
 ## Development Commands
 

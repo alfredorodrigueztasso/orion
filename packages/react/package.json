@@ -80,6 +80,7 @@
     "BUNDLE_OPTIMIZATION.md"
   ],
   "scripts": {
+    "postinstall": "node scripts/validate-install.js",
     "copy:assets": "mkdir -p assets/tokens && cp ../../theme.css assets/theme.css && cp ../../tokens/generated.css assets/tokens/generated.css",
     "build": "npm run copy:assets && vite build && npm run build:styles",
     "build:styles": "node scripts/bundle-styles.js",

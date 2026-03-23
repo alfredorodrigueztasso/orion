@@ -1,0 +1,360 @@
+# Quick Start Guide
+
+Get up and running with Orion in 5 minutes. This guide covers the essential steps to install, configure, and use your first component.
+
+---
+
+## Step 1: Install (30 seconds)
+
+Install the Orion React library using your favorite package manager:
+
+<PackageManagerTabs packageName="@orion-ds/react" />
+
+That's it! You now have access to 70+ components.
+
+---
+
+## Step 2: Import Styles (1 minute)
+
+Add the CSS import to your app's entry point. This single import includes all design tokens, component styles, theme support, and brand configurations.
+
+### React (Vite, CRA)
+
+```tsx
+// main.tsx or index.tsx
+import '@orion-ds/react/styles.css';
+import App from './App';
+
+ReactDOM.render(<App />, document.getElementById('root'));
+```
+
+### Next.js (App Router)
+
+```tsx
+// app/layout.tsx
+import '@orion-ds/react/styles.css';
+
+export default function RootLayout({ children }) {
+  return (
+    <html>
+      <body>{children}</body>
+    </html>
+  );
+}
+```
+
+### Next.js (Pages Router)
+
+```tsx
+// pages/_app.tsx
+import '@orion-ds/react/styles.css';
+
+export default function App({ Component, pageProps }) {
+  return <Component {...pageProps} />;
+}
+```
+
+> ⚠️ **Important:** Don't skip this step! Without the CSS import, components will appear unstyled. In development, ThemeProvider will warn you if styles are missing.
+
+---
+
+## Step 3: Wrap Your App (1 minute)
+
+Add `ThemeProvider` at the root of your app. This enables:
+- 🎨 Theme switching (light/dark mode)
+- 🏢 Brand switching (orion, red, deepblue, orange)
+- ✅ Automatic font loading
+- 💾 Persistent theme preferences
+
+### React (Vite, CRA)
+
+```tsx
+// main.tsx or index.tsx
+import { ThemeProvider } from '@orion-ds/react';
+import '@orion-ds/react/styles.css';
+import App from './App';
+
+ReactDOM.render(
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
+```
+
+### Next.js (App Router)
+
+```tsx
+// app/layout.tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+
+export default function RootLayout({ children }) {
+  return (
+    <html suppressHydrationWarning>
+      <body>
+        <ThemeProvider>
+          {children}
+        </ThemeProvider>
+      </body>
+    </html>
+  );
+}
+```
+
+### Next.js (Pages Router)
+
+```tsx
+// pages/_app.tsx
+import { ThemeProvider } from '@orion-ds/react/client';
+import '@orion-ds/react/styles.css';
+
+export default function App({ Component, pageProps }) {
+  return (
+    <ThemeProvider>
+      <Component {...pageProps} />
+    </ThemeProvider>
+  );
+}
+```
+
+**That's it!** Fonts load automatically, and your app is ready for Orion components.
+
+---
+
+## Step 4: Use Your First Component (2 minutes)
+
+Import a component and use it. Here's a simple example with Button and Card:
+
+```tsx
+import { Button, Card } from '@orion-ds/react';
+
+export default function MyComponent() {
+  return (
+    <Card>
+      <Card.Header>
+        <h2>Welcome to Orion</h2>
+      </Card.Header>
+      <Card.Body>
+        <p>You're ready to build amazing UIs.</p>
+        <Button variant="primary">Get Started</Button>
+      </Card.Body>
+    </Card>
+  );
+}
+```
+
+That's your first Orion component! All components automatically inherit the current theme and brand.
+
+### Example: Simple Form
+
+```tsx
+import { Button, Card, Field } from '@orion-ds/react';
+import { useState } from 'react';
+
+export default function LoginForm() {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log({ email, password });
+  };
+
+  return (
+    <Card style={{ maxWidth: '400px', margin: '0 auto' }}>
+      <Card.Header>
+        <h2>Sign In</h2>
+      </Card.Header>
+      <Card.Body>
+        <form onSubmit={handleSubmit}>
+          <Field
+            label="Email"
+            type="email"
+            placeholder="you@example.com"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <Field
+            label="Password"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <Button fullWidth variant="primary" type="submit">
+            Sign In
+          </Button>
+        </form>
+      </Card.Body>
+    </Card>
+  );
+}
+```
+
+### Example: Button Variations
+
+```tsx
+import { Button } from '@orion-ds/react';
+import { Download, Settings, Trash2 } from 'lucide-react';
+
+export default function ButtonVariations() {
+  return (
+    <div style={{ display: 'flex', gap: '8px', flexWrap: 'wrap' }}>
+      {/* Primary action */}
+      <Button variant="primary">Save</Button>
+
+      {/* Secondary action */}
+      <Button variant="secondary">Cancel</Button>
+
+      {/* Subtle action */}
+      <Button variant="ghost">Learn More</Button>
+
+      {/* Dangerous action */}
+      <Button variant="danger" icon={<Trash2 size={20} />}>
+        Delete
+      </Button>
+
+      {/* Icon + text */}
+      <Button icon={<Download size={20} />}>
+        Download
+      </Button>
+
+      {/* Icon-only (must have aria-label) */}
+      <Button iconOnly icon={<Settings size={20} />} aria-label="Settings" />
+
+      {/* Loading state */}
+      <Button isLoading>Saving...</Button>
+
+      {/* Full width */}
+      <Button fullWidth variant="primary">
+        Continue
+      </Button>
+
+      {/* Size variants */}
+      <Button size="sm">Small</Button>
+      <Button size="md">Medium</Button>
+      <Button size="lg">Large</Button>
+    </div>
+  );
+}
+```
+
+### Try These Components
+
+Common components to start with:
+
+- **[Button](/docs/component-browser#actions)** — Interactive buttons with variants
+- **[Card](/docs/component-browser#layout)** — Container for content
+- **[Field](/docs/component-browser#forms--input)** — Form input fields
+- **[Badge](/docs/component-browser#feedback--status)** — Labels and status indicators
+- **[Alert](/docs/component-browser#feedback--status)** — Messages and notifications
+- **[Modal](/docs/component-browser#overlays)** — Dialog and confirmations
+- **[Toast](/docs/component-browser#feedback--status)** — Temporary notifications
+
+---
+
+## Step 5: Next Steps (1 minute)
+
+### 🎨 Switch Themes & Brands
+
+Add a simple theme switcher to your app:
+
+```tsx
+import { useThemeContext } from '@orion-ds/react';
+import { Moon, Sun } from 'lucide-react';
+
+export function ThemeToggle() {
+  const { theme, setTheme, brand, setBrand } = useThemeContext();
+
+  return (
+    <div>
+      {/* Theme toggle */}
+      <button onClick={() => setTheme(theme === 'light' ? 'dark' : 'light')}>
+        {theme === 'light' ? <Moon size={20} /> : <Sun size={20} />}
+      </button>
+
+      {/* Brand selector */}
+      <select value={brand} onChange={(e) => setBrand(e.target.value)}>
+        <option value="orion">Orion</option>
+        <option value="red">Red</option>
+        <option value="deepblue">Deep Blue</option>
+        <option value="orange">Orange</option>
+      </select>
+    </div>
+  );
+}
+```
+
+### 📚 Explore All Components
+
+Browse the complete component library:
+- **[Components Browser](/docs/component-browser)** — Searchable grid of all 70+ components
+- **[Storybook](https://storybook.orion-ds.dev)** — Interactive examples with live code editor
+
+### 🤖 Use AI to Generate Code
+
+Orion ships with an MCP server for AI agents. Use Claude Code, Cursor, or Cline to generate Orion-compliant components automatically:
+
+- **[AI Integration Guide](/docs/ai-integration)** — 3-step MCP setup
+
+### 📖 Learn More
+
+- **[Installation Guide](/docs/installation)** — Framework-specific setup
+- **[Theming Guide](/docs/theming)** — Customize brands and colors
+- **[Design Tokens](/docs/tokens)** — Understand the token system
+- **[Accessibility](/docs/accessibility)** — WCAG AA compliance
+
+---
+
+## Troubleshooting
+
+### Styles aren't applying
+
+- ✅ Verify `import '@orion-ds/react/styles.css'` is in your entry file
+- ✅ Check that `<ThemeProvider>` wraps your entire app
+- ✅ For Next.js, add `suppressHydrationWarning` to the `<html>` tag
+
+### Components look unstyled
+
+This usually means the CSS import is missing. Add it to your entry file:
+
+```tsx
+import '@orion-ds/react/styles.css';
+```
+
+In development, `ThemeProvider` will warn you in the console if styles are missing.
+
+### TypeScript errors
+
+Update to the latest version:
+
+```bash
+npm install @orion-ds/react@latest
+```
+
+Then run:
+
+```bash
+npm run type-check
+```
+
+### Fonts not loading
+
+Fonts load automatically via `ThemeProvider`. If they don't appear:
+
+1. Check DevTools Network tab for font requests
+2. Verify you have an internet connection (fonts load from Google Fonts CDN)
+3. System fonts will display as fallback if CDN is unavailable
+
+---
+
+## You're Ready!
+
+You now have everything you need to build with Orion. Start with the [Components Browser](/components) to see what's available, or dive into the [Installation Guide](/docs/installation) for framework-specific setup.
+
+**Questions?** Check the [FAQ](/docs/faq) or [GitHub Issues](https://github.com/orion-ds/orion/issues).
+
+Happy building! 🚀

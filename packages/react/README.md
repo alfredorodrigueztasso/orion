@@ -80,7 +80,7 @@ This single import includes:
 
 ## Quick Start
 
-\`\`\`tsx
+````tsx
 // 1. Import styles (pick one option)
 import '@orion-ds/react/styles.css'; // Recommended: single import
 
@@ -89,7 +89,7 @@ import { Button, Card, Field, useTheme, ThemeProvider } from '@orion-ds/react';
 
 function App() {
 return (
-<ThemeProvider> {/_ Fonts load automatically! _/}
+<ThemeProvider> {/* Fonts load automatically! */}
 <MyApp />
 </ThemeProvider>
 );
@@ -112,9 +112,53 @@ Switch to {theme === 'light' ? 'dark' : 'light'} mode
 }
 \`\`\`
 
-## AI / LLM Integration
+## 🤖 AI Integration (MCP)
 
-This library is optimized for AI code generation. When using with Claude, Cursor, Copilot, or other AI tools:
+Orion includes an MCP (Model Context Protocol) server that lets AI agents generate Orion-compliant code automatically. Use with Claude Code, Cursor, Cline, and other AI tools.
+
+### 3-Minute Setup
+
+1. **Install the MCP server:**
+   ```bash
+   npm install @orion-ds/mcp
+````
+
+2. **Configure in your tool's settings** (see tool documentation):
+   - Claude Code: Add to `.claude.json`
+   - Cursor: Add to Cursor settings
+   - Cline: Add to MCP settings in VS Code
+
+3. **Start using AI commands:**
+   ```
+   "Add a Button component"
+   "Create a responsive card layout"
+   "Generate form input component"
+   ```
+
+### What's Available
+
+The MCP server exposes **9 tools**:
+
+- `list-components` — List all 70+ components, 25+ sections, and 8 templates
+- `get-component` — Get full details: props, examples, tokens, accessibility
+- `search-components` — Semantic search (e.g., "form input" finds Field, Select, Checkbox)
+- `list-tokens` — List design tokens by category
+- `get-token` — Get token values per theme and brand
+- `validate-code` — Validate code against Orion's anti-hallucination rules
+- `get-setup-guide` — Framework-specific setup (Vite, Next.js, React)
+- `list-sections` — Pre-built page sections and templates
+- `get-section` — Get section code and examples
+
+### Complete Documentation
+
+For setup instructions and advanced configuration:
+
+- **[MCP Documentation](../mcp/README.md)** — Complete MCP reference
+- **[AI Integration Guide](../../docs-site/content/docs/ai-integration.mdx)** — Step-by-step setup
+
+### AI Code Generation
+
+This library is optimized for AI code generation. For detailed guidance:
 
 | Document           | Purpose                                                   |
 | ------------------ | --------------------------------------------------------- |
