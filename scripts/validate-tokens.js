@@ -89,8 +89,8 @@ function validateFile(filepath) {
         if (line.includes('*/')) inComment = false;
         if (inComment || line.trim().startsWith('//')) return;
 
-        // Track :root block
-        if (line.includes(':root')) {
+        // Track :root and brand primitive blocks
+        if (line.includes(':root') || line.includes('[data-brand=')) {
             inRootBlock = true;
             rootBraceDepth = braceDepth;
         }
@@ -103,7 +103,7 @@ function validateFile(filepath) {
             inRootBlock = false;
         }
 
-        // Skip :root block (primitives are defined there)
+        // Skip :root and brand primitive blocks (primitives are defined there)
         if (inRootBlock) return;
 
         // Check for violations
