@@ -15,16 +15,42 @@
  */
 
 import React, { useState, useCallback, useMemo } from "react";
-import { format as formatDate } from "date-fns";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Popover } from "../Popover";
 import { Calendar } from "../Calendar";
 import { Button } from "../Button";
+import { MissingDependencyError } from "../MissingDependencyError";
 import type { DateRange } from "../Calendar/Calendar.types";
 import type { DatePickerProps, DatePickerPreset } from "./DatePicker.types";
 import styles from "./DatePicker.module.css";
 
+// date-fns imports with graceful error handling
+let formatDate: any;
+let DateFnsError: Error | null = null;
+
+try {
+  const dateFns = require("date-fns");
+  formatDate = dateFns.format;
+} catch (error) {
+  DateFnsError =
+    error instanceof Error ? error : new Error("date-fns not found");
+}
+
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
+  // Show error if date-fns is not installed
+  if (DateFnsError) {
+    return (
+      <MissingDependencyError
+        available={false}
+        componentName="DatePicker"
+        depName="date-fns"
+        installCommand="npm install date-fns"
+        pnpmCommand="pnpm add date-fns"
+        docsUrl="https://docs.orion-ds.dev/components/date-picker"
+      />
+    );
+  }
+
   const {
     mode = "single",
     min,

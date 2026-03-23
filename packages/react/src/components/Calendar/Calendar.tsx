@@ -20,25 +20,47 @@
  */
 
 import React, { useId, useState, useMemo, useCallback } from "react";
-import {
-  startOfMonth,
-  endOfMonth,
-  startOfWeek,
-  endOfWeek,
-  eachDayOfInterval,
-  addMonths,
-  subMonths,
-  isSameDay,
-  isSameMonth,
-  isToday,
-  isBefore,
-  isAfter,
-  format,
-} from "date-fns";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../Button";
+import { MissingDependencyError } from "../MissingDependencyError";
 import type { CalendarProps, DateRange } from "./Calendar.types";
 import styles from "./Calendar.module.css";
+
+// date-fns imports with graceful error handling
+let startOfMonth: any;
+let endOfMonth: any;
+let startOfWeek: any;
+let endOfWeek: any;
+let eachDayOfInterval: any;
+let addMonths: any;
+let subMonths: any;
+let isSameDay: any;
+let isSameMonth: any;
+let isToday: any;
+let isBefore: any;
+let isAfter: any;
+let format: any;
+let DateFnsError: Error | null = null;
+
+try {
+  const dateFns = require("date-fns");
+  startOfMonth = dateFns.startOfMonth;
+  endOfMonth = dateFns.endOfMonth;
+  startOfWeek = dateFns.startOfWeek;
+  endOfWeek = dateFns.endOfWeek;
+  eachDayOfInterval = dateFns.eachDayOfInterval;
+  addMonths = dateFns.addMonths;
+  subMonths = dateFns.subMonths;
+  isSameDay = dateFns.isSameDay;
+  isSameMonth = dateFns.isSameMonth;
+  isToday = dateFns.isToday;
+  isBefore = dateFns.isBefore;
+  isAfter = dateFns.isAfter;
+  format = dateFns.format;
+} catch (error) {
+  DateFnsError =
+    error instanceof Error ? error : new Error("date-fns not found");
+}
 
 const WEEKDAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
 
@@ -49,6 +71,20 @@ function rotateArray<T>(arr: T[], n: number): T[] {
 }
 
 export const Calendar: React.FC<CalendarProps> = (props) => {
+  // Show error if date-fns is not installed
+  if (DateFnsError) {
+    return (
+      <MissingDependencyError
+        available={false}
+        componentName="Calendar"
+        depName="date-fns"
+        installCommand="npm install date-fns"
+        pnpmCommand="pnpm add date-fns"
+        docsUrl="https://docs.orion-ds.dev/components/calendar"
+      />
+    );
+  }
+
   const {
     mode = "single",
     min,
@@ -195,8 +231,8 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
   );
 
   // Navigation
-  const goToPrevMonth = () => setCurrentMonth((m) => subMonths(m, 1));
-  const goToNextMonth = () => setCurrentMonth((m) => addMonths(m, 1));
+  const goToPrevMonth = () => setCurrentMonth((m: Date) => subMonths(m, 1));
+  const goToNextMonth = () => setCurrentMonth((m: Date) => addMonths(m, 1));
 
   // Build day cell classnames
   const getDayClassName = (date: Date): string => {
@@ -275,7 +311,7 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
         ))}
 
         {/* Day cells */}
-        {days.map((day) => {
+        {days.map((day: Date) => {
           const outsideMonth = !isSameMonth(day, currentMonth);
 
           if (outsideMonth && !showOutsideDays) {

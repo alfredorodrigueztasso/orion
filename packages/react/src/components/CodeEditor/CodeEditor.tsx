@@ -1,19 +1,33 @@
 "use client";
 
 import React, { forwardRef, useRef, useEffect, useState } from "react";
-import { Prism as SyntaxHighlighter } from "react-syntax-highlighter";
-import {
-  oneDark,
-  oneLight,
-} from "react-syntax-highlighter/dist/esm/styles/prism";
 import type { CodeEditorProps } from "./CodeEditor.types";
 import { useThemeContext } from "../../contexts";
+import { MissingDependencyError } from "../MissingDependencyError";
 import styles from "./CodeEditor.module.css";
+
+// react-syntax-highlighter imports with graceful error handling
+let SyntaxHighlighter: any;
+let oneDark: any;
+let oneLight: any;
+let ReactSyntaxHighlighterError: Error | null = null;
+
+try {
+  const rshl = require("react-syntax-highlighter");
+  SyntaxHighlighter = rshl.Prism;
+  const styles = require("react-syntax-highlighter/dist/esm/styles/prism");
+  oneDark = styles.oneDark;
+  oneLight = styles.oneLight;
+} catch (error) {
+  ReactSyntaxHighlighterError =
+    error instanceof Error
+      ? error
+      : new Error("react-syntax-highlighter not found");
+}
 
 // Extend markdown grammar with quoted string support
 // This mutation affects react-syntax-highlighter's refractor instance
 try {
-  // eslint-disable-next-line @typescript-eslint/no-var-requires
   const refractor = require("refractor/all");
   if (
     refractor.default &&
@@ -68,6 +82,20 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     },
     ref,
   ) => {
+    // Show error if react-syntax-highlighter is not installed
+    if (ReactSyntaxHighlighterError) {
+      return (
+        <MissingDependencyError
+          available={false}
+          componentName="CodeEditor"
+          depName="react-syntax-highlighter"
+          installCommand="npm install react-syntax-highlighter"
+          pnpmCommand="pnpm add react-syntax-highlighter"
+          docsUrl="https://docs.orion-ds.dev/components/code-editor"
+        />
+      );
+    }
+
     const lineNumbersRef = useRef<HTMLDivElement>(null);
     const highlightRef = useRef<HTMLDivElement>(null);
     const mirrorRef = useRef<HTMLDivElement>(null);

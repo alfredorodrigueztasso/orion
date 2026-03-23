@@ -9,6 +9,7 @@
 /* ─── Primitives (from primary.json) ─── */
 :root {
   /* Colors */
+
   /* Brand: Orion (default) */
   --color-brand-50: #e8f0ff;
   --color-brand-100: #c7daff;
@@ -23,7 +24,7 @@
   --color-brand-950: #071a5c;
 
   /* Neutral */
-  --color-neutral-0: #ffffff;
+  --color-neutral-0: #fff;
   --color-neutral-50: #f8fafc;
   --color-neutral-100: #f1f5f9;
   --color-neutral-200: #e2e8f0;
@@ -35,7 +36,7 @@
   --color-neutral-800: #1e293b;
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
-  --color-neutral-1000: #000000;
+  --color-neutral-1000: #000;
 
   /* Status */
   --color-error-500: #ef4444;
@@ -43,9 +44,9 @@
   --color-warning-500: #eab308;
 
   /* Typography */
-  --font-primary: Libre Baskerville, system-ui, sans-serif;
-  --font-secondary: Inter, system-ui, sans-serif;
-  --font-mono: JetBrains Mono, monospace;
+  --font-primary: libre baskerville, system-ui, sans-serif;
+  --font-secondary: inter, system-ui, sans-serif;
+  --font-mono: jetbrains mono, monospace;
 
   /* Font Sizes */
   --font-size-10: 10px;
@@ -106,6 +107,81 @@
   --blur-md: 8px;
   --blur-lg: 12px;
   --blur-xl: 24px;
+}
+
+/* ─── ORION Brand Override ─── */
+[data-brand="orion"] {
+  --color-brand-50: #e8f0ff;
+  --color-brand-100: #c7daff;
+  --color-brand-200: #a3c2ff;
+  --color-brand-300: #7ea9ff;
+  --color-brand-400: #5990ff;
+  --color-brand-500: #1b5bff;
+  --color-brand-600: #1850e6;
+  --color-brand-700: #1544cc;
+  --color-brand-800: #1139b3;
+  --color-brand-900: #0d2d99;
+  --color-brand-950: #071a5c;
+}
+
+/* ─── DEEPBLUE Brand Override ─── */
+[data-brand="deepblue"] {
+  --color-brand-50: #e6f2ff;
+  --color-brand-100: #b3d9ff;
+  --color-brand-200: #80bfff;
+  --color-brand-300: #4da6ff;
+  --color-brand-400: #1a8cff;
+  --color-brand-500: #006fba;
+  --color-brand-600: #0062a6;
+  --color-brand-700: #005592;
+  --color-brand-800: #00487d;
+  --color-brand-900: #003b69;
+  --color-brand-950: #002540;
+}
+
+/* ─── RED Brand Override ─── */
+[data-brand="red"] {
+  --color-brand-50: #fdf2f2;
+  --color-brand-100: #fde8e8;
+  --color-brand-200: #fbd5d5;
+  --color-brand-300: #f8b4b4;
+  --color-brand-400: #f08282;
+  --color-brand-500: #d7282f;
+  --color-brand-600: #b91c22;
+  --color-brand-700: #93151b;
+  --color-brand-800: #7a151b;
+  --color-brand-900: #661619;
+  --color-brand-950: #3b090b;
+}
+
+/* ─── ORANGE Brand Override ─── */
+[data-brand="orange"] {
+  --color-brand-50: #fef0eb;
+  --color-brand-100: #fdd5c9;
+  --color-brand-200: #fcb9a5;
+  --color-brand-300: #fa9d80;
+  --color-brand-400: #f87d52;
+  --color-brand-500: #f15d22;
+  --color-brand-600: #d9531f;
+  --color-brand-700: #c0491b;
+  --color-brand-800: #a63f17;
+  --color-brand-900: #8c3513;
+  --color-brand-950: #59220c;
+}
+
+/* ─── LEMON Brand Override ─── */
+[data-brand="lemon"] {
+  --color-brand-50: #f4ffe6;
+  --color-brand-100: #e5ffcc;
+  --color-brand-200: #cfa;
+  --color-brand-300: #a8ff77;
+  --color-brand-400: #8dff5c;
+  --color-brand-500: #72ff43;
+  --color-brand-600: #5ce629;
+  --color-brand-700: #47b31a;
+  --color-brand-800: #358c14;
+  --color-brand-900: #266b0f;
+  --color-brand-950: #1a4a0a;
 }
 
 /* ─── Light Theme Semantics ─── */

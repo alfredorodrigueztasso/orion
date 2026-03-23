@@ -28,7 +28,22 @@
  */
 
 import React, { createContext, useContext } from "react";
-import { ResponsiveContainer, Tooltip, Legend } from "recharts";
+
+// Recharts imports with graceful error handling
+let ResponsiveContainer: any;
+let Tooltip: any;
+let Legend: any;
+let RechartsError: Error | null = null;
+
+try {
+  const recharts = require("recharts");
+  ResponsiveContainer = recharts.ResponsiveContainer;
+  Tooltip = recharts.Tooltip;
+  Legend = recharts.Legend;
+} catch (error) {
+  RechartsError =
+    error instanceof Error ? error : new Error("recharts not found");
+}
 import type {
   ChartConfig,
   ChartContainerProps,
@@ -37,6 +52,7 @@ import type {
   ChartGradientProps,
 } from "./Chart.types";
 import { useResolvedChartColors } from "./useResolvedChartColors";
+import { MissingDependencyError } from "../MissingDependencyError";
 import styles from "./Chart.module.css";
 
 // Context to share config across tooltip/legend
@@ -52,6 +68,20 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
   style,
   ...rest
 }) => {
+  // Show error if recharts is not installed
+  if (RechartsError) {
+    return (
+      <MissingDependencyError
+        available={false}
+        componentName="Chart"
+        depName="recharts"
+        installCommand="npm install recharts"
+        pnpmCommand="pnpm add recharts"
+        docsUrl="https://docs.orion-ds.dev/components/chart"
+      />
+    );
+  }
+
   // Resolve CSS variable chains to concrete hex values for SVG compatibility
   const { resolvedConfig, resolvedColorVars } = useResolvedChartColors(config);
 
@@ -91,6 +121,20 @@ export const ChartTooltipContent: React.FC<ChartTooltipContentProps> = ({
   formatter,
   className,
 }) => {
+  // Show error if recharts is not installed
+  if (RechartsError) {
+    return (
+      <MissingDependencyError
+        available={false}
+        componentName="Chart"
+        depName="recharts"
+        installCommand="npm install recharts"
+        pnpmCommand="pnpm add recharts"
+        docsUrl="https://docs.orion-ds.dev/components/chart"
+      />
+    );
+  }
+
   const config = useContext(ChartContext);
 
   if (!active || !payload?.length) return null;
@@ -147,6 +191,20 @@ export const ChartLegendContent: React.FC<ChartLegendContentProps> = ({
   payload,
   className,
 }) => {
+  // Show error if recharts is not installed
+  if (RechartsError) {
+    return (
+      <MissingDependencyError
+        available={false}
+        componentName="Chart"
+        depName="recharts"
+        installCommand="npm install recharts"
+        pnpmCommand="pnpm add recharts"
+        docsUrl="https://docs.orion-ds.dev/components/chart"
+      />
+    );
+  }
+
   const config = useContext(ChartContext);
 
   if (!payload?.length) return null;
@@ -197,15 +255,32 @@ export const ChartGradient: React.FC<ChartGradientProps> = ({
   color,
   startOpacity = 0.4,
   endOpacity = 0.05,
-}) => (
-  <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
-    <stop offset="5%" stopColor={color} stopOpacity={startOpacity} />
-    <stop offset="95%" stopColor={color} stopOpacity={endOpacity} />
-  </linearGradient>
-);
+}) => {
+  // Show error if recharts is not installed
+  if (RechartsError) {
+    return (
+      <MissingDependencyError
+        available={false}
+        componentName="Chart"
+        depName="recharts"
+        installCommand="npm install recharts"
+        pnpmCommand="pnpm add recharts"
+        docsUrl="https://docs.orion-ds.dev/components/chart"
+      />
+    );
+  }
+
+  return (
+    <linearGradient id={id} x1="0" y1="0" x2="0" y2="1">
+      <stop offset="5%" stopColor={color} stopOpacity={startOpacity} />
+      <stop offset="95%" stopColor={color} stopOpacity={endOpacity} />
+    </linearGradient>
+  );
+};
 
 ChartGradient.displayName = "ChartGradient";
 
 // Re-export Recharts Tooltip and Legend for convenience
-export const ChartTooltip = Tooltip;
-export const ChartLegend = Legend;
+// Return null if recharts is not installed (these are used internally)
+export const ChartTooltip = Tooltip || null;
+export const ChartLegend = Legend || null;

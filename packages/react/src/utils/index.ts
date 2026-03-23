@@ -29,3 +29,11 @@ export {
   warnFieldChildren,
   warnUsePrebuiltSection,
 } from "./validation";
+
+// Optional dependency error handling
+export {
+  getOptionalDepError,
+  checkComponent,
+  OPTIONAL_DEP_COMPONENTS,
+  type OptionalDepError,
+} from "./optionalDeps";
