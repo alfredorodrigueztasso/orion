@@ -183,6 +183,51 @@ npm run validate:preview-modules # ✅ Checks 92 preview modules successfully
 npm run build:release          # ✅ Builds 6 packages (omits docs-site)
 ```
 
+#### 4. Dynamic Token Type Generation (Mejora 4 - In Progress)
+
+**Problem**: Original `scripts/generate-types.ts` hardcodes type definitions. When JSON tokens change, types fall out of sync, causing TypeScript errors.
+
+**Solution**: New `scripts/generate-types-dynamic.ts` introspects JSON files and generates types dynamically.
+
+**How It Works**:
+```typescript
+// Instead of hardcoding:
+export interface TypographySize {
+  10: string;
+  12: string;
+  // ... hardcoded sizes
+}
+
+// Now reads JSON and generates:
+export interface TypographySize {
+  12: string;
+  14: string;
+  16: string;
+  // ... extracted from tokens/primary.json
+  [key: string]: any;  // Flexible catch-all
+}
+```
+
+**Benefits**:
+- ✅ Types always match JSON reality
+- ✅ No manual sync between JSON and TypeScript
+- ✅ Flexible to new tokens (only `[key: string]: any` needed)
+- ✅ Extracts real brand names, spacing scales, radius values from JSON
+- ✅ Optional properties marked with `?` automatically
+
+**Usage**:
+```bash
+# Use new dynamic version (recommended for v5.2.0+)
+ts-node scripts/generate-types-dynamic.ts
+
+# Or keep original for backward compatibility
+ts-node scripts/generate-types.ts
+```
+
+**Status**: Pending — new script created in `/scripts/generate-types-dynamic.ts`. Migration to v5.2.0 recommended.
+
+**Files**: `scripts/generate-types-dynamic.ts` (new), `scripts/generate-types.ts` (original, legacy)
+
 ### Storybook
 ```bash
 cd packages/react
@@ -850,12 +895,20 @@ import { CollapsibleFolder } from '@orion-ds/react/dnd';
 ```
 
 **`@orion-ds/react/rich`** — Requires `react-markdown`, `react-syntax-highlighter`, `remark-gfm`
+
+**IMPORTANT**: Chat component is ONLY available via this subpath, not from the main export.
 ```bash
 npm install react-markdown react-syntax-highlighter remark-gfm
 ```
 ```typescript
+// ✅ CORRECT - Import from ./rich subpath
 import { Chat } from '@orion-ds/react/rich';
+
+// ❌ WRONG - Chat is NOT in main export
+// import { Chat } from '@orion-ds/react';  // Will fail
 ```
+
+This design reduces bundle size for users not using Chat (heavy dependencies not loaded).
 
 #### Migration from v4.4.0 to v4.5.0
 
@@ -909,10 +962,10 @@ import '@orion-ds/react/blocks.css';
 - Engagement: Newsletter, Stats, Comparison, LogoCloud, Timeline
 - Social: AppDownload, SocialProof, FAQ
 
-**App/SaaS Sections** (5 items):
+**App/SaaS Sections** (4 items):
 - Settings interfaces: SettingsLayout
 - Navigation: Breadcrumbs, AgentFolder
-- Process flows: Stepper, Chat
+- Process flows: Stepper
 
 **Full-Page Templates** (5 items):
 - Marketing: LandingPageTemplate, ContactPageTemplate, PricingPageTemplate, AboutPageTemplate
