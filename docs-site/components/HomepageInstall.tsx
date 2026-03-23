@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { Card } from '@/components/ClientComponents';
 import { Terminal, Copy, Check } from 'lucide-react';
 
-type Tab = 'package' | 'mcp';
+type Tab = 'package' | 'mcp' | 'claude-code';
 type PM = 'npm' | 'pnpm' | 'yarn';
 
 const PACKAGE_COMMANDS: Record<PM, string> = {
@@ -14,12 +14,13 @@ const PACKAGE_COMMANDS: Record<PM, string> = {
 };
 
 const MCP_COMMAND = 'npx @orion-ds/mcp';
+const CLAUDE_CODE_COMMAND = 'npx @orion-ds/mcp init';
 
 export default function HomepageInstall() {
   const [tab, setTab] = useState<Tab>('package');
   const [pm, setPm] = useState<PM>('pnpm');
   const [copied, setCopied] = useState(false);
-  const command = tab === 'package' ? PACKAGE_COMMANDS[pm] : MCP_COMMAND;
+  const command = tab === 'package' ? PACKAGE_COMMANDS[pm] : tab === 'mcp' ? MCP_COMMAND : CLAUDE_CODE_COMMAND;
 
   const handleCopy = () => {
     navigator.clipboard.writeText(command);
@@ -53,7 +54,7 @@ export default function HomepageInstall() {
 
       <Card variant="base">
         <Card.Body style={{ padding: 'var(--spacing-4)' }}>
-          {/* Main tabs: Package vs MCP */}
+          {/* Main tabs: Package vs MCP vs Claude Code */}
           <div
             style={{
               display: 'flex',
@@ -63,7 +64,7 @@ export default function HomepageInstall() {
               paddingBottom: 'var(--spacing-3)',
             }}
           >
-            {(['package', 'mcp'] as Tab[]).map((t) => (
+            {(['package', 'mcp', 'claude-code'] as Tab[]).map((t) => (
               <button
                 key={t}
                 onClick={() => setTab(t)}
@@ -84,7 +85,7 @@ export default function HomepageInstall() {
                   textTransform: 'capitalize',
                 }}
               >
-                {t === 'package' ? 'Package' : 'MCP Server'}
+                {t === 'package' ? 'Package' : t === 'mcp' ? 'MCP Server' : 'Claude Code'}
               </button>
             ))}
           </div>
@@ -183,7 +184,7 @@ export default function HomepageInstall() {
             </button>
           </div>
 
-          {/* MCP note */}
+          {/* Tab-specific notes */}
           {tab === 'mcp' && (
             <div
               style={{
@@ -195,7 +196,21 @@ export default function HomepageInstall() {
                 color: 'var(--text-secondary)',
               }}
             >
-              Claude Code can then install any Orion component directly from your conversation.
+              9 tools. Claude Code, Cursor, Cline. Your AI agent discovers components, searches patterns, and installs directly.
+            </div>
+          )}
+          {tab === 'claude-code' && (
+            <div
+              style={{
+                marginTop: 'var(--spacing-4)',
+                padding: 'var(--spacing-3)',
+                backgroundColor: 'var(--surface-layer)',
+                borderRadius: 'var(--radius-sm)',
+                fontSize: '0.875rem',
+                color: 'var(--text-secondary)',
+              }}
+            >
+              Initialize MCP Server with Claude Code. Then discover and install components directly from your editor.
             </div>
           )}
         </Card.Body>

@@ -22,7 +22,7 @@ export default function HomepageHero({
       align="center"
       badge={
         <Badge variant="secondary" size="sm">
-          ✦ MCP Server included — Claude Code ready
+          🔌 MCP Server included — Code-ready
         </Badge>
       }
       title={
@@ -36,7 +36,7 @@ export default function HomepageHero({
           already knows.
         </>
       }
-      description="Install components with a single instruction to Claude Code. 72 components, 26 sections, 10 templates — governed by Chain of Truth."
+      description="Your AI agent (Claude Code, Cursor, Cline) discovers, installs, and integrates Orion components directly. 9 tools built in. No API config needed."
       primaryAction={
         <Link href="/docs/getting-started">
           <Button
@@ -55,7 +55,7 @@ export default function HomepageHero({
           rel="noopener noreferrer"
         >
           <Button size="lg" variant="ghost">
-            View on GitHub
+            GitHub Repo
           </Button>
         </Link>
       }

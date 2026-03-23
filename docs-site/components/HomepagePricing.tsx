@@ -6,26 +6,26 @@ import { ArrowRight, Check } from 'lucide-react';
 
 export default function HomepagePricing() {
   const freeFeatures = [
-    '72 base components',
-    '26 sections',
+    '72 components',
+    '41 sections',
     '10 templates',
     'CLI installer',
-    'MCP Server — 9 tools',
-    'Chain of Truth architecture',
-    'Dark mode + 6 brands',
+    'MCP Server (9 tools)',
+    'Token-governed',
+    'Light/dark + 4 brands',
     'MIT License',
   ];
 
   const foundingFeatures = [
     'Everything in Free',
-    '10+ AI / Agentic components',
-    'AgentThinking · StreamText · ToolCall',
-    'ActionConfirmation · DiffViewer · ContextBar',
-    '4 production-ready AI templates',
-    'Figma Kit completo',
-    'Extended docs — the "why" behind each pattern',
-    'Private Slack channel',
-    'Early access to new components',
+    '10 AI components',
+    'AgentThinking, StreamText, ToolCall',
+    'ActionConfirmation, DiffViewer, ContextBar',
+    '4 AI templates',
+    'Figma Kit (complete)',
+    'Extended docs + design rationale',
+    'Private Slack group',
+    'Early access to features',
   ];
 
   return (
@@ -111,9 +111,19 @@ export default function HomepagePricing() {
                 marginLeft: 'var(--spacing-1)',
               }}
             >
-              /month
+              forever
             </span>
           </div>
+
+          <p
+            style={{
+              fontSize: 'var(--font-size-sm)',
+              color: 'var(--text-secondary)',
+              margin: '0 0 var(--spacing-6) 0',
+            }}
+          >
+            Get building. No credit card. Everything free.
+          </p>
 
           <ul
             style={{
@@ -142,13 +152,13 @@ export default function HomepagePricing() {
 
           <Link href="/docs/getting-started" style={{ width: '100%' }}>
             <Button
-              variant="ghost"
+              variant="secondary"
               size="md"
               style={{
                 width: '100%',
               }}
             >
-              Start Free
+              Get Started Free
             </Button>
           </Link>
         </div>
@@ -184,7 +194,7 @@ export default function HomepagePricing() {
               }}
             />
 
-            <Badge variant="brand">Founding Offer</Badge>
+            <Badge variant="brand">200 spots · X remaining</Badge>
 
             <h3
               style={{
@@ -225,7 +235,7 @@ export default function HomepagePricing() {
                 margin: '0 0 var(--spacing-6) 0',
               }}
             >
-              Lock in your price forever. First 200 members only.
+              200 spots total. Price locks in forever. Then $49/mo.
             </p>
 
             <ul
@@ -286,7 +296,7 @@ export default function HomepagePricing() {
               textDecoration: 'none',
             }}
           >
-            Contact us
+            Get in Touch
           </a>
         </p>
       </div>
@@ -299,7 +309,7 @@ export default function HomepagePricing() {
           color: 'var(--text-tertiary)',
         }}
       >
-        Price increases to $49/month after the first 200 Founding Members.
+        Price increases to $49/mo after 200 Founding Members are locked.
       </p>
     </section>
   );

@@ -66,8 +66,8 @@ const logos = [
 export default function HomepageLogoCloud() {
   return (
     <LogoCloud
-      eyebrow="Built for AI-native workflows"
-      title="Your AI agent can use Orion directly"
+      eyebrow="Built in"
+      title="Native support in React · Next.js · TypeScript · Claude Code"
       logos={logos}
       layout="inline"
       grayscale={true}

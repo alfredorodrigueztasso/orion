@@ -13,10 +13,10 @@ interface HomepageStatsProps {
 export default function HomepageStats({ counts }: HomepageStatsProps) {
   return (
     <Stats
-      eyebrow="The numbers"
-      title="Everything you need, nothing you don't"
-      description="Orion ships with a complete set of production-ready building blocks."
-      columns={5}
+      eyebrow="Built to scale"
+      title="Shipping at scale, from day one"
+      description="72 components, 41 sections, 10 templates. 9 MCP tools. Built in. Ready to go."
+      columns={4}
       variant="cards"
       background="subtle"
       highlightValue={true}
@@ -25,27 +25,22 @@ export default function HomepageStats({ counts }: HomepageStatsProps) {
         {
           value: `${counts.components}`,
           label: 'Components',
-          description: 'Ready-to-use React building blocks',
+          description: 'Production-ready React',
         },
         {
           value: `${counts.sections}`,
           label: 'Sections',
-          description: 'Pre-composed page blocks',
+          description: 'Pre-built page blocks',
         },
         {
           value: `${counts.templates}`,
           label: 'Templates',
-          description: 'Full-page starter layouts',
+          description: 'Full-page layouts',
         },
         {
           value: '9',
           label: 'MCP Tools',
-          description: 'AI agent integrations built-in',
-        },
-        {
-          value: '200',
-          label: 'Founding Member spots',
-          description: 'Limited early access pricing',
+          description: 'AI agent integrations',
         },
       ]}
     />

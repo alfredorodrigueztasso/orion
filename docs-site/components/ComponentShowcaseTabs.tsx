@@ -203,9 +203,9 @@ export default function ComponentShowcaseTabs() {
       marginBottom: 'var(--spacing-16)',
     }}>
       <div style={{ marginBottom: 'var(--spacing-8)' }}>
-        <h2 style={{ marginBottom: 'var(--spacing-2)' }}>Component Gallery</h2>
+        <h2 style={{ marginBottom: 'var(--spacing-2)' }}>Interactive Components</h2>
         <p style={{ color: 'var(--text-secondary)', margin: 0 }}>
-          Explore all component variants and states. Every component is built with Orion's design tokens.
+          Every component. Every variant. Every state. Built with design tokens. Copy the code. Integrate with MCP.
         </p>
       </div>
 

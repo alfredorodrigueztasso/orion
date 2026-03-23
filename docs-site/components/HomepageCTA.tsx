@@ -8,8 +8,8 @@ export default function HomepageCTA() {
   return (
     <>
       <CTA
-        title="Start building with Orion today"
-        description="Join builders creating AI-native interfaces. Free, open source, and ready to ship."
+        title="Ship AI-first products faster"
+        description="Ship with components that work with Claude Code, Cursor, Cline. Free to start. Open source forever."
         variant="brand"
         size="lg"
         align="center"
@@ -43,7 +43,7 @@ export default function HomepageCTA() {
             </Link>
           </div>
         }
-        footnote="Open source · MIT License · Free forever for base components"
+        footnote="MIT Licensed · Open Source · No credit card"
       />
 
       {/* Simple footer — Footer block causes SSR error with AgentWorkspace */}
@@ -59,13 +59,14 @@ export default function HomepageCTA() {
         }}
       >
         <p style={{ marginBottom: 'var(--spacing-4)' }}>
-          © 2026 Orion Design System. Built with AI-first principles.
+          © 2026 Orion Design System. Built for AI-first products.
         </p>
         <div style={{ display: 'flex', gap: 'var(--spacing-6)', justifyContent: 'center', flexWrap: 'wrap' }}>
           <Link href="https://github.com/alfredorodrigueztasso/orion" style={{ color: 'var(--text-secondary)' }}>GitHub</Link>
-          <Link href="https://npmjs.com/package/@orion-ds/react" style={{ color: 'var(--text-secondary)' }}>NPM</Link>
-          <Link href="/docs/getting-started" style={{ color: 'var(--text-secondary)' }}>Docs</Link>
+          <Link href="https://npmjs.com/package/@orion-ds/react" style={{ color: 'var(--text-secondary)' }}>NPM Registry</Link>
+          <Link href="/docs/getting-started" style={{ color: 'var(--text-secondary)' }}>Documentation</Link>
           <Link href="/pricing" style={{ color: 'var(--text-secondary)' }}>Pricing</Link>
+          <Link href="/privacy" style={{ color: 'var(--text-secondary)' }}>Privacy</Link>
         </div>
       </footer>
     </>

@@ -140,18 +140,6 @@ export function DocsNavbar() {
         >
           Orion
         </span>
-        <span
-          style={{
-            fontSize: 'var(--font-size-xs)',
-            color: 'var(--text-tertiary)',
-            marginLeft: 'var(--spacing-1)',
-            fontWeight: 500,
-            letterSpacing: '0.04em',
-            textTransform: 'uppercase',
-          }}
-        >
-          DS
-        </span>
       </Navbar.Brand>
 
       <Navbar.Nav>
