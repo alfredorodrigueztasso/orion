@@ -896,6 +896,9 @@ import { CollapsibleFolder } from '@orion-ds/react/dnd';
 
 **`@orion-ds/react/rich`** — Requires `react-markdown`, `react-syntax-highlighter`, `remark-gfm`
 
+> ⚠️ **DEPRECATED in v5.1.13** — Chat will be removed in v5.2.0 (April 2026).
+> See `packages/react/CHAT_MIGRATION_GUIDE.md` for migration alternatives.
+
 **IMPORTANT**: Chat component is ONLY available via this subpath, not from the main export.
 ```bash
 npm install react-markdown react-syntax-highlighter remark-gfm

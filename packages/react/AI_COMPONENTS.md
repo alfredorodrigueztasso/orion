@@ -187,7 +187,10 @@ Use these for landing pages, marketing sites, and product pages. **DO NOT create
 | `Container` | Constrain content width       |
 | `Section`   | Vertical section with spacing |
 
-### AI Chat Sections
+### AI Chat Sections [DEPRECATED ⚠️]
+
+> **Deprecated in v5.1.13** — will be removed in v5.2.0 (April 2026).
+> Import from `@orion-ds/react/rich` (not main export). See [CHAT_MIGRATION_GUIDE.md](../packages/react/CHAT_MIGRATION_GUIDE.md).
 
 | Section            | Use When             | Required Props              |
 | ------------------ | -------------------- | --------------------------- |
@@ -521,7 +524,11 @@ Some components use the compound pattern with dot notation:
 </Drawer>
 ```
 
-### Chat (AI Chat Interface)
+### Chat (AI Chat Interface) [DEPRECATED ⚠️ — Removed in v5.2.0]
+
+> **Status**: Deprecated in v5.1.13. Will be removed in v5.2.0 (April 2026).
+> Import: `import { Chat } from '@orion-ds/react/rich'` (NOT from main).
+> See [CHAT_MIGRATION_GUIDE.md](../packages/react/CHAT_MIGRATION_GUIDE.md) for alternatives.
 
 Full-featured chat interface with multimodal support (text, images, audio, files, code).
 

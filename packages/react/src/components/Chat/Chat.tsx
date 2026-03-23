@@ -46,6 +46,18 @@ import styles from "./Chat.module.css";
 
 // Main Chat container
 const ChatRoot: React.FC<ChatProps> = ({ children, className, ...rest }) => {
+  React.useEffect(() => {
+    console.warn(
+      "[DEPRECATED] Chat component will be removed in @orion-ds/react v5.2.0 (April 2026).\n" +
+        'Chat is not aligned with Orion\'s "primitives-first" philosophy.\n' +
+        "Alternatives:\n" +
+        "  - react-chat-elements (drop-in replacement)\n" +
+        "  - Build custom Chat with Orion primitives (Button, Card, Input, Modal)\n" +
+        "Migration guide: See CHAT_MIGRATION_GUIDE.md or GitHub discussions.\n" +
+        "Timeline: v5.1.13 (now) → v5.2.0 removed (April 2026)",
+    );
+  }, []);
+
   return (
     <div
       className={[styles.chat, className].filter(Boolean).join(" ")}
