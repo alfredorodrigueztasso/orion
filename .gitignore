@@ -55,6 +55,7 @@ public/r/
 .claude/*.txt
 .claude/*.json
 .claude/worktrees/
+.claude/workspace-docs/
 # Exception: skills are part of the project
 !.claude/skills/
 !.claude/skills/**
