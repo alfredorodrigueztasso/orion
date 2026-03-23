@@ -9,7 +9,7 @@
     "lint": "next lint"
   },
   "dependencies": {
-    "@orion-ds/react": "^4.9.6",
+    "@orion-ds/react": "^5.0.0",
     "lucide-react": "^0.400.0",
     "next": "^15.0.0",
     "next-mdx-remote": "^5.0.0",
