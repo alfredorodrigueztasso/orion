@@ -500,61 +500,10 @@ export type {
 // Note: Widgets (Sidebar, DataTable, etc.) are now exported from WIDGETS section above
 // These are kept for backward compatibility via sections/ re-exports
 
-// ============================================================================
-// CHAT (AI Chat Interface)
-// ============================================================================
-
-export { Chat } from "./components/Chat";
-export type {
-  // Core types
-  ChatRole,
-  MessageStatus,
-  AttachmentType,
-  MessageReaction,
-  ChatAttachment,
-  ChatMessage,
-  ChatConversation,
-  VoiceRecorderState,
-  // Component props
-  ChatProps,
-  ChatHeaderProps,
-  ChatMessagesProps,
-  ChatMessageProps,
-  ChatInputProps,
-  ChatTypingIndicatorProps,
-  ChatCodeBlockProps,
-  ChatMarkdownProps,
-  // Attachment props
-  ChatImagePreviewProps,
-  ChatAudioPlayerProps,
-  ChatVoiceRecorderProps,
-  ChatFileUploadProps,
-  ChatAttachmentPreviewProps,
-  // Sidebar props
-  ChatSidebarProps,
-  // Section props
-  ChatSectionProps,
-  // Lightbox
-  ChatLightboxProps,
-} from "./components/Chat";
-
-export {
-  useChatInput,
-  useAutoScroll,
-  useVoiceRecorder,
-  useStreamingText,
-} from "./components/Chat";
-
-export type {
-  UseAutoScrollOptions,
-  UseAutoScrollReturn,
-  UseVoiceRecorderOptions,
-  UseVoiceRecorderReturn,
-  UseChatInputOptions,
-  UseChatInputReturn,
-  UseStreamingTextOptions,
-  UseStreamingTextReturn,
-} from "./components/Chat";
+// NOTE: Chat component moved to ./rich subpath to avoid loading heavy dependencies
+// by default. Users who need Chat can import from '@orion-ds/react/rich':
+//   import { Chat } from '@orion-ds/react/rich';
+//   npm install react-markdown react-syntax-highlighter remark-gfm
 
 // ============================================================================
 // CODE EDITOR (AI Code Interface)

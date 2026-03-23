@@ -1,6 +1,6 @@
 {
   "name": "@orion-ds/react",
-  "version": "5.1.0",
+  "version": "5.1.13",
   "type": "module",
   "description": "Orion Design System - React component library with 40+ AI-ready components and 9 templates",
   "author": "Orion Design System Team",
@@ -80,7 +80,6 @@
     "BUNDLE_OPTIMIZATION.md"
   ],
   "scripts": {
-    "postinstall": "node scripts/validate-install.js",
     "copy:assets": "mkdir -p assets/tokens && cp ../../theme.css assets/theme.css && cp ../../tokens/generated.css assets/tokens/generated.css",
     "build": "npm run copy:assets && vite build && npm run build:styles",
     "build:styles": "node scripts/bundle-styles.js",
