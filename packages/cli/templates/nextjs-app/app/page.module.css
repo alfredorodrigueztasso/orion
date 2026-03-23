@@ -35,6 +35,32 @@
   margin: 0 0 var(--spacing-4) 0;
 }
 
+/* Control Groups (Theme/Brand Selection) */
+.controlGroup {
+  margin-bottom: var(--spacing-6);
+}
+
+.controlGroup label {
+  display: block;
+  margin-bottom: var(--spacing-2);
+  font-weight: 600;
+  font-size: var(--font-size-sm);
+  color: var(--text-primary);
+}
+
+.buttonGroup {
+  display: flex;
+  gap: var(--spacing-2);
+  flex-wrap: wrap;
+}
+
+.brandButtons {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: var(--spacing-2);
+}
+
+/* Features */
 .feature {
   display: flex;
   gap: var(--spacing-4);
@@ -56,6 +82,15 @@
   color: var(--text-secondary);
 }
 
+.feature code {
+  background: var(--surface-layer);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-family: var(--font-mono);
+  font-size: 0.85em;
+}
+
+/* Buttons */
 .buttons {
   display: flex;
   gap: var(--spacing-4);
@@ -63,6 +98,7 @@
   margin: var(--spacing-6) 0;
 }
 
+/* Badges */
 .badges {
   display: flex;
   gap: var(--spacing-3);
@@ -70,12 +106,67 @@
   flex-wrap: wrap;
 }
 
+/* Links */
+.links {
+  display: flex;
+  gap: var(--spacing-2);
+  justify-content: center;
+  align-items: center;
+  margin-top: var(--spacing-6);
+  font-size: var(--font-size-sm);
+}
+
+.links a {
+  color: var(--interactive-primary);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.links a:hover {
+  color: var(--interactive-primary-hover);
+  text-decoration: underline;
+}
+
+.separator {
+  color: var(--text-tertiary);
+}
+
 @media (max-width: 640px) {
   .container {
     padding: var(--spacing-4);
   }
 
+  .header h1 {
+    font-size: var(--font-size-2xl);
+  }
+
+  .card {
+    margin: var(--spacing-4) auto;
+  }
+
+  .cardContent {
+    padding: var(--spacing-4);
+  }
+
   .buttons {
     flex-direction: column;
+  }
+
+  .brandButtons {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .buttonGroup {
+    gap: var(--spacing-1);
+  }
+
+  .links {
+    flex-wrap: wrap;
+    gap: 0;
+  }
+
+  .links a,
+  .separator {
+    font-size: var(--font-size-xs);
   }
 }
