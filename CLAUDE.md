@@ -35,7 +35,7 @@ The system supports multiple brands via `data-brand` attribute:
 
 Brands are configured in `tokens/brands.json` and override base tokens in `theme.css`.
 
-**Note (v5.2.0):** TypeScript types currently include a phantom "ember" brand that doesn't exist in `tokens/brands.json`. This is a known limitation fixed in v5.3.0 (April 11, 2026) when we migrate to dynamic type generation. Use the 5 actual brands: orion, deepblue, red, orange, lemon. See `.claude/workspace-docs/GENERATE_TYPES_DECISION_EXECUTIVE_SUMMARY.md` for details.
+**Note (v5.3.0):** ✅ Phantom "ember" brand FIXED. All TypeScript types now perfectly match `tokens/brands.json`. Dynamic type generation (APPROACH B) ensures types are always in sync with JSON source. Use 5 actual brands: orion, deepblue, red, orange, lemon. Released Mar 24, 2026.
 
 ### Token System
 
