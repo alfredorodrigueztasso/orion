@@ -688,8 +688,8 @@ try {
 }
 
 console.log('✅ Dynamic type generation completed');
-console.log(`📝 Generated: \${path.join(OUTPUT_DIR, 'types.ts')}`);
-console.log(`📊 Brands detected: \${actualBrands.join(', ')}`);
-console.log(`📊 Typography sizes: \${typographySizes.length} detected`);
-console.log(`📊 Spacing scales: \${spacingKeys.length} detected`);
-console.log(`📊 Radius scales: \${radiusKeys.length} detected`);
+console.log(`📝 Generated: ${path.join(OUTPUT_DIR, 'types.ts')}`);
+console.log(`📊 Brands detected: ${actualBrands.join(', ')}`);
+console.log(`📊 Typography sizes: ${typographySizeInterface.split('\n').length} detected`);
+console.log(`📊 Spacing scales: ${spacingKeys.length} detected`);
+console.log(`📊 Radius scales: ${radiusKeys.length} detected`);
