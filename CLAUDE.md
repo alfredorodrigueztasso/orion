@@ -224,9 +224,17 @@ ts-node scripts/generate-types-dynamic.ts
 ts-node scripts/generate-types.ts
 ```
 
-**Status**: Pending — new script created in `/scripts/generate-types-dynamic.ts`. Migration to v5.2.0 recommended.
+**Status**: ⏸️ **DEFERRED TO v5.3.0 (May 2026)**
 
-**Files**: `scripts/generate-types-dynamic.ts` (new), `scripts/generate-types.ts` (original, legacy)
+**Why deferred?** v5.2.0 (April 2026) uses the proven original `generate-types.ts` to maintain schedule reliability. Dynamic type generation requires 3 P1 fixes (error handling, type validation, brand consistency) that will be properly refactored and tested in v5.3.0 with more time.
+
+**v5.2.0 (April 11)**: Original `generate-types.ts` — stable, tested, reliable
+**v5.3.0 (May 9)**: Dynamic generation with all P1 fixes — proper refactoring, not rushed
+
+**Files**:
+- `scripts/generate-types-dynamic.ts` (kept in repo for v5.3.0 reference, not active)
+- `scripts/generate-types.ts` (original, in use through v5.2.0)
+- See `memory/architecture-decisions.md` for full reasoning
 
 ### Storybook
 ```bash
