@@ -61,11 +61,6 @@ const BRAND_CONFIG: Record<
     radius: "9999px",
     description: "Red-Orange accent • Pill buttons",
   },
-  ember: {
-    accent: "#F15D22",
-    radius: "12px",
-    description: "Orange accent • Black buttons • 12px radius",
-  },
   lemon: {
     accent: "#72FF43",
     radius: "9999px",
@@ -94,7 +89,8 @@ export const ThemeController: React.FC<ThemeControllerProps> = ({
   }
 
   // Use context if available, otherwise fall back to standalone hook
-  const { theme, brand, setTheme, setBrand } = contextTheme ?? standaloneTheme;
+  const { theme, brand: rawBrand, setTheme, setBrand } = contextTheme ?? standaloneTheme;
+  const brand = rawBrand as Brand;
 
   const handleThemeChange = (newTheme: "light" | "dark") => {
     setTheme(newTheme);

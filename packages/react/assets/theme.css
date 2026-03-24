@@ -9,7 +9,6 @@
 /* ─── Primitives (from primary.json) ─── */
 :root {
     /* Colors */
-
     /* Brand: Orion (default) */
     --color-brand-50: #e8f0ff;
     --color-brand-100: #c7daff;
@@ -24,7 +23,7 @@
     --color-brand-950: #071a5c;
 
     /* Neutral */
-    --color-neutral-0: #fff;
+    --color-neutral-0: #ffffff;
     --color-neutral-50: #f8fafc;
     --color-neutral-100: #f1f5f9;
     --color-neutral-200: #e2e8f0;
@@ -36,7 +35,7 @@
     --color-neutral-800: #1e293b;
     --color-neutral-900: #0f172a;
     --color-neutral-950: #020617;
-    --color-neutral-1000: #000;
+    --color-neutral-1000: #000000;
 
     /* Status */
     --color-error-500: #ef4444;
@@ -44,9 +43,9 @@
     --color-warning-500: #eab308;
 
     /* Typography */
-    --font-primary: libre baskerville, system-ui, sans-serif;
-    --font-secondary: inter, system-ui, sans-serif;
-    --font-mono: jetbrains mono, monospace;
+    --font-primary: Libre Baskerville, system-ui, sans-serif;
+    --font-secondary: Inter, system-ui, sans-serif;
+    --font-mono: JetBrains Mono, monospace;
 
     /* Font Sizes */
     --font-size-10: 10px;
@@ -110,7 +109,7 @@
 
     /* Hover Animation Tokens */
     --mode-hover-lift: -2px;
-    --mode-shadow-hover: 0 4px 12px -2px rgb(0 0 0 / 10%);
+    --mode-shadow-hover: 0 4px 12px -2px rgba(0, 0, 0, 0.1);
     --mode-hover-duration: 200ms;
 }
 
@@ -297,14 +296,12 @@
     --color-brand-800: #00487d;
     --color-brand-900: #003b69;
     --color-brand-950: #002540;
-
     /* Derived: button="md" (12px) → container="xl" (24px) */
     --radius-button: var(--radius-md);
     --radius-container: var(--radius-xl);
 }
 
 /* ─── Red Radius ─── */
-
 /* ─── RED Brand Override ─── */
 [data-brand="red"] {
     /* Red brand colors */
@@ -319,7 +316,6 @@
     --color-brand-800: #7a151b;
     --color-brand-900: #661619;
     --color-brand-950: #3b090b;
-
     /* Derived: button="full" (9999px) → container="3xl" (36px) */
     --radius-button: var(--radius-full);
     --radius-container: var(--radius-3xl);
@@ -339,7 +335,6 @@
     --color-brand-800: #a63f17;
     --color-brand-900: #8c3513;
     --color-brand-950: #59220c;
-
     /* Derived: button="full" (9999px) → container="3xl" (36px) */
     --radius-button: var(--radius-full);
     --radius-container: var(--radius-3xl);
@@ -350,7 +345,7 @@
     /* Lemon brand colors */
     --color-brand-50: #F4FFE6;
     --color-brand-100: #E5FFCC;
-    --color-brand-200: #CFA;
+    --color-brand-200: #CCFFAA;
     --color-brand-300: #A8FF77;
     --color-brand-400: #8DFF5C;
     --color-brand-500: #72FF43;
@@ -359,7 +354,6 @@
     --color-brand-800: #358C14;
     --color-brand-900: #266B0F;
     --color-brand-950: #1A4A0A;
-
     /* Derived: button="full" (9999px) → container="3xl" (36px) */
     --radius-button: var(--radius-full);
     --radius-container: var(--radius-3xl);
@@ -378,15 +372,13 @@
     --color-brand-700: #1e293b;
     --color-brand-800: #0f172a;
     --color-brand-900: #020617;
-    --color-brand-950: #000;
-
+    --color-brand-950: #000000;
     /* Derived: button="md" (12px radius, more refined than pill) */
     --radius-button: var(--radius-md);
     --radius-container: var(--radius-xl);
 }
 
 /* ─── Brand-Specific Semantic Overrides ─── */
-
 /* Orion, Red, Orange, Deepblue: interactive primary text is ALWAYS white */
 [data-theme="light"][data-brand="orion"],
 [data-theme="dark"][data-brand="orion"],

@@ -1,8 +1,11 @@
 /**
  * Orion Design System - TypeScript Type Definitions
  *
- * Auto-generated from JSON token files.
+ * DYNAMICALLY GENERATED from JSON token files.
  * DO NOT EDIT MANUALLY - Run 'npm run build:tokens' to regenerate.
+ *
+ * This file uses introspection to match JSON structure exactly,
+ * preventing type mismatches when tokens change.
  */
 
 // ============================================================================
@@ -10,17 +13,17 @@
 // ============================================================================
 
 export type ColorShades = {
-  "50": string;
-  "100": string;
-  "200": string;
-  "300": string;
-  "400": string;
-  "500": string;
-  "600": string;
-  "700": string;
-  "800": string;
-  "900": string;
-  "950": string;
+  '50': string;
+  '100': string;
+  '200': string;
+  '300': string;
+  '400': string;
+  '500': string;
+  '600': string;
+  '700': string;
+  '800': string;
+  '900': string;
+  '950': string;
 };
 
 export interface BrandColors {
@@ -29,6 +32,7 @@ export interface BrandColors {
   red: ColorShades;
   orange: ColorShades;
   lemon: ColorShades;
+  [key: string]: ColorShades;
 }
 
 export interface NeutralColors {
@@ -44,11 +48,16 @@ export interface NeutralColors {
   800: string;
   900: string;
   950: string;
-  1000: string;
+  1000?: string;
+  [key: string]: any;
 }
 
 export interface StatusColors {
+  100?: string;
+  300?: string;
   500: string;
+  700?: string;
+  [key: string]: any;
 }
 
 export interface ColorPrimitives {
@@ -59,22 +68,26 @@ export interface ColorPrimitives {
   success: StatusColors;
   warning: StatusColors;
   info: StatusColors;
+
 }
 
 export interface TypographyFamily {
   primary: string;
   secondary: string;
   mono: string;
+  [key: string]: string;
 }
 
 export interface TypographyWeight {
   regular: string;
   medium: string;
   bold: string;
+  [key: string]: string;
 }
 
 export interface TypographySize {
   10: string;
+  11: string;
   12: string;
   13: string;
   14: string;
@@ -87,6 +100,7 @@ export interface TypographySize {
   64: string;
   80: string;
   96: string;
+  [key: string]: any;
 }
 
 export interface TypographyLineHeight {
@@ -96,6 +110,7 @@ export interface TypographyLineHeight {
   normal: string;
   relaxed: string;
   loose: string;
+  [key: string]: string;
 }
 
 export interface TypographyPrimitives {
@@ -103,39 +118,44 @@ export interface TypographyPrimitives {
   weight: TypographyWeight;
   size: TypographySize;
   lineHeight: TypographyLineHeight;
+  [key: string]: any;
 }
 
 export interface SpacingPrimitives {
-  0: string;
-  px: string;
-  "05": string;
-  1: string;
-  2: string;
-  3: string;
-  4: string;
-  5: string;
-  6: string;
-  7: string;
-  8: string;
-  9: string;
-  10: string;
-  11: string;
-  12: string;
-  16: string;
-  20: string;
-  24: string;
-  32: string;
+  '0': string;
+  '1': string;
+  '2': string;
+  '3': string;
+  '4': string;
+  '5': string;
+  '05': string;
+  '6': string;
+  '7': string;
+  '8': string;
+  '9': string;
+  '10': string;
+  '11': string;
+  '12': string;
+  '16': string;
+  '20': string;
+  '24': string;
+  '32': string;
+  'px': string;
+  [key: string]: any;
 }
 
 export interface RadiusPrimitives {
-  0: string;
-  sm: string;
-  md: string;
-  lg: string;
-  "lg-2": string;
-  xl: string;
-  "2xl": string;
+  '0': string;
+  '2xl': string;
+  '3xl'?: string;
   full: string;
+  lg: string;
+  'lg-2': string;
+  md: string;
+  sm: string;
+  xl: string;
+  xs?: string;
+  [key: string]: any;
 }
 
 export interface BlurPrimitives {
@@ -143,6 +163,7 @@ export interface BlurPrimitives {
   md: string;
   lg: string;
   xl: string;
+  [key: string]: string;
 }
 
 export interface IconPrimitives {
@@ -153,8 +174,10 @@ export interface IconPrimitives {
     md: string;
     lg: string;
     xl: string;
+    [key: string]: string;
   };
   stroke: string;
+  [key: string]: any;
 }
 
 export interface Primitives {
@@ -166,8 +189,11 @@ export interface Primitives {
   typography: TypographyPrimitives;
   spacing: SpacingPrimitives;
   radius: RadiusPrimitives;
+  radiusScale?: Record<string, any>;
   blur: BlurPrimitives;
   icon: IconPrimitives;
+  zIndex?: Record<string, any>;
+  transition?: Record<string, any>;
 }
 
 // ============================================================================
@@ -183,6 +209,14 @@ export interface SurfaceSemantics {
   glass: string;
   sunken: string;
   overlay: string;
+  [key: string]: string;
+}
+
+export interface TextOnBrandSemantics {
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  [key: string]: string;
 }
 
 export interface TextSemantics {
@@ -191,34 +225,41 @@ export interface TextSemantics {
   tertiary: string;
   inverse: string;
   brand: string;
+  'on-brand'?: TextOnBrandSemantics;
+  [key: string]: any;
 }
 
 export interface BorderSemantics {
   subtle: string;
   strong: string;
   interactive: string;
+  [key: string]: string;
 }
 
 export interface InteractivePrimarySemantics {
   default: string;
   hover: string;
   text: string;
+  [key: string]: string;
 }
 
 export interface InteractiveSecondarySemantics {
   default: string;
   hover: string;
   text: string;
+  [key: string]: string;
 }
 
 export interface InteractiveGhostSemantics {
   hover: string;
+  [key: string]: string;
 }
 
 export interface InteractiveSemantics {
   primary: InteractivePrimarySemantics;
   secondary: InteractiveSecondarySemantics;
   ghost: InteractiveGhostSemantics;
+  [key: string]: any;
 }
 
 export interface StatusSemantics {
@@ -226,19 +267,20 @@ export interface StatusSemantics {
   success: string;
   warning: string;
   info: string;
+  [key: string]: string;
 }
 
 export interface SoftSemantics {
   brand: string;
-  "brand-hover": string;
+  'brand-hover': string;
   success: string;
-  "success-hover"?: string;
+  'success-hover'?: string;
   error: string;
-  "error-hover"?: string;
+  'error-hover'?: string;
   warning?: string;
-  "warning-hover"?: string;
+  'warning-hover'?: string;
   info?: string;
-  "info-hover"?: string;
+  'info-hover'?: string;
 }
 
 export interface SemanticTokens {
@@ -248,6 +290,8 @@ export interface SemanticTokens {
   interactive: InteractiveSemantics;
   status: StatusSemantics;
   soft: SoftSemantics;
+  alert?: Record<string, any>;
+  chart?: Record<string, any>;
   focus?: {
     ring: string;
   };
@@ -261,8 +305,8 @@ export interface SemanticTokens {
 // THEME & BRAND TYPES
 // ============================================================================
 
-export type Theme = "light" | "dark";
-export type Brand = "orion" | "deepblue" | "red" | "orange" | "lemon";
+export type Theme = 'light' | 'dark';
+export type Brand = 'orion' | 'deepblue' | 'red' | 'orange' | 'lemon';
 
 export interface ThemeConfig {
   theme: Theme;
@@ -284,7 +328,7 @@ export interface BrandConfig {
   };
   geometry: {
     radiusControl: string;
-    radiusContainer: string;
+    radiusContainer?: string;
     buttonStyle: string;
   };
   semantic: {
@@ -304,6 +348,7 @@ export interface BrandConfig {
     css: string;
     attribute: string | null;
   };
+  [key: string]: any;
 }
 
 // ============================================================================
@@ -311,23 +356,23 @@ export interface BrandConfig {
 // ============================================================================
 
 export type ColorTokenPath =
-  | `color.brand.${Brand}.${keyof ColorShades}`
-  | `color.neutral.${keyof NeutralColors}`
-  | `color.neutralPure.${keyof NeutralColors}`
-  | "color.error.500"
-  | "color.success.500"
-  | "color.warning.500"
-  | "color.info.500";
+  | `color.brand.\${Brand}.\${keyof ColorShades}`
+  | `color.neutral.\${keyof NeutralColors}`
+  | `color.neutralPure.\${keyof NeutralColors}`
+  | 'color.error.500'
+  | 'color.success.500'
+  | 'color.warning.500'
+  | 'color.info.500';
 
 export type TypographyTokenPath =
-  | `typography.family.${keyof TypographyFamily}`
-  | `typography.weight.${keyof TypographyWeight}`
-  | `typography.size.${keyof TypographySize}`
-  | `typography.lineHeight.${keyof TypographyLineHeight}`;
+  | `typography.family.\${keyof TypographyFamily}`
+  | `typography.weight.\${keyof TypographyWeight}`
+  | `typography.size.\${keyof TypographySize}`
+  | `typography.lineHeight.\${keyof TypographyLineHeight}`;
 
-export type SpacingTokenPath = `spacing.${keyof SpacingPrimitives}`;
-export type RadiusTokenPath = `radius.${keyof RadiusPrimitives}`;
-export type BlurTokenPath = `blur.${keyof BlurPrimitives}`;
+export type SpacingTokenPath = `spacing.\${keyof SpacingPrimitives}`;
+export type RadiusTokenPath = `radius.\${keyof RadiusPrimitives}`;
+export type BlurTokenPath = `blur.\${keyof BlurPrimitives}`;
 
 export type TokenPath =
   | ColorTokenPath
@@ -337,79 +382,81 @@ export type TokenPath =
   | BlurTokenPath;
 
 export type SemanticTokenPath =
-  | `surface.${keyof SurfaceSemantics}`
-  | `text.${keyof TextSemantics}`
-  | `border.${keyof BorderSemantics}`
-  | `interactive.primary.${keyof InteractivePrimarySemantics}`
-  | `interactive.secondary.${keyof InteractiveSecondarySemantics}`
-  | `interactive.ghost.${keyof InteractiveGhostSemantics}`
-  | `status.${keyof StatusSemantics}`
-  | `soft.${keyof SoftSemantics}`;
+  | `surface.\${keyof SurfaceSemantics}`
+  | `text.\${keyof TextSemantics}`
+  | `border.\${keyof BorderSemantics}`
+  | `interactive.primary.\${keyof InteractivePrimarySemantics}`
+  | `interactive.secondary.\${keyof InteractiveSecondarySemantics}`
+  | `interactive.ghost.\${keyof InteractiveGhostSemantics}`
+  | `status.\${keyof StatusSemantics}`
+  | `soft.\${keyof SoftSemantics}`;
 
 // ============================================================================
 // CSS VARIABLE TYPES
 // ============================================================================
 
-export type CSSVariableName = `--${string}`;
+export type CSSVariableName = `--\${string}`;
 
 export interface CSSVariableMap {
   // Surface variables
-  "--surface-base": string;
-  "--surface-subtle": string;
-  "--surface-layer": string;
-  "--surface-primary": string;
-  "--surface-secondary": string;
-  "--surface-glass": string;
-  "--surface-sunken": string;
-  "--surface-overlay": string;
+  '--surface-base': string;
+  '--surface-subtle': string;
+  '--surface-layer': string;
+  '--surface-primary': string;
+  '--surface-secondary': string;
+  '--surface-glass': string;
+  '--surface-sunken': string;
+  '--surface-overlay': string;
 
   // Text variables
-  "--text-primary": string;
-  "--text-secondary": string;
-  "--text-tertiary": string;
-  "--text-inverse": string;
-  "--text-brand": string;
+  '--text-primary': string;
+  '--text-secondary': string;
+  '--text-tertiary': string;
+  '--text-inverse': string;
+  '--text-brand': string;
 
   // Interactive variables
-  "--interactive-primary": string;
-  "--interactive-primary-hover": string;
-  "--interactive-primary-text": string;
-  "--interactive-secondary": string;
-  "--interactive-secondary-hover": string;
-  "--interactive-secondary-text": string;
-  "--interactive-ghost-hover": string;
+  '--interactive-primary': string;
+  '--interactive-primary-hover': string;
+  '--interactive-primary-text': string;
+  '--interactive-secondary': string;
+  '--interactive-secondary-hover': string;
+  '--interactive-secondary-text': string;
+  '--interactive-ghost-hover': string;
 
   // Status variables
-  "--status-error": string;
-  "--status-success": string;
-  "--status-warning": string;
-  "--status-info": string;
+  '--status-error': string;
+  '--status-success': string;
+  '--status-warning': string;
+  '--status-info': string;
 
   // Border variables
-  "--border-subtle": string;
-  "--border-strong": string;
-  "--border-interactive": string;
+  '--border-subtle': string;
+  '--border-strong': string;
+  '--border-interactive': string;
 
-  // Spacing variables (sample - extend as needed)
-  "--spacing-0": string;
-  "--spacing-px": string;
-  "--spacing-1": string;
-  "--spacing-2": string;
-  "--spacing-3": string;
-  "--spacing-4": string;
-  "--spacing-6": string;
-  "--spacing-8": string;
-  "--spacing-16": string;
-  "--spacing-32": string;
+  // Spacing variables (sample)
+  '--spacing-0': string;
+  '--spacing-px': string;
+  '--spacing-1': string;
+  '--spacing-2': string;
+  '--spacing-3': string;
+  '--spacing-4': string;
+  '--spacing-6': string;
+  '--spacing-8': string;
+  '--spacing-16': string;
+  '--spacing-32': string;
 
   // Radius variables
-  "--radius-sm": string;
-  "--radius-md": string;
-  "--radius-lg": string;
-  "--radius-xl": string;
-  "--radius-2xl": string;
-  "--radius-full": string;
-  "--radius-control": string;
+  '--radius-sm': string;
+  '--radius-md': string;
+  '--radius-lg': string;
+  '--radius-xl': string;
+  '--radius-2xl': string;
+  '--radius-full': string;
+  '--radius-control': string;
+
+  [key: string]: any;
 }
 
 // ============================================================================
@@ -417,14 +464,12 @@ export interface CSSVariableMap {
 // ============================================================================
 
 /** Get nested property type from dot notation path */
-export type GetTokenValue<
-  T,
-  Path extends string,
-> = Path extends `${infer Key}.${infer Rest}`
-  ? Key extends keyof T
-    ? GetTokenValue<T[Key], Rest>
-    : never
-  : Path extends keyof T
+export type GetTokenValue<T, Path extends string> =
+  Path extends `${infer Key}.${infer Rest}`
+    ? Key extends keyof T
+      ? GetTokenValue<T[Key], Rest>
+      : never
+    : Path extends keyof T
     ? T[Path]
     : never;
 
