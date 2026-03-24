@@ -17,7 +17,7 @@
  * Use `renderItem` to render your custom items. See CollapsibleFolder stories and AgentFolder for examples.
  */
 
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import type { CollapsibleFolderProps } from "./CollapsibleFolder.types";
 import { Collapsible } from "../../components/Collapsible";
 import { Dropdown } from "../../components/Dropdown";
@@ -25,35 +25,57 @@ import { Badge } from "../../components/Badge";
 import { Button } from "../../components/Button";
 import { ChevronDown, MoreHorizontal } from "lucide-react";
 import { MissingDependencyError } from "../MissingDependencyError";
+import {
+  checkComponent,
+  type OptionalDepError,
+} from "../../utils/optionalDeps";
 import styles from "./CollapsibleFolder.module.css";
 
 // @dnd-kit imports with graceful error handling
 let useDroppable: any;
-let DndKitError: Error | null = null;
 
 try {
   const dndKit = require("@dnd-kit/core");
   useDroppable = dndKit.useDroppable;
 } catch (error) {
-  DndKitError =
-    error instanceof Error ? error : new Error("@dnd-kit/core not found");
+  // Fallback: require() can fail in ESM contexts
+  // Async validation will catch actual missing dependencies
 }
 
 export function CollapsibleFolder<
   TItem extends { id: string; draggable?: boolean },
 >(props: CollapsibleFolderProps<TItem>) {
-  // Show error if @dnd-kit packages are not installed
-  if (DndKitError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="CollapsibleFolder"
-        depName={["@dnd-kit/core", "@dnd-kit/sortable", "@dnd-kit/utilities"]}
-        installCommand="npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities"
-        pnpmCommand="pnpm add @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities"
-        docsUrl="https://docs.orion-ds.dev/components/collapsible-folder"
-      />
-    );
+  const [depError, setDepError] = useState<OptionalDepError | undefined>();
+  const [isChecking, setIsChecking] = useState(true);
+
+  useEffect(() => {
+    const checkDeps = async () => {
+      try {
+        const result = checkComponent("CollapsibleFolder");
+        if (result instanceof Promise) {
+          setDepError(await result);
+        } else {
+          setDepError(result);
+        }
+      } catch (error) {
+        // Fallback: assume deps available (optimistic)
+        setDepError(undefined);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkDeps();
+  }, []);
+
+  // Show error if deps missing
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  // Show loading while checking (optional - can skip if fast)
+  if (isChecking) {
+    return <div>Loading folder...</div>;
   }
   const {
     id,
