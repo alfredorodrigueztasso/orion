@@ -14,41 +14,63 @@
  * ```
  */
 
-import React, { useState, useCallback, useMemo } from "react";
+import React, { useState, useCallback, useMemo, useEffect } from "react";
 import { Calendar as CalendarIcon } from "lucide-react";
 import { Popover } from "../Popover";
 import { Calendar } from "../Calendar";
 import { Button } from "../Button";
 import { MissingDependencyError } from "../MissingDependencyError";
+import {
+  checkComponent,
+  type OptionalDepError,
+} from "../../utils/optionalDeps";
 import type { DateRange } from "../Calendar/Calendar.types";
 import type { DatePickerProps, DatePickerPreset } from "./DatePicker.types";
 import styles from "./DatePicker.module.css";
 
 // date-fns imports with graceful error handling
 let formatDate: any;
-let DateFnsError: Error | null = null;
 
 try {
   const dateFns = require("date-fns");
   formatDate = dateFns.format;
 } catch (error) {
-  DateFnsError =
-    error instanceof Error ? error : new Error("date-fns not found");
+  // Fallback: require() can fail in ESM contexts
+  // Async validation will catch actual missing dependencies
 }
 
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
-  // Show error if date-fns is not installed
-  if (DateFnsError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="DatePicker"
-        depName="date-fns"
-        installCommand="npm install date-fns"
-        pnpmCommand="pnpm add date-fns"
-        docsUrl="https://docs.orion-ds.dev/components/date-picker"
-      />
-    );
+  const [depError, setDepError] = useState<OptionalDepError | undefined>();
+  const [isChecking, setIsChecking] = useState(true);
+
+  useEffect(() => {
+    const checkDeps = async () => {
+      try {
+        const result = checkComponent("DatePicker");
+        if (result instanceof Promise) {
+          setDepError(await result);
+        } else {
+          setDepError(result);
+        }
+      } catch (error) {
+        // Fallback: assume deps available (optimistic)
+        setDepError(undefined);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkDeps();
+  }, []);
+
+  // Show error if deps missing
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  // Show loading while checking (optional - can skip if fast)
+  if (isChecking) {
+    return <div>Loading date picker...</div>;
   }
 
   const {
