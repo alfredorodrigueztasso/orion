@@ -159,7 +159,7 @@ function extractBrandKeys(brands: any): string[] {
  * Extract actual keys from typography sizes
  */
 function extractTypographySizeKeys(typog: any): string[] {
-  if (typog?.primitives?.typography?.size) {
+  if (typog?.typography?.size) {
     return Object.keys(typog.primitives.typography.size)
       .filter(k => !isNaN(parseInt(k)))
       .sort((a, b) => parseInt(a) - parseInt(b));
@@ -172,7 +172,7 @@ function extractTypographySizeKeys(typog: any): string[] {
 // ============================================================================
 
 // Extract real color shades from primary tokens
-const sampleColorShades = primaryTokens.primitives?.color?.brand?.orion || {};
+const sampleColorShades = primaryTokens.color?.brand?.orion || {};
 const colorShadesType = generateColorShadesType(sampleColorShades);
 
 // Extract real brands
@@ -188,7 +188,7 @@ const typographySizeInterface = typographySizes
   .join('\n');
 
 // Extract real spacing keys
-const spacingKeys = Object.keys(primaryTokens.primitives?.spacing || {})
+const spacingKeys = Object.keys(primaryTokens.spacing || {})
   .sort((a, b) => {
     if (a === 'px') return 1;
     if (b === 'px') return -1;
@@ -202,7 +202,7 @@ const spacingInterface = spacingKeys
   .join('\n');
 
 // Extract real radius keys
-const radiusKeys = Object.keys(primaryTokens.primitives?.radius || {})
+const radiusKeys = Object.keys(primaryTokens.radius || {})
   .sort((a, b) => a.localeCompare(b));
 const radiusInterface = radiusKeys
   .map(key => {
@@ -267,7 +267,7 @@ export interface ColorPrimitives {
   success: StatusColors;
   warning: StatusColors;
   info: StatusColors;
-  [key: string]: any;
+
 }
 
 export interface TypographyFamily {
@@ -351,7 +351,6 @@ export interface Primitives {
   radiusScale?: Record<string, any>;
   blur: BlurPrimitives;
   icon: IconPrimitives;
-  [key: string]: any;
 }
 
 // ============================================================================
@@ -439,7 +438,6 @@ export interface SoftSemantics {
   'warning-hover'?: string;
   info?: string;
   'info-hover'?: string;
-  [key: string]: any;
 }
 
 export interface SemanticTokens {
@@ -457,8 +455,6 @@ export interface SemanticTokens {
   gradient?: {
     start: string;
     end: string;
-  };
-  [key: string]: any;
 }
 
 // ============================================================================
