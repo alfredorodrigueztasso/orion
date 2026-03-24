@@ -183,8 +183,23 @@ function extractTypographySizeKeys(typog: any): string[] {
 const sampleColorShades = primaryTokens.color?.brand?.orion || {};
 const colorShadesType = generateColorShadesType(sampleColorShades);
 
+
+/**
+ * Validate that brands in brands.json match colors in primary.json
+ */
+function validateBrandConsistency(brands: string[], primaryTokens: any): void {
+  const primaryBrands = Object.keys(primaryTokens.color?.brand || {});
+  const missingInPrimary = brands.filter(b => !primaryBrands.includes(b));
+  const missingInBrands = primaryBrands.filter(b => !brands.includes(b));
+  if (missingInPrimary.length > 0)
+    console.warn(`⚠️  Brands in brands.json missing color shades in primary.json: ${missingInPrimary.join(', ')}`);
+  if (missingInBrands.length > 0)
+    console.warn(`⚠️  Color entries in primary.json not in brands.json: ${missingInBrands.join(', ')}`);
+}
+
 // Extract real brands
 const actualBrands = extractBrandKeys(brandsTokens);
+validateBrandConsistency(actualBrands, primaryTokens);
 const brandColorsInterface = actualBrands
   .map(brand => `  ${brand}: ColorShades;`)
   .join('\n');
