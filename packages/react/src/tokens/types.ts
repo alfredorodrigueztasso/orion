@@ -28,7 +28,6 @@ export interface BrandColors {
   deepblue: ColorShades;
   red: ColorShades;
   orange: ColorShades;
-  ember: ColorShades;
   lemon: ColorShades;
 }
 
@@ -76,7 +75,6 @@ export interface TypographyWeight {
 
 export interface TypographySize {
   10: string;
-  11: string;
   12: string;
   13: string;
   14: string;
@@ -140,18 +138,6 @@ export interface RadiusPrimitives {
   full: string;
 }
 
-export interface RadiusScalePrimitives {
-  0: string;
-  xs: string;
-  sm: string;
-  md: string;
-  lg: string;
-  "lg-2": string;
-  xl: string;
-  "2xl": string;
-  full: string;
-}
-
 export interface BlurPrimitives {
   sm: string;
   md: string;
@@ -171,23 +157,6 @@ export interface IconPrimitives {
   stroke: string;
 }
 
-export interface ZIndexPrimitives {
-  base: string;
-  dropdown: string;
-  sticky: string;
-  overlay: string;
-  modal: string;
-  popover: string;
-  tooltip: string;
-  toast: string;
-}
-
-export interface TransitionPrimitives {
-  fast: string;
-  normal: string;
-  slow: string;
-}
-
 export interface Primitives {
   project?: {
     name: string;
@@ -197,10 +166,7 @@ export interface Primitives {
   typography: TypographyPrimitives;
   spacing: SpacingPrimitives;
   radius: RadiusPrimitives;
-  radiusScale: RadiusScalePrimitives;
   blur: BlurPrimitives;
-  zIndex: ZIndexPrimitives;
-  transition: TransitionPrimitives;
   icon: IconPrimitives;
 }
 
@@ -225,11 +191,6 @@ export interface TextSemantics {
   tertiary: string;
   inverse: string;
   brand: string;
-  "on-brand"?: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
-  };
 }
 
 export interface BorderSemantics {
@@ -294,9 +255,6 @@ export interface SemanticTokens {
     start: string;
     end: string;
   };
-  chart?: {
-    [key: string]: string;
-  };
 }
 
 // ============================================================================
@@ -304,7 +262,7 @@ export interface SemanticTokens {
 // ============================================================================
 
 export type Theme = "light" | "dark";
-export type Brand = "orion" | "deepblue" | "red" | "orange" | "ember" | "lemon";
+export type Brand = "orion" | "deepblue" | "red" | "orange" | "lemon";
 
 export interface ThemeConfig {
   theme: Theme;
