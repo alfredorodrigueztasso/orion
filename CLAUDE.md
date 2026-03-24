@@ -185,7 +185,7 @@ npm run validate:preview-modules # ✅ Checks 92 preview modules successfully
 npm run build:release          # ✅ Builds 6 packages (omits docs-site)
 ```
 
-#### 4. Dynamic Token Type Generation (Mejora 4 - In Progress)
+#### 4. Dynamic Token Type Generation (Mejora 4 - Active)
 
 **Problem**: Original `scripts/generate-types.ts` hardcodes type definitions. When JSON tokens change, types fall out of sync, causing TypeScript errors.
 
@@ -226,12 +226,15 @@ ts-node scripts/generate-types-dynamic.ts
 ts-node scripts/generate-types.ts
 ```
 
-**Status**: ⏸️ **DEFERRED TO v5.3.0 (May 2026)**
+**Status**: ✅ **ACTIVE — v5.3.0**
 
-**Why deferred?** v5.2.0 (April 2026) uses the proven original `generate-types.ts` to maintain schedule reliability. Dynamic type generation requires 3 P1 fixes (error handling, type validation, brand consistency) that will be properly refactored and tested in v5.3.0 with more time.
+**Implementation**: v5.3.0 activates dynamic type generation with all 3 P1 fixes:
+1. **P1 Fix #1**: Error handling for missing/malformed token files (readTokenFile helper)
+2. **P1 Fix #2**: TypeScript validation of generated output (tsc --noEmit)
+3. **P1 Fix #3**: Brand consistency validation between brands.json and primary.json
 
-**v5.2.0 (April 11)**: Original `generate-types.ts` — stable, tested, reliable
-**v5.3.0 (May 9)**: Dynamic generation with all P1 fixes — proper refactoring, not rushed
+**v5.2.0 (March 24)**: Original `generate-types.ts` — baseline, stable
+**v5.3.0 (March 24)**: Dynamic generation with all P1 fixes — `build:tokens` runs both scripts
 
 **Files**:
 - `scripts/generate-types-dynamic.ts` (kept in repo for v5.3.0 reference, not active)
