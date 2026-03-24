@@ -45,38 +45,7 @@ try {
 export function CollapsibleFolder<
   TItem extends { id: string; draggable?: boolean },
 >(props: CollapsibleFolderProps<TItem>) {
-  const [depError, setDepError] = useState<OptionalDepError | undefined>();
-  const [isChecking, setIsChecking] = useState(true);
-
-  useEffect(() => {
-    const checkDeps = async () => {
-      try {
-        const result = checkComponent("CollapsibleFolder");
-        if (result instanceof Promise) {
-          setDepError(await result);
-        } else {
-          setDepError(result);
-        }
-      } catch (error) {
-        // Fallback: assume deps available (optimistic)
-        setDepError(undefined);
-      } finally {
-        setIsChecking(false);
-      }
-    };
-
-    checkDeps();
-  }, []);
-
-  // Show error if deps missing
-  if (depError) {
-    return <MissingDependencyError {...depError} />;
-  }
-
-  // Show loading while checking (optional - can skip if fast)
-  if (isChecking) {
-    return <div>Loading folder...</div>;
-  }
+  // FIRST: Props destructuring (needed for hook initialization)
   const {
     id,
     title,
@@ -103,11 +72,45 @@ export function CollapsibleFolder<
     ...rest
   } = props;
 
+  // FIRST (continued): Declare ALL hooks and refs
+  const [depError, setDepError] = useState<OptionalDepError | undefined>();
+  const [isChecking, setIsChecking] = useState(true);
   const [isExpanded, setIsExpanded] = useState(defaultExpanded);
   const [insertionIndex, setInsertionIndex] = useState<number | null>(null);
   const [isLocalDropTarget, setIsLocalDropTarget] = useState(false);
+
   const gridRef = useRef<HTMLDivElement>(null);
   const { setNodeRef } = useDroppable({ id });
+
+  // SECOND: useEffect for dependency checking
+  useEffect(() => {
+    const checkDeps = async () => {
+      try {
+        const result = checkComponent("CollapsibleFolder");
+        if (result instanceof Promise) {
+          setDepError(await result);
+        } else {
+          setDepError(result);
+        }
+      } catch (error) {
+        // Fallback: assume deps available (optimistic)
+        setDepError(undefined);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkDeps();
+  }, []);
+
+  // THIRD: Conditional rendering AFTER all hooks
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  if (isChecking) {
+    return <div>Loading folder...</div>;
+  }
 
   const handleDragOver = (e: React.DragEvent<HTMLDivElement>) => {
     e.preventDefault();

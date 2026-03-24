@@ -74,9 +74,44 @@ function rotateArray<T>(arr: T[], n: number): T[] {
 }
 
 export const Calendar: React.FC<CalendarProps> = (props) => {
+  // FIRST: Props destructuring (needed for hook initialization)
+  const {
+    mode = "single",
+    min,
+    max,
+    disabled,
+    weekStartsOn = 0,
+    showOutsideDays = true,
+    className,
+    ...rest
+  } = props;
+
+  // Remove non-DOM props before spreading
+  const {
+    selected: _s,
+    onSelect: _o,
+    ...domProps
+  } = rest as Record<string, unknown>;
+
+  // FIRST (continued): Declare ALL hooks
   const [depError, setDepError] = useState<OptionalDepError | undefined>();
   const [isChecking, setIsChecking] = useState(true);
+  const [currentMonth, setCurrentMonth] = useState(() => {
+    if (
+      mode === "single" &&
+      props.mode !== "range" &&
+      props.mode !== "multiple" &&
+      props.selected
+    ) {
+      return startOfMonth(props.selected);
+    }
+    if (mode === "range" && props.mode === "range" && props.selected?.from) {
+      return startOfMonth(props.selected.from);
+    }
+    return startOfMonth(new Date());
+  });
 
+  // SECOND: useEffect for dependency checking
   useEffect(() => {
     const checkDeps = async () => {
       try {
@@ -96,49 +131,6 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
 
     checkDeps();
   }, []);
-
-  // Show error if deps missing
-  if (depError) {
-    return <MissingDependencyError {...depError} />;
-  }
-
-  // Show loading while checking (optional - can skip if fast)
-  if (isChecking) {
-    return <div>Loading calendar...</div>;
-  }
-
-  const {
-    mode = "single",
-    min,
-    max,
-    disabled,
-    weekStartsOn = 0,
-    showOutsideDays = true,
-    className,
-    ...rest
-  } = props;
-
-  // Remove non-DOM props before spreading
-  const {
-    selected: _s,
-    onSelect: _o,
-    ...domProps
-  } = rest as Record<string, unknown>;
-
-  const [currentMonth, setCurrentMonth] = useState(() => {
-    if (
-      mode === "single" &&
-      props.mode !== "range" &&
-      props.mode !== "multiple" &&
-      props.selected
-    ) {
-      return startOfMonth(props.selected);
-    }
-    if (mode === "range" && props.mode === "range" && props.selected?.from) {
-      return startOfMonth(props.selected.from);
-    }
-    return startOfMonth(new Date());
-  });
 
   // Generate days grid
   const days = useMemo(() => {
@@ -288,10 +280,21 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
     return classes.join(" ");
   };
 
+  // More hooks before conditional rendering
+  const monthLabelId = useId();
+
+  // THIRD: Conditional rendering AFTER all hooks
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  if (isChecking) {
+    return <div>Loading calendar...</div>;
+  }
+
   const calendarClasses = [styles.calendar, className]
     .filter(Boolean)
     .join(" ");
-  const monthLabelId = useId();
 
   return (
     <div className={calendarClasses} {...domProps}>

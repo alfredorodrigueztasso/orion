@@ -99,20 +99,18 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
   style,
   ...rest
 }) => {
+  // FIRST: Declare ALL hooks
   const { depError, isChecking } = useChartDeps();
+  const { resolvedConfig, resolvedColorVars } = useResolvedChartColors(config);
 
-  // Show error if deps missing
+  // SECOND: Conditional rendering AFTER all hooks
   if (depError) {
     return <MissingDependencyError {...depError} />;
   }
 
-  // Show loading while checking (optional - can skip if fast)
   if (isChecking) {
     return <div>Loading chart...</div>;
   }
-
-  // Resolve CSS variable chains to concrete hex values for SVG compatibility
-  const { resolvedConfig, resolvedColorVars } = useResolvedChartColors(config);
 
   const containerClasses = [styles.container, className]
     .filter(Boolean)
@@ -150,19 +148,18 @@ export const ChartTooltipContent: React.FC<ChartTooltipContentProps> = ({
   formatter,
   className,
 }) => {
+  // FIRST: Declare ALL hooks
   const { depError, isChecking } = useChartDeps();
+  const config = useContext(ChartContext);
 
-  // Show error if deps missing
+  // SECOND: Conditional rendering AFTER all hooks
   if (depError) {
     return <MissingDependencyError {...depError} />;
   }
 
-  // Show loading while checking (optional - can skip if fast)
   if (isChecking) {
     return null;
   }
-
-  const config = useContext(ChartContext);
 
   if (!active || !payload?.length) return null;
 
@@ -218,19 +215,18 @@ export const ChartLegendContent: React.FC<ChartLegendContentProps> = ({
   payload,
   className,
 }) => {
+  // FIRST: Declare ALL hooks
   const { depError, isChecking } = useChartDeps();
+  const config = useContext(ChartContext);
 
-  // Show error if deps missing
+  // SECOND: Conditional rendering AFTER all hooks
   if (depError) {
     return <MissingDependencyError {...depError} />;
   }
 
-  // Show loading while checking (optional - can skip if fast)
   if (isChecking) {
     return null;
   }
-
-  const config = useContext(ChartContext);
 
   if (!payload?.length) return null;
 
@@ -281,14 +277,14 @@ export const ChartGradient: React.FC<ChartGradientProps> = ({
   startOpacity = 0.4,
   endOpacity = 0.05,
 }) => {
+  // FIRST: Declare ALL hooks
   const { depError, isChecking } = useChartDeps();
 
-  // Show error if deps missing
+  // SECOND: Conditional rendering AFTER all hooks
   if (depError) {
     return <MissingDependencyError {...depError} />;
   }
 
-  // Show loading while checking (optional - can skip if fast)
   if (isChecking) {
     return null;
   }

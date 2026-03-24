@@ -83,9 +83,25 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     },
     ref,
   ) => {
+    // FIRST: Declare ALL hooks and refs
     const [depError, setDepError] = useState<OptionalDepError | undefined>();
     const [isChecking, setIsChecking] = useState(true);
+    const [currentLine, setCurrentLine] = useState(0);
+    const [lineHeights, setLineHeights] = useState<number[]>([]);
 
+    const lineNumbersRef = useRef<HTMLDivElement>(null);
+    const highlightRef = useRef<HTMLDivElement>(null);
+    const mirrorRef = useRef<HTMLDivElement>(null);
+    const editorAreaRef = useRef<HTMLDivElement>(null);
+    const internalTextareaRef = useRef<HTMLTextAreaElement>(null);
+    const nextCursor = useRef<{ start: number; end: number } | null>(null);
+
+    // Use provided ref or internal ref
+    const textareaRef =
+      (ref as React.MutableRefObject<HTMLTextAreaElement | null>) ||
+      internalTextareaRef;
+
+    // SECOND: useEffect for dependency checking
     useEffect(() => {
       const checkDeps = async () => {
         try {
@@ -105,45 +121,6 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
 
       checkDeps();
     }, []);
-
-    // Show error if deps missing
-    if (depError) {
-      return <MissingDependencyError {...depError} />;
-    }
-
-    // Show loading while checking (optional - can skip if fast)
-    if (isChecking) {
-      return <div>Loading code editor...</div>;
-    }
-
-    const lineNumbersRef = useRef<HTMLDivElement>(null);
-    const highlightRef = useRef<HTMLDivElement>(null);
-    const mirrorRef = useRef<HTMLDivElement>(null);
-    const editorAreaRef = useRef<HTMLDivElement>(null);
-    const internalTextareaRef = useRef<HTMLTextAreaElement>(null);
-    const nextCursor = useRef<{ start: number; end: number } | null>(null);
-
-    // Use provided ref or internal ref
-    const textareaRef =
-      (ref as React.MutableRefObject<HTMLTextAreaElement | null>) ||
-      internalTextareaRef;
-
-    // Current line tracking for line highlight
-    const [currentLine, setCurrentLine] = useState(0);
-    const [lineHeights, setLineHeights] = useState<number[]>([]);
-
-    // Get theme for syntax highlighting
-    let currentTheme = "dark";
-    try {
-      const ctx = useThemeContext();
-      currentTheme = ctx.theme;
-    } catch {
-      // outside ThemeProvider — use dark
-    }
-    const highlightStyle = currentTheme === "light" ? oneLight : oneDark;
-
-    // Calculate number of lines
-    const lineCount = Math.max(value.split("\n").length, minRows);
 
     // Restore cursor position after React re-render
     useEffect(() => {
@@ -205,6 +182,28 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
         };
       }
     }, [textareaRef]);
+
+    // Get theme for syntax highlighting
+    let currentTheme = "dark";
+    try {
+      const ctx = useThemeContext();
+      currentTheme = ctx.theme;
+    } catch {
+      // outside ThemeProvider — use dark
+    }
+    const highlightStyle = currentTheme === "light" ? oneLight : oneDark;
+
+    // Calculate number of lines
+    const lineCount = Math.max(value.split("\n").length, minRows);
+
+    // THIRD: Conditional rendering AFTER all hooks
+    if (depError) {
+      return <MissingDependencyError {...depError} />;
+    }
+
+    if (isChecking) {
+      return <div>Loading code editor...</div>;
+    }
 
     // Track current line for highlight
     const updateCurrentLine = (textarea: HTMLTextAreaElement) => {

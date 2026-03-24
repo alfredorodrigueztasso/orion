@@ -40,39 +40,7 @@ try {
 }
 
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
-  const [depError, setDepError] = useState<OptionalDepError | undefined>();
-  const [isChecking, setIsChecking] = useState(true);
-
-  useEffect(() => {
-    const checkDeps = async () => {
-      try {
-        const result = checkComponent("DatePicker");
-        if (result instanceof Promise) {
-          setDepError(await result);
-        } else {
-          setDepError(result);
-        }
-      } catch (error) {
-        // Fallback: assume deps available (optimistic)
-        setDepError(undefined);
-      } finally {
-        setIsChecking(false);
-      }
-    };
-
-    checkDeps();
-  }, []);
-
-  // Show error if deps missing
-  if (depError) {
-    return <MissingDependencyError {...depError} />;
-  }
-
-  // Show loading while checking (optional - can skip if fast)
-  if (isChecking) {
-    return <div>Loading date picker...</div>;
-  }
-
+  // FIRST: Props destructuring (needed for hook initialization)
   const {
     mode = "single",
     min,
@@ -86,6 +54,9 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
     className,
   } = props;
 
+  // FIRST (continued): Declare ALL hooks - BEFORE conditionals
+  const [depError, setDepError] = useState<OptionalDepError | undefined>();
+  const [isChecking, setIsChecking] = useState(true);
   const [open, setOpen] = useState(false);
 
   // Format the display text
@@ -146,6 +117,36 @@ export const DatePicker: React.FC<DatePickerProps> = (props) => {
     },
     [mode, props],
   );
+
+  // SECOND: useEffect for dependency checking
+  useEffect(() => {
+    const checkDeps = async () => {
+      try {
+        const result = checkComponent("DatePicker");
+        if (result instanceof Promise) {
+          setDepError(await result);
+        } else {
+          setDepError(result);
+        }
+      } catch (error) {
+        // Fallback: assume deps available (optimistic)
+        setDepError(undefined);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkDeps();
+  }, []);
+
+  // THIRD: Conditional rendering AFTER all hooks
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  if (isChecking) {
+    return <div>Loading date picker...</div>;
+  }
 
   const triggerClasses = [styles.trigger, triggerClassName]
     .filter(Boolean)
