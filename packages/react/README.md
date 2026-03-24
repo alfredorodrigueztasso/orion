@@ -14,7 +14,7 @@ TypeScript-first React component library built on the Orion Design System. Featu
 - 🤖 **AI-First Design** - Optimized for AI/LLM code generation (see AI_GUIDE.md)
 - ✅ **70+ Components** - Fully typed with IntelliSense support
 - 📐 **25+ Sections** - Pre-built page sections (Hero, Features, Pricing, etc.)
-- 📄 **8 Templates** - Complete page templates (Dashboard, Login, Profile, Settings, Chat, etc.)
+- 📄 **7 Templates** - Complete page templates (Dashboard, Login, Profile, Settings, Chat, etc.)
 - 🎨 **Theme Switching** - Light/Dark modes with CSS variables
 - 🏢 **Multi-Brand** - orion, red, deepblue, orange, lemon brands
 - 🎯 **Lucide Icons** - 5000+ icons built-in
@@ -279,7 +279,6 @@ console.warn('Missing fonts:', missing);
 
 ### AI & Collaboration
 
-- **Chat** - Conversational UI component
 - **AgentCard** - Agent profile card
 - **CommandBar** - Command palette
 - **NotificationCenter** - Notification management
@@ -331,7 +330,6 @@ Complete full-page templates ready to use:
 | `LoginTemplate`       | Authentication and login flows                    |
 | `ProfilePageTemplate` | User profile pages                                |
 | `SettingsTemplate`    | Settings and preferences pages                    |
-| `ChatPageTemplate`    | AI chat interface and conversations               |
 | `AgentWorkspace`      | AI agent builder and management                   |
 | `AgentEditor`         | AI agent configuration editor                     |
 | `KanbanPageTemplate`  | Kanban board for task management                  |
@@ -409,7 +407,6 @@ These components require optional peer dependencies. Install only what you need:
 | `@orion-ds/react/calendar` | `Calendar`, `DatePicker`                        | `date-fns`                                                 | `npm install date-fns`                                           |
 | `@orion-ds/react/editor`   | `CodeEditor`                                    | `react-syntax-highlighter`                                 | `npm install react-syntax-highlighter`                           |
 | `@orion-ds/react/dnd`      | `CollapsibleFolder`, `KanbanBoard`              | `@dnd-kit/core`, `@dnd-kit/sortable`, `@dnd-kit/utilities` | `npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities` |
-| `@orion-ds/react/rich`     | `Chat`, `RichText`                              | `react-markdown`, `remark-gfm`, `react-syntax-highlighter` | `npm install react-markdown remark-gfm react-syntax-highlighter` |
 
 ```typescript
 // Only import if you've installed the peer dependency
@@ -417,7 +414,6 @@ import { ChartContainer } from "@orion-ds/react/chart"; // requires recharts
 import { Calendar } from "@orion-ds/react/calendar"; // requires date-fns
 import { CodeEditor } from "@orion-ds/react/editor"; // requires react-syntax-highlighter
 import { CollapsibleFolder } from "@orion-ds/react/dnd"; // requires @dnd-kit/*
-import { Chat } from "@orion-ds/react/rich"; // requires react-markdown
 ```
 
 ### Sections & Templates
