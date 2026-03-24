@@ -17,6 +17,7 @@
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
+import { execSync } from 'child_process';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -646,6 +647,20 @@ fs.writeFileSync(
   typesContent,
   'utf-8'
 );
+
+// Validate generated types.ts with TypeScript compiler
+const generatedFile = path.join(OUTPUT_DIR, 'types.ts');
+console.log('🔍 Validating generated types.ts...');
+try {
+  execSync(
+    `npx tsc --noEmit --strict --target ES2020 --module ESNext --moduleResolution bundler "${generatedFile}"`,
+    { stdio: 'inherit', cwd: path.join(__dirname, '..') }
+  );
+  console.log('✅ types.ts is valid TypeScript');
+} catch {
+  console.error('❌ Generated types.ts has TypeScript errors — check output above');
+  process.exit(1);
+}
 
 console.log('✅ Dynamic type generation completed');
 console.log(\`📝 Generated: \${path.join(OUTPUT_DIR, 'types.ts')}\`);
