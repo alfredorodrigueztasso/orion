@@ -66,6 +66,28 @@ export const lightTheme: ThemeConfig = {
       warning: "color-mix(in srgb, {color.warning.500} 10%, transparent)",
       info: "color-mix(in srgb, {color.info.500} 10%, transparent)",
     },
+    alert: {
+      success: {
+        bg: "{color.success.100}",
+        text: "{color.success.700}",
+        border: "{color.success.500}",
+      },
+      error: {
+        bg: "{color.error.100}",
+        text: "{color.error.700}",
+        border: "{color.error.500}",
+      },
+      warning: {
+        bg: "{color.warning.100}",
+        text: "{color.warning.700}",
+        border: "{color.warning.500}",
+      },
+      info: {
+        bg: "{color.info.100}",
+        text: "{color.info.700}",
+        border: "{color.info.500}",
+      },
+    },
     focus: {
       ring: "0 0 0 3px color-mix(in srgb, {color.brand.500} 40%, transparent)",
     },
@@ -141,6 +163,28 @@ export const darkTheme: ThemeConfig = {
       error: "color-mix(in srgb, {color.error.500} 15%, transparent)",
       warning: "color-mix(in srgb, {color.warning.500} 15%, transparent)",
       info: "color-mix(in srgb, {color.info.500} 15%, transparent)",
+    },
+    alert: {
+      success: {
+        bg: "color-mix(in srgb, {color.success.500} 20%, transparent)",
+        text: "{color.success.300}",
+        border: "{color.success.500}",
+      },
+      error: {
+        bg: "color-mix(in srgb, {color.error.500} 20%, transparent)",
+        text: "{color.error.300}",
+        border: "{color.error.500}",
+      },
+      warning: {
+        bg: "color-mix(in srgb, {color.warning.500} 20%, transparent)",
+        text: "{color.warning.300}",
+        border: "{color.warning.500}",
+      },
+      info: {
+        bg: "color-mix(in srgb, {color.info.500} 20%, transparent)",
+        text: "{color.info.300}",
+        border: "{color.info.500}",
+      },
     },
     focus: {
       ring: "0 0 0 3px color-mix(in srgb, {color.brand.500} 50%, transparent)",

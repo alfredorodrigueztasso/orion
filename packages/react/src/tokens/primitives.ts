@@ -66,19 +66,6 @@ export const primitives: Primitives = {
         "900": "#8c3513",
         "950": "#59220c",
       },
-      ember: {
-        "50": "#fef0eb",
-        "100": "#fdd5c9",
-        "200": "#fcb9a5",
-        "300": "#fa9d80",
-        "400": "#f87d52",
-        "500": "#F15D22",
-        "600": "#d9531f",
-        "700": "#c0491b",
-        "800": "#a63f17",
-        "900": "#8c3513",
-        "950": "#59220c",
-      },
       lemon: {
         "50": "#F4FFE6",
         "100": "#E5FFCC",
@@ -124,16 +111,28 @@ export const primitives: Primitives = {
       "1000": "#000000",
     },
     error: {
+      "100": "#fee2e2",
+      "300": "#fca5a5",
       "500": "#ef4444",
+      "700": "#b91c1c",
     },
     success: {
+      "100": "#dcfce7",
+      "300": "#86efac",
       "500": "#22c55e",
+      "700": "#15803d",
     },
     warning: {
+      "100": "#fef9c3",
+      "300": "#fde047",
       "500": "#eab308",
+      "700": "#a16207",
     },
     info: {
+      "100": "#dbeafe",
+      "300": "#93c5fd",
       "500": "#3b82f6",
+      "700": "#1d4ed8",
     },
   },
   typography: {
@@ -195,12 +194,14 @@ export const primitives: Primitives = {
   },
   radius: {
     "0": "0px",
+    xs: "4px",
     sm: "8px",
     md: "12px",
     lg: "16px",
     "lg-2": "20px",
     xl: "24px",
     "2xl": "32px",
+    "3xl": "36px",
     full: "9999px",
   },
   radiusScale: {

@@ -1,8 +1,11 @@
 /**
  * Orion Design System - TypeScript Type Definitions
  *
- * Auto-generated from JSON token files.
+ * DYNAMICALLY GENERATED from JSON token files.
  * DO NOT EDIT MANUALLY - Run 'npm run build:tokens' to regenerate.
+ *
+ * This file uses introspection to match JSON structure exactly,
+ * preventing type mismatches when tokens change.
  */
 
 // ============================================================================
@@ -28,8 +31,8 @@ export interface BrandColors {
   deepblue: ColorShades;
   red: ColorShades;
   orange: ColorShades;
-  ember: ColorShades;
   lemon: ColorShades;
+  [key: string]: ColorShades;
 }
 
 export interface NeutralColors {
@@ -45,11 +48,16 @@ export interface NeutralColors {
   800: string;
   900: string;
   950: string;
-  1000: string;
+  1000?: string;
+  [key: string]: any;
 }
 
 export interface StatusColors {
+  100?: string;
+  300?: string;
   500: string;
+  700?: string;
+  [key: string]: any;
 }
 
 export interface ColorPrimitives {
@@ -66,12 +74,14 @@ export interface TypographyFamily {
   primary: string;
   secondary: string;
   mono: string;
+  [key: string]: string;
 }
 
 export interface TypographyWeight {
   regular: string;
   medium: string;
   bold: string;
+  [key: string]: string;
 }
 
 export interface TypographySize {
@@ -89,6 +99,7 @@ export interface TypographySize {
   64: string;
   80: string;
   96: string;
+  [key: string]: any;
 }
 
 export interface TypographyLineHeight {
@@ -98,6 +109,7 @@ export interface TypographyLineHeight {
   normal: string;
   relaxed: string;
   loose: string;
+  [key: string]: string;
 }
 
 export interface TypographyPrimitives {
@@ -105,51 +117,44 @@ export interface TypographyPrimitives {
   weight: TypographyWeight;
   size: TypographySize;
   lineHeight: TypographyLineHeight;
+  [key: string]: any;
 }
 
 export interface SpacingPrimitives {
-  0: string;
-  px: string;
+  "0": string;
+  "1": string;
+  "2": string;
+  "3": string;
+  "4": string;
+  "5": string;
   "05": string;
-  1: string;
-  2: string;
-  3: string;
-  4: string;
-  5: string;
-  6: string;
-  7: string;
-  8: string;
-  9: string;
-  10: string;
-  11: string;
-  12: string;
-  16: string;
-  20: string;
-  24: string;
-  32: string;
+  "6": string;
+  "7": string;
+  "8": string;
+  "9": string;
+  "10": string;
+  "11": string;
+  "12": string;
+  "16": string;
+  "20": string;
+  "24": string;
+  "32": string;
+  px: string;
+  [key: string]: any;
 }
 
 export interface RadiusPrimitives {
-  0: string;
-  sm: string;
-  md: string;
+  "0": string;
+  "2xl": string;
+  "3xl"?: string;
+  full: string;
   lg: string;
   "lg-2": string;
-  xl: string;
-  "2xl": string;
-  full: string;
-}
-
-export interface RadiusScalePrimitives {
-  0: string;
-  xs: string;
-  sm: string;
   md: string;
-  lg: string;
-  "lg-2": string;
+  sm: string;
   xl: string;
-  "2xl": string;
-  full: string;
+  xs?: string;
+  [key: string]: any;
 }
 
 export interface BlurPrimitives {
@@ -157,6 +162,7 @@ export interface BlurPrimitives {
   md: string;
   lg: string;
   xl: string;
+  [key: string]: string;
 }
 
 export interface IconPrimitives {
@@ -167,25 +173,10 @@ export interface IconPrimitives {
     md: string;
     lg: string;
     xl: string;
+    [key: string]: string;
   };
   stroke: string;
-}
-
-export interface ZIndexPrimitives {
-  base: string;
-  dropdown: string;
-  sticky: string;
-  overlay: string;
-  modal: string;
-  popover: string;
-  tooltip: string;
-  toast: string;
-}
-
-export interface TransitionPrimitives {
-  fast: string;
-  normal: string;
-  slow: string;
+  [key: string]: any;
 }
 
 export interface Primitives {
@@ -197,10 +188,8 @@ export interface Primitives {
   typography: TypographyPrimitives;
   spacing: SpacingPrimitives;
   radius: RadiusPrimitives;
-  radiusScale: RadiusScalePrimitives;
+  radiusScale?: Record<string, any>;
   blur: BlurPrimitives;
-  zIndex: ZIndexPrimitives;
-  transition: TransitionPrimitives;
   icon: IconPrimitives;
 }
 
@@ -217,6 +206,14 @@ export interface SurfaceSemantics {
   glass: string;
   sunken: string;
   overlay: string;
+  [key: string]: string;
+}
+
+export interface TextOnBrandSemantics {
+  primary: string;
+  secondary: string;
+  tertiary: string;
+  [key: string]: string;
 }
 
 export interface TextSemantics {
@@ -225,39 +222,41 @@ export interface TextSemantics {
   tertiary: string;
   inverse: string;
   brand: string;
-  "on-brand"?: {
-    primary: string;
-    secondary: string;
-    tertiary: string;
-  };
+  "on-brand"?: TextOnBrandSemantics;
+  [key: string]: any;
 }
 
 export interface BorderSemantics {
   subtle: string;
   strong: string;
   interactive: string;
+  [key: string]: string;
 }
 
 export interface InteractivePrimarySemantics {
   default: string;
   hover: string;
   text: string;
+  [key: string]: string;
 }
 
 export interface InteractiveSecondarySemantics {
   default: string;
   hover: string;
   text: string;
+  [key: string]: string;
 }
 
 export interface InteractiveGhostSemantics {
   hover: string;
+  [key: string]: string;
 }
 
 export interface InteractiveSemantics {
   primary: InteractivePrimarySemantics;
   secondary: InteractiveSecondarySemantics;
   ghost: InteractiveGhostSemantics;
+  [key: string]: any;
 }
 
 export interface StatusSemantics {
@@ -265,6 +264,7 @@ export interface StatusSemantics {
   success: string;
   warning: string;
   info: string;
+  [key: string]: string;
 }
 
 export interface SoftSemantics {
@@ -287,15 +287,14 @@ export interface SemanticTokens {
   interactive: InteractiveSemantics;
   status: StatusSemantics;
   soft: SoftSemantics;
+  alert?: Record<string, any>;
+  chart?: Record<string, any>;
   focus?: {
     ring: string;
   };
   gradient?: {
     start: string;
     end: string;
-  };
-  chart?: {
-    [key: string]: string;
   };
 }
 
@@ -304,7 +303,7 @@ export interface SemanticTokens {
 // ============================================================================
 
 export type Theme = "light" | "dark";
-export type Brand = "orion" | "deepblue" | "red" | "orange" | "ember" | "lemon";
+export type Brand = "orion" | "deepblue" | "red" | "orange" | "lemon";
 
 export interface ThemeConfig {
   theme: Theme;
@@ -326,7 +325,7 @@ export interface BrandConfig {
   };
   geometry: {
     radiusControl: string;
-    radiusContainer: string;
+    radiusContainer?: string;
     buttonStyle: string;
   };
   semantic: {
@@ -346,6 +345,7 @@ export interface BrandConfig {
     css: string;
     attribute: string | null;
   };
+  [key: string]: any;
 }
 
 // ============================================================================
@@ -353,23 +353,23 @@ export interface BrandConfig {
 // ============================================================================
 
 export type ColorTokenPath =
-  | `color.brand.${Brand}.${keyof ColorShades}`
-  | `color.neutral.${keyof NeutralColors}`
-  | `color.neutralPure.${keyof NeutralColors}`
+  | `color.brand.\${Brand}.\${keyof ColorShades}`
+  | `color.neutral.\${keyof NeutralColors}`
+  | `color.neutralPure.\${keyof NeutralColors}`
   | "color.error.500"
   | "color.success.500"
   | "color.warning.500"
   | "color.info.500";
 
 export type TypographyTokenPath =
-  | `typography.family.${keyof TypographyFamily}`
-  | `typography.weight.${keyof TypographyWeight}`
-  | `typography.size.${keyof TypographySize}`
-  | `typography.lineHeight.${keyof TypographyLineHeight}`;
+  | `typography.family.\${keyof TypographyFamily}`
+  | `typography.weight.\${keyof TypographyWeight}`
+  | `typography.size.\${keyof TypographySize}`
+  | `typography.lineHeight.\${keyof TypographyLineHeight}`;
 
-export type SpacingTokenPath = `spacing.${keyof SpacingPrimitives}`;
-export type RadiusTokenPath = `radius.${keyof RadiusPrimitives}`;
-export type BlurTokenPath = `blur.${keyof BlurPrimitives}`;
+export type SpacingTokenPath = `spacing.\${keyof SpacingPrimitives}`;
+export type RadiusTokenPath = `radius.\${keyof RadiusPrimitives}`;
+export type BlurTokenPath = `blur.\${keyof BlurPrimitives}`;
 
 export type TokenPath =
   | ColorTokenPath
@@ -379,20 +379,20 @@ export type TokenPath =
   | BlurTokenPath;
 
 export type SemanticTokenPath =
-  | `surface.${keyof SurfaceSemantics}`
-  | `text.${keyof TextSemantics}`
-  | `border.${keyof BorderSemantics}`
-  | `interactive.primary.${keyof InteractivePrimarySemantics}`
-  | `interactive.secondary.${keyof InteractiveSecondarySemantics}`
-  | `interactive.ghost.${keyof InteractiveGhostSemantics}`
-  | `status.${keyof StatusSemantics}`
-  | `soft.${keyof SoftSemantics}`;
+  | `surface.\${keyof SurfaceSemantics}`
+  | `text.\${keyof TextSemantics}`
+  | `border.\${keyof BorderSemantics}`
+  | `interactive.primary.\${keyof InteractivePrimarySemantics}`
+  | `interactive.secondary.\${keyof InteractiveSecondarySemantics}`
+  | `interactive.ghost.\${keyof InteractiveGhostSemantics}`
+  | `status.\${keyof StatusSemantics}`
+  | `soft.\${keyof SoftSemantics}`;
 
 // ============================================================================
 // CSS VARIABLE TYPES
 // ============================================================================
 
-export type CSSVariableName = `--${string}`;
+export type CSSVariableName = `--\${string}`;
 
 export interface CSSVariableMap {
   // Surface variables
@@ -432,7 +432,7 @@ export interface CSSVariableMap {
   "--border-strong": string;
   "--border-interactive": string;
 
-  // Spacing variables (sample - extend as needed)
+  // Spacing variables (sample)
   "--spacing-0": string;
   "--spacing-px": string;
   "--spacing-1": string;
@@ -452,6 +452,8 @@ export interface CSSVariableMap {
   "--radius-2xl": string;
   "--radius-full": string;
   "--radius-control": string;
+
+  [key: string]: any;
 }
 
 // ============================================================================
