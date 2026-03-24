@@ -60,10 +60,25 @@ public/r/
 !.claude/skills/
 !.claude/skills/**
 
-# Local work documents
+# Session work documents (AI-generated, not project docs)
+CHAT_REMOVAL_*.md
+CHAT_REMOVAL_*.txt
+POSTMORTEM_*.md
+STATUS_UPDATE_*.md
+*_FIX_CHECKLIST.md
 ARCHITECTURE_REVIEW*.md
 TIER3_*.md
-US-3.3-*.md
+US-*.md
+INSTALLATION_ROADMAP.md
+MIGRATION_v*.md
+
+# Ad-hoc analysis scripts
+packages/react/ai-first-analysis.js
+packages/react/analyze-structure.js
+
+# Generated reports (analysis artifacts)
+packages/react/*-report.json
+packages/react/structure-analysis-*.json
 
 # Examples and local reports
 examples/lucide-icons-example.tsx

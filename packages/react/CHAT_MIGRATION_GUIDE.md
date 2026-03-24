@@ -73,11 +73,6 @@ function ChatInterface() {
 }
 ```
 
-### Option 3: Keep Using Until v5.2.0
-
-Chat continues to work in all v5.x releases. No breaking changes until April 2026.
-Import stays as-is: `import { Chat } from '@orion-ds/react/rich'`
-
 ## Questions?
 
 Open a discussion on GitHub or check `CLAUDE.md` for alternatives.

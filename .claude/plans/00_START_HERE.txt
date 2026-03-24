@@ -1,0 +1,342 @@
+================================================================================
+v5.3.0 APPROACH B IMPLEMENTATION PLAN - START HERE
+================================================================================
+
+STATUS: ✅ READY FOR FRONTEND DEVELOPER EXECUTION
+DATE: 2026-03-24
+TARGET: April 8-12, 2026 (5 days, 7 hours work)
+RELEASE: April 15, 2026
+
+================================================================================
+WHAT IS THIS?
+================================================================================
+
+Complete implementation plan for resolving template literal compilation error
+in TypeScript type generation using APPROACH B (separate runtime from types).
+
+Architect has approved APPROACH B strategy.
+All risks identified and mitigated.
+All success criteria defined.
+
+You have everything you need to succeed.
+
+================================================================================
+QUICK SUMMARY
+================================================================================
+
+PROBLEM:  ERR_INVALID_TYPESCRIPT_SYNTAX in generate-types-dynamic.ts
+CAUSE:    ts-node cannot distinguish type-level ${Type} from runtime ${var}
+SOLUTION: APPROACH B - separate type generation from type definitions
+IMPACT:   Unblocks 3+ months of type-safe development
+
+THREE FILES:
+  1. generate-types-dynamic.ts   → string generator (never executes output)
+  2. types.ts (generated)         → type definitions (TypeScript compiler only)
+  3. tokens-runtime.ts (new)      → runtime utilities (only file imported)
+
+RESULT:   ✅ Template literals work, types auto-sync with JSON
+
+================================================================================
+TIMELINE
+================================================================================
+
+MONDAY, APRIL 8     → APPROACH B refactoring                    (2.5 hours)
+TUESDAY, APRIL 9    → P1 Fixes + tokens-runtime.ts            (2.0 hours)
+WEDNESDAY, APRIL 10 → Smoke tests (5 tests)                    (1.5 hours)
+THURSDAY, APRIL 11  → Documentation + PR                       (1.0 hour)
+FRIDAY, APRIL 12    → Merge to main + release prep             (included)
+
+TOTAL: 7 hours (in 9-hour sprint) = 2-hour buffer built in
+
+================================================================================
+DOCUMENTS IN THIS FOLDER
+================================================================================
+
+1. 00_START_HERE.txt ← YOU ARE HERE
+   Quick reference, navigation guide
+
+2. README.md ⭐ READ THIS NEXT
+   Overview, quick start, getting help
+
+3. V5_3_0_PLAN_INDEX.md
+   Complete navigation and document structure
+
+4. V5_3_0_EXECUTIVE_SUMMARY.md
+   High-level overview (mission, timeline, success criteria)
+
+5. V5_3_0_IMPLEMENTATION_PLAN_APRIL_8_12.md ⭐⭐⭐ MAIN DOCUMENT
+   Hour-by-hour breakdown with exact commands
+   THIS IS WHAT YOU WILL FOLLOW DURING IMPLEMENTATION
+
+6. V5_3_0_SUCCESS_CRITERIA_CHECKLIST.md
+   Definition of "done" with verification commands
+
+7. V5_3_0_RISKS_MITIGATION_ROLLBACK.md
+   Risk register + mitigation strategies + rollback procedures
+
+================================================================================
+HOW TO USE THESE DOCUMENTS
+================================================================================
+
+STEP 1: Read README.md (10 minutes)
+        ↓
+STEP 2: Read V5_3_0_PLAN_INDEX.md (15 minutes)
+        ↓
+STEP 3: Read V5_3_0_EXECUTIVE_SUMMARY.md (10 minutes)
+        ↓
+STEP 4: Read V5_3_0_IMPLEMENTATION_PLAN_APRIL_8_12.md (45 minutes)
+        THIS IS YOUR MAIN GUIDE
+        ↓
+STEP 5: Read V5_3_0_SUCCESS_CRITERIA_CHECKLIST.md (20 minutes)
+        REFERENCE DURING TESTING
+        ↓
+STEP 6: Read V5_3_0_RISKS_MITIGATION_ROLLBACK.md (25 minutes)
+        REFERENCE IF BLOCKERS APPEAR
+
+TOTAL: 2.5 hours of reading = fully prepared for April 8
+
+================================================================================
+QUICK FACTS
+================================================================================
+
+Code Changes:            ~300-400 lines
+New Files:              1 (tokens-runtime.ts)
+P1 Fixes:               3 (error handling, validation, constraints)
+Smoke Tests:            5 (happy path + 4 error cases)
+Git Commits:            4 (clean history)
+Success Criteria:       20+ (all defined)
+Risks Identified:       6 (all mitigated)
+Rollback Levels:        5 (from local undo to emergency hotfix)
+Documentation:          40+ pages, 3,859 lines
+Contingency Buffer:     2 hours (33% of sprint time)
+
+================================================================================
+KEY POINTS
+================================================================================
+
+✅ APPROACH B is proven architecture (used in TypeScript monorepos)
+✅ All risks have documented mitigations
+✅ All success criteria clearly defined
+✅ Hour-by-hour timeline provided
+✅ Exact commands to copy-paste (no guessing)
+✅ 5-level rollback strategy (safety net)
+✅ Architect approval and support
+✅ 2-hour contingency buffer (comfortable pace)
+
+================================================================================
+SUCCESS LOOKS LIKE
+================================================================================
+
+After 5 days:
+  ✅ npm run build:tokens works
+  ✅ npm run type-check passes
+  ✅ npm run build:packages succeeds
+  ✅ All 5 smoke tests passing
+  ✅ CHANGELOG.md updated
+  ✅ docs/DYNAMIC_TYPES.md created
+  ✅ CLAUDE.md updated
+  ✅ GitHub PR merged to main
+  ✅ Ready for April 15 release
+
+================================================================================
+WHAT COULD GO WRONG?
+================================================================================
+
+Risk #1: Template literals still fail
+  → LOW (APPROACH B avoids ts-node execution)
+
+Risk #2: Generated types invalid
+  → MEDIUM (test escaping in isolation, verify output)
+
+Risk #3: Type regression
+  → LOW (compare before/after type counts)
+
+Risk #4: P1 fixes too strict
+  → MEDIUM (validate against actual token files)
+
+Risk #5: Timeline overrun
+  → MEDIUM (2-hour buffer built in)
+
+Risk #6: Rollback needed post-release
+  → LOW (5 smoke tests + type-check prevent most bugs)
+
+ALL RISKS HAVE DOCUMENTED MITIGATIONS
+Read V5_3_0_RISKS_MITIGATION_ROLLBACK.md for details
+
+================================================================================
+IF YOU GET STUCK
+================================================================================
+
+1. Check V5_3_0_RISKS_MITIGATION_ROLLBACK.md
+   Find your issue, follow mitigation strategy
+
+2. Review V5_3_0_IMPLEMENTATION_PLAN_APRIL_8_12.md
+   Reread that section, verify command syntax
+
+3. Check V5_3_0_SUCCESS_CRITERIA_CHECKLIST.md
+   See what "done" should look like
+
+4. Message Architect
+   2-hour SLA for unblocking
+   No blame — all contingencies planned
+
+================================================================================
+BEFORE YOU START (Do These By April 7)
+================================================================================
+
+□ Read all documents in order (2.5 hours)
+□ Understand APPROACH B architecture
+□ Clear calendar Apr 8-12 (not available for other tasks)
+□ Backup current types.ts: cp packages/react/src/tokens/types.ts types.ts.backup
+□ Verify token files are valid: jq empty tokens/*.json
+□ Print timeline (keep on desk)
+□ Know rollback procedures
+□ Confirm ready to start April 8
+
+================================================================================
+DURING IMPLEMENTATION (April 8-12)
+================================================================================
+
+Daily:
+  □ Review that day's timeline section
+  □ Copy-paste commands exactly (no variations)
+  □ Verify output matches expected output
+  □ Keep SUCCESS_CRITERIA_CHECKLIST visible
+  □ Commit after each major section
+  □ Push daily (don't accumulate uncommitted work)
+
+If stuck:
+  □ Consult RISKS_MITIGATION_ROLLBACK.md
+  □ Try the mitigation strategy
+  □ Escalate only if mitigation doesn't work
+
+================================================================================
+DOCUMENTS BY PURPOSE
+================================================================================
+
+If you want...                          Read this...
+────────────────────────────────────────────────────────────────────────────
+...to understand what's happening       V5_3_0_EXECUTIVE_SUMMARY.md
+...to know exactly what to do           V5_3_0_IMPLEMENTATION_PLAN_APRIL_8_12.md
+...to verify you're done                V5_3_0_SUCCESS_CRITERIA_CHECKLIST.md
+...to know risks and rollback           V5_3_0_RISKS_MITIGATION_ROLLBACK.md
+...to navigate all documents            V5_3_0_PLAN_INDEX.md
+...to get started quick                 README.md
+
+================================================================================
+KEY DATES
+================================================================================
+
+2026-03-24  ← Plan created (today)
+2026-03-25-04-07  ← Read documents, prepare
+2026-04-08  ← START: APPROACH B refactoring (Day 1)
+2026-04-09  ← P1 Fixes + tokens-runtime.ts (Day 2)
+2026-04-10  ← Smoke tests (Day 3)
+2026-04-11  ← Documentation + PR (Day 4)
+2026-04-12  ← Merge + release prep (Day 5)
+2026-04-15  ← RELEASE: v5.3.0 to npm
+
+================================================================================
+NEXT STEPS
+================================================================================
+
+RIGHT NOW:
+  1. Finish reading this file (you're almost done!)
+  2. Open README.md and read it (10 minutes)
+
+THIS WEEK (Before April 8):
+  1. Read V5_3_0_PLAN_INDEX.md (15 min)
+  2. Read V5_3_0_EXECUTIVE_SUMMARY.md (10 min)
+  3. Read V5_3_0_IMPLEMENTATION_PLAN_APRIL_8_12.md (45 min)
+  4. Read V5_3_0_SUCCESS_CRITERIA_CHECKLIST.md (20 min)
+  5. Read V5_3_0_RISKS_MITIGATION_ROLLBACK.md (25 min)
+  6. Prepare: backup files, verify tokens, print timeline
+
+MONDAY, APRIL 8:
+  1. Start with Day 1 timeline section
+  2. Create feature branch
+  3. Implement APPROACH B refactoring
+  4. Verify types.ts generated correctly
+  5. Commit by 11:30 AM
+
+CONTINUE...
+  2. Tuesday: P1 Fixes
+  3. Wednesday: Smoke tests
+  4. Thursday-Friday: Documentation + PR + merge
+
+================================================================================
+YOU ARE READY
+================================================================================
+
+You have:
+  ✅ Complete planning documentation (40+ pages)
+  ✅ Hour-by-hour timeline with exact commands
+  ✅ Success criteria for validation
+  ✅ Risk mitigations for every identified issue
+  ✅ 5 levels of rollback procedures
+  ✅ 2-hour contingency buffer
+  ✅ Architect approval and support
+
+Now go read README.md →
+
+================================================================================
+FILE LOCATIONS
+================================================================================
+
+Current directory:
+  .claude/plans/
+
+All planning documents:
+  00_START_HERE.txt ← You are here
+  README.md
+  V5_3_0_PLAN_INDEX.md
+  V5_3_0_EXECUTIVE_SUMMARY.md
+  V5_3_0_IMPLEMENTATION_PLAN_APRIL_8_12.md ⭐ MAIN
+  V5_3_0_SUCCESS_CRITERIA_CHECKLIST.md
+  V5_3_0_RISKS_MITIGATION_ROLLBACK.md
+
+Architect documents (reference):
+  ../.claude/workspace-docs/
+  └─ ARCHITECT_DECISION_SUMMARY.md
+  └─ APPROACH_B_IMPLEMENTATION_GUIDE.md
+  └─ APPROACH_B_QUICK_REFERENCE.md
+
+================================================================================
+CONTACT & SUPPORT
+================================================================================
+
+Questions?
+  → Consult the appropriate document (see "DOCUMENTS BY PURPOSE" above)
+
+Stuck on a specific task?
+  → Read RISKS_MITIGATION_ROLLBACK.md
+
+Need to rollback?
+  → Follow rollback procedures in RISKS_MITIGATION_ROLLBACK.md
+
+Out of ideas?
+  → Message Architect (2-hour SLA for unblocking)
+
+================================================================================
+FINAL WORDS
+================================================================================
+
+This is a **well-planned, low-risk implementation** with:
+
+  ✅ Clear timeline (7 hours in 9-hour sprint)
+  ✅ Complete documentation (40+ pages, 3,859 lines)
+  ✅ All risks identified and mitigated
+  ✅ All success criteria defined
+  ✅ Multiple rollback options
+  ✅ Architect support throughout
+
+You've got this.
+
+Now go read README.md →
+
+================================================================================
+Document: 00_START_HERE.txt
+Created: 2026-03-24
+Status: ✅ Ready for use
+Next: README.md
+================================================================================
