@@ -485,7 +485,7 @@ export interface SemanticTokens {
 // ============================================================================
 
 export type Theme = 'light' | 'dark';
-export type Brand = ${actualBrands.map(b => \`'\${b}'\`).join(' | ')};
+export type Brand = ${actualBrands.map(b => `'\${b}'`).join(' | ')};
 
 export interface ThemeConfig {
   theme: Theme;
@@ -535,23 +535,23 @@ export interface BrandConfig {
 // ============================================================================
 
 export type ColorTokenPath =
-  | \`color.brand.\${Brand}.\${keyof ColorShades}\`
-  | \`color.neutral.\${keyof NeutralColors}\`
-  | \`color.neutralPure.\${keyof NeutralColors}\`
+  | `color.brand.\${Brand}.\${keyof ColorShades}`
+  | `color.neutral.\${keyof NeutralColors}`
+  | `color.neutralPure.\${keyof NeutralColors}`
   | 'color.error.500'
   | 'color.success.500'
   | 'color.warning.500'
   | 'color.info.500';
 
 export type TypographyTokenPath =
-  | \`typography.family.\${keyof TypographyFamily}\`
-  | \`typography.weight.\${keyof TypographyWeight}\`
-  | \`typography.size.\${keyof TypographySize}\`
-  | \`typography.lineHeight.\${keyof TypographyLineHeight}\`;
+  | `typography.family.\${keyof TypographyFamily}`
+  | `typography.weight.\${keyof TypographyWeight}`
+  | `typography.size.\${keyof TypographySize}`
+  | `typography.lineHeight.\${keyof TypographyLineHeight}`;
 
-export type SpacingTokenPath = \`spacing.\${keyof SpacingPrimitives}\`;
-export type RadiusTokenPath = \`radius.\${keyof RadiusPrimitives}\`;
-export type BlurTokenPath = \`blur.\${keyof BlurPrimitives}\`;
+export type SpacingTokenPath = `spacing.\${keyof SpacingPrimitives}`;
+export type RadiusTokenPath = `radius.\${keyof RadiusPrimitives}`;
+export type BlurTokenPath = `blur.\${keyof BlurPrimitives}`;
 
 export type TokenPath =
   | ColorTokenPath
@@ -561,20 +561,20 @@ export type TokenPath =
   | BlurTokenPath;
 
 export type SemanticTokenPath =
-  | \`surface.\${keyof SurfaceSemantics}\`
-  | \`text.\${keyof TextSemantics}\`
-  | \`border.\${keyof BorderSemantics}\`
-  | \`interactive.primary.\${keyof InteractivePrimarySemantics}\`
-  | \`interactive.secondary.\${keyof InteractiveSecondarySemantics}\`
-  | \`interactive.ghost.\${keyof InteractiveGhostSemantics}\`
-  | \`status.\${keyof StatusSemantics}\`
-  | \`soft.\${keyof SoftSemantics}\`;
+  | `surface.\${keyof SurfaceSemantics}`
+  | `text.\${keyof TextSemantics}`
+  | `border.\${keyof BorderSemantics}`
+  | `interactive.primary.\${keyof InteractivePrimarySemantics}`
+  | `interactive.secondary.\${keyof InteractiveSecondarySemantics}`
+  | `interactive.ghost.\${keyof InteractiveGhostSemantics}`
+  | `status.\${keyof StatusSemantics}`
+  | `soft.\${keyof SoftSemantics}`;
 
 // ============================================================================
 // CSS VARIABLE TYPES
 // ============================================================================
 
-export type CSSVariableName = \`--\${string}\`;
+export type CSSVariableName = `--\${string}`;
 
 export interface CSSVariableMap {
   // Surface variables
@@ -644,7 +644,7 @@ export interface CSSVariableMap {
 
 /** Get nested property type from dot notation path */
 export type GetTokenValue<T, Path extends string> =
-  Path extends \`\${infer Key}.\${infer Rest}\`
+  Path extends `\${infer Key}.\${infer Rest}`
     ? Key extends keyof T
       ? GetTokenValue<T[Key], Rest>
       : never
@@ -678,8 +678,8 @@ try {
 }
 
 console.log('✅ Dynamic type generation completed');
-console.log(\`📝 Generated: \${path.join(OUTPUT_DIR, 'types.ts')}\`);
-console.log(\`📊 Brands detected: \${actualBrands.join(', ')}\`);
-console.log(\`📊 Typography sizes: \${typographySizes.length} detected\`);
-console.log(\`📊 Spacing scales: \${spacingKeys.length} detected\`);
-console.log(\`📊 Radius scales: \${radiusKeys.length} detected\`);
+console.log(`📝 Generated: \${path.join(OUTPUT_DIR, 'types.ts')}`);
+console.log(`📊 Brands detected: \${actualBrands.join(', ')}`);
+console.log(`📊 Typography sizes: \${typographySizes.length} detected`);
+console.log(`📊 Spacing scales: \${spacingKeys.length} detected`);
+console.log(`📊 Radius scales: \${radiusKeys.length} detected`);
