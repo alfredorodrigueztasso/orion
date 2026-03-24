@@ -19,7 +19,6 @@ export default defineConfig(
       calendar: path.resolve(__dirname, "src/calendar.ts"),
       editor: path.resolve(__dirname, "src/editor.ts"),
       dnd: path.resolve(__dirname, "src/dnd.ts"),
-      rich: path.resolve(__dirname, "src/rich.ts"),
     },
     name: "OrionReact",
     resolveAlias: {

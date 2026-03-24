@@ -61,10 +61,10 @@
       "total": 538
     },
     "components": {
-      "total": 72,
-      "fully_implemented": 72,
-      "documented": 72,
-      "with_examples": 72
+      "total": 71,
+      "fully_implemented": 71,
+      "documented": 71,
+      "with_examples": 71
     },
     "brands": {
       "total": 5,
@@ -114,14 +114,14 @@
       ]
     },
     "sections": {
-      "total": 26,
-      "implemented": 26,
+      "total": 25,
+      "implemented": 25,
       "documented": 26,
       "with_examples": 26
     },
     "templates": {
-      "total": 8,
-      "implemented": 8,
+      "total": 7,
+      "implemented": 7,
       "documented": 8,
       "with_examples": 8
     }

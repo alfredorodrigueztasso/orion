@@ -20,14 +20,6 @@ export type {
   CarouselCardProps,
 } from "./CarouselSection";
 
-export { ChatSection } from "./Chat";
-export type {
-  ChatSectionProps,
-  ChatMessage,
-  ChatConversation,
-  ChatInputProps,
-} from "./Chat";
-
 export { Comparison } from "./Comparison";
 export type { ComparisonProps } from "./Comparison";
 

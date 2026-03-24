@@ -63,11 +63,6 @@
       "import": "./dist/dnd.mjs",
       "require": "./dist/dnd.cjs"
     },
-    "./rich": {
-      "types": "./dist/rich.d.ts",
-      "import": "./dist/rich.mjs",
-      "require": "./dist/rich.cjs"
-    },
     "./blocks.css": "./dist/blocks.css"
   },
   "files": [

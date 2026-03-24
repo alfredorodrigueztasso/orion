@@ -500,11 +500,6 @@ export type {
 // Note: Widgets (Sidebar, DataTable, etc.) are now exported from WIDGETS section above
 // These are kept for backward compatibility via sections/ re-exports
 
-// NOTE: Chat component moved to ./rich subpath to avoid loading heavy dependencies
-// by default. Users who need Chat can import from '@orion-ds/react/rich':
-//   import { Chat } from '@orion-ds/react/rich';
-//   npm install react-markdown react-syntax-highlighter remark-gfm
-
 // ============================================================================
 // CODE EDITOR (AI Code Interface)
 // ============================================================================

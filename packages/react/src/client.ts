@@ -7,13 +7,12 @@
  * with React Server Components (RSC). This module is marked with the 'use client'
  * directive and excludes heavy optional dependencies.
  *
- * Heavy components (Chart, Calendar, DatePicker, CodeEditor, CollapsibleFolder, Chat)
+ * Heavy components (Chart, Calendar, DatePicker, CodeEditor, CollapsibleFolder)
  * have been moved to separate entry points to reduce bundle size:
  *   - import { Chart, ChartContainer } from '@orion-ds/react/chart'
  *   - import { Calendar, DatePicker } from '@orion-ds/react/calendar'
  *   - import { CodeEditor } from '@orion-ds/react/editor'
  *   - import { CollapsibleFolder } from '@orion-ds/react/dnd'
- *   - import { Chat } from '@orion-ds/react/rich'
  *
  * Usage:
  *   import { ThemeProvider, Button, useTheme } from '@orion-ds/react/client';
@@ -590,7 +589,6 @@ export { LandingPageExample } from "./examples";
 // - Calendar, DatePicker         →  @orion-ds/react/calendar  (requires date-fns)
 // - CodeEditor                   →  @orion-ds/react/editor  (requires react-syntax-highlighter)
 // - CollapsibleFolder            →  @orion-ds/react/dnd  (requires @dnd-kit/core, etc.)
-// - Chat (all components)        →  @orion-ds/react/rich  (requires react-markdown, etc.)
 //
 // This approach ensures that:
 // 1. Apps using only basic components don't fail if heavy deps aren't installed

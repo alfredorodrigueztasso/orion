@@ -9,9 +9,6 @@
  * // Agent management
  * import { AgentEditor, AgentWorkspace } from '@orion-ds/react/templates';
  *
- * // Communication
- * import { ChatPageTemplate } from '@orion-ds/react/templates';
- *
  * // Dashboard & Analytics
  * import { DashboardTemplate } from '@orion-ds/react/templates';
  *
@@ -35,12 +32,6 @@ export type { AgentEditorProps, Agent } from "./app/AgentEditor";
 
 export { AgentWorkspace } from "./app/AgentWorkspace";
 export type { AgentWorkspaceProps, WorkspaceAgent } from "./app/AgentWorkspace";
-
-export { ChatPageTemplate } from "./app/ChatPageTemplate";
-export type {
-  ChatPageTemplateProps,
-  ChatParticipant,
-} from "./app/ChatPageTemplate";
 
 export { DashboardTemplate } from "./app/DashboardTemplate";
 export type {

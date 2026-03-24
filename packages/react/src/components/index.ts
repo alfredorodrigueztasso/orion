@@ -313,36 +313,6 @@ export type { IconGalleryProps } from "./IconGallery";
 export { ErrorBoundary } from "./ErrorBoundary";
 export type { ErrorBoundaryProps } from "./ErrorBoundary";
 
-// Chat (AI Chat Interface)
-export { Chat } from "./Chat";
-export type {
-  ChatRole,
-  MessageStatus,
-  AttachmentType,
-  ChatAttachment,
-  ChatMessage,
-  ChatConversation,
-  VoiceRecorderState,
-  ChatProps,
-  ChatHeaderProps,
-  ChatMessagesProps,
-  ChatMessageProps,
-  ChatInputProps,
-  ChatTypingIndicatorProps,
-  ChatCodeBlockProps,
-  ChatMarkdownProps,
-  ChatImagePreviewProps,
-  ChatAudioPlayerProps,
-  ChatVoiceRecorderProps,
-  ChatFileUploadProps,
-  ChatAttachmentPreviewProps,
-  ChatSidebarProps,
-  ChatSectionProps,
-  ChatPageTemplateProps,
-  ChatLightboxProps,
-} from "./Chat";
-export { useAutoScroll, useVoiceRecorder, useChatInput } from "./Chat";
-
 // Widgets (Composite UI patterns reclassified from sections)
 export { ActivityFeed } from "./ActivityFeed";
 export type {
