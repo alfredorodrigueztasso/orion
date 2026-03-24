@@ -27,13 +27,16 @@
  * ```
  */
 
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, useState, useEffect } from "react";
+import {
+  checkComponent,
+  type OptionalDepError,
+} from "../../utils/optionalDeps";
 
 // Recharts imports with graceful error handling
 let ResponsiveContainer: any;
 let Tooltip: any;
 let Legend: any;
-let RechartsError: Error | null = null;
 
 try {
   const recharts = require("recharts");
@@ -41,8 +44,8 @@ try {
   Tooltip = recharts.Tooltip;
   Legend = recharts.Legend;
 } catch (error) {
-  RechartsError =
-    error instanceof Error ? error : new Error("recharts not found");
+  // Fallback: require() can fail in ESM contexts
+  // Async validation will catch actual missing dependencies
 }
 import type {
   ChartConfig,
@@ -58,6 +61,34 @@ import styles from "./Chart.module.css";
 // Context to share config across tooltip/legend
 const ChartContext = createContext<ChartConfig>({});
 
+// Shared error checking hook
+const useChartDeps = () => {
+  const [depError, setDepError] = useState<OptionalDepError | undefined>();
+  const [isChecking, setIsChecking] = useState(true);
+
+  useEffect(() => {
+    const checkDeps = async () => {
+      try {
+        const result = checkComponent("Chart");
+        if (result instanceof Promise) {
+          setDepError(await result);
+        } else {
+          setDepError(result);
+        }
+      } catch (error) {
+        // Fallback: assume deps available (optimistic)
+        setDepError(undefined);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkDeps();
+  }, []);
+
+  return { depError, isChecking };
+};
+
 /**
  * ChartContainer — wraps Recharts with CSS variable injection from config
  */
@@ -68,18 +99,16 @@ export const ChartContainer: React.FC<ChartContainerProps> = ({
   style,
   ...rest
 }) => {
-  // Show error if recharts is not installed
-  if (RechartsError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="Chart"
-        depName="recharts"
-        installCommand="npm install recharts"
-        pnpmCommand="pnpm add recharts"
-        docsUrl="https://docs.orion-ds.dev/components/chart"
-      />
-    );
+  const { depError, isChecking } = useChartDeps();
+
+  // Show error if deps missing
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  // Show loading while checking (optional - can skip if fast)
+  if (isChecking) {
+    return <div>Loading chart...</div>;
   }
 
   // Resolve CSS variable chains to concrete hex values for SVG compatibility
@@ -121,18 +150,16 @@ export const ChartTooltipContent: React.FC<ChartTooltipContentProps> = ({
   formatter,
   className,
 }) => {
-  // Show error if recharts is not installed
-  if (RechartsError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="Chart"
-        depName="recharts"
-        installCommand="npm install recharts"
-        pnpmCommand="pnpm add recharts"
-        docsUrl="https://docs.orion-ds.dev/components/chart"
-      />
-    );
+  const { depError, isChecking } = useChartDeps();
+
+  // Show error if deps missing
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  // Show loading while checking (optional - can skip if fast)
+  if (isChecking) {
+    return null;
   }
 
   const config = useContext(ChartContext);
@@ -191,18 +218,16 @@ export const ChartLegendContent: React.FC<ChartLegendContentProps> = ({
   payload,
   className,
 }) => {
-  // Show error if recharts is not installed
-  if (RechartsError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="Chart"
-        depName="recharts"
-        installCommand="npm install recharts"
-        pnpmCommand="pnpm add recharts"
-        docsUrl="https://docs.orion-ds.dev/components/chart"
-      />
-    );
+  const { depError, isChecking } = useChartDeps();
+
+  // Show error if deps missing
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  // Show loading while checking (optional - can skip if fast)
+  if (isChecking) {
+    return null;
   }
 
   const config = useContext(ChartContext);
@@ -256,18 +281,16 @@ export const ChartGradient: React.FC<ChartGradientProps> = ({
   startOpacity = 0.4,
   endOpacity = 0.05,
 }) => {
-  // Show error if recharts is not installed
-  if (RechartsError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="Chart"
-        depName="recharts"
-        installCommand="npm install recharts"
-        pnpmCommand="pnpm add recharts"
-        docsUrl="https://docs.orion-ds.dev/components/chart"
-      />
-    );
+  const { depError, isChecking } = useChartDeps();
+
+  // Show error if deps missing
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  // Show loading while checking (optional - can skip if fast)
+  if (isChecking) {
+    return null;
   }
 
   return (

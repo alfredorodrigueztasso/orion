@@ -4,13 +4,16 @@ import React, { forwardRef, useRef, useEffect, useState } from "react";
 import type { CodeEditorProps } from "./CodeEditor.types";
 import { useThemeContext } from "../../contexts";
 import { MissingDependencyError } from "../MissingDependencyError";
+import {
+  checkComponent,
+  type OptionalDepError,
+} from "../../utils/optionalDeps";
 import styles from "./CodeEditor.module.css";
 
 // react-syntax-highlighter imports with graceful error handling
 let SyntaxHighlighter: any;
 let oneDark: any;
 let oneLight: any;
-let ReactSyntaxHighlighterError: Error | null = null;
 
 try {
   const rshl = require("react-syntax-highlighter");
@@ -19,10 +22,8 @@ try {
   oneDark = styles.oneDark;
   oneLight = styles.oneLight;
 } catch (error) {
-  ReactSyntaxHighlighterError =
-    error instanceof Error
-      ? error
-      : new Error("react-syntax-highlighter not found");
+  // Fallback: require() can fail in ESM contexts
+  // Async validation will catch actual missing dependencies
 }
 
 // Extend markdown grammar with quoted string support
@@ -82,18 +83,37 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     },
     ref,
   ) => {
-    // Show error if react-syntax-highlighter is not installed
-    if (ReactSyntaxHighlighterError) {
-      return (
-        <MissingDependencyError
-          available={false}
-          componentName="CodeEditor"
-          depName="react-syntax-highlighter"
-          installCommand="npm install react-syntax-highlighter"
-          pnpmCommand="pnpm add react-syntax-highlighter"
-          docsUrl="https://docs.orion-ds.dev/components/code-editor"
-        />
-      );
+    const [depError, setDepError] = useState<OptionalDepError | undefined>();
+    const [isChecking, setIsChecking] = useState(true);
+
+    useEffect(() => {
+      const checkDeps = async () => {
+        try {
+          const result = checkComponent("CodeEditor");
+          if (result instanceof Promise) {
+            setDepError(await result);
+          } else {
+            setDepError(result);
+          }
+        } catch (error) {
+          // Fallback: assume deps available (optimistic)
+          setDepError(undefined);
+        } finally {
+          setIsChecking(false);
+        }
+      };
+
+      checkDeps();
+    }, []);
+
+    // Show error if deps missing
+    if (depError) {
+      return <MissingDependencyError {...depError} />;
+    }
+
+    // Show loading while checking (optional - can skip if fast)
+    if (isChecking) {
+      return <div>Loading code editor...</div>;
     }
 
     const lineNumbersRef = useRef<HTMLDivElement>(null);
