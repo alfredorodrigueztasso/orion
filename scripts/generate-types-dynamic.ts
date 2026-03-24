@@ -316,6 +316,8 @@ export interface Primitives {
   radiusScale?: Record<string, any>;
   blur: BlurPrimitives;
   icon: IconPrimitives;
+  zIndex?: Record<string, any>;
+  transition?: Record<string, any>;
 }
 
 // ============================================================================
