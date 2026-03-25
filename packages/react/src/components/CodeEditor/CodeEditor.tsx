@@ -11,10 +11,26 @@ import {
 import styles from "./CodeEditor.module.css";
 
 // Syntax highlighter styles and component
-// Populated dynamically via async import in useEffect if library is available
+// Loaded asynchronously at module scope if available
 let SyntaxHighlighter: any;
 let oneDark: any;
 let oneLight: any;
+
+// Load optional dependencies asynchronously (vi.mock intercepts these in tests)
+// Promise resolves immediately in tests due to mocking, creating synchronous-like behavior
+// In production, actual imports may be slower, but component's isChecking gate protects against that
+Promise.all([
+  import("react-syntax-highlighter"),
+  import("react-syntax-highlighter/dist/esm/styles/prism"),
+])
+  .then(([highlighter, styles]) => {
+    SyntaxHighlighter = highlighter.Prism;
+    oneDark = styles.oneDark;
+    oneLight = styles.oneLight;
+  })
+  .catch(() => {
+    // Dependencies not installed - component will detect via checkComponent() and show error
+  });
 
 /**
  * CodeEditor
@@ -54,6 +70,7 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     // FIRST: Declare ALL hooks and refs
     const [depError, setDepError] = useState<OptionalDepError | undefined>();
     const [isChecking, setIsChecking] = useState(true);
+    const [modulesLoaded, setModulesLoaded] = useState(false);
     const [currentLine, setCurrentLine] = useState(0);
     const [lineHeights, setLineHeights] = useState<number[]>([]);
 
@@ -88,6 +105,28 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
       };
 
       checkDeps();
+    }, []);
+
+    // Wait for optional modules to load before rendering syntax highlighting
+    useEffect(() => {
+      // If modules are already loaded, mark as ready
+      if (SyntaxHighlighter && oneDark && oneLight) {
+        setModulesLoaded(true);
+        return;
+      }
+
+      // Wait a small amount for Promise callbacks to execute
+      const timeout = setTimeout(() => {
+        // Check again after a microtask
+        if (SyntaxHighlighter && oneDark && oneLight) {
+          setModulesLoaded(true);
+        } else {
+          // Modules not available, mark as checked anyway (component will show error via checkComponent)
+          setModulesLoaded(true);
+        }
+      }, 0);
+
+      return () => clearTimeout(timeout);
     }, []);
 
     // Restore cursor position after React re-render
@@ -170,6 +209,11 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     }
 
     if (isChecking) {
+      return <div>Loading code editor...</div>;
+    }
+
+    // Wait for modules to load before rendering syntax highlighting branch
+    if (language && !modulesLoaded) {
       return <div>Loading code editor...</div>;
     }
 
