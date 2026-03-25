@@ -22,11 +22,11 @@ props:
     required: false
   timestamp:
     type: "string"
-    description: "Timestamp text (e.g., "Hace 2 horas")"
+    description: "Timestamp text (e.g., 'Hace 2 horas')"
     required: false
   isMultiAgent:
     type: "boolean"
-    description: "When true, shows a "Multi" badge indicating this is a multi-agent. Only multi-agents show a badge; single agents show nothing."
+    description: "When true, shows a 'Multi' badge indicating this is a multi-agent. Only multi-agents show a badge; single agents show nothing."
     required: false
   draggable:
     type: "boolean"
