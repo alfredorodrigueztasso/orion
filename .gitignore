@@ -28,6 +28,7 @@ pnpm-error.log*
 *.swp
 *.swo
 *~
+*.bak
 .DS_Store
 .env.local
 .env.*.local
