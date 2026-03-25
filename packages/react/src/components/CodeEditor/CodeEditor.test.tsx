@@ -4,18 +4,29 @@ import React from "react";
 import userEvent from "@testing-library/user-event";
 import { CodeEditor } from "./CodeEditor";
 
+vi.mock("react-syntax-highlighter", () => ({
+  Prism: ({ children }: { children: React.ReactNode }) => (
+    <pre data-testid="syntax-highlighter">{children}</pre>
+  ),
+}));
+
+vi.mock("react-syntax-highlighter/dist/esm/styles/prism", () => ({
+  oneDark: {},
+  oneLight: {},
+}));
+
 describe("CodeEditor", () => {
   const mockCode = `function hello() {\n  console.log("Hello World");\n}`;
 
-  it("renders editor with code", () => {
+  it("renders editor with code", async () => {
     const { container } = render(
       <CodeEditor value={mockCode} onChange={() => {}} language="javascript" />,
     );
 
-    const textarea = container.querySelector("textarea");
+    const textarea = await screen.findByRole("textbox");
     expect(textarea).toBeTruthy();
-    expect(textarea?.value).toBe(mockCode);
-  }, 10000);
+    expect(textarea.value).toBe(mockCode);
+  });
 
   it("handles code changes", () => {
     const { container } = render(
@@ -24,7 +35,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe("initial");
-  }, 10000);
+  });
 
   it("supports different languages", () => {
     const { container: pythonContainer } = render(
@@ -48,7 +59,7 @@ describe("CodeEditor", () => {
 
     const jsTextarea = jsContainer.querySelector("textarea");
     expect(jsTextarea?.value).toBe("console.log('hello')");
-  }, 10000);
+  });
 
   it("applies theme", () => {
     const { container } = render(
@@ -56,14 +67,14 @@ describe("CodeEditor", () => {
     );
 
     expect(container).toBeInTheDocument();
-  }, 10000);
+  });
 
   it("forwards ref correctly", () => {
     const ref = React.createRef<HTMLTextAreaElement>();
     render(<CodeEditor ref={ref} value={mockCode} onChange={() => {}} />);
 
     expect(ref.current).toBeInstanceOf(HTMLTextAreaElement);
-  }, 10000);
+  });
 
   it("displays code value in textarea", () => {
     const { container } = render(
@@ -72,14 +83,14 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe("const x = 10;");
-  }, 10000);
+  });
 
   it("handles empty value", () => {
     const { container } = render(<CodeEditor value="" onChange={() => {}} />);
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe("");
-  }, 10000);
+  });
 
   it("displays placeholder text when empty", () => {
     const { container } = render(
@@ -88,7 +99,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.placeholder).toBe("Enter code...");
-  }, 10000);
+  });
 
   it("respects readOnly prop", () => {
     const { container } = render(
@@ -97,7 +108,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.readOnly).toBe(true);
-  }, 10000);
+  });
 
   it("allows editing when readOnly is false", () => {
     const { container } = render(
@@ -106,7 +117,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.readOnly).toBe(false);
-  }, 10000);
+  });
 
   it("shows line numbers by default", () => {
     const { container } = render(
@@ -119,7 +130,7 @@ describe("CodeEditor", () => {
 
     const lineNumbers = container.querySelector("div[class*='lineNumbers']");
     expect(lineNumbers).toBeTruthy();
-  }, 10000);
+  });
 
   it("hides line numbers when showLineNumbers is false", () => {
     const { container } = render(
@@ -132,7 +143,7 @@ describe("CodeEditor", () => {
 
     const lineNumbers = container.querySelector("div[class*='lineNumbers']");
     expect(lineNumbers).not.toBeTruthy();
-  }, 10000);
+  });
 
   it("respects minRows prop", () => {
     const { container: container5 } = render(
@@ -148,7 +159,7 @@ describe("CodeEditor", () => {
 
     const textarea20 = container20.querySelector("textarea");
     expect(textarea20).toBeTruthy();
-  }, 10000);
+  });
 
   it("applies custom className", () => {
     const { container } = render(
@@ -161,7 +172,7 @@ describe("CodeEditor", () => {
 
     const wrapper = container.querySelector("div[class*='custom-editor']");
     expect(wrapper).toBeTruthy();
-  }, 10000);
+  });
 
   it("applies aria-label for accessibility", () => {
     const { container } = render(
@@ -176,7 +187,7 @@ describe("CodeEditor", () => {
     expect(textarea?.getAttribute("aria-label")).toBe(
       "Code editor for JavaScript",
     );
-  }, 10000);
+  });
 
   it("handles JavaScript language", () => {
     const jsCode = "const foo = () => {}";
@@ -186,7 +197,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe(jsCode);
-  }, 10000);
+  });
 
   it("handles Python language", () => {
     const pythonCode = "def foo():\n    pass";
@@ -196,7 +207,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe(pythonCode);
-  }, 10000);
+  });
 
   it("handles Markdown language", () => {
     const markdownCode = "# Hello World\n\nThis is a test";
@@ -210,7 +221,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe(markdownCode);
-  }, 10000);
+  });
 
   it("handles code with special characters", () => {
     const codeWithSpecial = 'const str = "Hello\\nWorld"; console.log(str);';
@@ -224,7 +235,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe(codeWithSpecial);
-  }, 10000);
+  });
 
   it("handles multiline code correctly", () => {
     const multilineCode =
@@ -240,7 +251,7 @@ describe("CodeEditor", () => {
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe(multilineCode);
     expect(textarea?.value.split("\n").length).toBe(4);
-  }, 10000);
+  });
 
   it("calculates correct line count", () => {
     const multilineValue = "line 1\nline 2\nline 3\nline 4\nline 5";
@@ -251,7 +262,7 @@ describe("CodeEditor", () => {
     const textarea = container.querySelector("textarea");
     expect(textarea).toBeTruthy();
     expect(textarea?.value).toBe(multilineValue);
-  }, 10000);
+  });
 
   it("handles onChange callback with new value", () => {
     const { container } = render(
@@ -260,7 +271,7 @@ describe("CodeEditor", () => {
 
     const textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe("initial");
-  }, 10000);
+  });
 
   it("updates value when prop changes", () => {
     const { container, rerender } = render(
@@ -274,7 +285,7 @@ describe("CodeEditor", () => {
 
     textarea = container.querySelector("textarea");
     expect(textarea?.value).toBe("updated code");
-  }, 10000);
+  });
 
   // ============================================================================
   // TAB HANDLING & EVENT HANDLERS COVERAGE
@@ -294,7 +305,7 @@ describe("CodeEditor", () => {
     expect(() => {
       fireEvent.keyDown(textarea, { key: "Tab" });
     }).not.toThrow();
-  }, 10000);
+  });
 
   it("handles Shift+Tab without throwing error", () => {
     const mockOnChange = vi.fn();
@@ -310,7 +321,7 @@ describe("CodeEditor", () => {
     expect(() => {
       fireEvent.keyDown(textarea, { key: "Tab", shiftKey: true });
     }).not.toThrow();
-  }, 10000);
+  });
 
   it("responds to onChange when value changes", () => {
     const mockOnChange = vi.fn();
@@ -324,7 +335,7 @@ describe("CodeEditor", () => {
     fireEvent.change(textarea, { target: { value: "hello world" } });
 
     expect(mockOnChange).toHaveBeenCalled();
-  }, 10000);
+  });
 
   it("fires onChange on change event in plain branch", () => {
     const mockOnChange = vi.fn();
@@ -336,7 +347,7 @@ describe("CodeEditor", () => {
     fireEvent.change(textarea, { target: { value: "new" } });
 
     expect(mockOnChange).toHaveBeenCalledWith("new");
-  }, 10000);
+  });
 
   it("calls updateCurrentLine on click in language branch", () => {
     const { container } = render(
@@ -352,7 +363,7 @@ describe("CodeEditor", () => {
 
     // No error thrown = updateCurrentLine executed
     expect(textarea).toBeInTheDocument();
-  }, 10000);
+  });
 
   it("calls updateCurrentLine on keyUp in language branch", () => {
     const { container } = render(
@@ -364,5 +375,5 @@ describe("CodeEditor", () => {
 
     // No error thrown = updateCurrentLine executed
     expect(textarea).toBeInTheDocument();
-  }, 10000);
+  });
 });

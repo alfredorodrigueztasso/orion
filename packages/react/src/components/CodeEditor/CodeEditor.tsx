@@ -10,47 +10,27 @@ import {
 } from "../../utils/optionalDeps";
 import styles from "./CodeEditor.module.css";
 
-// react-syntax-highlighter imports with graceful error handling
+// Syntax highlighter styles and component
+// Loaded asynchronously at module scope if available
 let SyntaxHighlighter: any;
 let oneDark: any;
 let oneLight: any;
 
-if (typeof require !== "undefined") {
-  try {
-    const rshl = require("react-syntax-highlighter");
-    SyntaxHighlighter = rshl.Prism;
-    const styles = require("react-syntax-highlighter/dist/esm/styles/prism");
+// Load optional dependencies asynchronously (vi.mock intercepts these in tests)
+// Promise resolves immediately in tests due to mocking, creating synchronous-like behavior
+// In production, actual imports may be slower, but component's isChecking gate protects against that
+Promise.all([
+  import("react-syntax-highlighter"),
+  import("react-syntax-highlighter/dist/esm/styles/prism"),
+])
+  .then(([highlighter, styles]) => {
+    SyntaxHighlighter = highlighter.Prism;
     oneDark = styles.oneDark;
     oneLight = styles.oneLight;
-  } catch (error) {
-    // Fallback: require() can fail if react-syntax-highlighter is not installed
-    // Async validation will catch actual missing dependencies
-  }
-}
-
-// Extend markdown grammar with quoted string support
-// This mutation affects react-syntax-highlighter's refractor instance
-if (typeof require !== "undefined") {
-  try {
-    const refractor = require("refractor/all");
-    if (
-      refractor.default &&
-      refractor.default.registered &&
-      refractor.default.registered("markdown") &&
-      !refractor.default.languages.markdown?.["quoted-string"]
-    ) {
-      refractor.default.languages.insertBefore("markdown", "bold", {
-        "quoted-string": {
-          pattern: /"(?:\\.|[^"\\])*"/,
-          greedy: true,
-          alias: "string",
-        },
-      });
-    }
-  } catch {
-    // refractor not available, skip quoted string enhancement
-  }
-}
+  })
+  .catch(() => {
+    // Dependencies not installed - component will detect via checkComponent() and show error
+  });
 
 /**
  * CodeEditor
@@ -90,6 +70,7 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     // FIRST: Declare ALL hooks and refs
     const [depError, setDepError] = useState<OptionalDepError | undefined>();
     const [isChecking, setIsChecking] = useState(true);
+    const [modulesLoaded, setModulesLoaded] = useState(false);
     const [currentLine, setCurrentLine] = useState(0);
     const [lineHeights, setLineHeights] = useState<number[]>([]);
 
@@ -124,6 +105,28 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
       };
 
       checkDeps();
+    }, []);
+
+    // Wait for optional modules to load before rendering syntax highlighting
+    useEffect(() => {
+      // If modules are already loaded, mark as ready
+      if (SyntaxHighlighter && oneDark && oneLight) {
+        setModulesLoaded(true);
+        return;
+      }
+
+      // Wait a small amount for Promise callbacks to execute
+      const timeout = setTimeout(() => {
+        // Check again after a microtask
+        if (SyntaxHighlighter && oneDark && oneLight) {
+          setModulesLoaded(true);
+        } else {
+          // Modules not available, mark as checked anyway (component will show error via checkComponent)
+          setModulesLoaded(true);
+        }
+      }, 0);
+
+      return () => clearTimeout(timeout);
     }, []);
 
     // Restore cursor position after React re-render
@@ -206,6 +209,11 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     }
 
     if (isChecking) {
+      return <div>Loading code editor...</div>;
+    }
+
+    // Wait for modules to load before rendering syntax highlighting branch
+    if (language && !modulesLoaded) {
       return <div>Loading code editor...</div>;
     }
 
