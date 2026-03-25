@@ -157,15 +157,20 @@ describe("Optional Dependencies - ESM (v5.3.1)", () => {
   describe("ESM spec compliance", () => {
     it("should not use require() - only import()", async () => {
       // This test validates that the source doesn't use require()
-      // by grepping the source file for require patterns
+      // by grepping the source file for require patterns, excluding comments
       const fs = await import("fs");
       const path = await import("path");
       const sourceFile = path.join(__dirname, "./optionalDeps.ts");
       const source = fs.readFileSync(sourceFile, "utf-8");
 
-      // Check for require() calls (excluding comments and strings)
-      const requirePattern = /(?<!\/\/.*)require\(/g;
-      const matches = source.match(requirePattern);
+      // Remove all comments (both // and /* */) before checking
+      const withoutComments = source
+        .replace(/\/\*[\s\S]*?\*\//g, "") // Remove /* */ comments
+        .replace(/\/\/.*$/gm, ""); // Remove // comments
+
+      // Check for require() calls in actual code (not comments)
+      const requirePattern = /require\(/g;
+      const matches = withoutComments.match(requirePattern);
 
       expect(matches).toBeNull();
     });
