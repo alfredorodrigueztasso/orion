@@ -35,7 +35,7 @@ The system supports multiple brands via `data-brand` attribute:
 
 Brands are configured in `tokens/brands.json` and override base tokens in `theme.css`.
 
-**Note (v5.3.1):** ✅ **CRITICAL HOTFIX RELEASED (Mar 25, 2026)** - v5.3.0 contained ESM spec violation (`require()` in `.mjs` files) blocking all Next.js SSR, Remix, Astro deployments. v5.3.1 replaces `require()` with async `import()` + Map-based caching. All 6 optional-dependency components (Calendar, DatePicker, Chart, CodeEditor, CollapsibleFolder, ChatMarkdown) updated. ESM validation gate added to pre-release checks (`npm run validate:esm`). Migration: `npm install @orion-ds/react@latest` (gets v5.3.1). See GitHub release for details. v5.3.0 marked as "broken" in dist-tags.
+**Note (v5.3.2):** ✅ **PATCH RELEASE (Mar 25, 2026)** - v5.3.2 fixes critical fresh-clone build failure (PRE-001: `build:react` now runs `build:tokens` prerequisite before copying assets). Also includes 3 preventive fixes: ESM validation gate now greps compiled `.mjs` files (PRE-007), `@dnd-kit/utilities` added to peerDependencies (PRE-008), ESM compliance test rewritten (PRE-009). All 2400+ tests passing, ESM validation gate functional, GitHub Actions CI/CD added for preventing future build regressions. v5.3.0 remains marked as "broken" (ESM regression). See GitHub release and `.claude/workspace-docs/V5_3_1_PRE_EXISTING_ISSUES_AUDIT.md` for technical details. Migration: `npm install @orion-ds/react@latest` (gets v5.3.2).
 
 ### Token System
 
