@@ -18,14 +18,14 @@ vi.mock("react-syntax-highlighter/dist/esm/styles/prism", () => ({
 describe("CodeEditor", () => {
   const mockCode = `function hello() {\n  console.log("Hello World");\n}`;
 
-  it("renders editor with code", () => {
+  it("renders editor with code", async () => {
     const { container } = render(
       <CodeEditor value={mockCode} onChange={() => {}} language="javascript" />,
     );
 
-    const textarea = container.querySelector("textarea");
+    const textarea = await screen.findByRole("textbox");
     expect(textarea).toBeTruthy();
-    expect(textarea?.value).toBe(mockCode);
+    expect(textarea.value).toBe(mockCode);
   });
 
   it("handles code changes", () => {
