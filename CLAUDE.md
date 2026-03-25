@@ -35,7 +35,7 @@ The system supports multiple brands via `data-brand` attribute:
 
 Brands are configured in `tokens/brands.json` and override base tokens in `theme.css`.
 
-**Note (v5.3.0):** ✅ Phantom "ember" brand FIXED. All TypeScript types now perfectly match `tokens/brands.json`. Dynamic type generation (APPROACH B) ensures types are always in sync with JSON source. Use 5 actual brands: orion, deepblue, red, orange, lemon. Released Mar 24, 2026.
+**Note (v5.3.1):** ✅ **CRITICAL HOTFIX RELEASED (Mar 25, 2026)** - v5.3.0 contained ESM spec violation (`require()` in `.mjs` files) blocking all Next.js SSR, Remix, Astro deployments. v5.3.1 replaces `require()` with async `import()` + Map-based caching. All 6 optional-dependency components (Calendar, DatePicker, Chart, CodeEditor, CollapsibleFolder, ChatMarkdown) updated. ESM validation gate added to pre-release checks (`npm run validate:esm`). Migration: `npm install @orion-ds/react@latest` (gets v5.3.1). See GitHub release for details. v5.3.0 marked as "broken" in dist-tags.
 
 ### Token System
 
