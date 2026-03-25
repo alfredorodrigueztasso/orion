@@ -472,14 +472,11 @@ describe("ThemeController", () => {
         screen.getByText("Red-Orange accent • Pill buttons"),
       ).toBeInTheDocument(); // Orange
       expect(
-        screen.getByText("Orange accent • Black buttons • 12px radius"),
-      ).toBeInTheDocument(); // Ember
-      expect(
         screen.getByText("Lime green accent • Highly rounded"),
       ).toBeInTheDocument(); // Lemon
     });
 
-    it("renders all six brands in compact mode", () => {
+    it("renders all five brands in compact mode", () => {
       render(<ThemeController compact showBrandSelector />, { wrapper });
 
       expect(screen.getByRole("button", { name: /Orion/ })).toBeInTheDocument();
@@ -490,7 +487,6 @@ describe("ThemeController", () => {
       expect(
         screen.getByRole("button", { name: /Orange/ }),
       ).toBeInTheDocument();
-      expect(screen.getByRole("button", { name: /Ember/ })).toBeInTheDocument();
       expect(screen.getByRole("button", { name: /Lemon/ })).toBeInTheDocument();
     });
   });

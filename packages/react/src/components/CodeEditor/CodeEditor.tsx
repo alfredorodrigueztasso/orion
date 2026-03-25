@@ -4,13 +4,16 @@ import React, { forwardRef, useRef, useEffect, useState } from "react";
 import type { CodeEditorProps } from "./CodeEditor.types";
 import { useThemeContext } from "../../contexts";
 import { MissingDependencyError } from "../MissingDependencyError";
+import {
+  checkComponent,
+  type OptionalDepError,
+} from "../../utils/optionalDeps";
 import styles from "./CodeEditor.module.css";
 
 // react-syntax-highlighter imports with graceful error handling
 let SyntaxHighlighter: any;
 let oneDark: any;
 let oneLight: any;
-let ReactSyntaxHighlighterError: Error | null = null;
 
 try {
   const rshl = require("react-syntax-highlighter");
@@ -19,10 +22,8 @@ try {
   oneDark = styles.oneDark;
   oneLight = styles.oneLight;
 } catch (error) {
-  ReactSyntaxHighlighterError =
-    error instanceof Error
-      ? error
-      : new Error("react-syntax-highlighter not found");
+  // Fallback: require() can fail in ESM contexts
+  // Async validation will catch actual missing dependencies
 }
 
 // Extend markdown grammar with quoted string support
@@ -82,19 +83,11 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
     },
     ref,
   ) => {
-    // Show error if react-syntax-highlighter is not installed
-    if (ReactSyntaxHighlighterError) {
-      return (
-        <MissingDependencyError
-          available={false}
-          componentName="CodeEditor"
-          depName="react-syntax-highlighter"
-          installCommand="npm install react-syntax-highlighter"
-          pnpmCommand="pnpm add react-syntax-highlighter"
-          docsUrl="https://docs.orion-ds.dev/components/code-editor"
-        />
-      );
-    }
+    // FIRST: Declare ALL hooks and refs
+    const [depError, setDepError] = useState<OptionalDepError | undefined>();
+    const [isChecking, setIsChecking] = useState(true);
+    const [currentLine, setCurrentLine] = useState(0);
+    const [lineHeights, setLineHeights] = useState<number[]>([]);
 
     const lineNumbersRef = useRef<HTMLDivElement>(null);
     const highlightRef = useRef<HTMLDivElement>(null);
@@ -108,22 +101,26 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
       (ref as React.MutableRefObject<HTMLTextAreaElement | null>) ||
       internalTextareaRef;
 
-    // Current line tracking for line highlight
-    const [currentLine, setCurrentLine] = useState(0);
-    const [lineHeights, setLineHeights] = useState<number[]>([]);
+    // SECOND: useEffect for dependency checking
+    useEffect(() => {
+      const checkDeps = async () => {
+        try {
+          const result = checkComponent("CodeEditor");
+          if (result instanceof Promise) {
+            setDepError(await result);
+          } else {
+            setDepError(result);
+          }
+        } catch (error) {
+          // Fallback: assume deps available (optimistic)
+          setDepError(undefined);
+        } finally {
+          setIsChecking(false);
+        }
+      };
 
-    // Get theme for syntax highlighting
-    let currentTheme = "dark";
-    try {
-      const ctx = useThemeContext();
-      currentTheme = ctx.theme;
-    } catch {
-      // outside ThemeProvider — use dark
-    }
-    const highlightStyle = currentTheme === "light" ? oneLight : oneDark;
-
-    // Calculate number of lines
-    const lineCount = Math.max(value.split("\n").length, minRows);
+      checkDeps();
+    }, []);
 
     // Restore cursor position after React re-render
     useEffect(() => {
@@ -185,6 +182,28 @@ export const CodeEditor = forwardRef<HTMLTextAreaElement, CodeEditorProps>(
         };
       }
     }, [textareaRef]);
+
+    // Get theme for syntax highlighting
+    let currentTheme = "dark";
+    try {
+      const ctx = useThemeContext();
+      currentTheme = ctx.theme;
+    } catch {
+      // outside ThemeProvider — use dark
+    }
+    const highlightStyle = currentTheme === "light" ? oneLight : oneDark;
+
+    // Calculate number of lines
+    const lineCount = Math.max(value.split("\n").length, minRows);
+
+    // THIRD: Conditional rendering AFTER all hooks
+    if (depError) {
+      return <MissingDependencyError {...depError} />;
+    }
+
+    if (isChecking) {
+      return <div>Loading code editor...</div>;
+    }
 
     // Track current line for highlight
     const updateCurrentLine = (textarea: HTMLTextAreaElement) => {

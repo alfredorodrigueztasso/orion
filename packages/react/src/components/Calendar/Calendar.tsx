@@ -19,10 +19,14 @@
  * ```
  */
 
-import React, { useId, useState, useMemo, useCallback } from "react";
+import React, { useId, useState, useMemo, useCallback, useEffect } from "react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "../Button";
 import { MissingDependencyError } from "../MissingDependencyError";
+import {
+  checkComponent,
+  type OptionalDepError,
+} from "../../utils/optionalDeps";
 import type { CalendarProps, DateRange } from "./Calendar.types";
 import styles from "./Calendar.module.css";
 
@@ -40,7 +44,6 @@ let isToday: any;
 let isBefore: any;
 let isAfter: any;
 let format: any;
-let DateFnsError: Error | null = null;
 
 try {
   const dateFns = require("date-fns");
@@ -58,8 +61,8 @@ try {
   isAfter = dateFns.isAfter;
   format = dateFns.format;
 } catch (error) {
-  DateFnsError =
-    error instanceof Error ? error : new Error("date-fns not found");
+  // Fallback: require() can fail in ESM contexts
+  // Async validation will catch actual missing dependencies
 }
 
 const WEEKDAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];
@@ -71,20 +74,7 @@ function rotateArray<T>(arr: T[], n: number): T[] {
 }
 
 export const Calendar: React.FC<CalendarProps> = (props) => {
-  // Show error if date-fns is not installed
-  if (DateFnsError) {
-    return (
-      <MissingDependencyError
-        available={false}
-        componentName="Calendar"
-        depName="date-fns"
-        installCommand="npm install date-fns"
-        pnpmCommand="pnpm add date-fns"
-        docsUrl="https://docs.orion-ds.dev/components/calendar"
-      />
-    );
-  }
-
+  // FIRST: Props destructuring (needed for hook initialization)
   const {
     mode = "single",
     min,
@@ -103,6 +93,9 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
     ...domProps
   } = rest as Record<string, unknown>;
 
+  // FIRST (continued): Declare ALL hooks
+  const [depError, setDepError] = useState<OptionalDepError | undefined>();
+  const [isChecking, setIsChecking] = useState(true);
   const [currentMonth, setCurrentMonth] = useState(() => {
     if (
       mode === "single" &&
@@ -117,6 +110,27 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
     }
     return startOfMonth(new Date());
   });
+
+  // SECOND: useEffect for dependency checking
+  useEffect(() => {
+    const checkDeps = async () => {
+      try {
+        const result = checkComponent("Calendar");
+        if (result instanceof Promise) {
+          setDepError(await result);
+        } else {
+          setDepError(result);
+        }
+      } catch (error) {
+        // Fallback: assume deps available (optimistic)
+        setDepError(undefined);
+      } finally {
+        setIsChecking(false);
+      }
+    };
+
+    checkDeps();
+  }, []);
 
   // Generate days grid
   const days = useMemo(() => {
@@ -266,10 +280,21 @@ export const Calendar: React.FC<CalendarProps> = (props) => {
     return classes.join(" ");
   };
 
+  // More hooks before conditional rendering
+  const monthLabelId = useId();
+
+  // THIRD: Conditional rendering AFTER all hooks
+  if (depError) {
+    return <MissingDependencyError {...depError} />;
+  }
+
+  if (isChecking) {
+    return <div>Loading calendar...</div>;
+  }
+
   const calendarClasses = [styles.calendar, className]
     .filter(Boolean)
     .join(" ");
-  const monthLabelId = useId();
 
   return (
     <div className={calendarClasses} {...domProps}>
