@@ -22,19 +22,30 @@ if (!fs.existsSync(OUTPUT_DIR)) {
   fs.mkdirSync(OUTPUT_DIR, { recursive: true });
 }
 
-// Read token files
-const primaryTokens = JSON.parse(
-  fs.readFileSync(path.join(TOKEN_DIR, 'primary.json'), 'utf-8')
-);
-const lightTokens = JSON.parse(
-  fs.readFileSync(path.join(TOKEN_DIR, 'light.json'), 'utf-8')
-);
-const darkTokens = JSON.parse(
-  fs.readFileSync(path.join(TOKEN_DIR, 'dark.json'), 'utf-8')
-);
-const brandsTokens = JSON.parse(
-  fs.readFileSync(path.join(TOKEN_DIR, 'brands.json'), 'utf-8')
-);
+/**
+ * Read and parse JSON token file with error handling
+ */
+function readTokenFile(filePath: string, label: string): any {
+  try {
+    return JSON.parse(fs.readFileSync(filePath, 'utf-8'));
+  } catch (err) {
+    if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
+      console.error(`❌ Token file not found: ${filePath}`);
+      console.error(`   Ensure "${label}" exists in the tokens/ directory.`);
+      console.error(`   Verify JSON syntax: ${filePath}`);
+    } else {
+      console.error(`❌ Failed to parse ${label}: ${(err as Error).message}`);
+      console.error(`   Verify JSON syntax in: ${filePath}`);
+    }
+    process.exit(1);
+  }
+}
+
+// Read token files with error handling
+const primaryTokens = readTokenFile(path.join(TOKEN_DIR, 'primary.json'), 'primary.json');
+const lightTokens = readTokenFile(path.join(TOKEN_DIR, 'light.json'), 'light.json');
+const darkTokens = readTokenFile(path.join(TOKEN_DIR, 'dark.json'), 'dark.json');
+const brandsTokens = readTokenFile(path.join(TOKEN_DIR, 'brands.json'), 'brands.json');
 
 // Helper: Convert object to TypeScript interface
 // @ts-ignore - Function declared for potential future use

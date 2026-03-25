@@ -38,8 +38,10 @@ function readTokenFile(filePath: string, label: string): any {
     if ((err as NodeJS.ErrnoException).code === 'ENOENT') {
       console.error(`❌ Token file not found: ${filePath}`);
       console.error(`   Ensure "${label}" exists in the tokens/ directory.`);
+      console.error(`   Verify JSON syntax: ${filePath}`);
     } else {
       console.error(`❌ Failed to parse ${label}: ${(err as Error).message}`);
+      console.error(`   Verify JSON syntax in: ${filePath}`);
     }
     process.exit(1);
   }
