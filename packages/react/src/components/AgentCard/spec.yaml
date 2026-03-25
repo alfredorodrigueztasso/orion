@@ -41,6 +41,40 @@ props:
     description: "Available folders"
     required: false
 
+ai_rules:
+  - "AgentCard displays agent information in a card format"
+  - "Avatar can be string (image URL) or ReactNode (icon component)"
+  - "Description is optional and truncated to 2 lines with ellipsis"
+  - "Multi-agent badge only shows when isMultiAgent=true"
+  - "Draggable prop enables drag & drop; isDragging tracks drag state"
+
+examples:
+  - title: "Basic Agent Card"
+    code: |
+      <AgentCard
+        id="agent-1"
+        avatar="https://example.com/avatar.jpg"
+        title="AI Assistant"
+        description="Helpful AI that answers questions"
+      />
+  - title: "Multi-Agent Card"
+    code: |
+      <AgentCard
+        id="agent-2"
+        avatar={<Users size={24} />}
+        title="Team Agents"
+        isMultiAgent={true}
+      />
+  - title: "Draggable Card"
+    code: |
+      <AgentCard
+        id="agent-3"
+        avatar="https://example.com/avatar.jpg"
+        title="Mobile Agent"
+        draggable={true}
+        isDragging={false}
+      />
+
 tokens:
   - "--spacing-4"
   - "--radius-control"
