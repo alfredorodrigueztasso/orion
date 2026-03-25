@@ -1,0 +1,84 @@
+name: Build Validation
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  build-validation:
+    runs-on: ubuntu-latest
+    name: Validate Fresh-Clone Build
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10.28.1
+
+      - name: Get pnpm store directory
+        id: pnpm-cache
+        shell: bash
+        run: |
+          echo "STORE_PATH=$(pnpm store path)" >> $GITHUB_OUTPUT
+
+      - name: Setup pnpm cache
+        uses: actions/cache@v3
+        with:
+          path: ${{ steps.pnpm-cache.outputs.STORE_PATH }}
+          key: ${{ runner.os }}-pnpm-store-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-pnpm-store-
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build token types
+        run: npm run build:tokens
+        env:
+          NODE_ENV: production
+
+      - name: Build React package
+        run: npm run build:react
+        env:
+          NODE_ENV: production
+
+      - name: Validate ESM compliance
+        run: npm run validate:esm
+
+      - name: Type checking
+        run: npm run type-check
+
+      - name: Full validation suite
+        run: npm run validate
+
+      - name: Build all packages
+        run: npm run build:release
+        env:
+          NODE_ENV: production
+
+      - name: Report on fresh-clone scenario
+        if: success()
+        run: |
+          echo "✅ Fresh-clone build validation PASSED"
+          echo "✅ Theme CSS generated and copied"
+          echo "✅ ESM modules compliant"
+          echo "✅ TypeScript valid"
+
+      - name: Report build failure
+        if: failure()
+        run: |
+          echo "❌ Build validation FAILED"
+          echo "This means the fresh-clone scenario would fail for users"
+          exit 1
