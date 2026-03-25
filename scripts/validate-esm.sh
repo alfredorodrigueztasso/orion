@@ -69,5 +69,9 @@ echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "✅ ESM validation passed"
 echo ""
-echo "All .mjs entry points are ESM spec-compliant."
-echo "No require() calls found in ESM modules."
+echo "Checking for require() calls in compiled .mjs files..."
+if grep -r "require(" packages/react/dist --include="*.mjs" | grep -v "//"; then
+  echo "✗ Found require() calls in ESM modules — ESM spec violation"
+  exit 1
+fi
+echo "✓ No require() calls found in compiled .mjs files"

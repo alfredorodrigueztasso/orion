@@ -155,13 +155,19 @@ describe("Optional Dependencies - ESM (v5.3.1)", () => {
   });
 
   describe("ESM spec compliance", () => {
-    it("should not use require() - only import()", () => {
+    it("should not use require() - only import()", async () => {
       // This test validates that the source doesn't use require()
-      // by checking the module loads without ReferenceError
-      const module = require("./optionalDeps.ts");
-      expect(module).toBeDefined();
-      expect(typeof module.checkComponent).toBe("function");
-      expect(typeof module.getOptionalDepError).toBe("function");
+      // by grepping the source file for require patterns
+      const fs = await import("fs");
+      const path = await import("path");
+      const sourceFile = path.join(__dirname, "./optionalDeps.ts");
+      const source = fs.readFileSync(sourceFile, "utf-8");
+
+      // Check for require() calls (excluding comments and strings)
+      const requirePattern = /(?<!\/\/.*)require\(/g;
+      const matches = source.match(requirePattern);
+
+      expect(matches).toBeNull();
     });
 
     it("should export OptionalDepError interface", () => {

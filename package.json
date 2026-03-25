@@ -14,7 +14,7 @@
     "build": "npm run build:tokens && npm run build:packages && node scripts/enrich-registry-safe.js",
     "build:tokens": "ts-node scripts/generate-types.ts && ts-node scripts/generate-types-dynamic.ts && node scripts/build-tokens.js",
     "build:packages": "turbo run build --filter=@orion-ds/react --filter=@orion-ds/cli --filter=@orion-ds/mcp --filter=@orion-ds/create --filter=@orion-ds/validate",
-    "build:react": "turbo run build --filter=@orion-ds/react",
+    "build:react": "npm run build:tokens && turbo run build --filter=@orion-ds/react",
     "build:release": "npm run build:tokens && npm run build:packages && npm run validate:esm && node scripts/enrich-registry-safe.js",
     "build:registry": "npx ts-node --transpile-only scripts/generate-registry.ts && npm run enrich:registry",
     "build:registry-api": "npx ts-node --transpile-only scripts/build-registry-api.ts",
