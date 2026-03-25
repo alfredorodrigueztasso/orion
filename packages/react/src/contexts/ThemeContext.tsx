@@ -244,13 +244,16 @@ export function ThemeProvider({
  *
  * ⚠️ IMPORTANT: Must be used inside a ThemeProvider for full functionality
  *
- * Returns SSR-safe defaults if used outside ThemeProvider (instead of throwing).
- * In development, a warning is logged if context is accessed outside the provider.
+ * **Development**: Throws a clear error if used outside ThemeProvider
+ * (helps catch integration mistakes early)
+ *
+ * **Production**: Returns SSR-safe defaults if used outside ThemeProvider
+ * (maintains compatibility during Next.js static prerendering)
  *
  * @example
  * ```tsx
  * function MyComponent() {
- *   const { theme, brand, setTheme, setBrand } = useTheme();
+ *   const { theme, brand, setTheme, setBrand } = useThemeContext();
  *   // Components automatically inherit theme/brand from <html> attributes
  *   // DO NOT pass brand prop to components - it's applied globally!
  * }
@@ -259,22 +262,25 @@ export function ThemeProvider({
 export function useThemeContext(): UseThemeReturn {
   const context = useContext(ThemeContext);
 
-  // Dev warning: detectar si se está usando fuera de ThemeProvider
-  // Solo warn si estamos en el cliente (typeof window !== "undefined")
-  if (process.env.NODE_ENV === "development" && typeof window !== "undefined") {
-    if (context === SSR_DEFAULTS) {
-      console.warn(
-        "⚠️ [Orion] useThemeContext() called outside <ThemeProvider>. Using SSR defaults.\n\n" +
-          "For full theme functionality, wrap your app with <ThemeProvider>:\n\n" +
-          "export default function App() {\n" +
-          "  return (\n" +
-          "    <ThemeProvider>\n" +
-          "      <YourComponents />\n" +
-          "    </ThemeProvider>\n" +
-          "  );\n" +
-          "}",
+  // DISC-003: Strict mode in development — fail fast with clear error
+  // Maintains SSR compatibility by returning defaults in production
+  if (context === SSR_DEFAULTS) {
+    if (process.env.NODE_ENV === "development") {
+      // Development: throw error to catch integration mistakes early
+      throw new Error(
+        "useThemeContext must be used within a <ThemeProvider> component.\n\n" +
+          "Wrap your app at the root:\n\n" +
+          "  import { ThemeProvider } from '@orion-ds/react';\n\n" +
+          "  export default function App() {\n" +
+          "    return (\n" +
+          "      <ThemeProvider>\n" +
+          "        <YourComponents />\n" +
+          "      </ThemeProvider>\n" +
+          "    );\n" +
+          "  }",
       );
     }
+    // Production: silently return SSR defaults (maintains compatibility)
   }
 
   return context;

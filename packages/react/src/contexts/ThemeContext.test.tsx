@@ -514,15 +514,45 @@ describe("useThemeContext Hook", () => {
     vi.clearAllMocks();
   });
 
-  it("throws error when used outside ThemeProvider", () => {
+  it("throws error when used outside ThemeProvider in development", () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "development";
+
     const TestComponent = () => {
       useThemeContext();
       return <div>Test</div>;
     };
 
-    // useThemeContext should throw
+    // DISC-003: useThemeContext should throw in development when outside provider
     const renderWithoutProvider = () => render(<TestComponent />);
-    expect(renderWithoutProvider).toThrow();
+    expect(renderWithoutProvider).toThrow(
+      "useThemeContext must be used within a <ThemeProvider>",
+    );
+
+    process.env.NODE_ENV = originalEnv;
+  });
+
+  it("returns SSR defaults when used outside ThemeProvider in production", () => {
+    const originalEnv = process.env.NODE_ENV;
+    process.env.NODE_ENV = "production";
+
+    const TestComponent = () => {
+      const context = useThemeContext();
+      return (
+        <div>
+          <div data-testid="theme">{context.theme}</div>
+          <div data-testid="brand">{context.brand}</div>
+        </div>
+      );
+    };
+
+    // DISC-003: useThemeContext should return defaults in production (SSR compatibility)
+    render(<TestComponent />);
+
+    expect(screen.getByTestId("theme")).toHaveTextContent("light");
+    expect(screen.getByTestId("brand")).toHaveTextContent("orion");
+
+    process.env.NODE_ENV = originalEnv;
   });
 
   it("returns context value when used inside ThemeProvider", () => {
