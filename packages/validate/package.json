@@ -1,6 +1,6 @@
 {
   "name": "@orion-ds/validate",
-  "version": "5.5.0",
+  "version": "5.5.1",
   "description": "Validate code against Orion Design System rules — catches hardcoded values, wrong props, and anti-patterns",
   "type": "module",
   "bin": {
