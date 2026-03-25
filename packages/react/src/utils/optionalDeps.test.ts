@@ -170,8 +170,9 @@ describe("Optional Dependencies - ESM (v5.3.1)", () => {
       expect(matches).toBeNull();
     });
 
-    it("should export OptionalDepError interface", () => {
-      const module = require("./optionalDeps.ts");
+    it("should export OptionalDepError interface", async () => {
+      // Use dynamic import() instead of require() for ESM compliance
+      const module = await import("./optionalDeps.ts");
       // TypeScript interfaces don't exist at runtime, but the type is exported
       expect(module.checkComponent).toBeDefined();
       expect(module.getOptionalDepError).toBeDefined();
