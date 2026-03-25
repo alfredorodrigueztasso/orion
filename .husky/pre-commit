@@ -9,6 +9,12 @@ node scripts/validate-ai-manifest.js
 # Run linters on staged files
 npx lint-staged
 
+# API drift detection for preview-modules (PRE-002)
+# Graceful fallback: skip if manifest doesn't exist (fresh clone before first build:registry)
+if [ -f "registry/artifacts/api-manifest.json" ]; then
+  node scripts/validate-preview-modules.js --check-api
+fi
+
 # Stage manifest if it was updated
 if ! git diff --quiet -- tokens/ai-manifest.json; then
   git add tokens/ai-manifest.json
