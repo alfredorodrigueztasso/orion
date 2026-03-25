@@ -15,37 +15,41 @@ let SyntaxHighlighter: any;
 let oneDark: any;
 let oneLight: any;
 
-try {
-  const rshl = require("react-syntax-highlighter");
-  SyntaxHighlighter = rshl.Prism;
-  const styles = require("react-syntax-highlighter/dist/esm/styles/prism");
-  oneDark = styles.oneDark;
-  oneLight = styles.oneLight;
-} catch (error) {
-  // Fallback: require() can fail in ESM contexts
-  // Async validation will catch actual missing dependencies
+if (typeof require !== "undefined") {
+  try {
+    const rshl = require("react-syntax-highlighter");
+    SyntaxHighlighter = rshl.Prism;
+    const styles = require("react-syntax-highlighter/dist/esm/styles/prism");
+    oneDark = styles.oneDark;
+    oneLight = styles.oneLight;
+  } catch (error) {
+    // Fallback: require() can fail if react-syntax-highlighter is not installed
+    // Async validation will catch actual missing dependencies
+  }
 }
 
 // Extend markdown grammar with quoted string support
 // This mutation affects react-syntax-highlighter's refractor instance
-try {
-  const refractor = require("refractor/all");
-  if (
-    refractor.default &&
-    refractor.default.registered &&
-    refractor.default.registered("markdown") &&
-    !refractor.default.languages.markdown?.["quoted-string"]
-  ) {
-    refractor.default.languages.insertBefore("markdown", "bold", {
-      "quoted-string": {
-        pattern: /"(?:\\.|[^"\\])*"/,
-        greedy: true,
-        alias: "string",
-      },
-    });
+if (typeof require !== "undefined") {
+  try {
+    const refractor = require("refractor/all");
+    if (
+      refractor.default &&
+      refractor.default.registered &&
+      refractor.default.registered("markdown") &&
+      !refractor.default.languages.markdown?.["quoted-string"]
+    ) {
+      refractor.default.languages.insertBefore("markdown", "bold", {
+        "quoted-string": {
+          pattern: /"(?:\\.|[^"\\])*"/,
+          greedy: true,
+          alias: "string",
+        },
+      });
+    }
+  } catch {
+    // refractor not available, skip quoted string enhancement
   }
-} catch {
-  // refractor not available, skip quoted string enhancement
 }
 
 /**

@@ -38,14 +38,16 @@ let ResponsiveContainer: any;
 let Tooltip: any;
 let Legend: any;
 
-try {
-  const recharts = require("recharts");
-  ResponsiveContainer = recharts.ResponsiveContainer;
-  Tooltip = recharts.Tooltip;
-  Legend = recharts.Legend;
-} catch (error) {
-  // Fallback: require() can fail in ESM contexts
-  // Async validation will catch actual missing dependencies
+if (typeof require !== "undefined") {
+  try {
+    const recharts = require("recharts");
+    ResponsiveContainer = recharts.ResponsiveContainer;
+    Tooltip = recharts.Tooltip;
+    Legend = recharts.Legend;
+  } catch (error) {
+    // Fallback: require() can fail if recharts is not installed
+    // Async validation will catch actual missing dependencies
+  }
 }
 import type {
   ChartConfig,

@@ -34,12 +34,14 @@ import styles from "./CollapsibleFolder.module.css";
 // @dnd-kit imports with graceful error handling
 let useDroppable: any;
 
-try {
-  const dndKit = require("@dnd-kit/core");
-  useDroppable = dndKit.useDroppable;
-} catch (error) {
-  // Fallback: require() can fail in ESM contexts
-  // Async validation will catch actual missing dependencies
+if (typeof require !== "undefined") {
+  try {
+    const dndKit = require("@dnd-kit/core");
+    useDroppable = dndKit.useDroppable;
+  } catch (error) {
+    // Fallback: require() can fail if @dnd-kit/core is not installed
+    // Async validation will catch actual missing dependencies
+  }
 }
 
 export function CollapsibleFolder<

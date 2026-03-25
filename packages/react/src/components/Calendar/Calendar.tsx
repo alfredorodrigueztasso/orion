@@ -45,24 +45,26 @@ let isBefore: any;
 let isAfter: any;
 let format: any;
 
-try {
-  const dateFns = require("date-fns");
-  startOfMonth = dateFns.startOfMonth;
-  endOfMonth = dateFns.endOfMonth;
-  startOfWeek = dateFns.startOfWeek;
-  endOfWeek = dateFns.endOfWeek;
-  eachDayOfInterval = dateFns.eachDayOfInterval;
-  addMonths = dateFns.addMonths;
-  subMonths = dateFns.subMonths;
-  isSameDay = dateFns.isSameDay;
-  isSameMonth = dateFns.isSameMonth;
-  isToday = dateFns.isToday;
-  isBefore = dateFns.isBefore;
-  isAfter = dateFns.isAfter;
-  format = dateFns.format;
-} catch (error) {
-  // Fallback: require() can fail in ESM contexts
-  // Async validation will catch actual missing dependencies
+if (typeof require !== "undefined") {
+  try {
+    const dateFns = require("date-fns");
+    startOfMonth = dateFns.startOfMonth;
+    endOfMonth = dateFns.endOfMonth;
+    startOfWeek = dateFns.startOfWeek;
+    endOfWeek = dateFns.endOfWeek;
+    eachDayOfInterval = dateFns.eachDayOfInterval;
+    addMonths = dateFns.addMonths;
+    subMonths = dateFns.subMonths;
+    isSameDay = dateFns.isSameDay;
+    isSameMonth = dateFns.isSameMonth;
+    isToday = dateFns.isToday;
+    isBefore = dateFns.isBefore;
+    isAfter = dateFns.isAfter;
+    format = dateFns.format;
+  } catch (error) {
+    // Fallback: require() can fail if date-fns is not installed
+    // Async validation will catch actual missing dependencies
+  }
 }
 
 const WEEKDAY_LABELS = ["Su", "Mo", "Tu", "We", "Th", "Fr", "Sa"];

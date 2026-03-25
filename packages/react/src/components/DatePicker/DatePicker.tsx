@@ -31,12 +31,14 @@ import styles from "./DatePicker.module.css";
 // date-fns imports with graceful error handling
 let formatDate: any;
 
-try {
-  const dateFns = require("date-fns");
-  formatDate = dateFns.format;
-} catch (error) {
-  // Fallback: require() can fail in ESM contexts
-  // Async validation will catch actual missing dependencies
+if (typeof require !== "undefined") {
+  try {
+    const dateFns = require("date-fns");
+    formatDate = dateFns.format;
+  } catch (error) {
+    // Fallback: require() can fail if date-fns is not installed
+    // Async validation will catch actual missing dependencies
+  }
 }
 
 export const DatePicker: React.FC<DatePickerProps> = (props) => {
