@@ -35,6 +35,8 @@ The system supports multiple brands via `data-brand` attribute:
 
 Brands are configured in `tokens/brands.json` and override base tokens in `theme.css`.
 
+**Note (v5.4.0):** 🚀 **MINOR RELEASE (Mar 25, 2026)** - v5.4.0 adds build-time API drift detection for preview modules (PRE-002) and completes ESM spec compliance test fix (PRE-009). **PRE-002**: New `docs-site/registry-link.json` maps components to preview exports; `npm run build:registry` generates `registry/artifacts/api-manifest.json` manifest; pre-commit hook validates drift with graceful fallback for fresh clones. **PRE-009**: ESM compliance test no longer uses `require()` to test for absence of `require()` — now greps compiled `.mjs` output directly. All 2400+ tests passing, 10 quality gates verified. See [v5.4.0 plan](`.claude/plans/composed-seeking-nygaard.md`) and GitHub release. Migration: `npm install @orion-ds/react@latest` (gets v5.4.0).
+
 **Note (v5.3.2):** ✅ **PATCH RELEASE (Mar 25, 2026)** - v5.3.2 fixes critical fresh-clone build failure (PRE-001: `build:react` now runs `build:tokens` prerequisite before copying assets). Also includes 3 preventive fixes: ESM validation gate now greps compiled `.mjs` files (PRE-007), `@dnd-kit/utilities` added to peerDependencies (PRE-008), ESM compliance test rewritten (PRE-009). All 2400+ tests passing, ESM validation gate functional, GitHub Actions CI/CD added for preventing future build regressions. v5.3.0 remains marked as "broken" (ESM regression). See GitHub release and `.claude/workspace-docs/V5_3_1_PRE_EXISTING_ISSUES_AUDIT.md` for technical details. Migration: `npm install @orion-ds/react@latest` (gets v5.3.2).
 
 ### Token System
