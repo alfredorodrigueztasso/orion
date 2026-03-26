@@ -667,6 +667,55 @@ These semantic aliases map to numeric primitives (`--font-size-12`, `--font-size
 
 Without fonts, text will fallback to system fonts (Times New Roman, etc.)
 
+## ⚠️ Critical: Installation & Dependencies
+
+### @orion-ds/react MUST be in `dependencies` (Not devDependencies!)
+
+**@orion-ds/react is a runtime UI library and must be installed in `dependencies`, NOT `devDependencies`.**
+
+#### ✅ CORRECT
+```bash
+npm install @orion-ds/react
+```
+
+Your `package.json` should show:
+```json
+{
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@orion-ds/react": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.0.0"
+  }
+}
+```
+
+#### ❌ WRONG
+```bash
+# DON'T DO THIS - Components will be missing in production!
+npm install --save-dev @orion-ds/react
+```
+
+#### Why This Matters
+| Location | Included in Build | Use Case |
+|----------|-------------------|----------|
+| `dependencies` | ✅ Production & Development | **UI libraries, components, styles** |
+| `devDependencies` | ❌ Development only | Testing, TypeScript, linters |
+
+**If installed as devDependency, components are excluded from production builds and your app will break!**
+
+If you accidentally installed it as a dev dependency:
+```bash
+npm uninstall --save-dev @orion-ds/react
+npm install @orion-ds/react
+```
+
+---
+
 ### React Component CSS Import (v3.0.0+)
 
 When using `@orion-ds/react@^3.0.0`, import styles using:
@@ -689,7 +738,7 @@ import '@orion-ds/react/theme.css';    // Design tokens only (228 KB)
 import { Button } from '@orion-ds/react/components/Button';
 ```
 
-Missing CSS imports will result in unstyled components.
+**⚠️ CRITICAL**: Missing CSS imports will result in unstyled components. Styles MUST be imported in your app's entry file (main.tsx, index.tsx, App.tsx, or layout.tsx).
 
 ## TypeScript Development Workflow (NEW)
 
@@ -783,6 +832,51 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
   color: var(--interactive-primary-text);
 }
 ```
+
+### 2a. Example package.json (Correct Structure)
+
+When you `npm install @orion-ds/react`, your `package.json` should look like this:
+
+```json
+{
+  "name": "my-orion-app",
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc && vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "react": "^19.0.0",
+    "react-dom": "^19.0.0",
+    "@orion-ds/react": "^5.5.2"
+  },
+  "devDependencies": {
+    "@types/react": "^19.0.0",
+    "@types/react-dom": "^19.0.0",
+    "typescript": "^5.0.0",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0"
+  }
+}
+```
+
+**Key points:**
+- ✅ `@orion-ds/react` is in `dependencies` (runtime)
+- ✅ `@types/*` are in `devDependencies` (development only)
+- ✅ `react` and `react-dom` are peers of `@orion-ds/react`
+
+**Common mistake to avoid:**
+```json
+{
+  "devDependencies": {
+    "@orion-ds/react": "^5.5.2"  // ❌ WRONG - Will break in production!
+  }
+}
+```
+
+---
 
 ### 3. Global Brand & Theme Management (AI-First Architecture)
 

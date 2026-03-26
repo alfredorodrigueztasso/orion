@@ -32,6 +32,58 @@ The library uses standard React APIs (`forwardRef`, `useState`, `useEffect`, `us
 
 ## Installation
 
+### ⚠️ CRITICAL: @orion-ds/react is a **Runtime Dependency**, NOT a Dev Tool
+
+**@orion-ds/react must be installed in `dependencies`**, not `devDependencies`. It contains UI components and styles needed in production.
+
+#### ✅ CORRECT Installation
+
+\`\`\`bash
+npm install @orion-ds/react
+\`\`\`
+
+This puts it in `dependencies` where it belongs.
+
+**Your `package.json` should show:**
+\`\`\`json
+{
+"dependencies": {
+"@orion-ds/react": "^5.5.2",
+"react": "^19.0.0",
+"react-dom": "^19.0.0"
+},
+"devDependencies": {
+"@types/react": "^19.0.0",
+"@types/react-dom": "^19.0.0",
+"typescript": "^5.0.0"
+}
+}
+\`\`\`
+
+#### ❌ WRONG: Using --save-dev (Will Break in Production!)
+
+\`\`\`bash
+
+# ❌ DON'T DO THIS
+
+npm install --save-dev @orion-ds/react
+\`\`\`
+
+If you accidentally installed it as a dev dependency, fix it:
+\`\`\`bash
+npm uninstall --save-dev @orion-ds/react
+npm install @orion-ds/react
+\`\`\`
+
+#### Why This Matters
+
+| Location          | Behavior                           | Use Case                              |
+| ----------------- | ---------------------------------- | ------------------------------------- |
+| `dependencies`    | ✅ Included in production builds   | **UI libraries, components, styling** |
+| `devDependencies` | ❌ Excluded from production builds | Testing tools, linters, TypeScript    |
+
+**If @orion-ds/react is in `devDependencies`, your components will be missing from the production build!**
+
 ### Option A: npm install (Recommended)
 
 \`\`\`bash
@@ -77,6 +129,84 @@ This single import includes:
 - ✅ Brand support (orion, red, deepblue, orange, lemon)
 
 > **⚠️ IMPORTANT**: Don't forget the CSS import! Without it, components will be unstyled. In development, ThemeProvider will warn you if styles are missing.
+
+## ⚠️ Common Setup Mistakes
+
+### Mistake 1: @orion-ds/react in devDependencies (CRITICAL!)
+
+**❌ WRONG:**
+\`\`\`bash
+npm install --save-dev @orion-ds/react
+\`\`\`
+
+**Why it breaks**: devDependencies are excluded from production builds. Your components won't be available in production!
+
+**✅ FIX:**
+\`\`\`bash
+npm uninstall --save-dev @orion-ds/react
+npm install @orion-ds/react
+\`\`\`
+
+Check your `package.json` - should be in `dependencies`:
+\`\`\`json
+{
+"dependencies": {
+"@orion-ds/react": "^5.5.2" // ✅ Runtime dependency
+}
+}
+\`\`\`
+
+---
+
+### Mistake 2: Forgot CSS imports
+
+**❌ WRONG:**
+\`\`\`tsx
+import { Button, Card } from '@orion-ds/react';
+// Forgot to import styles! Components will be unstyled
+\`\`\`
+
+**✅ CORRECT:**
+\`\`\`tsx
+import '@orion-ds/react/styles.css'; // Must come first
+import { Button, Card } from '@orion-ds/react';
+\`\`\`
+
+**Or in your app entry file:**
+\`\`\`tsx
+// main.tsx or index.tsx (root of your app)
+import '@orion-ds/react/styles.css';
+import App from './App';
+\`\`\`
+
+---
+
+### Mistake 3: Using Tailwind utilities alongside Orion
+
+**❌ WRONG:**
+\`\`\`tsx
+<Button className="gap-4 p-8">Click me</Button>
+\`\`\`
+
+**Why it breaks**: Tailwind utilities (gap-_, p-_, etc.) conflict with Orion's CSS variables.
+
+**✅ CORRECT - Use Orion tokens:**
+\`\`\`tsx
+<Button style={{ gap: 'var(--spacing-4)', padding: 'var(--spacing-8)' }}>
+Click me
+</Button>
+\`\`\`
+
+Or use Orion's built-in responsive system:
+\`\`\`tsx
+import { Stack } from '@orion-ds/react';
+
+<Stack gap="spacing-4" padding="spacing-8">
+  <Button>Click me</Button>
+</Stack>
+\`\`\`
+
+For detailed Tailwind compatibility, see [COMPATIBILITY.md](./COMPATIBILITY.md).
 
 ## Quick Start
 

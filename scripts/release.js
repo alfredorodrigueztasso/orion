@@ -5,12 +5,21 @@
  *
  * Automated release management for the monorepo.
  * Ensures all packages are versioned synchronously and published correctly.
+ * Integrates with CHANGELOG.md for automated GitHub Releases.
  *
  * Usage:
  *   npm run release:patch    # 1.0.0 → 1.0.1
  *   npm run release:minor    # 1.0.0 → 1.1.0
  *   npm run release:major    # 1.0.0 → 2.0.0
  *   npm run release:dry      # Preview without publishing
+ *
+ * After release:
+ *   - Git tag is created: v{version}
+ *   - Push with: git push origin --tags
+ *   - GitHub Actions will automatically:
+ *     1. Extract CHANGELOG entry
+ *     2. Create GitHub Release
+ *     3. Publish to npm
  */
 
 const { execSync } = require('child_process');
@@ -162,6 +171,97 @@ function exec(command, options = {}) {
 }
 
 /**
+ * Extract CHANGELOG entry for a version
+ */
+function extractChangelogEntry(version) {
+  const changelogPath = path.join(ROOT_DIR, 'CHANGELOG.md');
+
+  if (!fs.existsSync(changelogPath)) {
+    logWarning('CHANGELOG.md not found - GitHub Release will use minimal description');
+    return null;
+  }
+
+  const content = fs.readFileSync(changelogPath, 'utf8');
+  const lines = content.split('\n');
+
+  let inSection = false;
+  let section = [];
+  const versionHeader = `## [${version}]`;
+
+  for (let i = 0; i < lines.length; i++) {
+    const line = lines[i];
+
+    if (line.startsWith(versionHeader)) {
+      inSection = true;
+      // Skip the header line itself
+      continue;
+    }
+
+    if (inSection) {
+      // Stop at next version header or top-level separator
+      if (line.startsWith('## [') || line.startsWith('---')) {
+        break;
+      }
+
+      // Collect the section
+      if (line.trim() || section.length > 0) {
+        section.push(line);
+      }
+    }
+  }
+
+  if (section.length === 0) {
+    logWarning(`No CHANGELOG entry found for v${version}`);
+    return null;
+  }
+
+  // Trim trailing empty lines
+  while (section.length > 0 && !section[section.length - 1].trim()) {
+    section.pop();
+  }
+
+  return section.join('\n').trim();
+}
+
+/**
+ * Create and push git tag for release
+ */
+function createGitTag(version, dryRun = false) {
+  const tagName = `v${version}`;
+
+  logStep('Tag', `Creating git tag: ${tagName}`);
+
+  const changelogEntry = extractChangelogEntry(version) || `Release v${version}`;
+
+  if (dryRun) {
+    logInfo(`Would create tag: ${tagName}`);
+    logInfo(`Tag message:\n${changelogEntry}`);
+    return;
+  }
+
+  // Create annotated tag with changelog entry as message
+  const tagMessage = `Release v${version}\n\n${changelogEntry}`;
+
+  try {
+    exec(`git tag -a "${tagName}" -m "${tagMessage.replace(/"/g, '\\"')}"`, {
+      cwd: ROOT_DIR
+    });
+    logSuccess(`Git tag created: ${tagName}`);
+
+    logInfo(`\nNext step: Push tags to GitHub with:`);
+    logInfo(`  git push origin ${tagName}`);
+    logInfo(`\nOr push all tags with:`);
+    logInfo(`  git push origin --tags`);
+    logInfo(`\nGitHub Actions will automatically create a Release and publish to npm.`);
+  } catch (error) {
+    logError(`Failed to create git tag: ${error.message}`);
+    logWarning(`You can create it manually with:`);
+    logWarning(`  git tag -a "${tagName}" -m "Release v${version}"`);
+    logWarning(`  git push origin ${tagName}`);
+  }
+}
+
+/**
  * Check if npm is logged in
  */
 function checkNpmAuth() {
@@ -299,28 +399,45 @@ async function release() {
     }
   }
 
-  // Step 6: Summary
-  logStep('6/6', 'Release Summary');
-
-  log('\n' + '-'.repeat(60));
-
+  // Step 6: Create git tag and prepare for GitHub Actions
   const successful = publishResults.filter(r => r.success);
   const failed = publishResults.filter(r => !r.success);
 
+  if (!dryRun && failed.length === 0) {
+    createGitTag(newVersion, dryRun);
+  }
+
+  // Step 7: Summary
+  logStep('7/7', 'Release Summary');
+
+  log('\n' + '-'.repeat(60));
+
   if (dryRun) {
     log('\n  DRY RUN COMPLETE', colors.yellow);
-    log('  Run without --dry-run to publish for real.\n');
+    log('  The following would be executed:\n');
+    log('  1. All package.json files would be updated to v' + newVersion);
+    log('  2. Validation suite would run (audit, type-check)');
+    log('  3. Packages would be built (npm run build:release)');
+    log('  4. Packages would be published to npm');
+    log('  5. Git tag v' + newVersion + ' would be created');
+    log('  6. GitHub Actions would create a Release and publish changelog\n');
+    log('  Run without --dry-run to execute for real.\n');
   } else {
     if (failed.length === 0) {
-      log(`\n  ${colors.green}SUCCESS!${colors.reset} All packages published.\n`);
+      log(`\n  ${colors.green}SUCCESS!${colors.reset} Release v${newVersion} prepared.\n`);
       log('  Published packages:');
       for (const pkg of PACKAGES) {
-        log(`    - ${pkg.name}@${newVersion}`);
+        log(`    ${colors.green}✓${colors.reset} ${pkg.name}@${newVersion}`);
       }
-      log('\n  Install with:');
-      log(`    npm install @orion-ds/core@${newVersion}`);
+      log('\n  Installation:');
       log(`    npm install @orion-ds/react@${newVersion}`);
-      log(`    npm install @orion-ds/vue@${newVersion}`);
+      log(`    npm install @orion-ds/cli@${newVersion}`);
+      log(`    npm install @orion-ds/mcp@${newVersion}`);
+      log('\n  GitHub Release:');
+      log(`    Automated via GitHub Actions when tag is pushed`);
+      log(`    Changelog extracted from CHANGELOG.md automatically`);
+      log('\n  Next steps:');
+      log(`    ${colors.cyan}git push origin --tags${colors.reset} (to trigger GitHub Actions)`);
     } else {
       log(`\n  ${colors.red}PARTIAL FAILURE${colors.reset}`, colors.red);
       log(`  ${successful.length}/${publishResults.length} packages published.`);
