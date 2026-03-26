@@ -1009,6 +1009,37 @@ npm install @dnd-kit/core @dnd-kit/sortable @dnd-kit/utilities
 import { CollapsibleFolder } from '@orion-ds/react/dnd';
 ```
 
+#### Integrations (Tailwind CSS)
+
+**`@orion-ds/react/integrations/tailwind`** — Official Tailwind CSS preset (v5.7.0+)
+
+Maps all Orion semantic tokens to Tailwind utilities with automatic dark mode and brand switching.
+
+**Tailwind v3:**
+```typescript
+import { orionPreset } from '@orion-ds/react/integrations/tailwind';
+
+export default {
+  presets: [orionPreset],
+  content: ['./src/**/*.{ts,tsx}'],
+};
+```
+
+**Tailwind v4:**
+```css
+@import 'tailwindcss';
+@import '@orion-ds/react/integrations/tailwind/v4.css';
+```
+
+**What's included:**
+- 40+ color tokens (surfaces, text, interactive, borders, status, alerts)
+- 19 spacing values (`orion-0` through `orion-32`)
+- 6 border radius tokens (button, container, sm, md, lg, xl)
+- 3 font families (primary, secondary, mono)
+- 4 backdrop blur values (orion-sm, orion-md, orion-lg, orion-xl)
+
+All values use CSS variables for automatic dark mode and brand switching. See `packages/react/TAILWIND_INTEGRATION.md` for complete setup guide.
+
 #### Migration from v4.4.0 to v4.5.0
 
 **Problem (v4.4.0)**:

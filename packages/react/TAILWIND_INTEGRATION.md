@@ -76,9 +76,125 @@ Now all Tailwind utilities are namespaced: `tw-p-6`, `tw-gap-4`, `tw-flex`, etc.
 
 ---
 
-## Official Configuration Template
+## v5.7.0+: Official Tailwind CSS Preset
 
-While we work on built-in `@layer orion` support (coming in v5.6.0+), use this `tailwind.config.js` to map Tailwind keys to Orion CSS variables:
+The easiest way to use Orion with Tailwind is to import the official preset. This gives you instant access to all Orion tokens as Tailwind utilities, with automatic dark mode and brand switching.
+
+### Tailwind v3 Setup
+
+**Step 1**: Install @orion-ds/react (if you haven't already)
+
+```bash
+npm install @orion-ds/react
+```
+
+**Step 2**: Import the official preset in `tailwind.config.js`
+
+```ts
+// tailwind.config.ts
+import { orionPreset } from "@orion-ds/react/integrations/tailwind";
+
+export default {
+  presets: [orionPreset],
+  content: ["./src/**/*.{ts,tsx}"],
+};
+```
+
+**Step 3**: Set up your CSS
+
+```css
+/* src/index.css */
+@layer orion;
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+@import "@orion-ds/react/styles.css";
+```
+
+That's it! Now you can use Orion tokens as Tailwind utilities:
+
+```tsx
+<Button className="p-orion-4 rounded-button">Click me</Button>
+<div className="bg-surface-base text-text-primary p-orion-6">
+  Orion + Tailwind = 🚀
+</div>
+```
+
+### Tailwind v4 Setup
+
+For Tailwind v4 users, the official CSS `@theme` block is available:
+
+**Step 1**: Set up your CSS with Tailwind v4 imports
+
+```css
+/* src/index.css */
+@import "tailwindcss";
+@import "@orion-ds/react/integrations/tailwind/v4.css";
+```
+
+**Step 2**: Create a minimal `tailwind.config.js`
+
+```ts
+// tailwind.config.ts
+export default {
+  content: ["./src/**/*.{ts,tsx}"],
+};
+```
+
+All Orion tokens are automatically available as Tailwind utilities in v4 via the `@theme` block.
+
+### What the Preset Provides
+
+The `orionPreset` includes:
+
+- **40+ color tokens** — surfaces, text, interactive, borders, status, alerts, gradients
+- **19 spacing values** — `orion-0` through `orion-32` (mapped to `--spacing-*`)
+- **6 border radius tokens** — `button`, `container`, `sm`, `md`, `lg`, `xl`
+- **3 font families** — `primary`, `secondary`, `mono`
+- **4 backdrop blur values** — `orion-sm`, `orion-md`, `orion-lg`, `orion-xl`
+
+All values use CSS variables, so dark mode and brand switching work automatically.
+
+### Migration from Manual Config
+
+If you were using a manual `tailwind.config.js` with hardcoded Orion tokens, you can simplify:
+
+**Before (v5.6.0):**
+
+```js
+export default {
+  theme: {
+    extend: {
+      colors: {
+        "surface-base": "var(--surface-base)",
+        "surface-subtle": "var(--surface-subtle)",
+        // ... 30+ more tokens manually mapped
+      },
+      spacing: {
+        "orion-0": "var(--spacing-0)",
+        "orion-1": "var(--spacing-1)",
+        // ... 19 more tokens manually mapped
+      },
+    },
+  },
+};
+```
+
+**After (v5.7.0):**
+
+```ts
+import { orionPreset } from "@orion-ds/react/integrations/tailwind";
+
+export default {
+  presets: [orionPreset],
+};
+```
+
+---
+
+## Legacy: Manual Configuration Template
+
+For reference, here's the manual `tailwind.config.js` approach (for versions before v5.7.0):
 
 ```js
 // tailwind.config.js or tailwind.config.mjs
@@ -383,19 +499,6 @@ Built-in `@layer orion` support is now available in v5.6.0+! This makes Tailwind
 - No manual `@layer orion;` declaration needed in your CSS anymore
 - Tailwind utilities automatically work with Orion components
 - Implementation uses zero external dependencies (Opción B approach)
-
-**Upgrade to use it:**
-
-```bash
-npm install @orion-ds/react@5.6.0
-```
-
-**That's it!** Tailwind utilities will now work seamlessly with Orion components:
-
-```tsx
-// ✅ This now works automatically (no @layer config needed!)
-<Button className="p-6 gap-4">Click me</Button>
-```
 
 **Browser support:** Chrome 99+, Firefox 97+, Safari 15.4+, Edge 99+
 

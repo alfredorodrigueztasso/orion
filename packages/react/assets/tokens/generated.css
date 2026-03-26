@@ -9,6 +9,7 @@
 /* ─── Primitives (from primary.json) ─── */
 :root {
   /* Colors */
+
   /* Brand: Orion (default) */
   --color-brand-50: #e8f0ff;
   --color-brand-100: #c7daff;
@@ -23,7 +24,7 @@
   --color-brand-950: #071a5c;
 
   /* Neutral */
-  --color-neutral-0: #ffffff;
+  --color-neutral-0: #fff;
   --color-neutral-50: #f8fafc;
   --color-neutral-100: #f1f5f9;
   --color-neutral-200: #e2e8f0;
@@ -35,7 +36,7 @@
   --color-neutral-800: #1e293b;
   --color-neutral-900: #0f172a;
   --color-neutral-950: #020617;
-  --color-neutral-1000: #000000;
+  --color-neutral-1000: #000;
 
   /* Status */
   --color-error-500: #ef4444;
@@ -43,9 +44,9 @@
   --color-warning-500: #eab308;
 
   /* Typography */
-  --font-primary: Libre Baskerville, system-ui, sans-serif;
-  --font-secondary: Inter, system-ui, sans-serif;
-  --font-mono: JetBrains Mono, monospace;
+  --font-primary: libre baskerville, system-ui, sans-serif;
+  --font-secondary: inter, system-ui, sans-serif;
+  --font-mono: jetbrains mono, monospace;
 
   /* Font Sizes */
   --font-size-10: 10px;

@@ -63,7 +63,13 @@
       "import": "./dist/dnd.mjs",
       "require": "./dist/dnd.cjs"
     },
-    "./blocks.css": "./dist/blocks.css"
+    "./blocks.css": "./dist/blocks.css",
+    "./integrations/tailwind": {
+      "types": "./dist/integrations/tailwind/index.d.ts",
+      "import": "./dist/integrations/tailwind/index.mjs",
+      "require": "./dist/integrations/tailwind/index.cjs"
+    },
+    "./integrations/tailwind/v4.css": "./dist/integrations/tailwind/v4.css"
   },
   "files": [
     "dist",
@@ -216,6 +222,7 @@
     "react-dom": "^19.2.4",
     "rollup-plugin-preserve-directives": "^0.4.0",
     "storybook": "^8.6.17",
+    "tailwindcss": "^3.0.0",
     "typescript": "^5.9.3",
     "vite": "^7.3.1",
     "vite-plugin-dts": "^3.7.0",

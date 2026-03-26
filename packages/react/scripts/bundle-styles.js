@@ -20,7 +20,7 @@
  * See: packages/react/TAILWIND_INTEGRATION.md for complete Tailwind + Orion guide
  */
 
-import { readFileSync, writeFileSync, existsSync, readdirSync } from 'fs';
+import { readFileSync, writeFileSync, existsSync, readdirSync, mkdirSync } from 'fs';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -248,6 +248,46 @@ ${reactCss}
   console.log(`  ├─ react.css: ${reactSize}KB (component styles)`);
   console.log(`  ├─ styles.css: ${bundleSize}KB (full bundle with @layer orion)`);
   console.log(`  └─ blocks.css: ${blocksSize}KB (blocks & templates)`);
+
+  // Copy Tailwind integration files to proper subdirectory structure
+  const TAILWIND_DIST_DIR = resolve(DIST_DIR, 'integrations/tailwind');
+
+  try {
+    // Ensure directory exists
+    if (!existsSync(TAILWIND_DIST_DIR)) {
+      mkdirSync(TAILWIND_DIST_DIR, { recursive: true });
+    }
+
+    // Copy vite-generated .mjs and .cjs files from flat to subdirectory
+    const tailwindMjs = resolve(DIST_DIR, 'integrations/tailwind.mjs');
+    const tailwindCjs = resolve(DIST_DIR, 'integrations/tailwind.cjs');
+
+    if (existsSync(tailwindMjs)) {
+      const content = readFileSafely(tailwindMjs, 'Reading tailwind.mjs');
+      if (content) {
+        writeFileSync(resolve(TAILWIND_DIST_DIR, 'index.mjs'), content, 'utf-8');
+      }
+    }
+
+    if (existsSync(tailwindCjs)) {
+      const content = readFileSafely(tailwindCjs, 'Reading tailwind.cjs');
+      if (content) {
+        writeFileSync(resolve(TAILWIND_DIST_DIR, 'index.cjs'), content, 'utf-8');
+      }
+    }
+
+    // Copy Tailwind v4 CSS file (static asset for @theme integration)
+    const V4_CSS_SRC = resolve(__dirname, '../src/integrations/tailwind/v4.css');
+    if (existsSync(V4_CSS_SRC)) {
+      const v4Css = readFileSafely(V4_CSS_SRC, 'Reading Tailwind v4.css');
+      if (v4Css) {
+        writeFileSync(resolve(TAILWIND_DIST_DIR, 'v4.css'), v4Css, 'utf-8');
+        console.log(`✅ integrations/tailwind files organized (index.mjs, index.cjs, v4.css)`);
+      }
+    }
+  } catch (error) {
+    console.error(`⚠ Warning: Could not organize tailwind files: ${error.message}`);
+  }
 
   console.log(`\n📦 Output:`);
   console.log(`  ├─ ${OUTPUT_PATH}`);

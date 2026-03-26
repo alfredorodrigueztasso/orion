@@ -65,6 +65,22 @@ for subpath in chart calendar editor dnd; do
   fi
 done
 
+# Test 4: Tailwind integration preset
+echo ""
+echo "Test 4: Tailwind integration preset (integrations/tailwind/index.mjs)"
+if [ ! -f "packages/react/dist/integrations/tailwind/index.mjs" ]; then
+  echo "  ⚠ packages/react/dist/integrations/tailwind/index.mjs not found (skipping)"
+else
+  node --input-type=module --eval "
+    import('./packages/react/dist/integrations/tailwind/index.mjs')
+      .then(() => console.log('  ✓ Tailwind integration preset loaded'))
+      .catch(err => {
+        console.error('  ✗ Failed:', err.message);
+        process.exit(1);
+      })
+  " || exit 1
+fi
+
 echo ""
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "✅ ESM validation passed"

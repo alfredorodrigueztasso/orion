@@ -1,0 +1,118 @@
+/**
+ * Orion Design System — Tailwind v4 Theme Integration
+ *
+ * Use this in your Tailwind v4 CSS setup:
+ *
+ * @import 'tailwindcss';
+ * @import '@orion-ds/react/integrations/tailwind/v4.css';
+ *
+ * All Orion semantic tokens automatically map to Tailwind utilities
+ * with dark mode and brand switching support via CSS variables.
+ */
+
+/* stylelint-disable-next-line at-rule-no-unknown */
+@theme {
+  /* Surfaces */
+  --color-surface-base: var(--surface-base);
+  --color-surface-subtle: var(--surface-subtle);
+  --color-surface-layer: var(--surface-layer);
+  --color-surface-sunken: var(--surface-sunken);
+  --color-surface-glass: var(--surface-glass);
+  --color-surface-overlay: var(--surface-overlay);
+
+  /* Text */
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-tertiary: var(--text-tertiary);
+  --color-text-brand: var(--text-brand);
+  --color-text-inverse: var(--text-inverse);
+  --color-text-on-brand-primary: var(--text-on-brand-primary);
+
+  /* Interactive */
+  --color-interactive-primary: var(--interactive-primary);
+  --color-interactive-primary-hover: var(--interactive-primary-hover);
+  --color-interactive-primary-text: var(--interactive-primary-text);
+  --color-interactive-secondary: var(--interactive-secondary);
+  --color-interactive-secondary-hover: var(--interactive-secondary-hover);
+
+  /* Borders */
+  --color-border-subtle: var(--border-subtle);
+  --color-border-strong: var(--border-strong);
+  --color-border-interactive: var(--border-interactive);
+
+  /* Status */
+  --color-status-success: var(--status-success);
+  --color-status-error: var(--status-error);
+  --color-status-warning: var(--status-warning);
+  --color-status-info: var(--status-info);
+
+  /* Soft variants */
+  --color-soft-brand: var(--soft-brand);
+  --color-soft-success: var(--soft-success);
+  --color-soft-error: var(--soft-error);
+  --color-soft-warning: var(--soft-warning);
+  --color-soft-info: var(--soft-info);
+
+  /* Alert variants */
+  --color-alert-success-bg: var(--alert-success-bg);
+  --color-alert-success-text: var(--alert-success-text);
+  --color-alert-success-border: var(--alert-success-border);
+  --color-alert-error-bg: var(--alert-error-bg);
+  --color-alert-error-text: var(--alert-error-text);
+  --color-alert-error-border: var(--alert-error-border);
+  --color-alert-warning-bg: var(--alert-warning-bg);
+  --color-alert-warning-text: var(--alert-warning-text);
+  --color-alert-warning-border: var(--alert-warning-border);
+  --color-alert-info-bg: var(--alert-info-bg);
+  --color-alert-info-text: var(--alert-info-text);
+  --color-alert-info-border: var(--alert-info-border);
+
+  /* Brand primitives */
+  --color-brand: var(--color-brand-500);
+  --color-brand-400: var(--color-brand-400);
+  --color-brand-600: var(--color-brand-600);
+
+  /* Gradients */
+  --color-gradient-start: var(--gradient-start);
+  --color-gradient-end: var(--gradient-end);
+
+  /* Spacing (19 values) */
+  --spacing-orion-0: var(--spacing-0);
+  --spacing-orion-px: var(--spacing-px);
+  --spacing-orion-05: var(--spacing-05);
+  --spacing-orion-1: var(--spacing-1);
+  --spacing-orion-2: var(--spacing-2);
+  --spacing-orion-3: var(--spacing-3);
+  --spacing-orion-4: var(--spacing-4);
+  --spacing-orion-5: var(--spacing-5);
+  --spacing-orion-6: var(--spacing-6);
+  --spacing-orion-7: var(--spacing-7);
+  --spacing-orion-8: var(--spacing-8);
+  --spacing-orion-9: var(--spacing-9);
+  --spacing-orion-10: var(--spacing-10);
+  --spacing-orion-11: var(--spacing-11);
+  --spacing-orion-12: var(--spacing-12);
+  --spacing-orion-16: var(--spacing-16);
+  --spacing-orion-20: var(--spacing-20);
+  --spacing-orion-24: var(--spacing-24);
+  --spacing-orion-32: var(--spacing-32);
+
+  /* Border Radius */
+  --radius-button: var(--radius-button);
+  --radius-container: var(--radius-container);
+  --radius-sm: var(--radius-sm);
+  --radius-md: var(--radius-md);
+  --radius-lg: var(--radius-lg);
+  --radius-xl: var(--radius-xl);
+
+  /* Font Family */
+  --font-primary: var(--font-primary);
+  --font-secondary: var(--font-secondary);
+  --font-mono: var(--font-mono);
+
+  /* Backdrop Blur */
+  --blur-orion-sm: var(--blur-sm);
+  --blur-orion-md: var(--blur-md);
+  --blur-orion-lg: var(--blur-lg);
+  --blur-orion-xl: var(--blur-xl);
+}

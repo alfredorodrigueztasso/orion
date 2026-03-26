@@ -19,6 +19,11 @@ export default defineConfig(
       calendar: path.resolve(__dirname, "src/calendar.ts"),
       editor: path.resolve(__dirname, "src/editor.ts"),
       dnd: path.resolve(__dirname, "src/dnd.ts"),
+      // Tailwind integration (official preset)
+      "integrations/tailwind": path.resolve(
+        __dirname,
+        "src/integrations/tailwind/index.ts",
+      ),
     },
     name: "OrionReact",
     resolveAlias: {

@@ -5,7 +5,62 @@ All notable changes to Orion Design System are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.6.0] — 2026-03-26 (PLANNED)
+## [5.7.0] — 2026-03-26 (PLANNED)
+
+### Features
+
+#### Official Tailwind CSS Preset (Paso 3)
+
+**NEW**: `@orion-ds/react/integrations/tailwind` — Official preset for seamless Orion + Tailwind integration.
+
+**What's included:**
+
+- `orionPreset` — JavaScript config object for Tailwind v3
+- `v4.css` — CSS `@theme` block for Tailwind v4
+- 40+ color tokens (surfaces, text, interactive, borders, status, alerts, gradients)
+- 19 spacing values (`orion-0` through `orion-32`)
+- 6 border radius tokens (button, container, sm, md, lg, xl)
+- 3 font families (primary, secondary, mono)
+- 4 backdrop blur values (orion-sm, orion-md, orion-lg, orion-xl)
+
+**All values use CSS variables** — dark mode and brand switching work automatically.
+
+**Usage:**
+
+Tailwind v3:
+```ts
+import { orionPreset } from '@orion-ds/react/integrations/tailwind';
+
+export default {
+  presets: [orionPreset],
+  content: ['./src/**/*.{ts,tsx}'],
+};
+```
+
+Tailwind v4:
+```css
+@import 'tailwindcss';
+@import '@orion-ds/react/integrations/tailwind/v4.css';
+```
+
+**Migration**: If you were manually mapping tokens, use the preset instead. See `TAILWIND_INTEGRATION.md` for details.
+
+**Testing**: Added unit tests asserting no hardcoded hex values and all tokens use `var()` format.
+
+### Improvements
+
+- Cleaned up "coming in v5.6.0+" language from `TAILWIND_INTEGRATION.md` (v5.6.0 is now released)
+- Added v5.7.0 section to official Tailwind documentation
+- Added ESM gate test for new `integrations/tailwind` entry point
+- Updated testing project to use official preset instead of manual config
+
+### Zero Breaking Changes
+
+No API changes — purely additive feature. Existing manual configs continue to work.
+
+---
+
+## [5.6.0] — 2026-03-26 (SHIPPED)
 
 ### 🎯 Major Feature: Tailwind CSS Compatibility (Paso 2a)
 
