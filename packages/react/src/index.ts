@@ -165,6 +165,14 @@ export type {
   StackWrap,
 } from "./components/Stack";
 
+export { Box } from "./components/Box";
+export type {
+  BoxProps,
+  SpacingScale,
+  SemanticSurface,
+  Radius,
+} from "./components/Box";
+
 // Data Display
 export { Card } from "./components/Card";
 export type {

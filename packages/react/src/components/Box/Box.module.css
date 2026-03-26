@@ -1,0 +1,56 @@
+/**
+ * Box Component Styles
+ *
+ * Primitive layout box for spacing and background styling.
+ * Padding is handled via inline-style for clean CSS cascade management.
+ * Visual props (bg, radius) use CSS classes.
+ */
+
+/* Base box - no default styles, everything comes from props */
+.box {
+  box-sizing: border-box;
+}
+
+/* ============================================================================
+ * BACKGROUND SURFACES
+ * ============================================================================ */
+
+.bg-surface-base {
+  background: var(--surface-base);
+}
+
+.bg-surface-subtle {
+  background: var(--surface-subtle);
+}
+
+.bg-surface-layer {
+  background: var(--surface-layer);
+}
+
+.bg-surface-sunken {
+  background: var(--surface-sunken);
+}
+
+.bg-surface-glass {
+  background: var(--surface-glass);
+}
+
+/* ============================================================================
+ * BORDER RADIUS
+ * ============================================================================ */
+
+.radius-sm {
+  border-radius: var(--radius-sm);
+}
+
+.radius-control {
+  border-radius: var(--radius-control);
+}
+
+.radius-container {
+  border-radius: var(--radius-container);
+}
+
+.radius-full {
+  border-radius: var(--radius-full);
+}
