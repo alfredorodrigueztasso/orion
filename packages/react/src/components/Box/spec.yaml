@@ -1,0 +1,90 @@
+name: Box
+title: "Box"
+description: "Type-safe layout primitive for token-based spacing and background styling"
+category: "layout"
+
+props:
+  padding:
+    type: "SpacingScale"
+    description: "Uniform padding on all sides (0, px, 05, 1-12, 16, 20, 24, 32)"
+    required: false
+  paddingX:
+    type: "SpacingScale"
+    description: "Horizontal padding (left and right)"
+    required: false
+  paddingY:
+    type: "SpacingScale"
+    description: "Vertical padding (top and bottom)"
+    required: false
+  paddingTop:
+    type: "SpacingScale"
+    description: "Top padding only"
+    required: false
+  paddingBottom:
+    type: "SpacingScale"
+    description: "Bottom padding only"
+    required: false
+  paddingLeft:
+    type: "SpacingScale"
+    description: "Left padding only"
+    required: false
+  paddingRight:
+    type: "SpacingScale"
+    description: "Right padding only"
+    required: false
+  bg:
+    type: "SemanticSurface"
+    description: "Background surface color (surface-base, surface-subtle, surface-layer, surface-sunken, surface-glass)"
+    required: false
+  radius:
+    type: "Radius"
+    description: "Border radius (sm, control, container, full)"
+    required: false
+  as:
+    type: "ElementType"
+    description: "Custom element type to render as @default 'div'"
+    required: false
+
+ai_rules:
+  - "Never add brand prop (brand is global via ThemeProvider)"
+  - "Use semantic surface tokens only (var(--surface-base), var(--surface-subtle), etc)"
+  - "Padding uses inline-style for clean CSS cascade management"
+  - "Priority cascade: individual directions > axis-aligned (X/Y) > uniform padding"
+
+examples:
+  - title: "Basic Padding"
+    code: |
+      <Box padding={4}>Content with 16px padding</Box>
+  - title: "With Background and Radius"
+    code: |
+      <Box padding={4} bg="surface-layer" radius="control">
+        Styled content
+      </Box>
+  - title: "Directional Padding"
+    code: |
+      <Box paddingX={4} paddingY={2}>Content</Box>
+  - title: "Polymorphic Element"
+    code: |
+      <Box as="section" padding={4} bg="surface-subtle">
+        Section content
+      </Box>
+
+tokens:
+  - "--spacing-0"
+  - "--spacing-1"
+  - "--spacing-2"
+  - "--spacing-3"
+  - "--spacing-4"
+  - "--spacing-6"
+  - "--spacing-8"
+  - "--surface-base"
+  - "--surface-subtle"
+  - "--surface-layer"
+  - "--surface-sunken"
+  - "--surface-glass"
+  - "--radius-sm"
+  - "--radius-control"
+  - "--radius-container"
+  - "--radius-full"
+
+related_components: ["Stack", "Card", "Container", "Section"]
