@@ -89,7 +89,12 @@ export const ThemeController: React.FC<ThemeControllerProps> = ({
   }
 
   // Use context if available, otherwise fall back to standalone hook
-  const { theme, brand: rawBrand, setTheme, setBrand } = contextTheme ?? standaloneTheme;
+  const {
+    theme,
+    brand: rawBrand,
+    setTheme,
+    setBrand,
+  } = contextTheme ?? standaloneTheme;
   const brand = rawBrand as Brand;
 
   const handleThemeChange = (newTheme: "light" | "dark") => {

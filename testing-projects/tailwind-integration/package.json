@@ -1,0 +1,33 @@
+{
+  "name": "@orion-ds/testing-tailwind-integration",
+  "version": "5.6.0",
+  "description": "Testing project for Tailwind CSS + Orion Design System integration (v5.6.0)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview",
+    "test": "echo 'Run npm test from root to execute integration tests'",
+    "test:tailwind-v3": "vitest run tailwind-v3.test.ts",
+    "test:tailwind-v4": "vitest run tailwind-v4.test.ts"
+  },
+  "dependencies": {
+    "@orion-ds/react": "workspace:*",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0"
+  },
+  "devDependencies": {
+    "tailwindcss": "^3.4.0",
+    "postcss": "^8.4.0",
+    "autoprefixer": "^10.4.0",
+    "vite": "^5.0.0",
+    "@vitejs/plugin-react": "^4.0.0",
+    "vitest": "^1.0.0",
+    "@testing-library/react": "^14.0.0",
+    "@testing-library/dom": "^9.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}

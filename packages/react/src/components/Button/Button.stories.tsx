@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within, expect } from "@storybook/test";
 import { Button } from "./Button";
 import {
   Search,
@@ -585,4 +586,26 @@ export const InverseVariantsOnDarkBackgrounds: Story = {
       </div>
     </div>
   ),
+};
+
+// Interaction Testing - Demonstrates how button responds to user interaction
+export const InteractionTest: Story = {
+  args: {
+    children: "Click Me",
+    variant: "primary",
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const button = canvas.getByRole("button", { name: /click me/i });
+
+    // Verify button is rendered and interactive
+    await expect(button).toBeInTheDocument();
+    await expect(button).not.toBeDisabled();
+
+    // Simulate user click
+    await userEvent.click(button);
+
+    // Verify click was registered (button should still be visible and respond to subsequent clicks)
+    await expect(button).toBeInTheDocument();
+  },
 };

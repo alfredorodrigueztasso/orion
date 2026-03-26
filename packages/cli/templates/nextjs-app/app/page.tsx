@@ -8,15 +8,18 @@ import styles from "./page.module.css";
 export default function Home() {
   const [theme, setTheme] = useState<"light" | "dark">("light");
   const [brand, setBrand] = useState<"orion" | "red" | "deepblue" | "orange">(
-    "orion"
+    "orion",
   );
   const [mounted, setMounted] = useState(false);
 
   // Initialize theme/brand from localStorage and document
   useEffect(() => {
     setMounted(true);
-    
-    const savedTheme = localStorage.getItem("orion-theme") as "light" | "dark" | null;
+
+    const savedTheme = localStorage.getItem("orion-theme") as
+      | "light"
+      | "dark"
+      | null;
     const savedBrand = localStorage.getItem("orion-brand") as
       | "orion"
       | "red"
@@ -43,7 +46,9 @@ export default function Home() {
   };
 
   // Persist and apply brand changes
-  const handleBrandChange = (newBrand: "orion" | "red" | "deepblue" | "orange") => {
+  const handleBrandChange = (
+    newBrand: "orion" | "red" | "deepblue" | "orange",
+  ) => {
     setBrand(newBrand);
     localStorage.setItem("orion-brand", newBrand);
     document.documentElement.setAttribute("data-brand", newBrand);

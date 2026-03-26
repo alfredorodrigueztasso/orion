@@ -30,6 +30,7 @@ Open [http://localhost:3000](http://localhost:3000) in your browser. The page wi
 ### 3. Try Interacting
 
 On the homepage, you'll find:
+
 - **Theme Toggle**: Switch between light and dark modes
 - **Brand Selector**: Try different brand colors (Orion, Red, Deep Blue, Orange)
 - **Component Examples**: See Button, Card, and Badge components in action
@@ -54,7 +55,7 @@ Components are added to your `src/components/orion/` directory and ready to use 
 ### Example: Using a Component
 
 ```tsx
-import { Button, Card } from '@orion-ds/react';
+import { Button, Card } from "@orion-ds/react";
 
 export default function App() {
   return (
@@ -83,7 +84,7 @@ The app uses **ThemeProvider** to manage theme and brand globally. All component
 To access theme/brand in your components:
 
 ```tsx
-import { useThemeContext } from '@orion-ds/react';
+import { useThemeContext } from "@orion-ds/react";
 
 function MyComponent() {
   const { theme, brand } = useThemeContext();
@@ -126,11 +127,13 @@ README.md               # This file
 ## Learning Resources
 
 ### Documentation
+
 - **[Orion Docs](https://docs.orion-ds.dev)** - Complete documentation and guides
 - **[Component Library](https://docs.orion-ds.dev/components)** - Component browser with examples
 - **[Storybook](https://storybook.orion-ds.dev)** - Interactive component stories
 
 ### Design Tokens
+
 Orion uses a token-based system for consistency:
 
 ```css
@@ -139,8 +142,8 @@ background: var(--surface-base);
 color: var(--text-primary);
 
 /* Spacing (base unit: 4px) */
-padding: var(--spacing-4);      /* 16px */
-margin: var(--spacing-6);        /* 24px */
+padding: var(--spacing-4); /* 16px */
+margin: var(--spacing-6); /* 24px */
 
 /* Typography */
 font-family: var(--font-secondary);
@@ -193,13 +196,17 @@ This is a standard Next.js app—deploy to any platform that supports Node.js:
 ## Troubleshooting
 
 ### Components look unstyled
+
 Make sure `@orion-ds/react/styles.css` is imported in `layout.tsx`. Without it, components won't have styling.
 
 ### Theme doesn't persist
+
 The theme persists via `localStorage`. Check browser DevTools → Application → Local Storage → `orion-theme` and `orion-brand`.
 
 ### Port 3000 is in use
+
 Start on a different port:
+
 ```bash
 npm run dev -- -p 3001
 ```

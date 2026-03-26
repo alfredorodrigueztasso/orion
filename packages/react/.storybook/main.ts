@@ -30,6 +30,25 @@ const config: StorybookConfig = {
           ),
         },
       },
+      build: {
+        rollupOptions: {
+          output: {
+            manualChunks: (id) => {
+              // Split large story files into separate chunks to avoid >500KB bundles
+              if (id.includes("Chart.stories")) {
+                return "chart-stories";
+              }
+              if (id.includes("IconGallery.stories")) {
+                return "icon-stories";
+              }
+              // Vendor code in its own chunk
+              if (id.includes("node_modules")) {
+                return "vendor";
+              }
+            },
+          },
+        },
+      },
     });
   },
 };

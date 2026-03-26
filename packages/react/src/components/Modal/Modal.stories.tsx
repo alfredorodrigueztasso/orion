@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within, expect } from "@storybook/test";
 import { useState } from "react";
 import { Modal } from "./Modal";
 import { Button } from "../Button/Button";
@@ -309,5 +310,50 @@ export const AllSizes: Story = {
         </Modal>
       </div>
     );
+  },
+};
+
+// Interaction Testing - Demonstrates modal open/close workflow
+export const UserFlow: Story = {
+  render: () => {
+    const [isOpen, setIsOpen] = useState(false);
+    return (
+      <div>
+        <Button onClick={() => setIsOpen(true)}>Open Modal</Button>
+        <Modal open={isOpen} onClose={() => setIsOpen(false)}>
+          <Modal.Header>Confirm Action</Modal.Header>
+          <Modal.Body>Are you sure you want to proceed?</Modal.Body>
+          <Modal.Footer>
+            <Button variant="ghost" onClick={() => setIsOpen(false)}>
+              Cancel
+            </Button>
+            <Button onClick={() => setIsOpen(false)}>Confirm</Button>
+          </Modal.Footer>
+        </Modal>
+      </div>
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Verify modal is initially closed
+    const modalDialog = canvas.queryByRole("dialog");
+    await expect(modalDialog).not.toBeInTheDocument();
+
+    // Click open button
+    const openButton = canvas.getByRole("button", { name: /open modal/i });
+    await userEvent.click(openButton);
+
+    // Verify modal appears
+    const openedModal = canvas.getByRole("dialog");
+    await expect(openedModal).toBeInTheDocument();
+
+    // Click confirm button
+    const confirmButton = canvas.getByRole("button", { name: /confirm/i });
+    await userEvent.click(confirmButton);
+
+    // Verify modal closes
+    const closedModal = canvas.queryByRole("dialog");
+    await expect(closedModal).not.toBeInTheDocument();
   },
 };

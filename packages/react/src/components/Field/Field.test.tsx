@@ -1,13 +1,17 @@
 import { describe, it, expect } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { expectNoA11yViolations } from "../../../test/a11y";
 import { Field } from "./Field";
 
 describe("Field", () => {
-  it("renders with label and input", () => {
-    render(<Field label="Email" placeholder="Enter email" />);
+  it("renders with label and input", async () => {
+    const { container } = render(
+      <Field label="Email" placeholder="Enter email" />,
+    );
     expect(screen.getByLabelText("Email")).toBeInTheDocument();
     expect(screen.getByPlaceholderText("Enter email")).toBeInTheDocument();
+    await expectNoA11yViolations(container);
   });
 
   it("applies size classes correctly", () => {

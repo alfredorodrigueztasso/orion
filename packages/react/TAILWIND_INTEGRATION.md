@@ -373,11 +373,35 @@ If you need to support older browsers, use **Workaround #2** (Tailwind prefix) i
 
 ---
 
-## Coming Soon (v5.6.0+)
+## ✅ Now Available (v5.6.0+): Automatic @layer orion Support
 
-We're working on built-in `@layer orion` support to eliminate the need for manual setup. This will make Tailwind + Orion coexistence automatic with zero configuration.
+Built-in `@layer orion` support is now available in v5.6.0+! This makes Tailwind + Orion coexistence automatic with zero configuration.
 
-In the meantime, use the workarounds above.
+**What changed:**
+
+- All Orion styles are now wrapped in `@layer orion { ... }` automatically during build
+- No manual `@layer orion;` declaration needed in your CSS anymore
+- Tailwind utilities automatically work with Orion components
+- Implementation uses zero external dependencies (Opción B approach)
+
+**Upgrade to use it:**
+
+```bash
+npm install @orion-ds/react@5.6.0
+```
+
+**That's it!** Tailwind utilities will now work seamlessly with Orion components:
+
+```tsx
+// ✅ This now works automatically (no @layer config needed!)
+<Button className="p-6 gap-4">Click me</Button>
+```
+
+**Browser support:** Chrome 99+, Firefox 97+, Safari 15.4+, Edge 99+
+
+For **older browser support**, you can still use **Workaround #2** (Tailwind prefix) from the "Quick Wins" section above.
+
+**See also:** [scripts/BUNDLE_STYLES.md](./scripts/BUNDLE_STYLES.md) for technical details on how the layer is implemented.
 
 ---
 

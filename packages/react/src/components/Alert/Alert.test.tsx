@@ -1,12 +1,14 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { expectNoA11yViolations } from "../../../test/a11y";
 import { Alert } from "./Alert";
 
 describe("Alert", () => {
-  it("renders with children", () => {
-    render(<Alert>Alert message</Alert>);
+  it("renders with children", async () => {
+    const { container } = render(<Alert>Alert message</Alert>);
     expect(screen.getByText("Alert message")).toBeInTheDocument();
+    await expectNoA11yViolations(container);
   });
 
   it("applies variant classes correctly", () => {

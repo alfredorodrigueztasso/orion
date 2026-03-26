@@ -1,5 +1,6 @@
 /* eslint-disable react-hooks/rules-of-hooks */
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within, expect } from "@storybook/test";
 import { Field } from "./Field";
 import { useState } from "react";
 import { Search, Eye, EyeOff, Mail, Lock, User } from "lucide-react";
@@ -463,5 +464,51 @@ export const OnDarkBackground: Story = {
         </div>
       </div>
     );
+  },
+};
+
+// Interaction Testing - Demonstrates validation feedback on invalid input
+export const FormValidation: Story = {
+  render: () => {
+    const [email, setEmail] = useState("invalid");
+    return (
+      <Field
+        type="email"
+        label="Email"
+        placeholder="you@example.com"
+        value={email}
+        onChange={(e) => setEmail(e.currentTarget.value)}
+        error={!email.includes("@") ? "Please enter a valid email" : undefined}
+      />
+    );
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+    const input = canvas.getByPlaceholderText(
+      "you@example.com",
+    ) as HTMLInputElement;
+
+    // Verify field renders
+    await expect(input).toBeInTheDocument();
+
+    // Clear the field
+    await userEvent.clear(input);
+
+    // Type invalid email (no @)
+    await userEvent.type(input, "invalidemail");
+
+    // Verify error message appears
+    const errorText = canvas.queryByText(/please enter a valid email/i);
+    await expect(errorText).toBeInTheDocument();
+
+    // Type valid email
+    await userEvent.clear(input);
+    await userEvent.type(input, "test@example.com");
+
+    // Verify error disappears (or doesn't appear)
+    const errorAfter = canvas.queryByText(/please enter a valid email/i);
+    if (errorAfter) {
+      await expect(errorAfter).not.toBeInTheDocument();
+    }
   },
 };

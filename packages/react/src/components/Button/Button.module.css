@@ -128,7 +128,8 @@
   &:hover:not(:disabled) {
     background: var(--interactive-ghost-hover);
     transform: translateY(var(--mode-hover-lift));
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--text-primary) 5%, transparent);
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--text-primary) 5%, transparent);
   }
 
   &:active:not(:disabled) {
@@ -145,7 +146,8 @@
   &:hover:not(:disabled) {
     background: color-mix(in srgb, var(--color-neutral-0) 15%, transparent);
     transform: translateY(var(--mode-hover-lift));
-    box-shadow: 0 0 0 4px color-mix(in srgb, var(--color-neutral-0) 8%, transparent);
+    box-shadow: 0 0 0 4px
+      color-mix(in srgb, var(--color-neutral-0) 8%, transparent);
   }
 
   &:active:not(:disabled) {

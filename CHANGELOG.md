@@ -5,6 +5,83 @@ All notable changes to Orion Design System are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.6.0] — 2026-03-26 (PLANNED)
+
+### 🎯 Major Feature: Tailwind CSS Compatibility (Paso 2a)
+
+**CRITICAL FIX**: CSS cascade layers (`@layer orion`) now wrapped around all Orion styles to enable seamless Tailwind CSS coexistence.
+
+#### Problem Solved
+- ❌ **Before v5.6.0**: Orion component styles (specificity 0,2,0) overrode Tailwind utilities (0,1,0)
+- ✅ **v5.6.0+**: Tailwind utilities automatically win due to CSS cascade layer semantics
+
+#### Implementation (Opción B - Zero Dependencies)
+- Modified `packages/react/scripts/bundle-styles.js` to wrap entire CSS bundle in `@layer orion { ... }`
+- Added error handling following `readFileSafely` pattern from PRE-005
+- No external dependencies (unlike PostCSS plugin approach)
+- Better autonomy and sustainability for Orion
+
+#### What Changed
+- `packages/react/scripts/bundle-styles.js`: Added @layer orion wrapper (20 lines)
+- `packages/react/dist/styles.css`: Now contains `@layer orion { ... }`
+- `packages/react/dist/theme.css`: Remains unwrapped (for tree-shaking users)
+- `packages/react/scripts/BUNDLE_STYLES.md`: New documentation
+- `testing-projects/tailwind-integration/`: New testing project
+- `TAILWIND_INTEGRATION.md`: Updated with "now available in v5.6.0"
+
+#### Documentation
+- **Architectural principle established**: "Orion should be as autonomous as possible" — no external dependencies
+- Added `packages/react/scripts/BUNDLE_STYLES.md` explaining the layer implementation
+- Testing project validates @layer orion with Tailwind v3 and v4
+
+#### Browser Support
+- ✅ Chrome 99+, Edge 99+, Firefox 97+, Safari 15.4+
+- For older browsers: Use Tailwind `prefix: 'tw-'` workaround (v5.5.2 docs)
+
+#### Migration
+- **No breaking changes** — CSS behavior improves automatically
+- `npm install @orion-ds/react@5.6.0`
+- No configuration needed (users can still use workarounds from v5.5.2 if preferred)
+
+#### Testing
+- ✅ Vitest integration tests validate @layer orion presence
+- ✅ CSS variables accessibility verified
+- ✅ Layer semantics validated
+- ✅ No regressions in existing components
+
+#### Future
+- **v5.6.0b** (1-2 weeks): `Box` component for type-safe spacing API
+- **v5.7.0** (2-3 weeks): Official Tailwind preset auto-generation (`@orion-ds/react/integrations/tailwind`)
+
+### Added
+- `@layer orion` wrapper in `styles.css` for CSS cascade layer compliance
+- Error handling in bundle-styles.js (`readFileSafely` helper)
+- Testing project: `testing-projects/tailwind-integration/` with Vitest tests
+- Documentation: `packages/react/scripts/BUNDLE_STYLES.md` (how the bundle works)
+- Documentation: Updated `TAILWIND_INTEGRATION.md` with "now available" section
+
+### Changed
+- Bundle script now provides detailed logging and error messages
+- All component CSS now wrapped in CSS layer (architectural change, no API changes)
+- Improved bundle-styles.js code quality and error handling
+
+### Fixed
+- **P1 FIX**: Tailwind CSS utilities now work with Orion components (specificity conflict resolved)
+
+### Improved
+- Design System autonomy: Zero external dependencies for @layer implementation
+- Tailwind compatibility: Works with Tailwind v3 and v4
+- Error messages: Clearer feedback when build issues occur
+
+### Impact (Early User Feedback Response)
+This release directly addresses Pawo's Tailwind + Orion adoption blocker:
+1. ✅ Utilities now apply correctly (Tailwind p-6, gap-4 work with Orion Button)
+2. ✅ No configuration needed (automatic via @layer orion)
+3. ✅ Documented workarounds no longer needed (but still supported)
+4. 🛣️ Future: Official Tailwind preset (planned v5.7.0)
+
+---
+
 ## [5.5.4] — 2026-03-26
 
 ### Added

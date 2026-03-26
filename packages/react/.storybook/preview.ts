@@ -28,6 +28,42 @@ const preview: Preview = {
         },
       ],
     },
+    viewport: {
+      viewports: {
+        mobile: {
+          name: "Mobile (iPhone 12)",
+          styles: {
+            width: "390px",
+            height: "844px",
+          },
+          type: "mobile",
+        },
+        tablet: {
+          name: "Tablet (iPad)",
+          styles: {
+            width: "768px",
+            height: "1024px",
+          },
+          type: "tablet",
+        },
+        desktop: {
+          name: "Desktop (1440px)",
+          styles: {
+            width: "1440px",
+            height: "900px",
+          },
+          type: "desktop",
+        },
+        ultrawide: {
+          name: "Ultrawide (2560px)",
+          styles: {
+            width: "2560px",
+            height: "1440px",
+          },
+          type: "desktop",
+        },
+      },
+    },
     options: {
       storySort: {
         order: [

@@ -1,0 +1,47 @@
+/**
+ * Tailwind + Orion Styles
+ *
+ * CRITICAL: Import order for @layer orion to work correctly
+ *
+ * 1. Declare @layer orion FIRST
+ *    This creates the CSS layer where Orion styles will be placed
+ *
+ * 2. Import Tailwind directives
+ *    @tailwind directives generate utilities (which are unlayered by default)
+ *
+ * 3. Import Orion styles
+ *    This is where @layer orion { ... } block is defined (in the bundled CSS)
+ *
+ * Result: Tailwind utilities (unlayered) automatically win over Orion (layered)
+ * due to CSS cascade layer semantics.
+ */
+
+/* Step 1: Declare the @layer orion layer BEFORE Tailwind */
+@layer orion;
+
+/* Step 2: Import Tailwind directives */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Step 3: Import Orion styles (which contains @layer orion { ... } wrapper) */
+@import '@orion-ds/react/styles.css';
+
+/**
+ * Optional: Custom utilities that extend Orion
+ * These can reference Orion CSS variables without conflict
+ */
+
+:root {
+  /* You can add custom properties here if needed */
+}
+
+/* Global styles (outside any layer) */
+body {
+  font-family: var(--font-secondary);
+  line-height: 1.6;
+}
+
+html.dark {
+  color-scheme: dark;
+}

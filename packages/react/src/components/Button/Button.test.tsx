@@ -1,14 +1,16 @@
 import { describe, it, expect, vi } from "vitest";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { expectNoA11yViolations } from "../../../test/a11y";
 import { Button } from "./Button";
 
 describe("Button", () => {
-  it("renders with children", () => {
-    render(<Button>Click me</Button>);
+  it("renders with children", async () => {
+    const { container } = render(<Button>Click me</Button>);
     expect(
       screen.getByRole("button", { name: "Click me" }),
     ).toBeInTheDocument();
+    await expectNoA11yViolations(container);
   });
 
   it("applies variant classes", () => {

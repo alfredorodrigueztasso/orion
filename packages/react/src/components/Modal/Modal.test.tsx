@@ -1,6 +1,7 @@
 import { describe, it, expect, vi, beforeEach, afterEach } from "vitest";
 import { render, screen, cleanup } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
+import { expectNoA11yViolations } from "../../../test/a11y";
 import { Modal } from "./Modal";
 
 describe("Modal", () => {
@@ -15,14 +16,15 @@ describe("Modal", () => {
     document.body.style.overflow = "";
   });
 
-  it("renders when open is true", () => {
-    render(
+  it("renders when open is true", async () => {
+    const { container } = render(
       <Modal open={true} onClose={() => {}}>
         <Modal.Body>Modal content</Modal.Body>
       </Modal>,
     );
     expect(screen.getByText("Modal content")).toBeInTheDocument();
     expect(screen.getByRole("dialog")).toBeInTheDocument();
+    await expectNoA11yViolations(container);
   });
 
   it("does not render when open is false", () => {
