@@ -46,6 +46,27 @@ const COMPONENTS_PATH = path.join(__dirname, '../packages/react/src/components')
 const SECTIONS_PATH = path.join(__dirname, '../packages/react/src/blocks/sections');
 
 /**
+ * Safely read file with helpful error messages
+ * @param {string} filePath - Path to file
+ * @param {string} description - What we were trying to do (for error message)
+ * @returns {string|null} - File contents or null if error
+ */
+function readFileSafely(filePath, description) {
+  try {
+    return fs.readFileSync(filePath, 'utf8');
+  } catch (error) {
+    if (error.code === 'ENOENT') {
+      log.error(`${description}: File not found - ${filePath}`);
+    } else if (error.code === 'EACCES') {
+      log.error(`${description}: Permission denied - ${filePath}`);
+    } else {
+      log.error(`${description}: ${error.message}`);
+    }
+    return null;
+  }
+}
+
+/**
  * Get all component directories
  */
 function getComponentDirs() {
@@ -83,7 +104,8 @@ function testNoBrandProp() {
     if (!fs.existsSync(jsxFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(jsxFile, 'utf8');
+    const content = readFileSafely(jsxFile, `Reading component ${component}`);
+    if (!content) return;
 
     if (content.includes('data-brand')) {
       stats.failed++;
@@ -116,7 +138,8 @@ function testNoBrandType() {
     if (!fs.existsSync(typesFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(typesFile, 'utf8');
+    const content = readFileSafely(typesFile, `Reading types ${component}`);
+    if (!content) return;
 
     // Check for "brand?" or "brand:" as a prop in the Props interface
     // This is more specific than just looking for the word "brand"
@@ -157,7 +180,8 @@ function testCSSVariables() {
 
     stats.totalTests++;
     cssCheckCount++;
-    const content = fs.readFileSync(cssFile, 'utf8');
+    const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
 
     // Check for hardcoded HEX colors (the real anti-hallucination target)
     // Component pixel sizing (32px, 40px, 2px borders) is legitimate design
@@ -193,7 +217,8 @@ function testNoAnyType() {
     if (!fs.existsSync(typesFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(typesFile, 'utf8');
+    const content = readFileSafely(typesFile, `Reading types ${component}`);
+    if (!content) return;
 
     // Check for `= any` default type parameter or `: any` type annotation
     // Allow comments that mention 'any'
@@ -243,7 +268,8 @@ function testNoHardcodedRgba() {
     if (!fs.existsSync(cssFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(cssFile, 'utf8');
+    const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
 
     // Check for hardcoded rgba() values in box-shadow or background
     // These should use --shadow-* tokens or --interactive-ghost-hover
@@ -282,7 +308,8 @@ function testNoHardcodedZIndex() {
     if (!fs.existsSync(cssFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(cssFile, 'utf8');
+    const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
 
     // Check for hardcoded z-index values (should use var(--z-*))
     const zIndexMatches = content.match(/z-index\s*:\s*\d+/g);
@@ -320,7 +347,8 @@ function testNoHardcodedTransitions() {
     if (!fs.existsSync(cssFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(cssFile, 'utf8');
+    const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
 
     // Check for hardcoded transition timing (should use var(--transition-*))
     // Allow: transition: none; and var(--transition-*)
@@ -369,7 +397,8 @@ function testNoHardcodedFontSizes() {
     if (!fs.existsSync(cssFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(cssFile, 'utf8');
+    const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
 
     // Check for hardcoded font-size pixel values (allow em/rem and var())
     const fontSizeMatches = content.match(/font-size\s*:\s*\d+px/g);
@@ -410,7 +439,8 @@ function testNoHardcodedFonts() {
     if (!fs.existsSync(cssFile)) return;
 
     stats.totalTests++;
-    const content = fs.readFileSync(cssFile, 'utf8');
+    const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
 
     // Check for hardcoded font-family values
     const fontMatch = content.match(/font-family\s*:\s*[^;]*(?!var\()/);
@@ -451,7 +481,8 @@ function validateSections() {
     const cssFile = path.join(SECTIONS_PATH, section, `${section}.module.css`);
     if (fs.existsSync(cssFile)) {
       stats.totalTests++;
-      const content = fs.readFileSync(cssFile, 'utf8');
+      const content = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!content) return;
       const hexColorMatch = content.match(/#[0-9a-fA-F]{3,6}/g);
 
       if (hexColorMatch) {
@@ -467,7 +498,8 @@ function validateSections() {
     const jsxFile = path.join(SECTIONS_PATH, section, `${section}.tsx`);
     if (fs.existsSync(jsxFile)) {
       stats.totalTests++;
-      const content = fs.readFileSync(jsxFile, 'utf8');
+      const content = readFileSafely(jsxFile, `Reading section ${section}`);
+      if (!content) return;
 
       if (content.includes('data-brand')) {
         stats.failed++;
@@ -484,7 +516,8 @@ function validateSections() {
     const typesFile = path.join(SECTIONS_PATH, section, `${section}.types.ts`);
     if (fs.existsSync(typesFile)) {
       stats.totalTests++;
-      const content = fs.readFileSync(typesFile, 'utf8');
+      const content = readFileSafely(typesFile, `Reading section types ${section}`);
+      if (!content) return;
 
       // Check for "brand?: Brand" or "brand: Brand" (design system Brand type)
       // Allow FooterBrand, AppBrand, or other specific brand types
@@ -601,7 +634,8 @@ function testNoFakeVars() {
     const cssFile = path.join(COMPONENTS_PATH, componentDir, `${componentDir}.module.css`);
     if (!fs.existsSync(cssFile)) continue;
 
-    const cssContent = fs.readFileSync(cssFile, 'utf-8');
+    const cssContent = readFileSafely(cssFile, `Reading CSS ${component}`);
+    if (!cssContent) return;
     const matches = cssContent.match(fakeVarPattern);
     
     if (matches) {
