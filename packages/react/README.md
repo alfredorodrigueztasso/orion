@@ -9,6 +9,17 @@ TypeScript-first React component library built on the Orion Design System. Featu
 [![Bundle Size](<https://img.shields.io/badge/bundle-2.8MB--4.7MB%20(minified)-orange>)](#)
 [![Optional Deps](https://img.shields.io/badge/optional%20deps-1MB%20savings-success)](./BUNDLE_OPTIMIZATION.md)
 
+## 🎉 What's New in v5.6.0
+
+**Major additions:**
+
+- ✨ **Official Tailwind CSS Preset** (`@orion-ds/react/integrations/tailwind`) - Use all Orion tokens with Tailwind utilities (supports v3 & v4)
+- ✨ **Box Component** - Type-safe polymorphic component for spacing, surfaces, and borders with guaranteed token compliance
+- 🔄 **@layer orion CSS Cascade** - Seamless Tailwind + Orion coexistence (Tailwind utilities automatically win)
+- 🐛 **Type-Check Fix** - Resolved pre-existing type errors with optional dependencies (date-fns, recharts)
+
+[Full release notes](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.6.0)
+
 ## Features
 
 - 🤖 **AI-First Design** - Optimized for AI/LLM code generation (see AI_GUIDE.md)
@@ -48,7 +59,7 @@ This puts it in `dependencies` where it belongs.
 \`\`\`json
 {
 "dependencies": {
-"@orion-ds/react": "^5.5.2",
+"@orion-ds/react": "^5.6.0",
 "react": "^19.0.0",
 "react-dom": "^19.0.0"
 },
@@ -151,7 +162,7 @@ Check your `package.json` - should be in `dependencies`:
 \`\`\`json
 {
 "dependencies": {
-"@orion-ds/react": "^5.5.2" // ✅ Runtime dependency
+"@orion-ds/react": "^5.6.0" // ✅ Runtime dependency
 }
 }
 \`\`\`
@@ -181,32 +192,50 @@ import App from './App';
 
 ---
 
-### Mistake 3: Using Tailwind utilities alongside Orion
+### Using Tailwind CSS with Orion (NEW in v5.6.0! ✨)
 
-**❌ WRONG:**
-\`\`\`tsx
-<Button className="gap-4 p-8">Click me</Button>
+**v5.6.0 introduces official Tailwind CSS preset support!** You can now use Tailwind utilities alongside Orion components seamlessly.
+
+#### Setup (Tailwind v3)
+
+\`\`\`typescript
+// tailwind.config.ts
+import { orionPreset } from '@orion-ds/react/integrations/tailwind';
+
+export default {
+presets: [orionPreset],
+content: ['./src/**/*.{ts,tsx}'],
+};
 \`\`\`
 
-**Why it breaks**: Tailwind utilities (gap-_, p-_, etc.) conflict with Orion's CSS variables.
+#### Setup (Tailwind v4)
 
-**✅ CORRECT - Use Orion tokens:**
-\`\`\`tsx
-<Button style={{ gap: 'var(--spacing-4)', padding: 'var(--spacing-8)' }}>
-Click me
-</Button>
+\`\`\`css
+/_ tailwind.css _/
+@import 'tailwindcss';
+@import '@orion-ds/react/integrations/tailwind/v4.css';
 \`\`\`
 
-Or use Orion's built-in responsive system:
-\`\`\`tsx
-import { Stack } from '@orion-ds/react';
+#### Use Tailwind Utilities
 
-<Stack gap="md">
-  <Button>Click me</Button>
-</Stack>
+Now you can use Orion tokens with Tailwind utilities:
+
+\`\`\`tsx
+// ✅ NOW WORKS - Mix Orion components with Tailwind utilities!
+import { Box, Button } from '@orion-ds/react';
+
+<Box className="flex gap-4 p-6">
+  <Button className="bg-surface-base text-text-primary">Click</Button>
+</Box>
+
+// All Orion tokens available as Tailwind utilities:
+// - Colors: bg-surface-base, text-text-primary, border-border-subtle, etc.
+// - Spacing: p-orion-4, gap-orion-6, m-orion-8, etc.
+// - Radius: rounded-button, rounded-container, rounded-sm, etc.
+// - Fonts: font-primary, font-secondary, font-mono
 \`\`\`
 
-For detailed Tailwind + Orion integration guide with workarounds, see [TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md).
+For complete Tailwind + Orion integration guide, see [TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md).
 
 ## Quick Start
 
@@ -241,6 +270,42 @@ Switch to {theme === 'light' ? 'dark' : 'light'} mode
 );
 }
 \`\`\`
+
+## Box Component (Type-Safe Layouts)
+
+**NEW in v5.6.0!** Use the `Box` component for guaranteed design token compliance in layouts:
+
+\`\`\`tsx
+import { Box, Button } from '@orion-ds/react';
+
+// Type-safe spacing, surfaces, and radius — no arbitrary pixel values possible!
+<Box
+  bg="surface-base"
+  p={4}           // Always a token value (16px)
+  radius="container"
+  className="flex gap-4"
+>
+  <Button>Click me</Button>
+</Box>
+
+// Polymorphic rendering
+<Box as="section" className="py-12">
+  {/* Renders as <section> instead of <div> */}
+</Box>
+
+// Padding with directional control
+<Box pX={6} pY={4}>
+  {/* padding-left/right: 24px, padding-top/bottom: 16px */}
+</Box>
+\`\`\`
+
+Benefits:
+- ✅ **Type-safe** - Only valid token values accepted (no `p="20px"`)
+- ✅ **Dark mode aware** - Automatically switches surfaces based on theme
+- ✅ **Brand aware** - Respects brand-specific radius and colors
+- ✅ **Polymorphic** - Render as any HTML element with `as` prop
+
+See [Box Component Documentation](https://github.com/alfredorodrigueztasso/orion#) for full API.
 
 ## 🤖 AI Integration (MCP)
 
