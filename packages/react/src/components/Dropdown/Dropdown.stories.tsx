@@ -3,6 +3,7 @@
  */
 
 import type { Meta, StoryObj } from "@storybook/react";
+import { userEvent, within, expect } from "@storybook/test";
 import { Dropdown } from "./Dropdown";
 import { Button } from "../Button";
 import {
@@ -288,4 +289,37 @@ export const MultipleDropdowns: Story = {
       />
     </div>
   ),
+};
+
+// Interaction Testing - Demonstrates dropdown open/select interaction
+export const Selection: Story = {
+  args: {
+    trigger: <Button>Choose Action</Button>,
+    items: [
+      { id: "edit", label: "Edit", icon: <Edit size={16} /> },
+      { id: "copy", label: "Copy", icon: <Copy size={16} /> },
+      { id: "delete", label: "Delete", icon: <Trash2 size={16} /> },
+    ],
+  },
+  play: async ({ canvasElement }) => {
+    const canvas = within(canvasElement);
+
+    // Verify dropdown trigger button exists
+    const trigger = canvas.getByRole("button", { name: /choose action/i });
+    await expect(trigger).toBeInTheDocument();
+
+    // Click to open dropdown
+    await userEvent.click(trigger);
+
+    // Verify menu items appear
+    const editOption = canvas.getByRole("menuitem", { name: /edit/i });
+    await expect(editOption).toBeInTheDocument();
+
+    // Click on an option
+    await userEvent.click(editOption);
+
+    // Verify dropdown closes after selection (menu items disappear)
+    const closedMenu = canvas.queryByRole("menuitem", { name: /edit/i });
+    await expect(closedMenu).not.toBeInTheDocument();
+  },
 };
