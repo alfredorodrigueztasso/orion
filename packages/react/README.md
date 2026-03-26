@@ -201,12 +201,12 @@ Or use Orion's built-in responsive system:
 \`\`\`tsx
 import { Stack } from '@orion-ds/react';
 
-<Stack gap="spacing-4" padding="spacing-8">
+<Stack gap="md">
   <Button>Click me</Button>
 </Stack>
 \`\`\`
 
-For detailed Tailwind compatibility, see [COMPATIBILITY.md](./COMPATIBILITY.md).
+For detailed Tailwind + Orion integration guide with workarounds, see [TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md).
 
 ## Quick Start
 

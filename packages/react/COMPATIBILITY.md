@@ -76,7 +76,7 @@ import App from "./App";
 import { Stack, Button } from '@orion-ds/react';
 
 // Option 1: Use Orion's Stack component
-<Stack gap="spacing-4" padding="spacing-8">
+<Stack gap="md">
   <Button>Click me</Button>
 </Stack>
 
@@ -92,7 +92,7 @@ import { Stack, Button } from '@orion-ds/react';
 2. **Separate zones**: Have Orion-only sections and Tailwind-only sections
 3. **Use Tailwind CSS layers**: `@layer components` to avoid conflicts
 
-See [Tailwind Integration](./TAILWIND_INTEGRATION.md) for detailed patterns.
+**See [TAILWIND_INTEGRATION.md](./TAILWIND_INTEGRATION.md) for complete setup guide, workarounds, and best practices.**
 
 ---
 
