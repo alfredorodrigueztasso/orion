@@ -5,7 +5,7 @@ All notable changes to Orion Design System are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
-## [5.7.0] — 2026-03-26 (PLANNED)
+## [5.7.0] — TBD (FUTURE)
 
 ### Features
 
@@ -62,7 +62,7 @@ No API changes — purely additive feature. Existing manual configs continue to 
 
 ## [5.6.0] — 2026-03-26 (SHIPPED)
 
-### 🎯 Major Feature: Tailwind CSS Compatibility (Paso 2a)
+### 🎯 Major Release: Tailwind Integration Complete (Paso 2a + 2b + 3)
 
 **CRITICAL FIX**: CSS cascade layers (`@layer orion`) now wrapped around all Orion styles to enable seamless Tailwind CSS coexistence.
 
@@ -104,9 +104,22 @@ No API changes — purely additive feature. Existing manual configs continue to 
 - ✅ Layer semantics validated
 - ✅ No regressions in existing components
 
-#### Future
-- **v5.6.0b** (1-2 weeks): `Box` component for type-safe spacing API
-- **v5.7.0** (2-3 weeks): Official Tailwind preset auto-generation (`@orion-ds/react/integrations/tailwind`)
+#### Additional Features in v5.6.0
+
+**Box Component (Paso 2b)**:
+- New polymorphic `Box` component for type-safe spacing, surfaces, and radius
+- Guarantees design token compliance (no arbitrary pixel values possible)
+- 28 unit tests covering padding cascade, backgrounds, polymorphic rendering
+- 10 Storybook stories with responsive and dark mode examples
+- CSS Module implementation with semantic token references
+
+**Official Tailwind CSS Preset (Paso 3)**:
+- New `@orion-ds/react/integrations/tailwind` export with `orionPreset` Config
+- 46 color tokens all using CSS variable references for dark mode + brand switching
+- 19 spacing values with `orion-` prefix (avoids collision with Tailwind's rem scale)
+- 6 borderRadius tokens, 3 fontFamily tokens, 4 backdropBlur tokens
+- Separate `v4.css` file for Tailwind v4 static `@theme` block
+- 8 unit tests validating CSS variable references only (no hardcoded hex)
 
 ### Added
 - `@layer orion` wrapper in `styles.css` for CSS cascade layer compliance
@@ -122,6 +135,7 @@ No API changes — purely additive feature. Existing manual configs continue to 
 
 ### Fixed
 - **P1 FIX**: Tailwind CSS utilities now work with Orion components (specificity conflict resolved)
+- **PRE-EXISTING**: Fixed type-check errors with optional dependencies (date-fns, recharts) by adding to devDependencies
 
 ### Improved
 - Design System autonomy: Zero external dependencies for @layer implementation
