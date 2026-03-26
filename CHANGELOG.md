@@ -5,6 +5,37 @@ All notable changes to Orion Design System are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.5.4] — 2026-03-26
+
+### Added
+- **Public CHANGELOG.md** — Release notes now publicly visible on GitHub
+- **CHANGELOG automation** — GitHub Actions workflow for automated GitHub Releases
+- **Release checklist** — 22-gate pre-release validation checklist to prevent future incidents
+- **Incident documentation** — Full incident report for v5.3.0 with lessons learned
+- **COMPATIBILITY.md** — Troubleshooting guide for common setup issues
+- **package.json clarity** — Enhanced README and CLAUDE.md with installation guidance
+- **Release process documentation** — RELEASE.md user guide for release workflow
+
+### Fixed
+- **Storybook**: Added missing `id` property to Dropdown story items (TypeScript compliance)
+
+### Improved
+- Installation documentation now clearly distinguishes between `dependencies` vs `devDependencies`
+- v5.3.0 version status now documented with full incident context
+- Release process now fully automated via GitHub Actions
+
+### Impact (Early User Feedback Response)
+This release addresses friction points reported during early v5.5.2 adoption:
+1. ✅ CHANGELOG transparency (was private, now public)
+2. ✅ v5.3.0 context (incident documented with prevention measures)
+3. ✅ package.json confusion (dependencies guidance clarified)
+4. 🛣️ Tailwind compatibility (planned for v5.6.0)
+
+### Migration
+- No breaking changes. Update with: `npm install @orion-ds/react@5.5.4`
+
+---
+
 ## [5.5.2] — 2026-03-26
 
 ### Fixed
