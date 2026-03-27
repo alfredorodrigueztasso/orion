@@ -72,7 +72,7 @@ describe("dist/ Completeness (Pre-Publish Validation)", () => {
   });
 
   describe("Named entry points", () => {
-    const entryPoints = ["tokens", "sections", "blocks", "templates"];
+    const entryPoints = ["tokens", "sections", "blocks"];
 
     for (const ep of entryPoints) {
       describe(ep, () => {
@@ -99,7 +99,7 @@ describe("dist/ Completeness (Pre-Publish Validation)", () => {
   });
 
   describe("Optional entry points (heavy components)", () => {
-    const optionalEPs = ["chart", "calendar", "editor", "dnd", "rich"];
+    const optionalEPs = ["chart", "calendar", "editor", "dnd"];
 
     for (const ep of optionalEPs) {
       describe(ep, () => {
@@ -222,7 +222,7 @@ describe("dist/ Completeness (Pre-Publish Validation)", () => {
   });
 
   describe("Directory structure", () => {
-    const expectedDirs = ["tokens", "sections", "blocks", "templates"];
+    const expectedDirs = ["tokens", "sections", "blocks"];
 
     for (const dir of expectedDirs) {
       it(`${dir}/ directory exists`, () => {

@@ -183,6 +183,13 @@ function generateCSS() {
         }
     }
 
+    if (primary.zIndex) {
+        css += `\n    /* Z-Index */\n`;
+        for (const [name, value] of Object.entries(primary.zIndex)) {
+            css += `    --z-${name}: ${value};\n`;
+        }
+    }
+
     css += `}\n\n`;
 
     // --- Brand Overrides (All brands except default orion) ---

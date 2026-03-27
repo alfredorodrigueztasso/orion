@@ -102,6 +102,16 @@ export const lightTheme: ThemeConfig = {
       "4": "{color.success.500}",
       "5": "{color.warning.500}",
     },
+    zIndex: {
+      base: "{zIndex.base}",
+      dropdown: "{zIndex.dropdown}",
+      sticky: "{zIndex.sticky}",
+      overlay: "{zIndex.overlay}",
+      modal: "{zIndex.modal}",
+      popover: "{zIndex.popover}",
+      tooltip: "{zIndex.tooltip}",
+      toast: "{zIndex.toast}",
+    },
   },
 } as const;
 
@@ -199,6 +209,16 @@ export const darkTheme: ThemeConfig = {
       "3": "{color.brand.600}",
       "4": "{color.success.500}",
       "5": "{color.warning.500}",
+    },
+    zIndex: {
+      base: "{zIndex.base}",
+      dropdown: "{zIndex.dropdown}",
+      sticky: "{zIndex.sticky}",
+      overlay: "{zIndex.overlay}",
+      modal: "{zIndex.modal}",
+      popover: "{zIndex.popover}",
+      tooltip: "{zIndex.tooltip}",
+      toast: "{zIndex.toast}",
     },
   },
 } as const;

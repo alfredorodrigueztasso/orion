@@ -107,6 +107,16 @@
   --blur-md: 8px;
   --blur-lg: 12px;
   --blur-xl: 24px;
+
+  /* Z-Index */
+  --z-base: 0;
+  --z-dropdown: 50;
+  --z-sticky: 100;
+  --z-overlay: 200;
+  --z-modal: 300;
+  --z-popover: 400;
+  --z-tooltip: 500;
+  --z-toast: 600;
 }
 
 /* ─── Light Theme Semantics ─── */
