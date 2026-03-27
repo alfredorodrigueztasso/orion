@@ -9,16 +9,22 @@ TypeScript-first React component library built on the Orion Design System. Featu
 [![Bundle Size](<https://img.shields.io/badge/bundle-2.8MB--4.7MB%20(minified)-orange>)](#)
 [![Optional Deps](https://img.shields.io/badge/optional%20deps-1MB%20savings-success)](./BUNDLE_OPTIMIZATION.md)
 
-## 🎉 What's New in v5.6.0
+## 🎉 What's New in v5.7.0
 
-**Major additions:**
+**Semantic Token Aliases** (Mar 27, 2026):
 
-- ✨ **Official Tailwind CSS Preset** (`@orion-ds/react/integrations/tailwind`) - Use all Orion tokens with Tailwind utilities (supports v3 & v4)
-- ✨ **Box Component** - Type-safe polymorphic component for spacing, surfaces, and borders with guaranteed token compliance
-- 🔄 **@layer orion CSS Cascade** - Seamless Tailwind + Orion coexistence (Tailwind utilities automatically win)
-- 🐛 **Type-Check Fix** - Resolved pre-existing type errors with optional dependencies (date-fns, recharts)
+- ✨ **Font-Size Semantic Aliases** - 8 named aliases (`xs`, `sm`, `base`, `md`, `lg`, `xl`, `2xl`, `3xl`) for typography scale
+- ✨ **Z-Index Semantic Tokens** - 8 stacking context tokens (`base`, `dropdown`, `sticky`, `overlay`, `modal`, `popover`, `tooltip`, `toast`)
+- 🔧 **TypeScript Integration** - Full type definitions for new semantic token categories
+- 🎯 **CSS Variable References** - All tokens mapped to primitives for automatic dark mode + brand switching
 
-[Full release notes](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.6.0)
+**Previous releases** (v5.6.0 - Mar 26):
+
+- Official Tailwind CSS Preset with 46+ color mappings and 19 spacing scales
+- Box component for type-safe spacing/surfaces
+- @layer orion CSS cascade for Tailwind compatibility
+
+[Full release notes](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.7.0) | [v5.6.0 notes](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.6.0)
 
 ## Features
 
@@ -59,7 +65,7 @@ This puts it in `dependencies` where it belongs.
 \`\`\`json
 {
 "dependencies": {
-"@orion-ds/react": "^5.6.0",
+"@orion-ds/react": "^5.7.0",
 "react": "^19.0.0",
 "react-dom": "^19.0.0"
 },
