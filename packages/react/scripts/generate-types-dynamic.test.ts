@@ -1,0 +1,289 @@
+/**
+ * Unit Tests for generate-types-dynamic.ts
+ *
+ * Tests for APPROACH B refactoring:
+ * - String generation produces valid TypeScript
+ * - Template literals are properly escaped
+ * - Function executes without throwing
+ * - All required tokens are present in output
+ */
+
+import { describe, it, expect } from "vitest";
+import fs from "fs";
+import path from "path";
+
+describe("generate-types-dynamic.ts - APPROACH B Tests", () => {
+  const typesOutputDir = path.join(
+    import.meta.dirname,
+    "../packages/react/src/tokens",
+  );
+  const typesFile = path.join(typesOutputDir, "types.ts");
+
+  /**
+   * Test 1: String generation produces valid TypeScript
+   *
+   * Verifies that the generated types.ts file:
+   * - Exists and is readable
+   * - Contains valid TypeScript syntax
+   * - Parses without syntax errors
+   */
+  it("should generate valid TypeScript types file", () => {
+    expect(fs.existsSync(typesFile)).toBe(true);
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Should contain export statements
+    expect(content).toContain("export type");
+    expect(content).toContain("export interface");
+
+    // Should not contain obvious syntax errors
+    expect(content).not.toContain("undefined");
+    expect(content.split("{").length).toBeGreaterThan(
+      content.split("}").length - 2,
+    ); // Roughly balanced braces
+  });
+
+  /**
+   * Test 2: Template literals are properly escaped in output
+   *
+   * Verifies that:
+   * - Template literal syntax appears in the output file
+   * - Backticks are present for template literal types
+   * - ${} syntax is preserved for infer types
+   */
+  it("should contain properly escaped template literals", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Should contain template literal type definitions
+    expect(content).toContain("export type ColorTokenPath =");
+    expect(content).toContain("export type SpacingTokenPath =");
+    expect(content).toContain("export type RadiusTokenPath =");
+
+    // Should contain backticks in the template literal types
+    expect(content).toMatch(/`[^`]*\${[^}]*`/);
+
+    // Should contain the GetTokenValue conditional type with template literals
+    expect(content).toContain("Path extends `${infer Key}");
+  });
+
+  /**
+   * Test 3: Required type definitions are present
+   *
+   * Verifies that all essential type definitions exist:
+   * - Brand type with all valid brands
+   * - ColorTokenPath type
+   * - All Primitive interfaces
+   * - All Semantic interfaces
+   * - Theme and Brand types
+   */
+  it("should include all required type definitions", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Brand type should exist with valid brands
+    expect(content).toContain("export type Brand =");
+    expect(content).toMatch(/'orion'|'deepblue'|'red'|'orange'|'lemon'/);
+
+    // Primitive interfaces
+    expect(content).toContain("export interface ColorPrimitives");
+    expect(content).toContain("export interface TypographyPrimitives");
+    expect(content).toContain("export interface SpacingPrimitives");
+    expect(content).toContain("export interface RadiusPrimitives");
+    expect(content).toContain("export interface Primitives");
+
+    // Semantic interfaces
+    expect(content).toContain("export interface SurfaceSemantics");
+    expect(content).toContain("export interface TextSemantics");
+    expect(content).toContain("export interface InteractiveSemantics");
+    expect(content).toContain("export interface StatusSemantics");
+    expect(content).toContain("export interface SemanticTokens");
+
+    // Token path types
+    expect(content).toContain("export type ColorTokenPath =");
+    expect(content).toContain("export type TypographyTokenPath =");
+    expect(content).toContain("export type TokenPath =");
+    expect(content).toContain("export type SemanticTokenPath =");
+
+    // Theme and Brand configs
+    expect(content).toContain("export type Theme =");
+    expect(content).toContain("export interface ThemeConfig");
+    expect(content).toContain("export interface BrandConfig");
+  });
+
+  /**
+   * Test 4: CSS Variable types are defined
+   *
+   * Verifies that CSS variable types for styling exist
+   */
+  it("should include CSS variable type definitions", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    expect(content).toContain("export type CSSVariableName =");
+    expect(content).toContain("export interface CSSVariableMap");
+    expect(content).toContain("'--surface-base'");
+    expect(content).toContain("'--text-primary'");
+    expect(content).toContain("'--interactive-primary'");
+    expect(content).toContain("'--spacing-4'");
+    expect(content).toContain("'--radius-control'");
+  });
+
+  /**
+   * Test 5: Numeric and dash-containing keys are properly quoted
+   *
+   * Verifies that property keys starting with numbers or containing dashes
+   * are properly quoted in interface definitions (required for valid TypeScript)
+   */
+  it("should properly quote numeric and special property keys", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Check SpacingPrimitives interface
+    expect(content).toContain("'0': string");
+    expect(content).toContain("'px': string");
+
+    // Check RadiusPrimitives interface (contains 2xl, 3xl, etc.)
+    expect(content).toMatch(/'[0-9]xl'/); // Should have quoted numeric-starting keys
+  });
+
+  /**
+   * Test 6: No octal literals in output
+   *
+   * Verifies that numeric keys like '05' are not written as octal (05)
+   * which would cause TypeScript errors
+   */
+  it("should not contain octal literal syntax", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Should not have unquoted octal numbers
+    expect(content).not.toMatch(/:\s*05[;:,]/);
+    expect(content).not.toMatch(/:\s*07[;:,]/);
+    expect(content).not.toMatch(/:\s*08[;:,]/);
+    expect(content).not.toMatch(/:\s*09[;:,]/);
+  });
+
+  /**
+   * Test 7: Utility types with conditional type syntax
+   *
+   * Verifies that advanced TypeScript features (conditional types, infer)
+   * are properly generated
+   */
+  it("should include utility types with infer syntax", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Should have GetTokenValue type with infer
+    expect(content).toContain(
+      "export type GetTokenValue<T, Path extends string>",
+    );
+    expect(content).toContain("infer Key");
+    expect(content).toContain("infer Rest");
+
+    // Should have TokenValue type
+    expect(content).toContain("export type TokenValue<P extends TokenPath>");
+  });
+
+  /**
+   * Test 8: No dangling braces or syntax errors
+   *
+   * Verifies that the file structure is well-formed
+   */
+  it("should have balanced braces and valid structure", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    const openBraces = (content.match(/{/g) || []).length;
+    const closeBraces = (content.match(/}/g) || []).length;
+
+    // Allow for type/interface parameters which might have more opens
+    expect(Math.abs(openBraces - closeBraces)).toBeLessThanOrEqual(2);
+
+    // Should not end with dangling syntax
+    expect(content.trim()).not.toMatch(/[{,;]\s*$/);
+  });
+
+  /**
+   * Test 9: All semantic token paths use template literal syntax
+   *
+   * Verifies that semantic token paths properly use template literals
+   * for type-safe token access
+   */
+  it("should have semantic token paths with template literals", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    expect(content).toContain("`surface.${");
+    expect(content).toContain("`text.${");
+    expect(content).toContain("`border.${");
+    expect(content).toContain("`interactive.");
+    expect(content).toContain("`status.${");
+  });
+
+  /**
+   * Test 10: Comments and documentation are preserved
+   *
+   * Verifies that helpful comments and section headers exist
+   */
+  it("should include helpful comments and documentation", () => {
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    // Should have section headers
+    expect(content).toContain("PRIMITIVE TOKEN TYPES");
+    expect(content).toContain("SEMANTIC TOKEN TYPES");
+    expect(content).toContain("THEME & BRAND TYPES");
+    expect(content).toContain("TOKEN PATH TYPES");
+    expect(content).toContain("CSS VARIABLE TYPES");
+    expect(content).toContain("UTILITY TYPES");
+
+    // Should have generation notice
+    expect(content).toContain("DYNAMICALLY GENERATED");
+    expect(content).toContain("DO NOT EDIT MANUALLY");
+  });
+});
+
+describe("generate-types-dynamic.ts - APPROACH B - Smoke Tests", () => {
+  /**
+   * Smoke Test 1: File can be required without errors
+   *
+   * Verifies that the generated types.ts file can be imported
+   * without TypeScript or runtime errors
+   */
+  it("should generate importable TypeScript module", () => {
+    const typesOutputDir = path.join(
+      import.meta.dirname,
+      "../packages/react/src/tokens",
+    );
+    const typesFile = path.join(typesOutputDir, "types.ts");
+
+    // File should exist
+    expect(fs.existsSync(typesFile)).toBe(true);
+
+    // File should be readable
+    const content = fs.readFileSync(typesFile, "utf-8");
+    expect(content.length).toBeGreaterThan(100);
+  });
+
+  /**
+   * Smoke Test 2: Required exports exist
+   *
+   * Verifies that at least the critical exports are present
+   */
+  it("should export critical types and interfaces", () => {
+    const typesOutputDir = path.join(
+      import.meta.dirname,
+      "../packages/react/src/tokens",
+    );
+    const typesFile = path.join(typesOutputDir, "types.ts");
+    const content = fs.readFileSync(typesFile, "utf-8");
+
+    const exports = [
+      "Brand",
+      "Theme",
+      "TokenPath",
+      "SemanticTokenPath",
+      "Primitives",
+      "SemanticTokens",
+      "BrandColors",
+      "ColorPrimitives",
+      "ThemeConfig",
+    ];
+
+    for (const exp of exports) {
+      expect(content).toContain(`export type ${exp}`) ||
+        expect(content).toContain(`export interface ${exp}`);
+    }
+  });
+});

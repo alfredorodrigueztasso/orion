@@ -117,6 +117,16 @@
   --z-popover: 400;
   --z-tooltip: 500;
   --z-toast: 600;
+
+  /* Font Size Semantic Aliases */
+  --font-size-xs: 12px;
+  --font-size-sm: 13px;
+  --font-size-base: 14px;
+  --font-size-md: 16px;
+  --font-size-lg: 18px;
+  --font-size-xl: 20px;
+  --font-size-2xl: 24px;
+  --font-size-3xl: 32px;
 }
 
 /* ─── Light Theme Semantics ─── */

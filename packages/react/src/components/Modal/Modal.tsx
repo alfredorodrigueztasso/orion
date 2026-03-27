@@ -47,6 +47,7 @@ export const Modal: React.FC<ModalProps> & {
   showCloseButton = true,
   children,
   className,
+  "aria-label": ariaLabel,
 }) => {
   // Handle Escape key
   useEffect(() => {
@@ -93,6 +94,7 @@ export const Modal: React.FC<ModalProps> & {
       onClick={handleBackdropClick}
       role="dialog"
       aria-modal="true"
+      aria-label={ariaLabel}
     >
       <div className={modalClasses}>
         {/* Close button in corner */}

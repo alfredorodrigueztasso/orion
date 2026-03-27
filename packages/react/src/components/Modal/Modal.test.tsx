@@ -18,7 +18,7 @@ describe("Modal", () => {
 
   it("renders when open is true", async () => {
     const { container } = render(
-      <Modal open={true} onClose={() => {}}>
+      <Modal open={true} onClose={() => {}} aria-label="Test Modal">
         <Modal.Body>Modal content</Modal.Body>
       </Modal>,
     );

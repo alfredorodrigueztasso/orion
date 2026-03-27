@@ -69,6 +69,11 @@ export interface ModalProps {
    * Additional class name
    */
   className?: string;
+
+  /**
+   * ARIA label for accessibility
+   */
+  "aria-label"?: string;
 }
 
 /**
