@@ -284,7 +284,7 @@ async function release() {
   }
 
   // Step 1: Check npm authentication
-  logStep('1/6', 'Checking npm authentication...');
+  logStep('1/8', 'Checking npm authentication...');
   const npmUser = checkNpmAuth();
 
   if (!npmUser) {
@@ -294,7 +294,7 @@ async function release() {
   logSuccess(`Logged in as: ${npmUser}`);
 
   // Step 2: Get current versions and calculate new version
-  logStep('2/6', 'Calculating versions...');
+  logStep('2/8', 'Calculating versions...');
 
   const currentVersion = getHighestVersion();
   const newVersion = bumpVersion(currentVersion, bumpType);
@@ -311,7 +311,7 @@ async function release() {
   }
 
   // Step 3: Update package.json files
-  logStep('3/6', 'Updating package versions...');
+  logStep('3/8', 'Updating package versions...');
 
   if (!dryRun) {
     for (const pkg of PACKAGES) {
@@ -325,7 +325,7 @@ async function release() {
   }
 
   // Step 4: Run audit and build
-  logStep('4/6', 'Running audit and build...');
+  logStep('4/8', 'Running audit and build...');
 
   if (!dryRun) {
     log('\n  Running npm run audit...');
@@ -360,8 +360,22 @@ async function release() {
     logInfo('Skipped (dry run)');
   }
 
-  // Step 5: Publish packages
-  logStep('5/6', 'Publishing packages to npm...');
+  // Step 5: Commit version bump
+  logStep('5/7', 'Committing version bump...');
+
+  if (!dryRun) {
+    const commitResult = exec(`git commit -am "chore(release): bump all packages to v${newVersion}"`);
+    if (!commitResult.success) {
+      logWarning(`Version commit may have failed or nothing to commit`);
+    } else {
+      logSuccess(`Version bump committed`);
+    }
+  } else {
+    logInfo('Skipped (dry run)');
+  }
+
+  // Step 6: Publish packages
+  logStep('6/7', 'Publishing packages to npm...');
 
   const publishResults = [];
 
@@ -399,7 +413,7 @@ async function release() {
     }
   }
 
-  // Step 6: Create git tag and prepare for GitHub Actions
+  // Step 7: Create git tag and prepare for GitHub Actions
   const successful = publishResults.filter(r => r.success);
   const failed = publishResults.filter(r => !r.success);
 
@@ -407,8 +421,8 @@ async function release() {
     createGitTag(newVersion, dryRun);
   }
 
-  // Step 7: Summary
-  logStep('7/7', 'Release Summary');
+  // Step 8: Summary
+  logStep('8/8', 'Release Summary');
 
   log('\n' + '-'.repeat(60));
 
