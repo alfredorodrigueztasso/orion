@@ -309,6 +309,17 @@ export interface SemanticTokens {
     toast: string;
     [key: string]: any;
   };
+  fontSize?: {
+    xs: string;
+    sm: string;
+    base: string;
+    md: string;
+    lg: string;
+    xl: string;
+    "2xl": string;
+    "3xl": string;
+    [key: string]: any;
+  };
 }
 
 // ============================================================================

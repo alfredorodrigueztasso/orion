@@ -190,6 +190,25 @@ function generateCSS() {
         }
     }
 
+    if (primary.typography?.size) {
+        css += `\n    /* Font Size Semantic Aliases */\n`;
+        const sizeMap = {
+            '12': 'xs',
+            '13': 'sm',
+            '14': 'base',
+            '16': 'md',
+            '18': 'lg',
+            '20': 'xl',
+            '24': '2xl',
+            '32': '3xl'
+        };
+        for (const [size, name] of Object.entries(sizeMap)) {
+            if (primary.typography.size[size]) {
+                css += `    --font-size-${name}: ${primary.typography.size[size]};\n`;
+            }
+        }
+    }
+
     css += `}\n\n`;
 
     // --- Brand Overrides (All brands except default orion) ---

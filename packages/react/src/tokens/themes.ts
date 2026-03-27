@@ -112,6 +112,16 @@ export const lightTheme: ThemeConfig = {
       tooltip: "{zIndex.tooltip}",
       toast: "{zIndex.toast}",
     },
+    fontSize: {
+      xs: "{typography.size.12}",
+      sm: "{typography.size.13}",
+      base: "{typography.size.14}",
+      md: "{typography.size.16}",
+      lg: "{typography.size.18}",
+      xl: "{typography.size.20}",
+      "2xl": "{typography.size.24}",
+      "3xl": "{typography.size.32}",
+    },
   },
 } as const;
 
@@ -219,6 +229,16 @@ export const darkTheme: ThemeConfig = {
       popover: "{zIndex.popover}",
       tooltip: "{zIndex.tooltip}",
       toast: "{zIndex.toast}",
+    },
+    fontSize: {
+      xs: "{typography.size.12}",
+      sm: "{typography.size.13}",
+      base: "{typography.size.14}",
+      md: "{typography.size.16}",
+      lg: "{typography.size.18}",
+      xl: "{typography.size.20}",
+      "2xl": "{typography.size.24}",
+      "3xl": "{typography.size.32}",
     },
   },
 } as const;
