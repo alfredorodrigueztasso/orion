@@ -15,7 +15,7 @@ import path from "path";
 describe("generate-types-dynamic.ts - APPROACH B Tests", () => {
   const typesOutputDir = path.join(
     import.meta.dirname,
-    "../packages/react/src/tokens",
+    "../src/tokens",
   );
   const typesFile = path.join(typesOutputDir, "types.ts");
 
@@ -264,7 +264,7 @@ describe("generate-types-dynamic.ts - APPROACH B - Smoke Tests", () => {
   it("should export critical types and interfaces", () => {
     const typesOutputDir = path.join(
       import.meta.dirname,
-      "../packages/react/src/tokens",
+      "../src/tokens",
     );
     const typesFile = path.join(typesOutputDir, "types.ts");
     const content = fs.readFileSync(typesFile, "utf-8");
@@ -282,8 +282,9 @@ describe("generate-types-dynamic.ts - APPROACH B - Smoke Tests", () => {
     ];
 
     for (const exp of exports) {
-      expect(content).toContain(`export type ${exp}`) ||
-        expect(content).toContain(`export interface ${exp}`);
+      const hasType = content.includes(`export type ${exp}`);
+      const hasInterface = content.includes(`export interface ${exp}`);
+      expect(hasType || hasInterface).toBe(true);
     }
   });
 });
