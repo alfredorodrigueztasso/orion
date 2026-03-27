@@ -5,6 +5,47 @@ All notable changes to Orion Design System are documented in this file.
 The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
+## [5.7.1] — 2026-03-27
+
+### 🔧 CI/CD Improvements & Storybook Enhancements
+
+#### GitHub Actions Workflows (NEW)
+
+Two new automated workflows for quality gates:
+
+- **Unit Tests Workflow**: Automatically runs `npm test` on every push and PR to main
+  - Validates 137+ component tests with accessibility (vitest-axe) checks
+  - Node 20, pnpm 10.28.1 (consistent with build environment)
+  - Triggered on: `push` and `pull_request` to main
+
+- **Percy Visual Regression Workflow**: Validates visual changes on PRs
+  - Builds Storybook and uploads snapshots to Percy for comparison
+  - Requires `PERCY_TOKEN` secret in GitHub repo settings (optional, non-blocking)
+  - Triggered on: `pull_request` to main only (economizes Percy credits)
+  - Reports visual diffs in PR comments
+
+#### Release Script Improvements
+
+- ✅ Automatic git commit of version bump before publishing
+- ✅ Automatic git tag creation (v5.7.1) after successful publish
+- ✅ Improved step counters and logging (1/8 → 8/8 progress)
+- ✅ `npm run release:dry` to safely preview release without publishing
+
+#### Storybook (Sprint A - v5.6.0)
+
+- ✅ Viewport presets (mobile, tablet, desktop, ultrawide)
+- ✅ Shared decorators (allBrands, darkMode, triModal)
+- ✅ Play() functions for interaction testing (Button, Modal, Field, Dropdown)
+- ✅ vitest-axe accessibility validation (137 tests passing)
+- ✅ Code chunk optimization (chart-stories: 28.52 KB)
+
+#### Modal Component Fix
+
+- Fixed Modal accessibility: added `aria-label` support for ARIA dialog naming
+- Modal now properly announces its title to screen readers
+
+---
+
 ## [5.7.0] — 2026-03-27 (SHIPPED)
 
 ### 🎯 Semantic Token Aliases for Font-Size & Z-Index
