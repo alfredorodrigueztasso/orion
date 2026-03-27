@@ -4,11 +4,17 @@ import type { RenderResult } from "@testing-library/react";
 
 /**
  * Run axe accessibility checks on a rendered component.
- * Usage: await expectNoA11yViolations(renderResult);
+ * Usage: await expectNoA11yViolations(container); or await expectNoA11yViolations(renderResult);
  */
-export async function expectNoA11yViolations({
-  container,
-}: Pick<RenderResult, "container">) {
+export async function expectNoA11yViolations(
+  containerOrRenderResult: Element | Pick<RenderResult, "container">
+) {
+  // Handle both container directly and RenderResult object
+  const container =
+    "container" in containerOrRenderResult
+      ? containerOrRenderResult.container
+      : containerOrRenderResult;
+
   const results = await axe(container);
   // Check if there are any violations
   expect(results.violations).toEqual([]);
