@@ -9,22 +9,29 @@ TypeScript-first React component library built on the Orion Design System. Featu
 [![Bundle Size](<https://img.shields.io/badge/bundle-2.8MB--4.7MB%20(minified)-orange>)](#)
 [![Optional Deps](https://img.shields.io/badge/optional%20deps-1MB%20savings-success)](./BUNDLE_OPTIMIZATION.md)
 
-## 🎉 What's New in v5.7.0
+## 🎉 What's New in v5.7.1
 
-**Semantic Token Aliases** (Mar 27, 2026):
+**CI/CD Automation & Storybook Enhancements** (Mar 27, 2026):
 
-- ✨ **Font-Size Semantic Aliases** - 8 named aliases (`xs`, `sm`, `base`, `md`, `lg`, `xl`, `2xl`, `3xl`) for typography scale
-- ✨ **Z-Index Semantic Tokens** - 8 stacking context tokens (`base`, `dropdown`, `sticky`, `overlay`, `modal`, `popover`, `tooltip`, `toast`)
-- 🔧 **TypeScript Integration** - Full type definitions for new semantic token categories
-- 🎯 **CSS Variable References** - All tokens mapped to primitives for automatic dark mode + brand switching
+- 🤖 **GitHub Actions Workflows** - Automated unit tests on every push/PR + Percy visual regression on PRs
+- 📚 **Storybook Improvements** - Viewport presets (mobile/tablet/desktop/ultrawide), shared decorators, play() interaction tests
+- ♿ **Accessibility** - vitest-axe integration validates 137+ component tests for WCAG compliance
+- 🚀 **Release Automation** - Automatic git commits and tags in release script
+- 🎯 **Modal Accessibility** - Fixed dialog accessible naming with aria-label support
 
-**Previous releases** (v5.6.0 - Mar 26):
+**v5.7.0 highlights** (Mar 27):
 
-- Official Tailwind CSS Preset with 46+ color mappings and 19 spacing scales
-- Box component for type-safe spacing/surfaces
-- @layer orion CSS cascade for Tailwind compatibility
+- ✨ **Font-Size Semantic Aliases** - 8 named aliases (`xs`, `sm`, `base`, `md`, `lg`, `xl`, `2xl`, `3xl`) for typography
+- ✨ **Z-Index Semantic Tokens** - 8 stacking context tokens for consistent layering
+- 🔧 **TypeScript Integration** - Full type definitions for semantic tokens
 
-[Full release notes](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.7.0) | [v5.6.0 notes](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.6.0)
+**v5.6.0 features**:
+
+- Official Tailwind CSS Preset with 46+ color mappings
+- Box component for type-safe spacing
+- @layer orion CSS cascade
+
+[v5.7.1 Release](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.7.1) | [v5.7.0 Release](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.7.0) | [v5.6.0 Release](https://github.com/alfredorodrigueztasso/orion/releases/tag/v5.6.0)
 
 ## Features
 
