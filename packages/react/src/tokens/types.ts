@@ -298,28 +298,6 @@ export interface SemanticTokens {
     start: string;
     end: string;
   };
-  zIndex?: {
-    base: string;
-    dropdown: string;
-    sticky: string;
-    overlay: string;
-    modal: string;
-    popover: string;
-    tooltip: string;
-    toast: string;
-    [key: string]: any;
-  };
-  fontSize?: {
-    xs: string;
-    sm: string;
-    base: string;
-    md: string;
-    lg: string;
-    xl: string;
-    "2xl": string;
-    "3xl": string;
-    [key: string]: any;
-  };
 }
 
 // ============================================================================
